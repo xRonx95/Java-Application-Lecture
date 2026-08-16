@@ -1,0 +1,643 @@
+/* ============================================================
+   INVENTORY MANAGEMENT SYSTEM — LECTURE MODULE STYLESHEET
+   Course material: Java Swing (JFrame Form) GUI Development
+   ============================================================ */
+
+:root {
+  /* Color tokens */
+  --navy-900: #101a2c;
+  --navy-800: #16233b;
+  --navy-700: #1e335a;
+  --blue-600: #2f5aa8;
+  --blue-500: #3f6fc9;
+  --gold-500: #d9a441;
+  --gold-600: #b9822a;
+  --paper: #f3f5f9;
+  --card: #ffffff;
+  --ink-900: #1b2130;
+  --ink-700: #333c4f;
+  --ink-500: #5c6579;
+  --line: #dbe1ec;
+  --line-strong: #b9c3d6;
+  --code-bg: #0f1729;
+  --code-text: #e6edfb;
+  --code-accent: #d9a441;
+  --success-bg: #eaf6ef;
+  --success-text: #1f6b43;
+  --danger-bg: #fbeceb;
+  --danger-text: #a13328;
+
+  /* Typography */
+  --font-display: "Source Serif 4", "Georgia", serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Consolas", monospace;
+
+  --sidebar-width: 300px;
+}
+
+/* ------------------------------------------------------------
+   Base / Reset
+   ------------------------------------------------------------ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink-900);
+  font-size: 19px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--blue-600);
+  text-decoration: none;
+}
+
+a:hover, a:focus-visible {
+  text-decoration: underline;
+}
+
+a:focus-visible, button:focus-visible, .toc-link:focus-visible {
+  outline: 3px solid var(--gold-500);
+  outline-offset: 2px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--navy-900);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+p { margin: 0 0 1.1em 0; }
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ------------------------------------------------------------
+   Top utility bar (Home link + breadcrumb)
+   ------------------------------------------------------------ */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  background: var(--navy-900);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 40;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.topbar .crumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.topbar a {
+  color: #eaf0ff;
+  font-weight: 600;
+}
+
+.topbar a:hover { color: var(--gold-500); }
+
+.topbar .sep {
+  color: var(--line-strong);
+}
+
+.topbar .course-tag {
+  color: var(--gold-500);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  border: 1px solid rgba(217,164,65,0.5);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* ------------------------------------------------------------
+   Mobile nav toggle (checkbox hack — no JS required)
+   ------------------------------------------------------------ */
+.nav-toggle-checkbox {
+  display: none;
+}
+
+.nav-toggle-btn {
+  display: none;
+  position: fixed;
+  top: 10px;
+  right: 14px;
+  z-index: 60;
+  background: var(--gold-500);
+  color: var(--navy-900);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* ------------------------------------------------------------
+   Sidebar / Table of Contents
+   ------------------------------------------------------------ */
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background: var(--navy-800);
+  color: #dbe4f7;
+  padding: 88px 26px 40px 26px;
+  position: fixed;
+  top: 0; bottom: 0; left: 0;
+  overflow-y: auto;
+  z-index: 50;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.sidebar h2 {
+  font-family: var(--font-mono);
+  color: var(--gold-500);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 18px 0;
+}
+
+.sidebar .module-title {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 6px 0;
+}
+
+.sidebar .module-sub {
+  font-size: 14px;
+  color: #9fb0d1;
+  margin: 0 0 28px 0;
+}
+
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.toc-list li {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.toc-list .toc-link {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 12px 4px;
+  color: #cfdaf2;
+  font-size: 15.5px;
+  text-decoration: none;
+}
+
+.toc-list .toc-link:hover {
+  color: var(--gold-500);
+}
+
+.toc-num {
+  font-family: var(--font-mono);
+  color: var(--gold-500);
+  font-size: 13px;
+  min-width: 24px;
+}
+
+/* ------------------------------------------------------------
+   Main content
+   ------------------------------------------------------------ */
+main {
+  margin-left: var(--sidebar-width);
+  padding: 96px 56px 80px 56px;
+  max-width: 980px;
+  width: 100%;
+}
+
+.hero {
+  border-bottom: 3px solid var(--navy-900);
+  padding-bottom: 30px;
+  margin-bottom: 46px;
+}
+
+.hero .eyebrow {
+  font-family: var(--font-mono);
+  color: var(--gold-600);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin: 0 0 14px 0;
+}
+
+.hero .lede {
+  font-size: 20px;
+  color: var(--ink-700);
+  max-width: 760px;
+}
+
+.hero .meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.meta-chip {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14.5px;
+  color: var(--ink-700);
+  font-family: var(--font-mono);
+}
+
+.meta-chip strong {
+  color: var(--navy-900);
+}
+
+/* Objectives box */
+.objectives {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--gold-500);
+  border-radius: 10px;
+  padding: 26px 30px;
+  margin-bottom: 50px;
+}
+
+.objectives h2 {
+  font-size: 22px;
+  margin-top: 0;
+}
+
+.objectives ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.objectives li {
+  margin-bottom: 8px;
+}
+
+/* Lesson sections */
+.lesson {
+  padding-top: 42px;
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 76px;
+}
+
+.lesson:first-of-type {
+  border-top: none;
+}
+
+.lesson-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  color: #fff;
+  background: var(--navy-700);
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+  letter-spacing: 0.03em;
+}
+
+.lesson h2 {
+  font-size: 30px;
+  margin: 0 0 16px 0;
+}
+
+.lesson h3 {
+  font-size: 22px;
+  margin: 28px 0 12px 0;
+  color: var(--navy-700);
+}
+
+.lesson h4 {
+  font-size: 18px;
+  color: var(--ink-700);
+  margin: 20px 0 8px 0;
+}
+
+/* Step list */
+.steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 22px 0;
+  padding: 0;
+}
+
+.steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 4px 0 22px 52px;
+  border-left: 2px solid var(--line);
+  margin-left: 17px;
+}
+
+.steps > li:last-child {
+  border-left: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: -19px;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  color: var(--navy-900);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4px var(--paper);
+}
+
+.steps h4 {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-size: 19px;
+  color: var(--navy-900);
+}
+
+/* Figures / diagrams */
+.figure {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px;
+  margin: 20px 0 26px 0;
+}
+
+.figure figcaption {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ink-500);
+  margin-top: 12px;
+  text-align: center;
+}
+
+.figure figcaption b {
+  color: var(--navy-900);
+}
+
+/* Code blocks */
+pre {
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: 22px 24px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin: 18px 0;
+  border-left: 4px solid var(--gold-500);
+}
+
+code {
+  font-family: var(--font-mono);
+  background: rgba(47,90,168,0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.92em;
+  color: var(--navy-700);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.code-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: -6px;
+  display: block;
+}
+
+/* Tables */
+table.datatable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 26px 0;
+  font-size: 16.5px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table.datatable th {
+  background: var(--navy-800);
+  color: #fff;
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+table.datatable td {
+  padding: 11px 16px;
+  border-top: 1px solid var(--line);
+}
+
+table.datatable tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+/* Callout boxes */
+.callout {
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  border: 1px solid var(--line);
+}
+
+.callout .callout-title {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.callout.tip {
+  background: var(--success-bg);
+  border-color: #bfe3cc;
+}
+.callout.tip .callout-title { color: var(--success-text); }
+
+.callout.warning {
+  background: var(--danger-bg);
+  border-color: #f0c6c1;
+}
+.callout.warning .callout-title { color: var(--danger-text); }
+
+.callout.note {
+  background: #eef3fc;
+  border-color: #c9d9f4;
+}
+.callout.note .callout-title { color: var(--blue-600); }
+
+/* Activity / assessment box */
+.activity-box {
+  background: var(--navy-900);
+  color: #eaf0ff;
+  border-radius: 12px;
+  padding: 34px 36px;
+  margin: 30px 0;
+}
+
+.activity-box h2 {
+  color: #fff;
+  margin-top: 0;
+}
+
+.activity-box ol {
+  padding-left: 22px;
+}
+
+.activity-box li {
+  margin-bottom: 10px;
+}
+
+.activity-box .badge {
+  display: inline-block;
+  background: var(--gold-500);
+  color: var(--navy-900);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+/* Footer / references */
+.references {
+  margin-top: 50px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  color: var(--ink-500);
+}
+
+.references ol {
+  padding-left: 20px;
+}
+
+footer.page-footer {
+  margin-top: 60px;
+  padding: 24px 0 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 14.5px;
+  color: var(--ink-500);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* SVG mockup helper classes */
+.mockup-svg text {
+  font-family: var(--font-body);
+}
+
+/* ------------------------------------------------------------
+   Responsive / Mobile
+   ------------------------------------------------------------ */
+@media (max-width: 900px) {
+  body { font-size: 17.5px; }
+
+  .nav-toggle-btn {
+    display: block;
+  }
+
+  .sidebar {
+    transform: translateX(-105%);
+    transition: transform 0.28s ease;
+    width: 82%;
+    max-width: 340px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+  }
+
+  .nav-toggle-checkbox:checked ~ .sidebar {
+    transform: translateX(0);
+  }
+
+  main {
+    margin-left: 0;
+    padding: 88px 20px 60px 20px;
+  }
+
+  .hero h1 { font-size: 30px; }
+  .hero .lede { font-size: 18px; }
+
+  .lesson h2 { font-size: 24px; }
+  .lesson h3 { font-size: 19px; }
+
+  pre { font-size: 14px; padding: 16px; }
+
+  table.datatable { font-size: 14.5px; }
+  table.datatable th, table.datatable td { padding: 8px 10px; }
+
+  .activity-box { padding: 24px 20px; }
+
+  .steps > li { padding-left: 44px; margin-left: 10px; }
+  .steps > li::before { width: 30px; height: 30px; font-size: 14px; left: -16px; }
+
+  .topbar { padding: 0 60px 0 14px; font-size: 13.5px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 25px; }
+  .meta-row { gap: 8px; }
+  .meta-chip { font-size: 13px; padding: 6px 10px; }
+}

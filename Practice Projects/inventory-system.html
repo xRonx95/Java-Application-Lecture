@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 4: Inventory Management System Using JFrame Form</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Separated stylesheet -->
+  <link rel="stylesheet" href="../css/Practice Projects/inventory-system.css">
+</head>
+<body>
+
+  <!-- Top utility bar -->
+  <div class="topbar">
+    <div class="crumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Practice Projects</span>
+      <span class="sep">/</span>
+      <span>Inventory Management System</span>
+    </div>
+    <span class="course-tag">Java Swing &middot; JFrame Form</span>
+  </div>
+
+  <!-- Mobile nav toggle (checkbox hack, no JS) -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+  <label for="nav-toggle" class="nav-toggle-btn">&#9776; Lessons</label>
+
+  <div class="container">
+
+    <!-- Sidebar / Table of Contents -->
+    <nav class="sidebar" aria-label="Lesson navigation">
+      <h2>Module 4 &middot; Practice Project</h2>
+      <p class="module-title">Inventory Management System Using JFrame Form</p>
+      <p class="module-sub">Lecture notes for classroom discussion and demonstration.</p>
+
+      <ul class="toc-list">
+        <li><a class="toc-link" href="#objectives"><span class="toc-num">00</span> Learning Objectives</a></li>
+        <li><a class="toc-link" href="#lesson-1"><span class="toc-num">01</span> Introduction to Java Swing and JFrame</a></li>
+        <li><a class="toc-link" href="#lesson-2"><span class="toc-num">02</span> Planning the Inventory System</a></li>
+        <li><a class="toc-link" href="#lesson-3"><span class="toc-num">03</span> Setting Up the Project</a></li>
+        <li><a class="toc-link" href="#lesson-4"><span class="toc-num">04</span> Designing the JFrame Form</a></li>
+        <li><a class="toc-link" href="#lesson-5"><span class="toc-num">05</span> Naming Components and Setting Properties</a></li>
+        <li><a class="toc-link" href="#lesson-6"><span class="toc-num">06</span> Displaying Records in a JTable</a></li>
+        <li><a class="toc-link" href="#lesson-7"><span class="toc-num">07</span> Writing the Event-Handling Code</a></li>
+        <li><a class="toc-link" href="#lesson-8"><span class="toc-num">08</span> Connecting to the Database (JDBC)</a></li>
+        <li><a class="toc-link" href="#lesson-9"><span class="toc-num">09</span> Input Validation and Debugging</a></li>
+        <li><a class="toc-link" href="#lesson-10"><span class="toc-num">10</span> Summary and Key Takeaways</a></li>
+        <li><a class="toc-link" href="#activity"><span class="toc-num">11</span> Hands-on Activity</a></li>
+        <li><a class="toc-link" href="#references"><span class="toc-num">12</span> References</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main lecture content -->
+    <main>
+
+      <!-- Hero / title block -->
+      <header class="hero">
+        <div class="eyebrow">Practice Project &middot; GUI Programming in Java</div>
+        <h1>Inventory Management System Using JFrame Form</h1>
+        <p class="lede">
+          A structured, step-by-step lecture on designing and building a desktop-based
+          Inventory Management System using Java Swing components inside a JFrame Form.
+          This module walks through system planning, interface design, event handling,
+          and database connectivity.
+        </p>
+        <div class="meta-row">
+          <span class="meta-chip"><strong>Subject:</strong> Object-Oriented Programming</span>
+          <span class="meta-chip"><strong>Tool:</strong> NetBeans IDE (GUI Builder)</span>
+          <span class="meta-chip"><strong>Language:</strong> Java (Swing)</span>
+          <span class="meta-chip"><strong>Duration:</strong> 3&ndash;4 class sessions</span>
+        </div>
+      </header>
+
+      <!-- Learning objectives -->
+      <section class="objectives" id="objectives">
+        <h2>Learning Objectives</h2>
+        <p>At the end of this module, students should be able to:</p>
+        <ul>
+          <li>Explain the purpose and structure of a JFrame Form in Java Swing.</li>
+          <li>Identify and apply the appropriate Swing components for an inventory system.</li>
+          <li>Design a functional and organized graphical user interface (GUI) layout.</li>
+          <li>Implement event-handling logic for adding, updating, deleting, and searching records.</li>
+          <li>Connect a JFrame Form to a database using JDBC for data persistence.</li>
+          <li>Apply basic input validation and debugging techniques in a GUI application.</li>
+        </ul>
+      </section>
+
+      <!-- ============================================================
+           LESSON 1
+           ============================================================ -->
+      <section class="lesson" id="lesson-1">
+        <span class="lesson-tag">Lesson 01</span>
+        <h2>Introduction to Java Swing and JFrame</h2>
+
+        <p>
+          <strong>Java Swing</strong> is a part of the Java Foundation Classes (JFC) used to build
+          graphical user interfaces (GUIs) for desktop applications. It provides a rich set of
+          components &mdash; buttons, text fields, tables, labels, and more &mdash; that allow a program
+          to be operated visually instead of through the command line.
+        </p>
+        <p>
+          A <strong>JFrame</strong> is the main container, or "window," of a Swing application. Every
+          visible component that the user interacts with &mdash; text fields, buttons, tables &mdash;
+          is placed inside this window.
+        </p>
+
+        <figure class="figure">
+          <svg class="mockup-svg" viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of a blank JFrame window with title bar">
+            <rect x="0" y="0" width="760" height="260" fill="#eef1f6" rx="8"/>
+            <rect x="20" y="20" width="720" height="220" fill="#ffffff" stroke="#b9c3d6" stroke-width="2" rx="6"/>
+            <rect x="20" y="20" width="720" height="32" fill="#1e335a" rx="6"/>
+            <rect x="20" y="40" width="720" height="12" fill="#1e335a"/>
+            <circle cx="700" cy="36" r="6" fill="#e05b52"/>
+            <circle cx="678" cy="36" r="6" fill="#e0b552"/>
+            <circle cx="656" cy="36" r="6" fill="#5bc27a"/>
+            <text x="36" y="41" fill="#ffffff" font-size="14" font-weight="600">InventoryForm.java &mdash; JFrame</text>
+            <text x="380" y="150" text-anchor="middle" fill="#8892a6" font-size="16">(blank content pane)</text>
+            <rect x="40" y="70" width="680" height="160" fill="none" stroke="#dbe1ec" stroke-dasharray="6,6" stroke-width="2" rx="4"/>
+          </svg>
+          <figcaption><b>Figure 1.</b> A blank <code>JFrame</code> window &mdash; the starting canvas before any Swing components are added.</figcaption>
+        </figure>
+
+        <h3>Common Swing Components Used in This Project</h3>
+        <table class="datatable">
+          <thead>
+            <tr><th>Component</th><th>Class Name</th><th>Purpose in the Inventory System</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Label</td><td><code>JLabel</code></td><td>Displays field names such as "Product ID," "Quantity."</td></tr>
+            <tr><td>Text Field</td><td><code>JTextField</code></td><td>Accepts user input such as product name and price.</td></tr>
+            <tr><td>Button</td><td><code>JButton</code></td><td>Triggers actions &mdash; Add, Update, Delete, Clear, Search.</td></tr>
+            <tr><td>Table</td><td><code>JTable</code></td><td>Displays the list of inventory records in rows and columns.</td></tr>
+            <tr><td>Combo Box</td><td><code>JComboBox</code></td><td>Lets the user select a product category from a fixed list.</td></tr>
+            <tr><td>Scroll Pane</td><td><code>JScrollPane</code></td><td>Wraps the table so long lists of records can be scrolled.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout note">
+          <span class="callout-title">Discussion Point</span>
+          Ask the class: why is a graphical interface generally more user-friendly for an inventory
+          clerk than a console-based (text-only) program? Use this to transition into system planning.
+        </div>
+      </section>
+
+      <!-- ============================================================
+           LESSON 2
+           ============================================================ -->
+      <section class="lesson" id="lesson-2">
+        <span class="lesson-tag">Lesson 02</span>
+        <h2>Planning the Inventory System</h2>
+        <p>
+          Before opening the IDE, the class should plan <em>what</em> the system needs to store and
+          <em>what</em> actions it must perform. Good planning prevents redesigning the form later.
+        </p>
+
+        <h3>Data Fields to Capture</h3>
+        <table class="datatable">
+          <thead>
+            <tr><th>Field</th><th>Data Type</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Product ID</td><td>String / Integer</td><td>Unique identifier for each product.</td></tr>
+            <tr><td>Product Name</td><td>String</td><td>Name of the item in stock.</td></tr>
+            <tr><td>Category</td><td>String</td><td>Classification, selected from a combo box.</td></tr>
+            <tr><td>Quantity</td><td>Integer</td><td>Number of units currently on hand.</td></tr>
+            <tr><td>Unit Price</td><td>Double</td><td>Price per unit, used to compute total value.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Core System Functions (CRUD)</h3>
+        <p>The system will support the four fundamental data operations, commonly abbreviated as <strong>CRUD</strong>:</p>
+        <ul>
+          <li><strong>Create</strong> &mdash; add a new product record.</li>
+          <li><strong>Read</strong> &mdash; display and search existing records in the table.</li>
+          <li><strong>Update</strong> &mdash; edit the details of a selected record.</li>
+          <li><strong>Delete</strong> &mdash; remove a record from the system.</li>
+        </ul>
+
+        <div class="callout tip">
+          <span class="callout-title">Teaching Tip</span>
+          Have students sketch the form layout on paper first, labeling every field and button, before
+          they touch the GUI builder. This reinforces planning as a separate step from implementation.
+        </div>
+      </section>
+
+      <!-- ============================================================
+           LESSON 3
+           ============================================================ -->
+      <section class="lesson" id="lesson-3">
+        <span class="lesson-tag">Lesson 03</span>
+        <h2>Setting Up the Project</h2>
+        <p>
+          This lesson introduces the development environment used to build and run the JFrame Form.
+        </p>
+
+        <ol class="steps">
+          <li>
+            <h4>Install the Java Development Kit (JDK)</h4>
+            <p>Confirm that a current JDK is installed. This provides the compiler and runtime needed to build the application.</p>
+          </li>
+          <li>
+            <h4>Open the NetBeans IDE</h4>
+            <p>NetBeans includes a visual GUI Builder (Matisse) that allows Swing components to be arranged by dragging and dropping, rather than positioning them manually in code.</p>
+          </li>
+          <li>
+            <h4>Create a New Java Application</h4>
+            <p>File &rarr; New Project &rarr; Java with Ant / Java Application. Name the project, for example, <code>InventorySystem</code>.</p>
+          </li>
+          <li>
+            <h4>Add a New JFrame Form</h4>
+            <p>Right-click the project's source package &rarr; New &rarr; JFrame Form. Name it <code>InventoryForm</code>. This creates the blank window shown in Figure 1.</p>
+          </li>
+        </ol>
+
+        <figure class="figure">
+          <svg class="mockup-svg" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of the NetBeans GUI builder layout with palette design canvas and properties panel">
+            <rect x="0" y="0" width="760" height="300" fill="#eef1f6" rx="8"/>
+            <rect x="20" y="20" width="720" height="260" fill="#ffffff" stroke="#b9c3d6" stroke-width="2" rx="6"/>
+            <rect x="20" y="20" width="720" height="26" fill="#1e335a" rx="6"/>
+            <text x="34" y="38" fill="#ffffff" font-size="12" font-weight="600">NetBeans IDE &mdash; GUI Builder (Design View)</text>
+
+            <!-- Palette -->
+            <rect x="30" y="56" width="150" height="214" fill="#f6f7fb" stroke="#dbe1ec"/>
+            <text x="40" y="74" font-size="12" fill="#5c6579" font-weight="600">PALETTE</text>
+            <rect x="40" y="84" width="130" height="20" fill="#ffffff" stroke="#dbe1ec"/><text x="46" y="98" font-size="11" fill="#333c4f">JLabel</text>
+            <rect x="40" y="108" width="130" height="20" fill="#ffffff" stroke="#dbe1ec"/><text x="46" y="122" font-size="11" fill="#333c4f">JTextField</text>
+            <rect x="40" y="132" width="130" height="20" fill="#ffffff" stroke="#dbe1ec"/><text x="46" y="146" font-size="11" fill="#333c4f">JButton</text>
+            <rect x="40" y="156" width="130" height="20" fill="#d9a441" stroke="#b9822a"/><text x="46" y="170" font-size="11" fill="#1b2130" font-weight="700">JTable</text>
+            <rect x="40" y="180" width="130" height="20" fill="#ffffff" stroke="#dbe1ec"/><text x="46" y="194" font-size="11" fill="#333c4f">JComboBox</text>
+
+            <!-- Design canvas -->
+            <rect x="188" y="56" width="386" height="214" fill="#ffffff" stroke="#dbe1ec"/>
+            <text x="198" y="74" font-size="12" fill="#5c6579" font-weight="600">DESIGN CANVAS</text>
+            <rect x="198" y="84" width="80" height="16" fill="#eef1f6"/><text x="202" y="96" font-size="10" fill="#333c4f">Product ID</text>
+            <rect x="290" y="82" width="120" height="20" fill="#ffffff" stroke="#8892a6"/>
+            <rect x="198" y="112" width="80" height="16" fill="#eef1f6"/><text x="202" y="124" font-size="10" fill="#333c4f">Product Name</text>
+            <rect x="290" y="110" width="180" height="20" fill="#ffffff" stroke="#8892a6"/>
+            <rect x="198" y="140" width="80" height="16" fill="#eef1f6"/><text x="202" y="152" font-size="10" fill="#333c4f">Category</text>
+            <rect x="290" y="138" width="130" height="20" fill="#ffffff" stroke="#8892a6"/><text x="296" y="152" font-size="10" fill="#5c6579">Select &#9662;</text>
+            <rect x="198" y="176" width="90" height="26" fill="#2f5aa8" rx="3"/><text x="243" y="193" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">Add</text>
+            <rect x="296" y="176" width="90" height="26" fill="#2f5aa8" rx="3"/><text x="341" y="193" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">Update</text>
+            <rect x="394" y="176" width="90" height="26" fill="#a13328" rx="3"/><text x="439" y="193" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">Delete</text>
+            <rect x="198" y="216" width="286" height="40" fill="#f8fafc" stroke="#dbe1ec"/><text x="204" y="230" font-size="10" fill="#8892a6">JTable placeholder (inventory list)</text>
+
+            <!-- Properties panel -->
+            <rect x="586" y="56" width="144" height="214" fill="#f6f7fb" stroke="#dbe1ec"/>
+            <text x="596" y="74" font-size="12" fill="#5c6579" font-weight="600">PROPERTIES</text>
+            <text x="596" y="94" font-size="10" fill="#333c4f">Name: jTable1</text>
+            <text x="596" y="112" font-size="10" fill="#333c4f">Font: Segoe UI 12</text>
+            <text x="596" y="130" font-size="10" fill="#333c4f">rowHeight: 22</text>
+            <text x="596" y="148" font-size="10" fill="#333c4f">model: DefaultTableModel</text>
+          </svg>
+          <figcaption><b>Figure 2.</b> The GUI Builder layout: components are dragged from the <b>Palette</b> onto the <b>Design Canvas</b>, and each component's settings appear in the <b>Properties</b> panel.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============================================================
+           LESSON 4
+           ============================================================ -->
+      <section class="lesson" id="lesson-4">
+        <span class="lesson-tag">Lesson 04</span>
+        <h2>Designing the JFrame Form</h2>
+        <p>
+          With the blank form ready, components are added one at a time. Explain each step aloud
+          while pointing to the corresponding part of Figure 3.
+        </p>
+
+        <ol class="steps">
+          <li>
+            <h4>Step 1 &mdash; Add Labels</h4>
+            <p>Drag a <code>JLabel</code> for each data field: Product ID, Product Name, Category, Quantity, and Price. Labels describe what each input field is for.</p>
+          </li>
+          <li>
+            <h4>Step 2 &mdash; Add Text Fields</h4>
+            <p>Place a <code>JTextField</code> beside each label so the user can type in values.</p>
+          </li>
+          <li>
+            <h4>Step 3 &mdash; Add a Combo Box for Category</h4>
+            <p>Insert a <code>JComboBox</code> next to the Category label and populate it with fixed category choices, such as Electronics, Office Supplies, and Groceries.</p>
+          </li>
+          <li>
+            <h4>Step 4 &mdash; Add Action Buttons</h4>
+            <p>Place four buttons: <strong>Add</strong>, <strong>Update</strong>, <strong>Delete</strong>, and <strong>Clear</strong>. Each will later be linked to its own event-handling method.</p>
+          </li>
+          <li>
+            <h4>Step 5 &mdash; Add a Table Inside a Scroll Pane</h4>
+            <p>Drag a <code>JTable</code> onto the form. NetBeans automatically wraps it inside a <code>JScrollPane</code>, which allows the list to scroll when there are many records.</p>
+          </li>
+        </ol>
+
+        <figure class="figure">
+          <svg class="mockup-svg" viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Completed inventory form mockup with labeled fields buttons and a table of sample records">
+            <rect x="0" y="0" width="760" height="420" fill="#eef1f6" rx="8"/>
+            <rect x="20" y="20" width="720" height="380" fill="#ffffff" stroke="#b9c3d6" stroke-width="2" rx="6"/>
+            <rect x="20" y="20" width="720" height="30" fill="#1e335a" rx="6"/>
+            <text x="34" y="40" fill="#ffffff" font-size="13" font-weight="600">Inventory Management System</text>
+
+            <!-- Field labels + inputs -->
+            <text x="44" y="82" font-size="13" fill="#333c4f">Product ID</text>
+            <rect x="160" y="66" width="140" height="24" fill="#ffffff" stroke="#8892a6" rx="3"/>
+
+            <text x="330" y="82" font-size="13" fill="#333c4f">Product Name</text>
+            <rect x="450" y="66" width="240" height="24" fill="#ffffff" stroke="#8892a6" rx="3"/>
+
+            <text x="44" y="120" font-size="13" fill="#333c4f">Category</text>
+            <rect x="160" y="104" width="160" height="24" fill="#ffffff" stroke="#8892a6" rx="3"/>
+            <text x="168" y="120" font-size="12" fill="#5c6579">Electronics &#9662;</text>
+
+            <text x="340" y="120" font-size="13" fill="#333c4f">Quantity</text>
+            <rect x="420" y="104" width="90" height="24" fill="#ffffff" stroke="#8892a6" rx="3"/>
+
+            <text x="530" y="120" font-size="13" fill="#333c4f">Unit Price</text>
+            <rect x="610" y="104" width="90" height="24" fill="#ffffff" stroke="#8892a6" rx="3"/>
+
+            <!-- Buttons -->
+            <rect x="44" y="146" width="96" height="30" fill="#2f5aa8" rx="4"/><text x="92" y="166" font-size="13" fill="#fff" text-anchor="middle" font-weight="600">Add</text>
+            <rect x="150" y="146" width="96" height="30" fill="#2f5aa8" rx="4"/><text x="198" y="166" font-size="13" fill="#fff" text-anchor="middle" font-weight="600">Update</text>
+            <rect x="256" y="146" width="96" height="30" fill="#a13328" rx="4"/><text x="304" y="166" font-size="13" fill="#fff" text-anchor="middle" font-weight="600">Delete</text>
+            <rect x="362" y="146" width="96" height="30" fill="#5c6579" rx="4"/><text x="410" y="166" font-size="13" fill="#fff" text-anchor="middle" font-weight="600">Clear</text>
+            <rect x="600" y="146" width="100" height="30" fill="#d9a441" rx="4"/><text x="650" y="166" font-size="13" fill="#1b2130" text-anchor="middle" font-weight="700">Search</text>
+
+            <!-- Table -->
+            <rect x="44" y="196" width="656" height="184" fill="#ffffff" stroke="#dbe1ec"/>
+            <rect x="44" y="196" width="656" height="26" fill="#1e335a"/>
+            <text x="60" y="214" font-size="11.5" fill="#fff" font-weight="600">ID</text>
+            <text x="140" y="214" font-size="11.5" fill="#fff" font-weight="600">Product Name</text>
+            <text x="360" y="214" font-size="11.5" fill="#fff" font-weight="600">Category</text>
+            <text x="500" y="214" font-size="11.5" fill="#fff" font-weight="600">Qty</text>
+            <text x="580" y="214" font-size="11.5" fill="#fff" font-weight="600">Price</text>
+
+            <text x="60" y="240" font-size="11.5" fill="#333c4f">1001</text>
+            <text x="140" y="240" font-size="11.5" fill="#333c4f">Wireless Mouse</text>
+            <text x="360" y="240" font-size="11.5" fill="#333c4f">Electronics</text>
+            <text x="500" y="240" font-size="11.5" fill="#333c4f">35</text>
+            <text x="580" y="240" font-size="11.5" fill="#333c4f">450.00</text>
+            <line x1="44" y1="250" x2="700" y2="250" stroke="#eef1f6"/>
+
+            <text x="60" y="266" font-size="11.5" fill="#333c4f">1002</text>
+            <text x="140" y="266" font-size="11.5" fill="#333c4f">Bond Paper (A4)</text>
+            <text x="360" y="266" font-size="11.5" fill="#333c4f">Office Supplies</text>
+            <text x="500" y="266" font-size="11.5" fill="#333c4f">120</text>
+            <text x="580" y="266" font-size="11.5" fill="#333c4f">185.00</text>
+            <line x1="44" y1="276" x2="700" y2="276" stroke="#eef1f6"/>
+
+            <text x="60" y="292" font-size="11.5" fill="#333c4f">1003</text>
+            <text x="140" y="292" font-size="11.5" fill="#333c4f">USB Flash Drive 32GB</text>
+            <text x="360" y="292" font-size="11.5" fill="#333c4f">Electronics</text>
+            <text x="500" y="292" font-size="11.5" fill="#333c4f">60</text>
+            <text x="580" y="292" font-size="11.5" fill="#333c4f">299.00</text>
+          </svg>
+          <figcaption><b>Figure 3.</b> The completed <code>InventoryForm</code> layout showing labeled input fields, action buttons, and a <code>JTable</code> populated with sample inventory records.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============================================================
+           LESSON 5
+           ============================================================ -->
+      <section class="lesson" id="lesson-5">
+        <span class="lesson-tag">Lesson 05</span>
+        <h2>Naming Components and Setting Properties</h2>
+        <p>
+          Consistent naming makes the generated code easier to read and maintain. In the Properties
+          panel of NetBeans, rename each component using a clear, descriptive convention before
+          writing any logic.
+        </p>
+
+        <table class="datatable">
+          <thead>
+            <tr><th>Form Field</th><th>Recommended Variable Name</th><th>Component Type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Product ID</td><td><code>txtProductID</code></td><td>JTextField</td></tr>
+            <tr><td>Product Name</td><td><code>txtProductName</code></td><td>JTextField</td></tr>
+            <tr><td>Category</td><td><code>cmbCategory</code></td><td>JComboBox</td></tr>
+            <tr><td>Quantity</td><td><code>txtQuantity</code></td><td>JTextField</td></tr>
+            <tr><td>Unit Price</td><td><code>txtPrice</code></td><td>JTextField</td></tr>
+            <tr><td>Add button</td><td><code>btnAdd</code></td><td>JButton</td></tr>
+            <tr><td>Update button</td><td><code>btnUpdate</code></td><td>JButton</td></tr>
+            <tr><td>Delete button</td><td><code>btnDelete</code></td><td>JButton</td></tr>
+            <tr><td>Records table</td><td><code>tblInventory</code></td><td>JTable</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout note">
+          <span class="callout-title">Discussion Point</span>
+          Emphasize that the default names generated by NetBeans (<code>jTextField1</code>,
+          <code>jButton1</code>) are difficult to read once the project grows. Renaming components
+          now prevents confusion later when writing event-handling code.
+        </div>
+      </section>
+
+      <!-- ============================================================
+           LESSON 6
+           ============================================================ -->
+      <section class="lesson" id="lesson-6">
+        <span class="lesson-tag">Lesson 06</span>
+        <h2>Displaying Records in a JTable</h2>
+        <p>
+          A <code>JTable</code> does not store data by itself; it displays data supplied by a
+          <strong>table model</strong>. The simplest option is <code>DefaultTableModel</code>, which
+          can be filled with column headers and rows programmatically.
+        </p>
+
+        <span class="code-label">InventoryForm.java &mdash; Initializing the table model</span>
+        <pre><code>DefaultTableModel model = new DefaultTableModel();
+model.setColumnIdentifiers(new String[] {
+    "Product ID", "Product Name", "Category", "Quantity", "Price"
+});
+tblInventory.setModel(model);
+
+// Adding a sample row to the table
+model.addRow(new Object[] {
+    "1001", "Wireless Mouse", "Electronics", 35, 450.00
+});</code></pre>
+
+        <div class="callout tip">
+          <span class="callout-title">Teaching Tip</span>
+          Demonstrate this in class by running the program and adding two or three sample rows live,
+          so students can see the connection between the code and what appears on the table.
+        </div>
+      </section>
+
+      <!-- ============================================================
+           LESSON 7
+           ============================================================ -->
+      <section class="lesson" id="lesson-7">
+        <span class="lesson-tag">Lesson 07</span>
+        <h2>Writing the Event-Handling Code</h2>
+        <p>
+          Each button needs an <strong>ActionListener</strong> so the program responds when it is
+          clicked. In NetBeans, double-clicking a button in Design view automatically generates an
+          empty event method &mdash; the student then fills in the logic.
+        </p>
+
+        <h3>Add Button</h3>
+        <span class="code-label">btnAddActionPerformed</span>
+        <pre><code>private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {
+    String id       = txtProductID.getText();
+    String name     = txtProductName.getText();
+    String category = cmbCategory.getSelectedItem().toString();
+    String qty      = txtQuantity.getText();
+    String price    = txtPrice.getText();
+
+    DefaultTableModel model = (DefaultTableModel) tblInventory.getModel();
+    model.addRow(new Object[] { id, name, category, qty, price });
+
+    clearFields();
+}</code></pre>
+
+        <h3>Delete Button</h3>
+        <span class="code-label">btnDeleteActionPerformed</span>
+        <pre><code>private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
+    int selectedRow = tblInventory.getSelectedRow();
+
+    if (selectedRow >= 0) {
+        DefaultTableModel model = (DefaultTableModel) tblInventory.getModel();
+        model.removeRow(selectedRow);
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a record to delete.");
+    }
+}</code></pre>
+
+        <h3>Clear Button</h3>
+        <span class="code-label">btnClearActionPerformed</span>
+        <pre><code>private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
+    clearFields();
+}
+
+private void clearFields() {
+    txtProductID.setText("");
+    txtProductName.setText("");
+    txtQuantity.setText("");
+    txtPrice.setText("");
+    cmbCategory.setSelectedIndex(0);
+}</code></pre>
+
+        <div class="callout note">
+          <span class="callout-title">Discussion Point</span>
+          Walk through the flow of control: a user click &rarr; triggers the ActionEvent &rarr; calls
+          the listener method &rarr; updates the table model &rarr; the JTable repaints automatically.
+        </div>
+      </section>
+
+      <!-- ============================================================
+           LESSON 8
+           ============================================================ -->
+      <section class="lesson" id="lesson-8">
+        <span class="lesson-tag">Lesson 08</span>
+        <h2>Connecting to the Database (JDBC)</h2>
+        <p>
+          For records to persist after the program closes, the form must be connected to a database
+          such as MySQL, using <strong>JDBC</strong> (Java Database Connectivity).
+        </p>
+
+        <h3>Step 1 &mdash; Establish the Connection</h3>
+        <span class="code-label">DBConnection.java</span>
+        <pre><code>public class DBConnection {
+    public static Connection getConnection() {
+        Connection con = null;
+        try {
+            String url = "jdbc:mysql://localhost:3306/inventory_db";
+            con = DriverManager.getConnection(url, "root", "");
+        } catch (SQLException e) {
+            System.out.println("Connection failed: " + e.getMessage());
+        }
+        return con;
+    }
+}</code></pre>
+
+        <h3>Step 2 &mdash; Insert a New Record</h3>
+        <span class="code-label">Add operation using PreparedStatement</span>
+        <pre><code>String sql = "INSERT INTO products (id, name, category, qty, price) VALUES (?,?,?,?,?)";
+PreparedStatement ps = con.prepareStatement(sql);
+ps.setString(1, txtProductID.getText());
+ps.setString(2, txtProductName.getText());
+ps.setString(3, cmbCategory.getSelectedItem().toString());
+ps.setInt(4, Integer.parseInt(txtQuantity.getText()));
+ps.setDouble(5, Double.parseDouble(txtPrice.getText()));
+ps.executeUpdate();</code></pre>
+
+        <h3>Step 3 &mdash; Retrieve and Display Records</h3>
+        <span class="code-label">Read operation, populating the table on form load</span>
+        <pre><code>String sql = "SELECT * FROM products";
+ResultSet rs = con.createStatement().executeQuery(sql);
+DefaultTableModel model = (DefaultTableModel) tblInventory.getModel();
+
+while (rs.next()) {
+    model.addRow(new Object[] {
+        rs.getString("id"), rs.getString("name"),
+        rs.getString("category"), rs.getInt("qty"), rs.getDouble("price")
+    });
+}</code></pre>
+
+        <div class="callout warning">
+          <span class="callout-title">Common Mistake</span>
+          Remind students to always close the <code>Connection</code>, <code>Statement</code>, and
+          <code>ResultSet</code> objects (or use try-with-resources) to avoid leaving database
+          connections open.
+        </div>
+      </section>
+
+      <!-- ============================================================
+           LESSON 9
+           ============================================================ -->
+      <section class="lesson" id="lesson-9">
+        <span class="lesson-tag">Lesson 09</span>
+        <h2>Input Validation and Debugging</h2>
+        <p>
+          A reliable inventory system must guard against blank fields and invalid numeric entries
+          before a record is saved.
+        </p>
+
+        <span class="code-label">Basic validation before saving a record</span>
+        <pre><code>private boolean isInputValid() {
+    if (txtProductName.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Product name cannot be empty.");
+        return false;
+    }
+    try {
+        Integer.parseInt(txtQuantity.getText());
+        Double.parseDouble(txtPrice.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Quantity and price must be numeric.");
+        return false;
+    }
+    return true;
+}</code></pre>
+
+        <h3>Debugging Checklist for Students</h3>
+        <ul>
+          <li>Confirm every component name in the code matches the name in the Properties panel.</li>
+          <li>Check that the database driver (JDBC connector) is added to the project libraries.</li>
+          <li>Use <code>System.out.println()</code> statements to trace values before an operation runs.</li>
+          <li>Wrap database calls in <code>try&ndash;catch</code> blocks and read the exception message carefully.</li>
+        </ul>
+      </section>
+
+      <!-- ============================================================
+           LESSON 10 — SUMMARY
+           ============================================================ -->
+      <section class="lesson" id="lesson-10">
+        <span class="lesson-tag">Lesson 10</span>
+        <h2>Summary and Key Takeaways</h2>
+        <ul>
+          <li>A <code>JFrame</code> serves as the main window that hosts all Swing components of the application.</li>
+          <li>System planning &mdash; defining data fields and required operations &mdash; should precede interface design.</li>
+          <li>Labels, text fields, combo boxes, buttons, and a table together form the complete data-entry interface.</li>
+          <li>Clear, descriptive component names make event-handling code easier to write and review.</li>
+          <li>A <code>DefaultTableModel</code> connects the visual <code>JTable</code> to the underlying data.</li>
+          <li>ActionListener methods implement the Add, Update, Delete, Clear, and Search operations.</li>
+          <li>JDBC allows the form to store and retrieve data permanently from a database.</li>
+          <li>Input validation protects the system from blank or invalid data before it is saved.</li>
+        </ul>
+      </section>
+
+      <!-- ============================================================
+           ACTIVITY
+           ============================================================ -->
+      <section class="activity-box" id="activity">
+        <span class="badge">Hands-on Activity</span>
+        <h2>Build Your Own Inventory Form</h2>
+        <p>Individually or in pairs, complete the following tasks using the concepts covered in this module.</p>
+        <ol>
+          <li>Create a new JFrame Form named <code>InventoryForm</code> in a fresh NetBeans project.</li>
+          <li>Add and rename all required components following the naming convention in Lesson 5.</li>
+          <li>Implement the <code>btnAdd</code>, <code>btnDelete</code>, and <code>btnClear</code> event methods.</li>
+          <li>Add basic input validation before a record is added to the table.</li>
+          <li><em>(Extension)</em> Connect the form to a MySQL database and make the Add operation persist to a real table.</li>
+          <li>Prepare to demonstrate your working form in the next class session.</li>
+        </ol>
+      </section>
+
+      <!-- ============================================================
+           REFERENCES
+           ============================================================ -->
+      <section class="references" id="references">
+        <h2>References</h2>
+        <ol>
+          <li>Oracle. <em>The Java Tutorials &mdash; Creating a GUI with JFC/Swing.</em></li>
+          <li>Oracle. <em>Java SE Documentation &mdash; javax.swing package.</em></li>
+          <li>Oracle. <em>JDBC Database Access Documentation.</em></li>
+          <li>Apache NetBeans. <em>NetBeans GUI Builder (Matisse) User Guide.</em></li>
+        </ol>
+      </section>
+
+      <footer class="page-footer">
+        <span>Practice Projects &middot; Inventory Management System Module</span>
+        <span><a href="../index.html">&larr; Back to Home</a></span>
+      </footer>
+
+    </main>
+  </div>
+</body>
+</html>

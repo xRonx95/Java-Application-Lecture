@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional lesson module on performing safe SQL UPDATE and DELETE operations from a Java JFrame application using JDBC and PreparedStatement.">
+  <title>Database &amp; JDBC | UPDATE and DELETE Using JFrame</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="stylesheet" href="../css/Database & JDBC/update-delete.css">
+  <script src="../js/databaselesson.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to lesson content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" aria-label="Database and JDBC Learning Module home">
+        <span class="brand-mark" aria-hidden="true">DB</span>
+        <span>
+          <strong>Database &amp; JDBC</strong>
+          <small>Professional Learning Module</small>
+        </span>
+      </a>
+
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Menu</span>
+      </button>
+
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="#overview">Overview</a>
+        <a href="#update">UPDATE</a>
+        <a href="#delete">DELETE</a>
+        <a href="#jframe">JFrame</a>
+        <a href="#assessment">Assessment</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="lesson-title">
+      <div class="hero-content">
+        <p class="eyebrow">Lesson 06 · Data Manipulation with Java Swing</p>
+        <h1 id="lesson-title">Updating and Deleting Database Records Using JDBC and JFrame</h1>
+        <p class="hero-lead">A structured, step-by-step module for building safe <code>UPDATE</code> and <code>DELETE</code> features in a Java desktop application.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#overview">Begin the lesson</a>
+          <a class="button button-secondary" href="../java/StudentManagementFrame.java" download>Download Java example</a>
+        </div>
+        <dl class="lesson-meta" aria-label="Lesson information">
+          <div><dt>Level</dt><dd>Intermediate</dd></div>
+          <div><dt>Duration</dt><dd>90–120 minutes</dd></div>
+          <div><dt>Technology</dt><dd>Java, Swing, JDBC, MySQL</dd></div>
+          <div><dt>Output</dt><dd>Working CRUD interface</dd></div>
+        </dl>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="window-card">
+          <div class="window-bar"><span></span><span></span><span></span></div>
+          <div class="window-body">
+            <div class="mini-form"><i></i><i></i><i></i></div>
+            <div class="mini-buttons"><b>UPDATE</b><b>DELETE</b></div>
+            <div class="database-cylinder">SQL</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-strip" aria-label="Lesson progress guide">
+      <div class="strip-inner">
+        <span><b>01</b> Understand</span>
+        <span><b>02</b> Prepare</span>
+        <span><b>03</b> Code</span>
+        <span><b>04</b> Test</span>
+        <span><b>05</b> Evaluate</span>
+      </div>
+    </section>
+
+    <div class="page-layout">
+      <aside class="lesson-sidebar" aria-label="On this page">
+        <div class="sidebar-card">
+          <p class="sidebar-title">Lesson contents</p>
+          <ol>
+            <li><a href="#overview">Learning overview</a></li>
+            <li><a href="#concepts">JDBC concepts</a></li>
+            <li><a href="#setup">Project setup</a></li>
+            <li><a href="#database">Database preparation</a></li>
+            <li><a href="#update">UPDATE operation</a></li>
+            <li><a href="#delete">DELETE operation</a></li>
+            <li><a href="#jframe">JFrame integration</a></li>
+            <li><a href="#safety">Safety and errors</a></li>
+            <li><a href="#activity">Guided activity</a></li>
+            <li><a href="#assessment">Assessment</a></li>
+          </ol>
+        </div>
+      </aside>
+
+      <article class="lesson-content">
+        <section id="overview" class="content-section">
+          <div class="section-heading">
+            <span class="section-number">01</span>
+            <div>
+              <p class="section-kicker">Learning overview</p>
+              <h2>What students will learn</h2>
+            </div>
+          </div>
+          <p>Database applications must do more than display records. They must also allow authorized users to correct information and remove records that are no longer required. This lesson connects a Java Swing interface to MySQL through JDBC and applies safe, parameterized SQL statements.</p>
+
+          <div class="objective-grid">
+            <article class="objective-card"><span>1</span><h3>Explain</h3><p>Describe how a JFrame event travels through JDBC to the database.</p></article>
+            <article class="objective-card"><span>2</span><h3>Construct</h3><p>Write parameterized <code>UPDATE</code> and <code>DELETE</code> statements.</p></article>
+            <article class="objective-card"><span>3</span><h3>Integrate</h3><p>Connect Swing buttons, text fields, and a JTable to JDBC methods.</p></article>
+            <article class="objective-card"><span>4</span><h3>Evaluate</h3><p>Verify affected rows, handle exceptions, and protect user data.</p></article>
+          </div>
+
+          <div class="callout callout-info">
+            <div class="callout-icon" aria-hidden="true">i</div>
+            <div><h3>Prerequisite knowledge</h3><p>Students should already understand Java classes and methods, Swing components, basic SQL, primary keys, and the purpose of a database connection.</p></div>
+          </div>
+
+          <div class="teacher-note">
+            <strong>Teaching prompt:</strong> Ask the class, “Why should an UPDATE or DELETE statement use a primary key in its WHERE clause?” Return to this question during the safety section.
+          </div>
+        </section>
+
+        <section id="concepts" class="content-section">
+          <div class="section-heading">
+            <span class="section-number">02</span>
+            <div><p class="section-kicker">Core concepts</p><h2>How JDBC connects the interface and database</h2></div>
+          </div>
+          <p><strong>JDBC</strong> means Java Database Connectivity. It is the standard Java API used to open a connection, send SQL commands, receive results, and close database resources.</p>
+
+          <figure class="lesson-figure">
+            <img src="../img/database-setup/jdbc-architecture.svg" alt="JDBC architecture showing a user action in JFrame passing through event handling, JDBC, a MySQL driver, and the database.">
+            <figcaption>Figure 1. A button click in JFrame becomes a database operation through the JDBC layer.</figcaption>
+          </figure>
+
+          <div class="term-grid">
+            <article><h3>Connection</h3><p>An active session between the Java application and MySQL.</p></article>
+            <article><h3>PreparedStatement</h3><p>A precompiled SQL statement that accepts safe parameter values.</p></article>
+            <article><h3>executeUpdate()</h3><p>Executes INSERT, UPDATE, or DELETE and returns the number of affected rows.</p></article>
+            <article><h3>SQLException</h3><p>An exception containing database error details for diagnosis and handling.</p></article>
+          </div>
+
+          <h3 class="subheading">The standard JDBC operation cycle</h3>
+          <ol class="process-list">
+            <li><span>1</span><div><strong>Read and validate input</strong><p>Get values from Swing components and reject incomplete or invalid data.</p></div></li>
+            <li><span>2</span><div><strong>Open the connection</strong><p>Request a <code>Connection</code> from the reusable database utility class.</p></div></li>
+            <li><span>3</span><div><strong>Prepare the SQL</strong><p>Create a <code>PreparedStatement</code> containing <code>?</code> placeholders.</p></div></li>
+            <li><span>4</span><div><strong>Bind parameters</strong><p>Supply each value with the correct setter method and parameter position.</p></div></li>
+            <li><span>5</span><div><strong>Execute and verify</strong><p>Call <code>executeUpdate()</code> and check whether exactly one row changed.</p></div></li>
+            <li><span>6</span><div><strong>Refresh and close</strong><p>Reload the JTable and let try-with-resources close JDBC objects.</p></div></li>
+          </ol>
+        </section>
+
+        <section id="setup" class="content-section">
+          <div class="section-heading">
+            <span class="section-number">03</span>
+            <div><p class="section-kicker">Environment preparation</p><h2>Set up the Java project</h2></div>
+          </div>
+          <p>This module uses Java 17 or later, MySQL Server 8.0 or later, and MySQL Connector/J. The same concepts work in NetBeans, IntelliJ IDEA, or Eclipse.</p>
+
+          <div class="steps-grid">
+            <article class="step-card"><span class="step-label">Step 1</span><h3>Create the project</h3><p>Create a Java Application named <code>JdbcUpdateDeleteLesson</code>.</p></article>
+            <article class="step-card"><span class="step-label">Step 2</span><h3>Add the JDBC driver</h3><p>Add MySQL Connector/J to the project libraries or build configuration.</p></article>
+            <article class="step-card"><span class="step-label">Step 3</span><h3>Start MySQL</h3><p>Confirm that MySQL is running and note its port, normally <code>3306</code>.</p></article>
+            <article class="step-card"><span class="step-label">Step 4</span><h3>Create two classes</h3><p>Add <code>DatabaseConnection</code> and <code>StudentManagementFrame</code>.</p></article>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-toolbar"><span>Recommended Maven dependency</span><button type="button" data-copy-target="maven-code">Copy</button></div>
+            <pre id="maven-code"><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+    &lt;version&gt;26.7.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+          </div>
+
+          <div class="callout callout-warning">
+            <div class="callout-icon" aria-hidden="true">!</div>
+            <div><h3>Driver version note</h3><p>Use a Connector/J version compatible with your Java and MySQL installation. When working offline, add the downloaded JAR through the IDE’s project library settings.</p></div>
+          </div>
+        </section>
+
+        <section id="database" class="content-section">
+          <div class="section-heading">
+            <span class="section-number">04</span>
+            <div><p class="section-kicker">Database preparation</p><h2>Create the practice database and table</h2></div>
+          </div>
+          <p>The <code>student_id</code> column is the primary key. It uniquely identifies each record and is therefore the safest value to use in the <code>WHERE</code> clause.</p>
+
+          <div class="code-panel">
+            <div class="code-toolbar"><span>school_db.sql</span><button type="button" data-copy-target="schema-code">Copy</button></div>
+            <pre id="schema-code"><code>CREATE DATABASE IF NOT EXISTS school_db;
+USE school_db;
+
+CREATE TABLE IF NOT EXISTS students (
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name  VARCHAR(100) NOT NULL,
+    course     VARCHAR(80)  NOT NULL,
+    year_level INT          NOT NULL,
+    email      VARCHAR(120) NOT NULL UNIQUE
+);
+
+INSERT INTO students (full_name, course, year_level, email) VALUES
+('Ana Reyes', 'BS Information Technology', 2, 'ana.reyes@example.edu'),
+('Marco Santos', 'BS Computer Science', 3, 'marco.santos@example.edu');</code></pre>
+          </div>
+
+          <div class="table-wrap" role="region" aria-label="Sample students table" tabindex="0">
+            <table>
+              <caption>Expected sample data</caption>
+              <thead><tr><th>student_id</th><th>full_name</th><th>course</th><th>year_level</th><th>email</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Ana Reyes</td><td>BS Information Technology</td><td>2</td><td>ana.reyes@example.edu</td></tr>
+                <tr><td>2</td><td>Marco Santos</td><td>BS Computer Science</td><td>3</td><td>marco.santos@example.edu</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="subheading">Create the reusable connection class</h3>
+          <div class="code-panel">
+            <div class="code-toolbar"><span>DatabaseConnection.java</span><button type="button" data-copy-target="connection-code">Copy</button></div>
+            <pre id="connection-code"><code>import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public final class DatabaseConnection {
+    private static final String URL =
+            "jdbc:mysql://localhost:3306/school_db"
+            + "?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
+
+    private DatabaseConnection() { }
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+}</code></pre>
+          </div>
+          <p class="code-explanation"><strong>Explain the code:</strong> The URL identifies the server and database. <code>DriverManager</code> selects the matching JDBC driver. The method returns an open connection or throws <code>SQLException</code> if the connection fails. The <code>useSSL=false</code> setting is suitable only for a local classroom server; configure TLS correctly for deployed systems.</p>
+        </section>
+
+        <section id="update" class="content-section feature-section update-section">
+          <div class="section-heading">
+            <span class="section-number">05</span>
+            <div><p class="section-kicker">Data modification</p><h2>Implement the UPDATE operation</h2></div>
+          </div>
+          <p>An UPDATE statement changes existing values. It must include a precise <code>WHERE</code> clause; otherwise, every row in the table may be modified.</p>
+
+          <figure class="lesson-figure">
+            <img src="../img/database-setup/update-flow.svg" alt="Five-step update process: select a row, edit the fields, validate, execute a prepared statement, and refresh the table.">
+            <figcaption>Figure 2. Recommended UPDATE workflow in a JFrame application.</figcaption>
+          </figure>
+
+          <div class="compare-grid">
+            <div class="compare-card unsafe"><span>Unsafe</span><h3>Concatenated SQL</h3><pre><code>"UPDATE students SET full_name='"
+    + name + "' WHERE student_id=" + id</code></pre><p>Mixes user input with SQL and is difficult to validate safely.</p></div>
+            <div class="compare-card safe"><span>Recommended</span><h3>Parameterized SQL</h3><pre><code>UPDATE students
+SET full_name=?, course=?, year_level=?, email=?
+WHERE student_id=?</code></pre><p>Separates the SQL instruction from the supplied values.</p></div>
+          </div>
+
+          <figure class="lesson-figure compact-figure">
+            <img src="../img/database-setup/prepared-statement.svg" alt="PreparedStatement diagram matching five question-mark placeholders to full name, course, year level, email, and student ID values.">
+            <figcaption>Figure 3. Parameter positions are counted from left to right, beginning at 1.</figcaption>
+          </figure>
+
+          <div class="code-panel">
+            <div class="code-toolbar"><span>Update method</span><button type="button" data-copy-target="update-code">Copy</button></div>
+            <pre id="update-code"><code>private void updateStudent() {
+    Integer studentId = getSelectedStudentId();
+    if (studentId == null || !validateForm()) {
+        return;
+    }
+
+    String sql = "UPDATE students "
+            + "SET full_name = ?, course = ?, year_level = ?, email = ? "
+            + "WHERE student_id = ?";
+
+    try (Connection connection = DatabaseConnection.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+
+        statement.setString(1, txtFullName.getText().trim());
+        statement.setString(2, txtCourse.getText().trim());
+        statement.setInt(3, Integer.parseInt(txtYearLevel.getText().trim()));
+        statement.setString(4, txtEmail.getText().trim());
+        statement.setInt(5, studentId);
+
+        int affectedRows = statement.executeUpdate();
+        if (affectedRows == 1) {
+            JOptionPane.showMessageDialog(this, "Student record updated successfully.");
+            loadStudents();
+            clearForm();
+        } else {
+            JOptionPane.showMessageDialog(this, "No matching record was updated.");
+        }
+    } catch (SQLException exception) {
+        showDatabaseError("Unable to update the record.", exception);
+    }
+}</code></pre>
+          </div>
+
+          <div class="explain-grid">
+            <article><span>1</span><h3>Identify</h3><p>Read the primary key from the selected JTable row.</p></article>
+            <article><span>2</span><h3>Validate</h3><p>Stop if the selection or form data is incomplete.</p></article>
+            <article><span>3</span><h3>Bind</h3><p>Match every placeholder with its correct Java value.</p></article>
+            <article><span>4</span><h3>Verify</h3><p>Expect <code>affectedRows == 1</code> for one student.</p></article>
+          </div>
+        </section>
+
+        <section id="delete" class="content-section feature-section delete-section">
+          <div class="section-heading">
+            <span class="section-number">06</span>
+            <div><p class="section-kicker">Data removal</p><h2>Implement the DELETE operation safely</h2></div>
+          </div>
+          <p>A DELETE statement permanently removes a row. The interface should require a selected record and an explicit confirmation before executing the command.</p>
+
+          <figure class="lesson-figure">
+            <img src="../img/database-setup/delete-flow.svg" alt="Safe delete decision flow: choose a row, confirm the action, cancel or execute by primary key, then report the result and refresh the table.">
+            <figcaption>Figure 4. A confirmation dialog gives the user an opportunity to cancel.</figcaption>
+          </figure>
+
+          <div class="callout callout-danger">
+            <div class="callout-icon" aria-hidden="true">!</div>
+            <div><h3>Critical rule</h3><p>Never run <code>DELETE FROM students</code> when the intention is to remove only one student. Use <code>WHERE student_id = ?</code> and verify the selected ID.</p></div>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-toolbar"><span>Delete method</span><button type="button" data-copy-target="delete-code">Copy</button></div>
+            <pre id="delete-code"><code>private void deleteStudent() {
+    Integer studentId = getSelectedStudentId();
+    if (studentId == null) {
+        JOptionPane.showMessageDialog(this, "Select a student record first.");
+        return;
+    }
+
+    int choice = JOptionPane.showConfirmDialog(
+            this,
+            "Permanently delete student ID " + studentId + "?",
+            "Confirm Record Deletion",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+    );
+
+    if (choice != JOptionPane.YES_OPTION) {
+        return;
+    }
+
+    String sql = "DELETE FROM students WHERE student_id = ?";
+    try (Connection connection = DatabaseConnection.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+
+        statement.setInt(1, studentId);
+        int affectedRows = statement.executeUpdate();
+
+        if (affectedRows == 1) {
+            JOptionPane.showMessageDialog(this, "Student record deleted successfully.");
+            loadStudents();
+            clearForm();
+        } else {
+            JOptionPane.showMessageDialog(this, "The selected record no longer exists.");
+        }
+    } catch (SQLException exception) {
+        showDatabaseError("Unable to delete the record.", exception);
+    }
+}</code></pre>
+          </div>
+
+          <div class="checkpoint">
+            <div><span>Knowledge check</span><h3>Why is a confirmation dialog not enough by itself?</h3></div>
+            <details><summary>Reveal answer</summary><p>The SQL must still target the correct primary key. A user may confirm a dangerous command, so the application must also use a precise WHERE clause, validate the selected ID, and check the affected-row count.</p></details>
+          </div>
+        </section>
+
+        <section id="jframe" class="content-section">
+          <div class="section-heading">
+            <span class="section-number">07</span>
+            <div><p class="section-kicker">Interface integration</p><h2>Connect the operations to JFrame</h2></div>
+          </div>
+          <p>The JFrame acts as the presentation layer. It collects data, displays records, and calls database methods when the user activates a button.</p>
+
+          <figure class="lesson-figure">
+            <img src="../img/database-setup/jframe-map.svg" alt="Annotated student management JFrame showing full name, course, year level, and email fields, a records table, and Update, Delete, and Clear buttons.">
+            <figcaption>Figure 5. Suggested layout for the student management interface.</figcaption>
+          </figure>
+
+          <h3 class="subheading">Connect button events</h3>
+          <div class="code-panel">
+            <div class="code-toolbar"><span>Action listeners</span><button type="button" data-copy-target="listener-code">Copy</button></div>
+            <pre id="listener-code"><code>btnUpdate.addActionListener(event -&gt; updateStudent());
+btnDelete.addActionListener(event -&gt; deleteStudent());
+btnClear.addActionListener(event -&gt; clearForm());
+
+studentTable.getSelectionModel().addListSelectionListener(event -&gt; {
+    if (!event.getValueIsAdjusting()) {
+        populateFormFromSelectedRow();
+    }
+});</code></pre>
+          </div>
+
+          <h3 class="subheading">Load records into the JTable</h3>
+          <div class="code-panel">
+            <div class="code-toolbar"><span>Table refresh method</span><button type="button" data-copy-target="load-code">Copy</button></div>
+            <pre id="load-code"><code>private void loadStudents() {
+    tableModel.setRowCount(0);
+    String sql = "SELECT student_id, full_name, course, year_level, email "
+            + "FROM students ORDER BY student_id";
+
+    try (Connection connection = DatabaseConnection.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql);
+         ResultSet result = statement.executeQuery()) {
+
+        while (result.next()) {
+            tableModel.addRow(new Object[] {
+                result.getInt("student_id"),
+                result.getString("full_name"),
+                result.getString("course"),
+                result.getInt("year_level"),
+                result.getString("email")
+            });
+        }
+    } catch (SQLException exception) {
+        showDatabaseError("Unable to load student records.", exception);
+    }
+}</code></pre>
+          </div>
+
+          <div class="download-card">
+            <div><p class="section-kicker">Complete working example</p><h3>Use the full source during the demonstration</h3><p>The provided files include the JFrame layout, validation, JTable loading, update, delete, error handling, and database script.</p></div>
+            <div class="download-actions">
+              <a class="button button-primary" href="../java/StudentManagementFrame.java" download>StudentManagementFrame.java</a>
+              <a class="button button-outline" href="../java/DatabaseConnection.java" download>DatabaseConnection.java</a>
+              <a class="button button-outline" href="../sql/school_db.sql" download>school_db.sql</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="safety" class="content-section">
+          <div class="section-heading">
+            <span class="section-number">08</span>
+            <div><p class="section-kicker">Professional practice</p><h2>Protect data and handle failures</h2></div>
+          </div>
+
+          <figure class="lesson-figure compact-figure">
+            <img src="../img/database-setup/transaction-safety.svg" alt="Data safety layers showing validation, prepared statements, a precise WHERE clause, confirmation, transaction handling, and feedback.">
+            <figcaption>Figure 6. Safety is achieved through several controls working together.</figcaption>
+          </figure>
+
+          <div class="practice-grid">
+            <article><h3>Use primary keys</h3><p>Target one record with a stable, unique identifier.</p></article>
+            <article><h3>Validate before SQL</h3><p>Reject empty names, invalid year levels, and malformed email addresses.</p></article>
+            <article><h3>Use try-with-resources</h3><p>Automatically close connections, statements, and result sets.</p></article>
+            <article><h3>Show safe messages</h3><p>Inform users without exposing passwords or detailed server configuration.</p></article>
+            <article><h3>Check affected rows</h3><p>Confirm that the operation changed exactly the expected number of records.</p></article>
+            <article><h3>Restrict database accounts</h3><p>Give the application only the permissions it needs.</p></article>
+          </div>
+
+          <h3 class="subheading">Common problems and solutions</h3>
+          <div class="table-wrap" role="region" aria-label="JDBC troubleshooting table" tabindex="0">
+            <table>
+              <thead><tr><th>Problem</th><th>Likely cause</th><th>Recommended response</th></tr></thead>
+              <tbody>
+                <tr><td>No suitable driver</td><td>Connector/J is missing from the classpath.</td><td>Add the JDBC driver to the project libraries.</td></tr>
+                <tr><td>Access denied</td><td>Incorrect username, password, or account privileges.</td><td>Verify credentials and grant only required permissions.</td></tr>
+                <tr><td>Unknown database</td><td>The schema has not been created or the URL is incorrect.</td><td>Run the SQL script and confirm the database name.</td></tr>
+                <tr><td>Duplicate entry</td><td>The updated email already exists in a UNIQUE column.</td><td>Ask the user to enter a different email address.</td></tr>
+                <tr><td>Zero rows affected</td><td>The selected ID no longer exists.</td><td>Refresh the JTable and ask the user to select again.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="activity" class="content-section">
+          <div class="section-heading">
+            <span class="section-number">09</span>
+            <div><p class="section-kicker">Guided practice</p><h2>Student laboratory activity</h2></div>
+          </div>
+          <div class="activity-intro"><h3>Task: Complete a Student Record Manager</h3><p>Work individually or in pairs. Use the supplied starter database and JFrame example, then demonstrate both operations to the instructor.</p></div>
+
+          <ol class="lab-list">
+            <li><div><strong>Prepare the database.</strong><p>Run <code>school_db.sql</code>, then confirm that two sample records appear.</p></div><span>10 min</span></li>
+            <li><div><strong>Configure the connection.</strong><p>Update the URL, username, and password for the local MySQL installation.</p></div><span>10 min</span></li>
+            <li><div><strong>Test record loading.</strong><p>Run the JFrame and verify that the JTable displays current database values.</p></div><span>10 min</span></li>
+            <li><div><strong>Test UPDATE.</strong><p>Select Ana Reyes, change the year level to 3, save, and verify the database.</p></div><span>15 min</span></li>
+            <li><div><strong>Test DELETE.</strong><p>Add a temporary record, delete it, and confirm that cancellation also works.</p></div><span>15 min</span></li>
+            <li><div><strong>Improve the application.</strong><p>Add a search field, status label, or audit message that records the time of the last operation.</p></div><span>20 min</span></li>
+          </ol>
+
+          <div class="challenge-box">
+            <div class="challenge-label">Extension challenge</div>
+            <h3>Add transaction control</h3>
+            <p>Modify an operation so that two related SQL statements succeed or fail together using <code>setAutoCommit(false)</code>, <code>commit()</code>, and <code>rollback()</code>. Explain when this becomes necessary.</p>
+          </div>
+        </section>
+
+        <section id="assessment" class="content-section">
+          <div class="section-heading">
+            <span class="section-number">10</span>
+            <div><p class="section-kicker">Evaluation</p><h2>Assessment and reflection</h2></div>
+          </div>
+
+          <div class="quiz-list">
+            <details><summary><span>1</span> What does <code>executeUpdate()</code> return?</summary><p>It returns an integer representing the number of database rows affected by an INSERT, UPDATE, or DELETE statement.</p></details>
+            <details><summary><span>2</span> Why should PreparedStatement be preferred?</summary><p>It separates SQL instructions from data values, supports correct type binding, improves readability, and helps prevent SQL injection.</p></details>
+            <details><summary><span>3</span> What could happen if WHERE is omitted from UPDATE?</summary><p>Every row in the target table may receive the new values.</p></details>
+            <details><summary><span>4</span> Why refresh the JTable after a successful operation?</summary><p>The displayed data must be synchronized with the current state of the database.</p></details>
+            <details><summary><span>5</span> What is the role of try-with-resources?</summary><p>It closes AutoCloseable JDBC resources automatically, even when an exception occurs.</p></details>
+          </div>
+
+          <h3 class="subheading">Performance rubric</h3>
+          <div class="table-wrap" role="region" aria-label="Performance rubric" tabindex="0">
+            <table class="rubric-table">
+              <thead><tr><th>Criterion</th><th>Excellent (4)</th><th>Proficient (3)</th><th>Developing (2)</th><th>Beginning (1)</th></tr></thead>
+              <tbody>
+                <tr><th>Functionality</th><td>Both operations work reliably.</td><td>Both work with minor issues.</td><td>Only one operation works.</td><td>Operations do not complete.</td></tr>
+                <tr><th>SQL safety</th><td>Prepared statements, key-based WHERE, and confirmation are correct.</td><td>Most safeguards are correct.</td><td>Some unsafe construction remains.</td><td>SQL is broadly unsafe.</td></tr>
+                <tr><th>Validation</th><td>All fields and selection states are validated.</td><td>Most inputs are validated.</td><td>Validation is incomplete.</td><td>No meaningful validation.</td></tr>
+                <tr><th>Code quality</th><td>Clear methods, names, formatting, and resource handling.</td><td>Generally organized and readable.</td><td>Some duplication or unclear code.</td><td>Difficult to follow.</td></tr>
+                <tr><th>Explanation</th><td>Clearly explains the full event-to-database flow.</td><td>Explains the main flow.</td><td>Explanation has important gaps.</td><td>Cannot explain the process.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="summary-box">
+            <p class="section-kicker">Lesson summary</p>
+            <h3>Professional database modification is deliberate and verifiable.</h3>
+            <p>A well-designed JFrame application validates input, targets a primary key, uses PreparedStatement, confirms destructive actions, checks affected rows, handles errors, closes resources, and refreshes the user interface.</p>
+          </div>
+
+          <div class="reference-note">
+            <strong>Official reference:</strong>
+            <a href="https://dev.mysql.com/doc/connector-j/en/" target="_blank" rel="noopener noreferrer">MySQL Connector/J Developer Guide</a>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>Database &amp; JDBC Learning Module</strong><p>UPDATE and DELETE Using Java Swing JFrame</p></div>
+    <a href="../index.html">Home</a>
+  </footer>
+</body>
+</html>

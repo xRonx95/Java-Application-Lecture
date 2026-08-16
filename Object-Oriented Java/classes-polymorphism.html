@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A complete, visual, beginner-friendly Java lesson about polymorphism, method overriding, overloading, abstract classes, interfaces, dynamic method dispatch, casting, and hands-on coding practice.">
+    <title>Lesson Module: Polymorphism in Java</title>
+          <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+    <link rel="stylesheet" href="../css/Object-Oriented Java/classes-polymorphism.css">
+    <style>
+        /* Supplemental styles for the visual step-by-step additions in this lesson. */
+        .visual-lesson-map,
+        .visual-figure,
+        .guided-lab,
+        .trace-practice,
+        .extra-topic-card {
+            margin: 1.75rem 0;
+            border: 1px solid #e5d8dc;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 12px 30px rgba(75, 18, 34, .08);
+            overflow: hidden;
+        }
+
+        .visual-figure {
+            padding: 1rem;
+        }
+
+        .visual-figure svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            min-height: 220px;
+            border-radius: 14px;
+            background: #fffaf7;
+        }
+
+        .visual-figure figcaption {
+            padding: .9rem .35rem .2rem;
+            color: #4f3c43;
+            line-height: 1.65;
+        }
+
+        .visual-figure figcaption strong {
+            color: #761b35;
+        }
+
+        .lesson-path {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: .75rem;
+            padding: 1.15rem;
+            background: linear-gradient(135deg, #fff7f2, #fff);
+        }
+
+        .lesson-path article {
+            position: relative;
+            min-height: 145px;
+            padding: 1rem;
+            border-radius: 14px;
+            background: #fff;
+            border-top: 5px solid #9b2448;
+        }
+
+        .lesson-path article:not(:last-child)::after {
+            content: "\2192";
+            position: absolute;
+            top: 50%;
+            right: -.68rem;
+            z-index: 2;
+            width: 1.4rem;
+            height: 1.4rem;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #9b2448;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .lesson-path span,
+        .lab-step-number {
+            display: inline-grid;
+            place-items: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: #761b35;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .lesson-path h3 {
+            margin: .65rem 0 .35rem;
+            font-size: 1rem;
+        }
+
+        .lesson-path p {
+            margin: 0;
+            font-size: .9rem;
+        }
+
+        .picture-key {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .65rem 1rem;
+            margin: 1rem 0;
+            padding: .9rem 1rem;
+            border-radius: 12px;
+            background: #f8f2f4;
+        }
+
+        .picture-key span {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+        }
+
+        .picture-key i {
+            width: .85rem;
+            height: .85rem;
+            border-radius: 3px;
+            background: #761b35;
+        }
+
+        .picture-key span:nth-child(2) i { background: #d79a2b; }
+        .picture-key span:nth-child(3) i { background: #237a63; }
+
+        .mini-check {
+            margin: 1.25rem 0;
+            padding: 1rem 1.1rem;
+            border-left: 5px solid #d79a2b;
+            border-radius: 0 12px 12px 0;
+            background: #fff8e8;
+        }
+
+        .mini-check p:last-child { margin-bottom: 0; }
+
+        .guided-lab {
+            padding: 1.25rem;
+            background: linear-gradient(180deg, #fff, #fff8f4);
+        }
+
+        .lab-step {
+            display: grid;
+            grid-template-columns: 3rem minmax(0, 1fr);
+            gap: .9rem;
+            padding: 1.15rem 0;
+            border-bottom: 1px dashed #d8c3ca;
+        }
+
+        .lab-step:last-child { border-bottom: 0; }
+        .lab-step h3 { margin: .1rem 0 .4rem; }
+        .lab-step p { margin-top: 0; }
+
+        .file-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+            margin: .65rem 0;
+        }
+
+        .file-tabs code {
+            padding: .45rem .65rem;
+            border: 1px solid #d8c3ca;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .command-line {
+            display: block;
+            margin-top: .6rem;
+            padding: .8rem 1rem;
+            border-radius: 10px;
+            background: #231b20;
+            color: #f8e9ee;
+            overflow-x: auto;
+        }
+
+        .trace-practice { padding: 1.15rem; }
+        .trace-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: .8rem;
+        }
+
+        .trace-grid article {
+            padding: 1rem;
+            border-radius: 12px;
+            background: #faf6f7;
+        }
+
+        .trace-grid h3 { margin-top: 0; }
+
+        .extra-topic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .extra-topic-card { margin: 0; padding: 1.1rem; }
+        .extra-topic-card h3 { margin-top: 0; color: #761b35; }
+
+        .step-label {
+            display: inline-block;
+            margin-bottom: .65rem;
+            padding: .3rem .6rem;
+            border-radius: 999px;
+            background: #761b35;
+            color: #fff;
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .05em;
+        }
+
+        @media (max-width: 900px) {
+            .lesson-path { grid-template-columns: 1fr; }
+            .lesson-path article { min-height: 0; }
+            .lesson-path article:not(:last-child)::after {
+                content: "\2193";
+                top: auto;
+                bottom: -.7rem;
+                right: 1rem;
+            }
+            .trace-grid,
+            .extra-topic-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 560px) {
+            .visual-figure { padding: .55rem; }
+            .visual-figure svg { min-height: 180px; }
+            .guided-lab { padding: .9rem; }
+            .lab-step { grid-template-columns: 2.4rem minmax(0, 1fr); }
+            .lesson-path { padding: .8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#top" aria-label="Polymorphism lesson home">
+                <span class="brand-icon" aria-hidden="true">&lt;/&gt;</span>
+                <span>
+                    <strong>OOP Learning Module</strong>
+                    <small>Java Programming Fundamentals</small>
+                </span>
+            </a>
+
+            <nav class="lesson-nav" aria-label="Lesson navigation">
+                <a href="../index.html">Home</a>
+                <a href="#overview">Overview</a>
+                <a href="#meaning">Concepts</a>
+                <a href="#complete-example">Example</a>
+                <a href="#guided-lab">Guided Lab</a>
+                <a href="#activities">Activities</a>
+                <a href="#assessment">Assessment</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="lesson-title">
+            <div class="hero-content">
+                <div class="hero-copy">
+                    <p class="eyebrow">Lesson 04 · Object-Oriented Programming</p>
+                    <h1 id="lesson-title">Polymorphism</h1>
+                    <p class="hero-lead">
+                        Learn how <strong>one common reference</strong> can represent different objects—and how
+                        Java chooses the correct behavior for each object.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#overview">Start the lesson</a>
+                        <a class="button button-secondary" href="#assessment">Go to assessment</a>
+                    </div>
+
+                    <dl class="lesson-meta" aria-label="Lesson information">
+                        <div><dt>Level</dt><dd>Beginner–Intermediate</dd></div>
+                        <div><dt>Duration</dt><dd>150–180 minutes</dd></div>
+                        <div><dt>Language</dt><dd>Java</dd></div>
+                    </dl>
+                </div>
+
+                <div class="hero-visual" aria-label="One Animal reference producing different sounds">
+                    <div class="type-card">
+                        <span class="visual-label">COMMON TYPE</span>
+                        <strong>Animal</strong>
+                        <code>makeSound()</code>
+                    </div>
+                    <div class="visual-arrow" aria-hidden="true">one method call</div>
+                    <div class="behavior-stack">
+                        <div><span>Dog</span><strong>“Woof!”</strong></div>
+                        <div><span>Cat</span><strong>“Meow!”</strong></div>
+                        <div><span>Cow</span><strong>“Moo!”</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-layout">
+            <aside class="table-of-contents" aria-label="Table of contents">
+                <p class="toc-title">In this module</p>
+                <ol>
+                    <li><a href="#overview">Lesson overview</a></li>
+                    <li><a href="#meaning">Meaning of polymorphism</a></li>
+                    <li><a href="#foundation">Inheritance foundation</a></li>
+                    <li><a href="#reference-object">Reference type vs. object type</a></li>
+                    <li><a href="#overriding">Method overriding</a></li>
+                    <li><a href="#runtime">Runtime polymorphism</a></li>
+                    <li><a href="#dispatch-trace">Trace a method call</a></li>
+                    <li><a href="#overloading">Method overloading</a></li>
+                    <li><a href="#comparison">Overloading vs. overriding</a></li>
+                    <li><a href="#abstract">Abstract classes</a></li>
+                    <li><a href="#interfaces">Interfaces</a></li>
+                    <li><a href="#casting">Upcasting and downcasting</a></li>
+                    <li><a href="#collections">Polymorphic collections</a></li>
+                    <li><a href="#limits">What is not polymorphic?</a></li>
+                    <li><a href="#benefits">Benefits and design</a></li>
+                    <li><a href="#complete-example">Complete example</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#guided-lab">Step-by-step coding lab</a></li>
+                    <li><a href="#activities">Learning activities</a></li>
+                    <li><a href="#assessment">Quick assessment</a></li>
+                </ol>
+            </aside>
+
+            <article class="lesson-content">
+                <section id="overview" class="lesson-section">
+                    <p class="section-kicker">01 · Overview</p>
+                    <h2>What will you learn?</h2>
+                    <p>
+                        Polymorphism is one of the four main principles of object-oriented programming,
+                        together with encapsulation, inheritance, and abstraction. It lets a program use a
+                        common type while allowing each object to perform its own version of an action.
+                    </p>
+
+                    <div class="objectives-card">
+                        <h3>Learning objectives</h3>
+                        <p>At the end of this lesson, you should be able to:</p>
+                        <ul class="check-list">
+                            <li>Define polymorphism in your own words.</li>
+                            <li>Explain why inheritance or an interface is needed for runtime polymorphism.</li>
+                            <li>Differentiate method overriding from method overloading.</li>
+                            <li>Use a parent-class reference to store a child-class object.</li>
+                            <li>Explain dynamic method dispatch.</li>
+                            <li>Use abstract classes and interfaces as polymorphic types.</li>
+                            <li>Apply safe casting with <code>instanceof</code>.</li>
+                            <li>Process different objects through one reusable method or collection.</li>
+                            <li>Compile, run, trace, and extend a complete polymorphic Java program.</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-lesson-map" aria-labelledby="lesson-roadmap-title">
+                        <div class="lesson-path">
+                            <article><span>1</span><h3 id="lesson-roadmap-title">Understand</h3><p>See how one common type can represent many objects.</p></article>
+                            <article><span>2</span><h3>Build</h3><p>Create a parent class and child classes.</p></article>
+                            <article><span>3</span><h3>Override</h3><p>Give every child its own version of the method.</p></article>
+                            <article><span>4</span><h3>Run</h3><p>Call the same method and observe different output.</p></article>
+                            <article><span>5</span><h3>Apply</h3><p>Use arrays, interfaces, and a mini project.</p></article>
+                        </div>
+                    </div>
+
+                    <div class="prerequisite-box">
+                        <strong>Before this lesson</strong>
+                        <p>You should already understand classes, objects, methods, constructors, and basic inheritance.</p>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <span class="tip-icon" aria-hidden="true">💡</span>
+                        <div>
+                            <strong>Easy way to introduce the lesson</strong>
+                            <p>
+                                A person can respond differently to the same instruction. If a teacher says “introduce
+                                yourself,” every student follows the same request but gives a different answer. In Java,
+                                the shared request is a method call and each object's answer is its overridden method.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="meaning" class="lesson-section">
+                    <p class="section-kicker">02 · Core idea</p>
+                    <h2>What does polymorphism mean?</h2>
+                    <p>
+                        The word <strong>polymorphism</strong> comes from words meaning “many forms.” In programming,
+                        it means that one type, method name, or interface can work in more than one form.
+                    </p>
+
+                    <div class="definition-card">
+                        <span>CLASSROOM DEFINITION</span>
+                        <p>
+                            Polymorphism is the ability to treat different objects as one common type while each object
+                            responds according to its actual class.
+                        </p>
+                    </div>
+
+                    <div class="concept-grid three-cards">
+                        <article class="concept-card">
+                            <span class="concept-number">01</span>
+                            <h3>One common type</h3>
+                            <p>A parent class or interface gives different objects a shared identity.</p>
+                            <code>Animal pet</code>
+                        </article>
+                        <article class="concept-card">
+                            <span class="concept-number">02</span>
+                            <h3>Many object forms</h3>
+                            <p>The reference may point to a Dog, Cat, Cow, or another valid subtype.</p>
+                            <code>new Dog()</code>
+                        </article>
+                        <article class="concept-card">
+                            <span class="concept-number">03</span>
+                            <h3>Different behavior</h3>
+                            <p>The same method call can run a different implementation for each object.</p>
+                            <code>pet.makeSound()</code>
+                        </article>
+                    </div>
+
+                    <div class="formula-strip" aria-label="Polymorphism formula">
+                        <span>Common type</span><b>+</b><span>Different objects</span><b>+</b><span>Same message</span><b>=</b><strong>Different behavior</strong>
+                    </div>
+
+                    <figure class="visual-figure">
+                        <svg viewBox="0 0 900 360" role="img" aria-labelledby="many-forms-title many-forms-desc">
+                            <title id="many-forms-title">One command produces three different animal sounds</title>
+                            <desc id="many-forms-desc">A program sends makeSound to Animal references containing Dog, Cat, and Cow objects. The results are Woof, Meow, and Moo.</desc>
+                            <rect x="28" y="105" width="205" height="145" rx="22" fill="#761b35"/>
+                            <text x="130" y="145" text-anchor="middle" fill="#f7dca3" font-size="18" font-weight="700">SAME MESSAGE</text>
+                            <text x="130" y="190" text-anchor="middle" fill="#ffffff" font-size="25" font-family="monospace">makeSound()</text>
+                            <text x="130" y="224" text-anchor="middle" fill="#f4e9ed" font-size="16">sent to each object</text>
+                            <path d="M235 177 H330" stroke="#d79a2b" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M315 162 L335 177 L315 192" fill="none" stroke="#d79a2b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="355" y="35" width="190" height="82" rx="16" fill="#fff" stroke="#9b2448" stroke-width="3"/>
+                            <text x="380" y="69" fill="#761b35" font-size="20" font-weight="700">DOG</text><text x="505" y="92" text-anchor="end" fill="#237a63" font-size="24" font-weight="800">WOOF!</text>
+                            <rect x="355" y="139" width="190" height="82" rx="16" fill="#fff" stroke="#9b2448" stroke-width="3"/>
+                            <text x="380" y="173" fill="#761b35" font-size="20" font-weight="700">CAT</text><text x="505" y="196" text-anchor="end" fill="#237a63" font-size="24" font-weight="800">MEOW!</text>
+                            <rect x="355" y="243" width="190" height="82" rx="16" fill="#fff" stroke="#9b2448" stroke-width="3"/>
+                            <text x="380" y="277" fill="#761b35" font-size="20" font-weight="700">COW</text><text x="505" y="300" text-anchor="end" fill="#237a63" font-size="24" font-weight="800">MOO!</text>
+                            <path d="M560 75 H650 M560 180 H650 M560 284 H650" stroke="#d79a2b" stroke-width="5" stroke-linecap="round"/>
+                            <rect x="670" y="105" width="200" height="145" rx="22" fill="#eaf5f1" stroke="#237a63" stroke-width="3"/>
+                            <text x="770" y="145" text-anchor="middle" fill="#237a63" font-size="18" font-weight="700">DIFFERENT RESULT</text>
+                            <text x="770" y="184" text-anchor="middle" fill="#263a34" font-size="18">Java checks the</text>
+                            <text x="770" y="212" text-anchor="middle" fill="#263a34" font-size="18" font-weight="700">actual object</text>
+                        </svg>
+                        <figcaption><strong>Picture 1 — Many forms:</strong> the message stays the same, but the actual object decides the behavior.</figcaption>
+                    </figure>
+                </section>
+
+                <section id="foundation" class="lesson-section">
+                    <p class="section-kicker">03 · Foundation</p>
+                    <h2>Inheritance creates an “is-a” relationship</h2>
+                    <p>
+                        Runtime polymorphism works because a child object is also considered an object of its parent
+                        type. A <code>Dog</code> <em>is an</em> <code>Animal</code>, so an <code>Animal</code> variable can
+                        refer to a <code>Dog</code> object.
+                    </p>
+
+                    <div class="inheritance-map" aria-label="Animal inheritance hierarchy">
+                        <div class="parent-node"><small>PARENT CLASS</small><strong>Animal</strong><code>makeSound()</code></div>
+                        <div class="branch-line" aria-hidden="true"></div>
+                        <div class="child-row">
+                            <div><small>CHILD</small><strong>Dog</strong></div>
+                            <div><small>CHILD</small><strong>Cat</strong></div>
+                            <div><small>CHILD</small><strong>Cow</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header"><span>Valid parent references</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-keyword">Animal</span> a1 = <span class="code-keyword">new</span> Dog();
+<span class="code-keyword">Animal</span> a2 = <span class="code-keyword">new</span> Cat();
+<span class="code-keyword">Animal</span> a3 = <span class="code-keyword">new</span> Cow();</code></pre>
+                    </div>
+
+                    <div class="reading-code">
+                        <strong>Read the first line aloud:</strong>
+                        <p>“The reference type is Animal, the variable name is a1, and the actual object is a Dog.”</p>
+                    </div>
+                </section>
+
+                <section id="reference-object" class="lesson-section featured-section">
+                    <p class="section-kicker">04 · Read an object declaration</p>
+                    <h2>Reference type vs. actual object type</h2>
+                    <p>
+                        Beginners often see two class names in one declaration and think they must be the same.
+                        They have different jobs. The type on the left tells the compiler what members are available;
+                        the object on the right determines which overridden method runs.
+                    </p>
+
+                    <figure class="visual-figure">
+                        <svg viewBox="0 0 900 350" role="img" aria-labelledby="reference-title reference-desc">
+                            <title id="reference-title">Parts of Animal pet equals new Dog</title>
+                            <desc id="reference-desc">Animal is the reference type, pet is the variable, and new Dog creates the actual object. The reference points to the Dog object in memory.</desc>
+                            <rect x="45" y="45" width="810" height="88" rx="18" fill="#251b20"/>
+                            <text x="95" y="99" fill="#e7b453" font-size="34" font-family="monospace" font-weight="700">Animal</text>
+                            <text x="285" y="99" fill="#ffffff" font-size="34" font-family="monospace">pet</text>
+                            <text x="385" y="99" fill="#ffffff" font-size="34" font-family="monospace">= new</text>
+                            <text x="555" y="99" fill="#68c7a8" font-size="34" font-family="monospace" font-weight="700">Dog()</text>
+                            <text x="118" y="168" text-anchor="middle" fill="#761b35" font-size="18" font-weight="700">REFERENCE TYPE</text>
+                            <path d="M118 145 V118" stroke="#761b35" stroke-width="4"/>
+                            <text x="315" y="168" text-anchor="middle" fill="#761b35" font-size="18" font-weight="700">VARIABLE</text>
+                            <path d="M315 145 V118" stroke="#761b35" stroke-width="4"/>
+                            <text x="630" y="168" text-anchor="middle" fill="#237a63" font-size="18" font-weight="700">ACTUAL OBJECT</text>
+                            <path d="M630 145 V118" stroke="#237a63" stroke-width="4"/>
+                            <rect x="85" y="215" width="250" height="90" rx="18" fill="#f7e8ed" stroke="#9b2448" stroke-width="3"/>
+                            <text x="210" y="250" text-anchor="middle" fill="#761b35" font-size="20" font-weight="700">pet reference</text>
+                            <text x="210" y="281" text-anchor="middle" fill="#5f4b52" font-size="17">can call Animal members</text>
+                            <path d="M340 260 H548" stroke="#d79a2b" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M528 243 L555 260 L528 277" fill="none" stroke="#d79a2b" stroke-width="8" stroke-linecap="round"/>
+                            <rect x="565" y="205" width="245" height="110" rx="55" fill="#eaf5f1" stroke="#237a63" stroke-width="3"/>
+                            <text x="688" y="247" text-anchor="middle" fill="#237a63" font-size="22" font-weight="700">Dog object</text>
+                            <text x="688" y="278" text-anchor="middle" fill="#263a34" font-size="17">runs Dog.makeSound()</text>
+                        </svg>
+                        <figcaption><strong>Picture 2 — Read left to right:</strong> <code>Animal</code> controls what you may call; the <code>Dog</code> object controls which overridden version runs.</figcaption>
+                    </figure>
+
+                    <div class="picture-key" aria-label="Color key for the diagram">
+                        <span><i></i> Reference type</span>
+                        <span><i></i> Connection in memory</span>
+                        <span><i></i> Actual object</span>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header"><span>What can this reference do?</span><span class="language-badge">JAVA</span></div>
+                        <pre><code>Animal pet = <span class="code-keyword">new</span> Dog();
+pet.makeSound();      <span class="code-comment">// Allowed: declared in Animal; prints Woof!</span>
+<span class="code-comment">// pet.fetch();       // Not allowed: fetch() is not declared in Animal</span></code></pre>
+                    </div>
+
+                    <div class="mini-check">
+                        <strong>Pause and predict:</strong>
+                        <p>If the next line is <code>pet = new Cat();</code>, does the reference type change? <strong>No.</strong> It is still <code>Animal</code>; only the actual object changes.</p>
+                    </div>
+                </section>
+
+                <section id="overriding" class="lesson-section">
+                    <p class="section-kicker">05 · Specialized behavior</p>
+                    <h2>Method overriding</h2>
+                    <p>
+                        Overriding happens when a child class provides its own implementation of a method already
+                        declared in its parent class. The method name and parameter list must match.
+                    </p>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>Animal hierarchy</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-keyword">class</span> <span class="code-type">Animal</span> {
+    <span class="code-keyword">public void</span> makeSound() {
+        System.out.println(<span class="code-string">"An animal makes a sound."</span>);
+    }
+}
+
+<span class="code-keyword">class</span> <span class="code-type">Dog</span> <span class="code-keyword">extends</span> <span class="code-type">Animal</span> {
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public void</span> makeSound() {
+        System.out.println(<span class="code-string">"Woof!"</span>);
+    }
+}
+
+<span class="code-keyword">class</span> <span class="code-type">Cat</span> <span class="code-keyword">extends</span> <span class="code-type">Animal</span> {
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public void</span> makeSound() {
+        System.out.println(<span class="code-string">"Meow!"</span>);
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="rule-grid">
+                        <article><span>1</span><div><h3>Same signature</h3><p>Use the same method name and parameter types.</p></div></article>
+                        <article><span>2</span><div><h3>Inheritance required</h3><p>The method must come from a parent class or interface.</p></div></article>
+                        <article><span>3</span><div><h3>Compatible return</h3><p>The return type must be the same or a valid covariant type.</p></div></article>
+                        <article><span>4</span><div><h3>No weaker access</h3><p>An overridden method cannot become more restrictive.</p></div></article>
+                    </div>
+
+                    <div class="note-box">
+                        <strong>Use <code>@Override</code>.</strong> It tells the compiler to check that you are truly
+                        overriding a method. It catches spelling mistakes and incorrect parameters.
+                    </div>
+                </section>
+
+                <section id="runtime" class="lesson-section featured-section">
+                    <p class="section-kicker">06 · Runtime polymorphism</p>
+                    <h2>Dynamic method dispatch</h2>
+                    <p>
+                        When an overridden method is called through a parent reference, Java looks at the
+                        <strong>actual object</strong> at runtime. It then executes that object's version of the method.
+                    </p>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>PolymorphismDemo.java</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-keyword">public class</span> <span class="code-type">PolymorphismDemo</span> {
+    <span class="code-keyword">public static void</span> main(<span class="code-keyword">String</span>[] args) {
+        Animal pet = <span class="code-keyword">new</span> Dog();
+        pet.makeSound();        <span class="code-comment">// Woof!</span>
+
+        pet = <span class="code-keyword">new</span> Cat();
+        pet.makeSound();        <span class="code-comment">// Meow!</span>
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="dispatch-steps">
+                        <div><span>1</span><p><strong>Compile time:</strong> Java checks whether <code>Animal</code> has an accessible <code>makeSound()</code> method.</p></div>
+                        <div><span>2</span><p><strong>Runtime:</strong> Java checks the actual object currently stored in <code>pet</code>.</p></div>
+                        <div><span>3</span><p><strong>Method choice:</strong> A Dog runs <code>Dog.makeSound()</code>; a Cat runs <code>Cat.makeSound()</code>.</p></div>
+                    </div>
+
+                    <div class="key-idea">
+                        <span>KEY IDEA</span>
+                        <p><strong>The reference type controls what members can be called.</strong> The actual object type controls which overridden method body runs.</p>
+                    </div>
+                </section>
+
+                <section id="dispatch-trace" class="lesson-section">
+                    <p class="section-kicker">07 · Follow the decision</p>
+                    <h2>Trace one method call step by step</h2>
+                    <p>Use this four-question routine whenever you need to predict which method will run.</p>
+
+                    <figure class="visual-figure">
+                        <svg viewBox="0 0 900 420" role="img" aria-labelledby="trace-title trace-desc">
+                            <title id="trace-title">Four steps for tracing a polymorphic method call</title>
+                            <desc id="trace-desc">Check the reference type, confirm the method exists, inspect the actual object, and run that object's overridden method.</desc>
+                            <rect x="35" y="45" width="180" height="120" rx="18" fill="#f7e8ed" stroke="#9b2448" stroke-width="3"/>
+                            <circle cx="70" cy="80" r="22" fill="#761b35"/><text x="70" y="88" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">1</text>
+                            <text x="125" y="84" text-anchor="middle" fill="#761b35" font-size="18" font-weight="700">READ LEFT</text>
+                            <text x="125" y="118" text-anchor="middle" fill="#403238" font-size="17">Reference type:</text><text x="125" y="143" text-anchor="middle" fill="#403238" font-size="19" font-family="monospace">Animal</text>
+                            <path d="M220 105 H265" stroke="#d79a2b" stroke-width="7"/><path d="M250 91 L270 105 L250 119" fill="none" stroke="#d79a2b" stroke-width="7"/>
+                            <rect x="275" y="45" width="180" height="120" rx="18" fill="#fff8e8" stroke="#d79a2b" stroke-width="3"/>
+                            <circle cx="310" cy="80" r="22" fill="#d79a2b"/><text x="310" y="88" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">2</text>
+                            <text x="365" y="84" text-anchor="middle" fill="#79520d" font-size="18" font-weight="700">CHECK</text>
+                            <text x="365" y="118" text-anchor="middle" fill="#403238" font-size="17">Does Animal have</text><text x="365" y="143" text-anchor="middle" fill="#403238" font-size="17" font-family="monospace">makeSound()?</text>
+                            <path d="M460 105 H505" stroke="#d79a2b" stroke-width="7"/><path d="M490 91 L510 105 L490 119" fill="none" stroke="#d79a2b" stroke-width="7"/>
+                            <rect x="515" y="45" width="180" height="120" rx="18" fill="#eaf5f1" stroke="#237a63" stroke-width="3"/>
+                            <circle cx="550" cy="80" r="22" fill="#237a63"/><text x="550" y="88" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">3</text>
+                            <text x="605" y="84" text-anchor="middle" fill="#237a63" font-size="18" font-weight="700">LOOK RIGHT</text>
+                            <text x="605" y="118" text-anchor="middle" fill="#403238" font-size="17">Actual object:</text><text x="605" y="143" text-anchor="middle" fill="#403238" font-size="19" font-family="monospace">Dog</text>
+                            <path d="M700 105 H745" stroke="#d79a2b" stroke-width="7"/><path d="M730 91 L750 105 L730 119" fill="none" stroke="#d79a2b" stroke-width="7"/>
+                            <rect x="755" y="45" width="110" height="120" rx="18" fill="#761b35"/>
+                            <circle cx="790" cy="80" r="22" fill="#fff"/><text x="790" y="88" text-anchor="middle" fill="#761b35" font-size="22" font-weight="800">4</text>
+                            <text x="810" y="118" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">RUN</text><text x="810" y="143" text-anchor="middle" fill="#f7dca3" font-size="18">Woof!</text>
+                            <rect x="120" y="230" width="660" height="125" rx="22" fill="#251b20"/>
+                            <text x="450" y="273" text-anchor="middle" fill="#ffffff" font-size="24" font-family="monospace">Animal pet = new Dog();</text>
+                            <text x="450" y="315" text-anchor="middle" fill="#e7b453" font-size="26" font-family="monospace" font-weight="700">pet.makeSound();  // Woof!</text>
+                        </svg>
+                        <figcaption><strong>Picture 3 — Dispatch checklist:</strong> left side for permission, right side for behavior. Repeat these four steps until the decision feels automatic.</figcaption>
+                    </figure>
+
+                    <div class="trace-practice">
+                        <div class="trace-grid">
+                            <article><h3>Try 1</h3><code>Animal a = new Cat();</code><p><code>a.makeSound()</code> prints <strong>Meow!</strong></p></article>
+                            <article><h3>Try 2</h3><code>Animal a = new Cow();</code><p><code>a.makeSound()</code> prints <strong>Moo!</strong></p></article>
+                            <article><h3>Try 3</h3><code>Animal a = new Animal();</code><p><code>a.makeSound()</code> prints the <strong>parent message</strong>.</p></article>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="overloading" class="lesson-section">
+                    <p class="section-kicker">08 · Compile-time polymorphism</p>
+                    <h2>Method overloading</h2>
+                    <p>
+                        Overloading uses the same method name with different parameter lists in the same class.
+                        The compiler selects the correct method by looking at the arguments in the call.
+                    </p>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>Calculator.java</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-keyword">class</span> <span class="code-type">Calculator</span> {
+    <span class="code-keyword">int</span> add(<span class="code-keyword">int</span> a, <span class="code-keyword">int</span> b) {
+        <span class="code-keyword">return</span> a + b;
+    }
+
+    <span class="code-keyword">double</span> add(<span class="code-keyword">double</span> a, <span class="code-keyword">double</span> b) {
+        <span class="code-keyword">return</span> a + b;
+    }
+
+    <span class="code-keyword">int</span> add(<span class="code-keyword">int</span> a, <span class="code-keyword">int</span> b, <span class="code-keyword">int</span> c) {
+        <span class="code-keyword">return</span> a + b + c;
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="call-grid">
+                        <div><code>add(2, 5)</code><span>uses two <code>int</code> parameters</span></div>
+                        <div><code>add(2.5, 5.0)</code><span>uses two <code>double</code> parameters</span></div>
+                        <div><code>add(2, 5, 8)</code><span>uses three <code>int</code> parameters</span></div>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Changing only the return type is not enough.</strong>
+                        <p><code>int add(int, int)</code> and <code>double add(int, int)</code> have the same parameter list, so Java treats them as duplicate methods.</p>
+                    </div>
+                </section>
+
+                <section id="comparison" class="lesson-section">
+                    <p class="section-kicker">09 · Compare</p>
+                    <h2>Overloading vs. overriding</h2>
+                    <div class="comparison-table-wrapper" role="region" aria-label="Comparison of overloading and overriding" tabindex="0">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr><th scope="col">Basis</th><th scope="col">Overloading</th><th scope="col">Overriding</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th scope="row">Main idea</th><td>Same name, different parameters</td><td>Child replaces inherited behavior</td></tr>
+                                <tr><th scope="row">Classes involved</th><td>Usually one class</td><td>Parent and child classes</td></tr>
+                                <tr><th scope="row">Parameters</th><td>Must be different</td><td>Must match</td></tr>
+                                <tr><th scope="row">Decision time</th><td>Compile time</td><td>Runtime for instance methods</td></tr>
+                                <tr><th scope="row">Purpose</th><td>Convenient ways to perform a similar task</td><td>Specialized behavior for each subtype</td></tr>
+                                <tr><th scope="row">Annotation</th><td>No special annotation</td><td><code>@Override</code> is recommended</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="memory-line">
+                        <strong>Memory guide:</strong>
+                        <span><b>Overload</b> = different inputs</span>
+                        <span><b>Override</b> = different implementation</span>
+                    </div>
+                </section>
+
+                <section id="abstract" class="lesson-section">
+                    <p class="section-kicker">10 · Abstraction</p>
+                    <h2>Polymorphism with abstract classes</h2>
+                    <p>
+                        An abstract class can define shared data and behavior while requiring child classes to complete
+                        certain methods. You cannot instantiate an abstract class directly, but you can use it as a reference type.
+                    </p>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>Shape.java</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-keyword">abstract class</span> <span class="code-type">Shape</span> {
+    <span class="code-keyword">abstract double</span> area();
+
+    <span class="code-keyword">void</span> describe() {
+        System.out.println(<span class="code-string">"I am a shape."</span>);
+    }
+}
+
+<span class="code-keyword">class</span> <span class="code-type">Circle</span> <span class="code-keyword">extends</span> <span class="code-type">Shape</span> {
+    <span class="code-keyword">private double</span> radius;
+
+    Circle(<span class="code-keyword">double</span> radius) {
+        <span class="code-keyword">this</span>.radius = radius;
+    }
+
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">double</span> area() {
+        <span class="code-keyword">return</span> Math.PI * radius * radius;
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="plain-explanation">
+                        <strong>Why this helps:</strong> Every <code>Shape</code> promises an <code>area()</code> method,
+                        but each child class decides how its own area is calculated.
+                    </div>
+                </section>
+
+                <section id="interfaces" class="lesson-section">
+                    <p class="section-kicker">11 · Common contract</p>
+                    <h2>Polymorphism with interfaces</h2>
+                    <p>
+                        An interface describes a capability or contract. Unrelated classes can implement the same
+                        interface and then be processed through one interface reference.
+                    </p>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>PaymentMethod.java</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-keyword">interface</span> <span class="code-type">PaymentMethod</span> {
+    <span class="code-keyword">void</span> pay(<span class="code-keyword">double</span> amount);
+}
+
+<span class="code-keyword">class</span> <span class="code-type">CashPayment</span> <span class="code-keyword">implements</span> <span class="code-type">PaymentMethod</span> {
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public void</span> pay(<span class="code-keyword">double</span> amount) {
+        System.out.println(<span class="code-string">"Paid ₱"</span> + amount + <span class="code-string">" in cash."</span>);
+    }
+}
+
+<span class="code-keyword">class</span> <span class="code-type">CardPayment</span> <span class="code-keyword">implements</span> <span class="code-type">PaymentMethod</span> {
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public void</span> pay(<span class="code-keyword">double</span> amount) {
+        System.out.println(<span class="code-string">"Charged ₱"</span> + amount + <span class="code-string">" to a card."</span>);
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="two-column">
+                        <article>
+                            <span class="pill">ABSTRACT CLASS</span>
+                            <h3>Shared family</h3>
+                            <p>Useful when related classes share fields, constructors, and implemented methods.</p>
+                        </article>
+                        <article>
+                            <span class="pill pill-alt">INTERFACE</span>
+                            <h3>Shared capability</h3>
+                            <p>Useful when different classes promise the same action or behavior.</p>
+                        </article>
+                    </div>
+
+                    <figure class="visual-figure">
+                        <svg viewBox="0 0 900 360" role="img" aria-labelledby="interface-title interface-desc">
+                            <title id="interface-title">PaymentMethod interface connecting several payment classes</title>
+                            <desc id="interface-desc">CashPayment, CardPayment, and GCashPayment all implement PaymentMethod and each provides its own pay method.</desc>
+                            <rect x="310" y="35" width="280" height="92" rx="18" fill="#761b35"/>
+                            <text x="450" y="70" text-anchor="middle" fill="#f7dca3" font-size="17" font-weight="700">INTERFACE CONTRACT</text>
+                            <text x="450" y="104" text-anchor="middle" fill="#ffffff" font-size="25" font-family="monospace">PaymentMethod</text>
+                            <path d="M450 128 V178 M160 178 H740 M160 178 V220 M450 178 V220 M740 178 V220" fill="none" stroke="#d79a2b" stroke-width="6" stroke-linecap="round"/>
+                            <rect x="45" y="220" width="230" height="100" rx="18" fill="#fff" stroke="#9b2448" stroke-width="3"/>
+                            <text x="160" y="259" text-anchor="middle" fill="#761b35" font-size="20" font-weight="700">CashPayment</text><text x="160" y="292" text-anchor="middle" fill="#237a63" font-size="18" font-family="monospace">pay(amount)</text>
+                            <rect x="335" y="220" width="230" height="100" rx="18" fill="#fff" stroke="#9b2448" stroke-width="3"/>
+                            <text x="450" y="259" text-anchor="middle" fill="#761b35" font-size="20" font-weight="700">CardPayment</text><text x="450" y="292" text-anchor="middle" fill="#237a63" font-size="18" font-family="monospace">pay(amount)</text>
+                            <rect x="625" y="220" width="230" height="100" rx="18" fill="#fff" stroke="#9b2448" stroke-width="3"/>
+                            <text x="740" y="259" text-anchor="middle" fill="#761b35" font-size="20" font-weight="700">GCashPayment</text><text x="740" y="292" text-anchor="middle" fill="#237a63" font-size="18" font-family="monospace">pay(amount)</text>
+                        </svg>
+                        <figcaption><strong>Picture 4 — One contract, many implementations:</strong> the checkout code only needs <code>PaymentMethod</code>; every payment class decides how <code>pay()</code> works.</figcaption>
+                    </figure>
+                </section>
+
+                <section id="casting" class="lesson-section">
+                    <p class="section-kicker">12 · Type conversion</p>
+                    <h2>Upcasting, downcasting, and <code>instanceof</code></h2>
+
+                    <div class="casting-grid">
+                        <article>
+                            <span class="cast-label safe">AUTOMATIC</span>
+                            <h3>Upcasting</h3>
+                            <p>Converts a child reference to a parent reference. It is safe because every Dog is an Animal.</p>
+                            <code>Animal pet = new Dog();</code>
+                        </article>
+                        <article>
+                            <span class="cast-label caution">EXPLICIT</span>
+                            <h3>Downcasting</h3>
+                            <p>Converts a parent reference back to a child reference. Check the actual type first.</p>
+                            <code>Dog dog = (Dog) pet;</code>
+                        </article>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header"><span>Safe pattern matching</span><span class="language-badge">JAVA</span></div>
+                        <pre><code>Animal pet = <span class="code-keyword">new</span> Dog();
+
+<span class="code-keyword">if</span> (pet <span class="code-keyword">instanceof</span> Dog dog) {
+    dog.fetch();
+}</code></pre>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Unsafe casts can fail.</strong>
+                        <p>Casting a Cat object to Dog compiles in some parent-reference situations but throws a <code>ClassCastException</code> at runtime.</p>
+                    </div>
+
+                    <figure class="visual-figure">
+                        <svg viewBox="0 0 900 350" role="img" aria-labelledby="casting-title casting-desc">
+                            <title id="casting-title">Safe and unsafe casting paths</title>
+                            <desc id="casting-desc">Upcasting from Dog to Animal is safe. Downcasting should pass through an instanceof check. Casting an actual Cat object to Dog leads to ClassCastException.</desc>
+                            <rect x="60" y="50" width="215" height="88" rx="44" fill="#eaf5f1" stroke="#237a63" stroke-width="3"/>
+                            <text x="168" y="86" text-anchor="middle" fill="#237a63" font-size="21" font-weight="700">Dog object</text><text x="168" y="114" text-anchor="middle" fill="#34473f" font-size="16">actual type: Dog</text>
+                            <path d="M280 94 H385" stroke="#237a63" stroke-width="7"/><path d="M365 78 L390 94 L365 110" fill="none" stroke="#237a63" stroke-width="7"/>
+                            <text x="335" y="72" text-anchor="middle" fill="#237a63" font-size="16" font-weight="700">UPCAST</text>
+                            <rect x="400" y="50" width="215" height="88" rx="18" fill="#f7e8ed" stroke="#9b2448" stroke-width="3"/>
+                            <text x="508" y="86" text-anchor="middle" fill="#761b35" font-size="21" font-weight="700">Animal reference</text><text x="508" y="114" text-anchor="middle" fill="#5f4b52" font-size="16">pet points to Dog</text>
+                            <path d="M620 94 H745" stroke="#d79a2b" stroke-width="7"/><path d="M725 78 L750 94 L725 110" fill="none" stroke="#d79a2b" stroke-width="7"/>
+                            <text x="685" y="72" text-anchor="middle" fill="#79520d" font-size="15" font-weight="700">instanceof Dog</text>
+                            <rect x="760" y="50" width="100" height="88" rx="18" fill="#237a63"/>
+                            <text x="810" y="88" text-anchor="middle" fill="#fff" font-size="19" font-weight="700">SAFE</text><text x="810" y="114" text-anchor="middle" fill="#ddf4ec" font-size="15">cast</text>
+                            <rect x="60" y="215" width="215" height="88" rx="44" fill="#fff0f0" stroke="#b83a3a" stroke-width="3"/>
+                            <text x="168" y="251" text-anchor="middle" fill="#9b2020" font-size="21" font-weight="700">Cat object</text><text x="168" y="279" text-anchor="middle" fill="#5f3838" font-size="16">actual type: Cat</text>
+                            <path d="M280 259 H510" stroke="#b83a3a" stroke-width="7" stroke-dasharray="12 9"/><path d="M490 243 L515 259 L490 275" fill="none" stroke="#b83a3a" stroke-width="7"/>
+                            <text x="395" y="235" text-anchor="middle" fill="#9b2020" font-size="16" font-weight="700">CAST TO DOG</text>
+                            <rect x="525" y="215" width="335" height="88" rx="18" fill="#b83a3a"/>
+                            <text x="693" y="251" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">ClassCastException</text><text x="693" y="279" text-anchor="middle" fill="#ffe5e5" font-size="16">the object is not really a Dog</text>
+                        </svg>
+                        <figcaption><strong>Picture 5 — Safe casting route:</strong> upcasting is automatic. Before downcasting, use <code>instanceof</code> to confirm the object's real type.</figcaption>
+                    </figure>
+                </section>
+
+                <section id="collections" class="lesson-section">
+                    <p class="section-kicker">13 · Reusable processing</p>
+                    <h2>Polymorphic arrays, lists, and parameters</h2>
+                    <p>
+                        A collection of the parent or interface type can store different child objects. A loop can then
+                        send the same message to every object without knowing each exact class.
+                    </p>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>Animal list</span><span class="language-badge">JAVA</span></div>
+                        <pre><code>Animal[] animals = {
+    <span class="code-keyword">new</span> Dog(),
+    <span class="code-keyword">new</span> Cat(),
+    <span class="code-keyword">new</span> Cow()
+};
+
+<span class="code-keyword">for</span> (Animal animal : animals) {
+    animal.makeSound();
+}</code></pre>
+                    </div>
+
+                    <div class="output-box">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Woof!<br>Meow!<br>Moo!</code>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header"><span>Polymorphic method parameter</span></div>
+                        <pre><code><span class="code-keyword">static void</span> letAnimalSpeak(Animal animal) {
+    animal.makeSound();
+}
+
+letAnimalSpeak(<span class="code-keyword">new</span> Dog());
+letAnimalSpeak(<span class="code-keyword">new</span> Cat());</code></pre>
+                    </div>
+                </section>
+
+                <section id="limits" class="lesson-section">
+                    <p class="section-kicker">14 · Important limits</p>
+                    <h2>What is not dynamically polymorphic?</h2>
+                    <p>
+                        Runtime polymorphism applies to overridden <strong>instance methods</strong>. Fields, static
+                        methods, private methods, final methods, and constructors do not use dynamic method dispatch.
+                    </p>
+
+                    <div class="extra-topic-grid">
+                        <article class="extra-topic-card"><h3>Fields</h3><p>A field is selected using the reference type, not the actual object type. Prefer getter methods when behavior must vary.</p><code>pet.name</code></article>
+                        <article class="extra-topic-card"><h3>Static methods</h3><p>A child may hide a static method, but it does not override it. The reference or class name controls the call.</p><code>Animal.info()</code></article>
+                        <article class="extra-topic-card"><h3>Private methods</h3><p>A child cannot override a private parent method because that method is not inherited.</p><code>private void helper()</code></article>
+                        <article class="extra-topic-card"><h3>Final methods</h3><p>A method marked <code>final</code> is inherited but cannot be replaced by a child class.</p><code>final void identify()</code></article>
+                        <article class="extra-topic-card"><h3>Constructors</h3><p>Constructors initialize objects and are not inherited, so they cannot be overridden.</p><code>Dog()</code></article>
+                        <article class="extra-topic-card"><h3>Overloaded methods</h3><p>Overloads are selected at compile time using the declared argument types, not runtime dispatch.</p><code>print(Animal a)</code></article>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header"><span>Fields and methods behave differently</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-keyword">class</span> Animal {
+    String label = <span class="code-string">"Animal"</span>;
+    <span class="code-keyword">void</span> show() { System.out.println(<span class="code-string">"Animal method"</span>); }
+}
+
+<span class="code-keyword">class</span> Dog <span class="code-keyword">extends</span> Animal {
+    String label = <span class="code-string">"Dog"</span>;
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">void</span> show() { System.out.println(<span class="code-string">"Dog method"</span>); }
+}
+
+Animal pet = <span class="code-keyword">new</span> Dog();
+System.out.println(pet.label);  <span class="code-comment">// Animal (field)</span>
+pet.show();                     <span class="code-comment">// Dog method (overridden method)</span></code></pre>
+                    </div>
+
+                    <div class="mini-check">
+                        <strong>Rule of thumb:</strong>
+                        <p>If you need subtype-specific behavior, put that behavior in an overridable instance method instead of reading a field directly.</p>
+                    </div>
+                </section>
+
+                <section id="benefits" class="lesson-section">
+                    <p class="section-kicker">15 · Good software design</p>
+                    <h2>Why programmers use polymorphism</h2>
+
+                    <div class="benefit-grid">
+                        <article><span>↻</span><h3>Reusable code</h3><p>One method can work with many related object types.</p></article>
+                        <article><span>+</span><h3>Easy extension</h3><p>Add a new subtype without rewriting every caller.</p></article>
+                        <article><span>≋</span><h3>Less repetition</h3><p>A shared loop replaces separate code for every class.</p></article>
+                        <article><span>◇</span><h3>Loose coupling</h3><p>Code depends on a stable abstraction, not one exact class.</p></article>
+                    </div>
+
+                    <div class="design-example">
+                        <div>
+                            <span class="bad-label">WITHOUT POLYMORPHISM</span>
+                            <code>payCash()</code>
+                            <code>payCard()</code>
+                            <code>payGCash()</code>
+                            <p>Every new payment type may require another branch or method.</p>
+                        </div>
+                        <div>
+                            <span class="good-label">WITH POLYMORPHISM</span>
+                            <code>processPayment(PaymentMethod method)</code>
+                            <p>Any class that follows the contract can be accepted.</p>
+                        </div>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <span class="tip-icon" aria-hidden="true">🎯</span>
+                        <div>
+                            <strong>Design principle to remember</strong>
+                            <p>Program to a parent type or interface when callers only need the shared behavior. Use a specific child type only when child-specific behavior is truly required.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="complete-example" class="lesson-section featured-section">
+                    <p class="section-kicker">16 · Guided example</p>
+                    <h2>Complete example: employee payroll</h2>
+                    <p>
+                        The payroll program stores different employees in one <code>Employee</code> array. Each employee
+                        calculates pay differently, but the loop calls the same <code>calculatePay()</code> method.
+                    </p>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>PayrollDemo.java</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-keyword">abstract class</span> <span class="code-type">Employee</span> {
+    <span class="code-keyword">private String</span> name;
+
+    Employee(<span class="code-keyword">String</span> name) {
+        <span class="code-keyword">this</span>.name = name;
+    }
+
+    <span class="code-keyword">public String</span> getName() {
+        <span class="code-keyword">return</span> name;
+    }
+
+    <span class="code-keyword">public abstract double</span> calculatePay();
+}
+
+<span class="code-keyword">class</span> <span class="code-type">FullTimeEmployee</span> <span class="code-keyword">extends</span> <span class="code-type">Employee</span> {
+    <span class="code-keyword">private double</span> monthlySalary;
+
+    FullTimeEmployee(<span class="code-keyword">String</span> name, <span class="code-keyword">double</span> salary) {
+        <span class="code-keyword">super</span>(name);
+        monthlySalary = salary;
+    }
+
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public double</span> calculatePay() {
+        <span class="code-keyword">return</span> monthlySalary;
+    }
+}
+
+<span class="code-keyword">class</span> <span class="code-type">PartTimeEmployee</span> <span class="code-keyword">extends</span> <span class="code-type">Employee</span> {
+    <span class="code-keyword">private double</span> hourlyRate;
+    <span class="code-keyword">private int</span> hoursWorked;
+
+    PartTimeEmployee(<span class="code-keyword">String</span> name, <span class="code-keyword">double</span> rate, <span class="code-keyword">int</span> hours) {
+        <span class="code-keyword">super</span>(name);
+        hourlyRate = rate;
+        hoursWorked = hours;
+    }
+
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public double</span> calculatePay() {
+        <span class="code-keyword">return</span> hourlyRate * hoursWorked;
+    }
+}
+
+<span class="code-keyword">public class</span> <span class="code-type">PayrollDemo</span> {
+    <span class="code-keyword">public static void</span> main(<span class="code-keyword">String</span>[] args) {
+        Employee[] employees = {
+            <span class="code-keyword">new</span> FullTimeEmployee(<span class="code-string">"Ana"</span>, <span class="code-number">30000</span>),
+            <span class="code-keyword">new</span> PartTimeEmployee(<span class="code-string">"Ben"</span>, <span class="code-number">150</span>, <span class="code-number">80</span>)
+        };
+
+        <span class="code-keyword">for</span> (Employee employee : employees) {
+            System.out.printf(<span class="code-string">"%s: ₱%.2f%n"</span>,
+                    employee.getName(), employee.calculatePay());
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="output-box">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Ana: ₱30000.00<br>Ben: ₱12000.00</code>
+                    </div>
+
+                    <ol class="explanation-steps">
+                        <li><strong>The abstract parent defines the contract.</strong> Every Employee must provide <code>calculatePay()</code>.</li>
+                        <li><strong>Each child overrides the method.</strong> Full-time and part-time pay use different formulas.</li>
+                        <li><strong>The array uses the parent type.</strong> It can store either employee subtype.</li>
+                        <li><strong>The loop is reusable.</strong> The same code processes every employee.</li>
+                        <li><strong>Java dispatches dynamically.</strong> The actual object chooses the correct pay calculation.</li>
+                    </ol>
+
+                    <div class="explain-script">
+                        <h3>Short teacher explanation</h3>
+                        <p>
+                            “Notice that the loop never asks whether an employee is full-time or part-time. It simply
+                            tells every Employee object to calculate its pay. Each object already knows how to perform
+                            that job. That is the power of polymorphism.”
+                        </p>
+                    </div>
+                </section>
+
+                <section id="mistakes" class="lesson-section">
+                    <p class="section-kicker">17 · Troubleshooting</p>
+                    <h2>Common beginner mistakes</h2>
+
+                    <div class="mistake-list">
+                        <article><span>01</span><div><h3>Confusing overloading and overriding</h3><p>Overloading changes parameters; overriding replaces inherited behavior.</p></div></article>
+                        <article><span>02</span><div><h3>Using different parameters while overriding</h3><p>A changed parameter list creates an overload instead of an override. Add <code>@Override</code> so the compiler can warn you.</p></div></article>
+                        <article><span>03</span><div><h3>Calling a child-only method from a parent reference</h3><p><code>Animal pet</code> can only directly access members declared by Animal, even if the object is a Dog.</p></div></article>
+                        <article><span>04</span><div><h3>Unsafe downcasting</h3><p>Check the actual object with <code>instanceof</code> before converting to a child type.</p></div></article>
+                        <article><span>05</span><div><h3>Trying to override a static method</h3><p>Static methods belong to the class and are hidden, not dynamically overridden.</p></div></article>
+                        <article><span>06</span><div><h3>Making access more restrictive</h3><p>A public parent method cannot be overridden as protected or private.</p></div></article>
+                        <article><span>07</span><div><h3>Depending on exact classes everywhere</h3><p>Use a parent or interface type when only common behavior is needed.</p></div></article>
+                    </div>
+                </section>
+
+                <section id="guided-lab" class="lesson-section featured-section">
+                    <p class="section-kicker">18 · Hands-on coding lab</p>
+                    <h2>Build and run polymorphism step by step</h2>
+                    <p>
+                        Follow every step in order. Type the code yourself instead of copying everything at once;
+                        this helps you notice how the classes connect.
+                    </p>
+
+                    <figure class="visual-figure">
+                        <svg viewBox="0 0 900 390" role="img" aria-labelledby="lab-picture-title lab-picture-desc">
+                            <title id="lab-picture-title">Coding lab workflow from files to output</title>
+                            <desc id="lab-picture-desc">Create four Java files, compile them, run Main, and check that the output is Woof and Meow.</desc>
+                            <rect x="38" y="55" width="255" height="260" rx="20" fill="#251b20"/>
+                            <rect x="38" y="55" width="255" height="42" rx="20" fill="#4a3540"/>
+                            <circle cx="66" cy="76" r="7" fill="#e76e6e"/><circle cx="88" cy="76" r="7" fill="#e7b453"/><circle cx="110" cy="76" r="7" fill="#68c7a8"/>
+                            <text x="65" y="133" fill="#e7b453" font-size="17" font-family="monospace">Animal.java</text>
+                            <text x="65" y="173" fill="#f4e9ed" font-size="17" font-family="monospace">Dog.java</text>
+                            <text x="65" y="213" fill="#f4e9ed" font-size="17" font-family="monospace">Cat.java</text>
+                            <text x="65" y="253" fill="#68c7a8" font-size="17" font-family="monospace">Main.java</text>
+                            <text x="166" y="292" text-anchor="middle" fill="#bdaeb5" font-size="15">1. CREATE THE FILES</text>
+                            <path d="M310 185 H390" stroke="#d79a2b" stroke-width="8"/><path d="M370 168 L395 185 L370 202" fill="none" stroke="#d79a2b" stroke-width="8"/>
+                            <rect x="405" y="100" width="210" height="170" rx="20" fill="#fff" stroke="#9b2448" stroke-width="3"/>
+                            <text x="510" y="142" text-anchor="middle" fill="#761b35" font-size="19" font-weight="700">TERMINAL</text>
+                            <rect x="430" y="165" width="160" height="40" rx="8" fill="#251b20"/>
+                            <text x="510" y="191" text-anchor="middle" fill="#f7dca3" font-size="16" font-family="monospace">javac *.java</text>
+                            <rect x="430" y="215" width="160" height="40" rx="8" fill="#251b20"/>
+                            <text x="510" y="241" text-anchor="middle" fill="#68c7a8" font-size="16" font-family="monospace">java Main</text>
+                            <text x="510" y="302" text-anchor="middle" fill="#5f4b52" font-size="15">2. COMPILE &amp; RUN</text>
+                            <path d="M630 185 H695" stroke="#d79a2b" stroke-width="8"/><path d="M675 168 L700 185 L675 202" fill="none" stroke="#d79a2b" stroke-width="8"/>
+                            <rect x="710" y="85" width="155" height="200" rx="20" fill="#eaf5f1" stroke="#237a63" stroke-width="3"/>
+                            <text x="788" y="125" text-anchor="middle" fill="#237a63" font-size="19" font-weight="700">OUTPUT</text>
+                            <text x="788" y="181" text-anchor="middle" fill="#263a34" font-size="27" font-weight="800">Woof!</text>
+                            <text x="788" y="226" text-anchor="middle" fill="#263a34" font-size="27" font-weight="800">Meow!</text>
+                            <text x="788" y="318" text-anchor="middle" fill="#237a63" font-size="15">3. VERIFY</text>
+                        </svg>
+                        <figcaption><strong>Picture 6 — Your goal:</strong> four small source files become one working program with two different outputs from the same method call.</figcaption>
+                    </figure>
+
+                    <div class="guided-lab">
+                        <article class="lab-step">
+                            <span class="lab-step-number">1</span>
+                            <div>
+                                <h3>Create a project folder</h3>
+                                <p>Make a folder named <code>PolymorphismLab</code>. Open that folder in your Java editor.</p>
+                                <div class="file-tabs" aria-label="Files that will be created"><code>Animal.java</code><code>Dog.java</code><code>Cat.java</code><code>Main.java</code></div>
+                            </div>
+                        </article>
+
+                        <article class="lab-step">
+                            <span class="lab-step-number">2</span>
+                            <div>
+                                <h3>Create the parent class</h3>
+                                <p>In <code>Animal.java</code>, declare the common method every animal will share.</p>
+                                <div class="code-card compact-code"><pre><code><span class="code-keyword">public class</span> Animal {
+    <span class="code-keyword">public void</span> makeSound() {
+        System.out.println(<span class="code-string">"Animal sound"</span>);
+    }
+}</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="lab-step">
+                            <span class="lab-step-number">3</span>
+                            <div>
+                                <h3>Create the Dog child class</h3>
+                                <p>In <code>Dog.java</code>, extend <code>Animal</code> and override the method.</p>
+                                <div class="code-card compact-code"><pre><code><span class="code-keyword">public class</span> Dog <span class="code-keyword">extends</span> Animal {
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public void</span> makeSound() {
+        System.out.println(<span class="code-string">"Woof!"</span>);
+    }
+}</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="lab-step">
+                            <span class="lab-step-number">4</span>
+                            <div>
+                                <h3>Create the Cat child class</h3>
+                                <p>In <code>Cat.java</code>, repeat the structure but give the method different behavior.</p>
+                                <div class="code-card compact-code"><pre><code><span class="code-keyword">public class</span> Cat <span class="code-keyword">extends</span> Animal {
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public void</span> makeSound() {
+        System.out.println(<span class="code-string">"Meow!"</span>);
+    }
+}</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="lab-step">
+                            <span class="lab-step-number">5</span>
+                            <div>
+                                <h3>Create the main program</h3>
+                                <p>In <code>Main.java</code>, store both child objects in an <code>Animal</code> array.</p>
+                                <div class="code-card compact-code"><pre><code><span class="code-keyword">public class</span> Main {
+    <span class="code-keyword">public static void</span> main(String[] args) {
+        Animal[] pets = { <span class="code-keyword">new</span> Dog(), <span class="code-keyword">new</span> Cat() };
+
+        <span class="code-keyword">for</span> (Animal pet : pets) {
+            pet.makeSound();
+        }
+    }
+}</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="lab-step">
+                            <span class="lab-step-number">6</span>
+                            <div>
+                                <h3>Compile all four files</h3>
+                                <p>Open the terminal inside the project folder and compile:</p>
+                                <code class="command-line">javac Animal.java Dog.java Cat.java Main.java</code>
+                                <p>If no error appears, compilation succeeded.</p>
+                            </div>
+                        </article>
+
+                        <article class="lab-step">
+                            <span class="lab-step-number">7</span>
+                            <div>
+                                <h3>Run and check the output</h3>
+                                <code class="command-line">java Main</code>
+                                <div class="output-box"><span>EXPECTED OUTPUT</span><code>Woof!<br>Meow!</code></div>
+                            </div>
+                        </article>
+
+                        <article class="lab-step">
+                            <span class="lab-step-number">8</span>
+                            <div>
+                                <h3>Prove that the design is extendable</h3>
+                                <p>Create <code>Cow.java</code>, override <code>makeSound()</code> to print <code>Moo!</code>, and add <code>new Cow()</code> to the array. Do not change the loop.</p>
+                                <div class="mini-check"><strong>Success check:</strong><p>If the same loop prints all three sounds, you successfully used runtime polymorphism.</p></div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>If the program does not compile:</strong>
+                        <p>Check that every public class name matches its filename exactly, all files are in the same folder, braces are balanced, and <code>@Override</code> is spelled correctly.</p>
+                    </div>
+                </section>
+
+                <section id="activities" class="lesson-section">
+                    <p class="section-kicker">19 · Apply your learning</p>
+                    <h2>Classroom and coding activities</h2>
+
+                    <div class="activity-grid">
+                        <article class="activity-card">
+                            <span class="activity-label">ACTIVITY A · 10 MIN</span>
+                            <h3>Many forms around us</h3>
+                            <p>Choose one common action such as <em>move</em>, <em>pay</em>, or <em>communicate</em>.</p>
+                            <ol>
+                                <li>Name a possible parent type or interface.</li>
+                                <li>List three classes that can perform the action.</li>
+                                <li>Describe how each class performs it differently.</li>
+                            </ol>
+                        </article>
+
+                        <article class="activity-card">
+                            <span class="activity-label">ACTIVITY B · 20 MIN</span>
+                            <h3>Build a <code>Notification</code> system</h3>
+                            <ol>
+                                <li>Create a <code>Notification</code> interface with <code>send()</code>.</li>
+                                <li>Implement <code>EmailNotification</code> and <code>SMSNotification</code>.</li>
+                                <li>Store both objects in one array.</li>
+                                <li>Use a loop to call <code>send()</code>.</li>
+                            </ol>
+                        </article>
+
+                        <article class="activity-card">
+                            <span class="activity-label">ACTIVITY C · 25 MIN</span>
+                            <h3>Shape calculator</h3>
+                            <ol>
+                                <li>Create an abstract <code>Shape</code> class.</li>
+                                <li>Add <code>Circle</code>, <code>Rectangle</code>, and <code>Triangle</code>.</li>
+                                <li>Override <code>area()</code> in every child.</li>
+                                <li>Print all areas through a <code>Shape[]</code>.</li>
+                            </ol>
+                        </article>
+
+                        <article class="activity-card challenge-card">
+                            <span class="activity-label">CHALLENGE · 30 MIN</span>
+                            <h3>Extend the payroll example</h3>
+                            <ul>
+                                <li>Add a <code>CommissionEmployee</code>.</li>
+                                <li>Override <code>calculatePay()</code>.</li>
+                                <li>Add the new object to the same array.</li>
+                                <li>Confirm that the loop needs no new conditional statement.</li>
+                            </ul>
+                        </article>
+
+                        <article class="activity-card">
+                            <span class="activity-label">ACTIVITY D · 15 MIN</span>
+                            <h3>Output detective</h3>
+                            <ol>
+                                <li>Write three parent-reference declarations with different child objects.</li>
+                                <li>Predict each method call's output without running the code.</li>
+                                <li>Use the four-step dispatch checklist.</li>
+                                <li>Run the program and correct any prediction that was wrong.</li>
+                            </ol>
+                        </article>
+
+                        <article class="activity-card challenge-card">
+                            <span class="activity-label">MINI PROJECT · 45 MIN</span>
+                            <h3>Transport fare calculator</h3>
+                            <ul>
+                                <li>Create a <code>Transport</code> interface with <code>calculateFare(double km)</code>.</li>
+                                <li>Implement <code>Jeepney</code>, <code>Bus</code>, and <code>Taxi</code>.</li>
+                                <li>Give each class a different fare formula.</li>
+                                <li>Store the objects in a <code>Transport[]</code> and print every fare through one loop.</li>
+                                <li>Add one new transport type without changing the loop.</li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="assessment" class="lesson-section assessment-section">
+                    <p class="section-kicker">20 · Check your understanding</p>
+                    <h2>Quick assessment</h2>
+                    <p>Answer each question before opening its answer.</p>
+
+                    <div class="question-list">
+                        <details><summary><span>1</span> What is polymorphism?</summary><p><strong>Answer:</strong> It is the ability to use different objects through a common type while each object provides its own behavior.</p></details>
+                        <details><summary><span>2</span> What is method overriding?</summary><p><strong>Answer:</strong> It is when a child class supplies its own implementation of an inherited method with the same signature.</p></details>
+                        <details><summary><span>3</span> Why does <code>Animal pet = new Dog();</code> work?</summary><p><strong>Answer:</strong> A Dog is a subtype of Animal, so a parent reference can point to a child object.</p></details>
+                        <details><summary><span>4</span> Which type controls which members can be called?</summary><p><strong>Answer:</strong> The reference type controls which members are visible to the compiler.</p></details>
+                        <details><summary><span>5</span> Which type determines the overridden method that runs?</summary><p><strong>Answer:</strong> The actual object type determines the implementation selected at runtime.</p></details>
+                        <details><summary><span>6</span> What is the main difference between overloading and overriding?</summary><p><strong>Answer:</strong> Overloading changes the parameter list and is resolved at compile time; overriding replaces inherited behavior and is dispatched at runtime.</p></details>
+                        <details><summary><span>7</span> Why is <code>@Override</code> recommended?</summary><p><strong>Answer:</strong> It asks the compiler to confirm that the method correctly overrides an inherited method.</p></details>
+                        <details><summary><span>8</span> What should you check before downcasting?</summary><p><strong>Answer:</strong> Check the object's actual type, normally using <code>instanceof</code>.</p></details>
+                        <details><summary><span>9</span> Can an interface be used as a reference type?</summary><p><strong>Answer:</strong> Yes. Its reference can point to an object of any class that implements the interface.</p></details>
+                        <details><summary><span>10</span> Give one benefit of polymorphism.</summary><p><strong>Answer:</strong> Possible answers include reusable code, easier extension, less duplication, and looser coupling.</p></details>
+                        <details><summary><span>11</span> In <code>Animal pet = new Dog();</code>, what is the reference type?</summary><p><strong>Answer:</strong> <code>Animal</code> is the reference type.</p></details>
+                        <details><summary><span>12</span> In the same declaration, what is the actual object type?</summary><p><strong>Answer:</strong> <code>Dog</code> is the actual object type.</p></details>
+                        <details><summary><span>13</span> Are fields selected using dynamic method dispatch?</summary><p><strong>Answer:</strong> No. Field access is based on the reference type; dynamic dispatch applies to overridden instance methods.</p></details>
+                        <details><summary><span>14</span> Can constructors be overridden?</summary><p><strong>Answer:</strong> No. Constructors are not inherited.</p></details>
+                        <details><summary><span>15</span> How can you test that a design is easy to extend?</summary><p><strong>Answer:</strong> Add a new subtype. Existing code that works with the parent or interface should accept it without needing a new conditional branch.</p></details>
+                    </div>
+
+                    <div class="exit-ticket">
+                        <h3>Exit ticket</h3>
+                        <p>Complete these sentences in your own words:</p>
+                        <ol>
+                            <li>Polymorphism means...</li>
+                            <li>Overloading is different from overriding because...</li>
+                            <li>One place I can use polymorphism is...</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="lesson-section recap-section" aria-labelledby="recap-title">
+                    <p class="section-kicker">Lesson recap</p>
+                    <h2 id="recap-title">Remember these eight ideas</h2>
+                    <div class="recap-grid">
+                        <div><span>1</span><p>Polymorphism means <strong>many forms</strong>.</p></div>
+                        <div><span>2</span><p>A parent or interface can be a <strong>common type</strong>.</p></div>
+                        <div><span>3</span><p><strong>Overriding</strong> provides specialized behavior.</p></div>
+                        <div><span>4</span><p>Runtime dispatch follows the <strong>actual object</strong>.</p></div>
+                        <div><span>5</span><p><strong>Overloading</strong> uses different parameters.</p></div>
+                        <div><span>6</span><p>Polymorphism makes code easier to <strong>reuse and extend</strong>.</p></div>
+                        <div><span>7</span><p>Use <strong><code>instanceof</code></strong> before a risky downcast.</p></div>
+                        <div><span>8</span><p>Dynamic dispatch applies to overridden <strong>instance methods</strong>.</p></div>
+                    </div>
+                    <a class="button button-primary" href="#top">Back to the top</a>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <strong>OOP Learning Module</strong>
+            <p>Polymorphism · Java Programming Fundamentals</p>
+        </div>
+        <p>Designed for classroom discussion, self-study, and review.</p>
+    </footer>
+</body>
+</html>

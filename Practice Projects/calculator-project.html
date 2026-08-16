@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A formal classroom lecture and step-by-step module for explaining a simple calculator project using Java Swing JFrame in Apache NetBeans.">
+  <title>Calculator Project Using JFrame | Java Swing Lesson and Module</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <link rel="stylesheet" href="../css/Practice Projects/calculator-project.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to lesson content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Java GUI Learning calculator lesson">
+        <span class="brand-mark" aria-hidden="true">J</span>
+        <span>
+          <strong>Java GUI Learning</strong>
+          <small>Practice Project Lecture</small>
+        </span>
+      </a>
+      <a class="home-link" href="../index.html">Home</a>
+    </div>
+  </header>
+
+  <div class="page-layout" id="top">
+    <aside class="lesson-sidebar" aria-label="Lesson navigation">
+      <p class="navigation-title">Lesson Topics</p>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="#overview"><span>01</span> Module overview</a>
+        <a href="#objectives"><span>02</span> Learning objectives</a>
+        <a href="#foundation"><span>03</span> Concept foundation</a>
+        <a href="#planning"><span>04</span> Project planning</a>
+        <a href="#interface"><span>05</span> Interface design</a>
+        <a href="#variables"><span>06</span> Component names</a>
+        <a href="#logic"><span>07</span> Calculator logic</a>
+        <a href="#events"><span>08</span> Event handling</a>
+        <a href="#implementation"><span>09</span> Guided procedure</a>
+        <a href="#validation"><span>10</span> Validation</a>
+        <a href="#testing"><span>11</span> Testing</a>
+        <a href="#errors"><span>12</span> Common errors</a>
+        <a href="#discussion"><span>13</span> Discussion guide</a>
+        <a href="#activities"><span>14</span> Activities</a>
+        <a href="#assessment"><span>15</span> Assessment</a>
+        <a href="#summary"><span>16</span> Lesson summary</a>
+      </nav>
+    </aside>
+
+    <main class="lesson-main" id="main-content">
+      <details class="mobile-toc">
+        <summary>Open lesson topics</summary>
+        <nav aria-label="Mobile lesson navigation">
+          <a href="../index.html">Home</a>
+          <a href="#overview">Module overview</a>
+          <a href="#foundation">Concept foundation</a>
+          <a href="#planning">Project planning</a>
+          <a href="#implementation">Guided procedure</a>
+          <a href="#testing">Testing and debugging</a>
+          <a href="#assessment">Assessment</a>
+        </nav>
+      </details>
+
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <p class="eyebrow">Practice Project 01 · Java Desktop Development</p>
+          <h1>Simple Calculator Using <span>Java Swing JFrame</span></h1>
+          <p class="hero-lead">A formal, classroom-ready lecture for explaining how a graphical calculator is planned, designed, coded, tested, and improved in Apache NetBeans.</p>
+          <div class="hero-meta" aria-label="Module information">
+            <span><b>Level</b> Beginner to Intermediate</span>
+            <span><b>Duration</b> 2–3 class periods</span>
+            <span><b>Approach</b> Lecture and guided practice</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#objectives">Begin the lecture</a>
+            <a class="button secondary" href="#implementation">View the procedure</a>
+          </div>
+        </div>
+
+        <figure class="calculator-figure">
+          <div class="calculator-shell" role="img" aria-label="Illustration of the completed calculator interface with a display and arithmetic buttons">
+            <div class="calculator-top"><span></span><span></span><span></span><b>Simple Calculator</b></div>
+            <div class="calculator-display"><small>12 + 8</small><strong>20</strong></div>
+            <div class="calculator-keypad" aria-hidden="true">
+              <span class="utility">C</span><span class="utility">⌫</span><span class="utility">±</span><span class="operator">÷</span>
+              <span>7</span><span>8</span><span>9</span><span class="operator">×</span>
+              <span>4</span><span>5</span><span>6</span><span class="operator">−</span>
+              <span>1</span><span>2</span><span>3</span><span class="operator">+</span>
+              <span class="zero">0</span><span>.</span><span class="equals">=</span>
+            </div>
+          </div>
+          <figcaption>Figure 1. Target interface for the classroom calculator project.</figcaption>
+        </figure>
+      </section>
+
+      <section class="lesson-section outcomes" id="objectives">
+        <p class="section-label">Topic 02</p>
+        <h2>Learning objectives</h2>
+        <p class="section-intro">At the end of this module, learners should be able to demonstrate the following knowledge and skills:</p>
+        <div class="objective-grid">
+          <article><b>01</b><h3>Explain</h3><p>Describe the roles of JFrame, Swing components, variables, methods, and events in a GUI program.</p></article>
+          <article><b>02</b><h3>Plan</h3><p>Translate calculator requirements into an interface layout, component list, and processing algorithm.</p></article>
+          <article><b>03</b><h3>Design</h3><p>Arrange a readable display and keypad using appropriate Swing controls and consistent naming.</p></article>
+          <article><b>04</b><h3>Implement</h3><p>Connect number, operator, equals, clear, and decimal buttons to suitable event handlers.</p></article>
+          <article><b>05</b><h3>Validate</h3><p>Prevent invalid number formats and handle division by zero without terminating the program.</p></article>
+          <article><b>06</b><h3>Evaluate</h3><p>Use prepared test cases to confirm correct results and identify logical or interface defects.</p></article>
+        </div>
+
+        <div class="module-box">
+          <div><strong>Prerequisite knowledge</strong><span>Variables, data types, arithmetic operators, methods, conditions, and basic Java syntax</span></div>
+          <div><strong>Required software</strong><span>Java Development Kit and Apache NetBeans with Java Swing support</span></div>
+          <div><strong>Expected output</strong><span>A JFrame calculator that performs addition, subtraction, multiplication, and division</span></div>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="foundation">
+        <p class="section-label">Topic 03</p>
+        <h2>Concept foundation: how a JFrame calculator works</h2>
+        <p class="section-intro">A calculator is an event-driven program. It remains idle until the user clicks a button. Each click produces an event, and the assigned event handler decides how the program should respond.</p>
+
+        <div class="process-flow" aria-label="Calculator event process">
+          <span>User clicks a button</span><b>1</b>
+          <span>An event is generated</span><b>2</b>
+          <span>The handler updates data</span><b>3</b>
+          <span>The display shows the result</span>
+        </div>
+
+        <div class="concept-grid">
+          <article><span class="concept-icon">JF</span><h3>JFrame</h3><p>The main application window that contains the calculator interface.</p></article>
+          <article><span class="concept-icon">TF</span><h3>JTextField</h3><p>The display area used to show entered numbers, operations, and results.</p></article>
+          <article><span class="concept-icon">BT</span><h3>JButton</h3><p>A clickable control used for digits, operators, commands, and the equals action.</p></article>
+          <article><span class="concept-icon">EV</span><h3>ActionEvent</h3><p>An object that represents the user clicking a calculator button.</p></article>
+          <article><span class="concept-icon">MD</span><h3>Method</h3><p>A reusable block of instructions such as <code>appendDigit()</code> or <code>calculateResult()</code>.</p></article>
+          <article><span class="concept-icon">ST</span><h3>Program state</h3><p>Stored information such as the first number, selected operator, and whether a new number should begin.</p></article>
+        </div>
+
+        <aside class="teacher-note"><strong>Teacher explanation:</strong> The calculator interface is the visible layer. The variables and methods form the logic layer. Events connect these two layers.</aside>
+      </section>
+
+      <section class="lesson-section" id="planning">
+        <p class="section-label">Topic 04</p>
+        <h2>Analyze the project before opening NetBeans</h2>
+        <p class="section-intro">Professional development begins with clear requirements. The class should first identify what the calculator must accept, process, and display.</p>
+
+        <div class="ipo-grid">
+          <article><span>Input</span><h3>What the user provides</h3><ul><li>Digits from 0 to 9</li><li>A decimal point</li><li>An arithmetic operator</li><li>A command such as equals or clear</li></ul></article>
+          <article><span>Process</span><h3>What the program does</h3><ul><li>Stores the first number</li><li>Stores the chosen operator</li><li>Reads the second number</li><li>Performs the selected operation</li></ul></article>
+          <article><span>Output</span><h3>What the user receives</h3><ul><li>The entered number</li><li>The calculated result</li><li>A clear error message</li><li>A reset display after clearing</li></ul></article>
+        </div>
+
+        <h3 class="subheading">Functional requirements</h3>
+        <div class="requirements-list">
+          <div><b>FR-01</b><p>The system shall accept whole numbers and decimal numbers.</p></div>
+          <div><b>FR-02</b><p>The system shall perform addition, subtraction, multiplication, and division.</p></div>
+          <div><b>FR-03</b><p>The system shall display the current entry and the computed result.</p></div>
+          <div><b>FR-04</b><p>The system shall clear stored values when the Clear button is selected.</p></div>
+          <div><b>FR-05</b><p>The system shall reject a second decimal point in the same number.</p></div>
+          <div><b>FR-06</b><p>The system shall report division by zero without closing the window.</p></div>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="interface">
+        <p class="section-label">Topic 05</p>
+        <h2>Plan the calculator interface</h2>
+        <p class="section-intro">The interface should follow a predictable visual hierarchy: the display comes first, utility commands come next, digits occupy the central area, and arithmetic operators remain visually distinct.</p>
+
+        <div class="picture-grid two-pictures">
+          <figure class="picture-card">
+            <div class="wireframe" role="img" aria-label="Wireframe showing a calculator display above a four-column keypad">
+              <div class="wire-title">Calculator JFrame</div>
+              <div class="wire-display">DISPLAY / RESULT</div>
+              <div class="wire-grid">
+                <span>C</span><span>⌫</span><span>±</span><span>÷</span>
+                <span>7</span><span>8</span><span>9</span><span>×</span>
+                <span>4</span><span>5</span><span>6</span><span>−</span>
+                <span>1</span><span>2</span><span>3</span><span>+</span>
+                <span class="wide">0</span><span>.</span><span>=</span>
+              </div>
+            </div>
+            <figcaption><strong>Figure 2. Interface wireframe</strong><span>Use the wireframe to agree on the layout before adding components.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="layout-visual" role="img" aria-label="Diagram showing BorderLayout with a display in the north and a keypad panel in the center">
+              <div class="layout-label north">NORTH: displayField</div>
+              <div class="layout-center">
+                <strong>CENTER: keypadPanel</strong>
+                <span>GridLayout (5 rows × 4 columns)</span>
+              </div>
+              <div class="layout-label south">SOUTH: optional statusLabel</div>
+            </div>
+            <figcaption><strong>Figure 3. Suggested layout structure</strong><span>BorderLayout organizes major regions; GridLayout produces an even keypad.</span></figcaption>
+          </figure>
+        </div>
+
+        <div class="principle-grid">
+          <article><h3>Clarity</h3><p>Use a large display, high contrast, and labels that students can interpret immediately.</p></article>
+          <article><h3>Consistency</h3><p>Apply equal button sizes, uniform spacing, and a consistent font throughout the keypad.</p></article>
+          <article><h3>Feedback</h3><p>Every button click should produce a visible change or an understandable message.</p></article>
+          <article><h3>Error prevention</h3><p>Block invalid input where possible instead of waiting for the calculation to fail.</p></article>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="variables">
+        <p class="section-label">Topic 06</p>
+        <h2>Use meaningful component and variable names</h2>
+        <p class="section-intro">Descriptive names make the program easier to explain, debug, and maintain. Avoid leaving NetBeans defaults such as <code>jButton1</code> or <code>jTextField1</code>.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Item</th><th>Suggested name</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td>Calculator window</td><td><code>CalculatorFrame</code></td><td>Represents the complete JFrame class.</td></tr>
+              <tr><td>Display field</td><td><code>displayField</code></td><td>Shows the current number and result.</td></tr>
+              <tr><td>Number buttons</td><td><code>numberButtons</code></td><td>Stores the ten digit buttons in an array.</td></tr>
+              <tr><td>Operator buttons</td><td><code>addButton</code>, <code>subtractButton</code></td><td>Starts an arithmetic operation.</td></tr>
+              <tr><td>First operand</td><td><code>firstNumber</code></td><td>Stores the number entered before an operator.</td></tr>
+              <tr><td>Selected operation</td><td><code>operator</code></td><td>Stores <code>+</code>, <code>-</code>, <code>*</code>, or <code>/</code>.</td></tr>
+              <tr><td>Input status</td><td><code>startNewNumber</code></td><td>Indicates whether the next digit replaces the display.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block">
+          <div class="code-title"><span>Core calculator state</span><small>Lecture excerpt</small></div>
+          <pre><code>private double firstNumber = 0.0;
+private String operator = "";
+private boolean startNewNumber = true;</code></pre>
+        </div>
+
+        <aside class="teacher-note"><strong>Teacher prompt:</strong> Ask students why <code>double</code> is more suitable than <code>int</code> when the calculator must accept decimal values.</aside>
+      </section>
+
+      <section class="lesson-section" id="logic">
+        <p class="section-label">Topic 07</p>
+        <h2>Understand the calculator algorithm</h2>
+        <p class="section-intro">The algorithm must preserve the first number and operator while the user enters the second number. The equals button then completes the operation.</p>
+
+        <ol class="algorithm-list">
+          <li><span>1</span><div><h3>Accept the first number</h3><p>Append each digit to the display. Permit only one decimal point.</p></div></li>
+          <li><span>2</span><div><h3>Select an operator</h3><p>Convert the display text into a number, store it in <code>firstNumber</code>, and remember the selected operator.</p></div></li>
+          <li><span>3</span><div><h3>Accept the second number</h3><p>Set <code>startNewNumber</code> so the next digit replaces the previous display.</p></div></li>
+          <li><span>4</span><div><h3>Calculate the result</h3><p>Read the second number, use a <code>switch</code> statement, and store the computed value.</p></div></li>
+          <li><span>5</span><div><h3>Display and continue</h3><p>Show the result and prepare the calculator for another number or a chained operation.</p></div></li>
+        </ol>
+
+        <div class="decision-visual" role="img" aria-label="Decision diagram for the calculator operation">
+          <div>Read second number</div><span>→</span><div class="decision">Which operator?</div>
+          <div class="decision-options"><span>+ Add</span><span>− Subtract</span><span>× Multiply</span><span>÷ Divide</span></div>
+          <span>↓</span><div>Display result</div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-title"><span>Calculation decision</span><small>Lecture excerpt</small></div>
+          <pre><code>double secondNumber = Double.parseDouble(displayField.getText());
+double result;
+
+switch (operator) {
+    case "+" -&gt; result = firstNumber + secondNumber;
+    case "-" -&gt; result = firstNumber - secondNumber;
+    case "*" -&gt; result = firstNumber * secondNumber;
+    case "/" -&gt; {
+        if (secondNumber == 0) {
+            showError("Division by zero is not allowed.");
+            return;
+        }
+        result = firstNumber / secondNumber;
+    }
+    default -&gt; {
+        showError("Please select an operator.");
+        return;
+    }
+}
+
+displayField.setText(formatResult(result));</code></pre>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="events">
+        <p class="section-label">Topic 08</p>
+        <h2>Connect buttons to event handlers</h2>
+        <p class="section-intro">Each category of button has a different responsibility. Number buttons build input, operator buttons save state, and command buttons change or evaluate that state.</p>
+
+        <div class="event-grid">
+          <article><b>Digits</b><h3>Build a number</h3><p>Append the selected digit to the display or begin a new entry.</p></article>
+          <article><b>Decimal</b><h3>Control number format</h3><p>Add a decimal point only when the current entry does not already contain one.</p></article>
+          <article><b>Operators</b><h3>Store the first operand</h3><p>Remember the displayed number and the chosen operation.</p></article>
+          <article><b>Equals</b><h3>Execute the operation</h3><p>Read the second operand, calculate, and present the result.</p></article>
+          <article><b>Clear</b><h3>Reset program state</h3><p>Restore the display, first number, operator, and input status.</p></article>
+          <article><b>Backspace</b><h3>Correct input</h3><p>Remove the final character while maintaining a valid display.</p></article>
+        </div>
+
+        <div class="code-block">
+          <div class="code-title"><span>Reusable digit method</span><small>Lecture excerpt</small></div>
+          <pre><code>private void appendDigit(String digit) {
+    if (startNewNumber || displayField.getText().equals("0")) {
+        displayField.setText(digit);
+        startNewNumber = false;
+    } else {
+        displayField.setText(displayField.getText() + digit);
+    }
+}</code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-title"><span>Operator method</span><small>Lecture excerpt</small></div>
+          <pre><code>private void chooseOperator(String selectedOperator) {
+    firstNumber = Double.parseDouble(displayField.getText());
+    operator = selectedOperator;
+    startNewNumber = true;
+}</code></pre>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="implementation">
+        <p class="section-label">Topic 09</p>
+        <h2>Guided procedure in Apache NetBeans</h2>
+        <p class="section-intro">The following visuals are teaching illustrations. They show what students should look for at each stage without turning this lesson page into a Java application.</p>
+
+        <div class="picture-grid">
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="NetBeans File menu with New Project highlighted">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>Apache NetBeans IDE</b></div>
+              <div class="mock-menubar">File&nbsp;&nbsp; Edit&nbsp;&nbsp; View&nbsp;&nbsp; Navigate&nbsp;&nbsp; Source&nbsp;&nbsp; Refactor&nbsp;&nbsp; Run</div>
+              <div class="mock-workspace menu-view"><div class="menu-panel"><span class="selected">New Project… <kbd>Ctrl+Shift+N</kbd></span><span>New File…</span><span>Open Project…</span><span>Recent Projects</span></div><div class="workspace-message">Start Page</div></div>
+            </div>
+            <figcaption><strong>Step 1 — Start a project</strong><span>Choose <b>File → New Project</b> to open the project wizard.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="NetBeans New Project wizard with Java Application selected">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>New Project</b></div>
+              <div class="wizard"><div><small>Categories</small><span class="selected">Java with Ant</span><span>Java with Maven</span><span>Java with Gradle</span></div><div><small>Projects</small><span class="selected">Java Application</span><span>Java Class Library</span></div></div>
+              <div class="wizard-actions"><span>Back</span><b>Next</b><span>Cancel</span></div>
+            </div>
+            <figcaption><strong>Step 2 — Select the project type</strong><span>Choose <b>Java with Ant → Java Application</b>, then select <b>Next</b>.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="Project wizard with SimpleCalculator as the project name">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>Name and Location</b></div>
+              <div class="form-visual"><label>Project Name <strong>SimpleCalculator</strong></label><label>Project Location <span>C:\JavaProjects</span></label><label>Project Folder <span>C:\JavaProjects\SimpleCalculator</span></label><label class="check">✓ Create Main Class</label></div>
+              <div class="wizard-actions"><span>Back</span><b>Finish</b><span>Cancel</span></div>
+            </div>
+            <figcaption><strong>Step 3 — Name the project</strong><span>Enter <code>SimpleCalculator</code> and use a location that students can easily find.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="NetBeans project tree showing New JFrame Form action">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>SimpleCalculator</b></div>
+              <div class="project-view"><div class="mock-tree"><small>Projects</small><strong>▾ SimpleCalculator</strong><span>▾ Source Packages</span><span class="indent selected">calculator</span><span>▸ Libraries</span></div><div class="context-menu"><span>New</span><span class="selected">JFrame Form…</span><span>Java Class…</span><span>Package…</span></div></div>
+            </div>
+            <figcaption><strong>Step 4 — Create the JFrame form</strong><span>Right-click the package and choose <b>New → JFrame Form</b>. Name it <code>CalculatorFrame</code>.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="NetBeans Design view with calculator components placed on the form">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>CalculatorFrame.java — Design</b></div>
+              <div class="designer"><div class="palette"><small>Palette</small><span>JLabel</span><span class="selected">JTextField</span><span>JButton</span><span>JPanel</span></div><div class="form-canvas"><b>Simple Calculator</b><div class="display-mini">0</div><div class="keys-mini"><span>7</span><span>8</span><span>9</span><span>÷</span><span>4</span><span>5</span><span>6</span><span>×</span><span>1</span><span>2</span><span>3</span><span>−</span><span>0</span><span>.</span><span>=</span><span>+</span></div></div></div>
+            </div>
+            <figcaption><strong>Step 5 — Arrange the controls</strong><span>Add one display field and the required buttons. Keep spacing and alignment consistent.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="NetBeans Properties panel showing displayField as the variable name">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>Component Properties</b></div>
+              <div class="properties-view"><div class="properties-list"><small>Properties</small><label>text <span>0</span></label><label>font <span>Segoe UI, 28</span></label><label>horizontalAlignment <span>RIGHT</span></label><label>editable <span>false</span></label><label class="selected">Variable Name <b>displayField</b></label></div><div class="property-tip">Meaningful names make event code readable.</div></div>
+            </div>
+            <figcaption><strong>Step 6 — Configure properties</strong><span>Set the display to right alignment, make it non-editable, and rename every important component.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="NetBeans Events menu showing actionPerformed selected">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>Button Event</b></div>
+              <div class="event-visual"><div class="button-preview">7</div><div class="event-menu"><span>Events</span><span>Action</span><span class="selected">actionPerformed</span></div><div class="event-arrow">→</div><div class="handler-name">sevenButtonActionPerformed</div></div>
+            </div>
+            <figcaption><strong>Step 7 — Create button events</strong><span>Double-click a button or select <b>Events → Action → actionPerformed</b>.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="NetBeans Source view showing a number button event handler">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>CalculatorFrame.java — Source</b></div>
+              <div class="editor-visual"><span><em>142</em> private void sevenButtonActionPerformed(...) {</span><span class="selected"><em>143</em> &nbsp;&nbsp;appendDigit("7");</span><span><em>144</em> }</span><span><em>145</em></span><span><em>146</em> private void addButtonActionPerformed(...) {</span><span><em>147</em> &nbsp;&nbsp;chooseOperator("+");</span><span><em>148</em> }</span></div>
+            </div>
+            <figcaption><strong>Step 8 — Call reusable methods</strong><span>Keep handlers short. Let shared methods perform repeated calculator tasks.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="Running calculator window with 15 plus 27 equaling 42">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>Simple Calculator — Running</b></div>
+              <div class="run-visual"><div class="run-calculator"><div class="run-display"><small>15 + 27</small><b>42</b></div><div class="run-keys"><span>C</span><span>7</span><span>8</span><span>9</span><span>+</span><span>4</span><span>5</span><span>6</span><span>−</span><span>1</span><span>2</span><span>3</span><span>=</span></div></div></div>
+            </div>
+            <figcaption><strong>Step 9 — Run and observe</strong><span>Press <kbd>F6</kbd>. Confirm that the window opens, the display is readable, and each button responds.</span></figcaption>
+          </figure>
+
+          <figure class="picture-card">
+            <div class="mock-screen" role="img" aria-label="NetBeans Output window showing a successful build">
+              <div class="mock-titlebar"><i></i><i></i><i></i><b>Output — SimpleCalculator</b></div>
+              <div class="output-visual"><span>ant -f C:\JavaProjects\SimpleCalculator run</span><span>init:</span><span>compile:</span><span>run:</span><strong>BUILD SUCCESSFUL</strong><small>Total time: 2 seconds</small></div>
+            </div>
+            <figcaption><strong>Step 10 — Check the output</strong><span>Review the Output window. A successful build does not guarantee correct calculations, so functional testing is still required.</span></figcaption>
+          </figure>
+        </div>
+
+        <aside class="callout"><strong>Important classroom reminder:</strong> NetBeans-generated code inside <code>initComponents()</code> may be guarded. Modify the form through Design view and place custom logic in methods or event handlers outside guarded sections.</aside>
+      </section>
+
+      <section class="lesson-section" id="validation">
+        <p class="section-label">Topic 10</p>
+        <h2>Apply input validation and safe error handling</h2>
+        <p class="section-intro">A professional program does not assume that every action is valid. It prevents predictable errors and communicates clearly when an operation cannot be completed.</p>
+
+        <div class="validation-grid">
+          <article><span>01</span><h3>Multiple decimal points</h3><p>Add a decimal only when the current display does not already contain <code>.</code>.</p></article>
+          <article><span>02</span><h3>Division by zero</h3><p>Stop the calculation and display a warning when the second operand is zero.</p></article>
+          <article><span>03</span><h3>Missing operator</h3><p>Do not evaluate two numbers until the user has selected a valid operation.</p></article>
+          <article><span>04</span><h3>Invalid numeric text</h3><p>Use <code>try-catch</code> when converting display text if manual input is allowed.</p></article>
+          <article><span>05</span><h3>Long results</h3><p>Format unnecessary trailing zeros and consider limiting excessive decimal places.</p></article>
+          <article><span>06</span><h3>Recoverable state</h3><p>After an error, keep the window open and allow the learner to clear or correct the entry.</p></article>
+        </div>
+
+        <div class="code-block">
+          <div class="code-title"><span>Decimal-point validation</span><small>Lecture excerpt</small></div>
+          <pre><code>private void appendDecimalPoint() {
+    if (startNewNumber) {
+        displayField.setText("0.");
+        startNewNumber = false;
+    } else if (!displayField.getText().contains(".")) {
+        displayField.setText(displayField.getText() + ".");
+    }
+}</code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-title"><span>Clear calculator state</span><small>Lecture excerpt</small></div>
+          <pre><code>private void clearCalculator() {
+    firstNumber = 0.0;
+    operator = "";
+    startNewNumber = true;
+    displayField.setText("0");
+}</code></pre>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="testing">
+        <p class="section-label">Topic 11</p>
+        <h2>Test the calculator systematically</h2>
+        <p class="section-intro">Testing should compare an expected result with the actual result. A single successful calculation is not sufficient evidence that the program is correct.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Test</th><th>Input sequence</th><th>Expected result</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td>TC-01</td><td><code>12 + 8 =</code></td><td>20</td><td>Verify addition.</td></tr>
+              <tr><td>TC-02</td><td><code>25 - 40 =</code></td><td>-15</td><td>Verify a negative result.</td></tr>
+              <tr><td>TC-03</td><td><code>6 × 7 =</code></td><td>42</td><td>Verify multiplication.</td></tr>
+              <tr><td>TC-04</td><td><code>81 ÷ 9 =</code></td><td>9</td><td>Verify division.</td></tr>
+              <tr><td>TC-05</td><td><code>5 ÷ 0 =</code></td><td>Error message</td><td>Verify division-by-zero protection.</td></tr>
+              <tr><td>TC-06</td><td><code>1.5 + 2.25 =</code></td><td>3.75</td><td>Verify decimal calculation.</td></tr>
+              <tr><td>TC-07</td><td><code>3 . . 5</code></td><td>3.5</td><td>Reject a duplicate decimal point.</td></tr>
+              <tr><td>TC-08</td><td><code>9 + 1 C</code></td><td>0</td><td>Verify a complete reset.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="test-cycle">
+          <article><b>1</b><h3>Arrange</h3><p>Prepare the starting state and input sequence.</p></article>
+          <article><b>2</b><h3>Act</h3><p>Perform the exact clicks listed in the test case.</p></article>
+          <article><b>3</b><h3>Assert</h3><p>Compare the displayed value with the expected result.</p></article>
+          <article><b>4</b><h3>Record</h3><p>Mark the test as passed or document the observed defect.</p></article>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="errors">
+        <p class="section-label">Topic 12</p>
+        <h2>Common errors and professional corrections</h2>
+        <div class="accordion">
+          <details><summary>The button does not respond</summary><p>Confirm that the correct <code>actionPerformed</code> event is connected and that the handler calls the intended method.</p></details>
+          <details><summary>Numbers join incorrectly after an operator</summary><p>Set <code>startNewNumber</code> to <code>true</code> after storing the operator so the next digit replaces the previous display.</p></details>
+          <details><summary>NetBeans reports “cannot find symbol”</summary><p>Check spelling, capitalization, scope, and whether the component or variable was renamed consistently.</p></details>
+          <details><summary>The program shows NumberFormatException</summary><p>The display contains text that cannot be converted to a number. Validate the display before calling <code>Double.parseDouble()</code>.</p></details>
+          <details><summary>The interface looks uneven</summary><p>Use a layout manager and consistent preferred sizes. Avoid placing every component with fixed coordinates.</p></details>
+          <details><summary>The result contains an unnecessary .0</summary><p>Use a formatting method that displays whole-number results without a decimal portion.</p></details>
+          <details><summary>The JFrame opens in an unexpected location</summary><p>Call <code>setLocationRelativeTo(null)</code> after <code>pack()</code> so the window appears centered.</p></details>
+          <details><summary>Generated code cannot be edited</summary><p>Return to Design view for guarded components. Place custom methods outside <code>initComponents()</code>.</p></details>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="discussion">
+        <p class="section-label">Topic 13</p>
+        <h2>Teacher discussion guide</h2>
+        <p class="section-intro">Use these prompts to move beyond copying code and develop students’ understanding of program design.</p>
+
+        <div class="discussion-grid">
+          <article><span>Question 1</span><h3>Why is state necessary?</h3><p>Guide students to explain why the first number and operator must remain available while the second number is entered.</p></article>
+          <article><span>Question 2</span><h3>Why use methods?</h3><p>Compare ten repeated digit handlers with one reusable <code>appendDigit()</code> method.</p></article>
+          <article><span>Question 3</span><h3>Where should validation occur?</h3><p>Discuss preventing duplicate decimal points during entry versus detecting invalid input during calculation.</p></article>
+          <article><span>Question 4</span><h3>What makes an interface usable?</h3><p>Invite students to identify readable text, predictable placement, feedback, contrast, and adequate button size.</p></article>
+          <article><span>Question 5</span><h3>What does testing prove?</h3><p>Explain why boundary and error cases are as important as ordinary calculations.</p></article>
+          <article><span>Question 6</span><h3>How can the project improve?</h3><p>Consider keyboard input, calculation history, percentages, memory buttons, and theme options as extensions.</p></article>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="activities">
+        <p class="section-label">Topic 14</p>
+        <h2>Classroom learning activities</h2>
+        <div class="activity-grid">
+          <article><span>Guided · 20 minutes</span><h3>Interface identification</h3><p>Label the JFrame, display field, digit buttons, operator buttons, and layout regions in Figure 1.</p><ul><li>Identify each component type</li><li>Suggest a variable name</li><li>State its responsibility</li></ul></article>
+          <article><span>Pair work · 30 minutes</span><h3>Trace the program state</h3><p>Trace <code>12 + 8 =</code> and record the display, first number, operator, and <code>startNewNumber</code> after every click.</p><ul><li>Complete a state table</li><li>Compare answers with a partner</li><li>Correct any incorrect transition</li></ul></article>
+          <article><span>Independent · 40 minutes</span><h3>Improve one feature</h3><p>Select one enhancement and explain its interface, logic, and required test cases.</p><ul><li>Backspace button</li><li>Positive/negative toggle</li><li>Calculation history</li></ul></article>
+        </div>
+
+        <div class="extension-box">
+          <div><p class="section-label">Extension topics</p><h3>For advanced learners</h3></div>
+          <ul><li>Use a shared <code>ActionListener</code> for all number buttons.</li><li>Add keyboard shortcuts with Swing key bindings.</li><li>Separate calculation logic into a testable class.</li><li>Apply <code>BigDecimal</code> when exact decimal arithmetic is required.</li><li>Add percentage, square root, or memory operations.</li><li>Create a calculation-history panel using <code>JList</code>.</li></ul>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="assessment">
+        <p class="section-label">Topic 15</p>
+        <h2>Assessment and performance criteria</h2>
+        <div class="assessment-layout">
+          <div class="quiz-card">
+            <h3>Knowledge check</h3>
+            <ol>
+              <li>What is the role of JFrame in this project?</li>
+              <li>Why should the display field be non-editable?</li>
+              <li>What information must be stored after an operator is selected?</li>
+              <li>Why is division by zero validated before calculating?</li>
+              <li>What is the purpose of <code>startNewNumber</code>?</li>
+              <li>How does a layout manager improve the interface?</li>
+            </ol>
+          </div>
+
+          <div class="rubric-card">
+            <h3>Suggested performance rubric</h3>
+            <div><span>Interface organization and readability</span><b>20%</b></div>
+            <div><span>Correct component and variable naming</span><b>15%</b></div>
+            <div><span>Arithmetic operations and program logic</span><b>30%</b></div>
+            <div><span>Validation and error handling</span><b>15%</b></div>
+            <div><span>Testing evidence and explanation</span><b>15%</b></div>
+            <div><span>Code presentation and professionalism</span><b>5%</b></div>
+          </div>
+        </div>
+
+        <aside class="teacher-note"><strong>Assessment advice:</strong> Evaluate both the finished behavior and the learner’s explanation. A student should be able to describe why the variables, methods, conditions, and event handlers are necessary.</aside>
+      </section>
+
+      <section class="lesson-section summary-section" id="summary">
+        <p class="section-label">Topic 16</p>
+        <h2>Lesson summary</h2>
+        <p>A Swing calculator is a compact project that combines interface design, event-driven programming, program state, methods, selection structures, numeric conversion, validation, and testing. The principal learning outcome is not the calculator alone—it is the learner’s ability to connect a visible user action to organized Java logic.</p>
+        <div class="summary-points">
+          <span>Plan before coding</span>
+          <span>Name components clearly</span>
+          <span>Keep handlers short</span>
+          <span>Validate predictable errors</span>
+          <span>Test expected and exceptional cases</span>
+        </div>
+        <a class="button primary" href="#top">Return to the top</a>
+      </section>
+
+      <footer class="lesson-footer">
+        <div><strong>Simple Calculator Using Java Swing JFrame</strong><p>Professional lecture and classroom module · HTML lesson only</p></div>
+        <a href="../index.html">Home</a>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

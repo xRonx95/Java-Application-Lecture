@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">Recommended JFrame properties</title><desc id="desc">An illustrated properties panel shows a professional JFrame title, close operation, resizable setting, and minimum size.</desc>
+  <rect width="900" height="520" rx="20" fill="#eef3f7"/>
+  <rect x="40" y="36" width="820" height="448" rx="16" fill="#fff" stroke="#b7c5d1"/>
+  <rect x="40" y="36" width="820" height="54" rx="16" fill="#102b4e"/><rect x="40" y="74" width="820" height="16" fill="#102b4e"/>
+  <text x="66" y="70" font-family="Segoe UI,Arial" font-size="17" font-weight="700" fill="#fff">Properties — StudentRecordForm [JFrame]</text>
+  <rect x="62" y="115" width="202" height="338" rx="10" fill="#f3f7fa" stroke="#cad6e0"/>
+  <text x="82" y="146" font-family="Segoe UI,Arial" font-size="13" font-weight="800" fill="#526173">COMPONENT TREE</text>
+  <g font-family="Segoe UI,Arial" font-size="14" fill="#34465a"><rect x="76" y="166" width="174" height="39" rx="5" fill="#dcecf6"/><text x="92" y="191" font-weight="700" fill="#173b66">▣ StudentRecordForm</text><text x="104" y="232">▢ pnlHeader</text><text x="104" y="266">▢ pnlStudentForm</text><text x="104" y="300">▢ pnlActions</text><text x="104" y="334">▢ scrStudentTable</text></g>
+  <rect x="290" y="115" width="544" height="338" rx="10" fill="#fff" stroke="#cad6e0"/>
+  <text x="314" y="149" font-family="Segoe UI,Arial" font-size="19" font-weight="800" fill="#102b4e">Window Properties</text>
+  <line x1="314" y1="164" x2="810" y2="164" stroke="#d4dde5"/>
+  <g font-family="Segoe UI,Arial" font-size="15">
+    <rect x="314" y="184" width="496" height="49" fill="#f7f9fb"/><text x="330" y="214" fill="#526173">title</text><text x="535" y="214" font-weight="700" fill="#173b66">Student Record System</text>
+    <rect x="314" y="233" width="496" height="49" fill="#fff"/><text x="330" y="263" fill="#526173">defaultCloseOperation</text><text x="535" y="263" font-weight="700" fill="#173b66">EXIT_ON_CLOSE</text>
+    <rect x="314" y="282" width="496" height="49" fill="#f7f9fb"/><text x="330" y="312" fill="#526173">resizable</text><rect x="535" y="296" width="18" height="18" rx="3" fill="#1d5f91"/><path d="M539 305l4 4 7-9" fill="none" stroke="#fff" stroke-width="2"/><text x="563" y="312" font-weight="700" fill="#173b66">true</text>
+    <rect x="314" y="331" width="496" height="49" fill="#fff"/><text x="330" y="361" fill="#526173">minimumSize</text><text x="535" y="361" font-weight="700" fill="#173b66">1100 × 680</text>
+    <rect x="314" y="380" width="496" height="49" fill="#f7f9fb"/><text x="330" y="410" fill="#526173">locationByPlatform</text><text x="535" y="410" font-weight="700" fill="#173b66">true</text>
+  </g>
+  <rect x="290" y="184" width="6" height="196" fill="#c99432"/>
+</svg>

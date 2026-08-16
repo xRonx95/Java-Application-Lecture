@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>JavaLearn | Apache NetBeans</title>
+
+  <!-- Separated stylesheet -->
+  <link rel="stylesheet" href="../css/index.css">
+
+  <!-- Styles for the topic cards below the Java Swing section -->
+  <style>
+    .topic-showcase {
+      color: #414141;
+      background: #ffffff;
+    }
+
+    .topic-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(28px, 7vw, 106px);
+      padding: 64px clamp(24px, 3.4vw, 52px);
+    }
+
+    .topic-row--featured {
+      background: #f1f1f1;
+    }
+
+    .topic-card {
+      min-width: 0;
+      min-height: 260px;
+      padding: 34px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .topic-row--featured .topic-card {
+      box-shadow: 0 3px 9px rgba(0, 0, 0, 0.18);
+    }
+
+    .topic-card h2 {
+      margin: 0 0 16px;
+      color: #4a4a4a;
+      font-size: clamp(2rem, 3vw, 2.55rem);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .topic-card p {
+      max-width: 340px;
+      min-height: 58px;
+      margin: 0 0 20px;
+      color: #333333;
+      font-size: 1.22rem;
+      line-height: 1.45;
+    }
+
+    .topic-link {
+      display: inline-flex;
+      min-height: 38px;
+      padding: 8px 17px;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: #555555;
+      border: 2px solid #555555;
+      font-size: 0.98rem;
+      line-height: 1;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background-color 0.2s ease, border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .topic-link:hover,
+    .topic-link:focus-visible {
+      background: #b3262d;
+      border-color: #b3262d;
+      transform: translateY(-2px);
+    }
+
+    .topic-link:focus-visible {
+      outline: 3px solid rgba(179, 38, 45, 0.3);
+      outline-offset: 3px;
+    }
+
+    .topic-row--simple {
+      padding-top: 70px;
+      padding-bottom: 70px;
+    }
+
+    .topic-row--simple .topic-card {
+      min-height: 205px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    /* Visual step-by-step guide for beginning NetBeans students */
+    .visual-guide {
+      padding: clamp(56px, 8vw, 96px) clamp(18px, 5vw, 72px);
+      color: #313131;
+      background: #f7f8fa;
+    }
+
+    .visual-guide__header {
+      max-width: 820px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .visual-guide__eyebrow {
+      margin: 0 0 10px;
+      color: #b3262d;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .visual-guide__header h2 {
+      margin: 0;
+      color: #292929;
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      font-weight: 600;
+      line-height: 1.12;
+    }
+
+    .visual-guide__intro {
+      max-width: 700px;
+      margin: 16px auto 0;
+      color: #555555;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.65;
+    }
+
+    .step-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .visual-step {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #dedede;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(31, 39, 51, 0.08);
+    }
+
+    .visual-step__picture {
+      padding: 22px;
+      background: linear-gradient(145deg, #edf2f7 0%, #dce5ee 100%);
+      border-bottom: 1px solid #dedede;
+    }
+
+    .visual-step__picture svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 7px 18px rgba(25, 38, 51, 0.18);
+    }
+
+    .visual-step__body {
+      position: relative;
+      min-height: 145px;
+      padding: 28px 28px 28px 92px;
+    }
+
+    .visual-step__number {
+      position: absolute;
+      top: 27px;
+      left: 28px;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      background: #b3262d;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      font-weight: 800;
+      box-shadow: 0 5px 12px rgba(179, 38, 45, 0.25);
+    }
+
+    .visual-step h3 {
+      margin: 0 0 9px;
+      color: #292929;
+      font-size: clamp(1.3rem, 2vw, 1.6rem);
+      line-height: 1.25;
+    }
+
+    .visual-step p {
+      margin: 0;
+      color: #555555;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .visual-step strong {
+      color: #9d2026;
+    }
+
+    .visual-guide__tip {
+      max-width: 900px;
+      margin: 34px auto 0;
+      padding: 18px 22px;
+      color: #3d3d3d;
+      background: #fff4d8;
+      border-left: 5px solid #e0a400;
+      border-radius: 8px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .visual-guide__tip strong {
+      color: #744f00;
+    }
+
+    @media (max-width: 900px) {
+      .topic-row {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding: 40px 24px;
+      }
+
+      .topic-card,
+      .topic-row--simple .topic-card {
+        min-height: 0;
+        padding: 36px 24px;
+      }
+
+      .topic-card p {
+        min-height: 0;
+      }
+
+      .step-grid {
+        grid-template-columns: 1fr;
+        max-width: 680px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topic-row {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+
+      .topic-card h2 {
+        font-size: 2rem;
+      }
+
+      .topic-card p {
+        font-size: 1.05rem;
+      }
+
+      .visual-guide {
+        padding-right: 14px;
+        padding-left: 14px;
+      }
+
+      .visual-guide__header {
+        margin-bottom: 28px;
+      }
+
+      .step-grid {
+        gap: 20px;
+      }
+
+      .visual-step__picture {
+        padding: 12px;
+      }
+
+      .visual-step__body {
+        min-height: 0;
+        padding: 24px 20px 24px 76px;
+      }
+
+      .visual-step__number {
+        top: 23px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="brand-bar">
+      <a class="brand" href="../index.html" aria-label="JavaLearn home">
+        <span class="brand-mark" aria-hidden="true">J</span>
+        <span>Java<span class="brand-accent">Learn</span></span>
+      </a>
+
+      <p class="brand-description">
+        JAVA APPLICATION DEVELOPMENT WITH APACHE NETBEANS<br>
+        Build desktop applications with Java and Apache NetBeans.
+      </p>
+    </div>
+
+    <div class="navigation-bar">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-controls="main-navigation"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-navigation" id="main-navigation" aria-label="Main navigation">
+        <div class="tutorial-item">
+          <button
+            class="tutorial-toggle"
+            type="button"
+            aria-controls="tutorial-menu"
+            aria-expanded="false"
+          >
+            Tutorials
+            <span class="tutorial-arrow" aria-hidden="true"></span>
+          </button>
+
+          <div class="tutorial-menu" id="tutorial-menu">
+            <button
+              class="tutorial-menu-close"
+              type="button"
+              aria-label="Close tutorial menu"
+            >&times;</button>
+
+            <div class="tutorial-column">
+              <section class="tutorial-group" aria-labelledby="java-basics-heading">
+                <h2 id="java-basics-heading">Java Basics</h2>
+                <div class="tutorial-links">
+                  <a href="../Java Basics/java-introduction.html">Java Introduction</a>
+                  <a href="../Java Basics/java-installation.html">Java Installation</a>
+                  <a href="../Java Basics/java-syntax.html">Java Syntax</a>
+                  <a href="../Java Basics/variables-data-types.html">Variables &amp; Data Types</a>
+                  <a href="../Java Basics/java-operators.html">Java Operators</a>
+                  <a href="../Java Basics/conditions-loops.html">Conditions &amp; Loops</a>
+                </div>
+              </section>
+
+              <section class="tutorial-group" aria-labelledby="oop-heading">
+                <h2 id="oop-heading">Object-Oriented Java</h2>
+                <div class="tutorial-links">
+                  <a href="../Object-Oriented Java/classes-objects.html">Classes &amp; Objects</a>
+                  <a href="../Object-Oriented Java/classes-inheritance.html">Inheritance</a>
+                  <a href="../Object-Oriented Java/classes-polymorphism.html">Polymorphism</a>
+                  <a href="../Object-Oriented Java/encapsulation.html">Encapsulation</a>
+                </div>
+              </section>
+            </div>
+
+            <div class="tutorial-column">
+              <section class="tutorial-group" aria-labelledby="netbeans-heading">
+                <h2 id="netbeans-heading">Apache NetBeans</h2>
+                <div class="tutorial-links">
+                  <a href="../Apache NetBeans/netbeans-overview.html">NetBeans Overview</a>
+                  <a href="../Apache NetBeans/create-java-project.html">Create a Java Project</a>
+                  <a href="../Apache NetBeans/packages-classes.html">Packages &amp; Classes</a>
+                  <a href="../Apache NetBeans/run-debug.html">Run &amp; Debug</a>
+                  <a href="../Apache NetBeans/build-jar-file.html">Build a JAR File</a>
+                </div>
+              </section>
+
+              <section class="tutorial-group" aria-labelledby="swing-heading">
+                <h2 id="swing-heading">Swing GUI</h2>
+                <div class="tutorial-links">
+                  <a href="../Swing GUI/swing-introduction.html">Swing Introduction</a>
+                  <a href="../Swing GUI/jframe-form.html">JFrame Form</a>
+                  <a href="../Swing GUI/labels-fields-buttons.html">Labels, Fields &amp; Buttons</a>
+                  <a href="../Swing GUI/button-events.html">Button Events</a>
+                  <a href="../Swing GUI/jtable.html">JTable</a>
+                </div>
+              </section>
+            </div>
+
+            <div class="tutorial-column">
+              <section class="tutorial-group" aria-labelledby="jdbc-heading">
+                <h2 id="jdbc-heading">Database &amp; JDBC</h2>
+                <div class="tutorial-links">
+                  <a href="../Database &amp; JDBC/database-setup.html">Database Setup</a>
+                  <a href="../Database &amp; JDBC/mysql-connector.html">MySQL Connector</a>
+                  <a href="../Database &amp; JDBC/jdbc-connection.html">JDBC Connection</a>
+                  <a href="../Database &amp; JDBC/insert-data.html">Insert Data</a>
+                  <a href="../Database &amp; JDBC/display-data.html">Display Data</a>
+                  <a href="../Database &amp; JDBC/update-delete.html">Update &amp; Delete</a>
+                </div>
+              </section>
+
+              <section class="tutorial-group" aria-labelledby="projects-heading">
+                <h2 id="projects-heading">Practice Projects</h2>
+                <div class="tutorial-links">
+                  <a href="../Practice Projects/calculator-project.html">Calculator</a>
+                  <a href="../Practice Projects/login-system-project.html">Login System</a>
+                  <a href="../Practice Projects/student-record-system.html">Student Record System</a>
+                  <a href="../Practice Projects/inventory-system.html">Inventory System</a>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <a href="#netbeans">NetBeans</a>
+        <a href="#swing">Swing GUI</a>
+        <a href="../Database &amp; JDBC/jdbc-connection.html">JDBC</a>
+        <a href="../Practice Projects/calculator-project.html">Projects</a>
+      </nav>
+
+      <a class="header-cta" href="#lessons">Start Learning</a>
+    </div>
+  </header>
+
+  <main class="learning-showcase">
+    <!-- Java section based on Picture 1 -->
+    <section class="learning-section learning-section--java" id="lessons">
+      <div class="learning-layout">
+        <div class="learning-copy">
+          <p class="learning-kicker">Start Programming</p>
+          <h1>Java</h1>
+          <p class="learning-description">
+            The language for building reliable desktop applications.
+          </p>
+          <div class="learning-actions">
+            <a class="learning-button learning-button--primary" href="../Java Basics/java-introduction.html">
+              Learn Java
+            </a>
+            <a class="learning-button" href="../Java Basics/java-syntax.html">Java Reference</a>
+          </div>
+        </div>
+
+        <article class="example-panel" aria-labelledby="java-example-heading">
+          <h3 id="java-example-heading">Java Example:</h3>
+          <pre class="example-code"><code><span class="syntax-keyword">public class</span> <span class="syntax-class">Main</span> {
+  <span class="syntax-keyword">public static void</span> main(String[] args) {
+    System.out.println(<span class="syntax-string">"Hello, Java!"</span>);
+  }
+}</code></pre>
+          <div class="example-panel-footer">
+            <button class="run-button" type="button" data-output="Hello, Java!">
+              Run Example
+            </button>
+            <p class="example-output" aria-live="polite"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Apache NetBeans section based on Picture 2 -->
+    <section class="learning-section learning-section--netbeans" id="netbeans">
+      <div class="learning-layout">
+        <article class="example-panel" aria-labelledby="workflow-heading">
+          <h3 id="workflow-heading">NetBeans Workflow:</h3>
+          <ol class="workflow-list">
+            <li>Open Apache NetBeans.</li>
+            <li>Create a new Java Application.</li>
+            <li>Name the project <strong>MyFirstApp</strong>.</li>
+            <li>Open <strong>Main.java</strong>.</li>
+            <li>Type the sample Java code.</li>
+            <li>Run the project and check the Output window.</li>
+          </ol>
+          <div class="example-panel-footer">
+            <a class="run-button" href="../Apache NetBeans/create-java-project.html">View Setup Guide</a>
+          </div>
+        </article>
+
+        <div class="learning-copy">
+          <p class="learning-kicker">Code With Confidence</p>
+          <h2><span>Apache</span> NetBeans</h2>
+          <p class="learning-description">
+            A complete development environment for writing, running, and debugging Java applications.
+          </p>
+          <div class="learning-actions">
+            <a class="learning-button learning-button--primary" href="../Apache NetBeans/netbeans-overview.html">
+              Learn NetBeans
+            </a>
+            <a class="learning-button" href="../Apache NetBeans/run-debug.html">IDE Shortcuts</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Picture guide: each beginner action is paired with a visual -->
+    <section class="visual-guide" aria-labelledby="visual-guide-heading">
+      <header class="visual-guide__header">
+        <p class="visual-guide__eyebrow">Follow the pictures</p>
+        <h2 id="visual-guide-heading">Create Your First Java Project</h2>
+        <p class="visual-guide__intro">
+          Complete the steps in order. Compare your NetBeans window with each picture
+          before moving to the next step.
+        </p>
+      </header>
+
+      <div class="step-grid">
+        <article class="visual-step">
+          <div class="visual-step__picture">
+            <svg viewBox="0 0 640 360" role="img" aria-labelledby="step1-title step1-desc">
+              <title id="step1-title">Open Apache NetBeans</title>
+              <desc id="step1-desc">A desktop screen showing the Apache NetBeans application icon being opened.</desc>
+              <rect width="640" height="360" fill="#1f3143"/>
+              <rect y="310" width="640" height="50" fill="#172433"/>
+              <circle cx="43" cy="335" r="15" fill="#b3262d"/>
+              <rect x="88" y="322" width="115" height="25" rx="5" fill="#354b60"/>
+              <rect x="225" y="322" width="115" height="25" rx="5" fill="#354b60"/>
+              <g transform="translate(243 66)">
+                <rect width="154" height="178" rx="22" fill="#ffffff"/>
+                <path d="M77 28 119 53v50l-42 25-42-25V53z" fill="#2879b9"/>
+                <path d="m77 28 42 25-42 25-42-25z" fill="#6bb6df"/>
+                <path d="M77 78v50l42-25V53z" fill="#145986"/>
+                <text x="77" y="156" fill="#243746" font-size="18" font-family="Arial, sans-serif" text-anchor="middle" font-weight="700">Apache NetBeans</text>
+              </g>
+              <path d="M407 241c20-7 34-24 38-47" fill="none" stroke="#ffd34e" stroke-width="8" stroke-linecap="round"/>
+              <path d="m435 196 11-13 5 17" fill="#ffd34e"/>
+            </svg>
+          </div>
+          <div class="visual-step__body">
+            <span class="visual-step__number" aria-hidden="true">1</span>
+            <h3>Open Apache NetBeans</h3>
+            <p>Double-click the <strong>Apache NetBeans</strong> icon. Wait until the Start Page appears.</p>
+          </div>
+        </article>
+
+        <article class="visual-step">
+          <div class="visual-step__picture">
+            <svg viewBox="0 0 640 360" role="img" aria-labelledby="step2-title step2-desc">
+              <title id="step2-title">Choose File then New Project</title>
+              <desc id="step2-desc">A NetBeans-style menu with File and New Project highlighted.</desc>
+              <rect width="640" height="360" fill="#e8edf2"/>
+              <rect width="640" height="36" fill="#314b62"/>
+              <circle cx="18" cy="18" r="7" fill="#ef6666"/><circle cx="40" cy="18" r="7" fill="#f1c24d"/><circle cx="62" cy="18" r="7" fill="#58ba70"/>
+              <rect y="36" width="640" height="40" fill="#ffffff"/>
+              <rect x="12" y="43" width="48" height="26" rx="4" fill="#cfe4f5"/>
+              <text x="36" y="61" fill="#1e3344" font-size="15" font-family="Arial, sans-serif" text-anchor="middle">File</text>
+              <text x="87" y="61" fill="#1e3344" font-size="15" font-family="Arial, sans-serif">Edit</text>
+              <text x="130" y="61" fill="#1e3344" font-size="15" font-family="Arial, sans-serif">View</text>
+              <rect x="12" y="75" width="225" height="180" rx="5" fill="#ffffff" stroke="#9dadba"/>
+              <rect x="19" y="84" width="211" height="35" rx="3" fill="#2879b9"/>
+              <text x="34" y="107" fill="#ffffff" font-size="16" font-family="Arial, sans-serif">New Project...</text>
+              <text x="34" y="146" fill="#314b62" font-size="16" font-family="Arial, sans-serif">New File...</text>
+              <line x1="25" y1="165" x2="224" y2="165" stroke="#d3dae0"/>
+              <text x="34" y="194" fill="#314b62" font-size="16" font-family="Arial, sans-serif">Open Project...</text>
+              <text x="34" y="230" fill="#314b62" font-size="16" font-family="Arial, sans-serif">Close Project</text>
+              <path d="M390 128H255" fill="none" stroke="#b3262d" stroke-width="8" stroke-linecap="round"/>
+              <path d="m263 113-20 15 20 15" fill="#b3262d"/>
+              <rect x="390" y="95" width="188" height="68" rx="12" fill="#fff4d8" stroke="#e0a400" stroke-width="2"/>
+              <text x="484" y="123" fill="#744f00" font-size="17" font-family="Arial, sans-serif" text-anchor="middle" font-weight="700">Click New Project</text>
+              <text x="484" y="146" fill="#744f00" font-size="14" font-family="Arial, sans-serif" text-anchor="middle">or press Ctrl + Shift + N</text>
+            </svg>
+          </div>
+          <div class="visual-step__body">
+            <span class="visual-step__number" aria-hidden="true">2</span>
+            <h3>Start a New Project</h3>
+            <p>From the top menu, click <strong>File</strong>, then choose <strong>New Project</strong>.</p>
+          </div>
+        </article>
+
+        <article class="visual-step">
+          <div class="visual-step__picture">
+            <svg viewBox="0 0 640 360" role="img" aria-labelledby="step3-title step3-desc">
+              <title id="step3-title">Select Java Application</title>
+              <desc id="step3-desc">The New Project window with Java with Ant and Java Application selected.</desc>
+              <rect width="640" height="360" fill="#dce4eb"/>
+              <rect x="45" y="34" width="550" height="292" rx="8" fill="#ffffff" stroke="#8799a8" stroke-width="2"/>
+              <rect x="45" y="34" width="550" height="42" rx="8" fill="#314b62"/>
+              <text x="66" y="61" fill="#ffffff" font-size="18" font-family="Arial, sans-serif" font-weight="700">New Project</text>
+              <text x="69" y="103" fill="#314b62" font-size="15" font-family="Arial, sans-serif" font-weight="700">Categories:</text>
+              <text x="319" y="103" fill="#314b62" font-size="15" font-family="Arial, sans-serif" font-weight="700">Projects:</text>
+              <rect x="68" y="115" width="218" height="135" fill="#f7f9fb" stroke="#b8c3cc"/>
+              <rect x="76" y="153" width="202" height="33" rx="3" fill="#2879b9"/>
+              <text x="89" y="176" fill="#ffffff" font-size="16" font-family="Arial, sans-serif">Java with Ant</text>
+              <text x="89" y="141" fill="#43596b" font-size="16" font-family="Arial, sans-serif">Java with Maven</text>
+              <text x="89" y="213" fill="#43596b" font-size="16" font-family="Arial, sans-serif">Java with Gradle</text>
+              <rect x="315" y="115" width="257" height="135" fill="#f7f9fb" stroke="#b8c3cc"/>
+              <rect x="323" y="125" width="241" height="36" rx="3" fill="#2879b9"/>
+              <text x="339" y="149" fill="#ffffff" font-size="16" font-family="Arial, sans-serif">Java Application</text>
+              <text x="339" y="190" fill="#43596b" font-size="16" font-family="Arial, sans-serif">Java Class Library</text>
+              <rect x="471" y="275" width="101" height="34" rx="5" fill="#b3262d"/>
+              <text x="522" y="297" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="700">Next &gt;</text>
+              <path d="M413 260c19 2 39 9 57 22" fill="none" stroke="#e0a400" stroke-width="7" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="visual-step__body">
+            <span class="visual-step__number" aria-hidden="true">3</span>
+            <h3>Select Java Application</h3>
+            <p>Choose <strong>Java with Ant</strong>, select <strong>Java Application</strong>, and click <strong>Next</strong>.</p>
+          </div>
+        </article>
+
+        <article class="visual-step">
+          <div class="visual-step__picture">
+            <svg viewBox="0 0 640 360" role="img" aria-labelledby="step4-title step4-desc">
+              <title id="step4-title">Name the project MyFirstApp</title>
+              <desc id="step4-desc">The project name field contains MyFirstApp and the Finish button is highlighted.</desc>
+              <rect width="640" height="360" fill="#dce4eb"/>
+              <rect x="55" y="34" width="530" height="292" rx="8" fill="#ffffff" stroke="#8799a8" stroke-width="2"/>
+              <rect x="55" y="34" width="530" height="42" rx="8" fill="#314b62"/>
+              <text x="76" y="61" fill="#ffffff" font-size="18" font-family="Arial, sans-serif" font-weight="700">New Java Application</text>
+              <text x="85" y="120" fill="#314b62" font-size="16" font-family="Arial, sans-serif">Project Name:</text>
+              <rect x="213" y="95" width="327" height="38" rx="4" fill="#ffffff" stroke="#2879b9" stroke-width="3"/>
+              <text x="229" y="120" fill="#1e3344" font-size="17" font-family="Arial, sans-serif" font-weight="700">MyFirstApp</text>
+              <text x="85" y="171" fill="#314b62" font-size="16" font-family="Arial, sans-serif">Project Location:</text>
+              <rect x="213" y="146" width="327" height="38" rx="4" fill="#f6f7f8" stroke="#acb9c3"/>
+              <text x="229" y="170" fill="#647684" font-size="14" font-family="Arial, sans-serif">Documents/NetBeansProjects</text>
+              <rect x="86" y="207" width="18" height="18" rx="3" fill="#2879b9"/>
+              <path d="m90 216 5 5 10-13" fill="none" stroke="#ffffff" stroke-width="3"/>
+              <text x="116" y="222" fill="#314b62" font-size="15" font-family="Arial, sans-serif">Create Main Class</text>
+              <rect x="460" y="271" width="80" height="34" rx="5" fill="#b3262d"/>
+              <text x="500" y="293" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="700">Finish</text>
+              <path d="M376 246c26 7 51 18 77 35" fill="none" stroke="#e0a400" stroke-width="7" stroke-linecap="round"/>
+              <path d="m443 271 20 16-25 1" fill="#e0a400"/>
+            </svg>
+          </div>
+          <div class="visual-step__body">
+            <span class="visual-step__number" aria-hidden="true">4</span>
+            <h3>Name the Project</h3>
+            <p>Enter <strong>MyFirstApp</strong> in Project Name. Keep Create Main Class checked, then click <strong>Finish</strong>.</p>
+          </div>
+        </article>
+
+        <article class="visual-step">
+          <div class="visual-step__picture">
+            <svg viewBox="0 0 640 360" role="img" aria-labelledby="step5-title step5-desc">
+              <title id="step5-title">Type Java code in Main.java</title>
+              <desc id="step5-desc">A NetBeans-style editor showing a Hello Java program inside Main.java.</desc>
+              <rect width="640" height="360" fill="#f4f6f8"/>
+              <rect width="640" height="38" fill="#314b62"/>
+              <text x="18" y="25" fill="#ffffff" font-size="16" font-family="Arial, sans-serif" font-weight="700">MyFirstApp - Apache NetBeans</text>
+              <rect y="38" width="170" height="322" fill="#e9eef2"/>
+              <text x="16" y="70" fill="#314b62" font-size="15" font-family="Arial, sans-serif" font-weight="700">Projects</text>
+              <text x="20" y="106" fill="#314b62" font-size="15" font-family="Arial, sans-serif">▾ MyFirstApp</text>
+              <text x="38" y="137" fill="#314b62" font-size="14" font-family="Arial, sans-serif">▾ Source Packages</text>
+              <rect x="48" y="148" width="112" height="30" rx="3" fill="#cfe4f5"/>
+              <text x="59" y="168" fill="#1e3344" font-size="14" font-family="Arial, sans-serif" font-weight="700">Main.java</text>
+              <rect x="170" y="38" width="470" height="38" fill="#dce4eb"/>
+              <rect x="184" y="45" width="112" height="31" fill="#ffffff"/>
+              <text x="199" y="66" fill="#1e3344" font-size="14" font-family="Arial, sans-serif">Main.java</text>
+              <rect x="170" y="76" width="470" height="284" fill="#ffffff"/>
+              <rect x="170" y="76" width="42" height="284" fill="#f1f3f5"/>
+              <g fill="#8799a8" font-size="14" font-family="monospace" text-anchor="end">
+                <text x="201" y="110">1</text><text x="201" y="136">2</text><text x="201" y="162">3</text><text x="201" y="188">4</text><text x="201" y="214">5</text>
+              </g>
+              <g font-size="15" font-family="monospace">
+                <text x="225" y="110" fill="#7a2db8">public class</text><text x="335" y="110" fill="#1f4e79">Main</text><text x="376" y="110" fill="#333333">{</text>
+                <text x="245" y="136" fill="#7a2db8">public static void</text><text x="390" y="136" fill="#1f4e79">main</text><text x="430" y="136" fill="#333333">(String[] args) {</text>
+                <text x="265" y="162" fill="#333333">System.out.println(</text><text x="441" y="162" fill="#19843b">"Hello, Java!"</text><text x="568" y="162" fill="#333333">);</text>
+                <text x="245" y="188" fill="#333333">}</text><text x="225" y="214" fill="#333333">}</text>
+              </g>
+              <rect x="218" y="91" width="380" height="135" rx="5" fill="none" stroke="#b3262d" stroke-width="3" stroke-dasharray="8 6"/>
+            </svg>
+          </div>
+          <div class="visual-step__body">
+            <span class="visual-step__number" aria-hidden="true">5</span>
+            <h3>Write the Java Code</h3>
+            <p>Open <strong>Main.java</strong> under Source Packages and type the sample “Hello, Java!” program.</p>
+          </div>
+        </article>
+
+        <article class="visual-step">
+          <div class="visual-step__picture">
+            <svg viewBox="0 0 640 360" role="img" aria-labelledby="step6-title step6-desc">
+              <title id="step6-title">Run the project and check the output</title>
+              <desc id="step6-desc">The green Run Project triangle is highlighted and the Output window displays Hello Java.</desc>
+              <rect width="640" height="360" fill="#f4f6f8"/>
+              <rect width="640" height="38" fill="#314b62"/>
+              <text x="18" y="25" fill="#ffffff" font-size="16" font-family="Arial, sans-serif" font-weight="700">MyFirstApp - Apache NetBeans</text>
+              <rect y="38" width="640" height="50" fill="#ffffff"/>
+              <circle cx="47" cy="63" r="18" fill="#239b56"/>
+              <path d="m42 53 15 10-15 10z" fill="#ffffff"/>
+              <text x="80" y="69" fill="#314b62" font-size="15" font-family="Arial, sans-serif" font-weight="700">Run Project</text>
+              <rect x="18" y="103" width="604" height="132" rx="6" fill="#ffffff" stroke="#b9c5ce"/>
+              <g font-size="15" font-family="monospace">
+                <text x="40" y="137" fill="#7a2db8">public static void</text><text x="186" y="137" fill="#1f4e79">main</text><text x="226" y="137" fill="#333333">(String[] args) {</text>
+                <text x="60" y="168" fill="#333333">System.out.println(</text><text x="236" y="168" fill="#19843b">"Hello, Java!"</text><text x="363" y="168" fill="#333333">);</text>
+                <text x="40" y="199" fill="#333333">}</text>
+              </g>
+              <rect x="18" y="250" width="604" height="90" rx="6" fill="#172433"/>
+              <text x="35" y="274" fill="#a7bac8" font-size="14" font-family="Arial, sans-serif" font-weight="700">Output - MyFirstApp</text>
+              <text x="35" y="307" fill="#72e08f" font-size="19" font-family="monospace">Hello, Java!</text>
+              <text x="35" y="329" fill="#a7bac8" font-size="13" font-family="monospace">BUILD SUCCESSFUL</text>
+              <path d="M185 65H88" fill="none" stroke="#e0a400" stroke-width="7" stroke-linecap="round"/>
+              <path d="m96 51-19 14 19 14" fill="#e0a400"/>
+            </svg>
+          </div>
+          <div class="visual-step__body">
+            <span class="visual-step__number" aria-hidden="true">6</span>
+            <h3>Run and Check the Output</h3>
+            <p>Click the green <strong>Run Project</strong> triangle. Confirm that <strong>Hello, Java!</strong> appears below.</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="visual-guide__tip">
+        <strong>Student tip:</strong> If your screen looks different, check the step number,
+        read the caption again, and make sure the previous step was completed before continuing.
+      </p>
+    </section>
+
+    <!-- Java Swing section based on Picture 3 -->
+    <section class="learning-section learning-section--swing" id="swing">
+      <div class="learning-layout">
+        <div class="learning-copy">
+          <p class="learning-kicker">Build Desktop Interfaces</p>
+          <h2>Java Swing</h2>
+          <p class="learning-description">
+            Create windows, buttons, forms, tables, and responsive desktop interfaces.
+          </p>
+          <div class="learning-actions">
+            <a class="learning-button learning-button--primary" href="Swing GUI/swing-introduction.html">
+              Learn Swing
+            </a>
+            <a class="learning-button" href="../Swing GUI/labels-fields-buttons.html">Component List</a>
+          </div>
+        </div>
+
+        <article class="example-panel" aria-labelledby="swing-example-heading">
+          <h3 id="swing-example-heading">Swing Example:</h3>
+          <pre class="example-code"><code><span class="syntax-keyword">import</span> javax.swing.*;
+
+JFrame frame = <span class="syntax-keyword">new</span> JFrame(<span class="syntax-string">"My App"</span>);
+JButton button = <span class="syntax-keyword">new</span> JButton(<span class="syntax-string">"Click Me"</span>);
+
+frame.add(button);
+frame.setSize(<span class="syntax-number">400</span>, <span class="syntax-number">250</span>);
+frame.setVisible(<span class="syntax-keyword">true</span>);</code></pre>
+          <div class="example-panel-footer">
+            <button
+              class="run-button"
+              type="button"
+              data-output="Swing window created: My App (400 × 250)"
+            >
+              Run Example
+            </button>
+            <p class="example-output" aria-live="polite"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Learning topic cards based on the supplied sample picture -->
+    <section class="topic-showcase" aria-label="Explore more Java lessons">
+      <div class="topic-row topic-row--featured">
+        <article class="topic-card">
+          <h2>Java Basics</h2>
+          <p>Learn Java syntax, variables, operators, conditions, and loops.</p>
+          <a class="topic-link" href="../Java Basics/java-introduction.html">Learn Java</a>
+        </article>
+
+        <article class="topic-card">
+          <h2>Apache NetBeans</h2>
+          <p>Build, run, and debug Java applications in a complete IDE.</p>
+          <a class="topic-link" href="Apache NetBeans/netbeans-overview.html">Learn NetBeans</a>
+        </article>
+
+        <article class="topic-card">
+          <h2>Java Swing</h2>
+          <p>Create desktop windows, forms, buttons, tables, and events.</p>
+          <a class="topic-link" href="Swing GUI/swing-introduction.html">Learn Swing</a>
+        </article>
+      </div>
+
+      <div class="topic-row topic-row--simple">
+        <article class="topic-card">
+          <h2>Object-Oriented Java</h2>
+          <p>Understand classes, objects, inheritance, and encapsulation.</p>
+          <a class="topic-link" href="Object-Oriented Java/classes-objects.html">Learn OOP</a>
+        </article>
+
+        <article class="topic-card">
+          <h2>Database &amp; JDBC</h2>
+          <p>Connect Java applications to MySQL and manage stored data.</p>
+          <a class="topic-link" href="Database & JDBC/database-setup.html">Learn JDBC</a>
+        </article>
+
+        <article class="topic-card">
+          <h2>Practice Projects</h2>
+          <p>Apply your skills by building useful desktop applications.</p>
+          <a class="topic-link" href="Practice Projects/calculator-project.html">View Projects</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mainNavigation = document.querySelector(".main-navigation");
+    const tutorialItem = document.querySelector(".tutorial-item");
+    const tutorialToggle = document.querySelector(".tutorial-toggle");
+    const tutorialClose = document.querySelector(".tutorial-menu-close");
+
+    function setTutorialMenu(open) {
+      tutorialItem.classList.toggle("is-open", open);
+      tutorialToggle.setAttribute("aria-expanded", String(open));
+    }
+
+    function closeNavigation() {
+      mainNavigation.classList.remove("is-open");
+      menuToggle.classList.remove("is-active");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation");
+      document.body.classList.remove("menu-open");
+      setTutorialMenu(false);
+    }
+
+    menuToggle.addEventListener("click", () => {
+      const willOpen = menuToggle.getAttribute("aria-expanded") !== "true";
+
+      mainNavigation.classList.toggle("is-open", willOpen);
+      menuToggle.classList.toggle("is-active", willOpen);
+      menuToggle.setAttribute("aria-expanded", String(willOpen));
+      menuToggle.setAttribute("aria-label", willOpen ? "Close navigation" : "Open navigation");
+      document.body.classList.toggle("menu-open", willOpen);
+
+      if (!willOpen) {
+        setTutorialMenu(false);
+      }
+    });
+
+    tutorialToggle.addEventListener("click", () => {
+      const willOpen = tutorialToggle.getAttribute("aria-expanded") !== "true";
+      setTutorialMenu(willOpen);
+    });
+
+    tutorialClose.addEventListener("click", () => {
+      setTutorialMenu(false);
+      tutorialToggle.focus();
+    });
+
+    mainNavigation.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeNavigation);
+    });
+
+    document.querySelectorAll(".run-button[data-output]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const output = button.parentElement.querySelector(".example-output");
+        output.textContent = `Output: ${button.dataset.output}`;
+        output.classList.add("is-visible");
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!tutorialItem.contains(event.target)) {
+        setTutorialMenu(false);
+      }
+
+      if (
+        window.innerWidth <= 980 &&
+        !mainNavigation.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeNavigation();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        const tutorialWasOpen = tutorialItem.classList.contains("is-open");
+        const navigationWasOpen = mainNavigation.classList.contains("is-open");
+
+        closeNavigation();
+
+        if (tutorialWasOpen) {
+          tutorialToggle.focus();
+        } else if (navigationWasOpen) {
+          menuToggle.focus();
+        }
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 980) {
+        mainNavigation.classList.remove("is-open");
+        menuToggle.classList.remove("is-active");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+        document.body.classList.remove("menu-open");
+        setTutorialMenu(false);
+      }
+    });
+  </script>
+</body>
+</html>

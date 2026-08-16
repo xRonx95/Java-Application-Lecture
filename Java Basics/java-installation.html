@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A beginner-friendly Java installation lesson and learning module for Windows.">
+    <title>Java Installation | Java Basics Learning Module</title>
+      <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+    <link rel="stylesheet" href="../css/Java Basics/java-installation.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to lesson content</a>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#top" aria-label="Java Basics home">
+                <span class="brand-mark" aria-hidden="true">J</span>
+                <span>
+                    <strong>Java Basics</strong>
+                    <small>Learning Module</small>
+                </span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="#overview">Overview</a>
+                <a href="#installation">Installation</a>
+                <a href="#activity">Activity</a>
+                <a class="nav-button" href="#quiz">Take the Quiz</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero" id="top">
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <p class="eyebrow">Java Basics · Lesson 1</p>
+                    <h1>Installing Java on Windows</h1>
+                    <p class="hero-text">
+                        Learn what the JDK does, install it correctly, configure your computer,
+                        and confirm that Java is ready for programming.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#overview">Start Lesson</a>
+                        <a class="button button-secondary" href="#teacher-guide">Teaching Guide</a>
+                    </div>
+                    <ul class="lesson-meta" aria-label="Lesson information">
+                        <li><span>⏱</span> 30–45 minutes</li>
+                        <li><span>▣</span> Beginner</li>
+                        <li><span>✓</span> Practical activity</li>
+                    </ul>
+                </div>
+
+                <div class="hero-visual" aria-label="Java source code becomes a running program">
+                    <div class="terminal-card">
+                        <div class="terminal-bar">
+                            <span></span><span></span><span></span>
+                            <p>Command Prompt</p>
+                        </div>
+                        <div class="terminal-content">
+                            <p><span class="prompt">C:\Users\Student&gt;</span> java -version</p>
+                            <p class="output">java version "25"</p>
+                            <p><span class="prompt">C:\Users\Student&gt;</span> javac -version</p>
+                            <p class="output">javac 25</p>
+                            <p class="success">✓ Java is ready!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-layout">
+            <aside class="lesson-sidebar" aria-label="Lesson contents">
+                <div class="sidebar-card">
+                    <p class="sidebar-title">In this lesson</p>
+                    <ol>
+                        <li><a href="#overview">Lesson overview</a></li>
+                        <li><a href="#java-tools">JDK, JRE, and JVM</a></li>
+                        <li><a href="#requirements">Requirements</a></li>
+                        <li><a href="#installation">Installation steps</a></li>
+                        <li><a href="#environment">Environment variables</a></li>
+                        <li><a href="#verification">Verify installation</a></li>
+                        <li><a href="#activity">First Java program</a></li>
+                        <li><a href="#troubleshooting">Troubleshooting</a></li>
+                        <li><a href="#quiz">Knowledge check</a></li>
+                    </ol>
+                </div>
+            </aside>
+
+            <article class="lesson-content">
+                <section class="content-section" id="overview">
+                    <div class="section-heading">
+                        <span class="section-number">01</span>
+                        <div>
+                            <p class="section-label">Lesson overview</p>
+                            <h2>What will you learn?</h2>
+                        </div>
+                    </div>
+
+                    <p>
+                        Before writing a Java program, your computer needs the Java Development Kit.
+                        This lesson focuses on Windows, but the main ideas also apply to macOS and Linux.
+                    </p>
+
+                    <div class="objective-grid">
+                        <div class="objective-card">
+                            <span class="card-icon" aria-hidden="true">1</span>
+                            <h3>Identify</h3>
+                            <p>Explain the roles of the JDK, JRE, and JVM.</p>
+                        </div>
+                        <div class="objective-card">
+                            <span class="card-icon" aria-hidden="true">2</span>
+                            <h3>Install</h3>
+                            <p>Install a Java Development Kit on Windows.</p>
+                        </div>
+                        <div class="objective-card">
+                            <span class="card-icon" aria-hidden="true">3</span>
+                            <h3>Configure</h3>
+                            <p>Set JAVA_HOME and update the system Path.</p>
+                        </div>
+                        <div class="objective-card">
+                            <span class="card-icon" aria-hidden="true">4</span>
+                            <h3>Verify</h3>
+                            <p>Compile and run a simple Java program.</p>
+                        </div>
+                    </div>
+
+                    <div class="teacher-note" id="teacher-guide">
+                        <div class="note-icon" aria-hidden="true">💡</div>
+                        <div>
+                            <h3>Teacher explanation</h3>
+                            <p>
+                                Start with this comparison: <strong>the JDK is the complete toolbox</strong>,
+                                <strong>the JRE supplies what a program needs to run</strong>, and
+                                <strong>the JVM is the engine that executes Java bytecode</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="java-tools">
+                    <div class="section-heading">
+                        <span class="section-number">02</span>
+                        <div>
+                            <p class="section-label">Core concepts</p>
+                            <h2>JDK, JRE, and JVM</h2>
+                        </div>
+                    </div>
+
+                    <div class="concept-stack" aria-label="Relationship among the JDK, JRE, and JVM">
+                        <div class="concept-layer jdk-layer">
+                            <div class="concept-title">
+                                <strong>JDK</strong>
+                                <span>Java Development Kit</span>
+                            </div>
+                            <p>Tools for developing Java programs, including <code>javac</code>, <code>java</code>, and documentation tools.</p>
+                            <div class="concept-layer jre-layer">
+                                <div class="concept-title">
+                                    <strong>JRE</strong>
+                                    <span>Java Runtime Environment</span>
+                                </div>
+                                <p>Runtime libraries and supporting files used when a Java application runs.</p>
+                                <div class="concept-layer jvm-layer">
+                                    <div class="concept-title">
+                                        <strong>JVM</strong>
+                                        <span>Java Virtual Machine</span>
+                                    </div>
+                                    <p>Executes Java bytecode on the current computer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="process-flow" aria-label="Java program execution process">
+                        <div class="flow-item"><strong>Hello.java</strong><span>Source code</span></div>
+                        <span class="flow-arrow" aria-hidden="true">→</span>
+                        <div class="flow-item"><strong>javac</strong><span>Compiler</span></div>
+                        <span class="flow-arrow" aria-hidden="true">→</span>
+                        <div class="flow-item"><strong>Hello.class</strong><span>Bytecode</span></div>
+                        <span class="flow-arrow" aria-hidden="true">→</span>
+                        <div class="flow-item"><strong>JVM</strong><span>Runs program</span></div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="requirements">
+                    <div class="section-heading">
+                        <span class="section-number">03</span>
+                        <div>
+                            <p class="section-label">Before you begin</p>
+                            <h2>Installation requirements</h2>
+                        </div>
+                    </div>
+
+                    <div class="checklist">
+                        <label><input type="checkbox"> A 64-bit Windows computer</label>
+                        <label><input type="checkbox"> Administrator permission to install software</label>
+                        <label><input type="checkbox"> A stable internet connection</label>
+                        <label><input type="checkbox"> At least 1 GB of available storage</label>
+                        <label><input type="checkbox"> A web browser and Command Prompt</label>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Which version should the class use?</strong>
+                        <p>
+                            Use the JDK version required by your teacher or school. For a new class,
+                            an LTS release such as JDK 21 or JDK 25 is a practical choice. Every student
+                            should use the same major version whenever possible.
+                        </p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="installation">
+                    <div class="section-heading">
+                        <span class="section-number">04</span>
+                        <div>
+                            <p class="section-label">Guided procedure</p>
+                            <h2>Install the JDK on Windows</h2>
+                        </div>
+                    </div>
+
+                    <div class="steps">
+                        <section class="step-card">
+                            <div class="step-badge">Step 1</div>
+                            <div class="step-body">
+                                <h3>Open an official download page</h3>
+                                <p>Choose one trusted JDK provider. Do not download Java installers from unknown websites.</p>
+                                <div class="link-row">
+                                    <a href="https://www.oracle.com/java/technologies/downloads/" target="_blank" rel="noopener">Oracle JDK Downloads ↗</a>
+                                    <a href="https://adoptium.net/temurin/releases/" target="_blank" rel="noopener">Eclipse Temurin Downloads ↗</a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="step-card">
+                            <div class="step-badge">Step 2</div>
+                            <div class="step-body">
+                                <h3>Select the correct package</h3>
+                                <ul>
+                                    <li><strong>Operating system:</strong> Windows</li>
+                                    <li><strong>Architecture:</strong> x64 for most modern Windows computers</li>
+                                    <li><strong>Package:</strong> JDK installer (<code>.msi</code> or <code>.exe</code>)</li>
+                                </ul>
+                                <p class="small-note">To check your architecture: Settings → System → About → System type.</p>
+                            </div>
+                        </section>
+
+                        <section class="step-card">
+                            <div class="step-badge">Step 3</div>
+                            <div class="step-body">
+                                <h3>Run the installer</h3>
+                                <ol>
+                                    <li>Open the downloaded installer.</li>
+                                    <li>Select <strong>Yes</strong> if Windows asks for permission.</li>
+                                    <li>Choose <strong>Next</strong> and keep the default installation folder.</li>
+                                    <li>If available, enable <strong>Set JAVA_HOME</strong> and <strong>Add to PATH</strong>.</li>
+                                    <li>Select <strong>Install</strong>, then <strong>Finish</strong>.</li>
+                                </ol>
+                            </div>
+                        </section>
+
+                        <section class="step-card">
+                            <div class="step-badge">Step 4</div>
+                            <div class="step-body">
+                                <h3>Locate the installed JDK</h3>
+                                <p>The folder normally looks similar to one of these examples:</p>
+                                <pre><code>C:\Program Files\Java\jdk-25
+C:\Program Files\Eclipse Adoptium\jdk-25...</code></pre>
+                                <p class="small-note">Your exact folder name may be different because it includes the installed version.</p>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <section class="content-section" id="environment">
+                    <div class="section-heading">
+                        <span class="section-number">05</span>
+                        <div>
+                            <p class="section-label">System configuration</p>
+                            <h2>Set JAVA_HOME and Path</h2>
+                        </div>
+                    </div>
+
+                    <p>
+                        Some installers configure these automatically. If <code>java</code> or <code>javac</code>
+                        is not recognized, use the manual steps below.
+                    </p>
+
+                    <ol class="numbered-instructions">
+                        <li>
+                            <strong>Open Environment Variables.</strong>
+                            <span>Search Windows for “environment variables,” then select <em>Edit the system environment variables</em>.</span>
+                        </li>
+                        <li>
+                            <strong>Create JAVA_HOME.</strong>
+                            <span>Under System variables, select New. Enter <code>JAVA_HOME</code> as the name and your JDK folder as the value.</span>
+                        </li>
+                        <li>
+                            <strong>Update Path.</strong>
+                            <span>Edit the <code>Path</code> system variable and add <code>%JAVA_HOME%\bin</code>.</span>
+                        </li>
+                        <li>
+                            <strong>Save and reopen Command Prompt.</strong>
+                            <span>Select OK in every window. Close old terminals so they can load the new settings.</span>
+                        </li>
+                    </ol>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong>
+                        <p><code>JAVA_HOME</code> points to the JDK folder—not to its <code>bin</code> folder. The Path entry adds <code>\bin</code>.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="verification">
+                    <div class="section-heading">
+                        <span class="section-number">06</span>
+                        <div>
+                            <p class="section-label">Installation check</p>
+                            <h2>Verify Java in Command Prompt</h2>
+                        </div>
+                    </div>
+
+                    <p>Open a new Command Prompt and run each command separately:</p>
+
+                    <div class="code-card">
+                        <div class="code-title"><span>Command 1</span><strong>Check the Java launcher</strong></div>
+                        <pre><code>java -version</code></pre>
+                    </div>
+
+                    <div class="code-card">
+                        <div class="code-title"><span>Command 2</span><strong>Check the Java compiler</strong></div>
+                        <pre><code>javac -version</code></pre>
+                    </div>
+
+                    <div class="code-card">
+                        <div class="code-title"><span>Command 3</span><strong>Check JAVA_HOME</strong></div>
+                        <pre><code>echo %JAVA_HOME%</code></pre>
+                    </div>
+
+                    <div class="success-box">
+                        <span aria-hidden="true">✓</span>
+                        <div>
+                            <strong>Successful result</strong>
+                            <p>If the commands display version numbers and a valid JDK folder, Java is installed correctly.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="activity">
+                    <div class="section-heading">
+                        <span class="section-number">07</span>
+                        <div>
+                            <p class="section-label">Hands-on activity</p>
+                            <h2>Compile your first Java program</h2>
+                        </div>
+                    </div>
+
+                    <div class="activity-intro">
+                        <span aria-hidden="true">⌨</span>
+                        <div>
+                            <strong>Goal</strong>
+                            <p>Create, compile, and run a file named <code>HelloJava.java</code>.</p>
+                        </div>
+                    </div>
+
+                    <ol class="activity-steps">
+                        <li>Create a folder named <code>JavaPractice</code>.</li>
+                        <li>Open Notepad or VS Code and enter the code below.</li>
+                        <li>Save the file as <code>HelloJava.java</code>. The filename must match the class name.</li>
+                    </ol>
+
+                    <div class="code-card code-large">
+                        <div class="code-title"><span>HelloJava.java</span><strong>Java</strong></div>
+                        <pre><code><span class="code-keyword">public class</span> HelloJava {
+    <span class="code-keyword">public static void</span> main(String[] args) {
+        System.out.println(<span class="code-string">"Hello, Java!"</span>);
+    }
+}</code></pre>
+                    </div>
+
+                    <p>Open Command Prompt inside the folder, then compile and run the program:</p>
+
+                    <div class="command-sequence">
+                        <div><span>1</span><code>javac HelloJava.java</code><small>Creates HelloJava.class</small></div>
+                        <div><span>2</span><code>java HelloJava</code><small>Runs the compiled class</small></div>
+                    </div>
+
+                    <div class="expected-output">
+                        <strong>Expected output</strong>
+                        <pre><code>Hello, Java!</code></pre>
+                    </div>
+                </section>
+
+                <section class="content-section" id="troubleshooting">
+                    <div class="section-heading">
+                        <span class="section-number">08</span>
+                        <div>
+                            <p class="section-label">Common problems</p>
+                            <h2>Troubleshooting guide</h2>
+                        </div>
+                    </div>
+
+                    <div class="faq-list">
+                        <details>
+                            <summary>“java” is not recognized as a command.</summary>
+                            <p>Check that <code>%JAVA_HOME%\bin</code> is in Path. Save the change, close Command Prompt, and open a new one.</p>
+                        </details>
+                        <details>
+                            <summary><code>java -version</code> works, but <code>javac -version</code> does not.</summary>
+                            <p>You may have only a runtime or an incorrect Path entry. Install a full JDK and point <code>JAVA_HOME</code> to that JDK.</p>
+                        </details>
+                        <details>
+                            <summary>The wrong Java version appears.</summary>
+                            <p>Windows may find an older Java folder first. Move <code>%JAVA_HOME%\bin</code> above older Java entries in Path or remove obsolete entries.</p>
+                        </details>
+                        <details>
+                            <summary>“Could not find or load main class” appears.</summary>
+                            <p>Run the command from the folder containing the <code>.class</code> file. Use <code>java HelloJava</code> without <code>.class</code>.</p>
+                        </details>
+                        <details>
+                            <summary>The public class name and filename do not match.</summary>
+                            <p>A public class named <code>HelloJava</code> must be saved in a file named <code>HelloJava.java</code>, including matching capitalization.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section class="content-section" id="quiz">
+                    <div class="section-heading">
+                        <span class="section-number">09</span>
+                        <div>
+                            <p class="section-label">Knowledge check</p>
+                            <h2>Review questions</h2>
+                        </div>
+                    </div>
+
+                    <div class="quiz-list">
+                        <article class="quiz-card">
+                            <p><strong>1.</strong> Which component contains the compiler used to create Java programs?</p>
+                            <ol type="A"><li>JVM</li><li>JDK</li><li>Web browser</li><li>Command Prompt</li></ol>
+                            <details><summary>Show answer</summary><p><strong>B. JDK.</strong> It includes development tools such as <code>javac</code>.</p></details>
+                        </article>
+                        <article class="quiz-card">
+                            <p><strong>2.</strong> What does the <code>javac</code> command do?</p>
+                            <ol type="A"><li>Runs bytecode</li><li>Downloads Java</li><li>Compiles source code</li><li>Edits Path</li></ol>
+                            <details><summary>Show answer</summary><p><strong>C. Compiles source code.</strong> It turns a <code>.java</code> file into a <code>.class</code> file.</p></details>
+                        </article>
+                        <article class="quiz-card">
+                            <p><strong>3.</strong> What value should be added to the Windows Path?</p>
+                            <ol type="A"><li><code>%JAVA_HOME%\bin</code></li><li><code>HelloJava.java</code></li><li><code>C:\Windows</code></li><li><code>java -version</code></li></ol>
+                            <details><summary>Show answer</summary><p><strong>A. <code>%JAVA_HOME%\bin</code>.</strong> This lets Windows find Java command-line tools.</p></details>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="content-section module-summary">
+                    <p class="section-label">Lesson complete</p>
+                    <h2>Key takeaways</h2>
+                    <ul>
+                        <li>Install a full JDK to develop Java applications.</li>
+                        <li>The JDK includes the tools needed to compile and run Java code.</li>
+                        <li><code>JAVA_HOME</code> points to the JDK, while Path includes its <code>bin</code> folder.</li>
+                        <li>Use <code>java -version</code> and <code>javac -version</code> to verify the installation.</li>
+                        <li>A successful first program confirms the entire setup works.</li>
+                    </ul>
+                    <a class="button button-light" href="#top">Back to Top ↑</a>
+                </section>
+
+                <section class="content-section references" aria-labelledby="references-title">
+                    <h2 id="references-title">Official references</h2>
+                    <ul>
+                        <li><a href="https://docs.oracle.com/en/java/javase/25/install/installation-jdk-microsoft-windows-platforms.html" target="_blank" rel="noopener">Oracle: Installing the JDK on Microsoft Windows</a></li>
+                        <li><a href="https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html" target="_blank" rel="noopener">Oracle: The javac Command</a></li>
+                        <li><a href="https://adoptium.net/installation/windows" target="_blank" rel="noopener">Eclipse Adoptium: Windows MSI Installer Packages</a></li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <p><strong>Java Basics Learning Module</strong></p>
+            <p>Lesson 2: Java Installation</p>
+        </div>
+        <p>Designed for classroom discussion and independent study.</p>
+    </footer>
+</body>
+</html>

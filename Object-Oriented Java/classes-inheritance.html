@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A visual, classroom-ready Java lesson module about classes, objects, constructors, encapsulation, inheritance, interfaces, and polymorphism.">
+  <title>Classes, Objects &amp; Inheritance | Visual Java Lesson Module</title>
+        <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="stylesheet" href="../css/Object-Oriented Java/classes-inheritance.css">
+  <style>
+    /* Header navigation override: replaces the former lesson sidebar. */
+    html {
+      scroll-padding-top: 150px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .header-primary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 72px;
+      padding: 0.75rem clamp(1rem, 4vw, 4rem);
+    }
+
+    .lesson-header-nav {
+      width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      background: inherit;
+    }
+
+    .lesson-header-nav .sidebar-heading,
+    .lesson-header-nav .sidebar-card {
+      display: none;
+    }
+
+    .lesson-header-nav .topic-nav {
+      display: flex;
+      align-items: stretch;
+      gap: 0.25rem;
+      width: 100%;
+      padding: 0.55rem clamp(1rem, 4vw, 4rem);
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scrollbar-width: thin;
+    }
+
+    .lesson-header-nav .topic-nav a {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 42px;
+      padding: 0.6rem 0.85rem;
+      border-radius: 0.55rem;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .lesson-header-nav .topic-nav a span {
+      opacity: 0.72;
+      font-size: 0.75em;
+    }
+
+    .page-shell {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .lesson-main {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+
+    .menu-button {
+      display: none;
+    }
+
+    .nav-overlay {
+      display: none;
+    }
+
+    /* Additional visual lesson components. They use fallback colors so this
+       expanded module still works with the existing course stylesheet. */
+    .visual-title {
+      margin: 2rem 0 0.85rem;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+    }
+
+    .visual-gallery,
+    .picture-steps,
+    .practice-grid,
+    .mini-lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .lesson-figure,
+    .picture-step,
+    .practice-card,
+    .mini-lesson-card {
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid rgba(71, 85, 105, 0.18);
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .lesson-figure svg,
+    .picture-step svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #f8fafc;
+    }
+
+    .lesson-figure figcaption,
+    .picture-step figcaption {
+      padding: 0.9rem 1rem 1rem;
+      color: #334155;
+      line-height: 1.55;
+    }
+
+    .lesson-figure figcaption strong,
+    .picture-step figcaption strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: #0f172a;
+    }
+
+    .visual-gallery.single-column {
+      grid-template-columns: 1fr;
+    }
+
+    .step-number-badge {
+      display: inline-grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      margin-right: 0.45rem;
+      border-radius: 999px;
+      background: #7f1d1d;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .lesson-path {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin: 1.25rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .lesson-path li {
+      position: relative;
+      padding: 1rem 0.75rem;
+      border-radius: 0.85rem;
+      background: #fff7ed;
+      color: #7c2d12;
+      text-align: center;
+      font-weight: 750;
+    }
+
+    .lesson-path li:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -0.58rem;
+      z-index: 2;
+      transform: translateY(-50%);
+      color: #9a3412;
+    }
+
+    .checkpoint,
+    .try-box {
+      margin-top: 1.25rem;
+      padding: 1rem 1.1rem;
+      border-left: 5px solid #d97706;
+      border-radius: 0.75rem;
+      background: #fffbeb;
+      color: #78350f;
+    }
+
+    .checkpoint strong,
+    .try-box strong {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .picture-step figcaption p,
+    .practice-card p,
+    .mini-lesson-card p {
+      margin: 0.35rem 0 0;
+    }
+
+    .practice-card,
+    .mini-lesson-card {
+      padding: 1.1rem;
+    }
+
+    .practice-card small,
+    .mini-lesson-card small {
+      color: #9a3412;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .expected-output {
+      margin-top: 1.25rem;
+      padding: 1rem 1.1rem;
+      border-radius: 0.85rem;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .expected-output strong {
+      display: block;
+      margin-bottom: 0.55rem;
+      color: #fbbf24;
+    }
+
+    .expected-output pre {
+      margin: 0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    .topic-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+
+    .topic-chip-row span {
+      padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(127, 29, 29, 0.2);
+      border-radius: 999px;
+      background: #fff;
+      color: #7f1d1d;
+      font-weight: 700;
+    }
+
+    @media (max-width: 980px) {
+      .visual-gallery,
+      .picture-steps,
+      .practice-grid,
+      .mini-lesson-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lesson-path {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .lesson-path li:nth-child(3)::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      html {
+        scroll-padding-top: 74px;
+      }
+
+      .header-primary {
+        min-height: 64px;
+        padding: 0.65rem 1rem;
+      }
+
+      .brand small,
+      .course-label {
+        display: none;
+      }
+
+      .menu-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .lesson-header-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        max-height: calc(100vh - 64px);
+        overflow-y: auto;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.22);
+      }
+
+      .site-header.nav-open .lesson-header-nav {
+        display: block;
+      }
+
+      .lesson-header-nav .sidebar-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+      }
+
+      .lesson-header-nav .topic-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.25rem;
+        padding: 0 0.75rem 1rem;
+        overflow: visible;
+      }
+
+      .lesson-header-nav .topic-nav a {
+        width: 100%;
+        white-space: normal;
+      }
+
+      .nav-overlay {
+        position: fixed;
+        inset: 64px 0 0;
+        z-index: 999;
+        background: rgba(8, 15, 28, 0.55);
+        backdrop-filter: blur(2px);
+      }
+
+      .nav-overlay.is-visible {
+        display: block;
+      }
+
+      body.nav-locked {
+        overflow: hidden;
+      }
+
+      .visual-gallery,
+      .picture-steps,
+      .practice-grid,
+      .mini-lesson-grid,
+      .lesson-path {
+        grid-template-columns: 1fr;
+      }
+
+      .lesson-path li::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+
+  <header class="site-header">
+    <div class="header-primary">
+      <a class="brand" href="#overview" aria-label="Classes and Inheritance lesson home">
+        <span class="brand-mark" aria-hidden="true">CI</span>
+        <span><strong>Object-Oriented Programming</strong><small>Lesson Module 04</small></span>
+      </a>
+      <div class="header-actions">
+        <span class="course-label">JAVA FOUNDATIONS</span>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="lesson-navigation">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-text">Topics</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="lesson-header-nav" id="lesson-navigation" aria-label="Lesson topics">
+      <div class="sidebar-heading"><p>LESSON CONTENTS</p><span>18 topics</span></div>
+      <div class="topic-nav">
+        <a href="../index.html">Home</a>
+        <a class="active" href="#overview"><span>01</span> Overview</a>
+        <a href="#class-object"><span>02</span> Classes &amp; Objects</a>
+        <a href="#class-anatomy"><span>03</span> Anatomy of a Class</a>
+        <a href="#constructors"><span>04</span> Constructors &amp; <code>this</code></a>
+        <a href="#encapsulation"><span>05</span> Encapsulation</a>
+        <a href="#static-members"><span>06</span> Static vs Instance</a>
+        <a href="#inheritance"><span>07</span> Inheritance</a>
+        <a href="#inheritance-types"><span>08</span> Types of Inheritance</a>
+        <a href="#interfaces"><span>09</span> Interfaces</a>
+        <a href="#super-keyword"><span>10</span> The <code>super</code> Keyword</a>
+        <a href="#overriding"><span>11</span> Method Overriding</a>
+        <a href="#casting"><span>12</span> Polymorphism &amp; Casting</a>
+        <a href="#relationships"><span>13</span> IS-A vs HAS-A</a>
+        <a href="#advanced"><span>14</span> Abstract &amp; Final</a>
+        <a href="#common-mistakes"><span>15</span> Common Mistakes</a>
+        <a href="#build-run"><span>16</span> Write, Compile &amp; Run</a>
+        <a href="#activity"><span>17</span> Guided Activity</a>
+        <a href="#assessment"><span>18</span> Knowledge Check</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="page-shell">
+    <main class="lesson-main" id="lesson-content">
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> LESSON 04 · OBJECT-ORIENTED PROGRAMMING</div>
+          <h1>Classes &amp;<br><em>Inheritance</em></h1>
+          <p class="hero-lead">Learn how Java models real-world things, protects their data, and reuses behavior through parent and child classes.</p>
+          <div class="lesson-meta" aria-label="Lesson information">
+            <div><span aria-hidden="true">◷</span><strong>2–3 hours</strong><small>Suggested time</small></div>
+            <div><span aria-hidden="true">◎</span><strong>Beginner</strong><small>Difficulty</small></div>
+            <div><span aria-hidden="true">▣</span><strong>Java</strong><small>Language</small></div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Animal parent class with Dog and Cat child classes">
+          <div class="code-card parent-card"><small>PARENT CLASS</small><code><b>class</b> Animal {<br>&nbsp;&nbsp;void eat() { ... }<br>}</code></div>
+          <div class="tree-lines" aria-hidden="true"><i></i></div>
+          <div class="child-row">
+            <div class="code-card child"><span>D</span><code><b>Dog</b><small>inherits Animal</small></code></div>
+            <div class="code-card child cat"><span>C</span><code><b>Cat</b><small>inherits Animal</small></code></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="objectives content-section" aria-labelledby="objectives-title">
+        <div class="section-kicker">LEARNING TARGETS</div>
+        <h2 id="objectives-title">By the end of this lesson, you can…</h2>
+        <div class="objective-grid">
+          <article><span>01</span><h3>Define</h3><p>Explain classes, objects, fields, methods, and constructors in your own words.</p></article>
+          <article><span>02</span><h3>Build</h3><p>Create a Java class and instantiate working objects from it.</p></article>
+          <article><span>03</span><h3>Extend</h3><p>Build a child class that inherits accessible members from a parent.</p></article>
+          <article><span>04</span><h3>Differentiate</h3><p>Compare inheritance, composition, overloading, and overriding.</p></article>
+          <article><span>05</span><h3>Visualize</h3><p>Read simple UML-style diagrams and trace which method Java runs.</p></article>
+          <article><span>06</span><h3>Test</h3><p>Compile, run, debug, and improve a small multi-class Java program.</p></article>
+        </div>
+        <h3 class="visual-title">Your learning path</h3>
+        <ol class="lesson-path" aria-label="Lesson learning path">
+          <li>Meet a class</li><li>Create objects</li><li>Protect data</li><li>Build a child</li><li>Override behavior</li><li>Test a program</li>
+        </ol>
+      </section>
+
+      <section class="content-section" id="class-object">
+        <div class="section-number">01</div><div class="section-kicker">THE FOUNDATION</div>
+        <h2>Classes and objects</h2>
+        <p class="section-intro">A <strong>class</strong> is a blueprint that describes data and behavior. An <strong>object</strong> is a real instance created from that blueprint.</p>
+        <div class="analogy-panel">
+          <article><span>CLASS · BLUEPRINT</span><div class="blueprint-icon" aria-hidden="true">▱</div><h3>Smartphone design</h3><p>Defines the properties and actions every phone will have.</p></article>
+          <b aria-hidden="true">→</b>
+          <article><span>OBJECTS · INSTANCES</span><div class="objects-icon" aria-hidden="true"><i></i><i></i><i></i></div><h3>Actual smartphones</h3><p>Each object has its own color, storage, and battery level.</p></article>
+        </div>
+        <h3 class="visual-title">Picture it: one blueprint, many objects</h3>
+        <div class="visual-gallery">
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="blueprint-title blueprint-desc">
+              <title id="blueprint-title">A Car class blueprint</title><desc id="blueprint-desc">A blueprint lists fields color and speed plus methods drive and brake.</desc>
+              <rect width="480" height="260" fill="#eff6ff"/><rect x="70" y="35" width="340" height="190" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="4"/>
+              <path d="M95 82h290M95 136h290" stroke="#60a5fa" stroke-width="3"/><text x="95" y="68" font-size="25" font-weight="800" fill="#1e3a8a">CLASS: Car</text>
+              <text x="95" y="112" font-size="19" fill="#1e40af">fields: color, speed</text><text x="95" y="168" font-size="19" fill="#1e40af">methods: drive(), brake()</text>
+              <text x="95" y="201" font-size="15" fill="#475569">Defines what every Car object has and does</text>
+            </svg>
+            <figcaption><strong>1. The class is the plan</strong>It describes shared structure, but it is not yet a specific car.</figcaption>
+          </figure>
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="new-title new-desc">
+              <title id="new-title">The new keyword creates an object</title><desc id="new-desc">Java uses the Car blueprint and new to create a car object in memory.</desc>
+              <rect width="480" height="260" fill="#fff7ed"/><rect x="36" y="70" width="155" height="118" rx="12" fill="#ffedd5" stroke="#ea580c" stroke-width="4"/>
+              <text x="62" y="115" font-size="23" font-weight="800" fill="#9a3412">Car</text><text x="62" y="148" font-size="18" fill="#9a3412">blueprint</text>
+              <path d="M205 129h78" stroke="#c2410c" stroke-width="5" marker-end="url(#arrow-new)"/><defs><marker id="arrow-new" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0l10 5-10 5z" fill="#c2410c"/></marker></defs>
+              <rect x="300" y="52" width="145" height="154" rx="18" fill="#fff" stroke="#f97316" stroke-width="4"/><text x="323" y="91" font-size="18" font-weight="800" fill="#9a3412">new Car()</text><text x="323" y="130" font-size="17" fill="#7c2d12">color = blue</text><text x="323" y="160" font-size="17" fill="#7c2d12">speed = 0</text><text x="323" y="189" font-size="14" fill="#64748b">object in memory</text>
+            </svg>
+            <figcaption><strong>2. <code>new</code> builds an object</strong>The constructor supplies its starting values.</figcaption>
+          </figure>
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="objects-title objects-desc">
+              <title id="objects-title">Two independent Car objects</title><desc id="objects-desc">One blue car and one red car store different values.</desc>
+              <rect width="480" height="260" fill="#f0fdf4"/>
+              <g transform="translate(35 48)"><rect width="190" height="155" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="4"/><text x="20" y="37" font-size="21" font-weight="800" fill="#1e3a8a">carOne</text><text x="20" y="76" font-size="17" fill="#1e40af">color: Blue</text><text x="20" y="106" font-size="17" fill="#1e40af">speed: 40</text><circle cx="48" cy="136" r="11" fill="#1e3a8a"/><circle cx="142" cy="136" r="11" fill="#1e3a8a"/></g>
+              <g transform="translate(255 48)"><rect width="190" height="155" rx="16" fill="#fee2e2" stroke="#dc2626" stroke-width="4"/><text x="20" y="37" font-size="21" font-weight="800" fill="#7f1d1d">carTwo</text><text x="20" y="76" font-size="17" fill="#991b1b">color: Red</text><text x="20" y="106" font-size="17" fill="#991b1b">speed: 10</text><circle cx="48" cy="136" r="11" fill="#7f1d1d"/><circle cx="142" cy="136" r="11" fill="#7f1d1d"/></g>
+            </svg>
+            <figcaption><strong>3. Each object owns its state</strong>Changing <code>carOne.speed</code> does not change <code>carTwo.speed</code>.</figcaption>
+          </figure>
+        </div>
+        <div class="two-column">
+          <div><h3>Simple definition</h3><p>Think of a cookie cutter as the class and each cookie as an object. One blueprint can produce many independent objects.</p><div class="explain-box"><strong>Explain it this way</strong><p>“The class says what an object <em>has</em> and what it can <em>do</em>. The object holds the actual values.”</p></div></div>
+          <div class="code-window"><div class="code-head"><span>CarDemo.java</span><button class="copy-button" type="button">Copy</button></div><pre><code><span class="kw">class</span> <span class="type">Car</span> {
+  String color;
+
+  <span class="kw">void</span> drive() {
+    System.out.println(<span class="str">"Moving!"</span>);
+  }
+}
+
+<span class="type">Car</span> myCar = <span class="kw">new</span> <span class="type">Car</span>();
+myCar.color = <span class="str">"Blue"</span>;
+myCar.drive();</code></pre></div>
+        </div>
+      </section>
+
+      <section class="content-section tinted" id="class-anatomy">
+        <div class="section-number">02</div><div class="section-kicker">READING THE CODE</div>
+        <h2>Anatomy of a class</h2><p class="section-intro">A class normally combines state, setup, and behavior. Each part has a clear job.</p>
+        <div class="anatomy-layout">
+          <div class="code-window"><div class="code-head"><span>Student.java</span></div><pre><code><span class="kw">public class</span> <span class="type">Student</span> {
+  <span class="kw">private</span> String name;
+  <span class="kw">private int</span> score;
+
+  <span class="type">Student</span>(String name) {
+    <span class="kw">this</span>.name = name;
+  }
+
+  <span class="kw">void</span> study() { score++; }
+}</code></pre></div>
+          <div class="anatomy-notes">
+            <article><span>1</span><div><h3>Class declaration</h3><p>Names the new type and opens its code block.</p></div></article>
+            <article><span>2</span><div><h3>Fields</h3><p>Variables that store each object’s state.</p></div></article>
+            <article><span>3</span><div><h3>Constructor</h3><p>Runs when <code>new</code> creates an object and sets starting values.</p></div></article>
+            <article><span>4</span><div><h3>Methods</h3><p>Actions the object can perform or services it provides.</p></div></article>
+          </div>
+        </div>
+        <div class="concept-strip"><div><strong><code>this</code></strong><span>the current object</span></div><div><strong><code>new</code></strong><span>creates an object</span></div><div><strong>constructor</strong><span>same name as the class</span></div></div>
+      </section>
+
+      <section class="content-section" id="constructors">
+        <div class="section-number">03</div><div class="section-kicker">STARTING AN OBJECT</div>
+        <h2>Constructors, parameters, and <code>this</code></h2>
+        <p class="section-intro">A constructor runs once when an object is created. It gives the object a valid starting state.</p>
+        <div class="two-column">
+          <div class="code-window"><div class="code-head"><span>Book.java</span><button class="copy-button" type="button">Copy</button></div><pre><code><span class="kw">class</span> <span class="type">Book</span> {
+  <span class="kw">private</span> String title;
+  <span class="kw">private int</span> pages;
+
+  <span class="type">Book</span>(String title, <span class="kw">int</span> pages) {
+    <span class="kw">this</span>.title = title;
+    <span class="kw">this</span>.pages = pages;
+  }
+}
+
+Book novel = <span class="kw">new</span> Book(<span class="str">"Noli Me Tangere"</span>, 480);</code></pre></div>
+          <div>
+            <h3>Trace the values</h3>
+            <ol class="activity-steps">
+              <li><span>1</span><div><h3><code>new Book(...)</code></h3><p>Java reserves memory for one Book object.</p></div></li>
+              <li><span>2</span><div><h3>Arguments enter</h3><p><code>"Noli Me Tangere"</code> and <code>480</code> become parameter values.</p></div></li>
+              <li><span>3</span><div><h3><code>this</code> points to the object</h3><p>The values are copied into that object’s fields.</p></div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="mini-lesson-grid">
+          <article class="mini-lesson-card"><small>DEFAULT CONSTRUCTOR</small><h3>No parameters</h3><p>If you write no constructor, Java supplies a no-argument constructor. Once you write any constructor, that automatic one disappears.</p></article>
+          <article class="mini-lesson-card"><small>OVERLOADING</small><h3>More than one constructor</h3><p>A class can offer different parameter lists, such as <code>Book()</code> and <code>Book(String title)</code>.</p></article>
+          <article class="mini-lesson-card"><small>CONSTRUCTOR CHAINING</small><h3>Reuse setup with <code>this(...)</code></h3><p>One constructor can call another constructor in the same class as its first statement.</p></article>
+        </div>
+        <div class="checkpoint"><strong>Quick check</strong>Why does <code>this.title = title;</code> use <code>this</code>? The left side is the object’s field; the right side is the constructor parameter.</div>
+      </section>
+
+      <section class="content-section" id="encapsulation">
+        <div class="section-number">04</div><div class="section-kicker">PROTECTING DATA</div>
+        <h2>Encapsulation &amp; access modifiers</h2><p class="section-intro">Encapsulation keeps an object’s data safe by controlling how other code can read or change it.</p>
+        <div class="table-wrap"><table><thead><tr><th>Modifier</th><th>Same class</th><th>Same package</th><th>Child class</th><th>Everywhere</th></tr></thead><tbody>
+          <tr><td><code>private</code><small>Most restricted</small></td><td class="yes">Yes</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td><code>default</code><small>No keyword</small></td><td class="yes">Yes</td><td class="yes">Yes</td><td>Package only</td><td>—</td></tr>
+          <tr><td><code>protected</code><small>Inheritance-friendly</small></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td>—</td></tr>
+          <tr><td><code>public</code><small>Least restricted</small></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        </tbody></table></div>
+        <div class="two-column">
+          <div class="code-window"><div class="code-head"><span>BankAccount.java</span><button class="copy-button" type="button">Copy</button></div><pre><code><span class="kw">class</span> <span class="type">BankAccount</span> {
+  <span class="kw">private double</span> balance;
+
+  <span class="kw">public void</span> deposit(<span class="kw">double</span> amount) {
+    <span class="kw">if</span> (amount &gt; 0) balance += amount;
+  }
+
+  <span class="kw">public double</span> getBalance() {
+    <span class="kw">return</span> balance;
+  }
+}</code></pre></div>
+          <div><h3>Why not make every field public?</h3><p>If <code>balance</code> were public, any code could set an invalid value. A controlled method can check rules first.</p><div class="warning-box"><strong>Key idea</strong><p>Encapsulation is not simply “using getters and setters.” It means protecting valid object state.</p></div></div>
+        </div>
+      </section>
+
+      <section class="content-section tinted" id="static-members">
+        <div class="section-number">05</div><div class="section-kicker">SHARED OR INDIVIDUAL?</div>
+        <h2>Static members vs. instance members</h2>
+        <p class="section-intro">Instance members belong to each object. A <code>static</code> member belongs to the class and is shared by all objects.</p>
+        <div class="visual-gallery">
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="instance-title instance-desc">
+              <title id="instance-title">Separate instance fields</title><desc id="instance-desc">Two student objects each hold their own name.</desc>
+              <rect width="480" height="260" fill="#f8fafc"/><text x="32" y="42" font-size="22" font-weight="800" fill="#0f172a">INSTANCE: one copy per object</text>
+              <rect x="35" y="72" width="185" height="135" rx="16" fill="#e0f2fe" stroke="#0284c7" stroke-width="4"/><text x="58" y="111" font-size="21" font-weight="800" fill="#075985">studentA</text><text x="58" y="151" font-size="18" fill="#0c4a6e">name = "Ana"</text>
+              <rect x="260" y="72" width="185" height="135" rx="16" fill="#fce7f3" stroke="#db2777" stroke-width="4"/><text x="283" y="111" font-size="21" font-weight="800" fill="#831843">studentB</text><text x="283" y="151" font-size="18" fill="#831843">name = "Ben"</text>
+            </svg>
+            <figcaption><strong>Instance field</strong>Each student stores an independent <code>name</code>.</figcaption>
+          </figure>
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="static-title static-desc">
+              <title id="static-title">One shared static field</title><desc id="static-desc">Two student objects point to the same schoolName value.</desc>
+              <rect width="480" height="260" fill="#fff7ed"/><rect x="128" y="30" width="225" height="68" rx="13" fill="#fed7aa" stroke="#ea580c" stroke-width="4"/><text x="152" y="59" font-size="18" font-weight="800" fill="#9a3412">Student.schoolName</text><text x="152" y="84" font-size="16" fill="#7c2d12">"Rizal High School"</text>
+              <rect x="38" y="160" width="150" height="60" rx="12" fill="#fff" stroke="#64748b" stroke-width="3"/><text x="70" y="197" font-size="18" fill="#334155">studentA</text><rect x="292" y="160" width="150" height="60" rx="12" fill="#fff" stroke="#64748b" stroke-width="3"/><text x="324" y="197" font-size="18" fill="#334155">studentB</text>
+              <path d="M113 158L201 102M367 158L280 102" stroke="#c2410c" stroke-width="4"/>
+            </svg>
+            <figcaption><strong>Static field</strong>Every student shares one <code>schoolName</code> stored on the class.</figcaption>
+          </figure>
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="call-title call-desc">
+              <title id="call-title">How to access class and object members</title><desc id="call-desc">Static members use the class name while instance members use an object variable.</desc>
+              <rect width="480" height="260" fill="#f0fdf4"/><text x="38" y="45" font-size="20" font-weight="800" fill="#14532d">USE THE OWNER'S NAME</text>
+              <rect x="38" y="73" width="404" height="63" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/><text x="62" y="112" font-size="21" font-family="monospace" fill="#14532d">Student.schoolName</text>
+              <rect x="38" y="158" width="404" height="63" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/><text x="62" y="197" font-size="21" font-family="monospace" fill="#1e3a8a">studentA.getName()</text>
+            </svg>
+            <figcaption><strong>Access rule</strong>Prefer <code>ClassName.member</code> for static members and <code>object.member</code> for instance members.</figcaption>
+          </figure>
+        </div>
+        <div class="code-window wide-code"><div class="code-head"><span>StudentCounter.java</span><button class="copy-button" type="button">Copy</button></div><pre><code><span class="kw">class</span> <span class="type">Student</span> {
+  <span class="kw">static int</span> studentCount = 0; <span class="comment">// shared</span>
+  String name;                       <span class="comment">// per object</span>
+
+  <span class="type">Student</span>(String name) {
+    <span class="kw">this</span>.name = name;
+    studentCount++;
+  }
+}
+
+Student a = <span class="kw">new</span> Student(<span class="str">"Ana"</span>);
+Student b = <span class="kw">new</span> Student(<span class="str">"Ben"</span>);
+System.out.println(Student.studentCount); <span class="comment">// 2</span></code></pre></div>
+      </section>
+
+      <section class="content-section dark" id="inheritance">
+        <div class="section-number">06</div><div class="section-kicker">REUSING BEHAVIOR</div>
+        <h2>What is inheritance?</h2><p class="section-intro">Inheritance lets a new class reuse and specialize accessible members of an existing class. Java uses <code>extends</code>.</p>
+        <div class="inherit-stage"><article><span>PARENT / SUPERCLASS</span><h3>Animal</h3><p><code>name</code> · <code>eat()</code> · <code>sleep()</code></p></article><b>extends →</b><article><span>CHILD / SUBCLASS</span><h3>Dog</h3><p><code>breed</code> · <code>bark()</code> · <em>inherited members</em></p></article></div>
+        <div class="two-column code-pair">
+          <div class="code-window"><div class="code-head"><span>Animal.java</span></div><pre><code><span class="kw">class</span> <span class="type">Animal</span> {
+  String name;
+  <span class="kw">void</span> eat() {
+    System.out.println(name + <span class="str">" eats."</span>);
+  }
+}</code></pre></div>
+          <div class="code-window"><div class="code-head"><span>Dog.java</span><button class="copy-button" type="button">Copy</button></div><pre><code><span class="kw">class</span> <span class="type">Dog</span> <span class="kw">extends</span> <span class="type">Animal</span> {
+  <span class="kw">void</span> bark() {
+    System.out.println(<span class="str">"Woof!"</span>);
+  }
+}
+Dog pet = <span class="kw">new</span> Dog();
+pet.name = <span class="str">"Milo"</span>;
+pet.eat();  <span class="comment">// inherited</span>
+pet.bark(); <span class="comment">// own method</span></code></pre></div>
+        </div>
+        <div class="explain-box light"><strong>Explain it this way</strong><p>“A Dog can use Dog features and accessible Animal features. The child gains members, but the parent does not gain the child’s special members.”</p></div>
+      </section>
+
+      <section class="content-section" id="inheritance-types">
+        <div class="section-number">07</div><div class="section-kicker">CLASS HIERARCHIES</div>
+        <h2>Types of inheritance</h2><p class="section-intro">Java classes support single, multilevel, and hierarchical inheritance. Multiple inheritance of classes is not allowed.</p>
+        <div class="type-grid">
+          <article><div class="mini-tree"><span>A</span><i></i><span>B</span></div><div><small>SUPPORTED</small><h3>Single</h3><p>One child extends one direct parent.</p><code>Dog extends Animal</code></div></article>
+          <article><div class="mini-tree"><span>A</span><i></i><span>B</span><i></i><span>C</span></div><div><small>SUPPORTED</small><h3>Multilevel</h3><p>A child becomes a parent for another class.</p><code>Puppy extends Dog</code></div></article>
+          <article><div class="mini-tree branch"><span>A</span><i></i><div><span>B</span><span>C</span></div></div><div><small>SUPPORTED</small><h3>Hierarchical</h3><p>Several children share one parent.</p><code>Dog / Cat extend Animal</code></div></article>
+          <article><div class="mini-tree multiple"><div><span>A</span><span>B</span></div><i></i><span>C</span></div><div><small>INTERFACES ONLY</small><h3>Multiple</h3><p>A class cannot extend two classes, but it can implement interfaces.</p><code>C implements A, B</code></div></article>
+        </div>
+        <div class="note-box"><strong>Why can’t class C extend both A and B?</strong><p>If A and B contain the same method, Java would not know which implementation to inherit. This is called the diamond problem.</p></div>
+      </section>
+
+      <section class="content-section dark" id="interfaces">
+        <div class="section-number">08</div><div class="section-kicker">ADDING CAPABILITIES</div>
+        <h2>Interfaces and multiple capabilities</h2>
+        <p class="section-intro">An interface describes a capability a class promises to provide. A class may extend one class and implement several interfaces.</p>
+        <div class="visual-gallery">
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="interface-tree-title interface-tree-desc">
+              <title id="interface-tree-title">Duck class with parent and interfaces</title><desc id="interface-tree-desc">Duck extends Animal and implements Swimmable and Flyable.</desc>
+              <rect width="480" height="260" fill="#172554"/><rect x="170" y="22" width="140" height="52" rx="12" fill="#dbeafe"/><text x="204" y="55" font-size="19" font-weight="800" fill="#1e3a8a">Animal</text>
+              <rect x="165" y="107" width="150" height="60" rx="14" fill="#fef3c7" stroke="#f59e0b" stroke-width="4"/><text x="213" y="144" font-size="21" font-weight="800" fill="#78350f">Duck</text><path d="M240 107V76" stroke="#93c5fd" stroke-width="4"/>
+              <rect x="25" y="199" width="175" height="42" rx="10" fill="#cffafe"/><text x="47" y="226" font-size="16" font-weight="700" fill="#155e75">Swimmable</text><rect x="280" y="199" width="175" height="42" rx="10" fill="#dcfce7"/><text x="334" y="226" font-size="16" font-weight="700" fill="#166534">Flyable</text><path d="M196 198l26-29M284 198l-26-29" stroke="#fbbf24" stroke-width="4" stroke-dasharray="8 6"/>
+            </svg>
+            <figcaption><strong>One parent, many promises</strong><code>Duck</code> is an <code>Animal</code> and promises it can swim and fly.</figcaption>
+          </figure>
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="contract-title contract-desc">
+              <title id="contract-title">Interface as a contract</title><desc id="contract-desc">A checklist requires the swim and fly methods to be implemented.</desc>
+              <rect width="480" height="260" fill="#f8fafc"/><rect x="91" y="24" width="298" height="210" rx="16" fill="#fff" stroke="#64748b" stroke-width="4"/><text x="126" y="62" font-size="23" font-weight="800" fill="#0f172a">CAPABILITY CONTRACT</text>
+              <rect x="127" y="91" width="27" height="27" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/><path d="M133 104l7 7 15-17" fill="none" stroke="#15803d" stroke-width="4"/><text x="174" y="112" font-size="19" fill="#334155">write swim()</text>
+              <rect x="127" y="140" width="27" height="27" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/><path d="M133 153l7 7 15-17" fill="none" stroke="#15803d" stroke-width="4"/><text x="174" y="161" font-size="19" fill="#334155">write fly()</text><text x="127" y="207" font-size="15" fill="#64748b">The compiler checks the promise.</text>
+            </svg>
+            <figcaption><strong>The compiler checks the contract</strong>A concrete class must implement the interface’s abstract methods.</figcaption>
+          </figure>
+          <figure class="lesson-figure">
+            <svg viewBox="0 0 480 260" role="img" aria-labelledby="capability-title capability-desc">
+              <title id="capability-title">Different objects sharing one capability</title><desc id="capability-desc">Duck, fish, and robot can all be treated as Swimmable objects.</desc>
+              <rect width="480" height="260" fill="#ecfeff"/><rect x="145" y="25" width="190" height="54" rx="12" fill="#cffafe" stroke="#0891b2" stroke-width="4"/><text x="177" y="58" font-size="19" font-weight="800" fill="#155e75">Swimmable[]</text>
+              <path d="M240 80v40M240 120H90v35M240 120v35M240 120h150v35" stroke="#0891b2" stroke-width="4"/>
+              <g fill="#fff" stroke="#0e7490" stroke-width="3"><rect x="35" y="155" width="110" height="68" rx="13"/><rect x="185" y="155" width="110" height="68" rx="13"/><rect x="335" y="155" width="110" height="68" rx="13"/></g><g font-size="18" font-weight="700" fill="#164e63"><text x="68" y="196">Duck</text><text x="222" y="196">Fish</text><text x="366" y="196">Robot</text></g>
+            </svg>
+            <figcaption><strong>One capability, different classes</strong>Polymorphism lets a loop call <code>swim()</code> on every item.</figcaption>
+          </figure>
+        </div>
+        <div class="code-window wide-code"><div class="code-head"><span>Duck.java</span><button class="copy-button" type="button">Copy</button></div><pre><code><span class="kw">interface</span> <span class="type">Swimmable</span> { <span class="kw">void</span> swim(); }
+<span class="kw">interface</span> <span class="type">Flyable</span>   { <span class="kw">void</span> fly(); }
+
+<span class="kw">class</span> <span class="type">Animal</span> { <span class="kw">void</span> eat() { } }
+
+<span class="kw">class</span> <span class="type">Duck</span> <span class="kw">extends</span> <span class="type">Animal</span>
+           <span class="kw">implements</span> <span class="type">Swimmable</span>, <span class="type">Flyable</span> {
+  <span class="kw">public void</span> swim() { System.out.println(<span class="str">"Paddle"</span>); }
+  <span class="kw">public void</span> fly()  { System.out.println(<span class="str">"Flap"</span>); }
+}</code></pre></div>
+        <div class="try-box"><strong>Try it</strong>Create a <code>Robot</code> class that implements <code>Swimmable</code>. Its method can print <code>"Water mode activated"</code>.</div>
+      </section>
+
+      <section class="content-section tinted" id="super-keyword">
+        <div class="section-number">09</div><div class="section-kicker">CONNECTING TO THE PARENT</div>
+        <h2>The <code>super</code> keyword</h2><p class="section-intro"><code>super</code> refers to the immediate parent part of the current object. It has three common uses.</p>
+        <div class="super-grid">
+          <article><span>01</span><h3>Call a parent constructor</h3><code>super(name);</code><p>Must be the first statement in a child constructor.</p></article>
+          <article><span>02</span><h3>Call a parent method</h3><code>super.display();</code><p>Useful when the child also overrides that method.</p></article>
+          <article><span>03</span><h3>Access a parent field</h3><code>super.name</code><p>Distinguishes a hidden parent field from a child field.</p></article>
+        </div>
+        <div class="code-window wide-code"><div class="code-head"><span>Employee.java</span><button class="copy-button" type="button">Copy</button></div><pre><code><span class="kw">class</span> <span class="type">Person</span> {
+  String name;
+  <span class="type">Person</span>(String name) { <span class="kw">this</span>.name = name; }
+  <span class="kw">void</span> introduce() { System.out.println(<span class="str">"I am "</span> + name); }
+}
+
+<span class="kw">class</span> <span class="type">Employee</span> <span class="kw">extends</span> <span class="type">Person</span> {
+  String role;
+  <span class="type">Employee</span>(String name, String role) {
+    <span class="kw">super</span>(name); <span class="comment">// parent constructor</span>
+    <span class="kw">this</span>.role = role;
+  }
+  <span class="kw">void</span> introduce() {
+    <span class="kw">super</span>.introduce(); <span class="comment">// parent method</span>
+    System.out.println(<span class="str">"My role is "</span> + role);
+  }
+}</code></pre></div>
+      </section>
+
+      <section class="content-section" id="overriding">
+        <div class="section-number">10</div><div class="section-kicker">SPECIALIZING BEHAVIOR</div>
+        <h2>Method overriding &amp; polymorphism</h2><p class="section-intro">Overriding happens when a child provides its own version of an inherited method using the same signature.</p>
+        <div class="comparison-grid">
+          <article class="featured"><small>INHERITANCE</small><h3>Overriding</h3><p>A child replaces inherited behavior.</p><ul><li>Different classes</li><li>Same name</li><li>Same parameters</li><li>Runtime decision</li></ul></article>
+          <article><small>CONVENIENCE</small><h3>Overloading</h3><p>Methods share a name but accept different inputs.</p><ul><li>Usually same class</li><li>Same name</li><li>Different parameters</li><li>Compile-time decision</li></ul></article>
+        </div>
+        <div class="code-window wide-code"><div class="code-head"><span>PolymorphismDemo.java</span><button class="copy-button" type="button">Copy</button></div><pre><code><span class="kw">class</span> <span class="type">Animal</span> {
+  <span class="kw">void</span> sound() { System.out.println(<span class="str">"Animal sound"</span>); }
+}
+<span class="kw">class</span> <span class="type">Dog</span> <span class="kw">extends</span> <span class="type">Animal</span> {
+  <span class="annotation">@Override</span>
+  <span class="kw">void</span> sound() { System.out.println(<span class="str">"Woof"</span>); }
+}
+Animal pet = <span class="kw">new</span> Dog();
+pet.sound(); <span class="comment">// Woof — actual object decides</span></code></pre></div>
+        <div class="teacher-script"><span>ASK THE CLASS</span><p>“The variable type is <code>Animal</code>, so why does Java run the <code>Dog</code> method?”</p><small>Dynamic method dispatch chooses the method using the actual object at runtime.</small></div>
+      </section>
+
+      <section class="content-section tinted" id="casting">
+        <div class="section-number">11</div><div class="section-kicker">USING PARENT REFERENCES SAFELY</div>
+        <h2>Polymorphism, casting, and <code>instanceof</code></h2>
+        <p class="section-intro">A parent reference can point to a child object. It can call overridden methods, but child-only methods require a safe cast.</p>
+        <div class="two-column">
+          <div>
+            <h3>What the reference can see</h3>
+            <div class="visual-gallery single-column">
+              <figure class="lesson-figure">
+                <svg viewBox="0 0 600 290" role="img" aria-labelledby="reference-title reference-desc">
+                  <title id="reference-title">Animal reference pointing to Dog object</title><desc id="reference-desc">The variable sees Animal methods while the Dog object determines the overridden implementation.</desc>
+                  <rect width="600" height="290" fill="#f8fafc"/><rect x="35" y="83" width="205" height="110" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="4"/><text x="62" y="122" font-size="22" font-weight="800" fill="#1e3a8a">Animal pet</text><text x="62" y="157" font-size="17" fill="#1e40af">reference type</text>
+                  <path d="M246 138h92" stroke="#7c3aed" stroke-width="6" marker-end="url(#cast-arrow)"/><defs><marker id="cast-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0l10 5-10 5z" fill="#7c3aed"/></marker></defs>
+                  <rect x="355" y="45" width="210" height="190" rx="18" fill="#f3e8ff" stroke="#7c3aed" stroke-width="4"/><text x="383" y="84" font-size="23" font-weight="800" fill="#581c87">new Dog()</text><text x="383" y="120" font-size="17" fill="#6b21a8">eat() ✓</text><text x="383" y="150" font-size="17" fill="#6b21a8">sound() → "Woof"</text><text x="383" y="180" font-size="17" fill="#6b21a8">bark() child-only</text><text x="383" y="215" font-size="15" fill="#64748b">actual object</text>
+                </svg>
+                <figcaption><strong>Two types are involved</strong>The reference type controls what is callable; the actual object controls the overridden method result.</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="code-window"><div class="code-head"><span>SafeCasting.java</span><button class="copy-button" type="button">Copy</button></div><pre><code>Animal pet = <span class="kw">new</span> Dog();
+pet.sound(); <span class="comment">// allowed; prints Woof</span>
+
+<span class="comment">// pet.bark(); // compile error</span>
+
+<span class="kw">if</span> (pet <span class="kw">instanceof</span> Dog dog) {
+  dog.bark(); <span class="comment">// safe child access</span>
+}</code></pre></div>
+        </div>
+        <div class="comparison-grid">
+          <article class="featured"><small>UPCASTING</small><h3><code>Animal pet = new Dog();</code></h3><p>Automatic and safe. It lets different child objects share a parent reference type.</p></article>
+          <article><small>DOWNCASTING</small><h3><code>Dog dog = (Dog) pet;</code></h3><p>Explicit and potentially unsafe. Check the actual type with <code>instanceof</code> first.</p></article>
+        </div>
+        <div class="warning-box"><strong>Avoid <code>ClassCastException</code></strong><p>Never cast just because the compiler allows the syntax. Confirm the object really has that child type.</p></div>
+      </section>
+
+      <section class="content-section tinted" id="relationships">
+        <div class="section-number">12</div><div class="section-kicker">CHOOSING A DESIGN</div>
+        <h2>IS-A vs HAS-A</h2><p class="section-intro">Not every relationship should use inheritance. Use this sentence test before writing <code>extends</code>.</p>
+        <div class="relationship-grid">
+          <article><div class="relationship-title"><span>IS-A</span><small>Inheritance</small></div><h3>A Dog <em>is an</em> Animal.</h3><p>The child is a more specific version of the parent.</p><code>class Dog extends Animal</code><ul><li>Use for true specialization</li><li>Creates tighter coupling</li></ul></article>
+          <article class="has-a"><div class="relationship-title"><span>HAS-A</span><small>Composition</small></div><h3>A Car <em>has an</em> Engine.</h3><p>One object contains or uses another object.</p><code>class Car { Engine engine; }</code><ul><li>Use for parts and capabilities</li><li>Usually more flexible</li></ul></article>
+        </div>
+        <div class="decision-rule"><strong>Design rule</strong><p>Prefer composition when the relationship is “has-a,” when behavior may change independently, or when the inheritance sentence sounds unnatural.</p></div>
+      </section>
+
+      <section class="content-section" id="advanced">
+        <div class="section-number">13</div><div class="section-kicker">CONTROLLING THE HIERARCHY</div>
+        <h2>Abstract and final classes</h2><p class="section-intro">Java provides tools for requiring child behavior or stopping inheritance where it should end.</p>
+        <div class="advanced-grid">
+          <article><span>A</span><h3><code>abstract</code></h3><p>Cannot be instantiated directly. Children must implement its abstract methods.</p><code>abstract class Shape</code></article>
+          <article><span>F</span><h3><code>final</code> class</h3><p>Cannot be extended. Use it when the class design must remain unchanged.</p><code>final class Token</code></article>
+          <article><span>M</span><h3><code>final</code> method</h3><p>Is inherited but cannot be overridden by a child.</p><code>final void validate()</code></article>
+        </div>
+        <div class="code-window wide-code"><div class="code-head"><span>Shape.java</span></div><pre><code><span class="kw">abstract class</span> <span class="type">Shape</span> {
+  <span class="kw">abstract double</span> area();
+  <span class="kw">void</span> describe() { System.out.println(<span class="str">"I am a shape."</span>); }
+}
+<span class="kw">class</span> <span class="type">Circle</span> <span class="kw">extends</span> <span class="type">Shape</span> {
+  <span class="kw">double</span> radius;
+  <span class="annotation">@Override</span>
+  <span class="kw">double</span> area() { <span class="kw">return</span> Math.PI * radius * radius; }
+}</code></pre></div>
+      </section>
+
+      <section class="content-section dark compact" id="common-mistakes">
+        <div class="section-number">14</div><div class="section-kicker">DEBUGGING GUIDE</div><h2>Common mistakes</h2>
+        <div class="mistake-grid">
+          <article><span>01</span><div><h3>Accessing <code>private</code> fields</h3><p>Use an appropriate parent method instead.</p></div></article>
+          <article><span>02</span><div><h3>Forgetting <code>super(...)</code></h3><p>Call an available parent constructor.</p></div></article>
+          <article><span>03</span><div><h3>Confusing overload and override</h3><p>Changed parameters create an overload.</p></div></article>
+          <article><span>04</span><div><h3>Forcing inheritance</h3><p>Confirm a true IS-A relationship first.</p></div></article>
+          <article><span>05</span><div><h3>Wrong filename</h3><p>A public <code>Student</code> class must be saved as <code>Student.java</code>.</p></div></article>
+          <article><span>06</span><div><h3>Unsafe downcasting</h3><p>Use <code>instanceof</code> before treating a parent reference as a child.</p></div></article>
+        </div>
+      </section>
+
+      <section class="content-section" id="build-run">
+        <div class="section-number">15</div><div class="section-kicker">VISUAL STEP-BY-STEP</div>
+        <h2>Write, compile, and run your first class</h2>
+        <p class="section-intro">Follow the pictures in order. Complete the checkpoint under each step before moving forward.</p>
+        <div class="picture-steps">
+          <figure class="picture-step">
+            <svg viewBox="0 0 480 270" role="img" aria-labelledby="folder-title folder-desc">
+              <title id="folder-title">Create a Java project folder</title><desc id="folder-desc">A folder named SchoolApp is created and opened in the code editor.</desc>
+              <rect width="480" height="270" fill="#eff6ff"/><rect x="55" y="52" width="370" height="170" rx="18" fill="#fff" stroke="#2563eb" stroke-width="4"/><rect x="55" y="52" width="370" height="42" rx="15" fill="#dbeafe"/><circle cx="82" cy="73" r="7" fill="#ef4444"/><circle cx="104" cy="73" r="7" fill="#f59e0b"/><circle cx="126" cy="73" r="7" fill="#22c55e"/>
+              <path d="M91 126h105l17 19h176v52H91z" fill="#fef3c7" stroke="#d97706" stroke-width="3"/><text x="122" y="178" font-size="24" font-weight="800" fill="#92400e">SchoolApp</text>
+            </svg>
+            <figcaption><strong><span class="step-number-badge">1</span>Create a project folder</strong><p>Make a folder named <code>SchoolApp</code>, then open it in your editor.</p></figcaption>
+          </figure>
+          <figure class="picture-step">
+            <svg viewBox="0 0 480 270" role="img" aria-labelledby="file-title file-desc">
+              <title id="file-title">Create SchoolMember.java</title><desc id="file-desc">The editor file panel contains a new file named SchoolMember.java.</desc>
+              <rect width="480" height="270" fill="#f8fafc"/><rect x="45" y="32" width="390" height="205" rx="16" fill="#0f172a"/><rect x="45" y="32" width="125" height="205" rx="16" fill="#1e293b"/><text x="65" y="69" font-size="17" font-weight="800" fill="#cbd5e1">EXPLORER</text><rect x="57" y="91" width="104" height="36" rx="6" fill="#334155"/><text x="68" y="114" font-size="13" fill="#fbbf24">SchoolApp</text><text x="68" y="151" font-size="12" fill="#e2e8f0">☕ SchoolMember.java</text><text x="196" y="78" font-size="16" fill="#94a3b8">SchoolMember.java</text><text x="196" y="119" font-size="18" font-family="monospace" fill="#c084fc">public class</text><text x="328" y="119" font-size="18" font-family="monospace" fill="#f8fafc"> SchoolMember {</text><text x="196" y="154" font-size="18" font-family="monospace" fill="#f8fafc">}</text>
+            </svg>
+            <figcaption><strong><span class="step-number-badge">2</span>Create the parent file</strong><p>The filename must match the public class: <code>SchoolMember.java</code>.</p></figcaption>
+          </figure>
+          <figure class="picture-step">
+            <svg viewBox="0 0 480 270" role="img" aria-labelledby="code-title code-desc">
+              <title id="code-title">Type fields and a constructor</title><desc id="code-desc">The editor shows private fields and a constructor using this.</desc>
+              <rect width="480" height="270" fill="#fff7ed"/><rect x="32" y="25" width="416" height="220" rx="15" fill="#111827"/><g font-family="monospace" font-size="16"><text x="57" y="62" fill="#c084fc">class</text><text x="111" y="62" fill="#67e8f9"> SchoolMember {</text><text x="76" y="96" fill="#c084fc">private</text><text x="141" y="96" fill="#f8fafc"> String name;</text><text x="76" y="126" fill="#c084fc">private</text><text x="141" y="126" fill="#f8fafc"> int id;</text><text x="76" y="166" fill="#67e8f9">SchoolMember</text><text x="189" y="166" fill="#f8fafc">(String n, int i) {</text><text x="96" y="196" fill="#fbbf24">this</text><text x="131" y="196" fill="#f8fafc">.name = n;</text><text x="76" y="226" fill="#f8fafc">}</text></g>
+            </svg>
+            <figcaption><strong><span class="step-number-badge">3</span>Add state and setup</strong><p>Type the fields and constructor, then save the file.</p></figcaption>
+          </figure>
+          <figure class="picture-step">
+            <svg viewBox="0 0 480 270" role="img" aria-labelledby="child-file-title child-file-desc">
+              <title id="child-file-title">Create a Student child class</title><desc id="child-file-desc">Student extends SchoolMember and calls super in its constructor.</desc>
+              <rect width="480" height="270" fill="#f5f3ff"/><rect x="34" y="28" width="412" height="214" rx="15" fill="#1e1b4b"/><g font-family="monospace" font-size="16"><text x="56" y="66" fill="#c4b5fd">class</text><text x="104" y="66" fill="#67e8f9"> Student</text><text x="183" y="66" fill="#c4b5fd"> extends</text><text x="257" y="66" fill="#67e8f9"> SchoolMember {</text><text x="75" y="105" fill="#f8fafc">String course;</text><text x="75" y="145" fill="#67e8f9">Student</text><text x="137" y="145" fill="#f8fafc">(String n, int i, String c) {</text><text x="96" y="179" fill="#fbbf24">super</text><text x="141" y="179" fill="#f8fafc">(n, i);</text><text x="96" y="211" fill="#fbbf24">this</text><text x="131" y="211" fill="#f8fafc">.course = c;</text></g>
+            </svg>
+            <figcaption><strong><span class="step-number-badge">4</span>Add the child class</strong><p>Create <code>Student.java</code>, use <code>extends</code>, and call <code>super(...)</code>.</p></figcaption>
+          </figure>
+          <figure class="picture-step">
+            <svg viewBox="0 0 480 270" role="img" aria-labelledby="compile-title compile-desc">
+              <title id="compile-title">Compile the Java source files</title><desc id="compile-desc">The terminal runs javac SchoolMember.java Student.java Main.java.</desc>
+              <rect width="480" height="270" fill="#ecfdf5"/><rect x="37" y="34" width="406" height="202" rx="14" fill="#052e2b"/><rect x="37" y="34" width="406" height="40" rx="12" fill="#134e4a"/><text x="58" y="61" font-size="16" fill="#ccfbf1">TERMINAL</text><text x="58" y="112" font-size="16" font-family="monospace" fill="#5eead4">$ javac SchoolMember.java</text><text x="58" y="143" font-size="16" font-family="monospace" fill="#5eead4">  Student.java Main.java</text><rect x="58" y="171" width="245" height="38" rx="7" fill="#dcfce7"/><text x="76" y="196" font-size="16" font-weight="800" fill="#166534">✓ No errors: compiled</text>
+            </svg>
+            <figcaption><strong><span class="step-number-badge">5</span>Compile the files</strong><p>Open the terminal in the folder and run <code>javac SchoolMember.java Student.java Main.java</code>.</p></figcaption>
+          </figure>
+          <figure class="picture-step">
+            <svg viewBox="0 0 480 270" role="img" aria-labelledby="run-title run-desc">
+              <title id="run-title">Run the Main class and view output</title><desc id="run-desc">The terminal command java Main prints the student's name, id, and course.</desc>
+              <rect width="480" height="270" fill="#eff6ff"/><rect x="37" y="30" width="406" height="210" rx="14" fill="#0f172a"/><text x="59" y="67" font-size="16" font-family="monospace" fill="#93c5fd">$ java Main</text><text x="59" y="112" font-size="18" font-family="monospace" fill="#f8fafc">Name: Ana Cruz</text><text x="59" y="148" font-size="18" font-family="monospace" fill="#f8fafc">ID: 2026</text><text x="59" y="184" font-size="18" font-family="monospace" fill="#f8fafc">Course: BSIT</text><rect x="317" y="194" width="91" height="27" rx="14" fill="#166534"/><text x="337" y="213" font-size="13" font-weight="800" fill="#dcfce7">SUCCESS</text>
+            </svg>
+            <figcaption><strong><span class="step-number-badge">6</span>Run and verify</strong><p>Run <code>java Main</code>. Compare your output with the expected result.</p></figcaption>
+          </figure>
+        </div>
+        <div class="checkpoint"><strong>If the terminal says “javac is not recognized”</strong>Install a JDK, reopen the terminal, then check with <code>java -version</code> and <code>javac -version</code>.</div>
+      </section>
+
+      <section class="content-section" id="activity">
+        <div class="section-number">16</div><div class="section-kicker">GUIDED PRACTICE · 30–40 MINUTES</div>
+        <h2>Build a school member hierarchy</h2><p class="section-intro">Run the program after each step so errors stay small and easy to find.</p>
+        <div class="activity-layout">
+          <ol class="activity-steps">
+            <li><span>1</span><div><h3>Create <code>SchoolMember</code></h3><p>Add private fields <code>name</code> and <code>id</code>, a constructor, getters, and <code>displayInfo()</code>.</p></div></li>
+            <li><span>2</span><div><h3>Create <code>Student</code></h3><p>Extend <code>SchoolMember</code>. Add <code>course</code> and call the parent constructor.</p></div></li>
+            <li><span>3</span><div><h3>Create <code>Teacher</code></h3><p>Extend <code>SchoolMember</code>. Add <code>subject</code>.</p></div></li>
+            <li><span>4</span><div><h3>Override the behavior</h3><p>Override <code>displayInfo()</code>. Call <code>super.displayInfo()</code> first.</p></div></li>
+            <li><span>5</span><div><h3>Test polymorphism</h3><p>Store both objects in a <code>SchoolMember[]</code> and call the method in a loop.</p></div></li>
+          </ol>
+          <aside class="challenge-card"><small>CHALLENGE</small><h3>Add one more child</h3><p>Create a <code>Principal</code> or <code>Staff</code> class with one unique field.</p><hr><strong>Success criteria</strong><ul><li>Uses <code>extends</code></li><li>Calls <code>super(...)</code></li><li>Uses <code>@Override</code></li><li>Produces clear output</li></ul></aside>
+        </div>
+        <h3 class="visual-title">Practice checkpoints</h3>
+        <div class="practice-grid">
+          <article class="practice-card"><small>AFTER STEP 1</small><h3>Parent check</h3><p>Create one <code>SchoolMember</code>. Can <code>displayInfo()</code> print its name and ID?</p></article>
+          <article class="practice-card"><small>AFTER STEP 3</small><h3>Inheritance check</h3><p>Can both <code>Student</code> and <code>Teacher</code> use the parent getters?</p></article>
+          <article class="practice-card"><small>AFTER STEP 4</small><h3>Override check</h3><p>Does each child print its unique field after the shared information?</p></article>
+          <article class="practice-card"><small>AFTER STEP 5</small><h3>Polymorphism check</h3><p>Can one <code>SchoolMember[]</code> store both child objects?</p></article>
+          <article class="practice-card"><small>DEBUG TASK</small><h3>Find the error</h3><p>Remove <code>super(name, id)</code>, compile, read the error, then restore the call.</p></article>
+          <article class="practice-card"><small>EXTENSION</small><h3>Add a capability</h3><p>Create a <code>Payable</code> interface and let <code>Teacher</code> implement <code>calculatePay()</code>.</p></article>
+        </div>
+        <div class="expected-output"><strong>Example expected output</strong><pre>Name: Ana Cruz | ID: 2026 | Course: BSIT
+Name: Mr. Reyes | ID: 104 | Subject: Programming
+Total school members: 2</pre></div>
+        <div class="try-box"><strong>Reflection</strong>Write two sentences: Which code was reused from the parent? Which behavior was specialized by each child?</div>
+      </section>
+
+      <section class="content-section tinted" id="assessment">
+        <div class="section-number">17</div><div class="section-kicker">CHECK YOUR UNDERSTANDING</div>
+        <h2>Knowledge check</h2><p class="section-intro">Choose an answer before opening the explanation.</p>
+        <div class="quiz-list">
+          <details><summary><span>01</span><strong>What is the difference between a class and an object?</strong><i>View answer</i></summary><p>A class is a blueprint or type definition. An object is a specific instance with its own values in memory.</p></details>
+          <details><summary><span>02</span><strong>Which keyword creates inheritance between Java classes?</strong><i>View answer</i></summary><p><code>extends</code>, as in <code>class Dog extends Animal</code>.</p></details>
+          <details><summary><span>03</span><strong>Can a child directly access a parent’s private field?</strong><i>View answer</i></summary><p>No. The parent can expose controlled access through a suitable method.</p></details>
+          <details><summary><span>04</span><strong>Why do we use <code>@Override</code>?</strong><i>View answer</i></summary><p>It declares our intent and lets the compiler catch signature mistakes.</p></details>
+          <details><summary><span>05</span><strong>Should <code>Car</code> extend <code>Engine</code>? Why?</strong><i>View answer</i></summary><p>No. A car has an engine; it is not a type of engine. Use composition.</p></details>
+          <details><summary><span>06</span><strong>What is the difference between <code>this(...)</code> and <code>super(...)</code>?</strong><i>View answer</i></summary><p><code>this(...)</code> calls another constructor in the same class. <code>super(...)</code> calls a constructor in the immediate parent class. Either call must be the constructor’s first statement.</p></details>
+          <details><summary><span>07</span><strong>When should a field be <code>static</code>?</strong><i>View answer</i></summary><p>Use <code>static</code> when one value belongs to the class as a whole and should be shared by every object, such as a counter or fixed school name.</p></details>
+          <details><summary><span>08</span><strong>How can one class have several capabilities if it cannot extend two classes?</strong><i>View answer</i></summary><p>It can implement multiple interfaces, such as <code>class Duck extends Animal implements Swimmable, Flyable</code>.</p></details>
+          <details><summary><span>09</span><strong>What does <code>Animal pet = new Dog();</code> demonstrate?</strong><i>View answer</i></summary><p>It demonstrates upcasting and polymorphism: a parent reference points to a child object, and overridden methods use the child implementation.</p></details>
+          <details><summary><span>10</span><strong>Why should you check <code>instanceof</code> before downcasting?</strong><i>View answer</i></summary><p>It confirms the object has the requested child type and helps prevent a runtime <code>ClassCastException</code>.</p></details>
+        </div>
+        <h3 class="visual-title">More practice topics</h3>
+        <div class="topic-chip-row" aria-label="Suggested follow-up practice topics">
+          <span>Library system</span><span>Bank accounts</span><span>Employee payroll</span><span>Game characters</span><span>Vehicles</span><span>Online shop products</span><span>School clubs</span><span>Shapes and area</span>
+        </div>
+      </section>
+
+      <section class="summary-section"><div><div class="section-kicker">LESSON RECAP</div><h2>Eight ideas to remember</h2></div><ol>
+        <li><span>1</span><p>A <strong>class</strong> is a blueprint; an <strong>object</strong> is an instance.</p></li>
+        <li><span>2</span><p>A <strong>constructor</strong> gives a new object its starting state.</p></li>
+        <li><span>3</span><p>Encapsulation protects valid object state.</p></li>
+        <li><span>4</span><p><code>static</code> members belong to the class and are shared.</p></li>
+        <li><span>5</span><p>A child uses <code>extends</code> to inherit accessible members.</p></li>
+        <li><span>6</span><p>Interfaces describe capabilities a class promises to provide.</p></li>
+        <li><span>7</span><p>Overriding enables specialized runtime behavior.</p></li>
+        <li><span>8</span><p>Use inheritance for IS-A; composition for HAS-A.</p></li>
+      </ol></section>
+
+      <footer class="lesson-footer"><div><strong>Classes &amp; Inheritance</strong><span>Java Foundations · Lesson Module 04</span></div><a href="#overview">Back to top ↑</a></footer>
+    </main>
+  </div>
+  <div class="nav-overlay" aria-hidden="true"></div>
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      const menuButton = document.querySelector('.menu-button');
+      const navigation = document.getElementById('lesson-navigation');
+      const overlay = document.querySelector('.nav-overlay');
+      const topicLinks = [...document.querySelectorAll('.topic-nav a[href^="#"]')];
+
+      const setMenuState = (open) => {
+        header.classList.toggle('nav-open', open);
+        overlay.classList.toggle('is-visible', open);
+        document.body.classList.toggle('nav-locked', open);
+        menuButton.setAttribute('aria-expanded', String(open));
+        overlay.setAttribute('aria-hidden', String(!open));
+      };
+
+      menuButton.addEventListener('click', () => {
+        setMenuState(menuButton.getAttribute('aria-expanded') !== 'true');
+      });
+
+      overlay.addEventListener('click', () => setMenuState(false));
+
+      navigation.addEventListener('click', (event) => {
+        if (event.target.closest('a') && window.innerWidth <= 768) {
+          setMenuState(false);
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setMenuState(false);
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setMenuState(false);
+      });
+
+      document.querySelectorAll('.copy-button').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const code = button.closest('.code-window')?.querySelector('pre code')?.innerText;
+          if (!code) return;
+
+          try {
+            await navigator.clipboard.writeText(code);
+            const previousLabel = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => { button.textContent = previousLabel; }, 1500);
+          } catch {
+            button.textContent = 'Select & copy';
+          }
+        });
+      });
+
+      if ('IntersectionObserver' in window) {
+        const sections = topicLinks
+          .map((link) => document.querySelector(link.getAttribute('href')))
+          .filter(Boolean);
+
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visible) return;
+          topicLinks.forEach((link) => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`);
+          });
+        }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.01, 0.25, 0.5] });
+
+        sections.forEach((section) => observer.observe(section));
+      }
+    })();
+  </script>
+</body>
+</html>

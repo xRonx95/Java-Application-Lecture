@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A professional lesson and module on designing a Java Swing login system with JFrame.">
+  <title>JFrame Login System | Practice Project Lesson</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <!-- Separate stylesheet -->
+  <link rel="stylesheet" href="../css/Practice Projects/login-system-project.css?v=1">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to lesson content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="course-identity" aria-label="Course identity">
+        <span class="course-mark" aria-hidden="true">JS</span>
+        <div>
+          <p class="eyebrow">Object-Oriented Programming</p>
+          <p class="course-title">Java Swing Practice Projects</p>
+        </div>
+      </div>
+
+      <nav class="main-navigation" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="#overview">Overview</a>
+        <a href="#lesson-sequence">Lesson</a>
+        <a href="#assessment">Assessment</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="lesson-label">Practice Project Module 02</p>
+          <h1 id="page-title">Designing a Login System Using JFrame</h1>
+          <p class="hero-lead">
+            A structured lecture on Java Swing interface design, event handling,
+            input validation, and responsible authentication concepts.
+          </p>
+
+          <div class="hero-meta" aria-label="Lesson information">
+            <span><strong>Level:</strong> Intermediate</span>
+            <span><strong>Format:</strong> Lecture and guided analysis</span>
+            <span><strong>Estimated time:</strong> 90–120 minutes</span>
+          </div>
+
+          <a class="primary-link" href="#lesson-sequence">Begin the lesson</a>
+        </div>
+
+        <figure class="hero-visual visual-panel">
+          <svg viewBox="0 0 720 500" role="img" aria-labelledby="hero-svg-title hero-svg-desc">
+            <title id="hero-svg-title">JFrame login window illustration</title>
+            <desc id="hero-svg-desc">A desktop login window containing username and password fields, a show password option, and a sign in button.</desc>
+            <rect class="svg-shadow" x="64" y="52" width="592" height="398" rx="24"/>
+            <rect class="svg-window" x="46" y="34" width="592" height="398" rx="24"/>
+            <path class="svg-window-bar" d="M70 34h544a24 24 0 0 1 24 24v44H46V58a24 24 0 0 1 24-24Z"/>
+            <circle class="svg-dot-red" cx="83" cy="68" r="9"/>
+            <circle class="svg-dot-gold" cx="112" cy="68" r="9"/>
+            <circle class="svg-dot-green" cx="141" cy="68" r="9"/>
+            <rect class="svg-icon-bg" x="92" y="140" width="126" height="126" rx="63"/>
+            <path class="svg-icon" d="M155 166a27 27 0 1 1 0 54 27 27 0 0 1 0-54Zm-43 82c10-23 29-35 43-35s33 12 43 35"/>
+            <text class="svg-title" x="267" y="161">ACCOUNT LOGIN</text>
+            <text class="svg-label" x="267" y="198">Username</text>
+            <rect class="svg-input" x="267" y="211" width="295" height="49" rx="9"/>
+            <text class="svg-placeholder" x="285" y="242">Enter username</text>
+            <text class="svg-label" x="267" y="294">Password</text>
+            <rect class="svg-input" x="267" y="307" width="295" height="49" rx="9"/>
+            <text class="svg-placeholder" x="285" y="338">••••••••</text>
+            <rect class="svg-checkbox" x="267" y="374" width="18" height="18" rx="3"/>
+            <text class="svg-small" x="295" y="389">Show password</text>
+            <rect class="svg-button" x="419" y="369" width="143" height="43" rx="9"/>
+            <text class="svg-button-text" x="490" y="397" text-anchor="middle">SIGN IN</text>
+          </svg>
+          <figcaption>Figure 1. Target interface for the guided JFrame lesson.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-light" id="overview" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <p class="section-kicker">Module overview</p>
+        <h2 id="overview-title">What students will learn</h2>
+        <p>
+          The purpose of this module is to explain how a graphical login form is
+          planned and assembled. It focuses on reasoning, structure, and good
+          programming habits—not on distributing a finished Java application.
+        </p>
+      </div>
+
+      <div class="outcome-grid">
+        <article class="outcome-card">
+          <span class="number-badge">01</span>
+          <h3>Interface construction</h3>
+          <p>Identify how JFrame, JPanel, JLabel, JTextField, JPasswordField, JCheckBox, and JButton work together.</p>
+        </article>
+        <article class="outcome-card">
+          <span class="number-badge">02</span>
+          <h3>Layout management</h3>
+          <p>Use layout managers to create an organized interface that is easier to maintain than absolute positioning.</p>
+        </article>
+        <article class="outcome-card">
+          <span class="number-badge">03</span>
+          <h3>Event-driven behavior</h3>
+          <p>Explain how an ActionListener responds when a user selects a button or toggles password visibility.</p>
+        </article>
+        <article class="outcome-card">
+          <span class="number-badge">04</span>
+          <h3>Validation and feedback</h3>
+          <p>Check empty inputs, compare sample credentials, and present clear messages without exposing passwords.</p>
+        </article>
+        <article class="outcome-card">
+          <span class="number-badge">05</span>
+          <h3>Security awareness</h3>
+          <p>Distinguish a classroom demonstration from a production authentication system with a database and password hashing.</p>
+        </article>
+        <article class="outcome-card">
+          <span class="number-badge">06</span>
+          <h3>Testing and reflection</h3>
+          <p>Prepare test cases, interpret results, and suggest responsible improvements to the program design.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="concept-title">
+      <div class="section-heading">
+        <p class="section-kicker">Topic 1</p>
+        <h2 id="concept-title">Understanding the login process</h2>
+        <p>
+          A login interface collects credentials, validates the input, checks an
+          authentication source, and returns a result. Each responsibility should
+          be explained separately so that the program remains understandable.
+        </p>
+      </div>
+
+      <figure class="visual-panel process-figure">
+        <svg viewBox="0 0 1160 330" role="img" aria-labelledby="flow-title flow-desc">
+          <title id="flow-title">Login process flow</title>
+          <desc id="flow-desc">Five stages: enter credentials, validate fields, verify account, decide result, and show feedback.</desc>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 10 5 0 10Z" class="svg-arrow-head"/>
+            </marker>
+          </defs>
+          <g class="flow-lines" marker-end="url(#arrow)">
+            <path d="M215 162H272"/>
+            <path d="M445 162H502"/>
+            <path d="M675 162H732"/>
+            <path d="M905 162H962"/>
+          </g>
+          <g transform="translate(40 78)">
+            <rect class="flow-card" width="175" height="168" rx="18"/>
+            <circle class="flow-icon" cx="88" cy="50" r="29"/>
+            <path class="flow-symbol" d="M78 50h20m-10-10v20"/>
+            <text class="flow-step" x="88" y="105" text-anchor="middle">1. Enter</text>
+            <text class="flow-caption" x="88" y="132" text-anchor="middle">Collect credentials</text>
+          </g>
+          <g transform="translate(270 78)">
+            <rect class="flow-card" width="175" height="168" rx="18"/>
+            <circle class="flow-icon" cx="88" cy="50" r="29"/>
+            <path class="flow-symbol" d="m74 50 10 10 19-22"/>
+            <text class="flow-step" x="88" y="105" text-anchor="middle">2. Validate</text>
+            <text class="flow-caption" x="88" y="132" text-anchor="middle">Reject empty fields</text>
+          </g>
+          <g transform="translate(500 78)">
+            <rect class="flow-card" width="175" height="168" rx="18"/>
+            <circle class="flow-icon" cx="88" cy="50" r="29"/>
+            <path class="flow-symbol" d="M74 58v-17h28v17M80 41v-8h16v8"/>
+            <text class="flow-step" x="88" y="105" text-anchor="middle">3. Verify</text>
+            <text class="flow-caption" x="88" y="132" text-anchor="middle">Compare account data</text>
+          </g>
+          <g transform="translate(730 78)">
+            <rect class="flow-card" width="175" height="168" rx="18"/>
+            <circle class="flow-icon" cx="88" cy="50" r="29"/>
+            <path class="flow-symbol" d="M88 32v36M70 50h36"/>
+            <text class="flow-step" x="88" y="105" text-anchor="middle">4. Decide</text>
+            <text class="flow-caption" x="88" y="132" text-anchor="middle">Success or failure</text>
+          </g>
+          <g transform="translate(960 78)">
+            <rect class="flow-card" width="175" height="168" rx="18"/>
+            <circle class="flow-icon" cx="88" cy="50" r="29"/>
+            <path class="flow-symbol" d="M70 37h36v24H87l-10 8v-8h-7Z"/>
+            <text class="flow-step" x="88" y="105" text-anchor="middle">5. Respond</text>
+            <text class="flow-caption" x="88" y="132" text-anchor="middle">Display feedback</text>
+          </g>
+        </svg>
+        <figcaption>Figure 2. A login is a sequence of responsibilities, not only a button click.</figcaption>
+      </figure>
+
+      <aside class="teaching-note">
+        <div class="note-icon" aria-hidden="true">!</div>
+        <div>
+          <h3>Professional distinction</h3>
+          <p>
+            The sample credentials used in a classroom exercise demonstrate control
+            flow only. A real system must store salted password hashes, use a secure
+            database connection, apply access controls, and protect sensitive data.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section section-tint" aria-labelledby="anatomy-title">
+      <div class="section-heading">
+        <p class="section-kicker">Topic 2</p>
+        <h2 id="anatomy-title">Anatomy of the JFrame interface</h2>
+        <p>Java Swing uses containers and components. The JFrame is the top-level window; panels organize the controls placed inside it.</p>
+      </div>
+
+      <div class="two-column">
+        <figure class="visual-panel hierarchy-figure">
+          <svg viewBox="0 0 680 530" role="img" aria-labelledby="tree-title tree-desc">
+            <title id="tree-title">Swing component hierarchy</title>
+            <desc id="tree-desc">A JFrame contains a main JPanel, which contains labels, fields, controls, and a message label.</desc>
+            <g class="tree-lines">
+              <path d="M340 93v46M340 139H170v50M340 139h170v50M170 279v38M170 317H70v42M170 317h100v42M510 279v38M510 317H410v42M510 317h100v42"/>
+            </g>
+            <rect class="tree-root" x="220" y="30" width="240" height="64" rx="14"/>
+            <text class="tree-root-text" x="340" y="70" text-anchor="middle">JFrame: Login Window</text>
+            <rect class="tree-node" x="65" y="188" width="210" height="92" rx="14"/>
+            <text class="tree-title" x="170" y="226" text-anchor="middle">JPanel: Form</text>
+            <text class="tree-caption" x="170" y="254" text-anchor="middle">Inputs and labels</text>
+            <rect class="tree-node" x="405" y="188" width="210" height="92" rx="14"/>
+            <text class="tree-title" x="510" y="226" text-anchor="middle">JPanel: Actions</text>
+            <text class="tree-caption" x="510" y="254" text-anchor="middle">Options and button</text>
+            <rect class="tree-leaf" x="20" y="358" width="100" height="96" rx="13"/>
+            <text class="tree-leaf-title" x="70" y="396" text-anchor="middle">Labels</text>
+            <text class="tree-leaf-caption" x="70" y="423" text-anchor="middle">JLabel</text>
+            <rect class="tree-leaf" x="220" y="358" width="100" height="96" rx="13"/>
+            <text class="tree-leaf-title" x="270" y="396" text-anchor="middle">Inputs</text>
+            <text class="tree-leaf-caption" x="270" y="423" text-anchor="middle">Text fields</text>
+            <rect class="tree-leaf" x="360" y="358" width="100" height="96" rx="13"/>
+            <text class="tree-leaf-title" x="410" y="396" text-anchor="middle">Option</text>
+            <text class="tree-leaf-caption" x="410" y="423" text-anchor="middle">Check box</text>
+            <rect class="tree-leaf" x="560" y="358" width="100" height="96" rx="13"/>
+            <text class="tree-leaf-title" x="610" y="396" text-anchor="middle">Submit</text>
+            <text class="tree-leaf-caption" x="610" y="423" text-anchor="middle">JButton</text>
+          </svg>
+          <figcaption>Figure 3. A simple component hierarchy for the login window.</figcaption>
+        </figure>
+
+        <div class="table-wrap" role="region" aria-label="Swing component reference" tabindex="0">
+          <table>
+            <caption>Core Swing components</caption>
+            <thead>
+              <tr>
+                <th scope="col">Component</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Suggested variable</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>JFrame</code></td><td>Main application window</td><td><code>loginFrame</code></td></tr>
+              <tr><td><code>JPanel</code></td><td>Groups related controls</td><td><code>formPanel</code></td></tr>
+              <tr><td><code>JTextField</code></td><td>Accepts the username</td><td><code>usernameField</code></td></tr>
+              <tr><td><code>JPasswordField</code></td><td>Masks password characters</td><td><code>passwordField</code></td></tr>
+              <tr><td><code>JCheckBox</code></td><td>Toggles password visibility</td><td><code>showPasswordCheckBox</code></td></tr>
+              <tr><td><code>JButton</code></td><td>Submits the form</td><td><code>loginButton</code></td></tr>
+              <tr><td><code>JLabel</code></td><td>Displays labels or feedback</td><td><code>messageLabel</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lesson-sequence" aria-labelledby="sequence-title">
+      <div class="section-heading">
+        <p class="section-kicker">Guided lesson</p>
+        <h2 id="sequence-title">Step-by-step lecture sequence</h2>
+        <p>Present each step in order. Ask students to predict the next component or behavior before revealing the explanation.</p>
+      </div>
+
+      <div class="lesson-stack">
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 1</span>
+            <div>
+              <h3>Plan the interface before writing code</h3>
+              <p>Identify the information, actions, messages, and visual order required by the login form.</p>
+            </div>
+          </div>
+          <div class="step-content">
+            <div>
+              <h4>Lecture points</h4>
+              <ul class="check-list">
+                <li>Keep the form focused on one task: authenticating a user.</li>
+                <li>Place labels immediately above or beside their related inputs.</li>
+                <li>Make the primary action visually clear and keep feedback near the form.</li>
+                <li>Choose meaningful component names before implementation.</li>
+              </ul>
+            </div>
+            <figure class="mini-visual">
+              <svg viewBox="0 0 560 330" role="img" aria-labelledby="wire-title wire-desc">
+                <title id="wire-title">Login screen wireframe</title>
+                <desc id="wire-desc">A labeled wireframe showing the title, username, password, options, button, and message area.</desc>
+                <rect class="wire-window" x="40" y="28" width="480" height="272" rx="15"/>
+                <text class="wire-caption" x="280" y="68" text-anchor="middle">LOGIN TITLE</text>
+                <rect class="wire-label" x="85" y="93" width="95" height="14" rx="5"/>
+                <rect class="wire-input" x="85" y="117" width="390" height="38" rx="7"/>
+                <rect class="wire-label" x="85" y="174" width="88" height="14" rx="5"/>
+                <rect class="wire-input" x="85" y="198" width="390" height="38" rx="7"/>
+                <rect class="wire-check" x="85" y="253" width="17" height="17" rx="3"/>
+                <rect class="wire-label" x="112" y="255" width="105" height="12" rx="5"/>
+                <rect class="wire-button" x="355" y="248" width="120" height="31" rx="7"/>
+              </svg>
+              <figcaption>Figure 4. Low-fidelity wireframe used during planning.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 2</span>
+            <div>
+              <h3>Import the required Swing and AWT classes</h3>
+              <p>Imports make the graphical components, layouts, colors, fonts, and events available to the class.</p>
+            </div>
+          </div>
+          <div class="code-explanation-grid">
+          <pre><code><span class="code-keyword">import</span> javax.swing.*;
+<span class="code-keyword">import</span> java.awt.*;
+<span class="code-keyword">import</span> java.awt.event.ActionEvent;
+<span class="code-keyword">import</span> java.util.Arrays;</code></pre>
+            <div class="explanation-box">
+              <h4>Explain it professionally</h4>
+              <p><code>javax.swing</code> supplies interface components. <code>java.awt</code> supplies layouts, dimensions, colors, and fonts. <code>ActionEvent</code> represents a user action such as pressing a button.</p>
+              <p class="small-note">For introductory lessons, wildcard imports reduce visual clutter. In production code, explicit imports can improve clarity.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 3</span>
+            <div>
+              <h3>Create the class and declare fields</h3>
+              <p>Component fields allow multiple methods to read or update the same interface controls.</p>
+            </div>
+          </div>
+          <pre><code><span class="code-keyword">public class</span> <span class="code-type">LoginSystemLesson</span> <span class="code-keyword">extends</span> JFrame {
+    <span class="code-keyword">private</span> <span class="code-keyword">final</span> JTextField usernameField = <span class="code-keyword">new</span> JTextField();
+    <span class="code-keyword">private</span> <span class="code-keyword">final</span> JPasswordField passwordField = <span class="code-keyword">new</span> JPasswordField();
+    <span class="code-keyword">private</span> <span class="code-keyword">final</span> JCheckBox showPasswordCheckBox =
+        <span class="code-keyword">new</span> JCheckBox(<span class="code-string">"Show password"</span>);
+    <span class="code-keyword">private</span> <span class="code-keyword">final</span> JLabel messageLabel = <span class="code-keyword">new</span> JLabel(<span class="code-string">" "</span>);
+}</code></pre>
+          <div class="callout-row">
+            <p><strong><code>private</code></strong> protects the fields from unrelated classes.</p>
+            <p><strong><code>final</code></strong> means the field reference will not be assigned to a different component.</p>
+            <p><strong><code>extends JFrame</code></strong> makes the lesson class itself a window.</p>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 4</span>
+            <div>
+              <h3>Configure the window safely</h3>
+              <p>The constructor defines the title, closing behavior, size, position, and initial interface.</p>
+            </div>
+          </div>
+          <pre><code><span class="code-keyword">public</span> LoginSystemLesson() {
+    setTitle(<span class="code-string">"Account Login"</span>);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setContentPane(createMainPanel());
+    pack();
+    setMinimumSize(<span class="code-keyword">new</span> Dimension(<span class="code-number">520</span>, <span class="code-number">460</span>));
+    setLocationRelativeTo(<span class="code-keyword">null</span>);
+}</code></pre>
+          <div class="method-grid">
+            <div><code>setTitle()</code><span>Names the window.</span></div>
+            <div><code>setDefaultCloseOperation()</code><span>Defines what happens when it closes.</span></div>
+            <div><code>setMinimumSize()</code><span>Prevents an unusably small layout.</span></div>
+            <div><code>setLocationRelativeTo(null)</code><span>Centers the window.</span></div>
+            <div><code>setContentPane()</code><span>Installs the main interface panel.</span></div>
+            <div><code>pack()</code><span>Sizes the window from preferred component sizes.</span></div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 5</span>
+            <div>
+              <h3>Organize controls with layout managers</h3>
+              <p>Layout managers calculate positions and respond better to font, operating-system, and window-size differences.</p>
+            </div>
+          </div>
+          <div class="step-content reverse-on-mobile">
+            <figure class="mini-visual">
+              <svg viewBox="0 0 560 360" role="img" aria-labelledby="layout-title layout-desc">
+                <title id="layout-title">Nested layout manager illustration</title>
+                <desc id="layout-desc">The main BorderLayout contains title, form, and action regions. The form uses GridBagLayout.</desc>
+                <rect class="layout-frame" x="38" y="28" width="484" height="300" rx="16"/>
+                <rect class="layout-north" x="57" y="49" width="446" height="55" rx="9"/>
+                <text class="layout-text" x="280" y="82" text-anchor="middle">NORTH · Title panel</text>
+                <rect class="layout-center" x="57" y="120" width="446" height="118" rx="9"/>
+                <text class="layout-text" x="280" y="149" text-anchor="middle">CENTER · Form panel</text>
+                <path class="layout-grid" d="M75 166h410M75 202h410M205 136v86"/>
+                <text class="layout-small" x="139" y="190" text-anchor="middle">Labels</text>
+                <text class="layout-small" x="346" y="190" text-anchor="middle">Input fields</text>
+                <rect class="layout-south" x="57" y="254" width="446" height="53" rx="9"/>
+                <text class="layout-text" x="280" y="286" text-anchor="middle">SOUTH · Actions and feedback</text>
+              </svg>
+              <figcaption>Figure 5. Nested layouts create predictable interface regions.</figcaption>
+            </figure>
+            <div>
+              <h4>Recommended combination</h4>
+              <ol class="number-list">
+                <li>Use <code>BorderLayout</code> for the main page regions.</li>
+                <li>Use <code>GridBagLayout</code> for aligned labels and input fields.</li>
+                <li>Use <code>BoxLayout</code> for vertically stacked groups.</li>
+                <li>Add empty borders to create consistent internal spacing.</li>
+              </ol>
+              <div class="avoid-box">
+                <strong>Avoid as the default approach:</strong>
+                <p><code>setLayout(null)</code> and fixed pixel coordinates often break when fonts, screen scaling, or text length changes.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 6</span>
+            <div>
+              <h3>Read the password with care</h3>
+              <p>JPasswordField returns a character array so the value can be cleared after it is used.</p>
+            </div>
+          </div>
+          <pre><code><span class="code-keyword">char</span>[] passwordCharacters = passwordField.getPassword();
+
+<span class="code-keyword">try</span> {
+    String password = <span class="code-keyword">new</span> String(passwordCharacters);
+    <span class="code-comment">// Use only for this classroom comparison.</span>
+} <span class="code-keyword">finally</span> {
+    Arrays.fill(passwordCharacters, <span class="code-string">'\0'</span>);
+}</code></pre>
+          <div class="teaching-note compact-note">
+            <div class="note-icon" aria-hidden="true">i</div>
+            <div>
+              <h4>Instructor emphasis</h4>
+              <p>Converting a password to String leaves an immutable value in memory until garbage collection. This sample is useful for explaining a comparison, but production authentication should avoid unnecessary password copies and should verify a secure hash.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 7</span>
+            <div>
+              <h3>Respond to user actions</h3>
+              <p>Listeners connect visible controls to program behavior.</p>
+            </div>
+          </div>
+          <div class="code-explanation-grid">
+            <pre><code><span class="code-keyword">char</span> defaultEcho = passwordField.getEchoChar();
+
+loginButton.addActionListener(
+    <span class="code-keyword">this</span>::handleLogin
+);
+
+showPasswordCheckBox.addActionListener(event -> {
+    <span class="code-keyword">char</span> echo = showPasswordCheckBox.isSelected()
+        ? (<span class="code-keyword">char</span>) <span class="code-number">0</span>
+        : defaultEcho;
+    passwordField.setEchoChar(echo);
+});</code></pre>
+            <figure class="event-visual">
+              <svg viewBox="0 0 560 310" role="img" aria-labelledby="event-title event-desc">
+                <title id="event-title">Event listener sequence</title>
+                <desc id="event-desc">A user click creates an ActionEvent, activates the listener, and calls the login handler.</desc>
+                <defs>
+                  <marker id="event-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0 10 5 0 10Z" class="svg-arrow-head"/>
+                  </marker>
+                </defs>
+                <g class="event-lines" marker-end="url(#event-arrow)">
+                  <path d="M152 153h47"/>
+                  <path d="M361 153h47"/>
+                </g>
+                <rect class="event-box" x="20" y="93" width="132" height="120" rx="16"/>
+                <circle class="event-circle" cx="86" cy="132" r="22"/>
+                <text class="event-symbol" x="86" y="140" text-anchor="middle">1</text>
+                <text class="event-title" x="86" y="177" text-anchor="middle">Button click</text>
+                <rect class="event-box" x="199" y="93" width="162" height="120" rx="16"/>
+                <circle class="event-circle" cx="280" cy="132" r="22"/>
+                <text class="event-symbol" x="280" y="140" text-anchor="middle">2</text>
+                <text class="event-title" x="280" y="177" text-anchor="middle">ActionListener</text>
+                <rect class="event-box" x="408" y="93" width="132" height="120" rx="16"/>
+                <circle class="event-circle" cx="474" cy="132" r="22"/>
+                <text class="event-symbol" x="474" y="140" text-anchor="middle">3</text>
+                <text class="event-title" x="474" y="177" text-anchor="middle">Handler</text>
+              </svg>
+              <figcaption>Figure 6. Controls communicate with behavior through events.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 8</span>
+            <div>
+              <h3>Validate inputs before authentication</h3>
+              <p>Validation checks whether the input is usable; authentication checks whether the credentials are correct.</p>
+            </div>
+          </div>
+          <pre><code><span class="code-keyword">private void</span> handleLogin(ActionEvent event) {
+    String username = usernameField.getText().trim();
+    <span class="code-keyword">char</span>[] password = passwordField.getPassword();
+
+    <span class="code-keyword">if</span> (username.isEmpty() || password.length == <span class="code-number">0</span>) {
+        showMessage(<span class="code-string">"Enter both username and password."</span>, <span class="code-keyword">false</span>);
+        Arrays.fill(password, <span class="code-string">'\0'</span>);
+        <span class="code-keyword">return</span>;
+    }
+
+    <span class="code-keyword">boolean</span> isValid = username.equals(<span class="code-string">"student"</span>)
+        && Arrays.equals(password, <span class="code-string">"LearnJava123"</span>.toCharArray());
+
+    showMessage(isValid ? <span class="code-string">"Login successful."</span>
+                        : <span class="code-string">"Invalid username or password."</span>, isValid);
+    Arrays.fill(password, <span class="code-string">'\0'</span>);
+}</code></pre>
+
+          <div class="comparison-grid">
+            <div class="comparison-card validation-card">
+              <h4>Validation</h4>
+              <p>“Are the required fields present and in an acceptable format?”</p>
+              <ul><li>Empty username</li><li>Empty password</li><li>Unexpected input length</li></ul>
+            </div>
+            <div class="comparison-card authentication-card">
+              <h4>Authentication</h4>
+              <p>“Do the supplied credentials belong to a permitted account?”</p>
+              <ul><li>Account lookup</li><li>Password-hash verification</li><li>Access decision</li></ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-heading">
+            <span class="step-number">Step 9</span>
+            <div>
+              <h3>Start Swing on the Event Dispatch Thread</h3>
+              <p>Swing components should be created and updated on the thread responsible for interface events.</p>
+            </div>
+          </div>
+          <pre><code><span class="code-keyword">public static void</span> main(String[] args) {
+    SwingUtilities.invokeLater(() -> {
+        LoginSystemLesson window = <span class="code-keyword">new</span> LoginSystemLesson();
+        window.setVisible(<span class="code-keyword">true</span>);
+    });
+}</code></pre>
+          <p class="lecture-summary"><strong>Key explanation:</strong> <code>invokeLater</code> schedules interface creation on Swing’s Event Dispatch Thread. Long-running database or network work should not run directly on this thread because it would freeze the interface.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-dark" aria-labelledby="topics-title">
+      <div class="section-heading light-heading">
+        <p class="section-kicker">Extended topics</p>
+        <h2 id="topics-title">Professional concepts beyond the basic form</h2>
+        <p>Use these topics to deepen the discussion after students understand the component and event flow.</p>
+      </div>
+
+      <div class="topic-grid">
+        <article><span>01</span><h3>Separation of concerns</h3><p>Keep interface construction, validation, and authentication logic in separate methods or classes.</p></article>
+        <article><span>02</span><h3>Password hashing</h3><p>Store a salted hash—not a plaintext password—and verify it with an established password-hashing library.</p></article>
+        <article><span>03</span><h3>Database access</h3><p>Use prepared statements, least-privilege database accounts, and a dedicated data-access layer.</p></article>
+        <article><span>04</span><h3>Accessible feedback</h3><p>Use descriptive labels, keyboard focus, readable contrast, and feedback that is not communicated by color alone.</p></article>
+        <article><span>05</span><h3>Failure handling</h3><p>Show a neutral message to the user, record technical details safely, and never expose stack traces or database errors.</p></article>
+        <article><span>06</span><h3>Rate limiting</h3><p>Slow repeated failed attempts and monitor suspicious activity without permanently locking legitimate users out.</p></article>
+        <article><span>07</span><h3>Session state</h3><p>After authentication, maintain only the identity and permissions needed by the application.</p></article>
+        <article><span>08</span><h3>Maintainable styling</h3><p>Centralize colors, fonts, dimensions, and component factories to keep a consistent visual system.</p></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="test-title">
+      <div class="section-heading">
+        <p class="section-kicker">Topic 3</p>
+        <h2 id="test-title">Testing the login behavior</h2>
+        <p>A responsible test plan includes normal, error, and boundary cases. Students should predict the expected result before checking the program.</p>
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="Login test cases" tabindex="0">
+        <table class="test-table">
+          <caption>Suggested classroom test cases</caption>
+          <thead>
+            <tr>
+              <th scope="col">Case</th>
+              <th scope="col">Username</th>
+              <th scope="col">Password</th>
+              <th scope="col">Expected result</th>
+              <th scope="col">Concept checked</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>TC-01</td><td>Empty</td><td>Empty</td><td>Required-fields message</td><td>Validation</td></tr>
+            <tr><td>TC-02</td><td><code>student</code></td><td>Empty</td><td>Required-fields message</td><td>Validation</td></tr>
+            <tr><td>TC-03</td><td><code>student</code></td><td>Incorrect</td><td>Neutral failure message</td><td>Authentication failure</td></tr>
+            <tr><td>TC-04</td><td>Incorrect</td><td>Correct</td><td>Neutral failure message</td><td>Username comparison</td></tr>
+            <tr><td>TC-05</td><td><code>student</code></td><td>Correct</td><td>Success message</td><td>Successful path</td></tr>
+            <tr><td>TC-06</td><td>Leading spaces</td><td>Correct</td><td>Defined handling</td><td>Input normalization</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="assessment" aria-labelledby="assessment-title">
+      <div class="section-heading">
+        <p class="section-kicker">Assessment and practice</p>
+        <h2 id="assessment-title">Check understanding</h2>
+        <p>Use the questions for oral recitation, written reflection, or a short formative assessment.</p>
+      </div>
+
+      <div class="assessment-grid">
+        <article class="question-card">
+          <span>Question 1</span>
+          <h3>Why is JPasswordField preferred over JTextField for passwords?</h3>
+          <p class="answer-guide"><strong>Guide:</strong> It masks visible characters and provides the password as a character array.</p>
+        </article>
+        <article class="question-card">
+          <span>Question 2</span>
+          <h3>What is the difference between validation and authentication?</h3>
+          <p class="answer-guide"><strong>Guide:</strong> Validation checks input quality; authentication verifies identity.</p>
+        </article>
+        <article class="question-card">
+          <span>Question 3</span>
+          <h3>Why are layout managers preferred over fixed coordinates?</h3>
+          <p class="answer-guide"><strong>Guide:</strong> They adapt to fonts, scaling, content, and window size.</p>
+        </article>
+        <article class="question-card">
+          <span>Question 4</span>
+          <h3>Why should a database password never be stored as plaintext?</h3>
+          <p class="answer-guide"><strong>Guide:</strong> A breach would immediately expose every stored password.</p>
+        </article>
+        <article class="question-card">
+          <span>Question 5</span>
+          <h3>What is the role of an ActionListener?</h3>
+          <p class="answer-guide"><strong>Guide:</strong> It receives a user action event and invokes the required behavior.</p>
+        </article>
+        <article class="question-card">
+          <span>Question 6</span>
+          <h3>What work should not run directly on Swing’s event thread?</h3>
+          <p class="answer-guide"><strong>Guide:</strong> Long database, file, or network operations that can freeze the interface.</p>
+        </article>
+      </div>
+
+      <div class="practice-panel">
+        <div>
+          <p class="section-kicker">Student practice challenge</p>
+          <h3>Improve the design on paper or in pseudocode</h3>
+          <p>Ask students to propose changes without requiring a finished Java application.</p>
+        </div>
+        <ol>
+          <li>Add a maximum-attempt policy with a temporary delay.</li>
+          <li>Design a separate authentication service interface.</li>
+          <li>Write three additional boundary test cases.</li>
+          <li>Explain how database password hashing would replace the classroom comparison.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="rubric-title">
+      <div class="section-heading">
+        <p class="section-kicker">Instructor resource</p>
+        <h2 id="rubric-title">Suggested discussion rubric</h2>
+      </div>
+      <div class="rubric-grid">
+        <article><strong>30%</strong><h3>Concept accuracy</h3><p>Correctly explains components, events, validation, and authentication.</p></article>
+        <article><strong>25%</strong><h3>Program structure</h3><p>Uses meaningful names and separates interface behavior from authentication logic.</p></article>
+        <article><strong>25%</strong><h3>Security awareness</h3><p>Recognizes that sample credentials are not a production security model.</p></article>
+        <article><strong>20%</strong><h3>Communication</h3><p>Presents the workflow clearly and supports explanations with appropriate examples.</p></article>
+      </div>
+    </section>
+
+    <section class="section glossary-section" aria-labelledby="glossary-title">
+      <div class="section-heading">
+        <p class="section-kicker">Quick reference</p>
+        <h2 id="glossary-title">Key terms</h2>
+      </div>
+      <dl class="glossary-grid">
+        <div><dt>Authentication</dt><dd>Verifying that a claimed identity is genuine.</dd></div>
+        <div><dt>Authorization</dt><dd>Determining what an authenticated user may access.</dd></div>
+        <div><dt>Event</dt><dd>An occurrence, such as a click, that the program can respond to.</dd></div>
+        <div><dt>Layout manager</dt><dd>An object that calculates component size and position.</dd></div>
+        <div><dt>Password hash</dt><dd>A one-way derived value used to verify a password without storing it directly.</dd></div>
+        <div><dt>Validation</dt><dd>Checking whether input is complete and follows expected rules.</dd></div>
+      </dl>
+    </section>
+
+    <section class="lesson-close" aria-labelledby="close-title">
+      <div>
+        <p class="section-kicker">Lesson conclusion</p>
+        <h2 id="close-title">A professional login form begins with clear responsibilities.</h2>
+        <p>
+          Students should leave this lesson able to explain how Swing components,
+          layout managers, listeners, validation, authentication, security, and
+          testing contribute to the complete login process.
+        </p>
+      </div>
+      <a class="secondary-link" href="#page-title">Return to top</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p><strong>Java Swing Practice Projects</strong></p>
+      <p>Lecture Module: Designing a Login System Using JFrame</p>
+    </div>
+    <a href="../index.html">Home</a>
+  </footer>
+</body>
+</html>

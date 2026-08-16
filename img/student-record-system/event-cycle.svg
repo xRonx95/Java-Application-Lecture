@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" role="img" aria-labelledby="title desc">
+  <title id="title">Event-driven programming cycle</title><desc id="desc">Five-stage cycle from user action to event listener, validation, data operation, and feedback.</desc>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#71879a"/></marker></defs>
+  <rect width="900" height="540" rx="20" fill="#eef3f7"/>
+  <text x="450" y="52" text-anchor="middle" font-family="Segoe UI,Arial" font-size="18" font-weight="800" fill="#526173">EVENT-DRIVEN PROGRAMMING CYCLE</text>
+  <g fill="none" stroke="#71879a" stroke-width="4" marker-end="url(#a)"><path d="M287 162C360 96 538 96 611 162"/><path d="M690 230c44 56 38 126-8 171"/><path d="M602 446c-84 62-238 54-313-14"/><path d="M216 385c-40-65-27-129 18-170"/></g>
+  <g font-family="Segoe UI,Arial">
+    <circle cx="237" cy="188" r="78" fill="#1d5f91"/><text x="237" y="174" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">1. USER</text><text x="237" y="200" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">ACTION</text><text x="237" y="225" text-anchor="middle" font-size="12" fill="#dceaf4">Clicks a button</text>
+    <circle cx="657" cy="188" r="78" fill="#173b66"/><text x="657" y="174" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">2. EVENT</text><text x="657" y="200" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">LISTENER</text><text x="657" y="225" text-anchor="middle" font-size="12" fill="#dceaf4">Receives the event</text>
+    <circle cx="670" cy="407" r="78" fill="#c99432"/><text x="670" y="394" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">3. VALIDATE</text><text x="670" y="420" text-anchor="middle" font-size="12" fill="#fff">Checks data rules</text>
+    <circle cx="237" cy="407" r="78" fill="#1d7257"/><text x="237" y="394" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">5. FEEDBACK</text><text x="237" y="420" text-anchor="middle" font-size="12" fill="#e5f6ef">Updates the interface</text>
+    <rect x="355" y="243" width="190" height="102" rx="18" fill="#fff" stroke="#9fb0bf" stroke-width="2"/><text x="450" y="280" text-anchor="middle" font-size="18" font-weight="800" fill="#102b4e">4. DATA OPERATION</text><text x="450" y="309" text-anchor="middle" font-size="14" fill="#526173">Create • Read</text><text x="450" y="332" text-anchor="middle" font-size="14" fill="#526173">Update • Delete</text>
+    <path d="M596 244L545 275M355 318l-58 52" stroke="#71879a" stroke-width="4" marker-end="url(#a)"/>
+  </g>
+</svg>

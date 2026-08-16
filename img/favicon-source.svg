@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="92" fill="#102a43"/>
+  <ellipse cx="256" cy="151" rx="130" ry="58" fill="#5ca8d7"/>
+  <rect x="126" y="151" width="260" height="207" fill="#1769aa"/>
+  <ellipse cx="256" cy="358" rx="130" ry="58" fill="#102a43" stroke="#5ca8d7" stroke-width="12"/>
+  <ellipse cx="256" cy="255" rx="130" ry="58" fill="none" stroke="#8bc6e8" stroke-width="10"/>
+  <text x="256" y="282" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="96" font-weight="800">DB</text>
+</svg>

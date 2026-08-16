@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="650" viewBox="0 0 1100 650" role="img" aria-labelledby="t d">
+  <title id="t">Expected student records browser output</title><desc id="d">A browser window containing a student records table with four rows.</desc>
+  <rect width="1100" height="650" rx="30" fill="#dde7f2"/><rect x="45" y="45" width="1010" height="560" rx="22" fill="#fff"/>
+  <path d="M45 108h1010V67c0-12-10-22-22-22H67c-12 0-22 10-22 22z" fill="#173b67"/>
+  <circle cx="86" cy="77" r="10" fill="#ef6b6b"/><circle cx="119" cy="77" r="10" fill="#f2c66d"/><circle cx="152" cy="77" r="10" fill="#6fcf97"/>
+  <rect x="205" y="61" width="650" height="33" rx="16" fill="#f4f7fb"/><text x="230" y="84" font-family="Arial" font-size="17" fill="#5b6980">localhost:8080/student-records/lesson/display-data.html</text>
+  <g font-family="Arial, sans-serif"><text x="95" y="165" font-size="31" font-weight="700" fill="#173b67">Student Records</text><text x="95" y="198" font-size="18" fill="#5b6980">Records retrieved securely through JDBC</text>
+  <rect x="95" y="225" width="910" height="57" rx="8" fill="#173b67"/>
+  <g font-size="18" font-weight="700" fill="#fff"><text x="120" y="260">Student No.</text><text x="320" y="260">Full Name</text><text x="590" y="260">Course</text><text x="780" y="260">Year Level</text></g>
+  <g font-size="18" fill="#26344d"><text x="120" y="326">2026-001</text><text x="320" y="326">Ana Santos</text><text x="590" y="326">BSIT</text><text x="780" y="326">Second Year</text><text x="120" y="392">2026-002</text><text x="320" y="392">Marco Reyes</text><text x="590" y="392">BSCS</text><text x="780" y="392">First Year</text><text x="120" y="458">2026-003</text><text x="320" y="458">Lea Cruz</text><text x="590" y="458">BSIS</text><text x="780" y="458">Third Year</text><text x="120" y="524">2026-004</text><text x="320" y="524">Paolo Lim</text><text x="590" y="524">BSIT</text><text x="780" y="524">Second Year</text></g></g>
+  <g stroke="#dce4ef" stroke-width="2"><path d="M95 348h910M95 414h910M95 480h910M95 546h910"/></g>
+  <rect x="844" y="145" width="161" height="42" rx="21" fill="#dff6ee"/><circle cx="869" cy="166" r="7" fill="#0f766e"/><text x="887" y="173" font-family="Arial" font-size="18" font-weight="700" fill="#0f5d57">4 records</text>
+</svg>

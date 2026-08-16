@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A beginner-friendly lesson on Java syntax, program structure, comments, output, naming rules, and common errors.">
+  <title>Java Syntax | Java Basics</title>
+    <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="stylesheet" href="../css/Java Basics/java-basics.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="java-syntax.html"><span class="brand-mark">J</span> Java Basics</a>
+      <nav class="lesson-nav" aria-label="Java lessons">
+        <a href="../index.html">Home</a>
+        <a href="java-syntax.html" aria-current="page">Syntax</a>
+        <a href="variables-data-types.html">Variables</a>
+        <a href="java-operators.html">Operators</a>
+        <a href="conditions-loops.html">Conditions &amp; Loops</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Lesson 1 · Java Basics</p>
+      <h1>Java Syntax and Program Structure</h1>
+      <p>Learn how Java code is organized, written, compiled, and executed. This lesson gives you the vocabulary and rules needed to explain a basic Java program clearly.</p>
+    </div>
+  </section>
+
+  <main class="lesson-layout">
+    <aside class="table-of-contents" aria-label="On this page">
+      <h2>On this page</h2>
+      <ol>
+        <li><a href="#objectives">Objectives</a></li>
+        <li><a href="#first-program">First program</a></li>
+        <li><a href="#syntax-rules">Syntax rules</a></li>
+        <li><a href="#comments">Comments</a></li>
+        <li><a href="#output">Displaying output</a></li>
+        <li><a href="#naming">Naming conventions</a></li>
+        <li><a href="#compile">Compile and run</a></li>
+        <li><a href="#errors">Types of errors</a></li>
+        <li><a href="#practice">Practice and review</a></li>
+      </ol>
+    </aside>
+
+    <article class="lesson-content">
+      <section class="lesson-section" id="objectives">
+        <h2>Learning Objectives</h2>
+        <div class="objective-grid">
+          <div class="objective"><strong>Identify</strong><p>the class, main method, statements, blocks, and comments in a Java program.</p></div>
+          <div class="objective"><strong>Apply</strong><p>capitalization, semicolons, braces, and identifier rules correctly.</p></div>
+          <div class="objective"><strong>Use</strong><p><code class="inline-code">print</code>, <code class="inline-code">println</code>, and <code class="inline-code">printf</code> to show output.</p></div>
+          <div class="objective"><strong>Explain</strong><p>the difference between compile-time, runtime, and logic errors.</p></div>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="first-program">
+        <h2>1. Anatomy of a Java Program</h2>
+        <p>Syntax is the set of rules that tells us how Java code must be written. Java is <strong>case-sensitive</strong>, so <code class="inline-code">Main</code>, <code class="inline-code">main</code>, and <code class="inline-code">MAIN</code> are different names.</p>
+        <div class="code-example">
+          <div class="code-title"><span>HelloWorld.java</span><span>First program</span></div>
+          <pre><code><span class="comment">// A simple Java program</span>
+<span class="keyword">public class</span> <span class="type">HelloWorld</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        System.out.println(<span class="string">"Hello, Java!"</span>);
+    }
+}</code></pre>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Part</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>public class HelloWorld</code></td><td>Declares a class named <strong>HelloWorld</strong>. The filename must be <code>HelloWorld.java</code>.</td></tr>
+              <tr><td><code>{ }</code></td><td>Braces group related statements into a block.</td></tr>
+              <tr><td><code>main(...)</code></td><td>The entry point where the Java Virtual Machine starts the program.</td></tr>
+              <tr><td><code>String[] args</code></td><td>Stores optional command-line arguments as an array of text.</td></tr>
+              <tr><td><code>System.out.println(...)</code></td><td>Displays text, then moves the cursor to a new line.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="teacher-tip"><strong>How to explain it:</strong> A class is the container, <code class="inline-code">main</code> is the starting door, and statements are the instructions performed inside it.</div>
+      </section>
+
+      <section class="lesson-section" id="syntax-rules">
+        <h2>2. Essential Syntax Rules</h2>
+        <div class="concept-grid">
+          <div class="concept-card"><strong>Semicolon ;</strong><p>Ends most executable statements, such as declarations and method calls.</p></div>
+          <div class="concept-card"><strong>Braces { }</strong><p>Mark the beginning and end of classes, methods, loops, and decisions.</p></div>
+          <div class="concept-card"><strong>Parentheses ( )</strong><p>Hold method parameters or the condition of an <code>if</code> or loop.</p></div>
+          <div class="concept-card"><strong>Whitespace</strong><p>Spaces and indentation improve readability but usually do not change behavior.</p></div>
+        </div>
+        <h3>Keywords and identifiers</h3>
+        <p><strong>Keywords</strong> are reserved words with a special meaning, such as <code class="inline-code">class</code>, <code class="inline-code">public</code>, <code class="inline-code">int</code>, and <code class="inline-code">if</code>. An <strong>identifier</strong> is a name created by the programmer for a class, variable, or method.</p>
+        <ul>
+          <li>An identifier may contain letters, digits, the underscore (<code>_</code>), and dollar sign (<code>$</code>).</li>
+          <li>It cannot begin with a digit or contain spaces.</li>
+          <li>It cannot be a Java keyword.</li>
+          <li>Use meaningful names such as <code class="inline-code">studentCount</code>, not unclear names such as <code class="inline-code">x1</code>.</li>
+        </ul>
+        <div class="warning"><strong>Common mistake:</strong> Writing <code class="inline-code">system.out.println</code> fails because the correct class name is <code class="inline-code">System</code> with a capital S.</div>
+      </section>
+
+      <section class="lesson-section" id="comments">
+        <h2>3. Comments</h2>
+        <p>Comments document the purpose of code and are ignored by the compiler. They should explain <em>why</em> something is done rather than repeat obvious code.</p>
+        <div class="code-example">
+          <div class="code-title"><span>Comment styles</span><span>Java</span></div>
+          <pre><code><span class="comment">// Single-line comment</span>
+
+<span class="comment">/* Multi-line comment
+   for a longer explanation */</span>
+
+<span class="comment">/** Documentation comment
+ *  used by the Javadoc tool
+ */</span></code></pre>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="output">
+        <h2>4. Displaying Output</h2>
+        <p>Java provides several ways to print values to the console.</p>
+        <div class="code-example">
+          <div class="code-title"><span>OutputDemo.java</span><span>Expected output: Name: Ana · Score: 95</span></div>
+          <pre><code>System.out.print(<span class="string">"Name: "</span>);      <span class="comment">// stays on same line</span>
+System.out.println(<span class="string">"Ana"</span>);     <span class="comment">// ends the line</span>
+System.out.printf(<span class="string">"Score: %d%n"</span>, <span class="number">95</span>); <span class="comment">// formatted output</span></code></pre>
+        </div>
+        <h3>Useful escape sequences</h3>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Sequence</th><th>Meaning</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><code>\n</code></td><td>New line</td><td><code>"Line 1\nLine 2"</code></td></tr>
+              <tr><td><code>\t</code></td><td>Tab spacing</td><td><code>"Name\tScore"</code></td></tr>
+              <tr><td><code>\"</code></td><td>Double quote inside text</td><td><code>"She said \"Hi\""</code></td></tr>
+              <tr><td><code>\\</code></td><td>Backslash character</td><td><code>"C:\\Java"</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="naming">
+        <h2>5. Java Naming Conventions</h2>
+        <p>Conventions are not always compiler rules, but following them makes code easier for others to read.</p>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Item</th><th>Convention</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Class</td><td>PascalCase</td><td><code>StudentRecord</code></td></tr>
+              <tr><td>Variable / method</td><td>camelCase</td><td><code>finalGrade</code>, <code>calculateTotal()</code></td></tr>
+              <tr><td>Constant</td><td>UPPER_SNAKE_CASE</td><td><code>MAX_ATTEMPTS</code></td></tr>
+              <tr><td>Package</td><td>lowercase</td><td><code>com.school.lessons</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="compile">
+        <h2>6. From Source Code to Output</h2>
+        <ol>
+          <li>Write source code and save it as <code class="inline-code">HelloWorld.java</code>.</li>
+          <li>Compile with <code class="inline-code">javac HelloWorld.java</code>.</li>
+          <li>The compiler creates bytecode in <code class="inline-code">HelloWorld.class</code>.</li>
+          <li>Run it with <code class="inline-code">java HelloWorld</code>.</li>
+          <li>The Java Virtual Machine (JVM) executes the bytecode.</li>
+        </ol>
+        <div class="note"><strong>Why Java is portable:</strong> The same bytecode can run on any operating system that has a compatible JVM—often summarized as “write once, run anywhere.”</div>
+      </section>
+
+      <section class="lesson-section" id="errors">
+        <h2>7. Understanding Errors</h2>
+        <div class="concept-grid">
+          <div class="concept-card"><strong>Compile-time error</strong><p>Java cannot translate the source code, often because of a missing semicolon, wrong spelling, or mismatched brace.</p></div>
+          <div class="concept-card"><strong>Runtime error</strong><p>The program compiles but fails while running, such as dividing an integer by zero.</p></div>
+          <div class="concept-card"><strong>Logic error</strong><p>The program runs but produces the wrong answer because the instructions are incorrect.</p></div>
+          <div class="concept-card"><strong>Debugging</strong><p>The process of locating, understanding, and correcting errors in a program.</p></div>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="practice">
+        <h2>Practice and Review</h2>
+        <div class="practice-box">
+          <h3>Activity: Introduce Yourself</h3>
+          <p>Create <code class="inline-code">MyProfile.java</code>. Print your name, course, favorite technology, and one goal. Use at least one comment, one <code class="inline-code">println</code>, and one escape sequence.</p>
+        </div>
+        <h3>Quick check</h3>
+        <details><summary>1. Why must the filename be HelloWorld.java?</summary><p>Because the public class is named <code>HelloWorld</code>. A public class and its source filename must match exactly.</p></details>
+        <details><summary>2. What method is the entry point of a Java application?</summary><p><code>public static void main(String[] args)</code>.</p></details>
+        <details><summary>3. What is the difference between print and println?</summary><p><code>print</code> keeps the cursor on the current line; <code>println</code> adds a line break afterward.</p></details>
+      </section>
+
+      <nav class="lesson-pagination" aria-label="Lesson navigation">
+        <span></span>
+        <a class="page-link next" href="variables-data-types.html">Next: Variables &amp; Data Types →</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer"><p>Java Basics Learning Module</p><p>Lesson 3 of 6 · Java Syntax</p></footer>
+</body>
+</html>

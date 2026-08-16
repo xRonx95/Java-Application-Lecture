@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A professional lesson module about building and running executable JAR files from a Java Swing JFrame application.">
+    <title>Building an Executable JAR File with JFrame</title>
+      <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+    <link rel="stylesheet" href="../css/Apache NetBeans/build-jar-file.css">
+    <style>
+        /* Expanded visual lesson components. These styles are included here so the
+           new step-by-step illustrations also work when this file is previewed alone. */
+        .lesson-roadmap,
+        .visual-pair,
+        .screen-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .lesson-roadmap { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 1.5rem 0; }
+        .roadmap-card,
+        .lesson-visual,
+        .mini-lesson,
+        .topic-card {
+            border: 1px solid #d9e0ea;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, .07);
+        }
+
+        .roadmap-card { padding: 1.15rem; }
+        .roadmap-card span {
+            display: inline-grid;
+            width: 2.25rem;
+            height: 2.25rem;
+            place-items: center;
+            border-radius: 50%;
+            color: #fff;
+            background: #2563eb;
+            font-weight: 800;
+        }
+        .roadmap-card h3 { margin: .75rem 0 .35rem; }
+        .roadmap-card p { margin: 0; }
+
+        .visual-pair { grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr); align-items: center; }
+        .lesson-visual { overflow: hidden; margin: 1.1rem 0; }
+        .lesson-visual figcaption {
+            padding: .75rem 1rem;
+            color: #475569;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            font-size: .92rem;
+        }
+
+        .mock-window { background: #eef2f7; padding: .8rem; }
+        .mock-titlebar {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            min-height: 34px;
+            padding: .35rem .65rem;
+            border-radius: 9px 9px 0 0;
+            background: #1e293b;
+            color: #fff;
+            font-size: .78rem;
+        }
+        .mock-titlebar i { width: 9px; height: 9px; border-radius: 50%; background: #fb7185; }
+        .mock-titlebar i:nth-child(2) { background: #fbbf24; }
+        .mock-titlebar i:nth-child(3) { background: #4ade80; }
+        .mock-titlebar strong { margin-left: .35rem; font-weight: 650; }
+        .mock-body { min-height: 150px; padding: 1rem; background: #fff; border-radius: 0 0 9px 9px; }
+        .mock-body.dark { background: #0f172a; color: #e2e8f0; font-family: Consolas, monospace; }
+        .mock-body p { margin: .25rem 0; }
+        .prompt { color: #4ade80; }
+        .output { color: #93c5fd; }
+        .cursor { display: inline-block; width: 8px; height: 1em; background: currentColor; vertical-align: -.12em; }
+        .folder-row { display: flex; gap: .55rem; align-items: center; padding: .34rem .2rem; }
+        .folder-row.child { padding-left: 1.45rem; }
+        .folder-icon { font-size: 1.2rem; }
+        .selection { padding: .15rem .35rem; background: #dbeafe; border-radius: 4px; }
+
+        .visual-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; margin: 1rem 0; }
+        .visual-step { position: relative; padding: 1rem; border-radius: 13px; background: #eff6ff; border: 1px solid #bfdbfe; }
+        .visual-step strong { display: block; margin: .4rem 0 .25rem; }
+        .visual-step span { color: #1d4ed8; font-size: 1.6rem; }
+
+        .steps .lesson-visual { max-width: 760px; }
+        .expected-screen {
+            display: grid;
+            place-items: center;
+            min-height: 190px;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(#1f2937 0 42%, #fff 42%);
+        }
+        .expected-screen h4 { margin: 0 0 .3rem; font-size: 1.25rem; }
+        .expected-screen p { margin: 0; color: #d1d5db; }
+        .expected-screen button { margin-top: 3rem; padding: .7rem 1.25rem; border: 0; border-radius: 7px; background: #2563eb; color: #fff; font-weight: 700; }
+
+        .screen-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .mini-lesson { padding: 1.2rem; }
+        .mini-lesson h3 { margin-top: 0; }
+        .topic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+        .topic-card { padding: 1.2rem; }
+        .topic-card h3 { margin: 0 0 .45rem; }
+        .topic-card .topic-icon { font-size: 1.7rem; }
+        .checkpoint {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 5px solid #16a34a;
+            border-radius: 0 10px 10px 0;
+            background: #f0fdf4;
+        }
+        .teacher-tip {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 12px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+        }
+
+        @media (max-width: 900px) {
+            .lesson-roadmap,
+            .visual-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .visual-pair { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 620px) {
+            .lesson-roadmap,
+            .visual-steps,
+            .screen-grid,
+            .topic-grid { grid-template-columns: 1fr; }
+            .mock-body { min-height: 125px; font-size: .82rem; overflow-x: auto; }
+        }
+        @media print {
+            .lesson-visual,
+            .roadmap-card,
+            .mini-lesson,
+            .topic-card { break-inside: avoid; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#top" aria-label="Java Learning Module home">
+                <span class="brand-mark" aria-hidden="true">J</span>
+                <span>
+                    <strong>Java Learning Module</strong>
+                    <small>Desktop Application Development</small>
+                </span>
+            </a>
+
+            <button class="menu-button" id="menuButton" type="button" aria-controls="lessonNavigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+                <span class="sr-only">Open lesson navigation</span>
+            </button>
+
+            <nav class="top-nav" aria-label="Quick navigation">
+                <a href="../index.html">Home</a>
+                <a href="#overview">Overview</a>
+                <a href="#procedure">Procedure</a>
+                <a href="#assessment">Assessment</a>
+                <button class="print-button" type="button" data-print-page>Print Module</button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="lesson-title">
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <p class="eyebrow">Lesson 08 · Java Swing</p>
+                    <h1 id="lesson-title">Building an Executable <span>JAR File</span> with JFrame</h1>
+                    <p class="hero-summary">Learn how to turn a Java Swing desktop program into one portable file that users can launch with a command or a double-click.</p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#procedure">Start the lesson</a>
+                        <a class="button button-secondary" href="#complete-code">View complete code</a>
+                    </div>
+                </div>
+
+                <div class="concept-card" aria-label="JAR build concept">
+                    <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <p class="concept-label">BUILD FLOW</p>
+                    <div class="build-flow">
+                        <div><code>.java</code><span>Source</span></div>
+                        <b aria-hidden="true">→</b>
+                        <div><code>.class</code><span>Compile</span></div>
+                        <b aria-hidden="true">→</b>
+                        <div class="flow-result"><code>.jar</code><span>Package</span></div>
+                    </div>
+                    <pre><code>java -jar JFrameLessonApp.jar</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <div class="module-layout">
+            <aside class="lesson-sidebar" id="lessonNavigation">
+                <div class="sidebar-sticky">
+                    <p class="sidebar-title">Lesson contents</p>
+                    <nav aria-label="Lesson contents">
+                        <a href="#overview">1. Module overview</a>
+                        <a href="#concepts">2. Core concepts</a>
+                        <a href="#requirements">3. Requirements</a>
+                        <a href="#project-structure">4. Project structure</a>
+                        <a href="#complete-code">5. JFrame program</a>
+                        <a href="#procedure">6. Build procedure</a>
+                        <a href="#netbeans-build">7. Build with NetBeans</a>
+                        <a href="#automation">8. Faster build script</a>
+                        <a href="#resources">9. Resources & libraries</a>
+                        <a href="#troubleshooting">10. Troubleshooting</a>
+                        <a href="#best-practices">11. Best practices</a>
+                        <a href="#assessment">12. Assessment</a>
+                    </nav>
+                    <div class="sidebar-note">
+                        <strong>Estimated time</strong>
+                        <span>75–90 minutes</span>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="lesson-content">
+                <section class="content-section intro-section" id="overview">
+                    <div class="section-heading">
+                        <span class="section-number">01</span>
+                        <div>
+                            <p class="kicker">Module overview</p>
+                            <h2>From source code to a distributable application</h2>
+                        </div>
+                    </div>
+                    <p>A <strong>JAR</strong> (Java Archive) file combines compiled Java classes and related resources into a single package. An <strong>executable JAR</strong> also identifies the class that contains the program's <code>main()</code> method, allowing the Java Virtual Machine to start it directly.</p>
+
+                    <div class="lesson-roadmap" aria-label="Lesson roadmap">
+                        <article class="roadmap-card"><span>1</span><h3>Prepare</h3><p>Install the JDK and organize the project folders.</p></article>
+                        <article class="roadmap-card"><span>2</span><h3>Code</h3><p>Create and test a simple, responsive JFrame program.</p></article>
+                        <article class="roadmap-card"><span>3</span><h3>Build</h3><p>Compile classes and package them with a main entry point.</p></article>
+                        <article class="roadmap-card"><span>4</span><h3>Distribute</h3><p>Test the JAR and learn when to create an installer.</p></article>
+                    </div>
+
+                    <div class="learning-grid">
+                        <div class="info-panel">
+                            <span class="panel-icon" aria-hidden="true">◎</span>
+                            <h3>Learning objectives</h3>
+                            <p>At the end of this module, learners should be able to:</p>
+                            <ul>
+                                <li>Explain the purpose and structure of a JAR file.</li>
+                                <li>Create a functional Java Swing window using <code>JFrame</code>.</li>
+                                <li>Compile source code with <code>javac</code>.</li>
+                                <li>Define an application entry point in a manifest.</li>
+                                <li>Build, test, and troubleshoot an executable JAR.</li>
+                            </ul>
+                        </div>
+                        <div class="info-panel">
+                            <span class="panel-icon" aria-hidden="true">✓</span>
+                            <h3>Success criteria</h3>
+                            <p>The activity is complete when:</p>
+                            <ul>
+                                <li>The Java source compiles without errors.</li>
+                                <li>The JAR contains the expected class files.</li>
+                                <li><code>java -jar</code> opens the JFrame.</li>
+                                <li>The interface remains usable when resized.</li>
+                                <li>No IDE is required to run the final file.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="concepts">
+                    <div class="section-heading">
+                        <span class="section-number">02</span>
+                        <div>
+                            <p class="kicker">Core concepts</p>
+                            <h2>What each part of the application does</h2>
+                        </div>
+                    </div>
+
+                    <div class="term-grid">
+                        <article class="term-card">
+                            <span>01</span>
+                            <h3>JDK</h3>
+                            <p>The Java Development Kit provides <code>javac</code>, <code>java</code>, and <code>jar</code>—the three tools used in this lesson.</p>
+                        </article>
+                        <article class="term-card">
+                            <span>02</span>
+                            <h3>JFrame</h3>
+                            <p>A top-level Swing container that provides the title bar, window border, minimize button, and close button.</p>
+                        </article>
+                        <article class="term-card">
+                            <span>03</span>
+                            <h3>Bytecode</h3>
+                            <p>Platform-independent instructions stored in <code>.class</code> files after Java source code is compiled.</p>
+                        </article>
+                        <article class="term-card">
+                            <span>04</span>
+                            <h3>Manifest</h3>
+                            <p>Metadata inside the JAR. Its <code>Main-Class</code> entry tells Java which class must start the program.</p>
+                        </article>
+                    </div>
+
+                    <div class="explain-box">
+                        <h3>A simple explanation for your presentation</h3>
+                        <p>“The <code>javac</code> command translates readable Java source code into bytecode. The <code>jar</code> command then packages that bytecode into one archive. Finally, the manifest tells Java where the application begins. When we run <code>java -jar</code>, Java reads the manifest and calls the program's <code>main()</code> method.”</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="requirements">
+                    <div class="section-heading">
+                        <span class="section-number">03</span>
+                        <div>
+                            <p class="kicker">Before you begin</p>
+                            <h2>Software and knowledge requirements</h2>
+                        </div>
+                    </div>
+
+                    <div class="checklist">
+                        <label><input type="checkbox"> <span><strong>Java Development Kit</strong> — JDK 17 or newer is recommended.</span></label>
+                        <label><input type="checkbox"> <span><strong>Text editor or IDE</strong> — VS Code, IntelliJ IDEA, NetBeans, Eclipse, or Notepad.</span></label>
+                        <label><input type="checkbox"> <span><strong>Terminal</strong> — Command Prompt, PowerShell, Terminal, or a built-in IDE terminal.</span></label>
+                        <label><input type="checkbox"> <span><strong>Basic Java knowledge</strong> — Classes, methods, objects, imports, and event listeners.</span></label>
+                    </div>
+
+                    <h3>Verify the JDK installation</h3>
+                    <p>Open a terminal and run both commands. A version number should appear for each one.</p>
+                    <div class="code-block">
+                        <div class="code-toolbar"><span>Terminal</span><button type="button" data-copy-code>Copy</button></div>
+                        <pre><code>java --version
+javac --version</code></pre>
+                    </div>
+                    <figure class="lesson-visual">
+                        <div class="mock-window">
+                            <div class="mock-titlebar"><i></i><i></i><i></i><strong>Command Prompt — JDK check</strong></div>
+                            <div class="mock-body dark">
+                                <p><span class="prompt">C:\Users\Student&gt;</span> java --version</p>
+                                <p class="output">java 21.0.4 2024-07-16 LTS</p>
+                                <p><span class="prompt">C:\Users\Student&gt;</span> javac --version</p>
+                                <p class="output">javac 21.0.4</p>
+                                <p><span class="prompt">C:\Users\Student&gt;</span> <span class="cursor" aria-hidden="true"></span></p>
+                            </div>
+                        </div>
+                        <figcaption>Picture guide: both commands must display version numbers. The exact number may be different on your computer.</figcaption>
+                    </figure>
+                    <div class="callout callout-warning">
+                        <strong>If “command not found” appears:</strong> Install a JDK—not only a JRE—and add the JDK's <code>bin</code> directory to the system <code>PATH</code>.
+                    </div>
+                </section>
+
+                <section class="content-section" id="project-structure">
+                    <div class="section-heading">
+                        <span class="section-number">04</span>
+                        <div>
+                            <p class="kicker">File organization</p>
+                            <h2>Create a clean project structure</h2>
+                        </div>
+                    </div>
+                    <p>Keeping source, compiled output, and distributable files separate makes the project easier to understand and rebuild.</p>
+                    <div class="folder-tree" role="img" aria-label="Project folder structure">
+                        <p><strong>JFrameJarProject/</strong></p>
+                        <p class="tree-level-1">├── <strong>src/</strong></p>
+                        <p class="tree-level-2">│ &nbsp; └── JFrameLessonApp.java</p>
+                        <p class="tree-level-1">├── <strong>out/</strong> <em>compiled classes</em></p>
+                        <p class="tree-level-1">├── <strong>dist/</strong> <em>final JAR</em></p>
+                        <p class="tree-level-1">├── manifest.txt</p>
+                        <p class="tree-level-1">└── build.bat</p>
+                    </div>
+                    <figure class="lesson-visual">
+                        <div class="mock-window">
+                            <div class="mock-titlebar"><i></i><i></i><i></i><strong>File Explorer — JFrameJarProject</strong></div>
+                            <div class="mock-body">
+                                <div class="folder-row"><span class="folder-icon">📁</span><strong>JFrameJarProject</strong></div>
+                                <div class="folder-row child"><span class="folder-icon">📁</span><span class="selection">src</span><span>← write code here</span></div>
+                                <div class="folder-row child"><span class="folder-icon">📁</span><span>out</span><span>← compiled classes</span></div>
+                                <div class="folder-row child"><span class="folder-icon">📁</span><span>dist</span><span>← finished JAR</span></div>
+                                <div class="folder-row child"><span class="folder-icon">📄</span><span>manifest.txt</span></div>
+                            </div>
+                        </div>
+                        <figcaption>Picture guide: the three folders are siblings. Do not place <code>out</code> or <code>dist</code> inside <code>src</code>.</figcaption>
+                    </figure>
+                    <table class="module-table">
+                        <thead><tr><th>Item</th><th>Purpose</th><th>Created by</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>src/</code></td><td>Stores readable Java source files.</td><td>Developer</td></tr>
+                            <tr><td><code>out/</code></td><td>Stores compiled <code>.class</code> files.</td><td><code>javac</code></td></tr>
+                            <tr><td><code>dist/</code></td><td>Stores the final distributable JAR.</td><td><code>jar</code></td></tr>
+                            <tr><td><code>manifest.txt</code></td><td>Declares the application's main class.</td><td>Developer</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="content-section" id="complete-code">
+                    <div class="section-heading">
+                        <span class="section-number">05</span>
+                        <div>
+                            <p class="kicker">Complete source code</p>
+                            <h2>Build the JFrame application</h2>
+                        </div>
+                    </div>
+                    <p>Save this code as <code>src/JFrameLessonApp.java</code>. The class name and filename must match exactly.</p>
+
+                    <div class="code-block code-tall">
+                        <div class="code-toolbar"><span>JFrameLessonApp.java</span><button type="button" data-copy-code>Copy</button></div>
+                        <pre><code>import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+public class JFrameLessonApp extends JFrame {
+
+    private final JLabel statusLabel;
+    private int clickCount = 0;
+
+    public JFrameLessonApp() {
+        setTitle("Executable JAR Demo");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(520, 340));
+
+        JPanel header = new JPanel(new GridLayout(2, 1, 0, 5));
+        header.setBackground(new Color(31, 41, 55));
+        header.setBorder(BorderFactory.createEmptyBorder(28, 30, 24, 30));
+
+        JLabel title = new JLabel("JFrame JAR Application", SwingConstants.CENTER);
+        title.setForeground(Color.WHITE);
+        title.setFont(new Font("SansSerif", Font.BOLD, 25));
+
+        JLabel subtitle = new JLabel(
+                "This window is running from compiled Java code.",
+                SwingConstants.CENTER
+        );
+        subtitle.setForeground(new Color(209, 213, 219));
+
+        header.add(title);
+        header.add(subtitle);
+
+        JPanel center = new JPanel(new BorderLayout(0, 20));
+        center.setBorder(BorderFactory.createEmptyBorder(38, 55, 38, 55));
+
+        statusLabel = new JLabel("Click the button to test the application.", SwingConstants.CENTER);
+        statusLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
+
+        JButton actionButton = new JButton("Run Action");
+        actionButton.setFont(new Font("SansSerif", Font.BOLD, 15));
+        actionButton.setFocusPainted(false);
+        actionButton.addActionListener(event -> updateStatus());
+
+        center.add(statusLabel, BorderLayout.CENTER);
+        center.add(actionButton, BorderLayout.SOUTH);
+
+        add(header, BorderLayout.NORTH);
+        add(center, BorderLayout.CENTER);
+        pack();
+        setLocationRelativeTo(null);
+    }
+
+    private void updateStatus() {
+        clickCount++;
+        statusLabel.setText("Success! Button clicked " + clickCount + " time(s).");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrameLessonApp app = new JFrameLessonApp();
+            app.setVisible(true);
+        });
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="explanation-list">
+                        <article><span>1</span><div><h3><code>extends JFrame</code></h3><p>Makes the class a window and gives it JFrame behavior.</p></div></article>
+                        <article><span>2</span><div><h3>Constructor</h3><p>Configures the window and creates its Swing components.</p></div></article>
+                        <article><span>3</span><div><h3>Event listener</h3><p>Runs <code>updateStatus()</code> whenever the button is clicked.</p></div></article>
+                        <article><span>4</span><div><h3>Event Dispatch Thread</h3><p><code>SwingUtilities.invokeLater()</code> safely creates the interface on Swing's UI thread.</p></div></article>
+                    </div>
+
+                    <figure class="lesson-visual">
+                        <div class="expected-screen">
+                            <div>
+                                <h4>JFrame JAR Application</h4>
+                                <p>This window is running from compiled Java code.</p>
+                                <button type="button">Run Action</button>
+                            </div>
+                        </div>
+                        <figcaption>Expected program window: after clicking the button, the center message changes to show the click count.</figcaption>
+                    </figure>
+                    <div class="checkpoint"><strong>Checkpoint:</strong> Run the source in your editor before building the JAR. Fix red error marks and confirm the button works first.</div>
+                </section>
+
+                <section class="content-section" id="procedure">
+                    <div class="section-heading">
+                        <span class="section-number">06</span>
+                        <div>
+                            <p class="kicker">Step-by-step procedure</p>
+                            <h2>Compile, package, and run the JAR</h2>
+                        </div>
+                    </div>
+
+                    <ol class="steps">
+                        <li>
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Open the project folder</h3>
+                                <p>In the terminal, move to the folder that contains <code>src</code>.</p>
+                                <div class="code-block">
+                                    <div class="code-toolbar"><span>Windows example</span><button type="button" data-copy-code>Copy</button></div>
+                                    <pre><code>cd C:\Projects\JFrameJarProject</code></pre>
+                                </div>
+                                <figure class="lesson-visual">
+                                    <div class="mock-window"><div class="mock-titlebar"><i></i><i></i><i></i><strong>Step 1 — Open the correct folder</strong></div><div class="mock-body dark">
+                                        <p><span class="prompt">C:\Users\Student&gt;</span> cd C:\Projects\JFrameJarProject</p>
+                                        <p><span class="prompt">C:\Projects\JFrameJarProject&gt;</span> dir</p>
+                                        <p class="output">src &nbsp;&nbsp; manifest.txt &nbsp;&nbsp; build.bat</p>
+                                    </div></div>
+                                    <figcaption>You are in the correct location when <code>dir</code> shows the <code>src</code> folder.</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Create output folders</h3>
+                                <div class="code-block">
+                                    <div class="code-toolbar"><span>Windows Command Prompt</span><button type="button" data-copy-code>Copy</button></div>
+                                    <pre><code>if not exist out mkdir out
+if not exist dist mkdir dist</code></pre>
+                                </div>
+                                <figure class="lesson-visual">
+                                    <div class="mock-window"><div class="mock-titlebar"><i></i><i></i><i></i><strong>Step 2 — Folders after creation</strong></div><div class="mock-body">
+                                        <div class="folder-row"><span class="folder-icon">📁</span><strong>JFrameJarProject</strong></div>
+                                        <div class="folder-row child"><span class="folder-icon">📁</span><span>src</span></div>
+                                        <div class="folder-row child"><span class="folder-icon">📁</span><span class="selection">out</span><span>new</span></div>
+                                        <div class="folder-row child"><span class="folder-icon">📁</span><span class="selection">dist</span><span>new</span></div>
+                                    </div></div>
+                                    <figcaption>Picture guide: <code>out</code> and <code>dist</code> may be empty at this stage.</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Compile the Java source</h3>
+                                <p>The <code>-d out</code> option places the compiled class in the output folder.</p>
+                                <div class="code-block">
+                                    <div class="code-toolbar"><span>Terminal</span><button type="button" data-copy-code>Copy</button></div>
+                                    <pre><code>javac -encoding UTF-8 -d out src\JFrameLessonApp.java</code></pre>
+                                </div>
+                                <p class="command-note"><code>javac</code> = compiler · <code>-d out</code> = output directory · final value = source file</p>
+                                <figure class="lesson-visual">
+                                    <div class="mock-window"><div class="mock-titlebar"><i></i><i></i><i></i><strong>Step 3 — Successful compilation</strong></div><div class="mock-body dark">
+                                        <p><span class="prompt">...JFrameJarProject&gt;</span> javac -encoding UTF-8 -d out src\JFrameLessonApp.java</p>
+                                        <p><span class="prompt">...JFrameJarProject&gt;</span> dir out</p>
+                                        <p class="output">JFrameLessonApp.class</p>
+                                    </div></div>
+                                    <figcaption>No error message usually means compilation succeeded. Confirm that <code>out/JFrameLessonApp.class</code> exists.</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Test the compiled class</h3>
+                                <p>Testing before packaging separates source-code problems from JAR problems.</p>
+                                <div class="code-block">
+                                    <div class="code-toolbar"><span>Terminal</span><button type="button" data-copy-code>Copy</button></div>
+                                    <pre><code>java -cp out JFrameLessonApp</code></pre>
+                                </div>
+                                <figure class="lesson-visual">
+                                    <div class="expected-screen"><div><h4>Executable JAR Demo</h4><p>Click the button to test the application.</p><button type="button">Run Action</button></div></div>
+                                    <figcaption>The JFrame should open now. Close it before continuing to the packaging steps.</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Create the manifest file</h3>
+                                <p>Save the following as <code>manifest.txt</code>. Keep a blank line after the last entry.</p>
+                                <div class="code-block">
+                                    <div class="code-toolbar"><span>manifest.txt</span><button type="button" data-copy-code>Copy</button></div>
+                                    <pre><code>Main-Class: JFrameLessonApp
+</code></pre>
+                                </div>
+                                <figure class="lesson-visual">
+                                    <div class="mock-window"><div class="mock-titlebar"><i></i><i></i><i></i><strong>Step 5 — manifest.txt in Notepad</strong></div><div class="mock-body dark">
+                                        <p class="output">Main-Class: JFrameLessonApp</p>
+                                        <p><span class="cursor" aria-hidden="true"></span> <span style="color:#94a3b8">← blank final line</span></p>
+                                    </div></div>
+                                    <figcaption>Use the class name only—do not write <code>.java</code> or <code>.class</code>. Save as plain text.</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h3>Create the executable JAR</h3>
+                                <div class="code-block">
+                                    <div class="code-toolbar"><span>Terminal</span><button type="button" data-copy-code>Copy</button></div>
+                                    <pre><code>jar --create --file dist\JFrameLessonApp.jar --manifest manifest.txt -C out .</code></pre>
+                                </div>
+                                <p class="command-note"><code>--create</code> builds · <code>--file</code> names · <code>--manifest</code> adds metadata · <code>-C out .</code> packages everything inside <code>out</code></p>
+                                <figure class="lesson-visual">
+                                    <div class="visual-steps">
+                                        <div class="visual-step"><span>📦</span><strong>Read classes</strong><small>Take files from <code>out</code>.</small></div>
+                                        <div class="visual-step"><span>🧾</span><strong>Add manifest</strong><small>Record the main class.</small></div>
+                                        <div class="visual-step"><span>☕</span><strong>Create JAR</strong><small>Save it inside <code>dist</code>.</small></div>
+                                    </div>
+                                    <figcaption>What the <code>jar</code> command is doing behind the scenes.</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <h3>Run and inspect the JAR</h3>
+                                <div class="code-block">
+                                    <div class="code-toolbar"><span>Terminal</span><button type="button" data-copy-code>Copy</button></div>
+                                    <pre><code>java -jar dist\JFrameLessonApp.jar
+jar --list --file dist\JFrameLessonApp.jar</code></pre>
+                                </div>
+                                <figure class="lesson-visual">
+                                    <div class="mock-window"><div class="mock-titlebar"><i></i><i></i><i></i><strong>Step 7 — Inspect the finished JAR</strong></div><div class="mock-body dark">
+                                        <p><span class="prompt">...JFrameJarProject&gt;</span> jar --list --file dist\JFrameLessonApp.jar</p>
+                                        <p class="output">META-INF/</p><p class="output">META-INF/MANIFEST.MF</p><p class="output">JFrameLessonApp.class</p>
+                                    </div></div>
+                                    <figcaption>The JAR is complete when the manifest and compiled class both appear in the listing.</figcaption>
+                                </figure>
+                                <div class="callout callout-success"><strong>Expected result:</strong> The JFrame window opens, and the JAR listing includes <code>META-INF/MANIFEST.MF</code> and <code>JFrameLessonApp.class</code>.</div>
+                            </div>
+                        </li>
+                    </ol>
+
+                    <div class="shortcut-card">
+                        <div>
+                            <p class="kicker">Modern JDK shortcut</p>
+                            <h3>Build without a separate manifest file</h3>
+                            <p>The <code>--main-class</code> option writes the entry point for you.</p>
+                        </div>
+                        <div class="code-block">
+                            <div class="code-toolbar"><span>One JAR command</span><button type="button" data-copy-code>Copy</button></div>
+                            <pre><code>jar --create --file dist\JFrameLessonApp.jar --main-class JFrameLessonApp -C out .</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="netbeans-build">
+                    <div class="section-heading">
+                        <span class="section-number">07</span>
+                        <div>
+                            <p class="kicker">Apache NetBeans method</p>
+                            <h2>Build an executable JAR without typing commands</h2>
+                        </div>
+                    </div>
+                    <p>Use this route if your class created the JFrame in Apache NetBeans. The exact output folder depends on whether the project uses Ant, Maven, or Gradle.</p>
+
+                    <div class="visual-steps">
+                        <div class="visual-step"><span>📂</span><strong>1. Open the project</strong><small>Confirm the class with <code>main()</code> is inside Source Packages.</small></div>
+                        <div class="visual-step"><span>⚙️</span><strong>2. Choose main class</strong><small>Right-click the project → Properties → Run → Main Class.</small></div>
+                        <div class="visual-step"><span>🧹</span><strong>3. Clean and Build</strong><small>Right-click the project → Clean and Build.</small></div>
+                        <div class="visual-step"><span>🔎</span><strong>4. Read Output</strong><small>Look for <em>BUILD SUCCESSFUL</em> and the saved JAR path.</small></div>
+                        <div class="visual-step"><span>☕</span><strong>5. Find the JAR</strong><small>Ant: <code>dist/</code>. Maven: <code>target/</code>. Gradle: <code>build/libs/</code>.</small></div>
+                        <div class="visual-step"><span>▶️</span><strong>6. Test it</strong><small>Open a terminal and run <code>java -jar YourApp.jar</code>.</small></div>
+                    </div>
+
+                    <div class="screen-grid">
+                        <figure class="lesson-visual">
+                            <div class="mock-window">
+                                <div class="mock-titlebar"><i></i><i></i><i></i><strong>NetBeans — Projects panel</strong></div>
+                                <div class="mock-body">
+                                    <div class="folder-row"><span class="folder-icon">☕</span><strong>JFrameJarProject</strong></div>
+                                    <div class="folder-row child"><span class="folder-icon">📁</span>Source Packages</div>
+                                    <div class="folder-row child"><span class="folder-icon">📄</span><span class="selection">JFrameLessonApp.java</span></div>
+                                    <div class="folder-row child"><span class="folder-icon">📚</span>Libraries</div>
+                                </div>
+                            </div>
+                            <figcaption>Before building, locate the class containing <code>public static void main</code>.</figcaption>
+                        </figure>
+                        <figure class="lesson-visual">
+                            <div class="mock-window">
+                                <div class="mock-titlebar"><i></i><i></i><i></i><strong>NetBeans — Output</strong></div>
+                                <div class="mock-body dark">
+                                    <p>Building jar: ...\dist\JFrameJarProject.jar</p>
+                                    <p class="output">BUILD SUCCESSFUL</p>
+                                    <p>Total time: 2 seconds</p>
+                                </div>
+                            </div>
+                            <figcaption>Do not stop at “Run Project.” Use “Clean and Build” to generate a fresh distributable file.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="teacher-tip"><strong>Important:</strong> A JAR can build successfully but still fail to start if its main class is not set. Always test the generated file from a terminal so any error remains visible.</div>
+                </section>
+
+                <section class="content-section" id="automation">
+                    <div class="section-heading">
+                        <span class="section-number">08</span>
+                        <div>
+                            <p class="kicker">Faster workflow</p>
+                            <h2>Build everything with one click</h2>
+                        </div>
+                    </div>
+                    <p>Save this as <code>build.bat</code> in the project root. It cleans old files, compiles the program, creates the JAR, and stops immediately if compilation fails.</p>
+                    <div class="code-block">
+                        <div class="code-toolbar"><span>build.bat</span><button type="button" data-copy-code>Copy</button></div>
+                        <pre><code>@echo off
+setlocal
+
+echo [1/3] Preparing folders...
+if exist out rmdir /s /q out
+if exist dist rmdir /s /q dist
+mkdir out
+mkdir dist
+
+echo [2/3] Compiling Java source...
+javac -encoding UTF-8 -d out src\JFrameLessonApp.java
+if errorlevel 1 (
+    echo Build failed during compilation.
+    pause
+    exit /b 1
+)
+
+echo [3/3] Creating executable JAR...
+jar --create --file dist\JFrameLessonApp.jar ^
+    --main-class JFrameLessonApp -C out .
+if errorlevel 1 (
+    echo Build failed while creating the JAR.
+    pause
+    exit /b 1
+)
+
+echo Build successful: dist\JFrameLessonApp.jar
+echo Starting the application...
+java -jar dist\JFrameLessonApp.jar
+endlocal</code></pre>
+                    </div>
+                    <div class="callout"><strong>Why this is faster:</strong> After editing the Java code, double-click <code>build.bat</code> instead of typing each command again.</div>
+                </section>
+
+                <section class="content-section" id="resources">
+                    <div class="section-heading">
+                        <span class="section-number">09</span>
+                        <div>
+                            <p class="kicker">Additional lesson topics</p>
+                            <h2>Packages, pictures, libraries, and installers</h2>
+                        </div>
+                    </div>
+
+                    <div class="topic-grid">
+                        <article class="topic-card">
+                            <span class="topic-icon" aria-hidden="true">🗂️</span>
+                            <h3>Topic A: Java packages</h3>
+                            <p>If the source begins with <code>package com.school.app;</code>, the main class becomes <code>com.school.app.JFrameLessonApp</code>. The folder structure and manifest must match that full name.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-icon" aria-hidden="true">🖼️</span>
+                            <h3>Topic B: Images and resources</h3>
+                            <p>Place icons under a resource folder and load them from the classpath. This keeps the picture inside the JAR and avoids computer-specific paths.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-icon" aria-hidden="true">📚</span>
+                            <h3>Topic C: Third-party libraries</h3>
+                            <p>A normal JAR may not contain external libraries. Maven Shade or Gradle Shadow can create a “fat JAR” that includes required dependencies.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-icon" aria-hidden="true">💿</span>
+                            <h3>Topic D: Native installers</h3>
+                            <p><code>jpackage</code> can create a Windows installer or application image and include a Java runtime for computers that do not have Java installed.</p>
+                        </article>
+                    </div>
+
+                    <h3>Load an image safely from inside the JAR</h3>
+                    <p>Example project path: <code>src/images/school-logo.png</code>. Use a leading slash so Java searches from the classpath root.</p>
+                    <div class="code-block">
+                        <div class="code-toolbar"><span>Java resource example</span><button type="button" data-copy-code>Copy</button></div>
+                        <pre><code>var imageUrl = JFrameLessonApp.class.getResource("/images/school-logo.png");
+if (imageUrl == null) {
+    throw new IllegalStateException("Logo resource was not found");
+}
+setIconImage(new javax.swing.ImageIcon(imageUrl).getImage());</code></pre>
+                    </div>
+
+                    <figure class="lesson-visual">
+                        <div class="visual-steps">
+                            <div class="visual-step"><span>🖼️</span><strong>Resource file</strong><small><code>images/school-logo.png</code></small></div>
+                            <div class="visual-step"><span>📦</span><strong>Inside JAR</strong><small>The image is packaged beside the class files.</small></div>
+                            <div class="visual-step"><span>🪟</span><strong>Shown in JFrame</strong><small><code>getResource()</code> finds it on any computer.</small></div>
+                        </div>
+                        <figcaption>Resource flow: use classpath paths instead of <code>C:\Users\...</code> absolute paths.</figcaption>
+                    </figure>
+
+                    <h3>Create an application image with <code>jpackage</code></h3>
+                    <div class="code-block">
+                        <div class="code-toolbar"><span>Windows example</span><button type="button" data-copy-code>Copy</button></div>
+                        <pre><code>jpackage --type app-image ^
+  --name JFrameLessonApp ^
+  --input dist ^
+  --main-jar JFrameLessonApp.jar ^
+  --main-class JFrameLessonApp ^
+  --dest installer</code></pre>
+                    </div>
+                    <div class="callout"><strong>New idea:</strong> An executable JAR is portable across systems with Java. A native package is easier for end users but must usually be built separately for Windows, macOS, and Linux.</div>
+                </section>
+
+                <section class="content-section" id="troubleshooting">
+                    <div class="section-heading">
+                        <span class="section-number">10</span>
+                        <div>
+                            <p class="kicker">Problem solving</p>
+                            <h2>Common errors and their solutions</h2>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <details open>
+                            <summary><span>“Unable to access jarfile”</span><b>+</b></summary>
+                            <div><p>The path or filename is incorrect. Run <code>dir dist</code> to confirm the JAR exists, then use its exact name.</p></div>
+                        </details>
+                        <details>
+                            <summary><span>“No main manifest attribute”</span><b>+</b></summary>
+                            <div><p>The manifest does not contain a valid <code>Main-Class</code> entry. Rebuild with <code>--main-class JFrameLessonApp</code> or correct <code>manifest.txt</code>.</p></div>
+                        </details>
+                        <details>
+                            <summary><span>“Could not find or load main class”</span><b>+</b></summary>
+                            <div><p>The class name, package name, manifest value, or folder structure does not match. Java names are case-sensitive.</p></div>
+                        </details>
+                        <details>
+                            <summary><span>The JAR opens and immediately closes</span><b>+</b></summary>
+                            <div><p>Run it from a terminal with <code>java -jar ...</code> so the error remains visible. Confirm that the computer has a compatible Java runtime.</p></div>
+                        </details>
+                        <details>
+                            <summary><span>Double-click does not open the JAR</span><b>+</b></summary>
+                            <div><p>The <code>.jar</code> file association may be missing. Test with <code>java -jar</code>. For end users without Java, package a native installer with <code>jpackage</code>.</p></div>
+                        </details>
+                        <details>
+                            <summary><span>Images or other resources are missing</span><b>+</b></summary>
+                            <div><p>Put resources on the classpath and load them with <code>getResource()</code>. Avoid absolute paths such as <code>C:\Users\...</code> because they only work on one computer.</p></div>
+                        </details>
+                    </div>
+                </section>
+
+                <section class="content-section" id="best-practices">
+                    <div class="section-heading">
+                        <span class="section-number">11</span>
+                        <div>
+                            <p class="kicker">Professional practice</p>
+                            <h2>Make the application reliable and distributable</h2>
+                        </div>
+                    </div>
+                    <div class="practice-grid">
+                        <article><strong>Use packages</strong><p>For larger projects, place classes in a package such as <code>com.school.app</code> and set the main class to <code>com.school.app.JFrameLessonApp</code>.</p></article>
+                        <article><strong>Use layout managers</strong><p>Prefer <code>BorderLayout</code>, <code>GridLayout</code>, or <code>GridBagLayout</code> so the interface resizes correctly.</p></article>
+                        <article><strong>Keep work off the UI thread</strong><p>Use <code>SwingWorker</code> for slow database, file, or network tasks so the JFrame does not freeze.</p></article>
+                        <article><strong>Test on a clean computer</strong><p>Check the minimum Java version and confirm that every image, configuration file, and dependency is included.</p></article>
+                        <article><strong>Use a build tool later</strong><p>Maven or Gradle is better for projects with libraries, tests, many source files, and repeatable releases.</p></article>
+                        <article><strong>Consider jpackage</strong><p>A JAR still needs Java. <code>jpackage</code> can create a platform-specific installer that includes a runtime.</p></article>
+                    </div>
+
+                    <div class="compare-wrap">
+                        <h3>JAR compared with other deliverables</h3>
+                        <table class="module-table">
+                            <thead><tr><th>Format</th><th>Best use</th><th>Requirement</th></tr></thead>
+                            <tbody>
+                                <tr><td>Class files</td><td>Testing during development</td><td>Correct classpath</td></tr>
+                                <tr><td>Executable JAR</td><td>Portable Java distribution</td><td>Compatible Java runtime</td></tr>
+                                <tr><td>Native installer</td><td>End-user installation</td><td>Built for each operating system</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-section" id="assessment">
+                    <div class="section-heading">
+                        <span class="section-number">12</span>
+                        <div>
+                            <p class="kicker">Apply your learning</p>
+                            <h2>Activity, assessment, and reflection</h2>
+                        </div>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-heading">
+                            <span>Performance task</span>
+                            <strong>30 points</strong>
+                        </div>
+                        <h3>Create your own executable JFrame application</h3>
+                        <p>Modify the sample so it contains your name, course or section, one text field, and a button that displays a custom message. Compile it and submit the working JAR with its source code.</p>
+                        <div class="rubric">
+                            <div><strong>10 pts</strong><span>Correct functionality</span></div>
+                            <div><strong>8 pts</strong><span>Executable JAR</span></div>
+                            <div><strong>7 pts</strong><span>Clean interface</span></div>
+                            <div><strong>5 pts</strong><span>Code quality</span></div>
+                        </div>
+                    </div>
+
+                    <h3>Knowledge check</h3>
+                    <div class="quiz-list">
+                        <details><summary>1. What is the purpose of <code>javac</code>? <b>Show answer</b></summary><p>It compiles Java source files into JVM bytecode stored in <code>.class</code> files.</p></details>
+                        <details><summary>2. Why does an executable JAR need a main class? <b>Show answer</b></summary><p>Java needs to know which class contains the <code>main()</code> method that starts the application.</p></details>
+                        <details><summary>3. Why should a Swing interface start with <code>invokeLater()</code>? <b>Show answer</b></summary><p>It schedules interface creation on Swing's Event Dispatch Thread, which keeps UI operations thread-safe.</p></details>
+                        <details><summary>4. What does <code>-C out .</code> mean in the JAR command? <b>Show answer</b></summary><p>It changes into the <code>out</code> folder and packages all content from that folder into the JAR.</p></details>
+                        <details><summary>5. Does an executable JAR automatically include Java itself? <b>Show answer</b></summary><p>No. The target computer normally needs a compatible Java runtime unless the app is distributed using a tool such as <code>jpackage</code>.</p></details>
+                    </div>
+
+                    <div class="reflection-box">
+                        <h3>Reflection questions</h3>
+                        <ol>
+                            <li>Which stage—coding, compiling, packaging, or testing—was most difficult, and why?</li>
+                            <li>How does the manifest connect the JAR file to the JFrame application?</li>
+                            <li>When would you choose Maven, Gradle, or <code>jpackage</code> instead of manual commands?</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="summary-section">
+                    <p class="kicker">Lesson summary</p>
+                    <h2>Four commands, one complete workflow</h2>
+                    <div class="summary-flow">
+                        <div><span>1</span><code>javac</code><small>Compile source</small></div>
+                        <div><span>2</span><code>java -cp</code><small>Test classes</small></div>
+                        <div><span>3</span><code>jar</code><small>Build package</small></div>
+                        <div><span>4</span><code>java -jar</code><small>Run application</small></div>
+                    </div>
+                    <a class="button button-primary" href="#top">Review from the top</a>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <p><strong>Java Learning Module</strong></p>
+            <p>Building an Executable JAR File with JFrame</p>
+        </div>
+        <button class="footer-print" type="button" data-print-page>Print or Save as PDF</button>
+    </footer>
+
+    <div class="toast" id="copyToast" role="status" aria-live="polite">Code copied to clipboard</div>
+    <script src="../js/build-jar-file.js" defer></script>
+</body>
+</html>

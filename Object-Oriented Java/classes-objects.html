@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A complete beginner-friendly lesson about classes and objects in Java.">
+    <title>Lesson Module: Classes and Objects in Java</title>
+          <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+    <link rel="stylesheet" href="../css/Object-Oriented Java/classes-objects.css">
+    <style>
+        /* Extra visual lesson components added for the guided student version. */
+        .visual-roadmap,
+        .picture-grid,
+        .guided-steps,
+        .topic-cards {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .visual-roadmap { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .picture-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .topic-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+        .visual-roadmap figure,
+        .picture-card,
+        .guided-step,
+        .topic-card {
+            margin: 0;
+            padding: 1.25rem;
+            border: 1px solid #e3d8cc;
+            border-radius: 16px;
+            background: linear-gradient(145deg, #fffdf9, #f8f1e8);
+            box-shadow: 0 8px 24px rgba(63, 35, 20, 0.07);
+        }
+
+        .visual-roadmap figure { text-align: center; }
+        .visual-roadmap .picture-icon,
+        .picture-card .picture-icon {
+            display: grid;
+            place-items: center;
+            min-height: 110px;
+            margin-bottom: .85rem;
+            border-radius: 12px;
+            background: #f2e5d5;
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        .visual-roadmap figcaption strong,
+        .picture-card strong { display: block; margin-bottom: .3rem; }
+
+        .guided-steps { counter-reset: guided-step; }
+        .guided-step {
+            counter-increment: guided-step;
+            display: grid;
+            grid-template-columns: 88px minmax(0, 1fr);
+            gap: 1.15rem;
+            align-items: start;
+        }
+
+        .step-picture {
+            display: grid;
+            place-items: center;
+            width: 88px;
+            min-height: 88px;
+            border-radius: 18px;
+            background: #6f1d2b;
+            color: #fff;
+            font-size: 2.35rem;
+            position: relative;
+        }
+
+        .step-picture::after {
+            content: counter(guided-step);
+            position: absolute;
+            right: -7px;
+            bottom: -7px;
+            display: grid;
+            place-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e8b44f;
+            color: #32110f;
+            font: 700 .9rem/1 system-ui, sans-serif;
+        }
+
+        .guided-step h3,
+        .topic-card h3 { margin-top: 0; }
+
+        .student-action {
+            margin-top: .8rem;
+            padding: .75rem .9rem;
+            border-left: 4px solid #e8b44f;
+            background: #fff7df;
+            border-radius: 6px;
+        }
+
+        .picture-diagram {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: .55rem;
+            min-height: 125px;
+            margin-bottom: .9rem;
+            padding: 1rem;
+            border-radius: 12px;
+            background: #f3e8dc;
+        }
+
+        .diagram-box {
+            padding: .7rem .85rem;
+            border: 2px solid #7a2936;
+            border-radius: 10px;
+            background: #fff;
+            text-align: center;
+            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        }
+
+        .diagram-arrow { color: #7a2936; font-size: 1.6rem; font-weight: 800; }
+        .topic-card .topic-icon { font-size: 2.2rem; }
+
+        .progress-checklist {
+            display: grid;
+            gap: .65rem;
+            margin: 1rem 0 0;
+            padding: 1rem;
+            border-radius: 12px;
+            background: #f7efe7;
+        }
+
+        .progress-checklist label { display: flex; gap: .65rem; align-items: flex-start; }
+        .progress-checklist input { width: 1.15rem; height: 1.15rem; margin-top: .15rem; accent-color: #6f1d2b; }
+
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: .8rem;
+            margin-top: 1rem;
+        }
+
+        .glossary-grid div { padding: 1rem; border-radius: 10px; background: #f8f2eb; }
+        .glossary-grid dt { font-weight: 800; color: #6f1d2b; }
+        .glossary-grid dd { margin: .3rem 0 0; }
+
+        @media (max-width: 850px) {
+            .visual-roadmap,
+            .topic-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 620px) {
+            .visual-roadmap,
+            .picture-grid,
+            .topic-cards,
+            .glossary-grid { grid-template-columns: 1fr; }
+            .guided-step { grid-template-columns: 62px minmax(0, 1fr); padding: 1rem; }
+            .step-picture { width: 62px; min-height: 62px; font-size: 1.7rem; border-radius: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#top" aria-label="Classes and Objects lesson home">
+                <span class="brand-icon" aria-hidden="true">&lt;/&gt;</span>
+                <span>
+                    <strong>OOP Learning Module</strong>
+                    <small>Java Programming Fundamentals</small>
+                </span>
+            </a>
+
+            <nav class="lesson-nav" aria-label="Lesson navigation">
+                <a href="../index.html">Home</a>
+                <a href="#overview">Overview</a>
+                <a href="#visual-map">Visual Map</a>
+                <a href="#follow-along">Step by Step</a>
+                <a href="#core-concepts">Concepts</a>
+                <a href="#example">Example</a>
+                <a href="#activity">Activities</a>
+                <a href="#assessment">Assessment</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="lesson-title">
+            <div class="hero-content">
+                <div class="hero-copy">
+                    <p class="eyebrow">Lesson 01 · Object-Oriented Programming</p>
+                    <h1 id="lesson-title">Classes and Objects</h1>
+                    <p class="hero-lead">
+                        Learn how a <strong>class</strong> acts as a blueprint and how an
+                        <strong>object</strong> becomes a working instance with its own data and behavior.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#overview">Start the lesson</a>
+                        <a class="button button-secondary" href="#assessment">Go to assessment</a>
+                    </div>
+
+                    <dl class="lesson-meta" aria-label="Lesson information">
+                        <div>
+                            <dt>Level</dt>
+                            <dd>Beginner</dd>
+                        </div>
+                        <div>
+                            <dt>Duration</dt>
+                            <dd>120–150 minutes</dd>
+                        </div>
+                        <div>
+                            <dt>Language</dt>
+                            <dd>Java</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="hero-visual" aria-label="A class blueprint creating several objects">
+                    <div class="blueprint-card">
+                        <span class="visual-label">CLASS</span>
+                        <strong>Student</strong>
+                        <span>name · age</span>
+                        <span>study()</span>
+                    </div>
+                    <div class="connector" aria-hidden="true">creates</div>
+                    <div class="object-row">
+                        <div class="object-card"><span>OBJECT 1</span><strong>Ana</strong></div>
+                        <div class="object-card"><span>OBJECT 2</span><strong>Ben</strong></div>
+                        <div class="object-card"><span>OBJECT 3</span><strong>Cara</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-layout">
+            <aside class="table-of-contents" aria-label="Table of contents">
+                <p class="toc-title">In this module</p>
+                <ol>
+                    <li><a href="#overview">Lesson overview</a></li>
+                    <li><a href="#visual-map">Visual learning map</a></li>
+                    <li><a href="#core-concepts">Class and object</a></li>
+                    <li><a href="#class-anatomy">Anatomy of a class</a></li>
+                    <li><a href="#follow-along">Step-by-step coding</a></li>
+                    <li><a href="#constructors">Constructors</a></li>
+                    <li><a href="#members">Fields and methods</a></li>
+                    <li><a href="#this-keyword">The <code>this</code> keyword</a></li>
+                    <li><a href="#access">Access modifiers</a></li>
+                    <li><a href="#static-instance">Static vs. instance</a></li>
+                    <li><a href="#references">Objects and references</a></li>
+                    <li><a href="#overloading">Method overloading</a></li>
+                    <li><a href="#object-methods">Object methods</a></li>
+                    <li><a href="#lifecycle">Object life cycle</a></li>
+                    <li><a href="#example">Complete example</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#activity">Learning activities</a></li>
+                    <li><a href="#assessment">Quick assessment</a></li>
+                    <li><a href="#glossary">Key vocabulary</a></li>
+                </ol>
+            </aside>
+
+            <article class="lesson-content">
+                <section id="overview" class="lesson-section">
+                    <p class="section-kicker">01 · Overview</p>
+                    <h2>What will you learn?</h2>
+                    <p>
+                        Object-oriented programming, or OOP, organizes a program around objects.
+                        Each object combines <strong>state</strong> (what it knows) and
+                        <strong>behavior</strong> (what it can do). Classes describe the structure
+                        that those objects will follow.
+                    </p>
+
+                    <div class="objectives-card">
+                        <h3>Learning objectives</h3>
+                        <p>At the end of this lesson, you should be able to:</p>
+                        <ul class="check-list">
+                            <li>Differentiate a class from an object.</li>
+                            <li>Identify fields, methods, and constructors in a Java class.</li>
+                            <li>Create objects using the <code>new</code> keyword.</li>
+                            <li>Use dot notation to access an object's members.</li>
+                            <li>Explain access modifiers and basic encapsulation.</li>
+                            <li>Compare static members with instance members.</li>
+                            <li>Build a simple Java program using multiple objects.</li>
+                        </ul>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <span class="tip-icon" aria-hidden="true">💡</span>
+                        <div>
+                            <strong>Easy way to explain it</strong>
+                            <p>
+                                A class is like a house plan. The plan describes the rooms and doors,
+                                but nobody can live inside the plan. Objects are the actual houses built
+                                from it. They share one design, but each house can have a different color,
+                                address, and owner.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="visual-map" class="lesson-section featured-section">
+                    <p class="section-kicker">02 · Visual learning map</p>
+                    <h2>See the whole lesson before you begin</h2>
+                    <p>
+                        Follow these pictures from left to right. They show how a Java idea becomes
+                        a working object inside a running program.
+                    </p>
+
+                    <div class="visual-roadmap">
+                        <figure>
+                            <div class="picture-icon" aria-hidden="true">💭</div>
+                            <figcaption><strong>1. Choose an idea</strong>Think of a student, book, car, or bank account.</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="picture-icon" aria-hidden="true">📐</div>
+                            <figcaption><strong>2. Design a class</strong>Decide which data and actions the object needs.</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="picture-icon" aria-hidden="true">⌨️</div>
+                            <figcaption><strong>3. Write Java code</strong>Add fields, a constructor, and methods.</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="picture-icon" aria-hidden="true">🏗️</div>
+                            <figcaption><strong>4. Create an object</strong>Use <code>new</code> to build an instance.</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="picture-icon" aria-hidden="true">🎛️</div>
+                            <figcaption><strong>5. Use the object</strong>Read its data and call its methods.</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="picture-icon" aria-hidden="true">▶️</div>
+                            <figcaption><strong>6. Run and check</strong>Compile, run, and compare the output.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <span class="tip-icon" aria-hidden="true">👀</span>
+                        <div>
+                            <strong>Picture it first</strong>
+                            <p>Whenever the code feels confusing, return to this map and identify which step you are doing.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="core-concepts" class="lesson-section">
+                    <p class="section-kicker">03 · Core concepts</p>
+                    <h2>Class vs. object</h2>
+
+                    <div class="concept-grid">
+                        <article class="concept-card class-concept">
+                            <span class="concept-number">01</span>
+                            <h3>Class</h3>
+                            <p>
+                                A class is a programmer-defined blueprint that describes the fields
+                                and methods its objects will have.
+                            </p>
+                            <code>class Student { ... }</code>
+                        </article>
+
+                        <article class="concept-card object-concept">
+                            <span class="concept-number">02</span>
+                            <h3>Object</h3>
+                            <p>
+                                An object is a real instance created from a class. It occupies memory
+                                and stores its own values.
+                            </p>
+                            <code>Student ana = new Student();</code>
+                        </article>
+                    </div>
+
+                    <div class="comparison-table-wrapper" role="region" aria-label="Class and object comparison" tabindex="0">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Basis</th>
+                                    <th scope="col">Class</th>
+                                    <th scope="col">Object</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Meaning</th>
+                                    <td>Blueprint or definition</td>
+                                    <td>Instance of the blueprint</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Creation</th>
+                                    <td>Declared using <code>class</code></td>
+                                    <td>Usually created using <code>new</code></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Memory</th>
+                                    <td>Defines what will be stored</td>
+                                    <td>Uses memory when instantiated</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Example</th>
+                                    <td><code>Car</code></td>
+                                    <td><code>myCar</code>, <code>yourCar</code></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Quantity</th>
+                                    <td>Defined once</td>
+                                    <td>Many objects can come from one class</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="class-anatomy" class="lesson-section">
+                    <p class="section-kicker">04 · Structure</p>
+                    <h2>Anatomy of a Java class</h2>
+                    <p>A basic class may contain a class name, fields, a constructor, and methods.</p>
+
+                    <div class="code-card">
+                        <div class="code-header">
+                            <span>Student.java</span>
+                            <span class="language-badge">JAVA</span>
+                        </div>
+                        <pre><code><span class="code-comment">// 1. Class declaration</span>
+<span class="code-keyword">public class</span> <span class="code-type">Student</span> {
+
+    <span class="code-comment">// 2. Fields: the object's state</span>
+    <span class="code-keyword">String</span> name;
+    <span class="code-keyword">int</span> age;
+
+    <span class="code-comment">// 3. Constructor: prepares a new object</span>
+    <span class="code-type">Student</span>(<span class="code-keyword">String</span> name, <span class="code-keyword">int</span> age) {
+        <span class="code-keyword">this</span>.name = name;
+        <span class="code-keyword">this</span>.age = age;
+    }
+
+    <span class="code-comment">// 4. Method: the object's behavior</span>
+    <span class="code-keyword">void</span> study() {
+        System.out.println(name + <span class="code-string">" is studying."</span>);
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="term-grid">
+                        <div><strong>Class name</strong><span>Names the new data type.</span></div>
+                        <div><strong>Fields</strong><span>Store an object's information.</span></div>
+                        <div><strong>Constructor</strong><span>Sets up a new object.</span></div>
+                        <div><strong>Methods</strong><span>Define what an object can do.</span></div>
+                    </div>
+                </section>
+
+                <section id="follow-along" class="lesson-section featured-section">
+                    <p class="section-kicker">05 · Follow along</p>
+                    <h2>Create your first object step by step</h2>
+                    <p>
+                        Open your Java editor and complete every numbered step. The picture at the
+                        left shows what you should be doing at that moment.
+                    </p>
+
+                    <div class="guided-steps">
+                        <article class="guided-step">
+                            <div class="step-picture" aria-hidden="true">📁</div>
+                            <div>
+                                <h3>Create a project folder</h3>
+                                <p>Make a folder named <code>FirstObject</code>. All files for this activity will stay inside it.</p>
+                                <p class="student-action"><strong>Your turn:</strong> Check that the folder name has no spaces.</p>
+                            </div>
+                        </article>
+
+                        <article class="guided-step">
+                            <div class="step-picture" aria-hidden="true">📄</div>
+                            <div>
+                                <h3>Create <code>Student.java</code></h3>
+                                <p>The filename and public class name must match exactly, including capital letters.</p>
+                                <div class="mini-code"><pre><code>public class Student {
+
+}</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="guided-step">
+                            <div class="step-picture" aria-hidden="true">🏷️</div>
+                            <div>
+                                <h3>Add two fields</h3>
+                                <p>Place these inside the class. They describe what every Student object knows.</p>
+                                <div class="mini-code"><pre><code>String name;
+int age;</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="guided-step">
+                            <div class="step-picture" aria-hidden="true">🧰</div>
+                            <div>
+                                <h3>Add the constructor</h3>
+                                <p>The constructor receives starting values and stores them in the new object.</p>
+                                <div class="mini-code"><pre><code>Student(String name, int age) {
+    this.name = name;
+    this.age = age;
+}</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="guided-step">
+                            <div class="step-picture" aria-hidden="true">💬</div>
+                            <div>
+                                <h3>Add a method</h3>
+                                <p>This behavior allows each Student object to introduce itself.</p>
+                                <div class="mini-code"><pre><code>void introduce() {
+    System.out.println("I am " + name
+        + " and I am " + age + ".");
+}</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="guided-step">
+                            <div class="step-picture" aria-hidden="true">🏗️</div>
+                            <div>
+                                <h3>Create and use the object</h3>
+                                <p>Add <code>main</code> inside the class, then create Ana and call her method.</p>
+                                <div class="mini-code"><pre><code>public static void main(String[] args) {
+    Student ana = new Student("Ana", 19);
+    ana.introduce();
+}</code></pre></div>
+                            </div>
+                        </article>
+
+                        <article class="guided-step">
+                            <div class="step-picture" aria-hidden="true">🖥️</div>
+                            <div>
+                                <h3>Compile and run</h3>
+                                <p>Open the terminal in your folder and enter the commands one line at a time.</p>
+                                <div class="mini-code"><pre><code>javac Student.java
+java Student</code></pre></div>
+                                <div class="output-box"><span>EXPECTED OUTPUT</span><code>I am Ana and I am 19.</code></div>
+                                <p class="student-action"><strong>Your turn:</strong> Change Ana to your name, change the age, and run again.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="progress-checklist" aria-label="Follow-along completion checklist">
+                        <strong>Student progress check</strong>
+                        <label><input type="checkbox"> I created the correct filename and class name.</label>
+                        <label><input type="checkbox"> I added fields, a constructor, and a method.</label>
+                        <label><input type="checkbox"> I compiled the program without errors.</label>
+                        <label><input type="checkbox"> I changed the data and ran the program again.</label>
+                    </div>
+                </section>
+
+                <section id="constructors" class="lesson-section">
+                    <p class="section-kicker">06 · Object creation</p>
+                    <h2>Constructors and the <code>new</code> keyword</h2>
+                    <p>
+                        A constructor is a special block that runs when an object is created. Its name
+                        must be the same as the class, and it has no return type—not even <code>void</code>.
+                    </p>
+
+                    <div class="two-column">
+                        <div>
+                            <h3>Default-style constructor</h3>
+                            <div class="mini-code"><pre><code>Student() {
+    name = <span class="code-string">"Unknown"</span>;
+    age = <span class="code-number">0</span>;
+}</code></pre></div>
+                            <p>Creates an object with starting values chosen by the class.</p>
+                        </div>
+                        <div>
+                            <h3>Parameterized constructor</h3>
+                            <div class="mini-code"><pre><code>Student(String n, int a) {
+    name = n;
+    age = a;
+}</code></pre></div>
+                            <p>Receives values so each object can start with different data.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-flow" aria-label="Steps for creating an object">
+                        <div><span>1</span><strong>Declare</strong><code>Student ana</code></div>
+                        <div><span>2</span><strong>Instantiate</strong><code>new Student(...)</code></div>
+                        <div><span>3</span><strong>Assign</strong><code>ana = object reference</code></div>
+                    </div>
+
+                    <div class="note-box">
+                        <strong>Important:</strong> If you do not write any constructor, Java can provide
+                        a no-argument default constructor. Once you write your own constructor, Java no
+                        longer adds that automatic one.
+                    </div>
+                </section>
+
+                <section id="members" class="lesson-section">
+                    <p class="section-kicker">07 · State and behavior</p>
+                    <h2>Fields, methods, and dot notation</h2>
+                    <p>
+                        Fields represent an object's state, while methods represent its behavior.
+                        Outside the class, accessible members are used with the dot operator (<code>.</code>).
+                    </p>
+
+                    <div class="state-behavior-grid">
+                        <article>
+                            <div class="card-icon" aria-hidden="true">Aa</div>
+                            <h3>State: fields</h3>
+                            <p>Values that describe an object at a particular moment.</p>
+                            <ul>
+                                <li><code>name</code> = "Ana"</li>
+                                <li><code>age</code> = 19</li>
+                                <li><code>course</code> = "BSIT"</li>
+                            </ul>
+                        </article>
+                        <article>
+                            <div class="card-icon" aria-hidden="true">( )</div>
+                            <h3>Behavior: methods</h3>
+                            <p>Actions an object can perform or operations it provides.</p>
+                            <ul>
+                                <li><code>study()</code></li>
+                                <li><code>introduce()</code></li>
+                                <li><code>takeExam()</code></li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header"><span>Using object members</span></div>
+                        <pre><code>Student ana = <span class="code-keyword">new</span> Student(<span class="code-string">"Ana"</span>, <span class="code-number">19</span>);
+
+System.out.println(ana.name); <span class="code-comment">// Read a field</span>
+ana.age = <span class="code-number">20</span>;              <span class="code-comment">// Change a field</span>
+ana.study();                <span class="code-comment">// Call a method</span></code></pre>
+                    </div>
+                </section>
+
+                <section id="this-keyword" class="lesson-section">
+                    <p class="section-kicker">08 · Current object</p>
+                    <h2>Understanding the <code>this</code> keyword</h2>
+                    <p>
+                        The keyword <code>this</code> refers to the current object. It is commonly used
+                        when a parameter has the same name as a field.
+                    </p>
+
+                    <div class="explanation-pair">
+                        <div class="code-card compact-code">
+                            <div class="code-header"><span>Without clear names</span></div>
+                            <pre><code>Student(String name) {
+    name = name; <span class="code-comment">// Wrong result</span>
+}</code></pre>
+                        </div>
+                        <div class="code-card compact-code correct-code">
+                            <div class="code-header"><span>Using this</span></div>
+                            <pre><code>Student(String name) {
+    <span class="code-keyword">this</span>.name = name; <span class="code-comment">// Correct</span>
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <p class="plain-explanation">
+                        Read <code>this.name = name</code> as: “Put the constructor's <code>name</code>
+                        value into the <code>name</code> field of this current object.”
+                    </p>
+                </section>
+
+                <section id="access" class="lesson-section">
+                    <p class="section-kicker">09 · Data protection</p>
+                    <h2>Access modifiers and encapsulation</h2>
+                    <p>
+                        Access modifiers control where a class or member can be used. Encapsulation
+                        protects internal data and allows the class to control valid changes.
+                    </p>
+
+                    <div class="comparison-table-wrapper" role="region" aria-label="Java access modifiers" tabindex="0">
+                        <table class="comparison-table access-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Modifier</th>
+                                    <th scope="col">Same class</th>
+                                    <th scope="col">Same package</th>
+                                    <th scope="col">Subclass</th>
+                                    <th scope="col">Everywhere</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><th scope="row"><code>private</code></th><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+                                <tr><th scope="row">default</th><td>Yes</td><td>Yes</td><td>Package only</td><td>No</td></tr>
+                                <tr><th scope="row"><code>protected</code></th><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+                                <tr><th scope="row"><code>public</code></th><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>Encapsulated field with getter and setter</span></div>
+                        <pre><code><span class="code-keyword">private int</span> age;
+
+<span class="code-keyword">public int</span> getAge() {
+    <span class="code-keyword">return</span> age;
+}
+
+<span class="code-keyword">public void</span> setAge(<span class="code-keyword">int</span> age) {
+    <span class="code-keyword">if</span> (age &gt;= <span class="code-number">0</span>) {
+        <span class="code-keyword">this</span>.age = age;
+    }
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="static-instance" class="lesson-section">
+                    <p class="section-kicker">10 · Member ownership</p>
+                    <h2>Instance members vs. static members</h2>
+
+                    <div class="concept-grid">
+                        <article class="concept-card">
+                            <span class="pill">PER OBJECT</span>
+                            <h3>Instance member</h3>
+                            <p>Belongs to one object. Different objects may hold different values.</p>
+                            <code>ana.name</code>
+                        </article>
+                        <article class="concept-card">
+                            <span class="pill pill-alt">SHARED</span>
+                            <h3>Static member</h3>
+                            <p>Belongs to the class itself and is shared by all of its objects.</p>
+                            <code>Student.schoolName</code>
+                        </article>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header"><span>Static and instance data</span></div>
+                        <pre><code><span class="code-keyword">class</span> <span class="code-type">Student</span> {
+    <span class="code-keyword">static String</span> schoolName = <span class="code-string">"Rizal College"</span>;
+    <span class="code-keyword">String</span> name;
+}
+
+System.out.println(Student.schoolName); <span class="code-comment">// Class access</span>
+System.out.println(ana.name);           <span class="code-comment">// Object access</span></code></pre>
+                    </div>
+                </section>
+
+                <section id="references" class="lesson-section">
+                    <p class="section-kicker">11 · Memory concept</p>
+                    <h2>Objects, references, and <code>null</code></h2>
+                    <p>
+                        An object variable normally holds a <strong>reference</strong> to an object,
+                        not the complete object itself. Two variables can therefore point to the same object.
+                    </p>
+
+                    <div class="reference-demo">
+                        <div class="reference-code">
+                            <code>Student first = new Student("Ana", 19);</code>
+                            <code>Student second = first;</code>
+                            <code>second.name = "Angela";</code>
+                        </div>
+                        <div class="memory-visual" aria-label="Two reference variables point to the same object">
+                            <div class="variables">
+                                <span>first</span>
+                                <span>second</span>
+                            </div>
+                            <div class="arrows" aria-hidden="true">↘<br>↗</div>
+                            <div class="memory-object"><small>Student object</small><strong>name: "Angela"</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Watch out for <code>null</code>.</strong>
+                        <p>
+                            A variable set to <code>null</code> points to no object. Calling a method through
+                            it causes a <code>NullPointerException</code>.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="overloading" class="lesson-section">
+                    <p class="section-kicker">12 · Flexible behavior</p>
+                    <h2>Method and constructor overloading</h2>
+                    <p>
+                        Overloading means using the same method or constructor name with different
+                        parameter lists. Java chooses the matching version from the arguments supplied.
+                    </p>
+
+                    <div class="picture-grid">
+                        <figure class="picture-card">
+                            <div class="picture-diagram" aria-label="One print method accepts text while another accepts a number">
+                                <span class="diagram-box">print(String)</span>
+                                <span class="diagram-arrow">↔</span>
+                                <span class="diagram-box">print(int)</span>
+                            </div>
+                            <figcaption><strong>Same name, different input</strong>The parameter type or quantity must be different.</figcaption>
+                        </figure>
+                        <figure class="picture-card">
+                            <div class="picture-diagram" aria-label="Two Student constructors create objects with different starting information">
+                                <span class="diagram-box">Student()</span>
+                                <span class="diagram-arrow">+</span>
+                                <span class="diagram-box">Student(name, age)</span>
+                            </div>
+                            <figcaption><strong>More than one way to build</strong>Constructors may provide simple or detailed starting options.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="code-card">
+                        <div class="code-header"><span>Overloaded constructors and methods</span></div>
+                        <pre><code>Student() {
+    this("Unknown", 0);
+}
+
+Student(String name, int age) {
+    this.name = name;
+    this.age = age;
+}
+
+void study() {
+    System.out.println(name + " is studying.");
+}
+
+void study(int minutes) {
+    System.out.println(name + " studies for " + minutes + " minutes.");
+}</code></pre>
+                    </div>
+
+                    <div class="note-box">
+                        <strong>Remember:</strong> Changing only the return type does not create a valid overload.
+                        The parameters must differ in number, type, or order.
+                    </div>
+                </section>
+
+                <section id="object-methods" class="lesson-section">
+                    <p class="section-kicker">13 · Useful object methods</p>
+                    <h2><code>toString()</code> and object equality</h2>
+                    <p>
+                        Every Java class ultimately receives useful behavior from <code>Object</code>.
+                        Beginners most often meet <code>toString()</code>, <code>equals()</code>, and <code>hashCode()</code>.
+                    </p>
+
+                    <div class="topic-cards">
+                        <article class="topic-card">
+                            <span class="topic-icon" aria-hidden="true">🪪</span>
+                            <h3><code>toString()</code></h3>
+                            <p>Returns a readable text description of an object.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-icon" aria-hidden="true">⚖️</span>
+                            <h3><code>equals()</code></h3>
+                            <p>Can compare whether two objects should be considered equal by content.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-icon" aria-hidden="true">#️⃣</span>
+                            <h3><code>hashCode()</code></h3>
+                            <p>Produces a number used by collections such as <code>HashSet</code> and <code>HashMap</code>.</p>
+                        </article>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header"><span>A readable Student object</span></div>
+                        <pre><code>@Override
+public String toString() {
+    return "Student{name='" + name + "', age=" + age + "}";
+}
+
+Student ana = new Student("Ana", 19);
+System.out.println(ana); <span class="code-comment">// Java calls ana.toString()</span></code></pre>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong><code>==</code> and <code>equals()</code> are not automatically the same.</strong>
+                        <p><code>==</code> checks whether two reference variables point to the same object. A properly overridden <code>equals()</code> can compare object content.</p>
+                    </div>
+                </section>
+
+                <section id="lifecycle" class="lesson-section">
+                    <p class="section-kicker">14 · Object life cycle</p>
+                    <h2>From creation to garbage collection</h2>
+                    <p>An object moves through a simple life cycle while the program runs.</p>
+
+                    <div class="picture-card">
+                        <div class="picture-diagram" aria-label="Object life cycle from class definition to garbage collection">
+                            <span class="diagram-box">Class</span>
+                            <span class="diagram-arrow">→</span>
+                            <span class="diagram-box">new Object()</span>
+                            <span class="diagram-arrow">→</span>
+                            <span class="diagram-box">Use object</span>
+                            <span class="diagram-arrow">→</span>
+                            <span class="diagram-box">No references</span>
+                            <span class="diagram-arrow">→</span>
+                            <span class="diagram-box">Garbage collection</span>
+                        </div>
+                        <strong>Visual sequence</strong>
+                        <p>The garbage collector may reclaim memory after an object can no longer be reached.</p>
+                    </div>
+
+                    <ol class="explanation-steps">
+                        <li><strong>Define.</strong> The class tells Java what the object will contain.</li>
+                        <li><strong>Create.</strong> <code>new</code> allocates memory and runs a constructor.</li>
+                        <li><strong>Use.</strong> References allow the program to access the object.</li>
+                        <li><strong>Disconnect.</strong> The object becomes eligible for collection when no live reference can reach it.</li>
+                        <li><strong>Reclaim.</strong> Java automatically manages the memory; the exact collection time is not guaranteed.</li>
+                    </ol>
+                </section>
+
+                <section id="example" class="lesson-section featured-section">
+                    <p class="section-kicker">15 · Guided example</p>
+                    <h2>Complete example: a bank account</h2>
+                    <p>
+                        This example combines private fields, a constructor, methods, validation,
+                        two objects, and dot notation.
+                    </p>
+
+                    <div class="code-card">
+                        <div class="code-header">
+                            <span>BankAccount.java</span>
+                            <span class="language-badge">JAVA</span>
+                        </div>
+                        <pre><code><span class="code-keyword">public class</span> <span class="code-type">BankAccount</span> {
+    <span class="code-keyword">private String</span> owner;
+    <span class="code-keyword">private double</span> balance;
+
+    <span class="code-keyword">public</span> <span class="code-type">BankAccount</span>(<span class="code-keyword">String</span> owner, <span class="code-keyword">double</span> balance) {
+        <span class="code-keyword">this</span>.owner = owner;
+        <span class="code-keyword">this</span>.balance = balance;
+    }
+
+    <span class="code-keyword">public void</span> deposit(<span class="code-keyword">double</span> amount) {
+        <span class="code-keyword">if</span> (amount &gt; <span class="code-number">0</span>) {
+            balance += amount;
+        }
+    }
+
+    <span class="code-keyword">public void</span> withdraw(<span class="code-keyword">double</span> amount) {
+        <span class="code-keyword">if</span> (amount &gt; <span class="code-number">0</span> &amp;&amp; amount &lt;= balance) {
+            balance -= amount;
+        }
+    }
+
+    <span class="code-keyword">public void</span> displayAccount() {
+        System.out.println(owner + <span class="code-string">": ₱"</span> + balance);
+    }
+
+    <span class="code-keyword">public static void</span> main(<span class="code-keyword">String</span>[] args) {
+        BankAccount ana = <span class="code-keyword">new</span> BankAccount(<span class="code-string">"Ana"</span>, <span class="code-number">1000</span>);
+        BankAccount ben = <span class="code-keyword">new</span> BankAccount(<span class="code-string">"Ben"</span>, <span class="code-number">500</span>);
+
+        ana.deposit(<span class="code-number">250</span>);
+        ben.withdraw(<span class="code-number">100</span>);
+
+        ana.displayAccount();
+        ben.displayAccount();
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="output-box">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Ana: ₱1250.0<br>Ben: ₱400.0</code>
+                    </div>
+
+                    <ol class="explanation-steps">
+                        <li><strong>The class is defined.</strong> <code>BankAccount</code> describes the fields and available actions.</li>
+                        <li><strong>Two objects are created.</strong> <code>ana</code> and <code>ben</code> each receive separate data.</li>
+                        <li><strong>Methods change state.</strong> Depositing affects Ana's balance; withdrawing affects Ben's balance.</li>
+                        <li><strong>Each object keeps its own state.</strong> A change to one account does not automatically change the other.</li>
+                    </ol>
+                </section>
+
+                <section id="mistakes" class="lesson-section">
+                    <p class="section-kicker">16 · Troubleshooting</p>
+                    <h2>Common beginner mistakes</h2>
+
+                    <div class="mistake-list">
+                        <article>
+                            <span>01</span>
+                            <div>
+                                <h3>Forgetting <code>new</code></h3>
+                                <p><code>Student ana;</code> only declares a variable. It does not create a Student object.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span>02</span>
+                            <div>
+                                <h3>Giving a constructor a return type</h3>
+                                <p><code>void Student()</code> is a method, not a constructor. Remove <code>void</code>.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span>03</span>
+                            <div>
+                                <h3>Accessing a private field directly</h3>
+                                <p>Use the class's public getter, setter, or behavior method instead.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span>04</span>
+                            <div>
+                                <h3>Confusing a class name with a variable name</h3>
+                                <p><code>Student</code> is a type; <code>ana</code> is a variable referring to an object.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span>05</span>
+                            <div>
+                                <h3>Using an uninitialized or null reference</h3>
+                                <p>Make sure the variable points to an object before accessing its members.</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="activity" class="lesson-section">
+                    <p class="section-kicker">17 · Apply your learning</p>
+                    <h2>Classroom and coding activities</h2>
+
+                    <div class="activity-grid">
+                        <article class="activity-card">
+                            <span class="activity-label">ACTIVITY A · 10 MIN</span>
+                            <h3>Blueprint challenge</h3>
+                            <p>Choose one real-world item: a phone, book, employee, or vehicle.</p>
+                            <ol>
+                                <li>Write a suitable class name.</li>
+                                <li>List at least four fields.</li>
+                                <li>List at least three methods.</li>
+                                <li>Describe two different objects from that class.</li>
+                            </ol>
+                        </article>
+
+                        <article class="activity-card">
+                            <span class="activity-label">ACTIVITY B · 20 MIN</span>
+                            <h3>Build a <code>Book</code> class</h3>
+                            <ol>
+                                <li>Add <code>title</code>, <code>author</code>, and <code>pages</code>.</li>
+                                <li>Create a parameterized constructor.</li>
+                                <li>Add a <code>displayInfo()</code> method.</li>
+                                <li>Create and display two Book objects.</li>
+                            </ol>
+                        </article>
+
+                        <article class="activity-card challenge-card">
+                            <span class="activity-label">CHALLENGE · 25 MIN</span>
+                            <h3>Improve the bank account</h3>
+                            <p>Add the following to the guided example:</p>
+                            <ul>
+                                <li>A private account number</li>
+                                <li>A <code>getBalance()</code> method</li>
+                                <li>A message for an invalid withdrawal</li>
+                                <li>A static counter for created accounts</li>
+                            </ul>
+                        </article>
+
+                        <article class="activity-card">
+                            <span class="activity-label">ACTIVITY C · 20 MIN</span>
+                            <h3>Trace the references</h3>
+                            <p>Draw boxes and arrows for each line of this program:</p>
+                            <div class="mini-code"><pre><code>Student a = new Student("Mia", 18);
+Student b = a;
+b.name = "Maria";</code></pre></div>
+                            <ol>
+                                <li>Draw the object after line 1.</li>
+                                <li>Add arrows for <code>a</code> and <code>b</code>.</li>
+                                <li>Write the final value printed by <code>a.name</code>.</li>
+                            </ol>
+                        </article>
+
+                        <article class="activity-card">
+                            <span class="activity-label">ACTIVITY D · 30 MIN</span>
+                            <h3>Build a <code>Product</code> class</h3>
+                            <ol>
+                                <li>Use private fields for name, price, and stock.</li>
+                                <li>Add two overloaded constructors.</li>
+                                <li>Add <code>sell(int quantity)</code> with validation.</li>
+                                <li>Override <code>toString()</code>.</li>
+                                <li>Create and test three products.</li>
+                            </ol>
+                        </article>
+
+                        <article class="activity-card challenge-card">
+                            <span class="activity-label">PAIR ACTIVITY · 15 MIN</span>
+                            <h3>Code detective</h3>
+                            <p>Partner A writes a class containing three intentional mistakes. Partner B finds, explains, and fixes each mistake. Then switch roles.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="assessment" class="lesson-section assessment-section">
+                    <p class="section-kicker">18 · Check your understanding</p>
+                    <h2>Quick assessment</h2>
+                    <p>Answer each question before opening its answer.</p>
+
+                    <div class="question-list">
+                        <details>
+                            <summary><span>1</span> What is the main difference between a class and an object?</summary>
+                            <p><strong>Answer:</strong> A class is a blueprint or definition, while an object is an instance created from that class.</p>
+                        </details>
+                        <details>
+                            <summary><span>2</span> Which keyword is commonly used to create a Java object?</summary>
+                            <p><strong>Answer:</strong> The <code>new</code> keyword.</p>
+                        </details>
+                        <details>
+                            <summary><span>3</span> What is the purpose of a constructor?</summary>
+                            <p><strong>Answer:</strong> It initializes a new object when the object is created.</p>
+                        </details>
+                        <details>
+                            <summary><span>4</span> What does <code>this.name = name;</code> mean?</summary>
+                            <p><strong>Answer:</strong> It assigns the parameter named <code>name</code> to the current object's <code>name</code> field.</p>
+                        </details>
+                        <details>
+                            <summary><span>5</span> Which member belongs to the class rather than to each object?</summary>
+                            <p><strong>Answer:</strong> A member declared with <code>static</code>.</p>
+                        </details>
+                        <details>
+                            <summary><span>6</span> Why are fields often declared <code>private</code>?</summary>
+                            <p><strong>Answer:</strong> To protect the object's internal state and control access through methods.</p>
+                        </details>
+                        <details>
+                            <summary><span>7</span> What makes two methods valid overloads?</summary>
+                            <p><strong>Answer:</strong> They share a name but have different parameter lists by number, type, or order.</p>
+                        </details>
+                        <details>
+                            <summary><span>8</span> What does <code>==</code> compare when used with objects?</summary>
+                            <p><strong>Answer:</strong> It checks whether two references point to the same object.</p>
+                        </details>
+                        <details>
+                            <summary><span>9</span> When can an object become eligible for garbage collection?</summary>
+                            <p><strong>Answer:</strong> When it can no longer be reached through any live reference.</p>
+                        </details>
+                        <details>
+                            <summary><span>10</span> What is the purpose of <code>toString()</code>?</summary>
+                            <p><strong>Answer:</strong> It returns a readable text representation of an object.</p>
+                        </details>
+                    </div>
+
+                    <div class="exit-ticket">
+                        <h3>Exit ticket</h3>
+                        <p>Complete these three sentences in your own words:</p>
+                        <ol>
+                            <li>A class is...</li>
+                            <li>An object is...</li>
+                            <li>One thing I can now create is...</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="glossary" class="lesson-section">
+                    <p class="section-kicker">19 · Review vocabulary</p>
+                    <h2>Key words to remember</h2>
+                    <dl class="glossary-grid">
+                        <div><dt>Class</dt><dd>A blueprint that defines fields and methods.</dd></div>
+                        <div><dt>Object</dt><dd>A working instance created from a class.</dd></div>
+                        <div><dt>Field</dt><dd>A variable that stores object or class data.</dd></div>
+                        <div><dt>Method</dt><dd>A named block of behavior.</dd></div>
+                        <div><dt>Constructor</dt><dd>A special block that initializes a new object.</dd></div>
+                        <div><dt>Reference</dt><dd>A value that points to an object in memory.</dd></div>
+                        <div><dt>Encapsulation</dt><dd>Protecting data and controlling how it changes.</dd></div>
+                        <div><dt>Instance</dt><dd>Another word for an object created from a class.</dd></div>
+                        <div><dt>Static</dt><dd>Belonging to the class and shared by its objects.</dd></div>
+                        <div><dt>Overloading</dt><dd>One name with multiple parameter lists.</dd></div>
+                    </dl>
+                </section>
+
+                <section class="lesson-section recap-section" aria-labelledby="recap-title">
+                    <p class="section-kicker">Lesson recap</p>
+                    <h2 id="recap-title">Remember these five ideas</h2>
+                    <div class="recap-grid">
+                        <div><span>1</span><p>A <strong>class</strong> is a blueprint.</p></div>
+                        <div><span>2</span><p>An <strong>object</strong> is an instance.</p></div>
+                        <div><span>3</span><p><strong>Fields</strong> store state.</p></div>
+                        <div><span>4</span><p><strong>Methods</strong> define behavior.</p></div>
+                        <div><span>5</span><p>A <strong>constructor</strong> initializes an object.</p></div>
+                    </div>
+                    <a class="button button-primary" href="#top">Back to the top</a>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <strong>OOP Learning Module</strong>
+            <p>Classes and Objects · Java Programming Fundamentals</p>
+        </div>
+        <p>Designed for classroom discussion, self-study, and review.</p>
+    </footer>
+</body>
+</html>

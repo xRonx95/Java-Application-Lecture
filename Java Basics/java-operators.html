@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A clear lesson on Java arithmetic, assignment, comparison, logical, unary, ternary, and bitwise operators.">
+  <title>Java Operators | Java Basics</title>
+    <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="stylesheet" href="../css/Java Basics/java-basics.css">
+</head>
+<body>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="java-syntax.html"><span class="brand-mark">J</span> Java Basics</a><nav class="lesson-nav" aria-label="Java lessons"><a href="../index.html">Home</a><a href="java-syntax.html">Syntax</a><a href="variables-data-types.html">Variables</a><a href="java-operators.html" aria-current="page">Operators</a><a href="conditions-loops.html">Conditions &amp; Loops</a></nav></div></header>
+  <section class="hero"><div class="hero-inner"><p class="eyebrow">Lesson 3 · Java Basics</p><h1>Java Operators and Expressions</h1><p>Learn how operators calculate values, compare information, combine conditions, update variables, and build expressions that Java can evaluate.</p></div></section>
+
+  <main class="lesson-layout">
+    <aside class="table-of-contents" aria-label="On this page"><h2>On this page</h2><ol><li><a href="#objectives">Objectives</a></li><li><a href="#expressions">Expressions</a></li><li><a href="#arithmetic">Arithmetic</a></li><li><a href="#assignment">Assignment</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#logical">Logical</a></li><li><a href="#unary">Unary</a></li><li><a href="#ternary">Ternary</a></li><li><a href="#precedence">Precedence</a></li><li><a href="#bitwise">Bitwise</a></li><li><a href="#practice">Practice</a></li></ol></aside>
+    <article class="lesson-content">
+      <section class="lesson-section" id="objectives"><h2>Learning Objectives</h2><div class="objective-grid"><div class="objective"><strong>Calculate</strong><p>results using arithmetic and compound assignment operators.</p></div><div class="objective"><strong>Compare</strong><p>values and create boolean expressions.</p></div><div class="objective"><strong>Combine</strong><p>conditions using logical operators and short-circuit evaluation.</p></div><div class="objective"><strong>Predict</strong><p>expression results using associativity and precedence.</p></div></div></section>
+
+      <section class="lesson-section" id="expressions">
+        <h2>1. Operators, Operands, and Expressions</h2>
+        <p>An <strong>operator</strong> is a symbol that performs an action. An <strong>operand</strong> is a value used by the operator. An <strong>expression</strong> is a combination that produces a result.</p>
+        <div class="code-example"><div class="code-title"><span>An expression</span><span>10 and 5 are operands; + is the operator</span></div><pre><code><span class="type">int</span> result = <span class="number">10</span> + <span class="number">5</span>; <span class="comment">// expression evaluates to 15</span></code></pre></div>
+      </section>
+
+      <section class="lesson-section" id="arithmetic">
+        <h2>2. Arithmetic Operators</h2>
+        <div class="data-table-wrap"><table class="data-table"><thead><tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr></thead><tbody>
+          <tr><td><code>+</code></td><td>Addition</td><td><code>10 + 3</code></td><td><code>13</code></td></tr><tr><td><code>-</code></td><td>Subtraction</td><td><code>10 - 3</code></td><td><code>7</code></td></tr><tr><td><code>*</code></td><td>Multiplication</td><td><code>10 * 3</code></td><td><code>30</code></td></tr><tr><td><code>/</code></td><td>Division</td><td><code>10 / 3</code></td><td><code>3</code> for integers</td></tr><tr><td><code>%</code></td><td>Remainder</td><td><code>10 % 3</code></td><td><code>1</code></td></tr>
+        </tbody></table></div>
+        <h3>Useful modulo patterns</h3>
+        <div class="code-example"><div class="code-title"><span>Remainder operator</span><span>Java</span></div><pre><code><span class="type">boolean</span> isEven = number % <span class="number">2</span> == <span class="number">0</span>;
+<span class="type">int</span> lastDigit = number % <span class="number">10</span>;
+<span class="type">int</span> nextPosition = (currentPosition + <span class="number">1</span>) % totalPositions;</code></pre></div>
+        <h3>String concatenation</h3>
+        <p>The plus sign joins strings. Evaluation proceeds from left to right unless parentheses change it.</p>
+        <div class="code-example"><div class="code-title"><span>Concatenation</span><span>Watch the order</span></div><pre><code>System.out.println(<span class="string">"Total: "</span> + <span class="number">5</span> + <span class="number">3</span>);   <span class="comment">// Total: 53</span>
+System.out.println(<span class="string">"Total: "</span> + (<span class="number">5</span> + <span class="number">3</span>)); <span class="comment">// Total: 8</span></code></pre></div>
+      </section>
+
+      <section class="lesson-section" id="assignment">
+        <h2>3. Assignment Operators</h2>
+        <p>The simple assignment operator <code class="inline-code">=</code> places the value on its right into the variable on its left. Compound operators calculate and assign in one step.</p>
+        <div class="data-table-wrap"><table class="data-table"><thead><tr><th>Short form</th><th>Equivalent form</th><th>Effect</th></tr></thead><tbody><tr><td><code>x += 5</code></td><td><code>x = x + 5</code></td><td>Add and store</td></tr><tr><td><code>x -= 5</code></td><td><code>x = x - 5</code></td><td>Subtract and store</td></tr><tr><td><code>x *= 5</code></td><td><code>x = x * 5</code></td><td>Multiply and store</td></tr><tr><td><code>x /= 5</code></td><td><code>x = x / 5</code></td><td>Divide and store</td></tr><tr><td><code>x %= 5</code></td><td><code>x = x % 5</code></td><td>Store remainder</td></tr></tbody></table></div>
+        <div class="warning"><strong>Do not confuse:</strong> <code class="inline-code">=</code> assigns a value, while <code class="inline-code">==</code> asks whether two primitive values are equal.</div>
+      </section>
+
+      <section class="lesson-section" id="comparison">
+        <h2>4. Comparison Operators</h2>
+        <p>Comparison expressions always produce <code class="inline-code">true</code> or <code class="inline-code">false</code>.</p>
+        <div class="data-table-wrap"><table class="data-table"><thead><tr><th>Operator</th><th>Question</th><th>Example</th></tr></thead><tbody><tr><td><code>==</code></td><td>Equal?</td><td><code>score == 100</code></td></tr><tr><td><code>!=</code></td><td>Not equal?</td><td><code>status != 0</code></td></tr><tr><td><code>&gt;</code></td><td>Greater than?</td><td><code>age &gt; 17</code></td></tr><tr><td><code>&lt;</code></td><td>Less than?</td><td><code>temperature &lt; 20</code></td></tr><tr><td><code>&gt;=</code></td><td>Greater than or equal?</td><td><code>grade &gt;= 75</code></td></tr><tr><td><code>&lt;=</code></td><td>Less than or equal?</td><td><code>items &lt;= limit</code></td></tr></tbody></table></div>
+        <div class="note"><strong>Strings are objects:</strong> Compare their content with <code class="inline-code">firstName.equals(secondName)</code>. The <code>==</code> operator checks whether references point to the same object.</div>
+      </section>
+
+      <section class="lesson-section" id="logical">
+        <h2>5. Logical Operators</h2>
+        <div class="data-table-wrap"><table class="data-table"><thead><tr><th>Operator</th><th>Name</th><th>True when…</th></tr></thead><tbody><tr><td><code>&amp;&amp;</code></td><td>AND</td><td>Both conditions are true</td></tr><tr><td><code>||</code></td><td>OR</td><td>At least one condition is true</td></tr><tr><td><code>!</code></td><td>NOT</td><td>The condition is reversed</td></tr></tbody></table></div>
+        <div class="code-example"><div class="code-title"><span>Eligibility rules</span><span>Boolean expressions</span></div><pre><code><span class="type">boolean</span> canEnroll = age &gt;= <span class="number">18</span> &amp;&amp; hasRequirements;
+<span class="type">boolean</span> getsDiscount = isSenior || isStudent;
+<span class="type">boolean</span> accountBlocked = !isActive;</code></pre></div>
+        <h3>Short-circuit evaluation</h3>
+        <p>With <code class="inline-code">&amp;&amp;</code>, Java stops when the first condition is false. With <code class="inline-code">||</code>, it stops when the first condition is true. This can prevent unsafe work.</p>
+        <div class="code-example"><div class="code-title"><span>Safe check</span><span>Avoid NullPointerException</span></div><pre><code><span class="keyword">if</span> (name != <span class="keyword">null</span> &amp;&amp; name.length() &gt; <span class="number">0</span>) {
+    System.out.println(name);
+}</code></pre></div>
+      </section>
+
+      <section class="lesson-section" id="unary">
+        <h2>6. Unary and Increment Operators</h2>
+        <p>Unary operators work with one operand. <code class="inline-code">++</code> adds one, <code class="inline-code">--</code> subtracts one, unary <code>-</code> changes a number’s sign, and <code class="inline-code">!</code> reverses a boolean.</p>
+        <div class="code-example"><div class="code-title"><span>Prefix vs postfix</span><span>Java</span></div><pre><code><span class="type">int</span> x = <span class="number">5</span>;
+<span class="type">int</span> a = ++x; <span class="comment">// x becomes 6, then a receives 6</span>
+
+<span class="type">int</span> y = <span class="number">5</span>;
+<span class="type">int</span> b = y++; <span class="comment">// b receives 5, then y becomes 6</span></code></pre></div>
+        <p>As a standalone statement, both <code>x++;</code> and <code>++x;</code> simply add one. Avoid placing several increments in one expression because the result is harder to read.</p>
+      </section>
+
+      <section class="lesson-section" id="ternary">
+        <h2>7. The Ternary Operator</h2>
+        <p>The ternary operator selects one of two values using the pattern <code class="inline-code">condition ? valueIfTrue : valueIfFalse</code>.</p>
+        <div class="code-example"><div class="code-title"><span>Short decision</span><span>Java</span></div><pre><code><span class="type">String</span> result = grade &gt;= <span class="number">75</span> ? <span class="string">"Passed"</span> : <span class="string">"Failed"</span>;
+<span class="type">int</span> larger = first &gt; second ? first : second;</code></pre></div>
+        <div class="teacher-tip"><strong>Use it well:</strong> The ternary operator is ideal for a short choice that returns a value. Use a normal <code>if-else</code> when each branch performs several actions.</div>
+      </section>
+
+      <section class="lesson-section" id="precedence">
+        <h2>8. Operator Precedence</h2>
+        <p>Precedence decides which operator is evaluated first. Parentheses have the highest practical priority and make intent clearer.</p>
+        <ol><li>Parentheses: <code>( )</code></li><li>Unary: <code>!</code>, <code>++</code>, <code>--</code>, unary <code>+ -</code></li><li>Multiplicative: <code>* / %</code></li><li>Additive: <code>+ -</code></li><li>Comparison: <code>&lt; &lt;= &gt; &gt;=</code></li><li>Equality: <code>== !=</code></li><li>Logical AND: <code>&amp;&amp;</code></li><li>Logical OR: <code>||</code></li><li>Ternary and assignment</li></ol>
+        <div class="code-example"><div class="code-title"><span>Precedence</span><span>Parentheses improve clarity</span></div><pre><code><span class="type">int</span> first = <span class="number">2</span> + <span class="number">3</span> * <span class="number">4</span>;    <span class="comment">// 14</span>
+<span class="type">int</span> second = (<span class="number">2</span> + <span class="number">3</span>) * <span class="number">4</span>; <span class="comment">// 20</span></code></pre></div>
+      </section>
+
+      <section class="lesson-section" id="bitwise">
+        <h2>9. Bitwise Operators (Enrichment)</h2>
+        <p>Bitwise operators work on the binary digits of integer values. They are common in low-level programming, flags, graphics, and performance-sensitive code.</p>
+        <div class="data-table-wrap"><table class="data-table"><thead><tr><th>Operator</th><th>Action</th></tr></thead><tbody><tr><td><code>&amp;</code></td><td>Bitwise AND</td></tr><tr><td><code>|</code></td><td>Bitwise OR</td></tr><tr><td><code>^</code></td><td>Bitwise XOR</td></tr><tr><td><code>~</code></td><td>Bitwise complement</td></tr><tr><td><code>&lt;&lt;</code></td><td>Left shift</td></tr><tr><td><code>&gt;&gt;</code></td><td>Signed right shift</td></tr></tbody></table></div>
+      </section>
+
+      <section class="lesson-section" id="practice">
+        <h2>Practice and Review</h2>
+        <div class="practice-box"><h3>Activity: Simple Cashier</h3><p>Store a price and quantity, calculate subtotal, add a 12% tax, and show the total. Then create a boolean named <code class="inline-code">qualifiesForDiscount</code> that becomes true when the subtotal is at least 1,000.</p></div>
+        <h3>Quick check</h3><details><summary>1. What is 17 % 5?</summary><p><code>2</code>, because 17 divided by 5 leaves a remainder of 2.</p></details><details><summary>2. What is the result of true &amp;&amp; false?</summary><p><code>false</code>. AND is true only when both operands are true.</p></details><details><summary>3. Why use parentheses even when you know precedence?</summary><p>They make the intended order explicit and reduce mistakes for readers.</p></details>
+      </section>
+
+      <nav class="lesson-pagination" aria-label="Lesson navigation"><a class="page-link" href="variables-data-types.html">← Previous: Variables</a><a class="page-link next" href="conditions-loops.html">Next: Conditions &amp; Loops →</a></nav>
+    </article>
+  </main>
+  <footer class="site-footer"><p>Java Basics Learning Module</p><p>Lesson 5 of 6 · Java Operators</p></footer>
+</body>
+</html>

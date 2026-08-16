@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Annotated JFrame interface</title>
+  <desc id="desc">A professional student management form with labeled input, action, and data display areas.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eaf3fa"/><stop offset="1" stop-color="#dce9f3"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0d2138" flood-opacity=".2"/></filter><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0l10 5-10 5z" fill="#d7a33b"/></marker></defs>
+  <rect width="1200" height="700" rx="25" fill="url(#bg)"/>
+  <g filter="url(#s)">
+    <rect x="110" y="70" width="980" height="560" rx="18" fill="#f5f7fa" stroke="#9eafbd"/>
+    <rect x="110" y="70" width="980" height="58" rx="18" fill="#0d2138"/><rect x="110" y="110" width="980" height="18" fill="#0d2138"/>
+    <circle cx="140" cy="99" r="7" fill="#e16862"/><circle cx="164" cy="99" r="7" fill="#e2b353"/><circle cx="188" cy="99" r="7" fill="#5fb477"/><text x="222" y="106" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#fff">Student Record Management</text>
+    <rect x="138" y="154" width="300" height="422" rx="12" fill="#fff" stroke="#cbd6df"/>
+    <text x="164" y="191" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#0d2138">Selected Student</text>
+    <g font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#3d4d5f">
+      <text x="164" y="227">FULL NAME</text><rect x="164" y="238" width="248" height="39" rx="6" fill="#fff" stroke="#aab9c6"/><text x="178" y="263" font-size="14" font-weight="400">Ana Reyes</text>
+      <text x="164" y="308">COURSE</text><rect x="164" y="319" width="248" height="39" rx="6" fill="#fff" stroke="#aab9c6"/><text x="178" y="344" font-size="14" font-weight="400">BS Information Technology</text>
+      <text x="164" y="389">YEAR LEVEL</text><rect x="164" y="400" width="248" height="39" rx="6" fill="#fff" stroke="#aab9c6"/><text x="178" y="425" font-size="14" font-weight="400">3</text>
+      <text x="164" y="470">EMAIL ADDRESS</text><rect x="164" y="481" width="248" height="39" rx="6" fill="#fff" stroke="#aab9c6"/><text x="178" y="506" font-size="13" font-weight="400">ana.reyes@example.edu</text>
+    </g>
+    <rect x="164" y="537" width="112" height="38" rx="7" fill="#2563a8"/><text x="220" y="561" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#fff">UPDATE</text>
+    <rect x="286" y="537" width="126" height="38" rx="7" fill="#a93636"/><text x="349" y="561" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#fff">DELETE</text>
+    <rect x="464" y="154" width="598" height="422" rx="12" fill="#fff" stroke="#cbd6df"/>
+    <text x="490" y="190" font-family="Arial, sans-serif" font-size="14" fill="#59687a">Select a row to update or delete a student record.</text>
+    <rect x="490" y="214" width="546" height="42" fill="#15334f"/>
+    <g font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff"><text x="510" y="240">ID</text><text x="565" y="240">FULL NAME</text><text x="717" y="240">COURSE</text><text x="866" y="240">YEAR</text><text x="940" y="240">EMAIL</text></g>
+    <rect x="490" y="256" width="546" height="50" fill="#e9f3fc"/><rect x="490" y="306" width="546" height="50" fill="#fff"/><rect x="490" y="356" width="546" height="50" fill="#f8fafc"/>
+    <g font-family="Arial, sans-serif" font-size="13" fill="#24384d"><text x="510" y="287">1</text><text x="565" y="287">Ana Reyes</text><text x="717" y="287">BSIT</text><text x="877" y="287">3</text><text x="940" y="287">ana@school.edu</text><text x="510" y="337">2</text><text x="565" y="337">Marco Santos</text><text x="717" y="337">BSCS</text><text x="877" y="337">3</text><text x="940" y="337">marco@school.edu</text></g>
+    <rect x="490" y="520" width="546" height="34" rx="5" fill="#eef3f7"/><circle cx="512" cy="537" r="6" fill="#5fb477"/><text x="528" y="542" font-family="Arial, sans-serif" font-size="12" fill="#59687a">2 student records loaded</text>
+  </g>
+  <g font-family="Arial, sans-serif"><path d="M265 29v108" stroke="#d7a33b" stroke-width="4" marker-end="url(#a)"/><rect x="149" y="8" width="232" height="38" rx="19" fill="#0d2138"/><text x="265" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1 · JFrame title and context</text><path d="M45 355h92" stroke="#d7a33b" stroke-width="4" marker-end="url(#a)"/><rect x="12" y="303" width="117" height="38" rx="19" fill="#0d2138"/><text x="70" y="328" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2 · Input</text><path d="M286 655v-70" stroke="#d7a33b" stroke-width="4" marker-end="url(#a)"/><rect x="178" y="648" width="216" height="38" rx="19" fill="#0d2138"/><text x="286" y="673" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">3 · Action buttons</text><path d="M1138 360h-72" stroke="#d7a33b" stroke-width="4" marker-end="url(#a)"/><rect x="1071" y="307" width="117" height="38" rx="19" fill="#0d2138"/><text x="1129" y="332" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">4 · JTable</text><path d="M850 655v-88" stroke="#d7a33b" stroke-width="4" marker-end="url(#a)"/><rect x="735" y="648" width="230" height="38" rx="19" fill="#0d2138"/><text x="850" y="673" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">5 · Status feedback</text></g>
+</svg>

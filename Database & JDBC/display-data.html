@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A formal step-by-step lesson module about databases, JDBC, and displaying MySQL records in a web page.">
+  <title>Database &amp; JDBC | Lesson Module</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <!-- Separate page stylesheet -->
+  <link rel="stylesheet" href="../css/Database & JDBC/display-data.css?v=2">
+  <script src="../js/display-data.js?v=2" defer></script>
+</head>
+<body>
+  <div class="reading-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Database and JDBC lesson home">
+        <span class="brand-mark" aria-hidden="true">DB</span>
+        <span><strong>Computer Programming</strong><small>Professional Learning Module</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="lesson-navigation">
+        <span></span><span></span><span></span><span class="sr-only">Open lesson menu</span>
+      </button>
+      <nav class="lesson-nav" id="lesson-navigation" aria-label="Lesson sections">
+        <a href="#overview" class="active">Overview</a>
+        <a href="#concepts">Concepts</a>
+        <a href="#procedure">Procedure</a>
+        <a href="#practice">Practice</a>
+        <a href="#assessment">Assessment</a>
+        <a href="../index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="overview">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>Lesson 05</span> Database Programming</p>
+          <h1>Database &amp; <span>JDBC</span></h1>
+          <p class="hero-subtitle">Retrieving MySQL records with Java and presenting them clearly in <code>display-data.html</code></p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#objectives">Begin the lesson</a>
+            <a class="button button-secondary" href="#procedure">View the procedure</a>
+          </div>
+          <dl class="lesson-meta" aria-label="Lesson information">
+            <div><dt>Level</dt><dd>Intermediate</dd></div>
+            <div><dt>Duration</dt><dd>90–120 minutes</dd></div>
+            <div><dt>Output</dt><dd>Working records page</dd></div>
+          </dl>
+        </div>
+        <div class="hero-visual" aria-label="JDBC code illustration">
+          <div class="window-bar"><span></span><span></span><span></span><b>StudentServlet.java</b></div>
+          <pre><code><span class="code-comment">// 1. Connect to MySQL</span>
+Connection conn =
+  DBConnection.getConnection();
+
+<span class="code-comment">// 2. Execute the query</span>
+PreparedStatement stmt =
+  conn.prepareStatement(
+    <span class="code-string">"SELECT * FROM students"</span>
+  );
+
+<span class="code-comment">// 3. Read every row</span>
+ResultSet rs = stmt.executeQuery();</code></pre>
+          <div class="status-pill"><span></span> Database connected</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" id="objectives">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Learning guide</p>
+          <h2>What you will learn</h2>
+          <p>At the end of this lesson, learners should be able to explain the complete data flow and build a secure read-only JDBC feature.</p>
+        </div>
+        <div class="objective-grid">
+          <article class="objective-card"><span>01</span><h3>Explain</h3><p>Define a database, DBMS, JDBC, driver, connection, statement, and result set.</p></article>
+          <article class="objective-card"><span>02</span><h3>Prepare</h3><p>Create a MySQL database and a structured table with appropriate data types.</p></article>
+          <article class="objective-card"><span>03</span><h3>Connect</h3><p>Use the MySQL Connector/J driver to connect a Java application to MySQL.</p></article>
+          <article class="objective-card"><span>04</span><h3>Display</h3><p>Retrieve rows safely and present them as a readable, responsive HTML table.</p></article>
+        </div>
+        <aside class="prerequisite-box">
+          <div class="callout-icon" aria-hidden="true">✓</div>
+          <div><h3>Before you begin</h3><p>Students should understand basic Java classes, SQL commands, HTML tables, and how to start MySQL and Apache Tomcat. Prepare JDK 17+, MySQL 8+, an IDE, Tomcat 10+, and MySQL Connector/J.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="concepts">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Part I · Core concepts</p>
+          <h2>Understand the system before coding</h2>
+          <p>A working database feature depends on several components. Each one has a clear responsibility.</p>
+        </div>
+        <div class="concept-grid">
+          <article><div class="concept-icon">DB</div><h3>Database</h3><p>An organized collection of related data. In this module, the database stores student records in rows and columns.</p></article>
+          <article><div class="concept-icon">SQL</div><h3>DBMS</h3><p>Database Management System software—such as MySQL—that creates, stores, protects, and retrieves data.</p></article>
+          <article><div class="concept-icon">J</div><h3>JDBC API</h3><p>Java Database Connectivity provides standard Java interfaces for connecting to and working with relational databases.</p></article>
+          <article><div class="concept-icon">↔</div><h3>JDBC Driver</h3><p>Vendor-specific software that translates JDBC calls into instructions understood by MySQL.</p></article>
+        </div>
+
+        <div class="visual-card">
+          <div class="visual-copy"><p class="step-label">The big picture</p><h3>How one request travels through the system</h3><p>The browser never connects directly to MySQL. Java receives the browser request, JDBC communicates with the database, and Java returns safe output to the page.</p></div>
+          <img src="../img/database/jdbc-flow.svg" alt="Browser to Java servlet to MySQL request-and-response flow" width="1200" height="470">
+        </div>
+
+        <div class="term-table-wrap" role="region" aria-label="JDBC objects reference" tabindex="0">
+          <table class="term-table">
+            <caption>Essential JDBC objects</caption>
+            <thead><tr><th>Object</th><th>Primary purpose</th><th>Typical method</th></tr></thead>
+            <tbody>
+              <tr><td><code>Connection</code></td><td>Maintains a session with the database.</td><td><code>DriverManager.getConnection()</code></td></tr>
+              <tr><td><code>PreparedStatement</code></td><td>Sends a precompiled, parameterized SQL command.</td><td><code>prepareStatement(sql)</code></td></tr>
+              <tr><td><code>ResultSet</code></td><td>Holds rows returned by a <code>SELECT</code> query.</td><td><code>executeQuery()</code></td></tr>
+              <tr><td><code>SQLException</code></td><td>Describes database access errors.</td><td><code>getMessage()</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" id="procedure">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Part II · Guided laboratory</p>
+          <h2>Build the feature step by step</h2>
+          <p>Complete the steps in order. After every step, use the verification box before continuing.</p>
+        </div>
+
+        <article class="lesson-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title"><div><p class="step-label">Database preparation</p><h3>Create the database and table</h3></div><span class="time-chip">10 minutes</span></div>
+            <p>Open MySQL Workbench or phpMyAdmin, create the <code>school_db</code> database, then create a <code>students</code> table. A primary key uniquely identifies every row.</p>
+            <div class="split-layout">
+              <div class="code-card"><div class="code-head"><span>SQL · schema.sql</span><button class="copy-button" type="button">Copy code</button></div><pre><code>CREATE DATABASE school_db;
+USE school_db;
+
+CREATE TABLE students (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  student_no VARCHAR(20) NOT NULL UNIQUE,
+  full_name VARCHAR(100) NOT NULL,
+  course VARCHAR(50) NOT NULL,
+  year_level TINYINT NOT NULL
+);</code></pre></div>
+              <figure class="lesson-figure"><img src="../img/database/student-table.svg" alt="Visual representation of the students table and its sample rows" width="1000" height="540"><figcaption>Figure 1. The expected structure of the <code>students</code> table.</figcaption></figure>
+            </div>
+            <div class="verify"><strong>Checkpoint:</strong> Run <code>DESCRIBE students;</code>. Confirm that five columns appear and <code>id</code> is the primary key.</div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title"><div><p class="step-label">Sample records</p><h3>Insert and verify test data</h3></div><span class="time-chip">8 minutes</span></div>
+            <p>Test data helps confirm that the connection and query work. Insert at least four rows, then retrieve them with a simple <code>SELECT</code> statement.</p>
+            <div class="code-card"><div class="code-head"><span>SQL · sample-data.sql</span><button class="copy-button" type="button">Copy code</button></div><pre><code>INSERT INTO students (student_no, full_name, course, year_level)
+VALUES
+  ('2026-001', 'Ana Santos', 'BSIT', 2),
+  ('2026-002', 'Marco Reyes', 'BSCS', 1),
+  ('2026-003', 'Lea Cruz', 'BSIS', 3),
+  ('2026-004', 'Paolo Lim', 'BSIT', 2);
+
+SELECT * FROM students ORDER BY full_name ASC;</code></pre></div>
+            <div class="teacher-note"><strong>Explain to students:</strong> <code>INSERT</code> creates rows, while <code>SELECT</code> reads rows. <code>ORDER BY</code> controls their display order without changing stored data.</div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title"><div><p class="step-label">Project setup</p><h3>Add the JDBC driver and organize files</h3></div><span class="time-chip">12 minutes</span></div>
+            <p>Download MySQL Connector/J from the official MySQL website. Place the JAR file in <code>WEB-INF/lib</code>, or add the Maven dependency. Keep Java, HTML, CSS, and JavaScript in their proper folders.</p>
+            <div class="split-layout folder-layout">
+              <figure class="lesson-figure"><img src="../img/database/project-folders.svg" alt="Recommended Java web project folder structure" width="1000" height="570"><figcaption>Figure 2. Recommended separation of server-side and client-side files.</figcaption></figure>
+              <div>
+                <div class="code-card compact"><div class="code-head"><span>XML · pom.xml</span><button class="copy-button" type="button">Copy code</button></div><pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;com.mysql&lt;/groupId&gt;
+  &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+  &lt;version&gt;26.7.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre></div>
+                <div class="warning"><strong>Important:</strong> Use one driver installation method only. If Maven manages the dependency, do not also copy another connector JAR into <code>WEB-INF/lib</code>.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <div class="step-title"><div><p class="step-label">Java connection</p><h3>Create <code>DBConnection.java</code></h3></div><span class="time-chip">15 minutes</span></div>
+            <p>This utility class keeps connection details in one place. Change the username and password to match your local MySQL account.</p>
+            <div class="code-card"><div class="code-head"><span>Java · DBConnection.java</span><button class="copy-button" type="button">Copy code</button></div><pre><code>package com.school;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public final class DBConnection {
+    private static final String URL =
+        "jdbc:mysql://localhost:3306/school_db"
+        + "?useSSL=false&amp;serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
+
+    private DBConnection() { }
+
+    public static Connection getConnection()
+            throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+}</code></pre></div>
+            <div class="explanation-grid">
+              <div><b>Protocol</b><code>jdbc:mysql://</code><span>Tells Java to use the MySQL JDBC driver.</span></div>
+              <div><b>Host and port</b><code>localhost:3306</code><span>Points to the local MySQL server and default port.</span></div>
+              <div><b>Database</b><code>/school_db</code><span>Selects the database created in Step 1.</span></div>
+            </div>
+            <div class="security"><strong>Professional practice:</strong> Never commit real production passwords to source control. Use environment variables or server configuration for deployed systems.</div>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <div class="step-title"><div><p class="step-label">Server-side retrieval</p><h3>Create <code>StudentServlet.java</code></h3></div><span class="time-chip">25 minutes</span></div>
+            <p>The servlet executes the SQL query and returns student rows as JSON. The try-with-resources statement closes JDBC resources automatically, even when an error occurs.</p>
+            <div class="code-card"><div class="code-head"><span>Java · StudentServlet.java</span><button class="copy-button" type="button">Copy code</button></div><pre><code>package com.school;
+
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+@WebServlet("/students")
+public class StudentServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        String sql = "SELECT student_no, full_name, course, "
+                   + "year_level FROM students ORDER BY full_name";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery();
+             PrintWriter out = response.getWriter()) {
+
+            StringBuilder json = new StringBuilder("[");
+            boolean first = true;
+
+            while (rs.next()) {
+                if (!first) json.append(',');
+                first = false;
+                json.append(String.format(
+                    "{\"studentNo\":\"%s\",\"fullName\":\"%s\","
+                    + "\"course\":\"%s\",\"yearLevel\":%d}",
+                    escape(rs.getString("student_no")),
+                    escape(rs.getString("full_name")),
+                    escape(rs.getString("course")),
+                    rs.getInt("year_level")
+                ));
+            }
+            out.print(json.append(']'));
+        } catch (Exception error) {
+            response.sendError(500, "Unable to retrieve records.");
+        }
+    }
+
+    private String escape(String value) {
+        return value.replace("\\", "\\\\")
+                    .replace("\"", "\\\"");
+    }
+}</code></pre></div>
+            <ol class="process-list">
+              <li><span>1</span><div><b>Accept the request</b><p>The browser requests the <code>/students</code> endpoint.</p></div></li>
+              <li><span>2</span><div><b>Open resources</b><p>Java opens a connection, statement, result set, and response writer.</p></div></li>
+              <li><span>3</span><div><b>Process every row</b><p><code>rs.next()</code> moves the cursor forward one database row at a time.</p></div></li>
+              <li><span>4</span><div><b>Return JSON</b><p>The servlet sends structured data that JavaScript can display.</p></div></li>
+            </ol>
+          </div>
+        </article>
+
+        <article class="lesson-step featured-step">
+          <div class="step-number">6</div>
+          <div class="step-content">
+            <div class="step-title"><div><p class="step-label">Browser presentation</p><h3>Create <code>display-data.html</code></h3></div><span class="time-chip">20 minutes</span></div>
+            <p>The HTML page provides the semantic structure. CSS controls appearance, while JavaScript requests the records and creates a table row for each student.</p>
+            <div class="code-card"><div class="code-head"><span>HTML · display-data.html</span><button class="copy-button" type="button">Copy code</button></div><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Student Records&lt;/title&gt;
+
+  &lt;!-- Browser tab logo --&gt;
+  &lt;link rel="icon" type="image/jpeg"
+        href="../img/favicon.jpg?v=2"&gt;
+  &lt;link rel="shortcut icon" type="image/jpeg"
+        href="../img/favicon.jpg?v=2"&gt;
+
+  &lt;link rel="stylesheet" href="../css/display-data.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Student Records&lt;/h1&gt;
+    &lt;a href="../index.html"&gt;Home&lt;/a&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;p id="status" role="status"&gt;Loading records…&lt;/p&gt;
+    &lt;div class="table-wrap"&gt;
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;Student No.&lt;/th&gt;
+            &lt;th&gt;Full Name&lt;/th&gt;
+            &lt;th&gt;Course&lt;/th&gt;
+            &lt;th&gt;Year Level&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody id="studentRows"&gt;&lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+  &lt;script src="../js/student-records.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+            <div class="code-card"><div class="code-head"><span>JavaScript · student-records.js</span><button class="copy-button" type="button">Copy code</button></div><pre><code>const rows = document.getElementById("studentRows");
+const status = document.getElementById("status");
+
+fetch("../students")
+  .then(response =&gt; {
+    if (!response.ok) throw new Error("Request failed");
+    return response.json();
+  })
+  .then(students =&gt; {
+    students.forEach(student =&gt; {
+      const row = document.createElement("tr");
+
+      [student.studentNo, student.fullName,
+       student.course, student.yearLevel]
+        .forEach(value =&gt; {
+          const cell = document.createElement("td");
+          cell.textContent = value; // safer than innerHTML
+          row.appendChild(cell);
+        });
+
+      rows.appendChild(row);
+    });
+    status.textContent = `${students.length} records loaded.`;
+  })
+  .catch(() =&gt; {
+    status.textContent = "Records could not be loaded.";
+    status.classList.add("error");
+  });</code></pre></div>
+            <figure class="wide-figure"><img src="../img/database/browser-result.svg" alt="Expected browser result showing four student records in a table" width="1100" height="650"><figcaption>Figure 3. Expected result after Tomcat, MySQL, and the web application are running.</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="lesson-step">
+          <div class="step-number">7</div>
+          <div class="step-content">
+            <div class="step-title"><div><p class="step-label">Testing</p><h3>Run and verify the application</h3></div><span class="time-chip">10 minutes</span></div>
+            <ol class="run-list">
+              <li><b>Start MySQL.</b><span>Confirm that the <code>school_db</code> database is available.</span></li>
+              <li><b>Clean and build.</b><span>Resolve compilation errors before deployment.</span></li>
+              <li><b>Start Tomcat.</b><span>Deploy the project using the IDE or the generated WAR file.</span></li>
+              <li><b>Open the page.</b><span>Visit <code>http://localhost:8080/student-records/lesson/display-data.html</code>.</span></li>
+              <li><b>Inspect the result.</b><span>Confirm four rows, correct order, readable table, and no console errors.</span></li>
+            </ol>
+            <div class="success-box"><div class="success-icon">✓</div><div><h4>Success criteria</h4><p>The page loads without an error, displays every database row, remains readable on a phone, and shows a helpful message when the database is unavailable.</p></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="troubleshooting">
+      <div class="container">
+        <div class="section-heading"><p class="section-kicker">Part III · Troubleshooting</p><h2>Diagnose common JDBC problems</h2><p>Read the first meaningful error message, then check the likely cause instead of changing several items at once.</p></div>
+        <div class="trouble-grid">
+          <article><span class="error-code">01</span><h3>No suitable driver</h3><p><b>Cause:</b> Connector/J is missing from the runtime classpath.</p><p><b>Fix:</b> Add the Maven dependency or place the JAR in <code>WEB-INF/lib</code>, then rebuild.</p></article>
+          <article><span class="error-code">02</span><h3>Access denied</h3><p><b>Cause:</b> The username, password, or user permissions are incorrect.</p><p><b>Fix:</b> Verify credentials and grant access to <code>school_db</code>.</p></article>
+          <article><span class="error-code">03</span><h3>Communications link failure</h3><p><b>Cause:</b> MySQL is stopped, the port is wrong, or the host is unavailable.</p><p><b>Fix:</b> Start MySQL and confirm <code>localhost:3306</code>.</p></article>
+          <article><span class="error-code">04</span><h3>HTTP 404</h3><p><b>Cause:</b> The application context or servlet URL is incorrect.</p><p><b>Fix:</b> Check the deployment name and <code>@WebServlet("/students")</code>.</p></article>
+          <article><span class="error-code">05</span><h3>Empty table</h3><p><b>Cause:</b> No rows were inserted, or Java is connected to another database.</p><p><b>Fix:</b> Run the <code>SELECT</code> in MySQL and verify the JDBC URL.</p></article>
+          <article><span class="error-code">06</span><h3>HTTP 500</h3><p><b>Cause:</b> A server-side exception occurred during the query or JSON creation.</p><p><b>Fix:</b> Read the Tomcat log and inspect the earliest <code>Caused by</code> message.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" id="practice">
+      <div class="container">
+        <div class="section-heading"><p class="section-kicker">Part IV · Application</p><h2>Guided practice and extension tasks</h2><p>Use these activities to move from following instructions to independently applying JDBC concepts.</p></div>
+        <div class="activity-grid">
+          <article class="activity-card"><div class="activity-top"><span>Activity A</span><b>Guided · 15 min</b></div><h3>Filter by course</h3><p>Add a course filter. Send the selected course to the servlet and use a placeholder in the SQL query.</p><div class="mini-code"><code>WHERE course = ?</code><br><code>stmt.setString(1, course);</code></div><p class="deliverable"><strong>Submit:</strong> Screenshot and updated SQL.</p></article>
+          <article class="activity-card"><div class="activity-top"><span>Activity B</span><b>Independent · 20 min</b></div><h3>Add a search feature</h3><p>Let the user search student names. Use <code>LIKE ?</code> and add percent signs in Java—not by joining raw user input into SQL.</p><div class="mini-code"><code>stmt.setString(1, "%" + search + "%");</code></div><p class="deliverable"><strong>Submit:</strong> Working search and two test cases.</p></article>
+          <article class="activity-card"><div class="activity-top"><span>Challenge</span><b>Advanced · 25 min</b></div><h3>Add pagination</h3><p>Display ten rows per page using <code>LIMIT</code> and <code>OFFSET</code>. Include Previous and Next controls.</p><div class="mini-code"><code>LIMIT ? OFFSET ?</code></div><p class="deliverable"><strong>Submit:</strong> Page 1 and Page 2 results.</p></article>
+        </div>
+        <aside class="reflection"><h3>Think–Pair–Share</h3><p>Why should the browser not connect directly to MySQL? Identify at least two security or architectural risks, then explain how the Java server reduces them.</p></aside>
+      </div>
+    </section>
+
+    <section class="section assessment-section" id="assessment">
+      <div class="container narrow">
+        <div class="section-heading light"><p class="section-kicker">Part V · Check for understanding</p><h2>Knowledge assessment</h2><p>Answer each question before opening the answer. A score of 4 out of 5 demonstrates mastery of the lesson outcomes.</p></div>
+        <div class="quiz-list">
+          <details><summary><span>1</span>What is the main purpose of JDBC?</summary><p>JDBC provides standard Java interfaces for connecting to a relational database, executing SQL, and processing returned data.</p></details>
+          <details><summary><span>2</span>Which JDBC object holds rows returned by a <code>SELECT</code> query?</summary><p><code>ResultSet</code>. Its cursor begins before the first row, so the program calls <code>next()</code> to move through the results.</p></details>
+          <details><summary><span>3</span>Why is <code>PreparedStatement</code> preferred for user-supplied values?</summary><p>It separates SQL instructions from values, reduces SQL-injection risk, and handles parameter conversion more reliably.</p></details>
+          <details><summary><span>4</span>What does try-with-resources improve?</summary><p>It automatically closes resources such as <code>Connection</code>, <code>PreparedStatement</code>, and <code>ResultSet</code>, reducing connection leaks.</p></details>
+          <details><summary><span>5</span>Why does the page use <code>textContent</code> rather than <code>innerHTML</code> for database values?</summary><p><code>textContent</code> treats database values as text, helping prevent unintended HTML or script execution in the browser.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" id="summary">
+      <div class="container">
+        <div class="summary-panel">
+          <div><p class="section-kicker">Lesson synthesis</p><h2>From stored row to readable page</h2><p>The complete process is a controlled chain: MySQL stores structured records; JDBC connects Java to MySQL; a prepared statement runs SQL; a result set carries rows; the servlet returns safe data; and <code>display-data.html</code> presents that data to the user.</p></div>
+          <ol><li><span>1</span>Create</li><li><span>2</span>Connect</li><li><span>3</span>Query</li><li><span>4</span>Process</li><li><span>5</span>Display</li></ol>
+        </div>
+        <div class="glossary">
+          <h3>Quick glossary</h3>
+          <dl><div><dt>CRUD</dt><dd>Create, Read, Update, Delete</dd></div><div><dt>Driver</dt><dd>Software translator between JDBC and a DBMS</dd></div><div><dt>Query</dt><dd>A request for database information</dd></div><div><dt>Endpoint</dt><dd>A URL handled by server-side code</dd></div><div><dt>JSON</dt><dd>A text format for structured data exchange</dd></div><div><dt>SQL injection</dt><dd>Malicious SQL caused by unsafe input handling</dd></div></dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner"><div><strong>Database &amp; JDBC</strong><p>Professional lesson module for classroom instruction.</p></div><div class="footer-links"><a href="#top">Back to top</a><a href="../index.html">Home</a></div></div>
+  </footer>
+</body>
+</html>

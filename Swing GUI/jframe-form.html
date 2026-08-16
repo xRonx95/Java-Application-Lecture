@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A formal step-by-step lesson module about creating Java Swing JFrame forms.">
+  <title>Lesson Module: Creating a Java Swing JFrame Form</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <!-- Separate stylesheet -->
+  <link rel="stylesheet" href="../css/Swing GUI/jframe-form.css?v=2">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to lesson content</a>
+
+  <header class="module-header">
+    <div class="module-header__inner">
+      <div class="subject-mark" aria-hidden="true"><span>J</span></div>
+      <div class="module-heading">
+        <p class="eyebrow">Computer Programming · Java Swing</p>
+        <h1>Creating a Java Swing JFrame Form</h1>
+        <p class="module-subtitle">A step-by-step lesson and practical learning module</p>
+      </div>
+      <div class="module-number" aria-label="Module 1"><span>MODULE</span><strong>01</strong></div>
+    </div>
+  </header>
+
+  <nav class="lesson-nav" aria-label="Lesson sections">
+    <div class="lesson-nav__inner">
+        <a href="../index.html">Home</a>
+      <a href="#overview">Overview</a><a href="#concepts">Core Concepts</a>
+      <a href="#procedure">Procedure</a><a href="#program">Complete Program</a>
+      <a href="#practice">Practice</a><a href="#assessment">Assessment</a>
+    </div>
+  </nav>
+
+  <details class="mobile-contents">
+    <summary>Open lesson contents</summary>
+    <nav aria-label="Mobile lesson sections">
+      <a href="#overview">1. Lesson Overview</a><a href="#concepts">2. JFrame Concepts</a>
+      <a href="#procedure">3. Step-by-Step Procedure</a><a href="#program">4. Complete Program</a>
+      <a href="#practice">5. Guided Practice</a><a href="#assessment">6. Assessment</a>
+    </nav>
+  </details>
+
+  <div class="page-shell">
+    <aside class="table-of-contents" aria-label="Table of contents">
+      <p class="toc-title">In this module</p>
+      <ol>
+        <li><a href="#overview">Lesson overview</a></li><li><a href="#concepts">Core concepts</a></li>
+        <li><a href="#anatomy">Anatomy of a form</a></li><li><a href="#procedure">Build the JFrame</a></li>
+        <li><a href="#program">Complete program</a></li><li><a href="#validation">Validation</a></li>
+        <li><a href="#practice">Guided practice</a></li><li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#assessment">Assessment</a></li><li><a href="#summary">Lesson summary</a></li>
+      </ol>
+      <div class="toc-note"><strong>Estimated time</strong><span>90–120 minutes</span></div>
+    </aside>
+
+    <main id="main-content" class="lesson-content">
+      <section id="overview" class="lesson-section section-intro">
+        <div class="section-label">Lesson overview</div>
+        <h2>Building a Desktop Form with Java Swing</h2>
+        <p class="lead">In this lesson, students will design, program, test, and improve a simple student registration form using <strong>JFrame</strong> and standard Java Swing components.</p>
+
+        <div class="information-grid">
+          <article class="info-card"><span class="card-icon" aria-hidden="true">◎</span><h3>Learning Competency</h3><p>Create a functional graphical user interface that accepts and validates user input.</p></article>
+          <article class="info-card"><span class="card-icon" aria-hidden="true">⌁</span><h3>Required Knowledge</h3><p>Basic Java syntax, variables, methods, classes, and event handling.</p></article>
+          <article class="info-card"><span class="card-icon" aria-hidden="true">✓</span><h3>Expected Output</h3><p>A working student form with text fields, buttons, validation, and a confirmation message.</p></article>
+        </div>
+
+        <div class="objectives-panel">
+          <div><p class="panel-kicker">At the end of the lesson, students can:</p><h3>Learning Objectives</h3></div>
+          <ol class="objectives-list">
+            <li>Explain the purpose of <code>JFrame</code> in a Java Swing application.</li>
+            <li>Identify the main parts of a graphical form.</li>
+            <li>Add and arrange labels, text fields, buttons, and combo boxes.</li>
+            <li>Write an event listener for a button.</li>
+            <li>Validate input and provide clear feedback to the user.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="concepts" class="lesson-section">
+        <div class="section-label">Topic 1</div>
+        <h2>Understanding JFrame and Java Swing</h2>
+        <p><strong>Java Swing</strong> is a toolkit for creating graphical user interfaces for desktop applications. A <strong>JFrame</strong> is the main window that holds interface components such as labels, text fields, buttons, tables, and menus.</p>
+        <div class="definition-box"><span class="definition-tag">Key definition</span><p><code>JFrame</code> is a top-level Swing container. It provides the window title, border, minimize and close controls, and a content area where components are placed.</p></div>
+        <div class="component-table-wrap" role="region" aria-label="Swing component reference" tabindex="0">
+          <table class="component-table">
+            <thead><tr><th>Component</th><th>Purpose</th><th>Example Use</th></tr></thead>
+            <tbody>
+              <tr><td><code>JLabel</code></td><td>Displays text or an image</td><td>“Full Name” field label</td></tr>
+              <tr><td><code>JTextField</code></td><td>Accepts one line of text</td><td>Name or email address</td></tr>
+              <tr><td><code>JComboBox</code></td><td>Provides a list of choices</td><td>Grade level selection</td></tr>
+              <tr><td><code>JButton</code></td><td>Starts an action when clicked</td><td>Submit or Clear</td></tr>
+              <tr><td><code>JPanel</code></td><td>Groups related components</td><td>Form fields or button row</td></tr>
+              <tr><td><code>JOptionPane</code></td><td>Displays a dialog message</td><td>Success or error feedback</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="anatomy" class="lesson-section">
+        <div class="section-label">Visual guide 1</div><h2>Anatomy of a JFrame Form</h2>
+        <p>Use the illustration below to explain how a window contains panels and how panels organize individual controls.</p>
+        <figure class="lesson-figure anatomy-figure">
+          <div class="window-mockup">
+            <div class="window-titlebar"><div class="window-dots"><i></i><i></i><i></i></div><span>Student Registration Form</span></div>
+            <div class="window-body"><div class="mock-form-heading">Student Information</div>
+              <div class="mock-row"><span class="mock-label">Full Name</span><span class="mock-input"></span></div>
+              <div class="mock-row"><span class="mock-label">Email</span><span class="mock-input"></span></div>
+              <div class="mock-row"><span class="mock-label">Grade Level</span><span class="mock-input mock-select">Select grade</span></div>
+              <div class="mock-buttons"><span>Clear</span><strong>Submit</strong></div>
+            </div>
+          </div>
+          <div class="anatomy-labels" aria-label="Parts of the JFrame"><span><b>1</b> JFrame window</span><span><b>2</b> Title bar</span><span><b>3</b> Content panel</span><span><b>4</b> Input controls</span><span><b>5</b> Action buttons</span></div>
+          <figcaption><strong>Figure 1.</strong> Main parts of a basic JFrame data-entry form.</figcaption>
+        </figure>
+      </section>
+
+      <section id="procedure" class="lesson-section">
+        <div class="section-label">Topic 2 · Procedure</div><h2>Step-by-Step: Create the JFrame Form</h2>
+        <p class="lead">Complete each step in order. Compare your screen with the visual guide before continuing.</p>
+
+        <article class="procedure-step">
+          <div class="step-number">01</div>
+          <div class="step-copy"><p class="step-kicker">Prepare the project</p><h3>Create a New Java Application</h3>
+            <ol><li>Open Apache NetBeans or your preferred Java IDE.</li><li>Select <strong>File → New Project</strong>.</li><li>Choose <strong>Java Application</strong>, then select <strong>Next</strong>.</li><li>Enter <code>StudentFormApp</code> as the project name.</li><li>Select <strong>Finish</strong>.</li></ol>
+            <div class="teacher-note"><strong>Teacher prompt:</strong> Ask students why meaningful project names are better than names such as “Project1.”</div>
+          </div>
+          <figure class="lesson-figure mini-figure"><div class="ide-window"><div class="ide-bar"><span>New Project</span></div><div class="wizard-body"><div class="wizard-steps"><b>1. Choose Project</b><span>2. Name and Location</span></div><div class="wizard-main"><small>Categories</small><strong>Java with Ant</strong><small>Projects</small><b>Java Application</b></div></div><div class="wizard-actions"><span>Cancel</span><strong>Next ›</strong></div></div><figcaption><strong>Figure 2.</strong> Select Java Application in the New Project wizard.</figcaption></figure>
+        </article>
+
+        <article class="procedure-step">
+          <div class="step-number">02</div>
+          <div class="step-copy"><p class="step-kicker">Create the window</p><h3>Add a JFrame Form</h3>
+            <ol><li>Right-click the project package.</li><li>Select <strong>New → JFrame Form</strong>.</li><li>Enter <code>StudentForm</code> for the class name.</li><li>Select <strong>Finish</strong> to open the Design view.</li></ol>
+            <div class="code-callout"><span>Class naming rule</span><code>StudentForm</code> uses PascalCase and clearly describes the window.</div>
+          </div>
+          <figure class="lesson-figure mini-figure"><div class="project-visual"><div class="project-title">Projects</div><div class="tree-line"><span>▾</span><b> StudentFormApp</b></div><div class="tree-line indent"><span>▾</span> Source Packages</div><div class="tree-line indent-2"><span>◆</span> studentformapp</div><div class="context-menu"><span>New</span><b>JFrame Form…</b><span>Java Class…</span><span>Package…</span></div></div><figcaption><strong>Figure 3.</strong> Add the JFrame inside the correct source package.</figcaption></figure>
+        </article>
+
+        <article class="procedure-step">
+          <div class="step-number">03</div>
+          <div class="step-copy"><p class="step-kicker">Design the interface</p><h3>Place and Rename the Components</h3><p>Drag components from the Palette into the form. Align labels on the left and input controls on the right. Leave consistent spacing between rows.</p>
+            <div class="component-checklist"><div><span>1</span><code>lblTitle</code><small>JLabel</small></div><div><span>2</span><code>txtName</code><small>JTextField</small></div><div><span>3</span><code>txtEmail</code><small>JTextField</small></div><div><span>4</span><code>cmbGrade</code><small>JComboBox</small></div><div><span>5</span><code>btnSubmit</code><small>JButton</small></div><div><span>6</span><code>btnClear</code><small>JButton</small></div></div>
+          </div>
+          <figure class="lesson-figure mini-figure"><div class="designer-visual"><div class="palette"><b>Palette</b><span>Label</span><span>Text Field</span><span>Combo Box</span><span>Button</span></div><div class="design-canvas"><strong>Student Information</strong><div><span>Full Name</span><i></i></div><div><span>Email</span><i></i></div><div><span>Grade Level</span><i></i></div><em>Clear</em><b>Submit</b></div></div><figcaption><strong>Figure 4.</strong> Arrange controls in the Design view.</figcaption></figure>
+        </article>
+
+        <article class="procedure-step">
+          <div class="step-number">04</div>
+          <div class="step-copy"><p class="step-kicker">Add behavior</p><h3>Create the Submit Button Event</h3><p>Double-click the Submit button in Design view. NetBeans creates an <code>ActionPerformed</code> method. Add the following logic inside that method:</p>
+            <pre><code>private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+    String name = txtName.getText().trim();
+    String email = txtEmail.getText().trim();
+    String grade = cmbGrade.getSelectedItem().toString();
+
+    if (name.isEmpty() || email.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+            "Please complete all required fields.",
+            "Incomplete Form",
+            JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    JOptionPane.showMessageDialog(this,
+        "Registration saved for " + name + " (" + grade + ").",
+        "Success", JOptionPane.INFORMATION_MESSAGE);
+}</code></pre>
+          </div>
+          <figure class="lesson-figure mini-figure"><div class="code-visual"><div class="code-tabs"><span>StudentForm.java</span><b>Source</b></div><div class="code-lines"><i></i><i></i><i class="short"></i><i></i><i class="medium"></i><i class="short"></i></div><div class="method-tag">btnSubmitActionPerformed()</div></div><figcaption><strong>Figure 5.</strong> The button event contains the form logic.</figcaption></figure>
+        </article>
+
+        <article class="procedure-step">
+          <div class="step-number">05</div>
+          <div class="step-copy"><p class="step-kicker">Complete and test</p><h3>Add the Clear Action and Run the Form</h3>
+            <pre><code>private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
+    txtName.setText("");
+    txtEmail.setText("");
+    cmbGrade.setSelectedIndex(0);
+    txtName.requestFocus();
+}</code></pre>
+            <ol><li>Save the file using <kbd>Ctrl</kbd> + <kbd>S</kbd>.</li><li>Run the project using <kbd>F6</kbd>.</li><li>Test blank fields, valid information, Submit, and Clear.</li></ol>
+          </div>
+          <figure class="lesson-figure mini-figure"><div class="result-visual"><div class="result-form"><b>Student Registration</b><span>Maria Santos</span><span>maria@example.com</span><span>Grade 11</span><strong>Submit</strong></div><div class="dialog-visual"><b>✓ Registration saved</b><span>Registration saved for Maria Santos (Grade 11).</span><em>OK</em></div></div><figcaption><strong>Figure 6.</strong> Run the program and verify the confirmation dialog.</figcaption></figure>
+        </article>
+      </section>
+
+      <section id="program" class="lesson-section">
+        <div class="section-label">Topic 3 · Code reference</div><h2>Complete JFrame Program</h2>
+        <p>This version creates the same form entirely in Java code. It is useful for explaining how components, layouts, and listeners work behind the visual designer.</p>
+        <div class="code-heading"><span>StudentForm.java</span><span>Complete example</span></div>
+        <pre class="large-code"><code>import java.awt.*;
+import javax.swing.*;
+
+public class StudentForm extends JFrame {
+    private final JTextField txtName = new JTextField(20);
+    private final JTextField txtEmail = new JTextField(20);
+    private final JComboBox&lt;String&gt; cmbGrade = new JComboBox&lt;&gt;(
+        new String[] { "Select grade", "Grade 7", "Grade 8",
+                       "Grade 9", "Grade 10", "Grade 11", "Grade 12" }
+    );
+
+    public StudentForm() {
+        setTitle("Student Registration Form");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(520, 340);
+        setLocationRelativeTo(null);
+
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBorder(BorderFactory.createEmptyBorder(24, 28, 24, 28));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(8, 8, 8, 8);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        addRow(formPanel, gbc, 0, "Full Name:", txtName);
+        addRow(formPanel, gbc, 1, "Email:", txtEmail);
+        addRow(formPanel, gbc, 2, "Grade Level:", cmbGrade);
+
+        JButton btnClear = new JButton("Clear");
+        JButton btnSubmit = new JButton("Submit");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(btnClear);
+        buttonPanel.add(btnSubmit);
+
+        gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2;
+        formPanel.add(buttonPanel, gbc);
+
+        btnSubmit.addActionListener(event -&gt; submitForm());
+        btnClear.addActionListener(event -&gt; clearForm());
+        add(formPanel);
+    }
+
+    private void addRow(JPanel panel, GridBagConstraints gbc,
+                        int row, String label, JComponent input) {
+        gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = row;
+        panel.add(new JLabel(label), gbc);
+        gbc.gridx = 1; panel.add(input, gbc);
+    }
+
+    private void submitForm() {
+        String name = txtName.getText().trim();
+        String email = txtEmail.getText().trim();
+
+        if (name.isEmpty() || email.isEmpty() || cmbGrade.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this,
+                "Please complete all required fields.",
+                "Incomplete Form", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            JOptionPane.showMessageDialog(this,
+                "Please enter a valid email address.",
+                "Invalid Email", JOptionPane.ERROR_MESSAGE);
+            txtEmail.requestFocus();
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this,
+            "Registration saved for " + name + ".",
+            "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void clearForm() {
+        txtName.setText(""); txtEmail.setText("");
+        cmbGrade.setSelectedIndex(0); txtName.requestFocus();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -&gt; new StudentForm().setVisible(true));
+    }
+}</code></pre>
+        <div class="explanation-grid"><article><span>01</span><h3>Declare</h3><p>The text fields and combo box are class fields so other methods can access them.</p></article><article><span>02</span><h3>Construct</h3><p>The constructor configures the window and places all components.</p></article><article><span>03</span><h3>Listen</h3><p>Action listeners connect button clicks to methods.</p></article><article><span>04</span><h3>Launch</h3><p><code>SwingUtilities.invokeLater</code> safely opens the interface.</p></article></div>
+      </section>
+
+      <section id="validation" class="lesson-section">
+        <div class="section-label">Topic 4</div><h2>Input Validation and User Feedback</h2><p>A form should not simply collect information. It must also check whether the information is complete and reasonable.</p>
+        <div class="validation-flow" aria-label="Form validation process"><div><span>1</span><b>Read</b><small>Get field values</small></div><i aria-hidden="true">→</i><div><span>2</span><b>Check</b><small>Test required fields</small></div><i aria-hidden="true">→</i><div><span>3</span><b>Decide</b><small>Valid or invalid?</small></div><i aria-hidden="true">→</i><div><span>4</span><b>Respond</b><small>Show clear feedback</small></div></div>
+        <div class="do-dont-grid"><article class="do-card"><h3>Good validation</h3><ul><li>Explains exactly what needs correction.</li><li>Keeps valid information already entered.</li><li>Returns focus to the problem field.</li><li>Uses a polite and specific message.</li></ul></article><article class="dont-card"><h3>Avoid</h3><ul><li>Technical error messages students cannot understand.</li><li>Clearing the whole form after one error.</li><li>Accepting the default combo-box choice.</li><li>Showing success before checking every field.</li></ul></article></div>
+      </section>
+
+      <section id="practice" class="lesson-section">
+        <div class="section-label">Learning activity</div><h2>Guided Practice: Improve the Form</h2>
+        <div class="activity-card"><div class="activity-head"><span>PAIR ACTIVITY</span><strong>30 minutes</strong></div><h3>Student Profile Form Challenge</h3><p>Work with a partner. Extend the form by adding the following fields and behavior:</p><div class="task-grid"><label><input type="checkbox"> Add a Student Number field.</label><label><input type="checkbox"> Add a Course or Strand combo box.</label><label><input type="checkbox"> Require every field.</label><label><input type="checkbox"> Show all data in the success dialog.</label><label><input type="checkbox"> Add a Reset confirmation dialog.</label><label><input type="checkbox"> Test at least four input cases.</label></div></div>
+        <h3 class="subheading">Testing Checklist</h3>
+        <div class="test-table-wrap" role="region" aria-label="Testing checklist" tabindex="0"><table class="component-table"><thead><tr><th>Test Case</th><th>Input</th><th>Expected Result</th><th>Result</th></tr></thead><tbody><tr><td>1. Empty form</td><td>No information</td><td>Warning message appears</td><td>Pass / Fail</td></tr><tr><td>2. Invalid email</td><td><code>student@email</code></td><td>Email error appears</td><td>Pass / Fail</td></tr><tr><td>3. No grade</td><td>Default selection</td><td>Warning message appears</td><td>Pass / Fail</td></tr><tr><td>4. Valid form</td><td>All valid information</td><td>Success message appears</td><td>Pass / Fail</td></tr></tbody></table></div>
+      </section>
+
+      <section id="troubleshooting" class="lesson-section">
+        <div class="section-label">Reference</div><h2>Common Problems and Solutions</h2>
+        <div class="faq-list"><details open><summary>The JFrame does not appear.</summary><p>Confirm that the <code>main</code> method calls <code>setVisible(true)</code> and that the correct class is being run.</p></details><details><summary>The button does nothing.</summary><p>Check that an action listener is connected to the correct button and method.</p></details><details><summary>Components overlap or look misaligned.</summary><p>Use a layout manager such as <code>GridBagLayout</code>. Avoid relying on fixed coordinates when possible.</p></details><details><summary>The program closes immediately.</summary><p>Use <code>setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)</code> and look for errors in the IDE Output window.</p></details><details><summary>A variable “cannot be resolved.”</summary><p>Verify the component variable name, spelling, capitalization, and scope.</p></details></div>
+      </section>
+
+      <section id="assessment" class="lesson-section">
+        <div class="section-label">Assessment</div><h2>Check Your Understanding</h2>
+        <div class="question-list"><article><span>1</span><div><h3>What is the main purpose of a JFrame?</h3><p>Answer in one or two complete sentences.</p></div></article><article><span>2</span><div><h3>Which Swing component accepts one line of text?</h3><p>A. JLabel &nbsp; B. JTextField &nbsp; C. JPanel &nbsp; D. JButton</p></div></article><article><span>3</span><div><h3>Why should form input be validated?</h3><p>Give two reasons.</p></div></article><article><span>4</span><div><h3>What happens inside an ActionListener?</h3><p>Describe its relationship to a button click.</p></div></article><article><span>5</span><div><h3>Programming task</h3><p>Add an Age field that accepts values from 12 to 100 only.</p></div></article></div>
+        <h3 class="subheading">Performance Rubric</h3>
+        <div class="component-table-wrap" role="region" aria-label="Performance rubric" tabindex="0"><table class="component-table rubric-table"><thead><tr><th>Criterion</th><th>Excellent (4)</th><th>Proficient (3)</th><th>Developing (2)</th><th>Beginning (1)</th></tr></thead><tbody><tr><td>Interface design</td><td>Clear, aligned, readable</td><td>Mostly consistent</td><td>Some alignment issues</td><td>Difficult to use</td></tr><tr><td>Functionality</td><td>All actions work</td><td>Minor issue</td><td>Several issues</td><td>Not functional</td></tr><tr><td>Validation</td><td>Complete and specific</td><td>Mostly complete</td><td>Limited checks</td><td>No validation</td></tr><tr><td>Code quality</td><td>Clear and organized</td><td>Generally clear</td><td>Inconsistent</td><td>Hard to follow</td></tr></tbody></table></div>
+      </section>
+
+      <section id="summary" class="lesson-section summary-section">
+        <div class="section-label">Lesson closure</div><h2>Key Takeaways</h2>
+        <div class="takeaway-grid"><div><strong>JFrame</strong><span>provides the main application window.</span></div><div><strong>Components</strong><span>collect information and support user actions.</span></div><div><strong>Layouts</strong><span>keep the form organized and readable.</span></div><div><strong>Listeners</strong><span>make the interface respond to events.</span></div><div><strong>Validation</strong><span>prevents incomplete or incorrect data.</span></div><div><strong>Testing</strong><span>confirms that every action works correctly.</span></div></div>
+        <blockquote>“A good form does more than collect data—it guides the user toward providing correct information.”</blockquote>
+      </section>
+    </main>
+  </div>
+
+  <footer class="module-footer"><div><strong>Java Swing Learning Module</strong><span>JFrame Form Design and Event Handling</span></div><a href="#main-content">Return to top ↑</a></footer>
+</body>
+</html>

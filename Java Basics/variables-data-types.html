@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed lesson about Java variables, primitive and reference data types, constants, casting, scope, and user input.">
+  <title>Variables and Data Types | Java Basics</title>
+    <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="stylesheet" href="../css/Java Basics/java-basics.css">
+</head>
+<body>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="java-syntax.html"><span class="brand-mark">J</span> Java Basics</a>
+    <nav class="lesson-nav" aria-label="Java lessons">
+      <a href="../index.html">Home</a><a href="java-syntax.html">Syntax</a><a href="variables-data-types.html" aria-current="page">Variables</a><a href="java-operators.html">Operators</a><a href="conditions-loops.html">Conditions &amp; Loops</a>
+    </nav>
+  </div></header>
+
+  <section class="hero"><div class="hero-inner">
+    <p class="eyebrow">Lesson 2 · Java Basics</p>
+    <h1>Variables and Data Types</h1>
+    <p>Discover how Java stores information, chooses the correct kind of value, converts between types, accepts user input, and controls where variables can be used.</p>
+  </div></section>
+
+  <main class="lesson-layout">
+    <aside class="table-of-contents" aria-label="On this page"><h2>On this page</h2><ol>
+      <li><a href="#objectives">Objectives</a></li><li><a href="#variables">Variables</a></li><li><a href="#primitive">Primitive types</a></li><li><a href="#reference">Reference types</a></li><li><a href="#constants">Constants</a></li><li><a href="#casting">Type conversion</a></li><li><a href="#scope">Scope</a></li><li><a href="#input">User input</a></li><li><a href="#practice">Practice and review</a></li>
+    </ol></aside>
+
+    <article class="lesson-content">
+      <section class="lesson-section" id="objectives"><h2>Learning Objectives</h2><div class="objective-grid">
+        <div class="objective"><strong>Declare</strong><p>and initialize variables using valid identifiers.</p></div>
+        <div class="objective"><strong>Compare</strong><p>Java’s eight primitive types and common reference types.</p></div>
+        <div class="objective"><strong>Convert</strong><p>values using widening and narrowing type casting.</p></div>
+        <div class="objective"><strong>Apply</strong><p>constants, scope rules, and keyboard input in a program.</p></div>
+      </div></section>
+
+      <section class="lesson-section" id="variables">
+        <h2>1. What Is a Variable?</h2>
+        <p>A variable is a named storage location in memory. Its <strong>data type</strong> tells Java what kind of value it can store and which operations are allowed.</p>
+        <div class="code-example"><div class="code-title"><span>Declare, initialize, update</span><span>Java</span></div><pre><code><span class="type">int</span> age;          <span class="comment">// declaration</span>
+age = <span class="number">18</span>;        <span class="comment">// assignment</span>
+<span class="type">double</span> grade = <span class="number">94.5</span>; <span class="comment">// declaration + initialization</span>
+age = <span class="number">19</span>;        <span class="comment">// update: the old value is replaced</span></code></pre></div>
+        <p>The general pattern is <code class="inline-code">dataType variableName = value;</code>. A local variable must receive a value before it is read.</p>
+        <div class="warning"><strong>Common mistake:</strong> <code class="inline-code">int score = "90";</code> is invalid because <code>"90"</code> is text, not an integer.</div>
+        <h3>Declaring several variables</h3>
+        <div class="code-example"><div class="code-title"><span>Clear declarations</span><span>Recommended</span></div><pre><code><span class="type">int</span> firstScore = <span class="number">85</span>;
+<span class="type">int</span> secondScore = <span class="number">90</span>;
+<span class="type">int</span> thirdScore = <span class="number">95</span>;</code></pre></div>
+        <p>Java permits <code class="inline-code">int a = 1, b = 2;</code>, but one declaration per line is often easier to explain and maintain.</p>
+      </section>
+
+      <section class="lesson-section" id="primitive">
+        <h2>2. The Eight Primitive Data Types</h2>
+        <p>Primitive types store simple values directly. Pick a type based on the meaning and required range of the data.</p>
+        <div class="data-table-wrap"><table class="data-table">
+          <thead><tr><th>Type</th><th>Typical size</th><th>Use</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td><code>byte</code></td><td>8-bit</td><td>Very small whole numbers</td><td><code>byte level = 10;</code></td></tr>
+            <tr><td><code>short</code></td><td>16-bit</td><td>Small whole numbers</td><td><code>short year = 2026;</code></td></tr>
+            <tr><td><code>int</code></td><td>32-bit</td><td>Default whole-number type</td><td><code>int population = 5000;</code></td></tr>
+            <tr><td><code>long</code></td><td>64-bit</td><td>Very large whole numbers; add <code>L</code></td><td><code>long views = 9_000_000_000L;</code></td></tr>
+            <tr><td><code>float</code></td><td>32-bit</td><td>Decimal with less precision; add <code>F</code></td><td><code>float temp = 36.5F;</code></td></tr>
+            <tr><td><code>double</code></td><td>64-bit</td><td>Default decimal type</td><td><code>double price = 199.95;</code></td></tr>
+            <tr><td><code>char</code></td><td>16-bit</td><td>One Unicode character in single quotes</td><td><code>char section = 'A';</code></td></tr>
+            <tr><td><code>boolean</code></td><td>JVM-dependent</td><td>Logical value</td><td><code>boolean passed = true;</code></td></tr>
+          </tbody>
+        </table></div>
+        <div class="note"><strong>Readable numbers:</strong> Underscores may separate digits, such as <code class="inline-code">1_000_000</code>. They do not affect the stored value.</div>
+        <h3>Integer versus decimal division</h3>
+        <div class="code-example"><div class="code-title"><span>Numeric behavior</span><span>Output: 2 then 2.5</span></div><pre><code>System.out.println(<span class="number">5</span> / <span class="number">2</span>);     <span class="comment">// 2: both operands are integers</span>
+System.out.println(<span class="number">5.0</span> / <span class="number">2</span>);   <span class="comment">// 2.5: one operand is a double</span></code></pre></div>
+      </section>
+
+      <section class="lesson-section" id="reference">
+        <h2>3. Reference Data Types</h2>
+        <p>A reference variable points to an object rather than storing the complete object value directly. Examples include strings, arrays, classes, and interfaces.</p>
+        <div class="code-example"><div class="code-title"><span>References</span><span>Java</span></div><pre><code><span class="type">String</span> studentName = <span class="string">"Mika"</span>;
+<span class="type">int</span>[] scores = {<span class="number">88</span>, <span class="number">91</span>, <span class="number">95</span>};
+<span class="type">String</span> message = <span class="keyword">null</span>; <span class="comment">// currently refers to no object</span></code></pre></div>
+        <h3>String basics</h3>
+        <ul>
+          <li><code class="inline-code">studentName.length()</code> returns the number of characters.</li>
+          <li><code class="inline-code">studentName.toUpperCase()</code> returns an uppercase copy.</li>
+          <li>Use <code class="inline-code">name.equals("Mika")</code> to compare String content—not <code>==</code>.</li>
+          <li>Strings are immutable: methods return a new String instead of changing the original object.</li>
+        </ul>
+      </section>
+
+      <section class="lesson-section" id="constants">
+        <h2>4. Constants and Type Inference</h2>
+        <p>A constant is a variable whose value cannot be reassigned. Use the <code class="inline-code">final</code> keyword and an uppercase name.</p>
+        <div class="code-example"><div class="code-title"><span>Constants and var</span><span>Java 10+</span></div><pre><code><span class="keyword">final</span> <span class="type">double</span> PI = <span class="number">3.14159</span>;
+<span class="keyword">final</span> <span class="type">int</span> MAX_ATTEMPTS = <span class="number">3</span>;
+
+<span class="keyword">var</span> city = <span class="string">"Manila"</span>; <span class="comment">// compiler infers String</span>
+<span class="keyword">var</span> count = <span class="number">12</span>;      <span class="comment">// compiler infers int</span></code></pre></div>
+        <p><code class="inline-code">var</code> is only for local variables and still uses static typing: after inference, <code>count</code> remains an <code>int</code>.</p>
+      </section>
+
+      <section class="lesson-section" id="casting">
+        <h2>5. Type Conversion and Casting</h2>
+        <h3>Widening conversion</h3>
+        <p>A smaller compatible type is converted to a larger type automatically because the conversion is normally safe.</p>
+        <div class="code-example"><div class="code-title"><span>Automatic conversion</span><span>int → double</span></div><pre><code><span class="type">int</span> items = <span class="number">12</span>;
+<span class="type">double</span> itemCount = items; <span class="comment">// 12 becomes 12.0</span></code></pre></div>
+        <h3>Narrowing conversion</h3>
+        <p>A larger type is manually converted to a smaller type. Information may be lost.</p>
+        <div class="code-example"><div class="code-title"><span>Explicit cast</span><span>double → int</span></div><pre><code><span class="type">double</span> average = <span class="number">92.75</span>;
+<span class="type">int</span> wholeAverage = (<span class="type">int</span>) average; <span class="comment">// 92, decimal part removed</span></code></pre></div>
+        <h3>Converting text and numbers</h3>
+        <div class="code-example"><div class="code-title"><span>Parsing and conversion</span><span>Java</span></div><pre><code><span class="type">int</span> age = Integer.parseInt(<span class="string">"18"</span>);
+<span class="type">double</span> price = Double.parseDouble(<span class="string">"49.95"</span>);
+<span class="type">String</span> scoreText = String.valueOf(<span class="number">100</span>);</code></pre></div>
+      </section>
+
+      <section class="lesson-section" id="scope">
+        <h2>6. Variable Scope and Lifetime</h2>
+        <p>Scope is the part of a program where a variable can be accessed. A variable declared inside a block exists only inside that block.</p>
+        <div class="code-example"><div class="code-title"><span>Block scope</span><span>Java</span></div><pre><code><span class="type">int</span> total = <span class="number">80</span>; <span class="comment">// available throughout the method</span>
+
+<span class="keyword">if</span> (total &gt;= <span class="number">75</span>) {
+    <span class="type">String</span> result = <span class="string">"Passed"</span>; <span class="comment">// only inside this block</span>
+    System.out.println(result);
+}
+<span class="comment">// System.out.println(result); // compile-time error</span></code></pre></div>
+        <div class="teacher-tip"><strong>How to explain it:</strong> Imagine each pair of braces as a room. A local variable created inside that room cannot be used after you leave it.</div>
+      </section>
+
+      <section class="lesson-section" id="input">
+        <h2>7. Reading User Input with Scanner</h2>
+        <div class="code-example"><div class="code-title"><span>InputDemo.java</span><span>Keyboard input</span></div><pre><code><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">public class</span> <span class="type">InputDemo</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        <span class="type">Scanner</span> input = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);
+
+        System.out.print(<span class="string">"Enter your name: "</span>);
+        <span class="type">String</span> name = input.nextLine();
+
+        System.out.print(<span class="string">"Enter your age: "</span>);
+        <span class="type">int</span> age = input.nextInt();
+
+        System.out.printf(<span class="string">"Hello, %s! You are %d.%n"</span>, name, age);
+        input.close();
+    }
+}</code></pre></div>
+        <div class="warning"><strong>Scanner pitfall:</strong> After <code class="inline-code">nextInt()</code>, the newline remains in the input. If you next call <code>nextLine()</code>, add an extra <code>nextLine()</code> first to consume it.</div>
+      </section>
+
+      <section class="lesson-section" id="practice">
+        <h2>Practice and Review</h2>
+        <div class="practice-box"><h3>Activity: Student Information</h3><p>Ask for a student’s name, age, section, and three grades. Store each value using an appropriate type. Calculate the average and print a formatted student summary. Add a constant named <code class="inline-code">PASSING_GRADE</code>.</p></div>
+        <h3>Quick check</h3>
+        <details><summary>1. Which type should store 19.99?</summary><p><code>double</code> is the usual choice for a beginner example involving a decimal. Real financial systems generally use <code>BigDecimal</code> for exact money calculations.</p></details>
+        <details><summary>2. What happens when 9.8 is cast to int?</summary><p>The fractional part is discarded, producing <code>9</code>; it is not rounded.</p></details>
+        <details><summary>3. Why use final?</summary><p>It prevents reassignment, communicates intent, and protects values that should remain constant.</p></details>
+      </section>
+
+      <nav class="lesson-pagination" aria-label="Lesson navigation"><a class="page-link" href="java-syntax.html">← Previous: Java Syntax</a><a class="page-link next" href="java-operators.html">Next: Java Operators →</a></nav>
+    </article>
+  </main>
+  <footer class="site-footer"><p>Java Basics Learning Module</p><p>Lesson 4 of 6 · Variables and Data Types</p></footer>
+</body>
+</html>

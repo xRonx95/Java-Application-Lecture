@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A formal, classroom-ready lesson and learning module on Java Swing JTable using Apache NetBeans.">
+  <meta name="theme-color" content="#12355b">
+  <title>Java Swing JTable | Lesson and Learning Module</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <link rel="stylesheet" href="../css/Swing GUI/jtable.css?v=2">
+  <script src="../js/jtable.js?v=2" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#mainContent">Skip to lesson content</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="JTable Learning Module home">
+      <span class="brand-mark" aria-hidden="true">JT</span>
+      <span class="brand-copy">
+        <strong>Java Swing JTable</strong>
+        <small>Lesson and Learning Module</small>
+      </span>
+    </a>
+
+    <button class="menu-button" id="menuButton" type="button" aria-label="Open lesson navigation" aria-expanded="false" aria-controls="lessonNavigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="progress-area" aria-label="Reading progress">
+      <span id="progressText">0% complete</span>
+      <div class="progress-track"><span id="progressBar"></span></div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <aside class="lesson-sidebar" id="lessonNavigation" aria-label="Lesson topics">
+      <div class="sidebar-heading">
+        <span>Module contents</span>
+        <button id="closeMenu" type="button" aria-label="Close lesson navigation">&times;</button>
+      </div>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="#overview">01. Module overview</a>
+        <a href="#outcomes">02. Learning outcomes</a>
+        <a href="#prerequisites">03. Prerequisites</a>
+        <a href="#concept">04. What is JTable?</a>
+        <a href="#anatomy">05. JTable anatomy</a>
+        <a href="#project">06. Create the project</a>
+        <a href="#frame">07. Create the JFrame</a>
+        <a href="#design">08. Design the form</a>
+        <a href="#table-model">09. Configure the model</a>
+        <a href="#add-records">10. Add records</a>
+        <a href="#manage-records">11. Update and delete</a>
+        <a href="#search-sort">12. Search and sort</a>
+        <a href="#validation">13. Validate input</a>
+        <a href="#complete-code">14. Complete program</a>
+        <a href="#testing">15. Test and debug</a>
+        <a href="#activities">16. Learning activities</a>
+        <a href="#assessment">17. Assessment</a>
+        <a href="#teacher-guide">18. Teacher guide</a>
+        <a href="#summary">19. Lesson summary</a>
+      </nav>
+    </aside>
+    <button class="page-overlay" id="pageOverlay" type="button" aria-label="Close navigation"></button>
+
+    <main class="lesson-content" id="mainContent">
+      <section class="hero lesson-section" id="overview">
+        <div class="hero-copy">
+          <p class="eyebrow">Computer Programming • Java Swing</p>
+          <h1>Creating and Managing Records with <span>JTable</span></h1>
+          <p class="lead">A structured lesson on displaying tabular data and performing add, update, delete, search, and sort operations in a Java desktop application using Apache NetBeans.</p>
+          <div class="hero-meta" aria-label="Module information">
+            <span><b>Level</b> Beginner to intermediate</span>
+            <span><b>Duration</b> 2–3 hours</span>
+            <span><b>Output</b> Student Records App</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#outcomes">Begin the lesson</a>
+            <a class="button secondary" href="#complete-code">View complete code</a>
+          </div>
+        </div>
+
+        <figure class="visual-card hero-visual">
+          <div class="app-window" role="img" aria-label="Finished Student Records application containing fields, buttons, search, and a JTable">
+            <div class="window-bar"><i></i><i></i><i></i><b>Student Records Management</b></div>
+            <div class="finished-app">
+              <div class="finished-form">
+                <span>Name</span><em>Alex Santos</em>
+                <span>Course</span><em>BS Information Technology</em>
+                <span>Year</span><em>2</em>
+                <div class="visual-buttons"><b>Add</b><b>Update</b><b class="danger">Delete</b></div>
+              </div>
+              <div class="finished-table">
+                <div class="visual-search">Search records… <b>⌕</b></div>
+                <div class="mini-table">
+                  <b>ID</b><b>Name</b><b>Course</b><b>Year</b>
+                  <span>1001</span><span>Alex Santos</span><span>BSIT</span><span>2</span>
+                  <span>1002</span><span>Mika Reyes</span><span>BSCS</span><span>1</span>
+                  <span>1003</span><span>Jamie Cruz</span><span>BSIS</span><span>3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption><strong>Picture 1 — Target application</strong><span>Students will build a working records interface with a form, action buttons, search field, and JTable.</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="lesson-section panel" id="outcomes">
+        <p class="section-label">Topic 02 • Learning outcomes</p>
+        <h2>What students should be able to do</h2>
+        <p>At the end of this module, learners should be able to:</p>
+        <div class="outcome-grid">
+          <article><span>01</span><h3>Explain</h3><p>Describe the purpose of <code>JTable</code>, <code>TableModel</code>, rows, columns, and table selection.</p></article>
+          <article><span>02</span><h3>Construct</h3><p>Create a clear JTable interface with labels, input controls, buttons, and a scroll pane.</p></article>
+          <article><span>03</span><h3>Manage data</h3><p>Add, select, update, remove, search, and sort records using a <code>DefaultTableModel</code>.</p></article>
+          <article><span>04</span><h3>Apply quality</h3><p>Use validation, confirmation dialogs, meaningful names, and safe event-handling practices.</p></article>
+        </div>
+        <div class="lesson-note"><strong>Performance standard:</strong> Create a functional Student Records application that accurately manages in-memory table data and provides clear feedback to the user.</div>
+      </section>
+
+      <section class="lesson-section" id="prerequisites">
+        <p class="section-label">Topic 03 • Preparation</p>
+        <h2>Software, files, and prior knowledge</h2>
+        <div class="two-column">
+          <article class="check-card">
+            <h3>Required software</h3>
+            <ul class="check-list">
+              <li>Java Development Kit (JDK) 17 or later</li>
+              <li>Apache NetBeans IDE</li>
+              <li>A computer capable of running Java desktop applications</li>
+            </ul>
+          </article>
+          <article class="check-card">
+            <h3>Prior knowledge</h3>
+            <ul class="check-list">
+              <li>Java variables, methods, and classes</li>
+              <li>Basic Swing components and event listeners</li>
+              <li>Simple conditions and exception handling</li>
+            </ul>
+          </article>
+        </div>
+        <div class="term-strip">
+          <span><b>JDK</b> Java development tools</span>
+          <span><b>NetBeans</b> Integrated development environment</span>
+          <span><b>Swing</b> Java desktop GUI toolkit</span>
+          <span><b>CRUD</b> Create, read, update, delete</span>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="concept">
+        <p class="section-label">Topic 04 • Core concept</p>
+        <h2>What is a JTable?</h2>
+        <p>A <code>JTable</code> is a Java Swing component used to present data in rows and columns. It is well suited for records such as students, products, attendance entries, employees, or transactions.</p>
+        <div class="concept-flow" aria-label="How JTable separates data from display">
+          <article><span>1</span><h3>Your data</h3><p>Names, courses, year levels, or other record values.</p></article>
+          <i aria-hidden="true">→</i>
+          <article><span>2</span><h3>Table model</h3><p>Stores column names, cell values, and row operations.</p></article>
+          <i aria-hidden="true">→</i>
+          <article><span>3</span><h3>JTable view</h3><p>Displays the model and lets the user select records.</p></article>
+        </div>
+        <div class="important-box">
+          <h3>Important distinction</h3>
+          <p>The <code>JTable</code> displays the data, while the <code>DefaultTableModel</code> stores and changes the data. Updating the model automatically refreshes the table.</p>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="anatomy">
+        <p class="section-label">Topic 05 • Visual lesson</p>
+        <h2>Anatomy of a JTable</h2>
+        <p>Introduce each part before writing code. This helps students understand what they are changing later.</p>
+        <figure class="visual-card wide-visual">
+          <div class="table-anatomy" role="img" aria-label="Labeled anatomy of a JTable showing header, row, cell, selection, model, and scroll pane">
+            <div class="anatomy-label label-header">A. Column header</div>
+            <div class="anatomy-label label-row">B. Table row</div>
+            <div class="anatomy-label label-cell">C. Cell value</div>
+            <div class="anatomy-label label-selected">D. Selected row</div>
+            <div class="anatomy-label label-scroll">E. Scroll pane</div>
+            <div class="anatomy-table">
+              <div class="head">ID</div><div class="head">Name</div><div class="head">Course</div><div class="head">Year</div>
+              <div>1001</div><div>Alex Santos</div><div>BSIT</div><div>2</div>
+              <div class="selected">1002</div><div class="selected focus-cell">Mika Reyes</div><div class="selected">BSCS</div><div class="selected">1</div>
+              <div>1003</div><div>Jamie Cruz</div><div>BSIS</div><div>3</div>
+            </div>
+          </div>
+          <figcaption><strong>Picture 2 — JTable parts</strong><span>The header identifies columns, a row represents one record, a cell contains one value, and the scroll pane keeps large tables usable.</span></figcaption>
+        </figure>
+        <div class="definition-table-wrap">
+          <table class="definition-table">
+            <thead><tr><th>Part</th><th>Meaning</th><th>Useful method or class</th></tr></thead>
+            <tbody>
+              <tr><td>Table model</td><td>Stores column definitions and row data.</td><td><code>DefaultTableModel</code></td></tr>
+              <tr><td>Selected row</td><td>The row currently chosen by the user.</td><td><code>getSelectedRow()</code></td></tr>
+              <tr><td>Cell</td><td>A value at a specific row and column.</td><td><code>getValueAt(row, column)</code></td></tr>
+              <tr><td>Scroll pane</td><td>Provides scrolling and keeps the header visible.</td><td><code>JScrollPane</code></td></tr>
+              <tr><td>Row sorter</td><td>Supports column sorting and search filtering.</td><td><code>TableRowSorter</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="project">
+        <p class="section-label">Topic 06 • Step-by-step</p>
+        <h2>Step 1: Create a Java project</h2>
+        <ol class="numbered-steps">
+          <li><span>1</span><div><h3>Open the project wizard</h3><p>Select <b>File → New Project</b>.</p></div></li>
+          <li><span>2</span><div><h3>Choose the project type</h3><p>Select <b>Java with Ant → Java Application</b>, then click <b>Next</b>.</p></div></li>
+          <li><span>3</span><div><h3>Name the project</h3><p>Enter <code>StudentRecordsApp</code> and clear <b>Create Main Class</b> if you will use a JFrame Form.</p></div></li>
+          <li><span>4</span><div><h3>Finish</h3><p>Choose a safe project location and click <b>Finish</b>.</p></div></li>
+        </ol>
+        <div class="picture-grid">
+          <figure class="visual-card">
+            <div class="app-window" role="img" aria-label="NetBeans File menu with New Project highlighted">
+              <div class="window-bar"><i></i><i></i><i></i><b>Apache NetBeans</b></div>
+              <div class="netbeans-menu"><span>New File…</span><span class="target">New Project… <kbd>Ctrl+Shift+N</kbd></span><span>Open Project…</span><span>Recent Projects</span></div>
+              <b class="step-badge">1</b>
+            </div>
+            <figcaption><strong>Picture 3 — Start a new project</strong><span>Open File and select New Project.</span></figcaption>
+          </figure>
+          <figure class="visual-card">
+            <div class="app-window" role="img" aria-label="New Project dialog with Java Application selected">
+              <div class="window-bar"><i></i><i></i><i></i><b>New Project</b></div>
+              <div class="wizard-columns"><div><b>Categories</b><span class="active">Java with Ant</span><span>Java with Maven</span><span>JavaFX</span></div><div><b>Projects</b><span class="active">Java Application</span><span>Java Class Library</span></div></div>
+              <div class="wizard-actions"><span>Cancel</span><b>Next &gt;</b></div><b class="step-badge">2</b>
+            </div>
+            <figcaption><strong>Picture 4 — Choose Java Application</strong><span>Select Java with Ant and Java Application.</span></figcaption>
+          </figure>
+          <figure class="visual-card wide">
+            <div class="app-window compact-window" role="img" aria-label="New Java Application dialog with StudentRecordsApp project name">
+              <div class="window-bar"><i></i><i></i><i></i><b>New Java Application</b></div>
+              <div class="wizard-form"><label>Project Name</label><span class="field target">StudentRecordsApp</span><label>Project Location</label><span class="field">Documents/NetBeansProjects</span><label class="check-row"><i>✓</i> Set as Main Project</label><label class="check-row muted"><i></i> Create Main Class</label></div>
+              <div class="wizard-actions"><span>Cancel</span><b>Finish</b></div><b class="step-badge">3</b>
+            </div>
+            <figcaption><strong>Picture 5 — Name and create the project</strong><span>Use a meaningful project name. Clear Create Main Class when a JFrame Form will be created next.</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="frame">
+        <p class="section-label">Topic 07 • Step-by-step</p>
+        <h2>Step 2: Create the JFrame Form</h2>
+        <div class="two-column align-start">
+          <ol class="numbered-steps compact">
+            <li><span>1</span><div><h3>Open the source package</h3><p>Expand <b>Source Packages</b>.</p></div></li>
+            <li><span>2</span><div><h3>Add the form</h3><p>Right-click the package, then choose <b>New → JFrame Form</b>.</p></div></li>
+            <li><span>3</span><div><h3>Name the class</h3><p>Enter <code>StudentRecordsFrame</code>.</p></div></li>
+            <li><span>4</span><div><h3>Open Design view</h3><p>Click the <b>Design</b> tab after the form opens.</p></div></li>
+          </ol>
+          <figure class="visual-card">
+            <div class="app-window tall-window" role="img" aria-label="NetBeans project tree and context menu with JFrame Form highlighted">
+              <div class="window-bar"><i></i><i></i><i></i><b>Projects</b></div>
+              <div class="project-tree"><b>▾ StudentRecordsApp</b><span>▾ Source Packages</span><span>&nbsp;&nbsp;▣ studentrecords</span><div class="context-menu"><span>Java Class…</span><span class="target">JFrame Form…</span><span>JPanel Form…</span></div></div>
+              <b class="step-badge">2</b>
+            </div>
+            <figcaption><strong>Picture 6 — Add a JFrame Form</strong><span>Right-click the package and choose JFrame Form from the New menu.</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="design">
+        <p class="section-label">Topic 08 • Step-by-step</p>
+        <h2>Step 3: Design the records interface</h2>
+        <p>Create a predictable layout before adding event code. Keep input controls on the left or top and give the table the largest area.</p>
+        <div class="component-plan">
+          <div><span>Component</span><span>Variable name</span><span>Purpose</span></div>
+          <div><code>JTextField</code><code>txtStudentId</code><span>Student identifier</span></div>
+          <div><code>JTextField</code><code>txtName</code><span>Complete name</span></div>
+          <div><code>JComboBox</code><code>cmbCourse</code><span>Course selection</span></div>
+          <div><code>JSpinner</code><code>spnYear</code><span>Year level</span></div>
+          <div><code>JButton</code><code>btnAdd</code><span>Add a new row</span></div>
+          <div><code>JTable</code><code>tblStudents</code><span>Display records</span></div>
+          <div><code>JTextField</code><code>txtSearch</code><span>Filter visible rows</span></div>
+        </div>
+        <div class="picture-grid">
+          <figure class="visual-card">
+            <div class="app-window tall-window" role="img" aria-label="NetBeans Palette with JTable highlighted">
+              <div class="window-bar"><i></i><i></i><i></i><b>Palette — Swing Controls</b></div>
+              <div class="palette-list"><span>Label</span><span>Text Field</span><span>Combo Box</span><span>Button</span><span class="target">Table</span><span>Scroll Pane</span></div><b class="step-badge">1</b>
+            </div>
+            <figcaption><strong>Picture 7 — Drag a Table from the Palette</strong><span>A JTable added through the GUI Builder is normally placed inside a JScrollPane automatically.</span></figcaption>
+          </figure>
+          <figure class="visual-card">
+            <div class="app-window tall-window" role="img" aria-label="JFrame design wireframe showing input panel, buttons, search field, and table">
+              <div class="window-bar"><i></i><i></i><i></i><b>StudentRecordsFrame.java — Design</b></div>
+              <div class="design-canvas"><div class="design-form"><b>Student Information</b><span>ID</span><i></i><span>Name</span><i></i><span>Course</span><i></i><span>Year</span><i></i><div><b>Add</b><b>Update</b><b>Delete</b><b>Clear</b></div></div><div class="design-data"><span class="visual-search">Search records…</span><div class="blank-table"><b>ID</b><b>Name</b><b>Course</b><b>Year</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div><b class="step-badge">2</b>
+            </div>
+            <figcaption><strong>Picture 8 — Recommended interface layout</strong><span>Keep related controls grouped and allow the table to expand with the window.</span></figcaption>
+          </figure>
+        </div>
+        <div class="lesson-note"><strong>Professional practice:</strong> Variable names should describe purpose. Names such as <code>tblStudents</code> and <code>btnAdd</code> are clearer than default names such as <code>jTable1</code> and <code>jButton1</code>.</div>
+      </section>
+
+      <section class="lesson-section" id="table-model">
+        <p class="section-label">Topic 09 • Data model</p>
+        <h2>Step 4: Configure the table model</h2>
+        <div class="picture-grid">
+          <figure class="visual-card">
+            <div class="app-window tall-window" role="img" aria-label="JTable context menu with Table Contents highlighted">
+              <div class="window-bar"><i></i><i></i><i></i><b>JTable — Design view</b></div>
+              <div class="canvas-menu"><div class="blank-table small"><b>Title 1</b><b>Title 2</b><b>Title 3</b><b>Title 4</b><i></i><i></i><i></i><i></i></div><div class="context-menu"><span>Events</span><span class="target">Table Contents…</span><span>Customize Code…</span><span>Properties</span></div></div><b class="step-badge">1</b>
+            </div>
+            <figcaption><strong>Picture 9 — Open Table Contents</strong><span>Right-click the JTable and choose Table Contents to edit its model visually.</span></figcaption>
+          </figure>
+          <figure class="visual-card">
+            <div class="app-window tall-window" role="img" aria-label="Table model editor containing ID Name Course and Year columns">
+              <div class="window-bar"><i></i><i></i><i></i><b>Table Model</b></div>
+              <div class="model-editor"><b>Columns</b><span class="active">ID <em>String</em></span><span>Name <em>String</em></span><span>Course <em>String</em></span><span>Year <em>Integer</em></span><div><b>Insert</b><b>Delete</b></div></div><div class="wizard-actions"><span>Cancel</span><b>OK</b></div><b class="step-badge">2</b>
+            </div>
+            <figcaption><strong>Picture 10 — Define the columns</strong><span>Use ID, Name, Course, and Year. Remove unused sample rows.</span></figcaption>
+          </figure>
+          <figure class="visual-card wide">
+            <div class="app-window compact-window" role="img" aria-label="NetBeans component properties showing tblStudents variable name">
+              <div class="window-bar"><i></i><i></i><i></i><b>Properties — Code</b></div>
+              <div class="property-panel"><span>Variable Name</span><b class="field target">tblStudents</b><span>Variable Modifiers</span><b class="field">private</b></div><b class="step-badge">3</b>
+            </div>
+            <figcaption><strong>Picture 11 — Rename the table variable</strong><span>Open the Code tab in Properties and change the variable name to <code>tblStudents</code>.</span></figcaption>
+          </figure>
+        </div>
+        <div class="code-block">
+          <div class="code-heading"><span>Obtain the model in Java code</span><button class="copy-button" type="button">Copy code</button></div>
+          <pre><code>import javax.swing.table.DefaultTableModel;
+
+DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();</code></pre>
+        </div>
+        <p>The cast tells Java that the table is using a <code>DefaultTableModel</code>, making methods such as <code>addRow()</code>, <code>removeRow()</code>, and <code>setValueAt()</code> available.</p>
+      </section>
+
+      <section class="lesson-section" id="add-records">
+        <p class="section-label">Topic 10 • Create operation</p>
+        <h2>Step 5: Add a record to the JTable</h2>
+        <div class="operation-flow">
+          <article><b>1</b><span>Read fields</span></article><i>→</i><article><b>2</b><span>Validate values</span></article><i>→</i><article><b>3</b><span>Add model row</span></article><i>→</i><article><b>4</b><span>Clear form</span></article>
+        </div>
+        <div class="code-block">
+          <div class="code-heading"><span>Add button event</span><button class="copy-button" type="button">Copy code</button></div>
+          <pre><code>private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {
+    String id = txtStudentId.getText().trim();
+    String name = txtName.getText().trim();
+    String course = cmbCourse.getSelectedItem().toString();
+    int year = (Integer) spnYear.getValue();
+
+    if (id.isEmpty() || name.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+            "Student ID and complete name are required.",
+            "Incomplete Information",
+            JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    DefaultTableModel model =
+        (DefaultTableModel) tblStudents.getModel();
+    model.addRow(new Object[]{id, name, course, year});
+
+    clearForm();
+    JOptionPane.showMessageDialog(this, "Record added successfully.");
+}</code></pre>
+        </div>
+        <figure class="visual-card wide-visual">
+          <div class="before-after" role="img" aria-label="Before and after illustration of adding a student row">
+            <div><b>Before clicking Add</b><div class="visual-form"><span>ID</span><em>1004</em><span>Name</span><em>Pat Lee</em><span>Course</span><em>BSIT</em><span>Year</span><em>1</em><strong>Add Record</strong></div></div>
+            <i>→</i>
+            <div><b>After clicking Add</b><div class="mini-table"><b>ID</b><b>Name</b><b>Course</b><b>Year</b><span>1003</span><span>Jamie Cruz</span><span>BSIS</span><span>3</span><span class="new-row">1004</span><span class="new-row">Pat Lee</span><span class="new-row">BSIT</span><span class="new-row">1</span></div></div>
+          </div>
+          <figcaption><strong>Picture 12 — Adding a row</strong><span>The values are collected into an <code>Object[]</code> and appended to the model as one complete record.</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="lesson-section" id="manage-records">
+        <p class="section-label">Topic 11 • Update and delete operations</p>
+        <h2>Select, update, and delete records</h2>
+        <h3>Load the selected row into the form</h3>
+        <div class="code-block">
+          <div class="code-heading"><span>Table mouse-click event</span><button class="copy-button" type="button">Copy code</button></div>
+          <pre><code>private void tblStudentsMouseClicked(java.awt.event.MouseEvent evt) {
+    int row = tblStudents.getSelectedRow();
+    if (row == -1) return;
+
+    int modelRow = tblStudents.convertRowIndexToModel(row);
+    DefaultTableModel model =
+        (DefaultTableModel) tblStudents.getModel();
+
+    txtStudentId.setText(model.getValueAt(modelRow, 0).toString());
+    txtName.setText(model.getValueAt(modelRow, 1).toString());
+    cmbCourse.setSelectedItem(model.getValueAt(modelRow, 2).toString());
+    spnYear.setValue(model.getValueAt(modelRow, 3));
+}</code></pre>
+        </div>
+        <div class="two-column">
+          <article class="code-card">
+            <h3>Update the selected row</h3>
+            <pre><code>int viewRow = tblStudents.getSelectedRow();
+if (viewRow == -1) {
+    showSelectionWarning();
+    return;
+}
+
+int row = tblStudents
+    .convertRowIndexToModel(viewRow);
+DefaultTableModel model =
+    (DefaultTableModel) tblStudents.getModel();
+
+model.setValueAt(txtStudentId.getText().trim(), row, 0);
+model.setValueAt(txtName.getText().trim(), row, 1);
+model.setValueAt(cmbCourse.getSelectedItem(), row, 2);
+model.setValueAt(spnYear.getValue(), row, 3);</code></pre>
+          </article>
+          <article class="code-card">
+            <h3>Delete the selected row</h3>
+            <pre><code>int viewRow = tblStudents.getSelectedRow();
+if (viewRow == -1) {
+    showSelectionWarning();
+    return;
+}
+
+int answer = JOptionPane.showConfirmDialog(this,
+    "Delete the selected record?",
+    "Confirm Delete",
+    JOptionPane.YES_NO_OPTION);
+
+if (answer == JOptionPane.YES_OPTION) {
+    int row = tblStudents
+        .convertRowIndexToModel(viewRow);
+    ((DefaultTableModel) tblStudents.getModel())
+        .removeRow(row);
+}</code></pre>
+          </article>
+        </div>
+        <figure class="visual-card wide-visual">
+          <div class="selection-visual" role="img" aria-label="Selected table row copied to form with update and delete actions">
+            <div class="mini-table"><b>ID</b><b>Name</b><b>Course</b><b>Year</b><span>1001</span><span>Alex Santos</span><span>BSIT</span><span>2</span><span class="chosen">1002</span><span class="chosen">Mika Reyes</span><span class="chosen">BSCS</span><span class="chosen">1</span></div>
+            <i>→</i>
+            <div class="visual-form"><span>ID</span><em>1002</em><span>Name</span><em>Mika Reyes</em><span>Course</span><em>BSCS</em><span>Year</span><em>1</em><div><strong>Update</strong><strong class="delete-action">Delete</strong></div></div>
+          </div>
+          <figcaption><strong>Picture 13 — Work with a selected row</strong><span>Selecting a row loads its values into the form. The learner can then revise or remove that record.</span></figcaption>
+        </figure>
+        <div class="warning-box"><strong>Why use <code>convertRowIndexToModel()</code>?</strong> After sorting or filtering, the visible row number may differ from the model row number. Converting the index prevents updating or deleting the wrong record.</div>
+      </section>
+
+      <section class="lesson-section" id="search-sort">
+        <p class="section-label">Topic 12 • Data discovery</p>
+        <h2>Search and sort table records</h2>
+        <div class="two-column align-start">
+          <div>
+            <h3>Enable sorting</h3>
+            <div class="code-block">
+              <div class="code-heading"><span>Initialize the row sorter</span><button class="copy-button" type="button">Copy code</button></div>
+              <pre><code>DefaultTableModel model =
+    (DefaultTableModel) tblStudents.getModel();
+TableRowSorter&lt;DefaultTableModel&gt; sorter =
+    new TableRowSorter&lt;&gt;(model);
+tblStudents.setRowSorter(sorter);</code></pre>
+            </div>
+          </div>
+          <div>
+            <h3>Filter while typing</h3>
+            <div class="code-block">
+              <div class="code-heading"><span>Search field key event</span><button class="copy-button" type="button">Copy code</button></div>
+              <pre><code>String text = txtSearch.getText().trim();
+
+if (text.isEmpty()) {
+    sorter.setRowFilter(null);
+} else {
+    sorter.setRowFilter(
+        RowFilter.regexFilter("(?i)" +
+            Pattern.quote(text))
+    );
+}</code></pre>
+            </div>
+          </div>
+        </div>
+        <figure class="visual-card wide-visual">
+          <div class="search-visual" role="img" aria-label="Search field filtering JTable records to show BSIT students">
+            <div class="search-query"><span>Search records</span><b>BSIT</b><i>⌕</i></div>
+            <i>→</i>
+            <div class="mini-table"><b>ID ↕</b><b>Name ↕</b><b>Course ↕</b><b>Year ↕</b><span>1001</span><span>Alex Santos</span><span class="match">BSIT</span><span>2</span><span>1004</span><span>Pat Lee</span><span class="match">BSIT</span><span>1</span></div>
+          </div>
+          <figcaption><strong>Picture 14 — Filtered and sortable records</strong><span>The filter hides rows that do not match. Clicking a column header changes the visible order without changing the stored values.</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="lesson-section" id="validation">
+        <p class="section-label">Topic 13 • Reliability</p>
+        <h2>Validate input and prevent common mistakes</h2>
+        <div class="validation-grid">
+          <article><span>Required</span><h3>Reject blank values</h3><p>Student ID and name must contain meaningful text after <code>trim()</code>.</p></article>
+          <article><span>Unique</span><h3>Reject duplicate IDs</h3><p>Compare the new ID with every existing value in column 0.</p></article>
+          <article><span>Range</span><h3>Limit the year level</h3><p>Use a spinner model with a minimum of 1 and a maximum appropriate for the program.</p></article>
+          <article><span>Confirm</span><h3>Protect deletion</h3><p>Ask for confirmation before permanently removing a selected row.</p></article>
+        </div>
+        <div class="code-block">
+          <div class="code-heading"><span>Check for a duplicate student ID</span><button class="copy-button" type="button">Copy code</button></div>
+          <pre><code>private boolean idExists(String id, int ignoredRow) {
+    DefaultTableModel model =
+        (DefaultTableModel) tblStudents.getModel();
+
+    for (int row = 0; row &lt; model.getRowCount(); row++) {
+        if (row == ignoredRow) continue;
+
+        String savedId = model.getValueAt(row, 0).toString();
+        if (savedId.equalsIgnoreCase(id)) {
+            return true;
+        }
+    }
+    return false;
+}</code></pre>
+        </div>
+        <figure class="visual-card wide-visual">
+          <div class="dialog-gallery" role="img" aria-label="Examples of warning confirmation and success dialogs">
+            <div class="dialog warning"><b>!</b><span><strong>Incomplete Information</strong><small>Student ID and complete name are required.</small></span><em>OK</em></div>
+            <div class="dialog confirm"><b>?</b><span><strong>Confirm Delete</strong><small>Delete the selected record?</small></span><em>Yes&nbsp;&nbsp; No</em></div>
+            <div class="dialog success"><b>✓</b><span><strong>Record Saved</strong><small>The student record was added successfully.</small></span><em>OK</em></div>
+          </div>
+          <figcaption><strong>Picture 15 — Helpful user feedback</strong><span>Use precise titles and messages so users understand the problem and the next action.</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="lesson-section" id="complete-code">
+        <p class="section-label">Topic 14 • Complete runnable example</p>
+        <h2>Student Records application</h2>
+        <p>This code-only version can be copied into a new Java class named <code>StudentTableApp</code>. It demonstrates JTable without relying on generated GUI Builder code.</p>
+        <div class="code-block large-code">
+          <div class="code-heading"><span>StudentTableApp.java</span><button class="copy-button" type="button">Copy complete code</button></div>
+          <pre><code>import java.awt.*;
+import java.util.regex.Pattern;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
+public class StudentTableApp extends JFrame {
+    private final JTextField txtId = new JTextField(12);
+    private final JTextField txtName = new JTextField(18);
+    private final JComboBox&lt;String&gt; cmbCourse = new JComboBox&lt;&gt;(
+        new String[]{"BSIT", "BSCS", "BSIS"}
+    );
+    private final JSpinner spnYear = new JSpinner(
+        new SpinnerNumberModel(1, 1, 4, 1)
+    );
+    private final JTextField txtSearch = new JTextField(20);
+
+    private final DefaultTableModel model = new DefaultTableModel(
+        new String[]{"Student ID", "Complete Name", "Course", "Year"}, 0
+    ) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+
+    private final JTable table = new JTable(model);
+    private final TableRowSorter&lt;DefaultTableModel&gt; sorter =
+        new TableRowSorter&lt;&gt;(model);
+
+    public StudentTableApp() {
+        super("Student Records Management");
+        buildInterface();
+        registerEvents();
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(850, 520));
+        pack();
+        setLocationRelativeTo(null);
+    }
+
+    private void buildInterface() {
+        JPanel root = new JPanel(new BorderLayout(16, 16));
+        root.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JLabel title = new JLabel("Student Records Management");
+        title.setFont(title.getFont().deriveFont(Font.BOLD, 24f));
+        root.add(title, BorderLayout.NORTH);
+
+        JPanel form = new JPanel(new GridBagLayout());
+        form.setBorder(BorderFactory.createTitledBorder("Student Information"));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(6, 6, 6, 6);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        addField(form, gbc, 0, "Student ID", txtId);
+        addField(form, gbc, 1, "Complete Name", txtName);
+        addField(form, gbc, 2, "Course", cmbCourse);
+        addField(form, gbc, 3, "Year Level", spnYear);
+
+        JButton btnAdd = new JButton("Add");
+        JButton btnUpdate = new JButton("Update");
+        JButton btnDelete = new JButton("Delete");
+        JButton btnClear = new JButton("Clear");
+
+        JPanel actions = new JPanel(new GridLayout(2, 2, 8, 8));
+        actions.add(btnAdd);
+        actions.add(btnUpdate);
+        actions.add(btnDelete);
+        actions.add(btnClear);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        form.add(actions, gbc);
+
+        table.setRowHeight(28);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setAutoCreateRowSorter(false);
+        table.setRowSorter(sorter);
+
+        JPanel records = new JPanel(new BorderLayout(8, 8));
+        records.setBorder(BorderFactory.createTitledBorder("Student Records"));
+        records.add(txtSearch, BorderLayout.NORTH);
+        records.add(new JScrollPane(table), BorderLayout.CENTER);
+
+        JSplitPane split = new JSplitPane(
+            JSplitPane.HORIZONTAL_SPLIT, form, records
+        );
+        split.setResizeWeight(0.32);
+        split.setBorder(null);
+        root.add(split, BorderLayout.CENTER);
+        setContentPane(root);
+
+        btnAdd.addActionListener(event -&gt; addRecord());
+        btnUpdate.addActionListener(event -&gt; updateRecord());
+        btnDelete.addActionListener(event -&gt; deleteRecord());
+        btnClear.addActionListener(event -&gt; clearForm());
+    }
+
+    private void addField(
+            JPanel form, GridBagConstraints gbc,
+            int row, String label, JComponent field) {
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = row;
+        gbc.weightx = 0;
+        form.add(new JLabel(label + ":"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1;
+        form.add(field, gbc);
+    }
+
+    private void registerEvents() {
+        table.getSelectionModel().addListSelectionListener(event -&gt; {
+            if (event.getValueIsAdjusting()) return;
+            loadSelectedRecord();
+        });
+
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) { filterRecords(); }
+            public void removeUpdate(DocumentEvent e) { filterRecords(); }
+            public void changedUpdate(DocumentEvent e) { filterRecords(); }
+        });
+    }
+
+    private boolean validInput(int ignoredRow) {
+        String id = txtId.getText().trim();
+        String name = txtName.getText().trim();
+
+        if (id.isEmpty() || name.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Student ID and complete name are required.",
+                "Incomplete Information",
+                JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        if (idExists(id, ignoredRow)) {
+            JOptionPane.showMessageDialog(this,
+                "The student ID already exists.",
+                "Duplicate Student ID",
+                JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean idExists(String id, int ignoredRow) {
+        for (int row = 0; row &lt; model.getRowCount(); row++) {
+            if (row == ignoredRow) continue;
+            if (model.getValueAt(row, 0).toString().equalsIgnoreCase(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Object[] formValues() {
+        return new Object[]{
+            txtId.getText().trim(),
+            txtName.getText().trim(),
+            cmbCourse.getSelectedItem(),
+            spnYear.getValue()
+        };
+    }
+
+    private void addRecord() {
+        if (!validInput(-1)) return;
+        model.addRow(formValues());
+        clearForm();
+        showMessage("Record added successfully.");
+    }
+
+    private void updateRecord() {
+        int viewRow = table.getSelectedRow();
+        if (viewRow == -1) {
+            showSelectionWarning();
+            return;
+        }
+
+        int row = table.convertRowIndexToModel(viewRow);
+        if (!validInput(row)) return;
+
+        Object[] values = formValues();
+        for (int column = 0; column &lt; values.length; column++) {
+            model.setValueAt(values[column], row, column);
+        }
+        clearForm();
+        showMessage("Record updated successfully.");
+    }
+
+    private void deleteRecord() {
+        int viewRow = table.getSelectedRow();
+        if (viewRow == -1) {
+            showSelectionWarning();
+            return;
+        }
+
+        int answer = JOptionPane.showConfirmDialog(this,
+            "Delete the selected record?",
+            "Confirm Delete",
+            JOptionPane.YES_NO_OPTION);
+
+        if (answer == JOptionPane.YES_OPTION) {
+            model.removeRow(table.convertRowIndexToModel(viewRow));
+            clearForm();
+            showMessage("Record deleted successfully.");
+        }
+    }
+
+    private void loadSelectedRecord() {
+        int viewRow = table.getSelectedRow();
+        if (viewRow == -1) return;
+
+        int row = table.convertRowIndexToModel(viewRow);
+        txtId.setText(model.getValueAt(row, 0).toString());
+        txtName.setText(model.getValueAt(row, 1).toString());
+        cmbCourse.setSelectedItem(model.getValueAt(row, 2).toString());
+        spnYear.setValue(model.getValueAt(row, 3));
+    }
+
+    private void filterRecords() {
+        String text = txtSearch.getText().trim();
+        sorter.setRowFilter(text.isEmpty()
+            ? null
+            : RowFilter.regexFilter("(?i)" + Pattern.quote(text)));
+    }
+
+    private void clearForm() {
+        txtId.setText("");
+        txtName.setText("");
+        cmbCourse.setSelectedIndex(0);
+        spnYear.setValue(1);
+        table.clearSelection();
+        txtId.requestFocus();
+    }
+
+    private void showSelectionWarning() {
+        JOptionPane.showMessageDialog(this,
+            "Select a record from the table first.",
+            "No Record Selected",
+            JOptionPane.WARNING_MESSAGE);
+    }
+
+    private void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -&gt;
+            new StudentTableApp().setVisible(true)
+        );
+    }
+}</code></pre>
+        </div>
+        <div class="important-box"><h3>Teaching note</h3><p>The complete example stores data only while the application is open. Persistent storage using a text file or database should be introduced as a separate lesson after students understand the JTable model.</p></div>
+      </section>
+
+      <section class="lesson-section" id="testing">
+        <p class="section-label">Topic 15 • Quality assurance</p>
+        <h2>Run, test, and debug the application</h2>
+        <div class="test-table-wrap">
+          <table class="test-table">
+            <thead><tr><th>Test</th><th>Action</th><th>Expected result</th></tr></thead>
+            <tbody>
+              <tr><td>Valid add</td><td>Enter complete data and click Add.</td><td>A new row appears and the form clears.</td></tr>
+              <tr><td>Blank required field</td><td>Leave Student ID empty and click Add.</td><td>A warning appears; no row is created.</td></tr>
+              <tr><td>Duplicate ID</td><td>Add an ID that already exists.</td><td>A duplicate warning appears.</td></tr>
+              <tr><td>Update</td><td>Select a row, revise the name, and click Update.</td><td>The correct model row changes.</td></tr>
+              <tr><td>Delete</td><td>Select a row and click Delete.</td><td>A confirmation appears before removal.</td></tr>
+              <tr><td>Search</td><td>Type part of a name or course.</td><td>Only matching records remain visible.</td></tr>
+              <tr><td>Sort</td><td>Click a column header.</td><td>Visible rows change order safely.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="picture-grid">
+          <figure class="visual-card">
+            <div class="app-window" role="img" aria-label="NetBeans Run Project button highlighted">
+              <div class="window-bar"><i></i><i></i><i></i><b>StudentRecordsApp — NetBeans</b></div>
+              <div class="toolbar-visual"><span>File</span><span>Edit</span><span>Source</span><b class="target">▶ Run Project</b><span>Debug</span></div><div class="output-visual"><span>compile:</span><span>run:</span><b>BUILD SUCCESSFUL</b></div><b class="step-badge">1</b>
+            </div>
+            <figcaption><strong>Picture 16 — Run the project</strong><span>Save all files and press <kbd>F6</kbd>. Read the Output window if the application does not open.</span></figcaption>
+          </figure>
+          <figure class="visual-card">
+            <div class="app-window" role="img" aria-label="NetBeans editor with a breakpoint and variable values">
+              <div class="window-bar"><i></i><i></i><i></i><b>StudentTableApp.java — Debug</b></div>
+              <div class="debug-visual"><div><b>45</b><span>private void addRecord() {</span><b class="breakpoint">46</b><span class="current">if (!validInput(-1)) return;</span><b>47</b><span>model.addRow(formValues());</span></div><aside><b>Variables</b><span>id = "1004"</span><span>name = "Pat Lee"</span></aside></div><b class="step-badge">2</b>
+            </div>
+            <figcaption><strong>Picture 17 — Debug one step at a time</strong><span>Add a breakpoint and inspect the current values to find logic errors.</span></figcaption>
+          </figure>
+        </div>
+        <div class="accordion">
+          <details><summary>“Cannot find symbol: DefaultTableModel”</summary><p>Add <code>import javax.swing.table.DefaultTableModel;</code> at the top of the class.</p></details>
+          <details><summary>“Cannot find symbol: TableRowSorter”</summary><p>Add <code>import javax.swing.table.TableRowSorter;</code> and confirm that the spelling and capitalization are correct.</p></details>
+          <details><summary>The table header is not visible</summary><p>Place the JTable inside a <code>JScrollPane</code>. Add the scroll pane—not the bare table—to the layout.</p></details>
+          <details><summary>Delete removes the wrong row after sorting</summary><p>Convert the selected view index using <code>convertRowIndexToModel()</code> before calling <code>removeRow()</code>.</p></details>
+          <details><summary>The table accepts direct cell editing</summary><p>Override <code>isCellEditable()</code> in the table model and return <code>false</code>, or configure editable columns intentionally.</p></details>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="activities">
+        <p class="section-label">Topic 16 • Guided practice and performance tasks</p>
+        <h2>Learning activities</h2>
+        <div class="activity-grid">
+          <article><span>Guided activity • 20 minutes</span><h3>Class List</h3><p>Create a table with Student Number, Name, and Section. Add five sample records and enable column sorting.</p><ul><li>Use clear variable names</li><li>Make cells read-only</li><li>Set a readable row height</li></ul></article>
+          <article><span>Pair activity • 35 minutes</span><h3>Inventory Table</h3><p>Create Product Code, Product Name, Quantity, and Price columns. Add, update, and delete products.</p><ul><li>Validate quantity and price</li><li>Prevent duplicate product codes</li><li>Confirm deletion</li></ul></article>
+          <article><span>Performance task • 60 minutes</span><h3>Attendance Manager</h3><p>Create an attendance table that records learner name, date, time, and attendance status.</p><ul><li>Add search and sorting</li><li>Use a status combo box</li><li>Apply a complete test plan</li></ul></article>
+        </div>
+        <div class="rubric">
+          <h3>Suggested performance rubric (100 points)</h3>
+          <div><span>Correct JTable and model operations</span><b>35</b></div>
+          <div><span>Input validation and user feedback</span><b>20</b></div>
+          <div><span>Interface organization and readability</span><b>20</b></div>
+          <div><span>Search, sorting, and selection safety</span><b>15</b></div>
+          <div><span>Code quality and naming conventions</span><b>10</b></div>
+        </div>
+      </section>
+
+      <section class="lesson-section" id="assessment">
+        <p class="section-label">Topic 17 • Check your understanding</p>
+        <h2>Knowledge assessment</h2>
+        <p>Ask students to answer before opening each explanation.</p>
+        <div class="quiz">
+          <details><summary>1. What is the primary purpose of a JTable?</summary><p>It displays structured data in rows and columns and allows users to view or select records.</p></details>
+          <details><summary>2. What is the role of DefaultTableModel?</summary><p>It stores the JTable's column definitions and row data and provides methods for adding, updating, and deleting rows.</p></details>
+          <details><summary>3. Why should JTable be placed inside JScrollPane?</summary><p>The scroll pane displays the table header and allows users to reach rows or columns that do not fit in the visible area.</p></details>
+          <details><summary>4. Which method adds a row to DefaultTableModel?</summary><p><code>addRow(Object[] rowData)</code> adds one row containing the supplied values.</p></details>
+          <details><summary>5. What does getSelectedRow() return when no row is selected?</summary><p>It returns <code>-1</code>, which should be checked before an update or delete operation.</p></details>
+          <details><summary>6. Why is convertRowIndexToModel() important?</summary><p>Sorting and filtering change view positions. The method converts the selected visible row to the correct underlying model row.</p></details>
+          <details><summary>7. How can direct cell editing be prevented?</summary><p>Override <code>isCellEditable(int row, int column)</code> in the model and return <code>false</code>.</p></details>
+          <details><summary>8. What class is commonly used to filter JTable rows?</summary><p><code>TableRowSorter</code> works with <code>RowFilter</code> to filter and sort visible rows.</p></details>
+          <details><summary>9. Does DefaultTableModel automatically save data permanently?</summary><p>No. It stores data in memory. A file or database is needed for persistence after the program closes.</p></details>
+          <details><summary>10. Give two examples of professional input validation.</summary><p>Examples include rejecting blank required fields, preventing duplicate IDs, checking numeric ranges, and confirming destructive actions.</p></details>
+        </div>
+      </section>
+
+      <section class="lesson-section panel" id="teacher-guide">
+        <p class="section-label">Topic 18 • Discussion guide</p>
+        <h2>Suggested teacher explanation</h2>
+        <div class="teacher-grid">
+          <article><b>Engage</b><h3>Connect to familiar records</h3><p>Show a class list or inventory sheet. Ask: “What does one row represent? What does one column describe?”</p></article>
+          <article><b>Explain</b><h3>Separate model and view</h3><p>Use Picture 2 to explain that JTable presents the values while the model owns them.</p></article>
+          <article><b>Demonstrate</b><h3>Model one operation</h3><p>Add one record slowly. Trace each value from the input field to the <code>Object[]</code> and then to the new row.</p></article>
+          <article><b>Practice</b><h3>Use gradual independence</h3><p>Complete Add together, let pairs implement Update, then assign Delete and Search independently.</p></article>
+          <article><b>Question</b><h3>Check reasoning</h3><p>Ask why selection must be checked and why view indexes must be converted after sorting.</p></article>
+          <article><b>Evaluate</b><h3>Test behavior, not appearance only</h3><p>Use the testing table and rubric. Require students to demonstrate both successful and invalid inputs.</p></article>
+        </div>
+        <div class="important-box"><h3>Recommended teaching sequence</h3><p>Concept → visual demonstration → guided coding → controlled practice → independent task → testing → reflection.</p></div>
+      </section>
+
+      <section class="lesson-section" id="summary">
+        <p class="section-label">Topic 19 • Review</p>
+        <h2>Lesson summary</h2>
+        <div class="summary-map">
+          <article><span>1</span><p>A JTable presents data in rows and columns.</p></article>
+          <article><span>2</span><p>A DefaultTableModel stores and changes row data.</p></article>
+          <article><span>3</span><p>Input controls supply values for new or revised records.</p></article>
+          <article><span>4</span><p>Selection checks and model-index conversion protect data.</p></article>
+          <article><span>5</span><p>TableRowSorter supports sorting and search filters.</p></article>
+          <article><span>6</span><p>Validation and testing make the application reliable.</p></article>
+        </div>
+        <div class="final-challenge">
+          <div><p class="eyebrow">Extension challenge</p><h3>Move from memory to persistent storage</h3><p>After mastering this module, connect the JTable application to a text file, CSV file, or database so records remain available after the program closes.</p></div>
+          <a class="button primary" href="#top">Return to the top</a>
+        </div>
+      </section>
+
+      <footer class="lesson-footer">
+        <div><strong>Java Swing JTable: Lesson and Learning Module</strong><p>Prepared as a classroom-ready guide for teaching tabular data management in Apache NetBeans.</p></div>
+        <span>End of module</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

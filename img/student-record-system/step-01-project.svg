@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">Create the project and JFrame Form</title><desc id="desc">Three illustrated steps show creating a Java project, selecting JFrame Form, and naming StudentRecordForm.</desc>
+  <rect width="900" height="520" rx="20" fill="#eef3f7"/>
+  <rect x="34" y="34" width="832" height="452" rx="16" fill="#fff" stroke="#bdcad6"/>
+  <rect x="34" y="34" width="832" height="54" rx="16" fill="#102b4e"/><rect x="34" y="72" width="832" height="16" fill="#102b4e"/>
+  <text x="60" y="68" font-family="Segoe UI,Arial" font-size="17" font-weight="700" fill="#fff">NetBeans IDE — New Project</text>
+  <g font-family="Segoe UI,Arial">
+    <circle cx="161" cy="141" r="24" fill="#1d5f91"/><text x="161" y="149" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">1</text>
+    <circle cx="450" cy="141" r="24" fill="#1d5f91"/><text x="450" y="149" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">2</text>
+    <circle cx="739" cy="141" r="24" fill="#1d5f91"/><text x="739" y="149" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">3</text>
+    <text x="161" y="185" text-anchor="middle" font-size="18" font-weight="800" fill="#102b4e">Java Application</text><text x="450" y="185" text-anchor="middle" font-size="18" font-weight="800" fill="#102b4e">JFrame Form</text><text x="739" y="185" text-anchor="middle" font-size="18" font-weight="800" fill="#102b4e">Class Name</text>
+    <rect x="70" y="214" width="182" height="172" rx="10" fill="#f5f8fb" stroke="#ccd7e0"/><path d="M99 244h55l17 17v69H99z" fill="#fff" stroke="#1d5f91" stroke-width="3"/><path d="M154 244v18h17" fill="none" stroke="#1d5f91" stroke-width="3"/><text x="161" y="354" text-anchor="middle" font-size="14" fill="#526173">Project type</text>
+    <rect x="359" y="214" width="182" height="172" rx="10" fill="#e8f3fa" stroke="#1d5f91" stroke-width="2"/><rect x="399" y="246" width="102" height="73" rx="6" fill="#fff" stroke="#173b66" stroke-width="3"/><rect x="399" y="246" width="102" height="16" fill="#173b66"/><text x="450" y="354" text-anchor="middle" font-size="14" fill="#526173">Swing GUI form</text>
+    <rect x="648" y="214" width="182" height="172" rx="10" fill="#f5f8fb" stroke="#ccd7e0"/><text x="668" y="251" font-size="12" font-weight="700" fill="#526173">CLASS NAME</text><rect x="668" y="264" width="142" height="38" rx="5" fill="#fff" stroke="#1d5f91" stroke-width="2"/><text x="678" y="288" font-size="13" fill="#173b66">StudentRecordForm</text><text x="739" y="354" text-anchor="middle" font-size="14" fill="#526173">Meaningful name</text>
+    <path d="M267 300h72M556 300h72" stroke="#7b8fa2" stroke-width="4"/><path d="M329 290l12 10-12 10M618 290l12 10-12 10" fill="none" stroke="#7b8fa2" stroke-width="4"/>
+    <rect x="339" y="419" width="222" height="40" rx="20" fill="#fff5dc"/><text x="450" y="445" text-anchor="middle" font-size="14" font-weight="800" fill="#8a5a12">DESIGN VIEW READY</text>
+  </g>
+</svg>

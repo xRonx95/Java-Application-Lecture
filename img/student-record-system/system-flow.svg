@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img" aria-labelledby="title desc">
+  <title id="title">Student record data flow</title><desc id="desc">Data moves from input fields through validation and record processing to the JTable and feedback message.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#6c8296"/></marker></defs>
+  <rect width="1000" height="430" rx="24" fill="#f3f7fa"/>
+  <text x="500" y="53" text-anchor="middle" font-family="Segoe UI,Arial" font-size="18" font-weight="800" fill="#526173">DATA PROCESSING FLOW</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="50" y="135" width="175" height="120" rx="16" fill="#fff" stroke="#9fb0bf" stroke-width="2"/><circle cx="137" cy="166" r="20" fill="#1d5f91"/><path d="M128 166h18M137 157v18" stroke="#fff" stroke-width="3"/><text x="137" y="210" text-anchor="middle" font-size="19" font-weight="800" fill="#102b4e">User Input</text><text x="137" y="234" text-anchor="middle" font-size="13" fill="#526173">Form field values</text>
+    <rect x="285" y="135" width="175" height="120" rx="16" fill="#fff5dc" stroke="#c99432" stroke-width="2"/><path d="M372 151l23 42h-46z" fill="#c99432"/><text x="372" y="181" text-anchor="middle" font-size="17" font-weight="900" fill="#fff">!</text><text x="372" y="210" text-anchor="middle" font-size="19" font-weight="800" fill="#102b4e">Validation</text><text x="372" y="234" text-anchor="middle" font-size="13" fill="#526173">Required and valid?</text>
+    <rect x="520" y="135" width="175" height="120" rx="16" fill="#e8f3fa" stroke="#1d5f91" stroke-width="2"/><circle cx="607" cy="168" r="20" fill="#173b66"/><path d="M597 168h20M607 158v20" stroke="#fff" stroke-width="3"/><text x="607" y="210" text-anchor="middle" font-size="19" font-weight="800" fill="#102b4e">Processing</text><text x="607" y="234" text-anchor="middle" font-size="13" fill="#526173">CRUD operation</text>
+    <rect x="755" y="135" width="195" height="120" rx="16" fill="#e9f6f1" stroke="#1d7257" stroke-width="2"/><rect x="802" y="151" width="101" height="44" rx="5" fill="#fff" stroke="#1d7257"/><path d="M802 166h101M835 151v44M869 151v44" stroke="#1d7257"/><text x="852" y="216" text-anchor="middle" font-size="19" font-weight="800" fill="#102b4e">JTable</text><text x="852" y="240" text-anchor="middle" font-size="13" fill="#526173">Updated record view</text>
+    <path d="M225 195h48M460 195h48M695 195h48" stroke="#6c8296" stroke-width="4" marker-end="url(#arrow)"/>
+    <path d="M372 255v64h-176" fill="none" stroke="#a63838" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="51" y="304" width="145" height="54" rx="27" fill="#f7e9e9" stroke="#a63838"/><text x="123" y="336" text-anchor="middle" font-size="14" font-weight="700" fill="#8d3030">Show warning</text>
+    <path d="M852 255v76h-139" fill="none" stroke="#1d7257" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="565" y="304" width="148" height="54" rx="27" fill="#e9f6f1" stroke="#1d7257"/><text x="639" y="336" text-anchor="middle" font-size="14" font-weight="700" fill="#1d7257">Show success</text>
+    <text x="372" y="292" text-anchor="middle" font-size="12" font-weight="700" fill="#a63838">INVALID</text><text x="852" y="292" text-anchor="middle" font-size="12" font-weight="700" fill="#1d7257">COMPLETED</text>
+  </g>
+</svg>

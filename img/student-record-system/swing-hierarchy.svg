@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+  <title id="title">Swing component hierarchy</title><desc id="desc">JFrame at the top contains an input panel, action panel, and records panel with their related Swing components.</desc>
+  <rect width="1000" height="520" rx="24" fill="#eef3f7"/>
+  <text x="500" y="52" text-anchor="middle" font-family="Segoe UI,Arial" font-size="18" font-weight="700" fill="#526173">SWING COMPONENT STRUCTURE</text>
+  <rect x="370" y="78" width="260" height="78" rx="14" fill="#102b4e"/>
+  <text x="500" y="110" text-anchor="middle" font-family="Segoe UI,Arial" font-size="25" font-weight="800" fill="#fff">JFrame</text>
+  <text x="500" y="136" text-anchor="middle" font-family="Segoe UI,Arial" font-size="14" fill="#d7e3ee">Main application window</text>
+  <path d="M500 156v45M195 201h610M195 201v35M500 201v35M805 201v35" fill="none" stroke="#7e94a8" stroke-width="4"/>
+  <g font-family="Segoe UI,Arial">
+    <rect x="70" y="236" width="250" height="88" rx="13" fill="#fff" stroke="#9fb0bf" stroke-width="2"/>
+    <text x="195" y="272" text-anchor="middle" font-size="21" font-weight="800" fill="#173b66">Input JPanel</text><text x="195" y="299" text-anchor="middle" font-size="14" fill="#526173">Student information</text>
+    <rect x="375" y="236" width="250" height="88" rx="13" fill="#fff" stroke="#9fb0bf" stroke-width="2"/>
+    <text x="500" y="272" text-anchor="middle" font-size="21" font-weight="800" fill="#173b66">Action JPanel</text><text x="500" y="299" text-anchor="middle" font-size="14" fill="#526173">Record commands</text>
+    <rect x="680" y="236" width="250" height="88" rx="13" fill="#fff" stroke="#9fb0bf" stroke-width="2"/>
+    <text x="805" y="272" text-anchor="middle" font-size="21" font-weight="800" fill="#173b66">Records JPanel</text><text x="805" y="299" text-anchor="middle" font-size="14" fill="#526173">Data presentation</text>
+    <path d="M195 324v35M500 324v35M805 324v35" fill="none" stroke="#7e94a8" stroke-width="4"/>
+    <rect x="70" y="359" width="250" height="108" rx="13" fill="#e8f3fa"/><text x="195" y="392" text-anchor="middle" font-size="17" font-weight="700" fill="#102b4e">JLabel • JTextField</text><text x="195" y="422" text-anchor="middle" font-size="17" font-weight="700" fill="#102b4e">JComboBox</text><text x="195" y="448" text-anchor="middle" font-size="13" fill="#526173">Captures student details</text>
+    <rect x="375" y="359" width="250" height="108" rx="13" fill="#fff5dc"/><text x="500" y="392" text-anchor="middle" font-size="17" font-weight="700" fill="#102b4e">JButton</text><text x="500" y="422" text-anchor="middle" font-size="15" fill="#526173">Add • Update • Clear • Delete</text><text x="500" y="448" text-anchor="middle" font-size="13" fill="#526173">Starts event handlers</text>
+    <rect x="680" y="359" width="250" height="108" rx="13" fill="#e9f6f1"/><text x="805" y="392" text-anchor="middle" font-size="17" font-weight="700" fill="#102b4e">JTable</text><text x="805" y="422" text-anchor="middle" font-size="17" font-weight="700" fill="#102b4e">JScrollPane</text><text x="805" y="448" text-anchor="middle" font-size="13" fill="#526173">Displays record rows</text>
+  </g>
+</svg>

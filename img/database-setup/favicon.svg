@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="52" fill="#0d2138"/>
+  <ellipse cx="128" cy="70" rx="62" ry="25" fill="#5b9ac9"/>
+  <rect x="66" y="70" width="124" height="110" fill="#2563a8"/>
+  <ellipse cx="128" cy="180" rx="62" ry="25" fill="#1b4f78"/>
+  <path d="M66 101c0 14 28 25 62 25s62-11 62-25M66 139c0 14 28 25 62 25s62-11 62-25" fill="none" stroke="#b8dcf3" stroke-width="7"/>
+  <circle cx="187" cy="183" r="39" fill="#d7a33b" stroke="#0d2138" stroke-width="9"/>
+  <text x="187" y="194" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="900" fill="#0d2138">J</text>
+</svg>

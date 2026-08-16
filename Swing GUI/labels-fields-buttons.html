@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A formal step-by-step Java Swing lesson module about labels, fields, and buttons.">
+  <title>Lesson Module: Labels, Fields, and Buttons in Java Swing</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <!-- Separate stylesheet -->
+  <link rel="stylesheet" href="../css/Swing GUI/labels-fields-buttons.css?v=3">
+  <script src="../js/labels-fields-buttons.js?v=3" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to lesson content</a>
+  <div class="reading-progress" aria-hidden="true"><span id="readingProgress"></span></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Java Learning Module home">
+        <span class="brand-mark" aria-hidden="true">J</span>
+        <span><strong>Java Learning Module</strong><small>Computer Programming · Swing GUI</small></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span><span></span><b>Menu</b>
+      </button>
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="#overview">Overview</a>
+        <a href="#components">Components</a>
+        <a href="#procedure">Procedure</a>
+        <a href="#practice">Activities</a>
+        <a href="#assessment">Assessment</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top">
+      <img class="hero-image" src="../img/swing-form-hero.png" alt="Illustration of a laptop showing a simple form with labels, text fields, and a button">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="module-badge"><span>MODULE 03</span><b>Java Swing GUI</b></div>
+        <p class="eyebrow">Formal Lesson and Learning Module</p>
+        <h1>Labels, Fields, and Buttons</h1>
+        <p class="hero-lead">Learn how to build a clear, accessible, and functional Java Swing form using <code>JLabel</code>, text-entry components, and <code>JButton</code>.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#overview">Begin the lesson</a>
+          <a class="button button-secondary" href="#procedure">Go to procedure</a>
+        </div>
+        <dl class="lesson-facts">
+          <div><dt>Duration</dt><dd>120 minutes</dd></div>
+          <div><dt>Level</dt><dd>Beginner</dd></div>
+          <div><dt>Output</dt><dd>Student profile form</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="lesson-shell">
+      <aside class="contents" aria-label="Table of contents">
+        <p class="contents-label">Lesson contents</p>
+        <ol>
+          <li><a href="#overview">Lesson overview</a></li>
+          <li><a href="#components">Core components</a></li>
+          <li><a href="#properties">Properties and naming</a></li>
+          <li><a href="#layout">Form layout</a></li>
+          <li><a href="#procedure">Guided procedure</a></li>
+          <li><a href="#complete-code">Complete program</a></li>
+          <li><a href="#events">Events and validation</a></li>
+          <li><a href="#practice">Practice activities</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+          <li><a href="#assessment">Assessment</a></li>
+          <li><a href="#summary">Summary</a></li>
+        </ol>
+        <div class="contents-note">
+          <strong>Essential question</strong>
+          <span>How do interface components work together to collect information and respond to a user?</span>
+        </div>
+      </aside>
+
+      <div class="lesson-content">
+        <section class="lesson-section" id="overview">
+          <div class="section-heading">
+            <span class="topic-number">01</span>
+            <div><p class="section-kicker">Lesson overview</p><h2>From static window to interactive form</h2></div>
+          </div>
+          <p class="lead">A graphical form becomes useful when it can explain what information is needed, accept the user’s response, and perform an action. In Java Swing, labels, fields, and buttons provide these three essential functions.</p>
+
+          <div class="overview-grid">
+            <article class="overview-card"><span aria-hidden="true">◎</span><h3>Learning competency</h3><p>Design and program a Java Swing form that accepts, validates, and processes user input.</p></article>
+            <article class="overview-card"><span aria-hidden="true">⌁</span><h3>Prior knowledge</h3><p>Java classes, variables, methods, data types, and the basic structure of a <code>JFrame</code>.</p></article>
+            <article class="overview-card"><span aria-hidden="true">✓</span><h3>Required output</h3><p>A student profile form with meaningful labels, editable fields, and working Save and Clear buttons.</p></article>
+          </div>
+
+          <div class="objectives-panel">
+            <div class="objectives-title"><p>At the end of this module</p><h3>Learning objectives</h3></div>
+            <ol>
+              <li>Differentiate <code>JLabel</code>, <code>JTextField</code>, <code>JPasswordField</code>, <code>JTextArea</code>, and <code>JButton</code>.</li>
+              <li>Set appropriate text, variable names, sizes, tool tips, and accessibility properties.</li>
+              <li>Arrange form controls using a layout manager and consistent visual spacing.</li>
+              <li>Read field values and respond to button-click events.</li>
+              <li>Validate required input and provide clear feedback.</li>
+              <li>Test and improve a form using a structured checklist.</li>
+            </ol>
+          </div>
+
+          <div class="materials-row">
+            <strong>Materials:</strong><span>Computer</span><span>JDK 17 or later</span><span>Apache NetBeans</span><span>Notebook</span>
+          </div>
+          <div class="diagnostic-box">
+            <div><span>Before you begin</span><h3>Three-minute diagnostic</h3></div>
+            <ol><li>What is the purpose of a <code>JFrame</code>?</li><li>Which Java statement creates an object?</li><li>What do you expect a Save button to do?</li></ol>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="components">
+          <div class="section-heading">
+            <span class="topic-number">02</span>
+            <div><p class="section-kicker">Core concepts</p><h2>Meet the form components</h2></div>
+          </div>
+          <p>A well-designed form communicates a simple sequence: <strong>read the instruction, enter information, then choose an action.</strong> Each Swing component has a specific responsibility.</p>
+
+          <figure class="wide-figure">
+            <div class="component-anatomy">
+              <div class="anatomy-title">Student Profile</div>
+              <div class="anatomy-row"><span class="demo-label">Full Name</span><span class="demo-field">Juan Dela Cruz</span><b class="callout-dot one">1</b><b class="callout-dot two">2</b></div>
+              <div class="anatomy-row"><span class="demo-label">Email Address</span><span class="demo-field muted">student@example.com</span></div>
+              <div class="anatomy-actions"><span class="demo-button secondary">Clear</span><span class="demo-button primary">Save Profile</span><b class="callout-dot three">3</b></div>
+            </div>
+            <div class="figure-key">
+              <div><b>1</b><span><strong>JLabel</strong> explains what information is required.</span></div>
+              <div><b>2</b><span><strong>JTextField</strong> accepts a single line of text.</span></div>
+              <div><b>3</b><span><strong>JButton</strong> starts an action when selected.</span></div>
+            </div>
+            <figcaption><strong>Picture 1.</strong> The three-component communication pattern in a data-entry form.</figcaption>
+          </figure>
+
+          <div class="component-cards">
+            <article><div class="component-icon label-icon">Aa</div><p class="component-type">OUTPUT COMPONENT</p><h3>JLabel</h3><p>Displays instructions, captions, status text, or images. A label usually identifies a nearby field.</p><pre><code>JLabel lblName =
+    new JLabel("Full Name:");</code></pre></article>
+            <article><div class="component-icon field-icon"></div><p class="component-type">INPUT COMPONENT</p><h3>JTextField</h3><p>Accepts one line of editable text such as a name, email address, or student number.</p><pre><code>JTextField txtName =
+    new JTextField(20);</code></pre></article>
+            <article><div class="component-icon button-icon">Save</div><p class="component-type">ACTION COMPONENT</p><h3>JButton</h3><p>Represents a command. It fires an action event when the user clicks it or presses its keyboard shortcut.</p><pre><code>JButton btnSave =
+    new JButton("Save");</code></pre></article>
+          </div>
+
+          <h3 class="subheading">Other useful field types</h3>
+          <div class="reference-table-wrap" tabindex="0" role="region" aria-label="Java Swing field component comparison">
+            <table class="reference-table">
+              <thead><tr><th>Component</th><th>Accepts</th><th>Appropriate use</th><th>Important method</th></tr></thead>
+              <tbody>
+                <tr><td><code>JTextField</code></td><td>One line of visible text</td><td>Name, email, student number</td><td><code>getText()</code></td></tr>
+                <tr><td><code>JPasswordField</code></td><td>One hidden line</td><td>Password or PIN</td><td><code>getPassword()</code></td></tr>
+                <tr><td><code>JTextArea</code></td><td>Multiple lines</td><td>Address, remarks, description</td><td><code>getText()</code></td></tr>
+                <tr><td><code>JFormattedTextField</code></td><td>Formatted value</td><td>Date, number, currency</td><td><code>getValue()</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note note-blue"><strong>Remember:</strong> A label displays information; a field receives information; a button requests an action.</div>
+        </section>
+
+        <section class="lesson-section" id="properties">
+          <div class="section-heading"><span class="topic-number">03</span><div><p class="section-kicker">Professional practice</p><h2>Properties, names, and readable text</h2></div></div>
+          <p>Every component has properties that control its appearance and behavior. Use clear visible text for users and meaningful variable names for programmers.</p>
+          <div class="naming-comparison">
+            <article class="bad-example"><span>AVOID</span><h3>Default or unclear names</h3><code>jLabel1</code><code>jTextField2</code><code>jButton3</code><p>These names do not explain the component’s purpose.</p></article>
+            <div class="comparison-arrow" aria-hidden="true">→</div>
+            <article class="good-example"><span>USE</span><h3>Purpose-based names</h3><code>lblFullName</code><code>txtFullName</code><code>btnSave</code><p>Prefixes identify the component; the rest identifies its role.</p></article>
+          </div>
+          <div class="property-grid">
+            <article><b>text</b><p>The words visible to the user, such as “Email Address” or “Save Profile.”</p></article>
+            <article><b>font</b><p>The typeface, style, and size. Use readable sizes and consistent weights.</p></article>
+            <article><b>foreground</b><p>The text color. Maintain strong contrast with the background.</p></article>
+            <article><b>enabled</b><p>Determines whether the component accepts interaction.</p></article>
+            <article><b>toolTipText</b><p>Provides a short helpful explanation when the pointer rests over a control.</p></article>
+            <article><b>mnemonic</b><p>Adds a keyboard shortcut, such as <kbd>Alt</kbd> + <kbd>S</kbd> for Save.</p></article>
+          </div>
+          <figure class="wide-figure property-figure">
+            <div class="property-window"><div class="property-window-title">Properties — btnSave</div><div class="property-list"><span><b>variableName</b><em>btnSave</em></span><span><b>text</b><em>Save Profile</em></span><span><b>font</b><em>SansSerif, Bold, 16</em></span><span><b>toolTipText</b><em>Save the student profile</em></span><span><b>enabled</b><em>true</em></span></div></div>
+            <figcaption><strong>Picture 2.</strong> Example properties for a clearly named Save button.</figcaption>
+          </figure>
+        </section>
+
+        <section class="lesson-section" id="layout">
+          <div class="section-heading"><span class="topic-number">04</span><div><p class="section-kicker">Interface design</p><h2>Arrange controls as one visual system</h2></div></div>
+          <p>Good layout reduces errors. Align labels, keep related controls together, use equal field widths, and place the primary action where it is easy to find.</p>
+          <div class="layout-principles">
+            <article><span>01</span><h3>Align</h3><p>Keep labels and fields on a predictable grid.</p></article>
+            <article><span>02</span><h3>Group</h3><p>Place controls with related purposes close together.</p></article>
+            <article><span>03</span><h3>Space</h3><p>Use consistent gaps so every item is easy to scan.</p></article>
+            <article><span>04</span><h3>Prioritize</h3><p>Make the main action visually stronger than secondary actions.</p></article>
+          </div>
+          <div class="do-dont-layout">
+            <figure><div class="mini-form poor"><span>Name</span><i></i><span>Email Address</span><i class="tiny"></i><b>OK</b><em>Reset Form</em></div><figcaption><strong>Avoid:</strong> uneven alignment, unclear button labels, and inconsistent sizes.</figcaption></figure>
+            <figure><div class="mini-form good"><div><span>Full Name</span><i></i></div><div><span>Email Address</span><i></i></div><section><em>Clear</em><b>Save Profile</b></section></div><figcaption><strong>Preferred:</strong> clear labels, equal fields, consistent spacing, and a visible primary action.</figcaption></figure>
+          </div>
+          <div class="note note-gold"><strong>Layout recommendation:</strong> Use <code>GridBagLayout</code>, <code>GroupLayout</code>, or nested panels. Fixed coordinates often break when fonts, window size, or operating systems change.</div>
+        </section>
+
+        <section class="lesson-section" id="procedure">
+          <div class="section-heading"><span class="topic-number">05</span><div><p class="section-kicker">Guided laboratory procedure</p><h2>Build a Student Profile Form</h2></div></div>
+          <p class="lead">Follow the six steps in order. After each step, compare your work with the accompanying picture before moving forward.</p>
+
+          <article class="step-card">
+            <div class="step-head"><span>STEP 1</span><div><p>Prepare the interface</p><h3>Create the JFrame Form</h3></div><b>10 min</b></div>
+            <div class="step-grid"><div class="step-instructions"><ol><li>Open your Java project in Apache NetBeans.</li><li>Right-click the source package.</li><li>Select <strong>New → JFrame Form</strong>.</li><li>Enter <code>StudentProfileForm</code> as the class name.</li><li>Select <strong>Finish</strong>, then set the form title to <strong>Student Profile</strong>.</li></ol><div class="checkpoint"><strong>Checkpoint</strong><span>The class appears under Source Packages and opens in Design view.</span></div></div><figure class="step-picture"><div class="netbeans-window"><div class="nb-title">Projects</div><p>▾ StudentProfileApp</p><p class="indent">▾ Source Packages</p><p class="indent-2">◆ app</p><div class="nb-menu"><span>New</span><strong>JFrame Form…</strong><span>Java Class…</span><span>Package…</span></div></div><figcaption><strong>Picture 3.</strong> Create the form inside the project package.</figcaption></figure></div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-head"><span>STEP 2</span><div><p>Add instructions</p><h3>Place and Configure JLabels</h3></div><b>15 min</b></div>
+            <div class="step-grid"><div class="step-instructions"><ol><li>Drag four <strong>Label</strong> components from the Palette.</li><li>Change their text to <strong>Student Profile</strong>, <strong>Full Name</strong>, <strong>Email Address</strong>, and <strong>Student Number</strong>.</li><li>Rename them <code>lblTitle</code>, <code>lblFullName</code>, <code>lblEmail</code>, and <code>lblStudentNumber</code>.</li><li>Make the title larger and bold.</li><li>Align the three field labels along the same left edge.</li></ol><div class="teacher-note"><strong>Explain:</strong> Labels should use familiar words and should not end with unclear abbreviations.</div></div><figure class="step-picture"><div class="designer-window"><div class="palette-panel"><b>Palette</b><span class="active">Label</span><span>Text Field</span><span>Button</span></div><div class="canvas-panel"><h4>Student Profile</h4><p>Full Name</p><p>Email Address</p><p>Student Number</p></div></div><figcaption><strong>Picture 4.</strong> Place labels first to establish the structure of the form.</figcaption></figure></div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-head"><span>STEP 3</span><div><p>Collect information</p><h3>Add and Rename JTextFields</h3></div><b>15 min</b></div>
+            <div class="step-grid"><div class="step-instructions"><ol><li>Drag three <strong>Text Field</strong> components beside the labels.</li><li>Clear each field’s default text.</li><li>Rename the fields <code>txtFullName</code>, <code>txtEmail</code>, and <code>txtStudentNumber</code>.</li><li>Give the fields equal widths.</li><li>Set helpful tool tips such as “Enter your complete name.”</li></ol><div class="checkpoint"><strong>Checkpoint</strong><span>Each label is directly associated with one empty, clearly aligned field.</span></div></div><figure class="step-picture"><div class="drag-visual"><div class="drag-palette"><b>Text Field</b><span>drag</span></div><div class="drag-arrow">→</div><div class="drag-form"><div><span>Full Name</span><i></i></div><div><span>Email Address</span><i></i></div><div><span>Student Number</span><i></i></div></div></div><figcaption><strong>Picture 5.</strong> Place each field beside the label that describes it.</figcaption></figure></div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-head"><span>STEP 4</span><div><p>Create actions</p><h3>Add Save and Clear Buttons</h3></div><b>15 min</b></div>
+            <div class="step-grid"><div class="step-instructions"><ol><li>Drag two <strong>Button</strong> components below the fields.</li><li>Change their text to <strong>Clear</strong> and <strong>Save Profile</strong>.</li><li>Rename them <code>btnClear</code> and <code>btnSave</code>.</li><li>Place Clear first and Save Profile last.</li><li>Set <code>btnSave</code> as the root pane’s default button when coding manually.</li></ol><div class="teacher-note"><strong>Discuss:</strong> “Save Profile” is clearer than “OK” because it names the action and its object.</div></div><figure class="step-picture"><div class="button-states"><div><span>Normal</span><b>Save Profile</b></div><div><span>Keyboard focus</span><b class="focused">Save Profile</b></div><div><span>Secondary</span><em>Clear</em></div></div><figcaption><strong>Picture 6.</strong> Use specific button text and a visible focus state.</figcaption></figure></div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-head"><span>STEP 5</span><div><p>Program behavior</p><h3>Create the Button Events</h3></div><b>25 min</b></div>
+            <div class="step-grid"><div class="step-instructions"><ol><li>Double-click <strong>Save Profile</strong> in Design view.</li><li>Inside the generated method, read and trim each field.</li><li>Check whether any required value is empty.</li><li>Show a warning or success message.</li><li>Double-click <strong>Clear</strong> and reset all fields.</li></ol><div class="inline-code"><div><span>btnSaveActionPerformed</span><button class="copy-button" type="button" data-copy="eventCode">Copy code</button></div><pre id="eventCode"><code>String name = txtFullName.getText().trim();
+
+if (name.isEmpty()) {
+    JOptionPane.showMessageDialog(this,
+        "Please enter the student's full name.");
+    txtFullName.requestFocus();
+    return;
+}
+
+JOptionPane.showMessageDialog(this,
+    "Student profile saved successfully.");</code></pre></div></div><figure class="step-picture"><div class="event-flow"><div><span>1</span><b>Click</b><small>Save Profile</small></div><i>→</i><div><span>2</span><b>Read</b><small>Field values</small></div><i>→</i><div><span>3</span><b>Validate</b><small>Required data</small></div><i>→</i><div><span>4</span><b>Respond</b><small>Show message</small></div></div><figcaption><strong>Picture 7.</strong> A button event reads, checks, and responds to input.</figcaption></figure></div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-head"><span>STEP 6</span><div><p>Verify quality</p><h3>Run and Test the Form</h3></div><b>20 min</b></div>
+            <div class="step-grid"><div class="step-instructions"><ol><li>Save the file, then press <kbd>F6</kbd> to run.</li><li>Select Save Profile while all fields are empty.</li><li>Test one missing field at a time.</li><li>Enter valid information and save again.</li><li>Select Clear and confirm that all fields become empty.</li><li>Use <kbd>Tab</kbd> to check the focus order.</li></ol><div class="checkpoint"><strong>Completion standard</strong><span>All test cases pass, messages are specific, and keyboard navigation follows the visual order.</span></div></div><figure class="step-picture"><div class="test-result"><div class="finished-form"><h4>Student Profile</h4><p><span>Full Name</span><b>Maria Santos</b></p><p><span>Email Address</span><b>maria@example.com</b></p><p><span>Student Number</span><b>2026-00124</b></p><div><em>Clear</em><strong>Save Profile</strong></div></div><div class="success-dialog"><b>✓</b><span>Student profile saved successfully.</span><em>OK</em></div></div><figcaption><strong>Picture 8.</strong> Expected result after valid information is submitted.</figcaption></figure></div>
+          </article>
+        </section>
+
+        <section class="lesson-section" id="complete-code">
+          <div class="section-heading"><span class="topic-number">06</span><div><p class="section-kicker">Code reference</p><h2>Complete Working Program</h2></div></div>
+          <p>This example builds the same form with Java code. It uses meaningful variable names, <code>GridBagLayout</code>, keyboard mnemonics, validation, and separate methods for each action.</p>
+          <div class="code-block">
+            <div class="code-toolbar"><span><b>StudentProfileForm.java</b><small>Complete example</small></span><button class="copy-button" type="button" data-copy="completeProgram">Copy code</button></div>
+            <pre id="completeProgram"><code>import java.awt.*;
+import javax.swing.*;
+
+public class StudentProfileForm extends JFrame {
+    private final JTextField txtFullName = new JTextField(22);
+    private final JTextField txtEmail = new JTextField(22);
+    private final JTextField txtStudentNumber = new JTextField(22);
+
+    public StudentProfileForm() {
+        setTitle("Student Profile");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(600, 400);
+        setLocationRelativeTo(null);
+
+        JLabel lblTitle = new JLabel("Student Profile");
+        lblTitle.setFont(new Font("SansSerif", Font.BOLD, 24));
+
+        JLabel lblFullName = new JLabel("Full Name:");
+        JLabel lblEmail = new JLabel("Email Address:");
+        JLabel lblStudentNumber = new JLabel("Student Number:");
+
+        lblFullName.setLabelFor(txtFullName);
+        lblEmail.setLabelFor(txtEmail);
+        lblStudentNumber.setLabelFor(txtStudentNumber);
+
+        txtFullName.setToolTipText("Enter the student's complete name");
+        txtEmail.setToolTipText("Enter a valid email address");
+        txtStudentNumber.setToolTipText("Enter the official student number");
+
+        JButton btnClear = new JButton("Clear");
+        JButton btnSave = new JButton("Save Profile");
+        btnClear.setMnemonic('C');
+        btnSave.setMnemonic('S');
+
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBorder(BorderFactory.createEmptyBorder(28, 32, 28, 32));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(9, 9, 9, 9);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
+        formPanel.add(lblTitle, gbc);
+        gbc.gridwidth = 1;
+
+        addRow(formPanel, gbc, 1, lblFullName, txtFullName);
+        addRow(formPanel, gbc, 2, lblEmail, txtEmail);
+        addRow(formPanel, gbc, 3, lblStudentNumber, txtStudentNumber);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+        buttonPanel.add(btnClear);
+        buttonPanel.add(btnSave);
+        gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 2;
+        formPanel.add(buttonPanel, gbc);
+
+        btnSave.addActionListener(event -&gt; saveProfile());
+        btnClear.addActionListener(event -&gt; clearFields());
+        getRootPane().setDefaultButton(btnSave);
+
+        add(formPanel);
+    }
+
+    private void addRow(JPanel panel, GridBagConstraints gbc, int row,
+                        JLabel label, JTextField field) {
+        gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = row;
+        gbc.weightx = 0;
+        panel.add(label, gbc);
+        gbc.gridx = 1; gbc.weightx = 1;
+        panel.add(field, gbc);
+    }
+
+    private void saveProfile() {
+        String name = txtFullName.getText().trim();
+        String email = txtEmail.getText().trim();
+        String studentNumber = txtStudentNumber.getText().trim();
+
+        if (name.isEmpty()) {
+            showWarning("Please enter the student's full name.", txtFullName);
+            return;
+        }
+        if (email.isEmpty() || !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            showWarning("Please enter a valid email address.", txtEmail);
+            return;
+        }
+        if (studentNumber.isEmpty()) {
+            showWarning("Please enter the student number.", txtStudentNumber);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this,
+            "Student profile saved for " + name + ".",
+            "Profile Saved", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void showWarning(String message, JTextField field) {
+        JOptionPane.showMessageDialog(this, message,
+            "Incomplete Form", JOptionPane.WARNING_MESSAGE);
+        field.requestFocus();
+    }
+
+    private void clearFields() {
+        txtFullName.setText("");
+        txtEmail.setText("");
+        txtStudentNumber.setText("");
+        txtFullName.requestFocus();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -&gt;
+            new StudentProfileForm().setVisible(true));
+    }
+}</code></pre>
+          </div>
+          <div class="code-explanation">
+            <article><span>01</span><h3>Create</h3><p>Construct labels, fields, and buttons with appropriate text and sizes.</p></article>
+            <article><span>02</span><h3>Connect</h3><p><code>setLabelFor()</code> associates each label with its field for accessibility.</p></article>
+            <article><span>03</span><h3>Arrange</h3><p><code>GridBagLayout</code> keeps rows aligned while allowing fields to expand.</p></article>
+            <article><span>04</span><h3>Respond</h3><p>Action listeners call focused methods that save or clear the form.</p></article>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="events">
+          <div class="section-heading"><span class="topic-number">07</span><div><p class="section-kicker">Events and validation</p><h2>Turn input into a useful response</h2></div></div>
+          <p>An event listener waits for an interaction. When the user selects a button, the listener runs the connected code. Before saving, the program should validate the information.</p>
+          <div class="validation-flow" aria-label="Validation sequence"><div><span>1</span><b>Read</b><small><code>getText()</code></small></div><i>→</i><div><span>2</span><b>Clean</b><small><code>trim()</code></small></div><i>→</i><div><span>3</span><b>Check</b><small><code>isEmpty()</code></small></div><i>→</i><div><span>4</span><b>Respond</b><small>Message dialog</small></div></div>
+          <div class="feedback-grid">
+            <article class="feedback-good"><h3>Effective feedback</h3><ul><li>Names the field that needs attention.</li><li>Explains how to correct the problem.</li><li>Moves keyboard focus to that field.</li><li>Uses a polite, concise message.</li></ul></article>
+            <article class="feedback-poor"><h3>Ineffective feedback</h3><ul><li>Uses vague text such as “Error!”</li><li>Clears valid information unnecessarily.</li><li>Shows success before validation.</li><li>Exposes technical exception details.</li></ul></article>
+          </div>
+          <div class="quick-check"><div><span>QUICK CHECK</span><h3>Which message is more helpful?</h3><p>A. “Invalid input.” &nbsp;&nbsp; B. “Please enter a valid email address, such as name@example.com.”</p></div><button type="button" class="reveal-button" data-reveal="quickAnswer">Reveal answer</button><p id="quickAnswer" hidden><strong>Answer: B.</strong> It identifies the problem and gives the user a useful example.</p></div>
+        </section>
+
+        <section class="lesson-section" id="practice">
+          <div class="section-heading"><span class="topic-number">08</span><div><p class="section-kicker">Application and practice</p><h2>Apply what you learned</h2></div></div>
+          <div class="lab-photo-card"><img src="../img/student-gui-lab.png" alt="Students and a teacher working on Java form design in a computer laboratory"><div><p>Collaborative laboratory</p><h3>Plan, build, test, and explain</h3><span>Students work in pairs: one acts as the programmer while the other uses the testing checklist. Change roles after the first successful test.</span></div></div>
+
+          <div class="activity-grid">
+            <article class="activity-card"><div><span>ACTIVITY A</span><b>15 minutes</b></div><h3>Component Identification</h3><p>Study an existing login form. List every label, field, and button. State the purpose and suggest a meaningful Java variable name for each one.</p><ul><li>Minimum of six components</li><li>Correct Swing class</li><li>Clear variable naming</li></ul></article>
+            <article class="activity-card"><div><span>ACTIVITY B</span><b>30 minutes</b></div><h3>Registration Form Extension</h3><p>Add a course field, a multiline address area, and a Reset confirmation. Keep the design aligned and keyboard accessible.</p><ul><li>Use <code>JTextArea</code> for address</li><li>Validate every required value</li><li>Display all saved information</li></ul></article>
+          </div>
+
+          <h3 class="subheading">Student testing checklist</h3>
+          <div class="checklist-grid">
+            <label><input type="checkbox"> Every label clearly describes its field.</label>
+            <label><input type="checkbox"> Component variable names explain their purpose.</label>
+            <label><input type="checkbox"> Fields are aligned and have equal widths.</label>
+            <label><input type="checkbox"> The Tab key follows the correct order.</label>
+            <label><input type="checkbox"> Blank fields display specific warnings.</label>
+            <label><input type="checkbox"> Valid input displays a success message.</label>
+            <label><input type="checkbox"> Clear removes all values and restores focus.</label>
+            <label><input type="checkbox"> Buttons use clear action words.</label>
+          </div>
+
+          <h3 class="subheading">Test cases</h3>
+          <div class="reference-table-wrap" tabindex="0" role="region" aria-label="Program testing table">
+            <table class="reference-table"><thead><tr><th>No.</th><th>Test input</th><th>Expected result</th><th>Student result</th></tr></thead><tbody><tr><td>1</td><td>All fields empty</td><td>Full Name warning; focus moves to name</td><td>Pass / Fail</td></tr><tr><td>2</td><td>Email is <code>student@email</code></td><td>Valid email warning appears</td><td>Pass / Fail</td></tr><tr><td>3</td><td>Student number empty</td><td>Student Number warning appears</td><td>Pass / Fail</td></tr><tr><td>4</td><td>All values valid</td><td>Success message names the student</td><td>Pass / Fail</td></tr><tr><td>5</td><td>Select Clear</td><td>All fields empty; name field focused</td><td>Pass / Fail</td></tr></tbody></table>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="troubleshooting">
+          <div class="section-heading"><span class="topic-number">09</span><div><p class="section-kicker">Troubleshooting reference</p><h2>Common problems and corrections</h2></div></div>
+          <div class="faq-list">
+            <details open><summary>The button does nothing when selected.</summary><p>Confirm that an <code>ActionListener</code> is connected to the correct button and that the event method contains the intended statements.</p></details>
+            <details><summary>“Cannot find symbol” appears for a field name.</summary><p>Check spelling, capitalization, and scope. <code>txtFullName</code> and <code>txtFullname</code> are different names in Java.</p></details>
+            <details><summary>The fields are too small or become misaligned.</summary><p>Use a layout manager and set an appropriate column count, such as <code>new JTextField(22)</code>. Avoid fixed coordinates.</p></details>
+            <details><summary>The form accepts spaces as valid information.</summary><p>Call <code>trim()</code> before <code>isEmpty()</code> so whitespace is removed before validation.</p></details>
+            <details><summary>Pressing Enter does not activate Save.</summary><p>Set the default button with <code>getRootPane().setDefaultButton(btnSave)</code>.</p></details>
+            <details><summary>A label does not move focus to its field.</summary><p>Associate them with <code>lblFullName.setLabelFor(txtFullName)</code> and configure a mnemonic if needed.</p></details>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="assessment">
+          <div class="section-heading"><span class="topic-number">10</span><div><p class="section-kicker">Assessment</p><h2>Check your understanding</h2></div></div>
+          <form class="assessment-form" id="assessmentForm">
+            <fieldset data-answer="b"><legend><span>1</span>Which component displays a field caption?</legend><label><input type="radio" name="q1" value="a"> JTextField</label><label><input type="radio" name="q1" value="b"> JLabel</label><label><input type="radio" name="q1" value="c"> JButton</label></fieldset>
+            <fieldset data-answer="c"><legend><span>2</span>Which method reads text from a JTextField?</legend><label><input type="radio" name="q2" value="a"> setText()</label><label><input type="radio" name="q2" value="b"> readText()</label><label><input type="radio" name="q2" value="c"> getText()</label></fieldset>
+            <fieldset data-answer="a"><legend><span>3</span>Which variable name best represents a Save button?</legend><label><input type="radio" name="q3" value="a"> btnSave</label><label><input type="radio" name="q3" value="b"> button1</label><label><input type="radio" name="q3" value="c"> txtSave</label></fieldset>
+            <fieldset data-answer="c"><legend><span>4</span>Why is trim() used before checking a field?</legend><label><input type="radio" name="q4" value="a"> It changes text to uppercase.</label><label><input type="radio" name="q4" value="b"> It hides the field value.</label><label><input type="radio" name="q4" value="c"> It removes leading and trailing spaces.</label></fieldset>
+            <fieldset data-answer="b"><legend><span>5</span>What connects a button click to program code?</legend><label><input type="radio" name="q5" value="a"> A layout manager</label><label><input type="radio" name="q5" value="b"> An ActionListener</label><label><input type="radio" name="q5" value="c"> A JLabel</label></fieldset>
+            <button class="button button-primary" type="submit">Check my score</button>
+            <div class="score-box" id="scoreBox" role="status" aria-live="polite"></div>
+          </form>
+
+          <h3 class="subheading">Performance task</h3>
+          <div class="performance-task"><div><span>INDIVIDUAL TASK</span><h3>Build a Contact Information Form</h3><p>Create a form containing Full Name, Email, Mobile Number, and Address. Include Save and Clear buttons, complete validation, useful feedback, and correct keyboard navigation.</p></div><ol><li>Plan and name components.</li><li>Build and align the form.</li><li>Program both button events.</li><li>Test five cases.</li><li>Demonstrate and explain the code.</li></ol></div>
+
+          <div class="reference-table-wrap" tabindex="0" role="region" aria-label="Performance rubric">
+            <table class="reference-table rubric"><thead><tr><th>Criterion</th><th>Excellent (4)</th><th>Proficient (3)</th><th>Developing (2)</th><th>Beginning (1)</th></tr></thead><tbody><tr><td>Component selection</td><td>All components are appropriate</td><td>One minor issue</td><td>Several incorrect choices</td><td>Major components missing</td></tr><tr><td>Interface design</td><td>Clear, aligned, highly readable</td><td>Mostly consistent</td><td>Some layout issues</td><td>Difficult to follow</td></tr><tr><td>Functionality</td><td>All actions work correctly</td><td>One minor error</td><td>Several errors</td><td>Actions do not work</td></tr><tr><td>Validation</td><td>Complete, specific feedback</td><td>Mostly complete</td><td>Limited checks</td><td>No validation</td></tr><tr><td>Code quality</td><td>Clear names and organization</td><td>Generally clear</td><td>Inconsistent naming</td><td>Hard to understand</td></tr></tbody></table>
+          </div>
+          <details class="answer-key"><summary>Teacher answer key</summary><p><strong>Multiple choice:</strong> 1–B, 2–C, 3–A, 4–C, 5–B.</p><p><strong>Diagnostic guide:</strong> A JFrame is the top-level application window; <code>new</code> creates an object; a Save button should validate and store/process the current form values.</p></details>
+        </section>
+
+        <section class="lesson-section summary-section" id="summary">
+          <div class="section-heading"><span class="topic-number">11</span><div><p class="section-kicker">Lesson closure</p><h2>Key takeaways</h2></div></div>
+          <div class="takeaway-grid"><article><strong>JLabel</strong><span>explains what information a field requires.</span></article><article><strong>Text fields</strong><span>accept and return user-entered values.</span></article><article><strong>JButton</strong><span>requests an action through an event listener.</span></article><article><strong>Naming</strong><span>makes code easier to read and maintain.</span></article><article><strong>Layout</strong><span>creates alignment, grouping, and visual order.</span></article><article><strong>Validation</strong><span>prevents incomplete or incorrect input.</span></article></div>
+          <blockquote>“A professional form does not merely collect data; it guides the user clearly, prevents mistakes, and confirms every important action.”</blockquote>
+          <div class="exit-ticket"><div><span>EXIT TICKET</span><h3>Explain in three sentences</h3></div><p>How do a label, a field, and a button work together in one form row? Include one Java class name and one method in your answer.</p></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="module-footer"><div><strong>Java Swing Learning Module</strong><span>Module 03 · Labels, Fields, and Buttons</span></div><a href="#top">Return to top ↑</a></footer>
+</body>
+</html>

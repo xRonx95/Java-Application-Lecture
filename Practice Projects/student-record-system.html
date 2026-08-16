@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A professional lecture module on designing a Student Record System using Java Swing and JFrame Form.">
+  <title>Student Record System Using JFrame Form | Lesson Module</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <link rel="stylesheet" href="../css/Practice Projects/student-record-system.css?v=1">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to lesson content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="module-brand" aria-label="Lesson module identity">
+        <span class="brand-mark" aria-hidden="true">SR</span>
+        <div>
+          <p class="brand-kicker">Programming Practice Project</p>
+          <p class="brand-title">Student Record System</p>
+        </div>
+      </div>
+
+      <nav class="main-navigation" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="#lesson-overview">Overview</a>
+        <a href="#guided-lesson">Lessons</a>
+        <a href="#assessment">Assessment</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="module-title">
+      <div class="hero-content">
+        <p class="eyebrow">Lesson and Module • Java GUI Programming</p>
+        <h1 id="module-title">Designing a Student Record System Using JFrame Form</h1>
+        <p class="hero-summary">
+          A structured lecture on planning, designing, and explaining a desktop-based student record system with Java Swing and the NetBeans JFrame Form designer.
+        </p>
+
+        <div class="hero-meta" aria-label="Module information">
+          <div><span>Level</span><strong>Intermediate</strong></div>
+          <div><span>Suggested time</span><strong>3–4 hours</strong></div>
+          <div><span>Format</span><strong>Lecture &amp; guided analysis</strong></div>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <img src="../img/student-record-system/hero-interface.svg" alt="Illustration of a Student Record System window with form fields and a records table">
+        <figcaption>Target interface: record entry, table display, search, and record management.</figcaption>
+      </figure>
+    </section>
+
+    <div class="module-layout">
+      <aside class="lesson-sidebar" aria-label="Table of contents">
+        <div class="sidebar-card">
+          <p class="sidebar-label">Module contents</p>
+          <ol>
+            <li><a href="#lesson-overview">Lesson overview</a></li>
+            <li><a href="#concept-foundation">Concept foundation</a></li>
+            <li><a href="#system-plan">System planning</a></li>
+            <li><a href="#guided-lesson">Guided JFrame lessons</a></li>
+            <li><a href="#crud-operations">CRUD operations</a></li>
+            <li><a href="#validation">Input validation</a></li>
+            <li><a href="#testing">Testing and debugging</a></li>
+            <li><a href="#assessment">Assessment</a></li>
+          </ol>
+        </div>
+        <div class="sidebar-note">
+          <strong>Instructor note</strong>
+          <p>This page is a lecture guide. The code blocks are examples for explanation and are not an attached Java application.</p>
+        </div>
+      </aside>
+
+      <article class="lesson-content">
+        <section id="lesson-overview" class="lesson-section">
+          <p class="section-number">01</p>
+          <h2>Lesson Overview</h2>
+          <p class="lead">
+            A Student Record System is an information-management application used to collect, organize, locate, revise, and remove student information. In this module, the system serves as a practical context for learning event-driven programming with Java Swing.
+          </p>
+
+          <div class="objective-grid">
+            <div class="objective-card">
+              <span class="card-icon" aria-hidden="true">01</span>
+              <h3>Explain the structure</h3>
+              <p>Identify the purpose of JFrame, JPanel, labels, text fields, buttons, tables, and event listeners.</p>
+            </div>
+            <div class="objective-card">
+              <span class="card-icon" aria-hidden="true">02</span>
+              <h3>Plan the interface</h3>
+              <p>Organize the input form and record table according to clear usability and data requirements.</p>
+            </div>
+            <div class="objective-card">
+              <span class="card-icon" aria-hidden="true">03</span>
+              <h3>Analyze CRUD logic</h3>
+              <p>Describe how Create, Read, Update, and Delete operations affect the table model and selected record.</p>
+            </div>
+            <div class="objective-card">
+              <span class="card-icon" aria-hidden="true">04</span>
+              <h3>Apply validation</h3>
+              <p>Recognize incomplete or invalid entries and communicate errors through meaningful messages.</p>
+            </div>
+          </div>
+
+          <div class="callout callout-info">
+            <h3>Learning outcome</h3>
+            <p>At the end of the lesson, students should be able to explain the complete workflow of a JFrame-based Student Record System and interpret the purpose of its major code segments.</p>
+          </div>
+        </section>
+
+        <section id="concept-foundation" class="lesson-section">
+          <p class="section-number">02</p>
+          <h2>Concept Foundation: Java Swing and JFrame</h2>
+          <p>
+            <strong>Java Swing</strong> is a graphical user interface toolkit included with Java. It provides reusable interface components such as windows, buttons, labels, text fields, dialog boxes, and tables. A <strong>JFrame</strong> is the main top-level window that holds these components.
+          </p>
+
+          <figure class="lesson-figure">
+            <img src="../img/student-record-system/swing-hierarchy.svg" alt="Diagram showing JFrame containing panels, input controls, action buttons, and a JTable">
+            <figcaption><strong>Figure 1.</strong> A JFrame acts as the main container of the student record interface.</figcaption>
+          </figure>
+
+          <div class="definition-table" role="region" aria-label="Swing component reference" tabindex="0">
+            <table>
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Purpose in the system</th>
+                  <th>Suggested variable name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><code>JFrame</code></td><td>Main application window</td><td><code>StudentRecordForm</code></td></tr>
+                <tr><td><code>JPanel</code></td><td>Groups related interface elements</td><td><code>pnlStudentForm</code></td></tr>
+                <tr><td><code>JLabel</code></td><td>Describes an input field</td><td><code>lblStudentId</code></td></tr>
+                <tr><td><code>JTextField</code></td><td>Accepts a short text entry</td><td><code>txtStudentId</code></td></tr>
+                <tr><td><code>JComboBox</code></td><td>Presents a controlled list of choices</td><td><code>cmbProgram</code></td></tr>
+                <tr><td><code>JButton</code></td><td>Starts an action</td><td><code>btnAdd</code></td></tr>
+                <tr><td><code>JTable</code></td><td>Displays records by row and column</td><td><code>tblStudents</code></td></tr>
+                <tr><td><code>JScrollPane</code></td><td>Allows the table to scroll</td><td><code>scrStudentTable</code></td></tr>
+                <tr><td><code>JOptionPane</code></td><td>Shows feedback, warnings, or confirmation</td><td>Used directly</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout-tip">
+            <h3>Professional naming convention</h3>
+            <p>Use short prefixes such as <code>txt</code>, <code>btn</code>, <code>cmb</code>, and <code>tbl</code>. A meaningful name such as <code>btnUpdate</code> is easier to explain and maintain than a default name such as <code>jButton3</code>.</p>
+          </div>
+        </section>
+
+        <section id="system-plan" class="lesson-section">
+          <p class="section-number">03</p>
+          <h2>System Planning Before Opening the Form Designer</h2>
+          <p>
+            Good interface design begins with a clear data plan. The class should first identify which information is required and what operations the user must perform. This prevents the interface from becoming crowded or incomplete.
+          </p>
+
+          <h3>Recommended student data fields</h3>
+          <div class="field-grid">
+            <div><strong>Student ID</strong><span>Unique identifier</span></div>
+            <div><strong>Complete name</strong><span>Student’s full name</span></div>
+            <div><strong>Program</strong><span>Academic program or course</span></div>
+            <div><strong>Year level</strong><span>Current academic standing</span></div>
+            <div><strong>Email address</strong><span>Contact information</span></div>
+            <div><strong>Contact number</strong><span>Optional mobile number</span></div>
+          </div>
+
+          <figure class="lesson-figure">
+            <img src="../img/student-record-system/system-flow.svg" alt="Flow diagram from user input to validation, record processing, and JTable display">
+            <figcaption><strong>Figure 2.</strong> Data should pass through validation before it reaches the record collection and JTable.</figcaption>
+          </figure>
+
+          <h3>Core functional requirements</h3>
+          <ol class="numbered-list">
+            <li><strong>Add a record.</strong> Accept valid student details and display them as a new table row.</li>
+            <li><strong>View records.</strong> Present stored information in an organized table.</li>
+            <li><strong>Select a record.</strong> Copy a selected table row back into the input fields.</li>
+            <li><strong>Update a record.</strong> Replace the selected row with revised values.</li>
+            <li><strong>Delete a record.</strong> Remove the selected row after confirmation.</li>
+            <li><strong>Search records.</strong> Filter or locate a student by ID or name.</li>
+            <li><strong>Clear the form.</strong> Reset all fields for the next entry.</li>
+          </ol>
+        </section>
+
+        <section id="guided-lesson" class="lesson-section">
+          <p class="section-number">04</p>
+          <h2>Guided Lesson: Building the JFrame Form</h2>
+          <p class="lead">The following sequence is intended for classroom demonstration. Each step contains the action, the concept to explain, and the expected visual result.</p>
+
+          <div class="step-block">
+            <div class="step-heading"><span>Step 1</span><h3>Create the Java project and JFrame Form</h3></div>
+            <div class="step-grid">
+              <div>
+                <p>In NetBeans, create a Java Application project. Add a new <strong>JFrame Form</strong> and name the class <code>StudentRecordForm</code>.</p>
+                <ul class="check-list">
+                  <li>Use a descriptive project name such as <code>StudentRecordSystem</code>.</li>
+                  <li>Place the form in a suitable package such as <code>studentrecords</code>.</li>
+                  <li>Use the Design tab for layout and the Source tab for logic.</li>
+                </ul>
+              </div>
+              <figure>
+                <img src="../img/student-record-system/step-01-project.svg" alt="Illustrated NetBeans sequence for creating a Java project and JFrame Form">
+                <figcaption>Create Project → New JFrame Form → Name the class.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <div class="step-heading"><span>Step 2</span><h3>Set the main window properties</h3></div>
+            <div class="step-grid">
+              <div>
+                <p>Select the JFrame and adjust its essential properties. These values establish a clear title and predictable opening behavior.</p>
+                <div class="property-list">
+                  <p><code>title</code><strong>Student Record System</strong></p>
+                  <p><code>defaultCloseOperation</code><strong>EXIT_ON_CLOSE</strong></p>
+                  <p><code>resizable</code><strong>true</strong></p>
+                  <p><code>minimumSize</code><strong>1100 × 680</strong></p>
+                </div>
+              </div>
+              <figure>
+                <img src="../img/student-record-system/step-02-frame.svg" alt="JFrame properties panel with title, close operation, resizable, and minimum size settings">
+                <figcaption>Recommended properties for the main application window.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <div class="step-heading"><span>Step 3</span><h3>Arrange the input form</h3></div>
+            <div class="step-grid">
+              <div>
+                <p>Drag labels and input controls from the Palette. Align related labels and fields to create a consistent reading path from top to bottom.</p>
+                <ul class="check-list">
+                  <li>Use text fields for ID, name, email, and contact number.</li>
+                  <li>Use combo boxes for program and year level.</li>
+                  <li>Keep labels short and place them close to their fields.</li>
+                  <li>Do not use color alone to indicate a required field.</li>
+                </ul>
+              </div>
+              <figure>
+                <img src="../img/student-record-system/step-03-form.svg" alt="Student input form layout with aligned labels, text fields, and combo boxes">
+                <figcaption>A simple two-column form is readable and easy to demonstrate.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <div class="step-heading"><span>Step 4</span><h3>Add the action buttons</h3></div>
+            <div class="step-grid">
+              <div>
+                <p>Add buttons below the input form and name them according to their actions. Keep the primary action visually clear and place destructive actions last.</p>
+                <div class="button-meaning">
+                  <span class="demo-button primary">Add</span><span>Creates a new record</span>
+                  <span class="demo-button">Update</span><span>Revises the selected record</span>
+                  <span class="demo-button">Clear</span><span>Resets the input fields</span>
+                  <span class="demo-button danger">Delete</span><span>Removes the selected record</span>
+                </div>
+              </div>
+              <figure>
+                <img src="../img/student-record-system/step-04-actions.svg" alt="Action button arrangement showing Add, Update, Clear, and Delete buttons">
+                <figcaption>Consistent verbs make each action easy to understand.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <div class="step-heading"><span>Step 5</span><h3>Configure the JTable and table model</h3></div>
+            <div class="step-grid">
+              <div>
+                <p>Place a JTable inside a JScrollPane. The <code>DefaultTableModel</code> manages column headings and rows displayed by the table.</p>
+                <pre><code>DefaultTableModel model = new DefaultTableModel(
+    new Object[] {
+        "Student ID", "Complete Name", "Program",
+        "Year Level", "Email", "Contact Number"
+    },
+    0
+);
+
+tblStudents.setModel(model);</code></pre>
+              </div>
+              <figure>
+                <img src="../img/student-record-system/step-05-table.svg" alt="JTable mockup showing student record columns and example rows">
+                <figcaption>The table model defines the visible record structure.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <div class="step-heading"><span>Step 6</span><h3>Connect actions through event listeners</h3></div>
+            <div class="step-grid">
+              <div>
+                <p>Swing follows an <strong>event-driven</strong> model. The program waits for a user action. When a button is clicked, its event handler performs the related task.</p>
+                <pre><code>private void btnAddActionPerformed(
+        java.awt.event.ActionEvent evt) {
+    addStudentRecord();
+}</code></pre>
+                <p>The event method should call a clearly named helper method. This separates the interface event from the processing logic.</p>
+              </div>
+              <figure>
+                <img src="../img/student-record-system/event-cycle.svg" alt="Cycle diagram showing user click, event listener, validation, data operation, and interface feedback">
+                <figcaption>Every interface action follows a predictable event cycle.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section id="crud-operations" class="lesson-section">
+          <p class="section-number">05</p>
+          <h2>Understanding CRUD Operations</h2>
+          <p><strong>CRUD</strong> means Create, Read, Update, and Delete. These four operations form the central behavior of most record-management systems.</p>
+
+          <figure class="lesson-figure compact-figure">
+            <img src="../img/student-record-system/crud-cycle.svg" alt="Four-part CRUD cycle showing Create, Read, Update, and Delete">
+            <figcaption><strong>Figure 3.</strong> CRUD provides the basic lifecycle of a student record.</figcaption>
+          </figure>
+
+          <div class="code-lesson">
+            <div class="code-heading"><span>Create</span><h3>Add a valid row to the table</h3></div>
+            <pre><code>private void addStudentRecord() {
+    if (!isFormValid()) {
+        return;
+    }
+
+    DefaultTableModel model =
+        (DefaultTableModel) tblStudents.getModel();
+
+    model.addRow(new Object[] {
+        txtStudentId.getText().trim(),
+        txtCompleteName.getText().trim(),
+        cmbProgram.getSelectedItem(),
+        cmbYearLevel.getSelectedItem(),
+        txtEmail.getText().trim(),
+        txtContactNumber.getText().trim()
+    });
+
+    clearForm();
+    JOptionPane.showMessageDialog(this,
+        "Student record added successfully.");
+}</code></pre>
+            <p class="explanation"><strong>Explanation:</strong> The method validates the form, obtains the current table model, creates one row from the form values, clears the fields, and reports success.</p>
+          </div>
+
+          <div class="code-lesson">
+            <div class="code-heading"><span>Read</span><h3>Load a selected row into the form</h3></div>
+            <pre><code>private void tblStudentsMouseClicked(
+        java.awt.event.MouseEvent evt) {
+    int row = tblStudents.getSelectedRow();
+
+    if (row >= 0) {
+        txtStudentId.setText(
+            tblStudents.getValueAt(row, 0).toString());
+        txtCompleteName.setText(
+            tblStudents.getValueAt(row, 1).toString());
+        cmbProgram.setSelectedItem(
+            tblStudents.getValueAt(row, 2).toString());
+        cmbYearLevel.setSelectedItem(
+            tblStudents.getValueAt(row, 3).toString());
+    }
+}</code></pre>
+            <p class="explanation"><strong>Explanation:</strong> The selected table row becomes the current record. Its values are copied into the fields so the user can inspect or revise them.</p>
+          </div>
+
+          <div class="code-lesson">
+            <div class="code-heading"><span>Update</span><h3>Replace the selected row values</h3></div>
+            <pre><code>private void updateStudentRecord() {
+    int row = tblStudents.getSelectedRow();
+
+    if (row == -1) {
+        showWarning("Select a record to update.");
+        return;
+    }
+
+    DefaultTableModel model =
+        (DefaultTableModel) tblStudents.getModel();
+
+    model.setValueAt(txtStudentId.getText().trim(), row, 0);
+    model.setValueAt(txtCompleteName.getText().trim(), row, 1);
+    model.setValueAt(cmbProgram.getSelectedItem(), row, 2);
+    model.setValueAt(cmbYearLevel.getSelectedItem(), row, 3);
+}</code></pre>
+            <p class="explanation"><strong>Explanation:</strong> Updating requires a selected row. Each form value is written to its corresponding column in that same row.</p>
+          </div>
+
+          <div class="code-lesson">
+            <div class="code-heading"><span>Delete</span><h3>Confirm before removing a record</h3></div>
+            <pre><code>private void deleteStudentRecord() {
+    int row = tblStudents.getSelectedRow();
+
+    if (row == -1) {
+        showWarning("Select a record to delete.");
+        return;
+    }
+
+    int answer = JOptionPane.showConfirmDialog(
+        this,
+        "Delete the selected student record?",
+        "Confirm deletion",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (answer == JOptionPane.YES_OPTION) {
+        ((DefaultTableModel) tblStudents.getModel())
+            .removeRow(row);
+        clearForm();
+    }
+}</code></pre>
+            <p class="explanation"><strong>Explanation:</strong> A confirmation dialog helps prevent accidental data loss. The row is removed only when the user chooses Yes.</p>
+          </div>
+        </section>
+
+        <section id="validation" class="lesson-section">
+          <p class="section-number">06</p>
+          <h2>Input Validation and User Feedback</h2>
+          <p>Validation protects data quality. It should occur before a record is added or updated. Error messages must identify the problem and tell the user how to correct it.</p>
+
+          <div class="validation-grid">
+            <article><span>Required</span><h3>Empty-field check</h3><p>Student ID, complete name, program, and year level must not be empty.</p></article>
+            <article><span>Format</span><h3>Email check</h3><p>The email should contain a valid local part, an @ symbol, and a domain.</p></article>
+            <article><span>Type</span><h3>Numeric check</h3><p>A contact number should accept only expected digits and symbols.</p></article>
+            <article><span>Uniqueness</span><h3>Duplicate ID check</h3><p>Each student ID should identify only one record.</p></article>
+          </div>
+
+          <pre><code>private boolean isFormValid() {
+    String id = txtStudentId.getText().trim();
+    String name = txtCompleteName.getText().trim();
+    String email = txtEmail.getText().trim();
+
+    if (id.isEmpty() || name.isEmpty()) {
+        showWarning("Student ID and complete name are required.");
+        return false;
+    }
+
+    if (!email.isEmpty()
+            &amp;&amp; !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+        showWarning("Enter a valid email address.");
+        return false;
+    }
+
+    return true;
+}</code></pre>
+
+          <div class="callout callout-warning">
+            <h3>Important distinction</h3>
+            <p>A JTable only displays the current in-memory rows. When the program closes, those rows are lost unless the system is connected to persistent storage such as a file or database.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section">
+          <p class="section-number">07</p>
+          <h2>Search, Clear, and Usability Features</h2>
+          <div class="two-column">
+            <div>
+              <h3>Clearing the form</h3>
+              <pre><code>private void clearForm() {
+    txtStudentId.setText("");
+    txtCompleteName.setText("");
+    txtEmail.setText("");
+    txtContactNumber.setText("");
+    cmbProgram.setSelectedIndex(0);
+    cmbYearLevel.setSelectedIndex(0);
+    tblStudents.clearSelection();
+    txtStudentId.requestFocus();
+}</code></pre>
+            </div>
+            <div>
+              <h3>Usability checklist</h3>
+              <ul class="check-list roomy">
+                <li>Use consistent spacing and alignment.</li>
+                <li>Display complete, readable field labels.</li>
+                <li>Keep button wording short and action-based.</li>
+                <li>Show confirmation before deletion.</li>
+                <li>Return focus to the first field after clearing.</li>
+                <li>Allow keyboard navigation in logical order.</li>
+                <li>Do not overcrowd the window with decoration.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Introducing search with a row filter</h3>
+          <p>A <code>TableRowSorter</code> can filter the displayed rows while leaving the underlying model unchanged.</p>
+          <pre><code>private void searchRecords() {
+    DefaultTableModel model =
+        (DefaultTableModel) tblStudents.getModel();
+    TableRowSorter&lt;DefaultTableModel&gt; sorter =
+        new TableRowSorter&lt;&gt;(model);
+
+    tblStudents.setRowSorter(sorter);
+    sorter.setRowFilter(
+        RowFilter.regexFilter(
+            "(?i)" + Pattern.quote(txtSearch.getText().trim())
+        )
+    );
+}</code></pre>
+          <p><code>Pattern.quote()</code> treats the search text as ordinary text instead of a regular-expression command. The class requires <code>import java.util.regex.Pattern;</code>.</p>
+        </section>
+
+        <section class="lesson-section">
+          <p class="section-number">08</p>
+          <h2>Data Storage: From Classroom Prototype to Real System</h2>
+          <p>The first lesson may use a table model only. A later version can introduce persistent storage. This progression lets students understand interface behavior before adding database complexity.</p>
+
+          <div class="progression" aria-label="Suggested project progression">
+            <div><span>Stage 1</span><strong>JFrame interface</strong><p>Arrange controls and practice component properties.</p></div>
+            <div><span>Stage 2</span><strong>In-memory JTable</strong><p>Apply CRUD operations during one program session.</p></div>
+            <div><span>Stage 3</span><strong>File storage</strong><p>Save and reload records using CSV or serialization.</p></div>
+            <div><span>Stage 4</span><strong>Database storage</strong><p>Use JDBC and prepared statements with a relational database.</p></div>
+          </div>
+
+          <div class="callout callout-info">
+            <h3>Separation of concerns</h3>
+            <p>In a larger system, keep the interface, student data model, validation rules, and database operations in separate classes. This makes the program easier to test, explain, and maintain.</p>
+          </div>
+        </section>
+
+        <section id="testing" class="lesson-section">
+          <p class="section-number">09</p>
+          <h2>Testing and Debugging the Form</h2>
+          <p>Testing should cover normal use, incorrect use, and boundary cases. Students should record the expected result before running each test.</p>
+
+          <div class="definition-table" role="region" aria-label="Test case table" tabindex="0">
+            <table>
+              <thead><tr><th>Test case</th><th>Action</th><th>Expected result</th></tr></thead>
+              <tbody>
+                <tr><td>Valid entry</td><td>Complete all required fields and click Add</td><td>A new row appears and the form clears</td></tr>
+                <tr><td>Missing ID</td><td>Leave Student ID blank and click Add</td><td>A warning appears; no row is added</td></tr>
+                <tr><td>Invalid email</td><td>Enter an incomplete email address</td><td>A format warning appears</td></tr>
+                <tr><td>No selection</td><td>Click Update without selecting a row</td><td>The system asks the user to select a record</td></tr>
+                <tr><td>Delete cancel</td><td>Click Delete and choose No</td><td>The record remains in the table</td></tr>
+                <tr><td>Search case</td><td>Search using lowercase letters</td><td>Matching names appear regardless of letter case</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <figure class="lesson-figure">
+            <img src="../img/student-record-system/testing-loop.svg" alt="Testing loop from prepare test data to run, compare, correct, and retest">
+            <figcaption><strong>Figure 4.</strong> Debugging is a repeated process of observing, correcting, and retesting.</figcaption>
+          </figure>
+
+          <h3>Common beginner errors</h3>
+          <div class="mistake-list">
+            <div><strong>Wrong column index</strong><p>Table columns begin at index 0. A mismatched index places data in the wrong column.</p></div>
+            <div><strong>No selected-row check</strong><p>Calling an update or delete operation with row <code>-1</code> causes an error.</p></div>
+            <div><strong>Default variable names</strong><p>Names such as <code>jTextField1</code> make code difficult to explain and maintain.</p></div>
+            <div><strong>Logic inside every event</strong><p>Repeated code should be moved into helper methods such as <code>clearForm()</code>.</p></div>
+          </div>
+        </section>
+
+        <section class="lesson-section">
+          <p class="section-number">10</p>
+          <h2>Complete Process Summary</h2>
+          <figure class="lesson-figure">
+            <img src="../img/student-record-system/complete-process.svg" alt="Complete eight-step process for planning, designing, coding, validating, and testing the system">
+            <figcaption><strong>Figure 5.</strong> A disciplined sequence makes the project easier to understand and present.</figcaption>
+          </figure>
+
+          <div class="summary-steps">
+            <p><span>1</span><strong>Plan</strong> the fields, actions, and table columns.</p>
+            <p><span>2</span><strong>Create</strong> the JFrame Form and set its properties.</p>
+            <p><span>3</span><strong>Arrange</strong> labels, controls, buttons, and the JTable.</p>
+            <p><span>4</span><strong>Name</strong> every component clearly.</p>
+            <p><span>5</span><strong>Connect</strong> buttons to event handlers.</p>
+            <p><span>6</span><strong>Validate</strong> user input before processing.</p>
+            <p><span>7</span><strong>Apply</strong> CRUD and search operations.</p>
+            <p><span>8</span><strong>Test</strong> normal, invalid, and boundary cases.</p>
+          </div>
+        </section>
+
+        <section id="assessment" class="lesson-section assessment-section">
+          <p class="section-number">11</p>
+          <h2>Discussion and Assessment</h2>
+
+          <h3>Guide questions</h3>
+          <ol class="question-list">
+            <li>Why is JFrame called a top-level container?</li>
+            <li>What is the role of a <code>DefaultTableModel</code> in the system?</li>
+            <li>Why must the selected row be checked before updating or deleting?</li>
+            <li>How does input validation improve the quality of student records?</li>
+            <li>What is the difference between data displayed in a JTable and data saved in a database?</li>
+            <li>Why should deletion require confirmation?</li>
+            <li>How does separating helper methods improve code readability?</li>
+          </ol>
+
+          <h3>Practice-project analysis</h3>
+          <div class="activity-box">
+            <p><strong>Instruction:</strong> On paper or in a document, design an improved Student Record System interface. Label each Swing component and write its suggested variable name. Then prepare a flowchart for one operation: Add, Update, Delete, or Search.</p>
+            <p><strong>Submission:</strong> Interface sketch, component list, operation flowchart, and a brief explanation of validation rules.</p>
+          </div>
+
+          <h3>Evaluation rubric</h3>
+          <div class="definition-table" role="region" aria-label="Evaluation rubric" tabindex="0">
+            <table>
+              <thead><tr><th>Criterion</th><th>Excellent</th><th>Satisfactory</th><th>Needs improvement</th></tr></thead>
+              <tbody>
+                <tr><td>Interface organization</td><td>Complete, logical, and highly readable</td><td>Mostly organized with minor issues</td><td>Important elements are missing or unclear</td></tr>
+                <tr><td>Component identification</td><td>All components and names are correct</td><td>Most components are correctly identified</td><td>Several components are incorrect</td></tr>
+                <tr><td>Process explanation</td><td>Flow is accurate and clearly explained</td><td>Flow is generally correct</td><td>Flow contains major gaps</td></tr>
+                <tr><td>Validation rules</td><td>Rules are complete and appropriate</td><td>Basic rules are provided</td><td>Rules are incomplete or unsuitable</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="lesson-section conclusion">
+          <p class="section-number">12</p>
+          <h2>Lesson Conclusion</h2>
+          <p class="lead">The Student Record System combines interface design, event-driven programming, table models, validation, and record-management logic in one practical lesson. JFrame Form makes the visual layout easier to construct, but professional results still depend on thoughtful planning, clear naming, correct logic, and systematic testing.</p>
+          <p>Students who understand this project can transfer the same principles to inventory systems, library systems, appointment systems, and other desktop record-management applications.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <p><strong>Student Record System Using JFrame Form</strong></p>
+      <p>Professional lecture module for classroom discussion and guided practice.</p>
+    </div>
+    <a href="#main-content">Return to top ↑</a>
+  </footer>
+</body>
+</html>

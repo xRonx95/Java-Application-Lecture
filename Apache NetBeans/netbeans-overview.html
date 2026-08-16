@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A classroom-ready Apache NetBeans overview lesson and learning module.">
+  <title>Apache NetBeans Learning Module</title>
+  <link rel="stylesheet" href="../css/Apache NetBeans/netbeans-overview.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to lesson content</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Learning module home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span><b>CODECLASS</b><small>Learning Module</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="#overview">Overview</a>
+      <a href="#topics">Topics</a>
+      <a href="#activity">Activity</a>
+      <a href="#review">Review</a>
+    </nav>
+    <a class="start-link" href="#topic-1">Start lesson →</a>
+    <details class="mobile-nav">
+      <summary aria-label="Open navigation">Menu</summary>
+      <nav aria-label="Mobile navigation">
+        <a href="#overview">Overview</a><a href="#topics">Topics</a>
+        <a href="#activity">Activity</a><a href="#review">Review</a>
+      </nav>
+    </details>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>MODULE 01</span> • INTEGRATED DEVELOPMENT ENVIRONMENTS</p>
+        <h1>Meet your coding workspace: <em>Apache NetBeans</em></h1>
+        <p class="lead">A practical, classroom-ready introduction to the free IDE that helps you install the tools, create a Java project, write code, run programs, debug errors, test results, and organize applications in one place.</p>
+        <div class="hero-actions"><a class="button primary" href="#topic-1">Begin the module →</a><a class="button secondary" href="#topics">Explore topics</a></div>
+        <dl class="stats"><div><dt>90–120</dt><dd>Minutes</dd></div><div><dt>9</dt><dd>Core topics</dd></div><div><dt>Beginner</dt><dd>Level</dd></div></dl>
+      </div>
+      <div class="editor" aria-label="Illustration of the NetBeans source editor">
+        <div class="editor-title"><span class="dots">● ● ●</span><b>StudentProfile.java</b><small>Apache NetBeans IDE</small></div>
+        <div class="editor-main">
+          <aside><b>PROJECTS</b><p>⌄ StudentApp</p><p>&nbsp;&nbsp;⌄ Source Packages</p><p class="active">&nbsp;&nbsp;&nbsp;&nbsp;◇ StudentProfile.java</p><p>&nbsp;&nbsp;&nbsp;&nbsp;◇ Main.java</p><p>&nbsp;&nbsp;▸ Libraries</p></aside>
+          <pre><code><span>public class</span> StudentProfile {
+  <span>private</span> String name;
+  <span>private int</span> yearLevel;
+
+  <span>public</span> StudentProfile(String name) {
+    <mark>this.name = name;</mark>
+  }
+}</code></pre>
+        </div>
+        <div class="editor-status">✓ No errors found <span>Run project with F6</span></div>
+      </div>
+    </section>
+
+    <section class="section soft" id="overview">
+      <div class="section-heading split"><div><p class="eyebrow">MODULE OVERVIEW</p><h2>What you will learn</h2></div><p>By the end of this module, learners can explain what an IDE does, identify the main NetBeans interface areas, create and run a Java project, and use essential development tools.</p></div>
+      <div class="objectives">
+        <article><span>01</span><h3>Define</h3><p>Explain IDE and Apache NetBeans using beginner-friendly terms.</p></article>
+        <article><span>02</span><h3>Navigate</h3><p>Identify the Projects, Files, Navigator, Editor, Output, and Services windows.</p></article>
+        <article><span>03</span><h3>Develop</h3><p>Follow the create, code, build, run, test, and debug cycle.</p></article>
+        <article><span>04</span><h3>Evaluate</h3><p>Discuss NetBeans advantages, limitations, and suitable uses.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="topics">
+      <div class="section-heading center"><p class="eyebrow">LESSON MAP</p><h2>Nine topics, one complete workflow</h2><p>Teach the topics in order or use each one as a separate discussion. Picture guides are included for the steps students perform on screen.</p></div>
+      <div class="lesson-map">
+        <a href="#topic-1"><span>01</span><b>Introduction</b><small>What NetBeans is and why developers use an IDE</small><i>↗</i></a>
+        <a href="#topic-2"><span>02</span><b>Workspace</b><small>Main interface windows and their purpose</small><i>↗</i></a>
+        <a href="#topic-3"><span>03</span><b>Project workflow</b><small>Create, code, build, run, test, and improve</small><i>↗</i></a>
+        <a href="#topic-4"><span>04</span><b>Smart coding</b><small>Completion, templates, hints, and refactoring</small><i>↗</i></a>
+        <a href="#topic-5"><span>05</span><b>Debugging</b><small>Breakpoints, variables, and step controls</small><i>↗</i></a>
+        <a href="#topic-6"><span>06</span><b>More tools</b><small>Git, databases, testing, plugins, and build tools</small><i>↗</i></a>
+        <a href="#topic-7"><span>07</span><b>Install & prepare</b><small>Install the JDK and NetBeans, then verify the setup</small><i>↗</i></a>
+        <a href="#topic-8"><span>08</span><b>Java essentials</b><small>Variables, input, decisions, and readable output</small><i>↗</i></a>
+        <a href="#topic-9"><span>09</span><b>Errors & testing</b><small>Read errors, test values, and improve the program</small><i>↗</i></a>
+      </div>
+    </section>
+
+    <section class="section lesson" id="topic-1">
+      <div class="topic-label">TOPIC 01 <i></i></div>
+      <div class="two-column">
+        <div><p class="eyebrow">FOUNDATION</p><h2>What is Apache NetBeans?</h2><p class="big-copy">Apache NetBeans is a free, open-source Integrated Development Environment—or IDE. It combines the tools a programmer needs in one application.</p></div>
+        <div class="lesson-copy">
+          <p>Instead of writing code in one application, compiling it in a terminal, and looking for errors somewhere else, an IDE puts these tasks into one organized workspace. NetBeans is best known for Java, but can also support PHP, HTML, CSS, JavaScript, C/C++, and other technologies.</p>
+          <aside class="callout"><b>Simple explanation</b><p>Think of NetBeans as a digital workshop: the editor is the workbench, the compiler is the quality checker, the debugger is the magnifying glass, and the project window is the organizer.</p></aside>
+          <h3>IDE vs. basic text editor</h3>
+          <div class="comparison"><div><b>Basic text editor</b><ul><li>Mainly edits plain text</li><li>Tools are installed separately</li><li>Little awareness of project structure</li></ul></div><div><b>NetBeans IDE</b><ul><li>Understands project structure</li><li>Suggests and checks code</li><li>Builds, runs, and debugs in one place</li></ul></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft lesson" id="topic-2">
+      <div class="topic-label">TOPIC 02 <i></i></div>
+      <div class="section-heading"><p class="eyebrow">THE INTERFACE</p><h2>Know your workspace</h2><p>NetBeans divides its tools into windows. Knowing each area makes the IDE easier to use.</p></div>
+      <div class="cards three">
+        <article><span>A</span><h3>Menu & toolbar</h3><p>Commands for creating, saving, building, running, debugging, and configuring projects.</p></article>
+        <article><span>B</span><h3>Projects window</h3><p>Shows source packages, libraries, tests, resources, and the logical project structure.</p></article>
+        <article><span>C</span><h3>Source editor</h3><p>The main coding area, with syntax colors, line numbers, tabs, hints, and error marks.</p></article>
+        <article><span>D</span><h3>Navigator</h3><p>Lists classes, methods, fields, and members in the selected source file.</p></article>
+        <article><span>E</span><h3>Output window</h3><p>Displays program output, compiler messages, test results, and build information.</p></article>
+        <article><span>F</span><h3>Services window</h3><p>Connects to databases, servers, repositories, and development services.</p></article>
+      </div>
+      <aside class="teacher-note"><b>Teacher prompt</b><p>Ask: “If a program does not produce the expected result, which window would you check first—and why?”</p></aside>
+
+      <div class="visual-lesson">
+        <div class="visual-lesson-copy"><p class="eyebrow">PICTURE GUIDE</p><h3>Find the four areas you will use most</h3><p>Match each numbered marker with the description. Students can keep this guide open while they work in NetBeans.</p></div>
+        <figure class="workspace-picture" aria-labelledby="workspace-caption">
+          <div class="mock-window">
+            <div class="mock-titlebar"><span>● ● ●</span><b>GradeChecker — Apache NetBeans IDE</b></div>
+            <div class="mock-menu">File&nbsp;&nbsp; Edit&nbsp;&nbsp; View&nbsp;&nbsp; Navigate&nbsp;&nbsp; Source&nbsp;&nbsp; Refactor&nbsp;&nbsp; Run&nbsp;&nbsp; Debug</div>
+            <div class="workspace-grid">
+              <div class="mock-projects"><i>1</i><strong>Projects</strong><p>⌄ GradeChecker</p><p>&nbsp;&nbsp;⌄ Source Packages</p><p class="selected">&nbsp;&nbsp;&nbsp;&nbsp;GradeChecker.java</p></div>
+              <div class="mock-code"><i>2</i><strong>Source Editor</strong><pre><span>public class</span> GradeChecker {
+  <span>public static void</span> main(String[] args) {
+    int grade = 88;
+    System.out.println(grade);
+  }
+}</pre></div>
+              <div class="mock-navigator"><i>3</i><strong>Navigator</strong><p>◇ GradeChecker</p><p>&nbsp;&nbsp;ƒ main(String[])</p></div>
+              <div class="mock-output"><i>4</i><strong>Output</strong><p>run:</p><p>88</p><p class="success">BUILD SUCCESSFUL</p></div>
+            </div>
+          </div>
+          <figcaption id="workspace-caption"><b>1 Projects</b> organizes files • <b>2 Editor</b> is where code is written • <b>3 Navigator</b> lists members • <b>4 Output</b> shows results and errors</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section lesson" id="topic-3">
+      <div class="topic-label">TOPIC 03 <i></i></div>
+      <div class="section-heading split"><div><p class="eyebrow">PROJECT WORKFLOW</p><h2>From idea to running program</h2></div><p>A project is a managed collection of source code, libraries, settings, and output files.</p></div>
+      <ol class="workflow">
+        <li><span>1</span><div><b>Create</b><p>Select File → New Project, choose a project type, and give it a clear name.</p></div></li>
+        <li><span>2</span><div><b>Code</b><p>Add packages and classes, then write the program in the Source Editor.</p></div></li>
+        <li><span>3</span><div><b>Build</b><p>Compile the source. Correct errors reported in the Output window.</p></div></li>
+        <li><span>4</span><div><b>Run</b><p>Press F6 to run the main project and examine the result.</p></div></li>
+        <li><span>5</span><div><b>Test & debug</b><p>Compare actual and expected behavior, then locate and correct problems.</p></div></li>
+      </ol>
+      <div class="code-example"><div><p class="eyebrow">MINI EXAMPLE</p><h3>Your first Java program</h3><p>Create a Java Application named <b>HelloNetBeans</b>, enter this code, and press F6.</p></div><pre><code><span>public class</span> HelloNetBeans {
+  <span>public static void</span> main(String[] args) {
+    System.out.println(<em>"Hello, NetBeans!"</em>);
+  }
+}</code></pre></div>
+
+      <div class="section-heading walkthrough-heading"><p class="eyebrow">STEP-BY-STEP PICTURES</p><h2>Create and run your first project</h2><p>Follow the six pictures from left to right. Complete each checkpoint before moving to the next one.</p></div>
+      <div class="picture-steps">
+        <figure class="step-card">
+          <div class="step-picture"><div class="mini-menubar"><b>File</b> Edit View</div><div class="dropdown-picture"><span>New File...</span><strong>New Project...</strong><span>Open Project...</span></div><div class="pointer">➤</div></div>
+          <figcaption><span>1</span><div><b>Open New Project</b><p>Click <strong>File → New Project</strong>. You can also press Ctrl + Shift + N.</p><small>Checkpoint: The New Project window appears.</small></div></figcaption>
+        </figure>
+        <figure class="step-card">
+          <div class="step-picture dialog-picture"><div class="dialog-title">New Project</div><div class="dialog-columns"><div><small>Categories</small><strong>Java with Maven</strong><span>Java with Ant</span></div><div><small>Projects</small><strong>Java Application</strong><span>JavaFX Application</span></div></div><button>Next &gt;</button></div>
+          <figcaption><span>2</span><div><b>Choose a project type</b><p>Select <strong>Java with Maven</strong>, choose <strong>Java Application</strong>, then click Next.</p><small>Checkpoint: The Name and Location page appears.</small></div></figcaption>
+        </figure>
+        <figure class="step-card">
+          <div class="step-picture dialog-picture"><div class="dialog-title">Name and Location</div><label>Project Name</label><div class="fake-input active-input">HelloNetBeans</div><label>Project Location</label><div class="fake-input">Documents/NetBeansProjects</div><button>Finish</button></div>
+          <figcaption><span>3</span><div><b>Name the project</b><p>Type <strong>HelloNetBeans</strong>. Keep “Create Main Class” selected and click Finish.</p><small>Checkpoint: The project appears under Projects.</small></div></figcaption>
+        </figure>
+        <figure class="step-card">
+          <div class="step-picture project-picture"><div class="dialog-title">Projects</div><p>⌄ <b>HelloNetBeans</b></p><p>&nbsp;&nbsp;⌄ Source Packages</p><p class="highlight-row">&nbsp;&nbsp;&nbsp;&nbsp;◇ HelloNetBeans.java</p><p>&nbsp;&nbsp;▸ Dependencies</p></div>
+          <figcaption><span>4</span><div><b>Open the main class</b><p>Expand Source Packages and double-click <strong>HelloNetBeans.java</strong>.</p><small>Checkpoint: The file opens in the editor.</small></div></figcaption>
+        </figure>
+        <figure class="step-card">
+          <div class="step-picture code-picture"><div class="dialog-title">HelloNetBeans.java</div><pre><span>public static void</span> main(String[] args) {
+  System.out.println(
+    <em>"Hello, NetBeans!"</em>);
+}</pre><div class="caret-line"></div></div>
+          <figcaption><span>5</span><div><b>Enter and save the code</b><p>Type the print statement inside <strong>main</strong>, then press Ctrl + S.</p><small>Checkpoint: No red error badge is visible.</small></div></figcaption>
+        </figure>
+        <figure class="step-card">
+          <div class="step-picture output-picture"><div class="run-strip"><b>▶ Run Project</b><kbd>F6</kbd></div><div class="output-screen"><small>Output - HelloNetBeans</small><p>Hello, NetBeans!</p><strong>BUILD SUCCESS</strong></div></div>
+          <figcaption><span>6</span><div><b>Run and check the output</b><p>Press <strong>F6</strong>. Read the Output window at the bottom.</p><small>Checkpoint: “Hello, NetBeans!” and BUILD SUCCESS appear.</small></div></figcaption>
+        </figure>
+      </div>
+      <aside class="callout visual-tip"><b>If your screen looks different</b><p>NetBeans versions may place buttons in slightly different positions. Follow the menu names and window titles shown in each picture.</p></aside>
+    </section>
+
+    <section class="section dark lesson" id="topic-4">
+      <div class="topic-label">TOPIC 04 <i></i></div>
+      <div class="section-heading split"><div><p class="eyebrow">SMART CODING</p><h2>Tools that help you code better</h2></div><p>These features reduce repetitive work and help learners notice mistakes earlier.</p></div>
+      <div class="cards three dark-cards">
+        <article><small>01</small><h3>Code completion</h3><p>Ctrl + Space suggests suitable keywords, classes, methods, and variables.</p></article>
+        <article><small>02</small><h3>Syntax highlighting</h3><p>Colors distinguish keywords, strings, comments, and identifiers.</p></article>
+        <article><small>03</small><h3>Hints & quick fixes</h3><p>Suggestions explain common issues and offer possible corrections.</p></article>
+        <article><small>04</small><h3>Refactoring</h3><p>Safely rename or restructure code and update related references.</p></article>
+        <article><small>05</small><h3>Code templates</h3><p>Abbreviations expand into frequently used code structures.</p></article>
+        <article><small>06</small><h3>Formatting</h3><p>Alt + Shift + F applies consistent indentation and spacing.</p></article>
+      </div>
+    </section>
+
+    <section class="section lesson" id="topic-5">
+      <div class="topic-label">TOPIC 05 <i></i></div>
+      <div class="two-column">
+        <div><p class="eyebrow">DEBUGGING</p><h2>Find the cause, not just the error</h2><p class="big-copy">Debugging means pausing a program while it runs so you can inspect its behavior one instruction at a time.</p></div>
+        <div>
+          <ol class="debug-list"><li><span>1</span><div><b>Set a breakpoint</b><p>Click beside a line number. Execution pauses before that line runs.</p></div></li><li><span>2</span><div><b>Start Debug Project</b><p>Use Ctrl + F5 to run the project in debugging mode.</p></div></li><li><span>3</span><div><b>Inspect variables</b><p>Check current values and compare them with the values you expected.</p></div></li><li><span>4</span><div><b>Step through code</b><p>Use Step Over, Step Into, Step Out, and Continue to control execution.</p></div></li></ol>
+          <aside class="callout warning"><b>Know the difference</b><p>A <strong>syntax error</strong> breaks language rules, a <strong>runtime error</strong> occurs during execution, and a <strong>logic error</strong> produces a wrong result even though the program runs.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft lesson" id="topic-6">
+      <div class="topic-label">TOPIC 06 <i></i></div>
+      <div class="section-heading center"><p class="eyebrow">BEYOND THE EDITOR</p><h2>More tools inside NetBeans</h2><p>A modern IDE supports the entire development process—not only typing code.</p></div>
+      <div class="cards three">
+        <article><span>Git</span><h3>Version control</h3><p>Review changes, create commits, manage branches, and work with remote repositories.</p></article>
+        <article><span>DB</span><h3>Database tools</h3><p>Connect to databases, browse tables, view records, and execute SQL.</p></article>
+        <article><span>UI</span><h3>GUI builder</h3><p>Design Java Swing forms visually and edit component properties.</p></article>
+        <article><span>＋</span><h3>Plugins</h3><p>Add language support, themes, frameworks, and new tools.</p></article>
+        <article><span>✓</span><h3>Testing</h3><p>Create and run unit tests, then review pass and fail results.</p></article>
+        <article><span>⚙</span><h3>Build tools</h3><p>Work with Ant, Maven, and Gradle projects in one interface.</p></article>
+      </div>
+    </section>
+
+    <section class="section lesson" id="topic-7">
+      <div class="topic-label">TOPIC 07 <i></i></div>
+      <div class="section-heading split"><div><p class="eyebrow">INSTALL & PREPARE</p><h2>Set up NetBeans correctly</h2></div><p>NetBeans needs a Java Development Kit (JDK). Install the JDK first, then install NetBeans and confirm that the IDE can find Java.</p></div>
+      <div class="setup-steps">
+        <figure><div class="setup-picture"><span class="download-icon">↓</span><b>JDK</b><small>Java Development Kit</small></div><figcaption><span>1</span><div><b>Install a supported JDK</b><p>Download a JDK for your operating system, run the installer, and keep the default options unless your teacher gives different instructions.</p></div></figcaption></figure>
+        <figure><div class="setup-picture netbeans-colors"><span class="cube-icon">◆</span><b>Apache NetBeans</b><small>Installer or package</small></div><figcaption><span>2</span><div><b>Install Apache NetBeans</b><p>Run the NetBeans installer. When asked for a Java location, select the folder of the JDK you installed.</p></div></figcaption></figure>
+        <figure><div class="setup-picture terminal-picture"><small>Terminal / Command Prompt</small><code>java --version</code><strong>openjdk 21...</strong></div><figcaption><span>3</span><div><b>Verify Java</b><p>Open a terminal, enter <strong>java --version</strong>, and confirm that a version number is displayed.</p></div></figcaption></figure>
+      </div>
+      <aside class="callout"><b>Before the class starts</b><p>Open NetBeans once and allow initial background downloads to finish. Create a small test project so installation problems are solved before the activity.</p></aside>
+    </section>
+
+    <section class="section soft lesson" id="topic-8">
+      <div class="topic-label">TOPIC 08 <i></i></div>
+      <div class="section-heading"><p class="eyebrow">JAVA ESSENTIALS</p><h2>Build programs with input and decisions</h2><p>The Grade Checker activity uses four ideas: variables, keyboard input, an if/else decision, and output.</p></div>
+      <div class="concept-grid">
+        <article><span>1</span><h3>Variables store values</h3><pre><code>String name = <em>"Ana"</em>;
+int grade = <em>88</em>;</code></pre><p>Choose a data type and a meaningful variable name.</p></article>
+        <article><span>2</span><h3>Scanner reads input</h3><pre><code>Scanner input =
+  new Scanner(System.in);</code></pre><p>Import <strong>java.util.Scanner</strong> before the class.</p></article>
+        <article><span>3</span><h3>if/else decides</h3><pre><code>if (grade &gt;= 75) {
+  // passed
+} else { // improve
+}</code></pre><p>The condition is true when the grade is 75 or higher.</p></article>
+        <article><span>4</span><h3>println shows output</h3><pre><code>System.out.println(
+  name + <em>" passed."</em>);</code></pre><p>Join text and variable values with the + operator.</p></article>
+      </div>
+      <div class="code-example full-program"><div><p class="eyebrow">COMPLETE EXAMPLE</p><h3>Student Grade Checker</h3><p>Copy carefully, compare every bracket and semicolon, then test with 74, 75, and 100.</p></div><pre><code><span>import</span> java.util.Scanner;
+
+<span>public class</span> GradeChecker {
+  <span>public static void</span> main(String[] args) {
+    Scanner input = <span>new</span> Scanner(System.in);
+
+    System.out.print(<em>"Student name: "</em>);
+    String name = input.nextLine();
+    System.out.print(<em>"Numeric grade: "</em>);
+    <span>int</span> grade = input.nextInt();
+
+    <span>if</span> (grade &gt;= 75) {
+      System.out.println(name + <em>" — Passed"</em>);
+    } <span>else</span> {
+      System.out.println(name + <em>" — Needs Improvement"</em>);
+    }
+  }
+}</code></pre></div>
+    </section>
+
+    <section class="section lesson" id="topic-9">
+      <div class="topic-label">TOPIC 09 <i></i></div>
+      <div class="section-heading split"><div><p class="eyebrow">ERRORS & TESTING</p><h2>Read the clue, fix one problem at a time</h2></div><p>Do not guess randomly. Start with the first error in the Output window, locate its line number, correct it, and run the program again.</p></div>
+      <div class="error-gallery">
+        <figure><div class="error-picture"><div class="error-code">System.out.println(<u>"Passed"</u>)</div><div class="error-message">';' expected</div></div><figcaption><b>Syntax error</b><p>Add the missing semicolon at the end of the statement.</p></figcaption></figure>
+        <figure><div class="error-picture"><div class="error-code"><u>int grade = input.nextInt();</u></div><div class="error-message amber">InputMismatchException</div></div><figcaption><b>Runtime error</b><p>Enter a whole number, not letters, when the program asks for a grade.</p></figcaption></figure>
+        <figure><div class="error-picture"><div class="error-code">if (grade <u>&gt; 75</u>)</div><div class="error-message blue">75 → Needs Improvement</div></div><figcaption><b>Logic error</b><p>Use <strong>&gt;= 75</strong> so the boundary value 75 is counted as passing.</p></figcaption></figure>
+      </div>
+      <div class="test-table-wrap">
+        <h3>Test plan for the Grade Checker</h3>
+        <table><thead><tr><th>Test</th><th>Input grade</th><th>Expected result</th><th>Why test it?</th></tr></thead><tbody><tr><td>Below boundary</td><td>74</td><td>Needs Improvement</td><td>Checks the false branch</td></tr><tr><td>Exact boundary</td><td>75</td><td>Passed</td><td>Checks the comparison operator</td></tr><tr><td>Typical pass</td><td>88</td><td>Passed</td><td>Checks an ordinary valid value</td></tr><tr><td>Highest grade</td><td>100</td><td>Passed</td><td>Checks the upper valid value</td></tr></tbody></table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading"><p class="eyebrow">EVALUATION</p><h2>Advantages and limitations</h2></div>
+      <div class="pros-cons"><article><h3>+ Why choose NetBeans?</h3><ul><li>Free and open-source</li><li>Strong Java support</li><li>Integrated coding and debugging tools</li><li>Works on Windows, macOS, and Linux</li><li>Supports organized projects</li><li>Expandable with plugins</li></ul></article><article><h3>– What should learners know?</h3><ul><li>Uses more memory than a text editor</li><li>May start slowly on older computers</li><li>Many panels can feel complex at first</li><li>Some languages need plugins</li><li>Large projects need good organization</li><li>Shortcuts take time to learn</li></ul></article></div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-heading split"><div><p class="eyebrow">CHEAT SHEET</p><h2>Useful shortcuts</h2></div><p>Shortcuts speed up common actions and help learners stay focused on their code.</p></div>
+      <div class="shortcuts"><div><kbd>Ctrl + Space</kbd><span>Show code suggestions</span></div><div><kbd>Alt + Shift + F</kbd><span>Format source code</span></div><div><kbd>Ctrl + R</kbd><span>Rename safely</span></div><div><kbd>Ctrl + F</kbd><span>Find in current file</span></div><div><kbd>Ctrl + Shift + F</kbd><span>Find in projects</span></div><div><kbd>F6</kbd><span>Run main project</span></div><div><kbd>Ctrl + F5</kbd><span>Debug main project</span></div><div><kbd>Ctrl + Shift + I</kbd><span>Fix imports</span></div></div>
+    </section>
+
+    <section class="section activity" id="activity">
+      <div><p class="eyebrow">HANDS-ON ACTIVITY</p><h2>Build a Student Grade Checker</h2><p>Apply the full module in a short program. Estimated time: 30–45 minutes.</p></div>
+      <div class="activity-grid"><div><h3>Instructions</h3><ol><li>Return to the six-picture guide and create a Java Application named <b>GradeChecker</b>.</li><li>Import <b>java.util.Scanner</b> above the class declaration.</li><li>Ask for a student name and numeric grade.</li><li>Use an <b>if/else</b> decision: display “Passed” for grades 75 or higher; otherwise display “Needs Improvement.”</li><li>Run the program with 74, 75, 88, and 100. Compare each result with the test table.</li><li>Set a breakpoint on the if statement, start Debug Project, and inspect the grade.</li><li>Format the code and rename one variable using Refactor.</li><li>Add validation so grades below 0 or above 100 display “Invalid grade.”</li></ol></div><div class="checklist"><h3>Success checklist</h3><label><input type="checkbox"> Project and class have clear names</label><label><input type="checkbox"> Scanner accepts the name and grade</label><label><input type="checkbox"> 74 displays Needs Improvement</label><label><input type="checkbox"> 75, 88, and 100 display Passed</label><label><input type="checkbox"> Invalid grades are rejected</label><label><input type="checkbox"> Code is formatted and readable</label><label><input type="checkbox"> Breakpoint and inspection work</label></div></div>
+    </section>
+
+    <section class="section" id="review">
+      <div class="section-heading center"><p class="eyebrow">KNOWLEDGE CHECK</p><h2>Review questions</h2><p>Answer first, then open each question to check.</p></div>
+      <div class="questions">
+        <details><summary><span>01</span>What does IDE mean, and what problem does it solve?</summary><p>IDE means Integrated Development Environment. It combines tools for editing, building, running, testing, and debugging software in one workspace.</p></details>
+        <details><summary><span>02</span>Which window displays compiler messages and program results?</summary><p>The Output window displays build messages, errors, test results, and text printed by the program.</p></details>
+        <details><summary><span>03</span>What is the purpose of a breakpoint?</summary><p>A breakpoint pauses execution so a developer can inspect values and follow the program's behavior.</p></details>
+        <details><summary><span>04</span>How is a logic error different from a syntax error?</summary><p>A syntax error breaks language rules. A logic error allows the program to run but gives an incorrect result.</p></details>
+        <details><summary><span>05</span>Name three NetBeans productivity tools.</summary><p>Examples: code completion, refactoring, templates, formatting, quick fixes, Git integration, and the debugger.</p></details>
+        <details><summary><span>06</span>Why must a JDK be installed before creating Java projects?</summary><p>The JDK provides the Java compiler and other development tools that NetBeans uses to build and run Java programs.</p></details>
+        <details><summary><span>07</span>What does Scanner do in the Grade Checker?</summary><p>Scanner reads values entered by the user through the keyboard, such as the student name and numeric grade.</p></details>
+        <details><summary><span>08</span>Why should the grade 75 be included in the test plan?</summary><p>It is the exact boundary between the two results. Testing it confirms that the program uses greater than or equal to, not only greater than.</p></details>
+        <details><summary><span>09</span>What is the best first action after NetBeans reports several errors?</summary><p>Read and fix the first reported error, because one early syntax problem can cause several additional messages.</p></details>
+      </div>
+    </section>
+
+    <section class="complete"><p class="eyebrow">MODULE COMPLETE</p><h2>You now know the NetBeans workflow.</h2><p>Remember: create → code → build → run → test → debug → improve.</p><a class="button light" href="#top">Return to the top ↑</a></section>
+  </main>
+
+  <footer><b>CODECLASS</b><span>Apache NetBeans Learning Module</span><p>For classroom discussion, demonstration, and independent study.</p></footer>
+</body>
+</html>

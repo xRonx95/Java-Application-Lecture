@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional lesson and guided laboratory for Database, JDBC, and secure data insertion.">
+  <title>Database &amp; JDBC | Insert Data Laboratory</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <!-- Separate page stylesheet -->
+  <link rel="stylesheet" href="../css/Database & JDBC/insert-data.css?v=2">
+</head>
+<body>
+  <header class="module-header">
+    <div class="brand"><span class="database-icon" aria-hidden="true"></span><div><strong>Database &amp; JDBC</strong><small>Student Laboratory Guide</small></div></div>
+    <nav aria-label="Lesson navigation">
+      <a href="../index.html">Home</a>
+      <a href="#concepts">Concepts</a>
+      <a href="#procedure">Procedure</a>
+      <a href="#assessment">Assessment</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div>
+        <p class="eyebrow">Lesson 05 · Guided Laboratory</p>
+        <h1>Insert Form Data into MySQL using JDBC</h1>
+        <p class="lead">Create a professional Java web workflow that receives student information, validates it, and stores it securely with a PreparedStatement.</p>
+        <div class="meta"><span><b>Level</b> Intermediate</span><span><b>Time</b> 2–3 hours</span><span><b>Output</b> Working insert form</span></div>
+      </div>
+      <figure class="flow-picture">
+        <div class="browser-title">insert-data.html</div>
+        <div class="flow"><div><b>1</b><strong>HTML Form</strong><small>User input</small></div><i>→</i><div><b>2</b><strong>Servlet</strong><small>Validation</small></div><i>→</i><div><b>3</b><strong>JDBC</strong><small>SQL values</small></div><i>→</i><div><b>4</b><strong>MySQL</strong><small>New row</small></div></div>
+        <figcaption>Picture 1. Complete data insertion path</figcaption>
+      </figure>
+    </section>
+
+    <section class="content" id="concepts">
+      <div class="section-title"><p>Part I</p><h2>Essential concepts</h2><span>Understand the process before writing the code.</span></div>
+      <div class="cards">
+        <article><span>01</span><h3>Relational database</h3><p>Stores related records in tables composed of rows and columns. Keys identify and connect records.</p></article>
+        <article><span>02</span><h3>JDBC</h3><p>The Java API that communicates with a database through a vendor-specific driver such as Connector/J.</p></article>
+        <article><span>03</span><h3>PreparedStatement</h3><p>A parameterized SQL statement that separates the query structure from user-supplied values.</p></article>
+        <article><span>04</span><h3>HTTP POST</h3><p>The form method used to send data in the request body for a server-side operation that changes data.</p></article>
+      </div>
+      <figure class="table-picture">
+        <div class="table-head"><b>student_id 🔑</b><b>full_name</b><b>email</b><b>course</b></div>
+        <div><span>101</span><span>Ana Reyes</span><span>ana@example.com</span><span>BSIT</span></div>
+        <div><span>102</span><span>Marco Lim</span><span>marco@example.com</span><span>BSCS</span></div>
+        <figcaption>Picture 2. Records in a relational students table</figcaption>
+      </figure>
+    </section>
+
+    <section class="procedure" id="procedure">
+      <div class="section-title light"><p>Part II</p><h2>Step-by-step procedure</h2><span>Complete each checkpoint before moving to the next stage.</span></div>
+
+      <article class="step"><div class="step-copy"><span class="number">Step 1</span><h3>Install and verify the tools</h3><ol><li>Install JDK 17 or later.</li><li>Install Apache Tomcat 10 or later.</li><li>Install and start MySQL Server.</li><li>Download MySQL Connector/J.</li><li>Add the driver JAR to <code>WEB-INF/lib</code>.</li></ol><aside><b>Checkpoint:</b> Java, Tomcat, and MySQL must all start without an error.</aside></div>
+        <figure class="tools-picture"><div><span>JDK 17+</span><span>Tomcat 10+</span><span>MySQL 8+</span><span>Connector/J</span></div><ul><li>✓ Java detected</li><li>✓ Web server started</li><li>✓ Database online</li><li>✓ Driver available</li></ul><figcaption>Picture 3. Required development environment</figcaption></figure></article>
+
+      <article class="step"><div class="step-copy"><span class="number">Step 2</span><h3>Create the database and table</h3><p>Run the following script in MySQL Workbench or phpMyAdmin.</p><pre><code>CREATE DATABASE school_db;
+USE school_db;
+
+CREATE TABLE students (
+  student_id INT PRIMARY KEY AUTO_INCREMENT,
+  full_name VARCHAR(100) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  course VARCHAR(80) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre><aside><b>Checkpoint:</b> Run <code>DESCRIBE students;</code> and confirm five columns.</aside></div>
+        <figure class="schema-picture"><div class="cylinder">school_db</div><div class="schema"><b>students</b><p><span>🔑 student_id</span><em>INT</em></p><p><span>full_name</span><em>VARCHAR</em></p><p><span>email</span><em>VARCHAR</em></p><p><span>course</span><em>VARCHAR</em></p><p><span>created_at</span><em>TIMESTAMP</em></p></div><figcaption>Picture 4. Expected school_db schema</figcaption></figure></article>
+
+      <article class="step"><div class="step-copy"><span class="number">Step 3</span><h3>Create insert-data.html</h3><p>The <code>name</code> attributes are important because the servlet uses the same names to read the submitted values.</p><pre><code>&lt;form action="insert-student" method="post"&gt;
+  &lt;label for="fullName"&gt;Full name&lt;/label&gt;
+  &lt;input id="fullName" name="fullName" required&gt;
+
+  &lt;label for="email"&gt;Email address&lt;/label&gt;
+  &lt;input id="email" name="email" type="email" required&gt;
+
+  &lt;label for="course"&gt;Course&lt;/label&gt;
+  &lt;select id="course" name="course" required&gt;
+    &lt;option value=""&gt;Select a course&lt;/option&gt;
+    &lt;option&gt;BS Information Technology&lt;/option&gt;
+    &lt;option&gt;BS Computer Science&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;button type="submit"&gt;Save student&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+        <figure class="form-picture"><div class="browser-title">localhost:8080/student-app/insert-data.html</div><div class="mock-form"><h4>Student Registration</h4><label>Full name<input value="Ana Reyes" readonly></label><label>Email address<input value="ana@example.com" readonly></label><label>Course<select><option>BSIT</option></select></label><button type="button">Save student</button></div><figcaption>Picture 5. Expected form appearance</figcaption></figure></article>
+
+      <article class="step"><div class="step-copy"><span class="number">Step 4</span><h3>Create the JDBC connection</h3><pre><code>public class DatabaseConnection {
+  private static final String URL =
+      "jdbc:mysql://localhost:3306/school_db";
+
+  public static Connection getConnection()
+      throws SQLException {
+    return DriverManager.getConnection(
+        URL, "app_user", "secure_password");
+  }
+}</code></pre><aside class="warning"><b>Professional practice:</b> Store real credentials in environment variables or protected server configuration, not in public source files.</aside></div>
+        <figure class="project-picture"><div><b>student-app/</b><span>├── src/main/java/</span><span>│ &nbsp; ├── DatabaseConnection.java</span><span>│ &nbsp; └── InsertStudentServlet.java</span><span>└── src/main/webapp/</span><span>&nbsp;&nbsp;&nbsp; ├── insert-data.html</span><span>&nbsp;&nbsp;&nbsp; ├── css/insert-data.css</span><span>&nbsp;&nbsp;&nbsp; └── WEB-INF/lib/</span></div><figcaption>Picture 6. Recommended project structure</figcaption></figure></article>
+
+      <article class="step"><div class="step-copy"><span class="number">Step 5</span><h3>Insert the data safely</h3><pre><code>String sql = "INSERT INTO students " +
+  "(full_name, email, course) VALUES (?, ?, ?)";
+
+try (Connection con = DatabaseConnection.getConnection();
+     PreparedStatement ps = con.prepareStatement(sql)) {
+  ps.setString(1, request.getParameter("fullName").trim());
+  ps.setString(2, request.getParameter("email").trim());
+  ps.setString(3, request.getParameter("course"));
+  int rows = ps.executeUpdate();
+}</code></pre><aside class="warning"><b>Security rule:</b> Never concatenate form input into SQL. Use placeholders and validate every field on the server.</aside></div>
+        <figure class="binding-picture"><code>VALUES ( ?, ?, ? )</code><p><b>1</b><span>Ana Reyes</span><em>String</em></p><p><b>2</b><span>ana@example.com</span><em>String</em></p><p><b>3</b><span>BSIT</span><em>String</em></p><strong>Prepared safely ✓</strong><figcaption>Picture 7. PreparedStatement parameter binding</figcaption></figure></article>
+
+      <article class="step"><div class="step-copy"><span class="number">Step 6</span><h3>Run and verify</h3><ol><li>Start MySQL, then start Tomcat.</li><li>Open the form in the browser.</li><li>Enter a unique email and submit once.</li><li>Run the verification query below.</li></ol><pre><code>SELECT * FROM students
+ORDER BY student_id DESC;</code></pre><aside><b>Expected result:</b> The newest row contains the exact values submitted in the form.</aside></div>
+        <figure class="result-picture"><div><b>Before</b><strong>102</strong><small>records</small></div><i>+1</i><div><b>After</b><strong>103</strong><small>records</small></div><p><span>103</span><b>Ana Reyes</b><span>ana@example.com</span><em>BSIT</em></p><figcaption>Picture 8. Successful insert verification</figcaption></figure></article>
+    </section>
+
+    <section class="content" id="assessment">
+      <div class="section-title"><p>Part III</p><h2>Practice and assessment</h2><span>Demonstrate both technical correctness and clear explanation.</span></div>
+      <div class="activities"><article><small>Activity A · 15 minutes</small><h3>Trace the data</h3><p>Explain what happens at each stage from the browser input to the stored row.</p></article><article><small>Activity B · 25 minutes</small><h3>Extend the form</h3><p>Add a year-level field to the table, form, servlet, and PreparedStatement.</p></article><article><small>Challenge · 35 minutes</small><h3>Handle duplicates</h3><p>Show a helpful message when a student submits an email that already exists.</p></article></div>
+      <div class="rubric"><h3>Performance rubric · 100 points</h3><div><span>Database design <b>20</b></span><span>HTML form <b>15</b></span><span>JDBC connection <b>20</b></span><span>Secure insertion <b>25</b></span><span>Testing and explanation <b>20</b></span></div></div>
+      <details><summary>Review questions</summary><ol><li>What role does Connector/J perform?</li><li>Why is HTTP POST appropriate for inserting a record?</li><li>How does PreparedStatement reduce SQL injection risk?</li><li>What is the purpose of the primary key?</li><li>How do you verify that the operation succeeded?</li></ol></details>
+    </section>
+  </main>
+
+  <footer><div><strong>Database &amp; JDBC</strong><p>Professional Lesson Module · Student Laboratory Guide</p></div><a href="#top">Back to top ↑</a></footer>
+</body>
+</html>

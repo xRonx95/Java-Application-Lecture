@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive lesson module about running and debugging Java programs.">
+    <title>Run and Debug Java | Lesson Module</title>
+      <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+    <link rel="stylesheet" href="../css/Apache NetBeans/run-debug.css">
+    <style>
+        /* Extra visual lesson styles are included here so the new pictures work immediately. */
+        .lesson-figure{margin:24px 0;border:1px solid #c7dceb;border-radius:14px;overflow:hidden;background:#f8fcff;box-shadow:0 8px 22px rgba(16,42,67,.08)}
+        .lesson-figure svg{display:block;width:100%;height:auto;max-height:390px}
+        .lesson-figure figcaption{padding:11px 16px;background:#edf7ff;color:#486581;font-size:.92rem;border-top:1px solid #c7dceb}
+        .visual-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+        .visual-steps article{position:relative;padding:16px 12px;text-align:center;border:1px solid #c7dceb;border-radius:12px;background:#f8fcff}
+        .visual-steps article:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:42%;z-index:2;color:#1261a0;font-weight:900;font-size:1.25rem}
+        .visual-steps b{display:grid;place-items:center;width:36px;height:36px;margin:0 auto 8px;border-radius:50%;background:#1261a0;color:#fff}
+        .practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0}
+        .practice-grid article{padding:17px;border:1px solid #d9e2ec;border-radius:12px;background:#fbfdff}
+        .practice-grid h3{margin-top:0}
+        .mini-task{margin:20px 0;padding:18px;border:2px dashed #8fc7e8;border-radius:12px;background:#f5fbff}
+        .mini-task h3{margin-top:0}
+        @media(max-width:800px){.visual-steps,.practice-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:520px){.visual-steps,.practice-grid{grid-template-columns:1fr}.visual-steps article:not(:last-child)::after{content:"↓";right:auto;left:49%;top:auto;bottom:-20px}}
+        @media print{.lesson-figure{break-inside:avoid;box-shadow:none}}
+    </style>
+</head>
+<body>
+    <header class="module-header">
+        <div class="header-copy">
+            <span class="eyebrow">Interactive Java Lesson</span>
+            <h1>Run &amp; Debug Java</h1>
+            <p>Learn through step-by-step pictures, explanations, code examples, guided activities, and a knowledge check.</p>
+        </div>
+        <div class="header-actions">
+            <span class="level-badge">Beginner Friendly</span>
+            <button class="menu-button" id="menuButton" type="button" aria-controls="lessonNavigation" aria-expanded="false">
+                <span aria-hidden="true">☰</span> Topics
+            </button>
+        </div>
+    </header>
+
+    <div class="module-progress" aria-label="Lesson progress">
+        <span id="progressLabel">Topic 1 of 16</span>
+        <div class="progress-track">
+            <span id="progressFill"></span>
+        </div>
+    </div>
+
+    <div class="module-layout">
+        <aside class="lesson-navigation" id="lessonNavigation" aria-label="Lesson topics">
+            <div class="navigation-heading">
+                <strong>Lesson Contents</strong>
+                <button class="close-menu" id="closeMenu" type="button" aria-label="Close lesson menu">×</button>
+            </div>
+            <nav>
+                <a class="topic-link home-link"
+   href="../index.html"
+   onclick="event.stopImmediatePropagation();">
+    <span>00</span> Home
+</a>
+                <a class="topic-link active" href="#run-vs-debug" data-topic="1"><span>01</span> Run vs. Debug</a>
+                <a class="topic-link" href="#compile-run" data-topic="2"><span>02</span> Compile and Run</a>
+                <a class="topic-link" href="#debugging-process" data-topic="3"><span>03</span> Debugging Process</a>
+                <a class="topic-link" href="#breakpoints" data-topic="4"><span>04</span> Breakpoints</a>
+                <a class="topic-link" href="#step-controls" data-topic="5"><span>05</span> Step Controls</a>
+                <a class="topic-link" href="#inspect-state" data-topic="6"><span>06</span> Inspect Program State</a>
+                <a class="topic-link" href="#error-types" data-topic="7"><span>07</span> Types of Errors</a>
+                <a class="topic-link" href="#stack-traces" data-topic="8"><span>08</span> Stack Traces</a>
+                <a class="topic-link" href="#troubleshooting" data-topic="9"><span>09</span> Troubleshooting</a>
+                <a class="topic-link" href="#java-setup" data-topic="10"><span>10</span> Set Up Java</a>
+                <a class="topic-link" href="#netbeans-project" data-topic="11"><span>11</span> Create a Project</a>
+                <a class="topic-link" href="#input-validation" data-topic="12"><span>12</span> Input Validation</a>
+                <a class="topic-link" href="#loops-arrays" data-topic="13"><span>13</span> Loops and Arrays</a>
+                <a class="topic-link" href="#methods-stack" data-topic="14"><span>14</span> Methods and Stack</a>
+                <a class="topic-link" href="#activity" data-topic="15"><span>15</span> Debugging Activity</a>
+                <a class="topic-link" href="#quiz" data-topic="16"><span>16</span> Knowledge Check</a>
+            </nav>
+        </aside>
+
+        <button class="navigation-overlay" id="navigationOverlay" type="button" aria-label="Close navigation"></button>
+
+        <main class="lesson-content" id="lessonContent">
+            <section class="lesson-card" id="run-vs-debug" data-section="1">
+                <div class="topic-number">Topic 01</div>
+                <h2>Run vs. Debug</h2>
+                <div class="objective-box">
+                    <strong>Learning objective</strong>
+                    <p>Differentiate normal program execution from debugging execution.</p>
+                </div>
+
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 300" role="img" aria-label="Java code can follow a Run path or a Debug path before producing output">
+                        <rect width="900" height="300" fill="#f8fcff"/>
+                        <rect x="35" y="105" width="155" height="90" rx="14" fill="#102a43"/><text x="112" y="145" text-anchor="middle" fill="white" font-size="23" font-weight="700">Java Code</text><text x="112" y="175" text-anchor="middle" fill="#bfe3ff" font-size="17">Start</text>
+                        <path d="M190 130 H290" stroke="#1261a0" stroke-width="8"/><polygon points="290,120 310,130 290,140" fill="#1261a0"/><rect x="310" y="55" width="225" height="90" rx="14" fill="#dff1ff" stroke="#1261a0" stroke-width="3"/><text x="422" y="95" text-anchor="middle" fill="#102a43" font-size="25" font-weight="700">▶ Run</text><text x="422" y="124" text-anchor="middle" fill="#486581" font-size="17">Normal speed</text>
+                        <path d="M190 175 H290" stroke="#16845b" stroke-width="8"/><polygon points="290,165 310,175 290,185" fill="#16845b"/><rect x="310" y="170" width="225" height="90" rx="14" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><text x="422" y="210" text-anchor="middle" fill="#102a43" font-size="25" font-weight="700">◆ Debug</text><text x="422" y="239" text-anchor="middle" fill="#486581" font-size="17">Pause and inspect</text>
+                        <path d="M535 100 H680" stroke="#1261a0" stroke-width="6"/><path d="M535 215 H680" stroke="#16845b" stroke-width="6" stroke-dasharray="14 8"/><rect x="680" y="103" width="185" height="95" rx="15" fill="white" stroke="#9fb3c8" stroke-width="3"/><text x="772" y="145" text-anchor="middle" fill="#102a43" font-size="23" font-weight="700">Output</text><text x="772" y="175" text-anchor="middle" fill="#486581" font-size="17">Result or error</text>
+                    </svg>
+                    <figcaption>Picture 1. Run reaches the result quickly. Debug follows the same code but allows controlled pauses.</figcaption>
+                </figure>
+
+                <h3>What does “Run” mean?</h3>
+                <p>Running executes a program normally from beginning to end. The computer follows the instructions, displays output, and stops when the program finishes or encounters an unhandled error.</p>
+
+                <h3>What does “Debug” mean?</h3>
+                <p>Debugging executes the same program with tools that let you pause it, inspect values, follow its control flow, and locate the reason for incorrect behavior. A program may run without crashing and still contain a logic error.</p>
+
+                <div class="comparison-grid">
+                    <article>
+                        <span class="comparison-icon">▶</span>
+                        <h4>Run</h4>
+                        <ul>
+                            <li>Executes at normal speed</li>
+                            <li>Shows the final behavior</li>
+                            <li>Stops at errors or completion</li>
+                        </ul>
+                    </article>
+                    <article>
+                        <span class="comparison-icon">◆</span>
+                        <h4>Debug</h4>
+                        <ul>
+                            <li>Can pause at breakpoints</li>
+                            <li>Shows variables and call flow</li>
+                            <li>Helps explain why a bug occurs</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="teacher-tip"><strong>Explanation tip:</strong> Compare debugging to pausing a recorded game so you can study exactly what every player is doing.</div>
+            </section>
+
+            <section class="lesson-card" id="compile-run" data-section="2">
+                <div class="topic-number">Topic 02</div>
+                <h2>Compile and Run a Java Program</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Describe the compile-run cycle and execute a basic Java program.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 250" role="img" aria-label="Java source becomes bytecode through javac and then output through the JVM">
+                        <rect width="900" height="250" fill="#f8fcff"/><rect x="35" y="70" width="190" height="110" rx="15" fill="#e8f4ff" stroke="#1261a0" stroke-width="3"/><text x="130" y="115" text-anchor="middle" fill="#102a43" font-size="22" font-weight="700">HelloWorld.java</text><text x="130" y="147" text-anchor="middle" fill="#486581" font-size="17">Source code</text><path d="M225 125 H345" stroke="#1261a0" stroke-width="7"/><polygon points="345,114 365,125 345,136" fill="#1261a0"/><text x="295" y="105" text-anchor="middle" fill="#486581" font-size="16">javac</text><rect x="365" y="70" width="180" height="110" rx="15" fill="#fff4cd" stroke="#d3a100" stroke-width="3"/><text x="455" y="115" text-anchor="middle" fill="#102a43" font-size="22" font-weight="700">.class</text><text x="455" y="147" text-anchor="middle" fill="#486581" font-size="17">Bytecode</text><path d="M545 125 H665" stroke="#16845b" stroke-width="7"/><polygon points="665,114 685,125 665,136" fill="#16845b"/><text x="615" y="105" text-anchor="middle" fill="#486581" font-size="16">JVM</text><rect x="685" y="70" width="180" height="110" rx="15" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><text x="775" y="115" text-anchor="middle" fill="#102a43" font-size="22" font-weight="700">Hello!</text><text x="775" y="147" text-anchor="middle" fill="#486581" font-size="17">Program output</text>
+                    </svg>
+                    <figcaption>Picture 2. The compiler changes source code into bytecode; the JVM executes the bytecode.</figcaption>
+                </figure>
+                <p>Java source code is stored in a <code>.java</code> file. The <code>javac</code> compiler checks the syntax and creates bytecode in a <code>.class</code> file. The Java Virtual Machine then executes that bytecode.</p>
+
+                <ol class="process-list">
+                    <li><span>1</span><div><strong>Write and save</strong><p>Save the source as <code>HelloWorld.java</code>. The filename must match the public class.</p></div></li>
+                    <li><span>2</span><div><strong>Compile</strong><p>Run <code>javac HelloWorld.java</code> to create <code>HelloWorld.class</code>.</p></div></li>
+                    <li><span>3</span><div><strong>Execute</strong><p>Run <code>java HelloWorld</code>. Do not include the file extension.</p></div></li>
+                </ol>
+
+                <div class="code-block">
+                    <div class="code-heading"><span>HelloWorld.java</span><button class="copy-code" type="button">Copy</button></div>
+                    <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, debugger!");
+    }
+}</code></pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-heading"><span>Terminal</span><button class="copy-code" type="button">Copy</button></div>
+                    <pre><code>javac HelloWorld.java
+java HelloWorld</code></pre>
+                </div>
+            </section>
+
+            <section class="lesson-card" id="debugging-process" data-section="3">
+                <div class="topic-number">Topic 03</div>
+                <h2>The Debugging Process</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Apply a repeatable debugging method instead of guessing.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 245" role="img" aria-label="Six-step debugging process from reproduce to verify">
+                        <rect width="900" height="245" fill="#f8fcff"/><g font-family="system-ui" text-anchor="middle" font-weight="700"><g transform="translate(20 75)"><circle cx="60" cy="45" r="44" fill="#dff1ff" stroke="#1261a0" stroke-width="3"/><text x="60" y="43" fill="#102a43" font-size="15">1</text><text x="60" y="62" fill="#102a43" font-size="14">Reproduce</text></g><path d="M125 120 H165" stroke="#829ab1" stroke-width="5"/><g transform="translate(165 75)"><circle cx="60" cy="45" r="44" fill="#e8f4ff" stroke="#1261a0" stroke-width="3"/><text x="60" y="43" fill="#102a43" font-size="15">2</text><text x="60" y="62" fill="#102a43" font-size="14">Observe</text></g><path d="M270 120 H310" stroke="#829ab1" stroke-width="5"/><g transform="translate(310 75)"><circle cx="60" cy="45" r="44" fill="#fff4cd" stroke="#d3a100" stroke-width="3"/><text x="60" y="43" fill="#102a43" font-size="15">3</text><text x="60" y="62" fill="#102a43" font-size="13">Hypothesize</text></g><path d="M415 120 H455" stroke="#829ab1" stroke-width="5"/><g transform="translate(455 75)"><circle cx="60" cy="45" r="44" fill="#f1ecff" stroke="#7656b4" stroke-width="3"/><text x="60" y="43" fill="#102a43" font-size="15">4</text><text x="60" y="62" fill="#102a43" font-size="14">Test</text></g><path d="M560 120 H600" stroke="#829ab1" stroke-width="5"/><g transform="translate(600 75)"><circle cx="60" cy="45" r="44" fill="#ffe9e7" stroke="#b42318" stroke-width="3"/><text x="60" y="43" fill="#102a43" font-size="15">5</text><text x="60" y="62" fill="#102a43" font-size="14">Fix</text></g><path d="M705 120 H745" stroke="#829ab1" stroke-width="5"/><g transform="translate(745 75)"><circle cx="60" cy="45" r="44" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><text x="60" y="43" fill="#102a43" font-size="15">6</text><text x="60" y="62" fill="#102a43" font-size="14">Verify</text></g><path d="M805 165 C805 220 80 220 80 165" fill="none" stroke="#16845b" stroke-width="4" stroke-dasharray="12 8"/><text x="445" y="225" fill="#16845b" font-size="16">Repeat when new evidence appears</text></g>
+                    </svg>
+                    <figcaption>Picture 3. Debugging is a repeatable investigation, not random editing.</figcaption>
+                </figure>
+                <p>Debugging is an evidence-based investigation. Use the following cycle whenever a program behaves incorrectly.</p>
+                <div class="steps-grid">
+                    <article><span>01</span><h3>Reproduce</h3><p>Find exact actions or input that consistently cause the problem.</p></article>
+                    <article><span>02</span><h3>Observe</h3><p>Read the output, error message, and complete stack trace.</p></article>
+                    <article><span>03</span><h3>Hypothesize</h3><p>State one specific possible cause based on the evidence.</p></article>
+                    <article><span>04</span><h3>Test</h3><p>Use breakpoints, watches, or temporary output to test the idea.</p></article>
+                    <article><span>05</span><h3>Fix</h3><p>Make one focused correction without changing unrelated code.</p></article>
+                    <article><span>06</span><h3>Verify</h3><p>Run normal, boundary, and invalid-input tests after the change.</p></article>
+                </div>
+                <div class="teacher-tip"><strong>Remember:</strong> Observe → Hypothesize → Test → Fix → Verify.</div>
+            </section>
+
+            <section class="lesson-card" id="breakpoints" data-section="4">
+                <div class="topic-number">Topic 04</div>
+                <h2>Breakpoints</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Place useful breakpoints and explain what happens when one is reached.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 300" role="img" aria-label="Code editor with a red breakpoint beside a highlighted loop line">
+                        <rect width="900" height="300" fill="#102a43"/><rect width="88" height="300" fill="#243b53"/><g fill="#9fb3c8" font-family="monospace" font-size="21" text-anchor="end"><text x="65" y="72">1</text><text x="65" y="112">2</text><text x="65" y="152">3</text><text x="65" y="192">4</text><text x="65" y="232">5</text></g><circle cx="43" cy="183" r="13" fill="#ef4444"/><rect x="88" y="157" width="812" height="45" fill="#193b55"/><g fill="#eaf6ff" font-family="monospace" font-size="21"><text x="118" y="72">int total = 0;</text><text x="118" y="112">for (int i = 0; i &lt; scores.length; i++) {</text><text x="145" y="152">int score = scores[i];</text><text x="145" y="192" fill="#ffcb47">total += score;  // pauses here</text><text x="118" y="232">}</text></g><path d="M43 202 V270 H220" stroke="#ef4444" stroke-width="4" fill="none"/><text x="235" y="277" fill="#ffaaa5" font-size="19" font-weight="700">Click the margin beside the line</text>
+                    </svg>
+                    <figcaption>Picture 4. A red marker identifies the breakpoint; the highlighted line is the current paused instruction.</figcaption>
+                </figure>
+                <p>A breakpoint is a marker that pauses the program before a selected line executes. While paused, you can inspect local variables, object fields, method parameters, threads, and the call stack.</p>
+                <div class="code-block">
+                    <div class="code-heading"><span>Breakpoint example</span><button class="copy-code" type="button">Copy</button></div>
+                    <pre><code>int total = 0;
+for (int i = 0; i &lt; scores.length; i++) {
+    total += scores[i]; // Place breakpoint here
+}
+double average = (double) total / scores.length;</code></pre>
+                </div>
+                <div class="note-grid">
+                    <article><h3>Line breakpoint</h3><p>Pauses every time execution reaches the selected line.</p></article>
+                    <article><h3>Conditional breakpoint</h3><p>Pauses only when an expression such as <code>i == 2</code> is true.</p></article>
+                    <article><h3>Good placement</h3><p>Choose a line near the first point where the program state becomes suspicious.</p></article>
+                </div>
+                <div class="warning-box"><strong>Important:</strong> A breakpoint does not fix or permanently stop a program. It temporarily freezes the current execution for inspection.</div>
+            </section>
+
+            <section class="lesson-card" id="step-controls" data-section="5">
+                <div class="topic-number">Topic 05</div>
+                <h2>Debugger Step Controls</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Choose correctly among Resume, Step Over, Step Into, Step Out, Restart, and Stop.</p></div>
+                <div class="control-table-wrap">
+                    <table class="control-table">
+                        <thead><tr><th>Control</th><th>What it does</th><th>When to use it</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Resume</strong></td><td>Continues normal execution.</td><td>Move to the next breakpoint or program end.</td></tr>
+                            <tr><td><strong>Step Over</strong></td><td>Executes the current line without entering called methods.</td><td>The called method is not being investigated.</td></tr>
+                            <tr><td><strong>Step Into</strong></td><td>Enters the method called on the current line.</td><td>You suspect the problem is inside that method.</td></tr>
+                            <tr><td><strong>Step Out</strong></td><td>Finishes the current method and returns to its caller.</td><td>You have inspected enough of the current method.</td></tr>
+                            <tr><td><strong>Restart</strong></td><td>Stops and starts the debugging session again.</td><td>You need to reproduce the program from the beginning.</td></tr>
+                            <tr><td><strong>Stop</strong></td><td>Terminates the current debugging session.</td><td>The current run is no longer useful.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="code-block">
+                    <div class="code-heading"><span>Choosing a step command</span><button class="copy-code" type="button">Copy</button></div>
+                    <pre><code>double finalPrice = calculateDiscount(price);
+printReceipt(finalPrice);
+
+// Step Into to inspect calculateDiscount().
+// Step Over to execute it as one line.
+// Step Out to finish it and return to the caller.</code></pre>
+                </div>
+            </section>
+
+            <section class="lesson-card" id="inspect-state" data-section="6">
+                <div class="topic-number">Topic 06</div>
+                <h2>Inspect Program State</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Use Variables, Watches, and the Call Stack to explain program behavior.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 320" role="img" aria-label="Debugger panels for variables, watches, and call stack">
+                        <rect width="900" height="320" fill="#e9f0f5"/><g font-family="system-ui"><rect x="30" y="35" width="260" height="250" rx="12" fill="white" stroke="#1261a0" stroke-width="3"/><text x="50" y="70" fill="#102a43" font-size="21" font-weight="700">Variables</text><line x1="50" y1="84" x2="270" y2="84" stroke="#d9e2ec"/><text x="55" y="125" fill="#486581" font-size="18">i</text><text x="230" y="125" fill="#1261a0" font-size="18">2</text><text x="55" y="165" fill="#486581" font-size="18">score</text><text x="230" y="165" fill="#1261a0" font-size="18">79</text><text x="55" y="205" fill="#486581" font-size="18">total</text><text x="230" y="205" fill="#b42318" font-size="18">180</text><rect x="320" y="35" width="260" height="250" rx="12" fill="white" stroke="#16845b" stroke-width="3"/><text x="340" y="70" fill="#102a43" font-size="21" font-weight="700">Watches</text><line x1="340" y1="84" x2="560" y2="84" stroke="#d9e2ec"/><text x="345" y="130" fill="#486581" font-size="17">total / 3.0</text><text x="520" y="130" fill="#16845b" font-size="18">60.0</text><rect x="610" y="35" width="260" height="250" rx="12" fill="white" stroke="#7656b4" stroke-width="3"/><text x="630" y="70" fill="#102a43" font-size="21" font-weight="700">Call Stack</text><line x1="630" y1="84" x2="850" y2="84" stroke="#d9e2ec"/><text x="635" y="125" fill="#7656b4" font-size="17">calculate()</text><text x="635" y="165" fill="#486581" font-size="17">showReport()</text><text x="635" y="205" fill="#486581" font-size="17">main()</text></g>
+                    </svg>
+                    <figcaption>Picture 5. These panels answer: What values exist, what expression matters, and how did execution arrive here?</figcaption>
+                </figure>
+                <div class="feature-list">
+                    <article><span>V</span><div><h3>Variables</h3><p>Shows the values currently available in the method or block where execution is paused.</p></div></article>
+                    <article><span>W</span><div><h3>Watches</h3><p>Evaluates expressions you want to monitor, such as <code>total / (double) count</code>.</p></div></article>
+                    <article><span>C</span><div><h3>Call Stack</h3><p>Shows the chain of method calls that led to the current line.</p></div></article>
+                    <article><span>E</span><div><h3>Evaluate Expression</h3><p>Tests an expression while the program is paused without adding it permanently to the code.</p></div></article>
+                </div>
+                <div class="teacher-tip"><strong>Ask three questions:</strong> What values do I have? How did execution get here? What line will execute next?</div>
+            </section>
+
+            <section class="lesson-card" id="error-types" data-section="7">
+                <div class="topic-number">Topic 07</div>
+                <h2>Types of Programming Errors</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Classify syntax, runtime, and logic errors using evidence.</p></div>
+                <div class="error-grid">
+                    <article>
+                        <span class="error-label compile">Compile time</span>
+                        <h3>Syntax Error</h3>
+                        <p>Violates Java language rules and prevents successful compilation.</p>
+                        <pre><code>int age = 18 // Missing ;</code></pre>
+                    </article>
+                    <article>
+                        <span class="error-label runtime">During execution</span>
+                        <h3>Runtime Error</h3>
+                        <p>Occurs while the program is executing and often creates an exception.</p>
+                        <pre><code>int answer = 10 / 0;</code></pre>
+                    </article>
+                    <article>
+                        <span class="error-label logic">Wrong result</span>
+                        <h3>Logic Error</h3>
+                        <p>The program finishes but produces an incorrect result.</p>
+                        <pre><code>int area = length + width;</code></pre>
+                    </article>
+                </div>
+            </section>
+
+            <section class="lesson-card" id="stack-traces" data-section="8">
+                <div class="topic-number">Topic 08</div>
+                <h2>Stack Traces and Exceptions</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Read an exception message and locate the relevant source line.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 300" role="img" aria-label="Annotated exception with type, message, source line, and caller">
+                        <rect width="900" height="300" fill="#102a43"/><g font-family="monospace" font-size="19"><text x="35" y="50" fill="#eaf6ff">Exception in thread "main"</text><rect x="25" y="65" width="520" height="42" rx="6" fill="#5b2630"/><text x="35" y="93" fill="#ffaaa5">ArrayIndexOutOfBoundsException</text><path d="M545 86 H680" stroke="#ffaaa5" stroke-width="3"/><text x="695" y="93" fill="#ffaaa5" font-family="system-ui" font-weight="700">1. Type</text><rect x="25" y="118" width="570" height="42" rx="6" fill="#625416"/><text x="35" y="146" fill="#ffe58a">Index 3 out of bounds for length 3</text><path d="M595 139 H680" stroke="#ffe58a" stroke-width="3"/><text x="695" y="146" fill="#ffe58a" font-family="system-ui" font-weight="700">2. Message</text><rect x="25" y="171" width="545" height="42" rx="6" fill="#184c43"/><text x="35" y="199" fill="#9ce7cc">at GradeApp.calculate(GradeApp.java:18)</text><path d="M570 192 H680" stroke="#9ce7cc" stroke-width="3"/><text x="695" y="199" fill="#9ce7cc" font-family="system-ui" font-weight="700">3. Start here</text><text x="35" y="252" fill="#bfe3ff">at GradeApp.main(GradeApp.java:7)</text><path d="M495 245 H680" stroke="#8fd2ff" stroke-width="3"/><text x="695" y="252" fill="#8fd2ff" font-family="system-ui" font-weight="700">4. Caller</text></g>
+                    </svg>
+                    <figcaption>Picture 6. Read the exception from top to bottom, then open the first listed line from your own code.</figcaption>
+                </figure>
+                <p>A stack trace names the exception, gives a message, and lists method calls. Read the exception type first, then locate the first line that belongs to your own code.</p>
+                <div class="code-block">
+                    <div class="code-heading"><span>Example stack trace</span><button class="copy-code" type="button">Copy</button></div>
+                    <pre><code>Exception in thread "main"
+java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3
+    at GradeApp.calculate(GradeApp.java:18)
+    at GradeApp.main(GradeApp.java:7)</code></pre>
+                </div>
+                <ol class="reading-list">
+                    <li><strong>Exception type:</strong> <code>ArrayIndexOutOfBoundsException</code></li>
+                    <li><strong>Message:</strong> Index 3 is invalid for an array containing three items.</li>
+                    <li><strong>First source location:</strong> Start investigating <code>GradeApp.java</code>, line 18.</li>
+                    <li><strong>Caller:</strong> The failing method was called from line 7 of <code>main</code>.</li>
+                </ol>
+                <div class="warning-box"><strong>Remember:</strong> The listed line is where the failure appeared. The incorrect value may have been created earlier.</div>
+            </section>
+
+            <section class="lesson-card" id="troubleshooting" data-section="9">
+                <div class="topic-number">Topic 09</div>
+                <h2>Troubleshooting Checklist</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Use a practical checklist when a Java program does not run correctly.</p></div>
+                <div class="checklist">
+                    <label><input type="checkbox"> Confirm the JDK is installed using <code>java -version</code> and <code>javac -version</code>.</label>
+                    <label><input type="checkbox"> Make sure the public class name matches the filename.</label>
+                    <label><input type="checkbox"> Save all source files and rebuild the project.</label>
+                    <label><input type="checkbox"> Read the complete error message and stack trace.</label>
+                    <label><input type="checkbox"> Check null references, array indexes, loop conditions, and division by zero.</label>
+                    <label><input type="checkbox"> Confirm operators and data types produce the intended result.</label>
+                    <label><input type="checkbox"> Reduce the bug to a small, repeatable example.</label>
+                    <label><input type="checkbox"> Test normal, boundary, and invalid inputs after the fix.</label>
+                </div>
+            </section>
+
+            <section class="lesson-card" id="java-setup" data-section="10">
+                <div class="topic-number">Topic 10 — New Lesson</div>
+                <h2>Set Up Java and Apache NetBeans</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Confirm that the JDK and Apache NetBeans are ready before creating a project.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 290" role="img" aria-label="Four setup steps: install JDK, install NetBeans, check versions, and launch the IDE">
+                        <rect width="900" height="290" fill="#f8fcff"/><g font-family="system-ui" text-anchor="middle"><g transform="translate(35 68)"><rect width="180" height="145" rx="16" fill="#fff4cd" stroke="#d3a100" stroke-width="3"/><circle cx="90" cy="43" r="26" fill="#ffcb47"/><text x="90" y="51" font-size="24" font-weight="800">1</text><text x="90" y="94" font-size="20" font-weight="700" fill="#102a43">Install JDK</text><text x="90" y="121" font-size="15" fill="#486581">Compiler + JVM</text></g><g transform="translate(250 68)"><rect width="180" height="145" rx="16" fill="#e8f4ff" stroke="#1261a0" stroke-width="3"/><circle cx="90" cy="43" r="26" fill="#8fd2ff"/><text x="90" y="51" font-size="24" font-weight="800">2</text><text x="90" y="94" font-size="20" font-weight="700" fill="#102a43">Install IDE</text><text x="90" y="121" font-size="15" fill="#486581">Apache NetBeans</text></g><g transform="translate(465 68)"><rect width="180" height="145" rx="16" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><circle cx="90" cy="43" r="26" fill="#87ddb8"/><text x="90" y="51" font-size="24" font-weight="800">3</text><text x="90" y="94" font-size="20" font-weight="700" fill="#102a43">Check</text><text x="90" y="121" font-size="15" fill="#486581">java -version</text></g><g transform="translate(680 68)"><rect width="180" height="145" rx="16" fill="#f1ecff" stroke="#7656b4" stroke-width="3"/><circle cx="90" cy="43" r="26" fill="#c8b5f5"/><text x="90" y="51" font-size="24" font-weight="800">4</text><text x="90" y="94" font-size="20" font-weight="700" fill="#102a43">Launch</text><text x="90" y="121" font-size="15" fill="#486581">Start NetBeans</text></g></g>
+                    </svg>
+                    <figcaption>Picture 7. Complete setup from left to right. If the version check fails, fix the JDK before creating a project.</figcaption>
+                </figure>
+                <ol class="process-list">
+                    <li><span>1</span><div><strong>Install a Java Development Kit</strong><p>The JDK contains the Java compiler, JVM, and debugger tools.</p></div></li>
+                    <li><span>2</span><div><strong>Install Apache NetBeans</strong><p>Choose Java development components during installation.</p></div></li>
+                    <li><span>3</span><div><strong>Open Terminal or Command Prompt</strong><p>Run both commands below and confirm that each displays a version.</p></div></li>
+                    <li><span>4</span><div><strong>Launch NetBeans</strong><p>If prompted for a Java platform, select your installed JDK.</p></div></li>
+                </ol>
+                <div class="code-block"><div class="code-heading"><span>Installation check</span><button class="copy-code" type="button">Copy</button></div><pre><code>java -version
+javac -version</code></pre></div>
+                <div class="warning-box"><strong>If the command is not recognized:</strong> reinstall the JDK or correct the Java PATH setting, then close and reopen the terminal.</div>
+            </section>
+
+            <section class="lesson-card" id="netbeans-project" data-section="11">
+                <div class="topic-number">Topic 11 — New Lesson</div>
+                <h2>Create and Run a NetBeans Project</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Create a Java Application, find its source file, and recognize the Output panel.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 360" role="img" aria-label="Simplified Apache NetBeans window showing Projects, code editor, and Output">
+                        <rect width="900" height="360" fill="#e9f0f5"/><rect x="30" y="28" width="840" height="304" rx="12" fill="white" stroke="#829ab1" stroke-width="3"/><rect x="30" y="28" width="840" height="38" rx="12" fill="#243b53"/><circle cx="55" cy="47" r="7" fill="#ff7068"/><circle cx="78" cy="47" r="7" fill="#ffcb47"/><circle cx="101" cy="47" r="7" fill="#43c59e"/><rect x="45" y="82" width="220" height="218" fill="#f1f5f8" stroke="#bcccdc"/><text x="62" y="110" fill="#102a43" font-size="18" font-weight="700">Projects</text><text x="70" y="145" fill="#1261a0" font-size="17">▾ HelloProject</text><text x="89" y="178" fill="#486581" font-size="16">▾ Source Packages</text><text x="110" y="210" fill="#102a43" font-size="16">HelloWorld.java</text><rect x="285" y="82" width="565" height="142" fill="#102a43"/><text x="310" y="115" fill="#8fd2ff" font-size="16">public class HelloWorld {</text><text x="330" y="145" fill="#eaf6ff" font-size="16">public static void main(String[] args) {</text><text x="350" y="175" fill="#ffcb47" font-size="16">System.out.println("Hello!");</text><text x="330" y="202" fill="#eaf6ff" font-size="16">}</text><rect x="285" y="240" width="565" height="60" fill="#f8fcff" stroke="#bcccdc"/><text x="305" y="265" fill="#102a43" font-size="16" font-weight="700">Output</text><text x="305" y="290" fill="#16845b" font-size="16">Hello!  BUILD SUCCESSFUL</text>
+                    </svg>
+                    <figcaption>Picture 8. Projects holds the files, the editor holds the code, and Output shows the result.</figcaption>
+                </figure>
+                <div class="visual-steps"><article><b>1</b>File → New Project</article><article><b>2</b>Choose Java Application</article><article><b>3</b>Name it HelloProject</article><article><b>4</b>Click Finish</article></div>
+                <ol class="process-list">
+                    <li><span>1</span><div><strong>Open the project wizard</strong><p>Choose <b>File → New Project</b>.</p></div></li>
+                    <li><span>2</span><div><strong>Select Java Application</strong><p>Depending on your version, it may appear under Java with Ant, Maven, or Gradle.</p></div></li>
+                    <li><span>3</span><div><strong>Create a main class</strong><p>Name the project <code>HelloProject</code> and keep “Create Main Class” selected.</p></div></li>
+                    <li><span>4</span><div><strong>Edit and run</strong><p>Open the generated <code>.java</code> file, enter the code, save, and press <b>F6</b>.</p></div></li>
+                </ol>
+                <div class="mini-task"><h3>Student practice</h3><p>Change the output to <code>Hello, my name is ______!</code>, run the project, and confirm the message in the Output panel.</p></div>
+            </section>
+
+            <section class="lesson-card" id="input-validation" data-section="12">
+                <div class="topic-number">Topic 12 — New Lesson</div>
+                <h2>Prevent Bugs with Input Validation</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Check user input before using it in a calculation.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 250" role="img" aria-label="Input validation flow from reading a value to accepting it or showing an error">
+                        <rect width="900" height="250" fill="#f8fcff"/><rect x="35" y="80" width="180" height="90" rx="14" fill="#e8f4ff" stroke="#1261a0" stroke-width="3"/><text x="125" y="120" text-anchor="middle" fill="#102a43" font-size="21" font-weight="700">Read input</text><text x="125" y="148" text-anchor="middle" fill="#486581" font-size="16">age = ?</text><path d="M215 125 H320" stroke="#1261a0" stroke-width="6"/><polygon points="320,115 340,125 320,135" fill="#1261a0"/><polygon points="450,55 560,125 450,195 340,125" fill="#fff4cd" stroke="#d3a100" stroke-width="3"/><text x="450" y="116" text-anchor="middle" fill="#102a43" font-size="18" font-weight="700">0 to 120?</text><text x="450" y="143" text-anchor="middle" fill="#486581" font-size="16">Valid?</text><path d="M560 105 H680" stroke="#16845b" stroke-width="6"/><text x="620" y="92" text-anchor="middle" fill="#16845b" font-weight="700">YES</text><rect x="680" y="55" width="185" height="82" rx="14" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><text x="772" y="105" text-anchor="middle" fill="#102a43" font-size="20" font-weight="700">Use value</text><path d="M450 195 V220 H680" stroke="#b42318" stroke-width="6" fill="none"/><text x="560" y="216" text-anchor="middle" fill="#b42318" font-weight="700">NO</text><rect x="680" y="175" width="185" height="58" rx="14" fill="#ffe9e7" stroke="#b42318" stroke-width="3"/><text x="772" y="211" text-anchor="middle" fill="#102a43" font-size="18" font-weight="700">Show error</text>
+                    </svg>
+                    <figcaption>Picture 9. Validate first so invalid data follows a safe error path instead of crashing the program.</figcaption>
+                </figure>
+                <div class="code-block"><div class="code-heading"><span>SafeAge.java</span><button class="copy-code" type="button">Copy</button></div><pre><code>Scanner input = new Scanner(System.in);
+System.out.print("Enter age: ");
+
+if (input.hasNextInt()) {
+    int age = input.nextInt();
+    if (age &gt;= 0 &amp;&amp; age &lt;= 120) {
+        System.out.println("Accepted: " + age);
+    } else {
+        System.out.println("Age must be from 0 to 120.");
+    }
+} else {
+    System.out.println("Please enter a whole number.");
+}</code></pre></div>
+                <div class="practice-grid"><article><h3>Normal input</h3><p>Test <code>18</code>. It should be accepted.</p></article><article><h3>Boundary input</h3><p>Test <code>0</code> and <code>120</code>.</p></article><article><h3>Invalid input</h3><p>Test <code>-1</code>, <code>121</code>, and <code>hello</code>.</p></article></div>
+            </section>
+
+            <section class="lesson-card" id="loops-arrays" data-section="13">
+                <div class="topic-number">Topic 13 — New Lesson</div>
+                <h2>Debug Loops and Arrays</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Trace an array loop and prevent off-by-one errors.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 280" role="img" aria-label="Array with valid indexes zero, one, and two, and invalid index three">
+                        <rect width="900" height="280" fill="#f8fcff"/><text x="450" y="42" text-anchor="middle" fill="#102a43" font-size="24" font-weight="700">grades.length = 3</text><g font-family="system-ui" text-anchor="middle"><g transform="translate(155 88)"><text x="75" y="-15" fill="#486581" font-size="18">index 0</text><rect width="150" height="95" rx="12" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><text x="75" y="58" fill="#102a43" font-size="30" font-weight="700">88</text></g><g transform="translate(325 88)"><text x="75" y="-15" fill="#486581" font-size="18">index 1</text><rect width="150" height="95" rx="12" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><text x="75" y="58" fill="#102a43" font-size="30" font-weight="700">92</text></g><g transform="translate(495 88)"><text x="75" y="-15" fill="#486581" font-size="18">index 2</text><rect width="150" height="95" rx="12" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><text x="75" y="58" fill="#102a43" font-size="30" font-weight="700">79</text></g><g transform="translate(665 88)"><text x="75" y="-15" fill="#b42318" font-size="18">index 3</text><rect width="150" height="95" rx="12" fill="#ffe9e7" stroke="#b42318" stroke-width="3" stroke-dasharray="10 7"/><text x="75" y="58" fill="#b42318" font-size="24" font-weight="700">INVALID</text></g><text x="450" y="235" fill="#16845b" font-size="21" font-weight="700">Correct condition: i &lt; grades.length</text></g>
+                    </svg>
+                    <figcaption>Picture 10. An array length of 3 has valid indexes 0, 1, and 2. Index 3 is already outside the array.</figcaption>
+                </figure>
+                <div class="code-block"><div class="code-heading"><span>Safe array loop</span><button class="copy-code" type="button">Copy</button></div><pre><code>int[] grades = {88, 92, 79};
+int total = 0;
+
+for (int i = 0; i &lt; grades.length; i++) {
+    total += grades[i];
+}</code></pre></div>
+                <ol class="process-list"><li><span>1</span><div><strong>Place a breakpoint inside the loop</strong><p>Pause before <code>total</code> changes.</p></div></li><li><span>2</span><div><strong>Watch the index</strong><p>Confirm that <code>i</code> changes from 0 to 1 to 2.</p></div></li><li><span>3</span><div><strong>Watch the total</strong><p>It should change from 0 to 88 to 180 to 259.</p></div></li><li><span>4</span><div><strong>Confirm the exit</strong><p>When <code>i</code> becomes 3, the condition is false and the loop stops safely.</p></div></li></ol>
+                <div class="warning-box"><strong>Common mistake:</strong> <code>i &lt;= grades.length</code> executes once too many and tries to read invalid index 3.</div>
+            </section>
+
+            <section class="lesson-card" id="methods-stack" data-section="14">
+                <div class="topic-number">Topic 14 — New Lesson</div>
+                <h2>Trace Methods and the Call Stack</h2>
+                <div class="objective-box"><strong>Learning objective</strong><p>Follow values into a method, through its return statement, and back to the caller.</p></div>
+                <figure class="lesson-figure">
+                    <svg viewBox="0 0 900 305" role="img" aria-label="Main calls showReport, which calls calculateAverage and receives a returned result">
+                        <rect width="900" height="305" fill="#f8fcff"/><text x="215" y="42" text-anchor="middle" fill="#102a43" font-size="23" font-weight="700">Call order</text><rect x="70" y="70" width="290" height="55" rx="10" fill="#e8f4ff" stroke="#1261a0" stroke-width="3"/><text x="215" y="105" text-anchor="middle" fill="#102a43" font-size="19">main()</text><path d="M215 125 V155" stroke="#1261a0" stroke-width="5"/><polygon points="205,150 225,150 215,168" fill="#1261a0"/><rect x="70" y="168" width="290" height="55" rx="10" fill="#f1ecff" stroke="#7656b4" stroke-width="3"/><text x="215" y="203" text-anchor="middle" fill="#102a43" font-size="19">showReport()</text><path d="M360 195 H540" stroke="#7656b4" stroke-width="5"/><polygon points="535,185 555,195 535,205" fill="#7656b4"/><text x="450" y="178" text-anchor="middle" fill="#486581" font-size="16">Step Into</text><rect x="555" y="130" width="290" height="125" rx="12" fill="#e7f8f0" stroke="#16845b" stroke-width="3"/><text x="700" y="172" text-anchor="middle" fill="#102a43" font-size="20" font-weight="700">calculateAverage()</text><text x="700" y="205" text-anchor="middle" fill="#486581" font-size="17">returns 86.33</text><path d="M555 240 H390" stroke="#16845b" stroke-width="5"/><polygon points="400,230 380,240 400,250" fill="#16845b"/><text x="470" y="274" text-anchor="middle" fill="#16845b" font-size="16">Step Out / return</text>
+                    </svg>
+                    <figcaption>Picture 11. Step Into follows a method call; Step Out returns to the caller after the method finishes.</figcaption>
+                </figure>
+                <div class="code-block"><div class="code-heading"><span>Method example</span><button class="copy-code" type="button">Copy</button></div><pre><code>static double calculateAverage(int total, int count) {
+    return (double) total / count;
+}
+
+public static void main(String[] args) {
+    double result = calculateAverage(259, 3);
+    System.out.println(result);
+}</code></pre></div>
+                <div class="mini-task"><h3>Guided trace</h3><ol><li>Put a breakpoint on the line that calls <code>calculateAverage</code>.</li><li>Use Step Into and inspect <code>total</code> and <code>count</code>.</li><li>Step to the return statement and predict the result.</li><li>Use Step Out and confirm that <code>result</code> receives the returned value.</li></ol></div>
+            </section>
+
+            <section class="lesson-card activity-card" id="activity" data-section="15">
+                <div class="topic-number">Activity 15</div>
+                <h2>Find and Fix the Bugs</h2>
+                <div class="objective-box"><strong>Your task</strong><p>Predict the result, identify three problems, and choose a useful breakpoint before revealing the solution.</p></div>
+                <div class="code-block">
+                    <div class="code-heading"><span>GradeChecker.java</span><button class="copy-code" type="button">Copy</button></div>
+                    <pre><code>public class GradeChecker {
+    public static void main(String[] args) {
+        int[] grades = {88, 92, 79};
+        int total = 0;
+
+        for (int i = 0; i &lt;= grades.length; i++) {
+            total =+ grades[i];
+        }
+
+        double average = total / grades.length;
+        System.out.println("Average: " + average);
+    }
+}</code></pre>
+                </div>
+                <label class="answer-label" for="studentAnswer">Write your analysis:</label>
+                <textarea id="studentAnswer" rows="5" placeholder="What errors do you see? Where will you put a breakpoint?"></textarea>
+                <button class="primary-button" id="revealSolution" type="button" aria-expanded="false">Reveal solution</button>
+                <div class="solution-panel" id="solutionPanel" hidden>
+                    <h3>Suggested solution</h3>
+                    <ol>
+                        <li><strong>Runtime error:</strong> Change <code>i &lt;= grades.length</code> to <code>i &lt; grades.length</code>.</li>
+                        <li><strong>Logic error:</strong> Change <code>total =+ grades[i]</code> to <code>total += grades[i]</code>.</li>
+                        <li><strong>Accuracy issue:</strong> Use <code>double average = (double) total / grades.length;</code>.</li>
+                        <li><strong>Breakpoint:</strong> Pause at the first line inside the loop, then watch <code>i</code>, <code>grades[i]</code>, and <code>total</code>.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="lesson-card quiz-card" id="quiz" data-section="16">
+                <div class="topic-number">Final Topic 16</div>
+                <h2>Knowledge Check</h2>
+                <p>Select one answer for each question, then check your score.</p>
+
+                <form id="quizForm">
+                    <fieldset class="quiz-question">
+                        <legend>1. What is the main purpose of a breakpoint?</legend>
+                        <label><input type="radio" name="q1" value="a"> To permanently stop a program</label>
+                        <label><input type="radio" name="q1" value="b"> To pause execution and inspect the program state</label>
+                        <label><input type="radio" name="q1" value="c"> To automatically correct errors</label>
+                    </fieldset>
+                    <fieldset class="quiz-question">
+                        <legend>2. Which debugger control enters a called method?</legend>
+                        <label><input type="radio" name="q2" value="a"> Resume</label>
+                        <label><input type="radio" name="q2" value="b"> Step Over</label>
+                        <label><input type="radio" name="q2" value="c"> Step Into</label>
+                    </fieldset>
+                    <fieldset class="quiz-question">
+                        <legend>3. Which error occurs while a program is executing?</legend>
+                        <label><input type="radio" name="q3" value="a"> Runtime error</label>
+                        <label><input type="radio" name="q3" value="b"> Syntax error</label>
+                        <label><input type="radio" name="q3" value="c"> Formatting error</label>
+                    </fieldset>
+                    <fieldset class="quiz-question">
+                        <legend>4. Which statement correctly adds value to total?</legend>
+                        <label><input type="radio" name="q4" value="a"> total =+ value;</label>
+                        <label><input type="radio" name="q4" value="b"> total += value;</label>
+                        <label><input type="radio" name="q4" value="c"> total == value;</label>
+                    </fieldset>
+                    <fieldset class="quiz-question">
+                        <legend>5. What should you do before changing code during debugging?</legend>
+                        <label><input type="radio" name="q5" value="a"> Guess randomly</label>
+                        <label><input type="radio" name="q5" value="b"> Delete the method</label>
+                        <label><input type="radio" name="q5" value="c"> Reproduce and observe the problem</label>
+                    </fieldset>
+                    <button class="primary-button" type="submit">Check answers</button>
+                    <button class="secondary-button" id="resetQuiz" type="reset">Try again</button>
+                    <div class="quiz-result" id="quizResult" role="status" aria-live="polite"></div>
+                </form>
+            </section>
+
+            <div class="lesson-controls" aria-label="Lesson navigation controls">
+                <button class="secondary-button" id="previousTopic" type="button">← Previous</button>
+                <button class="primary-button" id="nextTopic" type="button">Next →</button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="module-footer">
+        <p>Run &amp; Debug Java — Interactive Lesson Module</p>
+        <button id="backToTop" type="button">Back to top ↑</button>
+    </footer>
+
+    <script src="../js/run-debug.js"></script>
+</body>
+</html>

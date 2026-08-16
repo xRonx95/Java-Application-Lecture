@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A beginner-friendly introduction to Java, its features, platform, syntax, and first program.">
+    <title>Introduction to Java | Java Application</title>
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+    <!-- This page is inside the "Java Basics" folder, so ../ goes back to the project root. -->
+    <link rel="stylesheet" href="../css/Java Basics/java-introduction.css">
+    <link rel="icon" href="../img/favicon.jpg" type="image/jpeg">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="../index.html" aria-label="Java Application home">
+                <img
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
+                    alt="Java logo"
+                    width="46"
+                    height="46"
+                >
+                <span>
+                    <strong>Java Application</strong>
+                    <small>Learn. Code. Build.</small>
+                </span>
+            </a>
+
+            <input class="menu-checkbox" type="checkbox" id="menu-checkbox" aria-hidden="true">
+            <label class="menu-button" for="menu-checkbox" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav class="main-navigation" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a class="active" href="java-introduction.html" aria-current="page">Java Basics</a>
+                <a href="#first-program">Examples</a>
+                <a href="#learning-path">Learning Path</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero">
+            <div class="hero-overlay" aria-hidden="true"></div>
+            <div class="container hero-content">
+                <div class="hero-copy">
+                    <p class="eyebrow">Java Basics · Lesson 01</p>
+                    <h1>Introduction to <span>Java</span></h1>
+                    <p class="hero-description">
+                        Discover one of the world's most widely used programming languages and learn
+                        how Java turns a single program into software that can run on many platforms.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#what-is-java">Start Learning</a>
+                        <a class="button button-secondary" href="#first-program">View First Program</a>
+                    </div>
+                    <ul class="hero-points" aria-label="Lesson highlights">
+                        <li>Beginner friendly</li>
+                        <li>Clear examples</li>
+                        <li>Mobile responsive</li>
+                    </ul>
+                </div>
+
+                <div class="hero-visual" aria-label="Java code preview">
+                    <div class="code-window">
+                        <div class="window-bar">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="window-title">HelloWorld.java</span>
+                        </div>
+                        <pre><code><span class="code-purple">public class</span> <span class="code-yellow">HelloWorld</span> {
+    <span class="code-purple">public static void</span> <span class="code-blue">main</span>(String[] args) {
+        System.out.println(<span class="code-green">"Hello, World!"</span>);
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-nav" aria-label="On this page">
+            <div class="container quick-nav-inner">
+                <strong>On this page:</strong>
+                <div class="quick-links">
+                    <a href="#what-is-java">What is Java?</a>
+                    <a href="#features">Features</a>
+                    <a href="#platform">JDK, JRE &amp; JVM</a>
+                    <a href="#first-program">First Program</a>
+                    <a href="#uses">Uses</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="what-is-java">
+            <div class="container two-column">
+                <div class="content-column">
+                    <p class="section-label">Getting Started</p>
+                    <h2>What is Java?</h2>
+                    <p class="lead">
+                        Java is a high-level, class-based, object-oriented programming language
+                        designed to have as few implementation dependencies as possible.
+                    </p>
+                    <p>
+                        It was created at Sun Microsystems by a team led by James Gosling and was
+                        first released in 1995. Java programs are compiled into <strong>bytecode</strong>,
+                        which runs on a Java Virtual Machine (JVM). This design supports Java's famous
+                        idea: <strong>“Write Once, Run Anywhere.”</strong>
+                    </p>
+                    <div class="info-note">
+                        <span class="note-icon" aria-hidden="true">💡</span>
+                        <div>
+                            <strong>Simple explanation</strong>
+                            <p>You write Java code once, then a compatible JVM helps it run on Windows, macOS, or Linux.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="image-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&amp;fit=crop&amp;w=1200&amp;q=85"
+                        alt="Laptop displaying programming code"
+                        loading="lazy"
+                    >
+                    <figcaption>Java gives beginners a strong foundation in programming and problem solving.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section section-soft" id="features">
+            <div class="container">
+                <div class="section-heading centered">
+                    <p class="section-label">Why Learn Java?</p>
+                    <h2>Core Features of Java</h2>
+                    <p>These qualities have helped Java remain useful for education, business systems, and modern application development.</p>
+                </div>
+
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <span class="feature-number">01</span>
+                        <div class="feature-icon" aria-hidden="true">◎</div>
+                        <h3>Object-Oriented</h3>
+                        <p>Programs are organized using classes and objects, making large projects easier to structure and maintain.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="feature-number">02</span>
+                        <div class="feature-icon" aria-hidden="true">↔</div>
+                        <h3>Platform Independent</h3>
+                        <p>Compiled Java bytecode can run on any operating system that has a compatible Java Virtual Machine.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="feature-number">03</span>
+                        <div class="feature-icon" aria-hidden="true">⌁</div>
+                        <h3>Simple &amp; Familiar</h3>
+                        <p>Java uses readable syntax and automatically handles many low-level memory-management tasks.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="feature-number">04</span>
+                        <div class="feature-icon" aria-hidden="true">▣</div>
+                        <h3>Secure</h3>
+                        <p>Strong type checking, runtime checks, and managed memory help developers build safer applications.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="feature-number">05</span>
+                        <div class="feature-icon" aria-hidden="true">⚡</div>
+                        <h3>High Performance</h3>
+                        <p>Just-In-Time compilation allows frequently used bytecode to be converted into optimized machine code.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="feature-number">06</span>
+                        <div class="feature-icon" aria-hidden="true">∞</div>
+                        <h3>Multithreaded</h3>
+                        <p>Java can perform multiple tasks at the same time, which is valuable for responsive and scalable software.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="platform">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label">How Java Works</p>
+                    <h2>JDK, JRE, and JVM</h2>
+                    <p>These three parts work together when you create and run a Java program.</p>
+                </div>
+
+                <div class="platform-layout">
+                    <article class="platform-card jdk-card">
+                        <div class="platform-badge">JDK</div>
+                        <h3>Java Development Kit</h3>
+                        <p>The complete toolkit used to <strong>write, compile, debug, and run</strong> Java programs.</p>
+                        <ul>
+                            <li>Includes the compiler (<code>javac</code>)</li>
+                            <li>Includes development tools</li>
+                            <li>Contains the JRE</li>
+                        </ul>
+                    </article>
+
+                    <span class="platform-arrow" aria-hidden="true">→</span>
+
+                    <article class="platform-card jre-card">
+                        <div class="platform-badge">JRE</div>
+                        <h3>Java Runtime Environment</h3>
+                        <p>The environment that provides the libraries and components needed to <strong>run</strong> Java software.</p>
+                        <ul>
+                            <li>Contains Java libraries</li>
+                            <li>Provides runtime support</li>
+                            <li>Contains the JVM</li>
+                        </ul>
+                    </article>
+
+                    <span class="platform-arrow" aria-hidden="true">→</span>
+
+                    <article class="platform-card jvm-card">
+                        <div class="platform-badge">JVM</div>
+                        <h3>Java Virtual Machine</h3>
+                        <p>The engine that reads Java bytecode and <strong>executes</strong> it on the current device.</p>
+                        <ul>
+                            <li>Runs Java bytecode</li>
+                            <li>Manages memory</li>
+                            <li>Enables platform independence</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="process-strip" aria-label="Java program execution process">
+                    <div><span>1</span><strong>Write</strong><small>HelloWorld.java</small></div>
+                    <b aria-hidden="true">›</b>
+                    <div><span>2</span><strong>Compile</strong><small>javac</small></div>
+                    <b aria-hidden="true">›</b>
+                    <div><span>3</span><strong>Bytecode</strong><small>HelloWorld.class</small></div>
+                    <b aria-hidden="true">›</b>
+                    <div><span>4</span><strong>Run</strong><small>JVM</small></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-dark" id="first-program">
+            <div class="container program-grid">
+                <div class="program-copy">
+                    <p class="section-label">Try It Yourself</p>
+                    <h2>Your First Java Program</h2>
+                    <p>
+                        Create a file named <code>HelloWorld.java</code>. The filename must match the
+                        public class name exactly, including capital letters.
+                    </p>
+                    <ol class="steps-list">
+                        <li><span>1</span><div><strong>Save the file</strong><small>Use the filename HelloWorld.java.</small></div></li>
+                        <li><span>2</span><div><strong>Compile the code</strong><small>Run: javac HelloWorld.java</small></div></li>
+                        <li><span>3</span><div><strong>Run the program</strong><small>Run: java HelloWorld</small></div></li>
+                    </ol>
+                </div>
+
+                <div class="large-code-card">
+                    <div class="code-card-header">
+                        <span>HelloWorld.java</span>
+                        <span class="language-pill">JAVA</span>
+                    </div>
+                    <pre><code><span class="line-number">1</span>  <span class="code-purple">public class</span> <span class="code-yellow">HelloWorld</span> {
+<span class="line-number">2</span>      <span class="code-purple">public static void</span> <span class="code-blue">main</span>(String[] args) {
+<span class="line-number">3</span>          System.out.println(<span class="code-green">"Hello, World!"</span>);
+<span class="line-number">4</span>      }
+<span class="line-number">5</span>  }</code></pre>
+                    <div class="output-box">
+                        <span>OUTPUT</span>
+                        <code>Hello, World!</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="uses">
+            <div class="container">
+                <div class="section-heading centered">
+                    <p class="section-label">Real-World Applications</p>
+                    <h2>What Can You Build with Java?</h2>
+                    <p>Java supports projects ranging from classroom exercises to large enterprise systems.</p>
+                </div>
+
+                <div class="uses-grid">
+                    <article><span aria-hidden="true">🌐</span><h3>Web Applications</h3><p>Back-end services, APIs, and enterprise websites.</p></article>
+                    <article><span aria-hidden="true">📱</span><h3>Mobile Apps</h3><p>Android applications and mobile-supporting services.</p></article>
+                    <article><span aria-hidden="true">🖥️</span><h3>Desktop Software</h3><p>Cross-platform graphical and utility programs.</p></article>
+                    <article><span aria-hidden="true">☁️</span><h3>Cloud Systems</h3><p>Scalable services, distributed systems, and microservices.</p></article>
+                    <article><span aria-hidden="true">🎮</span><h3>Games</h3><p>2D games, learning projects, and game-server logic.</p></article>
+                    <article><span aria-hidden="true">📊</span><h3>Data Tools</h3><p>Processing systems, analytics applications, and utilities.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-soft" id="learning-path">
+            <div class="container learning-banner">
+                <div>
+                    <p class="section-label">Continue Learning</p>
+                    <h2>Your Java Learning Path</h2>
+                    <p>Build confidence one topic at a time. Start with syntax, then move into program structure and reusable objects.</p>
+                </div>
+                <div class="path-list">
+                    <a class="current" href="java-introduction.html"><span>01</span><div><strong>Introduction to Java</strong><small>You are here</small></div></a>
+                    <a href="java-variables.html"><span>02</span><div><strong>Variables &amp; Data Types</strong><small>Next lesson</small></div></a>
+                    <a href="java-operators.html"><span>03</span><div><strong>Operators &amp; Expressions</strong><small>Coming next</small></div></a>
+                    <a href="java-conditions-loops.html"><span>04</span><div><strong>Conditions &amp; Loops</strong><small>Coming next</small></div></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section call-to-action">
+            <div class="container cta-inner">
+                <div>
+                    <p class="section-label">Ready to Practice?</p>
+                    <h2>Turn what you learned into code.</h2>
+                    <p>Open your code editor, create HelloWorld.java, and run your first Java program today.</p>
+                </div>
+                <a class="button button-light" href="#first-program">Review the Example</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="brand footer-brand" href="../index.html">
+                <img
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
+                    alt=""
+                    width="42"
+                    height="42"
+                >
+                <span><strong>Java Application</strong><small>Learn. Code. Build.</small></span>
+            </a>
+            <p><strong>Java Basics Java Introduction</strong></p>
+            <p>Lesson 1: Java Introduction</p>
+            <p>Beginner-friendly Java learning resources.</p>
+            <p>&copy; 2026 Java Application. Educational use.</p>
+        </div>
+    </footer>
+</body>
+</html>

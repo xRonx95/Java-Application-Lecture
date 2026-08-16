@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="t d">
+  <title id="t">Java web project folder structure</title><desc id="d">The project includes src main java, webapp, lib and display-data HTML files.</desc>
+  <rect width="1000" height="570" rx="28" fill="#101827"/>
+  <g font-family="ui-monospace, Consolas, monospace" font-size="25" fill="#e8eef7">
+    <text x="80" y="75" font-weight="700" fill="#72a7e0">student-records/</text>
+    <text x="120" y="126" fill="#f2c66d">├── src/main/java/com/school/</text>
+    <text x="160" y="177">│   ├── DBConnection.java</text>
+    <text x="160" y="228">│   └── StudentServlet.java</text>
+    <text x="120" y="279" fill="#f2c66d">├── src/main/webapp/</text>
+    <text x="160" y="330">│   ├── lesson/display-data.html</text>
+    <text x="160" y="381">│   ├── css/display-data.css</text>
+    <text x="160" y="432">│   └── js/display-data.js</text>
+    <text x="120" y="483" fill="#f2c66d">└── WEB-INF/lib/</text>
+    <text x="160" y="534" fill="#7ee2bc">    └── mysql-connector-j.jar</text>
+  </g>
+</svg>

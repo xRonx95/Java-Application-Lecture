@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A professional learning module on installing and using MySQL Connector/J with Java, JDBC, Apache NetBeans, and MySQL.">
+  <title>MySQL Connector/J | Lesson and Learning Module</title>
+
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+
+  <link rel="stylesheet" href="../css/Database & JDBC/mysql-connector.css?v=1">
+  <script src="../js/mysql-connector.js?v=1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to lesson content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="lesson-brand" href="../index.html" aria-label="Go to the home page">
+        <span class="brand-mark" aria-hidden="true">JDBC</span>
+        <span>
+          <strong>Programming Learning Module</strong>
+          <small>Database Connectivity Series</small>
+        </span>
+      </a>
+
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Menu</span>
+      </button>
+
+      <nav class="primary-navigation" id="primary-navigation" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="#objectives">Objectives</a>
+        <a href="#procedure">Procedure</a>
+        <a href="#activity">Activity</a>
+        <a href="#assessment">Assessment</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="lesson-hero" aria-labelledby="lesson-title">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Lesson 2 · Database and JDBC</p>
+        <h1 id="lesson-title">Installing and Using MySQL Connector/J</h1>
+        <p class="hero-summary">A guided lesson on connecting a Java application to a MySQL database through JDBC using Apache NetBeans.</p>
+        <div class="lesson-meta" aria-label="Lesson information">
+          <span><strong>Level:</strong> Intermediate</span>
+          <span><strong>Duration:</strong> 90–120 minutes</span>
+          <span><strong>Mode:</strong> Demonstration and Laboratory</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <span class="hero-node">JAVA</span>
+        <span class="hero-line"></span>
+        <span class="hero-node connector-node">JDBC</span>
+        <span class="hero-line"></span>
+        <span class="hero-node database-node">MySQL</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="lesson-layout">
+    <aside class="lesson-sidebar" aria-label="Table of contents">
+      <div class="sidebar-card">
+        <p class="sidebar-title">In this module</p>
+        <ol class="contents-list">
+          <li><a href="#overview">Lesson Overview</a></li>
+          <li><a href="#objectives">Learning Objectives</a></li>
+          <li><a href="#concepts">Core Concepts</a></li>
+          <li><a href="#requirements">Requirements</a></li>
+          <li><a href="#architecture">How the Connection Works</a></li>
+          <li><a href="#procedure">Step-by-Step Procedure</a></li>
+          <li><a href="#secure-queries">Secure Queries</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+          <li><a href="#activity">Laboratory Activity</a></li>
+          <li><a href="#assessment">Assessment</a></li>
+          <li><a href="#glossary">Glossary</a></li>
+          <li><a href="#references">References</a></li>
+        </ol>
+      </div>
+    </aside>
+
+    <main id="main-content" class="lesson-content">
+      <section class="content-section" id="overview">
+        <p class="section-kicker">Introduction</p>
+        <h2>Lesson Overview</h2>
+        <p><strong>MySQL Connector/J</strong> is the official JDBC driver for MySQL. It allows a Java program to send SQL commands to a MySQL server and receive the results in a form that Java can process.</p>
+        <p>Without the connector, the Java application and the database cannot communicate using JDBC. The connector acts as a translator between Java's standard database interfaces and the MySQL network protocol.</p>
+
+        <div class="callout callout-information">
+          <span class="callout-icon" aria-hidden="true">i</span>
+          <div>
+            <h3>Scope of this lesson</h3>
+            <p>This module uses a local MySQL or MariaDB server, Java, JDBC, and Apache NetBeans. The same JDBC principles also apply to other Java IDEs.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="objectives">
+        <p class="section-kicker">Expected Outcomes</p>
+        <h2>Learning Objectives</h2>
+        <p>At the end of this lesson, the learner should be able to:</p>
+        <ul class="objective-list">
+          <li><span>01</span>define JDBC, JDBC driver, Connector/J, connection URL, and classpath;</li>
+          <li><span>02</span>explain how a Java application communicates with a MySQL server;</li>
+          <li><span>03</span>download and identify the correct Connector/J JAR file;</li>
+          <li><span>04</span>add the connector library to an Apache NetBeans project;</li>
+          <li><span>05</span>configure a valid JDBC connection URL and database credentials;</li>
+          <li><span>06</span>open and close a database connection safely using try-with-resources;</li>
+          <li><span>07</span>execute parameterized SQL using <code>PreparedStatement</code>;</li>
+          <li><span>08</span>diagnose common driver, authentication, database, and port errors; and</li>
+          <li><span>09</span>apply basic security and maintainability practices to connection code.</li>
+        </ul>
+      </section>
+
+      <section class="content-section" id="concepts">
+        <p class="section-kicker">Foundation</p>
+        <h2>Core Concepts</h2>
+        <div class="concept-grid">
+          <article class="concept-card">
+            <span class="concept-symbol" aria-hidden="true">API</span>
+            <h3>JDBC</h3>
+            <p>Java Database Connectivity is the standard Java API for opening connections, executing SQL, and processing database results.</p>
+          </article>
+          <article class="concept-card">
+            <span class="concept-symbol" aria-hidden="true">JAR</span>
+            <h3>Connector/J</h3>
+            <p>The MySQL JDBC driver packaged as a Java archive. It implements JDBC for communication with MySQL.</p>
+          </article>
+          <article class="concept-card">
+            <span class="concept-symbol" aria-hidden="true">URL</span>
+            <h3>Connection URL</h3>
+            <p>An address such as <code>jdbc:mysql://localhost:3306/school_db</code> that identifies the server, port, and database.</p>
+          </article>
+          <article class="concept-card">
+            <span class="concept-symbol" aria-hidden="true">CP</span>
+            <h3>Classpath</h3>
+            <p>The locations where Java searches for compiled classes and libraries required by the application.</p>
+          </article>
+          <article class="concept-card">
+            <span class="concept-symbol" aria-hidden="true">CON</span>
+            <h3>Connection</h3>
+            <p>An active session between the Java application and the database server.</p>
+          </article>
+          <article class="concept-card">
+            <span class="concept-symbol" aria-hidden="true">PS</span>
+            <h3>PreparedStatement</h3>
+            <p>A parameterized SQL statement that improves clarity and helps prevent SQL injection.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="requirements">
+        <p class="section-kicker">Preparation</p>
+        <h2>Software and Prior Knowledge</h2>
+        <div class="two-column-grid">
+          <div class="checklist-card">
+            <h3>Required Software</h3>
+            <ul class="check-list">
+              <li>Java Development Kit (JDK)</li>
+              <li>Apache NetBeans or another Java IDE</li>
+              <li>MySQL Server or MariaDB through XAMPP</li>
+              <li>phpMyAdmin or MySQL command-line client</li>
+              <li>MySQL Connector/J</li>
+              <li>A modern web browser</li>
+            </ul>
+          </div>
+          <div class="checklist-card">
+            <h3>Prerequisite Knowledge</h3>
+            <ul class="check-list">
+              <li>Creating and running a Java project</li>
+              <li>Writing a Java class and <code>main</code> method</li>
+              <li>Basic SQL: <code>CREATE</code>, <code>INSERT</code>, and <code>SELECT</code></li>
+              <li>Database, table, row, column, and primary key</li>
+              <li>Starting MySQL in XAMPP</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout callout-warning">
+          <span class="callout-icon" aria-hidden="true">!</span>
+          <div>
+            <h3>Before beginning</h3>
+            <p>Start the MySQL service and confirm that the practice database can be opened. Do not use a production database or real personal information for classroom exercises.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="architecture">
+        <p class="section-kicker">System Flow</p>
+        <h2>How the Connection Works</h2>
+        <p>The application does not communicate with MySQL directly. Java code uses JDBC interfaces, Connector/J translates those calls, and the database server executes the SQL.</p>
+        <figure class="lesson-figure">
+          <img src="../img/mysql-connector/01-jdbc-architecture.svg" alt="Diagram showing a Java application communicating through JDBC and Connector J to a MySQL server" width="1200" height="675">
+          <figcaption><strong>Figure 1.</strong> Request and response flow between Java, JDBC, Connector/J, and MySQL.</figcaption>
+        </figure>
+        <div class="process-grid" aria-label="Connection process">
+          <div><strong>1. Request</strong><span>Java calls the JDBC API.</span></div>
+          <div><strong>2. Translation</strong><span>Connector/J converts the call.</span></div>
+          <div><strong>3. Execution</strong><span>MySQL runs the SQL statement.</span></div>
+          <div><strong>4. Result</strong><span>JDBC returns data or an update count.</span></div>
+        </div>
+      </section>
+
+      <section class="content-section procedure-section" id="procedure">
+        <p class="section-kicker">Guided Demonstration</p>
+        <h2>Step-by-Step Installation and Connection</h2>
+        <p class="section-introduction">Complete each step in order. Read the checkpoint before proceeding to the next step.</p>
+
+        <article class="procedure-step" id="step-1">
+          <div class="step-heading"><span class="step-number">1</span><div><p class="step-label">Official Package</p><h3>Download MySQL Connector/J</h3></div></div>
+          <ol class="instruction-list">
+            <li>Open the official <a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" rel="noopener noreferrer">MySQL Connector/J download page</a>.</li>
+            <li>Select the platform-independent package when manually adding a JAR to NetBeans.</li>
+            <li>Download the archive to a known location such as <strong>Downloads</strong>.</li>
+            <li>Use the current release that is compatible with the JDK and MySQL Server used by your institution.</li>
+          </ol>
+          <figure class="lesson-figure">
+            <img src="../img/mysql-connector/02-download-connector.svg" alt="Illustration of the official MySQL Connector J download page and platform independent package selection" width="1200" height="675" loading="lazy">
+            <figcaption><strong>Figure 2.</strong> Download Connector/J from the official MySQL website.</figcaption>
+          </figure>
+          <div class="verification"><strong>Checkpoint:</strong> A Connector/J ZIP or TAR archive should appear in the Downloads folder.</div>
+        </article>
+
+        <article class="procedure-step" id="step-2">
+          <div class="step-heading"><span class="step-number">2</span><div><p class="step-label">Library File</p><h3>Extract and Locate the JAR File</h3></div></div>
+          <ol class="instruction-list">
+            <li>Right-click the downloaded archive and select <strong>Extract All</strong>.</li>
+            <li>Open the extracted folder.</li>
+            <li>Locate the driver file named similar to <code>mysql-connector-j-x.y.z.jar</code>.</li>
+            <li>Move the extracted package to a permanent folder. Do not leave the only copy inside a temporary archive location.</li>
+          </ol>
+          <figure class="lesson-figure">
+            <img src="../img/mysql-connector/03-locate-jar.svg" alt="File explorer illustration showing the extracted mysql connector J JAR file" width="1200" height="675" loading="lazy">
+            <figcaption><strong>Figure 3.</strong> The version numbers vary; select the compiled <code>.jar</code> file, not a source or documentation file.</figcaption>
+          </figure>
+          <div class="verification"><strong>Checkpoint:</strong> The selected filename ends in <code>.jar</code> and begins with <code>mysql-connector-j</code>.</div>
+        </article>
+
+        <article class="procedure-step" id="step-3">
+          <div class="step-heading"><span class="step-number">3</span><div><p class="step-label">Project Setup</p><h3>Create or Open a Java Project</h3></div></div>
+          <ol class="instruction-list">
+            <li>Open Apache NetBeans.</li>
+            <li>Select <strong>File → New Project</strong>.</li>
+            <li>Choose <strong>Java Application</strong>, then select <strong>Next</strong>.</li>
+            <li>Name the project <code>MySQLConnectorLesson</code> and complete the wizard.</li>
+            <li>Create a package named <code>school.database</code>.</li>
+          </ol>
+          <figure class="lesson-figure">
+            <img src="../img/mysql-connector/04-create-netbeans-project.svg" alt="Apache NetBeans illustration showing a new Java application project named MySQLConnectorLesson" width="1200" height="675" loading="lazy">
+            <figcaption><strong>Figure 4.</strong> Use a meaningful project name and package structure.</figcaption>
+          </figure>
+        </article>
+
+        <article class="procedure-step" id="step-4">
+          <div class="step-heading"><span class="step-number">4</span><div><p class="step-label">Classpath Configuration</p><h3>Add Connector/J to the Project Libraries</h3></div></div>
+          <ol class="instruction-list">
+            <li>In the Projects panel, right-click the project and select <strong>Properties</strong>.</li>
+            <li>Open the <strong>Libraries</strong> category.</li>
+            <li>Select <strong>Add JAR/Folder</strong>.</li>
+            <li>Browse to the extracted Connector/J folder and select the JAR file.</li>
+            <li>Select <strong>Open</strong>, then <strong>OK</strong>.</li>
+          </ol>
+          <figure class="lesson-figure">
+            <img src="../img/mysql-connector/05-add-library.svg" alt="NetBeans Project Properties illustration showing the Add JAR Folder action in Libraries" width="1200" height="675" loading="lazy">
+            <figcaption><strong>Figure 5.</strong> Adding the JAR places the Connector/J classes on the project classpath.</figcaption>
+          </figure>
+          <div class="verification"><strong>Checkpoint:</strong> Expand the project's libraries or dependencies and confirm that the Connector/J JAR is listed.</div>
+        </article>
+
+        <article class="procedure-step" id="step-5">
+          <div class="step-heading"><span class="step-number">5</span><div><p class="step-label">Database Preparation</p><h3>Create the Practice Database and Table</h3></div></div>
+          <p>Open phpMyAdmin or the MySQL command line and execute the following SQL. The example uses fictional classroom data only.</p>
+          <div class="code-panel">
+            <div class="code-toolbar"><span>SQL · database setup</span><button class="copy-button" type="button" data-copy-target="databaseSql">Copy</button></div>
+            <pre class="code-block"><code id="databaseSql">CREATE DATABASE IF NOT EXISTS school_db
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE school_db;
+
+CREATE TABLE IF NOT EXISTS students (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  student_number VARCHAR(20) NOT NULL UNIQUE,
+  full_name VARCHAR(120) NOT NULL,
+  program VARCHAR(80) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+          </div>
+          <figure class="lesson-figure">
+            <img src="../img/mysql-connector/06-create-database.svg" alt="phpMyAdmin SQL tab illustration showing creation of the school database and students table" width="1200" height="675" loading="lazy">
+            <figcaption><strong>Figure 6.</strong> Prepare the schema before testing the Java connection.</figcaption>
+          </figure>
+          <div class="verification"><strong>Checkpoint:</strong> The <code>school_db</code> database contains a <code>students</code> table with five columns.</div>
+        </article>
+
+        <article class="procedure-step" id="step-6">
+          <div class="step-heading"><span class="step-number">6</span><div><p class="step-label">Reusable Configuration</p><h3>Create the Database Connection Class</h3></div></div>
+          <p>Create <code>DatabaseConnection.java</code> inside the <code>school.database</code> package. Update the username and password to match the classroom server.</p>
+          <div class="code-panel">
+            <div class="code-toolbar"><span>Java · DatabaseConnection.java</span><button class="copy-button" type="button" data-copy-target="connectionCode">Copy</button></div>
+            <pre class="code-block"><code id="connectionCode">package school.database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public final class DatabaseConnection {
+    private static final String URL =
+        "jdbc:mysql://localhost:3306/school_db"
+        + "?useSSL=false&amp;serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
+
+    private DatabaseConnection() {
+        // Prevent this utility class from being instantiated.
+    }
+
+    public static Connection open() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+}</code></pre>
+          </div>
+          <figure class="lesson-figure">
+            <img src="../img/mysql-connector/07-connection-class.svg" alt="NetBeans editor illustration showing the DatabaseConnection Java class and JDBC URL" width="1200" height="675" loading="lazy">
+            <figcaption><strong>Figure 7.</strong> Centralizing connection settings makes the project easier to maintain.</figcaption>
+          </figure>
+          <div class="callout callout-warning">
+            <span class="callout-icon" aria-hidden="true">!</span>
+            <div><h3>Credentials require protection</h3><p>Hard-coded credentials are acceptable only for a controlled beginner exercise. In a real application, load secrets from protected configuration or environment variables and use a database account with only the permissions it needs.</p></div>
+          </div>
+        </article>
+
+        <article class="procedure-step" id="step-7">
+          <div class="step-heading"><span class="step-number">7</span><div><p class="step-label">Connection Test</p><h3>Open and Verify the Connection</h3></div></div>
+          <p>Create <code>ConnectionTest.java</code> in the same package.</p>
+          <div class="code-panel">
+            <div class="code-toolbar"><span>Java · ConnectionTest.java</span><button class="copy-button" type="button" data-copy-target="testCode">Copy</button></div>
+            <pre class="code-block"><code id="testCode">package school.database;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+public class ConnectionTest {
+    public static void main(String[] args) {
+        try (Connection connection = DatabaseConnection.open()) {
+            System.out.println("Connection successful.");
+            System.out.println("Database: "
+                + connection.getCatalog());
+        } catch (SQLException exception) {
+            System.err.println("Connection failed.");
+            System.err.println("SQLState: "
+                + exception.getSQLState());
+            System.err.println("Message: "
+                + exception.getMessage());
+        }
+    }
+}</code></pre>
+          </div>
+          <ol class="instruction-list">
+            <li>Save both Java files.</li>
+            <li>Right-click <code>ConnectionTest.java</code> and select <strong>Run File</strong>.</li>
+            <li>Read the Output window.</li>
+            <li>If the connection fails, record the full message before changing the code.</li>
+          </ol>
+          <figure class="lesson-figure">
+            <img src="../img/mysql-connector/08-successful-test.svg" alt="NetBeans Output window illustration displaying Connection successful and school_db" width="1200" height="675" loading="lazy">
+            <figcaption><strong>Figure 8.</strong> A successful test confirms that the driver, URL, credentials, server, and database are working together.</figcaption>
+          </figure>
+          <div class="verification"><strong>Expected output:</strong> <code>Connection successful.</code> followed by <code>Database: school_db</code>.</div>
+        </article>
+
+        <article class="procedure-step" id="step-8">
+          <div class="step-heading"><span class="step-number">8</span><div><p class="step-label">Alternative Setup</p><h3>Add Connector/J with Maven</h3></div></div>
+          <p>For a Maven project, add the official coordinates below to <code>pom.xml</code>. Replace <code>x.y.z</code> with a compatible current version selected by the teacher or project team.</p>
+          <div class="code-panel">
+            <div class="code-toolbar"><span>XML · pom.xml</span><button class="copy-button" type="button" data-copy-target="mavenCode">Copy</button></div>
+            <pre class="code-block"><code id="mavenCode">&lt;dependency&gt;
+    &lt;groupId&gt;com.mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+    &lt;version&gt;x.y.z&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+          </div>
+          <figure class="lesson-figure">
+            <img src="../img/mysql-connector/09-maven-dependency.svg" alt="NetBeans Maven project illustration showing the MySQL Connector J dependency in pom xml" width="1200" height="675" loading="lazy">
+            <figcaption><strong>Figure 9.</strong> Maven downloads and manages the library, so the JAR does not need to be added manually.</figcaption>
+          </figure>
+          <div class="callout callout-information"><span class="callout-icon" aria-hidden="true">i</span><div><h3>Choose one dependency method</h3><p>Use either the manual JAR method or Maven dependency management for the same project. Maven is normally preferred for projects already configured to use Maven.</p></div></div>
+        </article>
+      </section>
+
+      <section class="content-section" id="secure-queries">
+        <p class="section-kicker">Application Development</p>
+        <h2>Execute SQL Safely with PreparedStatement</h2>
+        <p>A successful connection is only the beginning. Applications should use parameterized statements when inserting, searching, updating, or deleting values supplied by a user.</p>
+        <div class="code-panel">
+          <div class="code-toolbar"><span>Java · safe insert</span><button class="copy-button" type="button" data-copy-target="insertCode">Copy</button></div>
+          <pre class="code-block"><code id="insertCode">String sql = "INSERT INTO students "
+        + "(student_number, full_name, program) "
+        + "VALUES (?, ?, ?)";
+
+try (Connection connection = DatabaseConnection.open();
+     PreparedStatement statement =
+         connection.prepareStatement(sql)) {
+
+    statement.setString(1, "2026-001");
+    statement.setString(2, "Sample Student");
+    statement.setString(3, "BS Information Technology");
+
+    int rowsAdded = statement.executeUpdate();
+    System.out.println("Rows added: " + rowsAdded);
+} catch (SQLException exception) {
+    System.err.println("Insert failed: "
+        + exception.getMessage());
+}</code></pre>
+        </div>
+        <figure class="lesson-figure">
+          <img src="../img/mysql-connector/10-prepared-statement.svg" alt="Diagram showing user input being assigned to PreparedStatement placeholders before safe execution in MySQL" width="1200" height="675" loading="lazy">
+          <figcaption><strong>Figure 10.</strong> Values are bound to placeholders instead of being joined directly into the SQL string.</figcaption>
+        </figure>
+
+        <h3>Recommended Connection Practices</h3>
+        <ul class="practice-list">
+          <li>Use <strong>try-with-resources</strong> so connections, statements, and result sets close automatically.</li>
+          <li>Use <strong>PreparedStatement</strong> for all user-supplied values.</li>
+          <li>Do not show database passwords or detailed server errors to end users.</li>
+          <li>Use a dedicated database account with the minimum required privileges.</li>
+          <li>Keep connection settings in one configuration class or protected configuration source.</li>
+          <li>Log technical details securely for troubleshooting.</li>
+          <li>Use encrypted connections and verified certificates for remote production databases.</li>
+        </ul>
+      </section>
+
+      <section class="content-section" id="troubleshooting">
+        <p class="section-kicker">Problem Solving</p>
+        <h2>Common Errors and Solutions</h2>
+        <div class="responsive-table" role="region" aria-label="Troubleshooting table" tabindex="0">
+          <table>
+            <thead><tr><th>Error or Symptom</th><th>Likely Cause</th><th>Recommended Check</th></tr></thead>
+            <tbody>
+              <tr><td><code>No suitable driver</code></td><td>Connector/J is not on the runtime classpath or the URL is invalid.</td><td>Confirm that the JAR or Maven dependency is present and the URL begins with <code>jdbc:mysql:</code>.</td></tr>
+              <tr><td><code>ClassNotFoundException</code></td><td>The driver class cannot be loaded.</td><td>Re-add the connector, clean the project, and rebuild it. The modern driver class is <code>com.mysql.cj.jdbc.Driver</code>.</td></tr>
+              <tr><td><code>Communications link failure</code></td><td>MySQL is stopped, the port is wrong, or the host is unreachable.</td><td>Start MySQL and verify the host and port. The common local port is <code>3306</code>, but the installation may use another port.</td></tr>
+              <tr><td><code>Access denied for user</code></td><td>The username, password, host permission, or account privileges are incorrect.</td><td>Test the same credentials in an approved MySQL client and verify account permissions.</td></tr>
+              <tr><td><code>Unknown database</code></td><td>The database name is misspelled or has not been created.</td><td>Check the schema name in MySQL and in the JDBC URL.</td></tr>
+              <tr><td>Time-zone exception</td><td>The client and server time-zone configuration cannot be resolved.</td><td>Use an appropriate <code>serverTimezone</code> value approved for the application.</td></tr>
+              <tr><td>Authentication plugin error</td><td>The connector and server authentication configuration are incompatible.</td><td>Use compatible supported releases and review the official Connector/J compatibility documentation.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="diagnostic-sequence">
+          <h3>Professional Diagnostic Sequence</h3>
+          <ol>
+            <li>Read and record the complete exception message and SQLState.</li>
+            <li>Confirm that MySQL is running and listening on the expected port.</li>
+            <li>Verify the host, port, database name, username, and password.</li>
+            <li>Confirm that Connector/J is present in the runtime classpath.</li>
+            <li>Test the account and database using an approved database client.</li>
+            <li>Change only one item at a time, then rerun the test.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="content-section" id="activity">
+        <p class="section-kicker">Performance Task</p>
+        <h2>Laboratory Activity: Student Database Connection</h2>
+        <div class="activity-brief">
+          <div><span>Suggested time</span><strong>35–45 minutes</strong></div>
+          <div><span>Work arrangement</span><strong>Individual or Pair</strong></div>
+          <div><span>Required output</span><strong>Working Java Project</strong></div>
+        </div>
+
+        <h3>Task</h3>
+        <p>Create a Java console project that connects to <code>school_db</code>, inserts one fictional student record using <code>PreparedStatement</code>, and displays all student records using a <code>SELECT</code> query.</p>
+
+        <h3>Required Evidence</h3>
+        <ol class="instruction-list">
+          <li>A screenshot showing Connector/J under the project libraries or Maven dependencies.</li>
+          <li>The complete <code>DatabaseConnection.java</code> file.</li>
+          <li>The insert code using three <code>?</code> placeholders.</li>
+          <li>Program output confirming one inserted row.</li>
+          <li>Program output listing the saved record.</li>
+          <li>A short explanation of how resources are closed.</li>
+        </ol>
+
+        <h3>Assessment Rubric</h3>
+        <div class="responsive-table" role="region" aria-label="Laboratory assessment rubric" tabindex="0">
+          <table>
+            <thead><tr><th>Criterion</th><th>Excellent</th><th>Satisfactory</th><th>Needs Improvement</th><th>Points</th></tr></thead>
+            <tbody>
+              <tr><td>Connector setup</td><td>Correctly installed and clearly verified</td><td>Installed with minor documentation issue</td><td>Missing or incorrectly configured</td><td>20</td></tr>
+              <tr><td>Connection class</td><td>Reusable, clear, and functional</td><td>Functional with minor code issue</td><td>Incomplete or not reusable</td><td>25</td></tr>
+              <tr><td>Prepared statement</td><td>Correct parameters and safe execution</td><td>Works with a minor issue</td><td>Unsafe concatenation or incorrect parameters</td><td>25</td></tr>
+              <tr><td>Output and testing</td><td>Insert and display both verified</td><td>Only one operation fully verified</td><td>Operations do not run correctly</td><td>20</td></tr>
+              <tr><td>Explanation and presentation</td><td>Accurate, formal, and complete</td><td>Generally clear with minor gaps</td><td>Unclear or incomplete</td><td>10</td></tr>
+            </tbody>
+            <tfoot><tr><th colspan="4">Total</th><th>100</th></tr></tfoot>
+          </table>
+        </div>
+      </section>
+
+      <section class="content-section" id="assessment">
+        <p class="section-kicker">Knowledge Check</p>
+        <h2>Lesson Assessment</h2>
+        <div class="question-list">
+          <article><span>1</span><div><h3>What is the primary purpose of MySQL Connector/J?</h3><p>A. Design Java forms &nbsp; B. Allow Java to communicate with MySQL through JDBC &nbsp; C. Start Apache &nbsp; D. Replace the JDK</p></div></article>
+          <article><span>2</span><div><h3>Which item identifies the server, port, and database?</h3><p>A. Package name &nbsp; B. JDBC URL &nbsp; C. Table row &nbsp; D. Java method</p></div></article>
+          <article><span>3</span><div><h3>Why is PreparedStatement preferred for user-supplied values?</h3><p>Explain its effect on security and code clarity in two or three sentences.</p></div></article>
+          <article><span>4</span><div><h3>What should be checked after a “Communications link failure”?</h3><p>Give at least three specific checks in the correct diagnostic order.</p></div></article>
+          <article><span>5</span><div><h3>Why should a database connection be closed?</h3><p>Relate your answer to resource use, reliability, and application behavior.</p></div></article>
+        </div>
+        <details class="answer-key">
+          <summary>Teacher's Answer Guide</summary>
+          <div>
+            <p><strong>1.</strong> B. Connector/J implements JDBC communication for MySQL.</p>
+            <p><strong>2.</strong> B. The JDBC URL identifies the database endpoint.</p>
+            <p><strong>3.</strong> It separates SQL structure from values, helps prevent SQL injection, and makes parameter handling explicit.</p>
+            <p><strong>4.</strong> Confirm the server is running, verify host and port, check network access, then confirm the JDBC URL.</p>
+            <p><strong>5.</strong> Closing connections releases limited database and network resources and prevents resource leaks.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="content-section" id="glossary">
+        <p class="section-kicker">Terminology</p>
+        <h2>Glossary</h2>
+        <dl class="glossary-list">
+          <div><dt>Classpath</dt><dd>The set of locations Java searches for required classes and libraries.</dd></div>
+          <div><dt>Connection</dt><dd>An active communication session between an application and a database server.</dd></div>
+          <div><dt>Driver</dt><dd>Software that implements a standard interface for a specific database system.</dd></div>
+          <div><dt>JAR</dt><dd>A Java archive used to distribute compiled classes and related resources.</dd></div>
+          <div><dt>JDBC</dt><dd>The standard Java API for relational database operations.</dd></div>
+          <div><dt>JDBC URL</dt><dd>A structured address describing how to reach a database.</dd></div>
+          <div><dt>MySQL Connector/J</dt><dd>The official JDBC driver for MySQL.</dd></div>
+          <div><dt>PreparedStatement</dt><dd>A precompiled, parameterized SQL statement represented by a JDBC object.</dd></div>
+          <div><dt>ResultSet</dt><dd>A JDBC object that represents rows returned by a query.</dd></div>
+          <div><dt>SQLState</dt><dd>A standardized code that categorizes a database error or condition.</dd></div>
+        </dl>
+      </section>
+
+      <section class="content-section" id="references">
+        <p class="section-kicker">Further Reading</p>
+        <h2>Official References</h2>
+        <ul class="reference-list">
+          <li><a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" rel="noopener noreferrer">MySQL Connector/J Download</a></li>
+          <li><a href="https://dev.mysql.com/doc/connector-j/en/" target="_blank" rel="noopener noreferrer">MySQL Connector/J Developer Guide</a></li>
+          <li><a href="https://dev.mysql.com/doc/connector-j/en/connector-j-installing-maven.html" target="_blank" rel="noopener noreferrer">Installing Connector/J Using Maven</a></li>
+          <li><a href="https://docs.oracle.com/en/java/javase/" target="_blank" rel="noopener noreferrer">Java Platform Documentation</a></li>
+        </ul>
+        <p class="reference-note">Software interfaces change over time. Teachers should verify release compatibility and institutional requirements before a laboratory session.</p>
+      </section>
+
+      <nav class="lesson-pagination" aria-label="Lesson navigation">
+        <a href="database-setup.html"><span>Previous lesson</span><strong>Database Setup</strong></a>
+        <a class="next-lesson" href="jdbc-connection.html"><span>Next lesson</span><strong>JDBC Connection and CRUD</strong></a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div>
+      <p><strong>Programming Learning Module</strong></p>
+      <p>Prepared for classroom instruction and guided laboratory practice.</p>
+    </div>
+    <a href="#lesson-title">Return to top</a>
+  </footer>
+</body>
+</html>

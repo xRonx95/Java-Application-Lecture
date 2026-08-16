@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 JAVA & APACHE NETBEANS TUTORIAL WEBSITE
 
 Files:
@@ -15,3 +16,7 @@ HOW TO RUN
 Important: Because the header is stored in a separate HTML file and loaded with
 JavaScript, some browsers block it when index.html is opened directly as a file.
 Running it through a local web server fixes this.
+=======
+# Java-Application-Lecture
+For Teaching Instrument
+>>>>>>> b204c32751a1b234e65766f0c71a3f42159e6aee

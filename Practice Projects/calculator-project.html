@@ -226,11 +226,33 @@
           </table>
         </div>
 
-        <div class="code-block">
-          <div class="code-title"><span>Core calculator state</span><small>Lecture excerpt</small></div>
+        <aside class="run-preview-note"><strong>Run Example:</strong> Each button below reveals a browser-based GUI simulation of the expected Java/Swing result. The Java source itself still runs in Apache NetBeans/JDK.</aside>
+
+        <div class="code-block java-example">
+          <div class="code-title">
+            <div class="code-title-copy"><span>Core calculator state</span><small>Java example · browser output preview</small></div>
+            <button class="run-example-button" type="button" aria-expanded="false">▶ Run Example</button>
+          </div>
           <pre><code>private double firstNumber = 0.0;
 private String operator = "";
 private boolean startNewNumber = true;</code></pre>
+          <div class="run-output" hidden aria-live="polite">
+            <div class="run-output-heading"><span>GUI result preview</span><small>Simulated Swing output</small></div>
+            <div class="gui-preview" role="img" aria-label="Program state inspector showing the initial calculator variables">
+              <div class="gui-window">
+                <div class="gui-titlebar">
+                  <div class="gui-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <strong>CalculatorFrame — Program State</strong>
+                </div>
+                <div class="gui-state-panel">
+                  <div class="gui-state-row"><span>firstNumber</span><b>0.0</b></div>
+                  <div class="gui-state-row"><span>operator</span><b>""</b></div>
+                  <div class="gui-state-row"><span>startNewNumber</span><b class="state-true">true</b></div>
+                </div>
+                <div class="gui-status success"><span class="status-dot"></span>Calculator state initialized successfully.</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <aside class="teacher-note"><strong>Teacher prompt:</strong> Ask students why <code>double</code> is more suitable than <code>int</code> when the calculator must accept decimal values.</aside>
@@ -255,8 +277,11 @@ private boolean startNewNumber = true;</code></pre>
           <span>↓</span><div>Display result</div>
         </div>
 
-        <div class="code-block">
-          <div class="code-title"><span>Calculation decision</span><small>Lecture excerpt</small></div>
+        <div class="code-block java-example">
+          <div class="code-title">
+            <div class="code-title-copy"><span>Calculation decision</span><small>Java example · browser output preview</small></div>
+            <button class="run-example-button" type="button" aria-expanded="false">▶ Run Example</button>
+          </div>
           <pre><code>double secondNumber = Double.parseDouble(displayField.getText());
 double result;
 
@@ -278,6 +303,28 @@ switch (operator) {
 }
 
 displayField.setText(formatResult(result));</code></pre>
+          <div class="run-output" hidden aria-live="polite">
+            <div class="run-output-heading"><span>GUI result preview</span><small>Example: 15 + 27</small></div>
+            <div class="gui-preview" role="img" aria-label="Calculator GUI displaying the result 42 for 15 plus 27">
+              <div class="gui-window calculator-gui-window">
+                <div class="gui-titlebar">
+                  <div class="gui-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <strong>Simple Calculator</strong>
+                </div>
+                <div class="gui-calculator">
+                  <div class="gui-calculator-display"><small>15 + 27 =</small><strong>42</strong></div>
+                  <div class="gui-calculator-grid" aria-hidden="true">
+                    <span class="gui-key utility">C</span><span class="gui-key utility">⌫</span><span class="gui-key utility">±</span><span class="gui-key operator">÷</span>
+                    <span class="gui-key">7</span><span class="gui-key">8</span><span class="gui-key">9</span><span class="gui-key operator">×</span>
+                    <span class="gui-key">4</span><span class="gui-key">5</span><span class="gui-key">6</span><span class="gui-key operator">−</span>
+                    <span class="gui-key">1</span><span class="gui-key">2</span><span class="gui-key">3</span><span class="gui-key operator">+</span>
+                    <span class="gui-key zero">0</span><span class="gui-key">.</span><span class="gui-key equals">=</span>
+                  </div>
+                </div>
+                <div class="gui-status success"><span class="status-dot"></span>Calculation completed: 15 + 27 = 42.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -295,8 +342,11 @@ displayField.setText(formatResult(result));</code></pre>
           <article><b>Backspace</b><h3>Correct input</h3><p>Remove the final character while maintaining a valid display.</p></article>
         </div>
 
-        <div class="code-block">
-          <div class="code-title"><span>Reusable digit method</span><small>Lecture excerpt</small></div>
+        <div class="code-block java-example">
+          <div class="code-title">
+            <div class="code-title-copy"><span>Reusable digit method</span><small>Java example · browser output preview</small></div>
+            <button class="run-example-button" type="button" aria-expanded="false">▶ Run Example</button>
+          </div>
           <pre><code>private void appendDigit(String digit) {
     if (startNewNumber || displayField.getText().equals("0")) {
         displayField.setText(digit);
@@ -305,15 +355,50 @@ displayField.setText(formatResult(result));</code></pre>
         displayField.setText(displayField.getText() + digit);
     }
 }</code></pre>
+          <div class="run-output" hidden aria-live="polite">
+            <div class="run-output-heading"><span>GUI result preview</span><small>Example: appendDigit("7")</small></div>
+            <div class="gui-preview" role="img" aria-label="Calculator GUI showing digit 7 after the seven button is pressed">
+              <div class="gui-window compact-gui-window">
+                <div class="gui-titlebar">
+                  <div class="gui-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <strong>Simple Calculator</strong>
+                </div>
+                <div class="gui-demo-body">
+                  <div class="gui-calculator-display single-value"><small>Display</small><strong>7</strong></div>
+                  <div class="gui-action-trace"><span>Before: 0</span><b>Click 7</b><span>After: 7</span></div>
+                </div>
+                <div class="gui-status success"><span class="status-dot"></span>Digit accepted. The next digit will append to the current value.</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="code-block">
-          <div class="code-title"><span>Operator method</span><small>Lecture excerpt</small></div>
+        <div class="code-block java-example">
+          <div class="code-title">
+            <div class="code-title-copy"><span>Operator method</span><small>Java example · browser output preview</small></div>
+            <button class="run-example-button" type="button" aria-expanded="false">▶ Run Example</button>
+          </div>
           <pre><code>private void chooseOperator(String selectedOperator) {
     firstNumber = Double.parseDouble(displayField.getText());
     operator = selectedOperator;
     startNewNumber = true;
 }</code></pre>
+          <div class="run-output" hidden aria-live="polite">
+            <div class="run-output-heading"><span>GUI result preview</span><small>Example: display = 15, operator = +</small></div>
+            <div class="gui-preview" role="img" aria-label="Calculator GUI showing 15 with the addition operator selected">
+              <div class="gui-window compact-gui-window">
+                <div class="gui-titlebar">
+                  <div class="gui-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <strong>Simple Calculator</strong>
+                </div>
+                <div class="gui-demo-body">
+                  <div class="gui-calculator-display single-value"><small>First operand stored</small><strong>15</strong></div>
+                  <div class="operator-selection"><span>Selected operator</span><b>+</b></div>
+                </div>
+                <div class="gui-status info"><span class="status-dot"></span>Ready for the second number.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -424,8 +509,11 @@ displayField.setText(formatResult(result));</code></pre>
           <article><span>06</span><h3>Recoverable state</h3><p>After an error, keep the window open and allow the learner to clear or correct the entry.</p></article>
         </div>
 
-        <div class="code-block">
-          <div class="code-title"><span>Decimal-point validation</span><small>Lecture excerpt</small></div>
+        <div class="code-block java-example">
+          <div class="code-title">
+            <div class="code-title-copy"><span>Decimal-point validation</span><small>Java example · browser output preview</small></div>
+            <button class="run-example-button" type="button" aria-expanded="false">▶ Run Example</button>
+          </div>
           <pre><code>private void appendDecimalPoint() {
     if (startNewNumber) {
         displayField.setText("0.");
@@ -434,16 +522,51 @@ displayField.setText(formatResult(result));</code></pre>
         displayField.setText(displayField.getText() + ".");
     }
 }</code></pre>
+          <div class="run-output" hidden aria-live="polite">
+            <div class="run-output-heading"><span>GUI result preview</span><small>Duplicate decimal prevention</small></div>
+            <div class="gui-preview" role="img" aria-label="Calculator GUI showing 12 point with a duplicate decimal click ignored">
+              <div class="gui-window compact-gui-window">
+                <div class="gui-titlebar">
+                  <div class="gui-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <strong>Simple Calculator</strong>
+                </div>
+                <div class="gui-demo-body">
+                  <div class="gui-calculator-display single-value"><small>Current display</small><strong>12.</strong></div>
+                  <div class="decimal-demo"><span>First . click</span><b>12.</b><span>Second . click</span><b>12.</b></div>
+                </div>
+                <div class="gui-status warning"><span class="status-dot"></span>Duplicate decimal point ignored; the displayed value remains valid.</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="code-block">
-          <div class="code-title"><span>Clear calculator state</span><small>Lecture excerpt</small></div>
+        <div class="code-block java-example">
+          <div class="code-title">
+            <div class="code-title-copy"><span>Clear calculator state</span><small>Java example · browser output preview</small></div>
+            <button class="run-example-button" type="button" aria-expanded="false">▶ Run Example</button>
+          </div>
           <pre><code>private void clearCalculator() {
     firstNumber = 0.0;
     operator = "";
     startNewNumber = true;
     displayField.setText("0");
 }</code></pre>
+          <div class="run-output" hidden aria-live="polite">
+            <div class="run-output-heading"><span>GUI result preview</span><small>Reset state</small></div>
+            <div class="gui-preview" role="img" aria-label="Calculator GUI reset to zero after the clear action">
+              <div class="gui-window compact-gui-window">
+                <div class="gui-titlebar">
+                  <div class="gui-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <strong>Simple Calculator</strong>
+                </div>
+                <div class="gui-demo-body">
+                  <div class="gui-calculator-display single-value"><small>Display after Clear</small><strong>0</strong></div>
+                  <div class="gui-reset-grid"><span>firstNumber <b>0.0</b></span><span>operator <b>""</b></span><span>startNewNumber <b>true</b></span></div>
+                </div>
+                <div class="gui-status success"><span class="status-dot"></span>Calculator reset completed.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -571,5 +694,30 @@ displayField.setText(formatResult(result));</code></pre>
       </footer>
     </main>
   </div>
+
+  <script>
+    (() => {
+      const runButtons = document.querySelectorAll('.run-example-button');
+
+      runButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const example = button.closest('.java-example');
+          const output = example?.querySelector('.run-output');
+          if (!output) return;
+
+          const shouldOpen = output.hidden;
+          output.hidden = !shouldOpen;
+          button.setAttribute('aria-expanded', String(shouldOpen));
+          button.textContent = shouldOpen ? '▾ Hide GUI Output' : '▶ Run Example';
+
+          if (shouldOpen) {
+            output.classList.remove('output-flash');
+            void output.offsetWidth;
+            output.classList.add('output-flash');
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

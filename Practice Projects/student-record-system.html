@@ -10,7 +10,7 @@
   <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
-  <link rel="stylesheet" href="../css/Practice Projects/student-record-system.css?v=1">
+  <link rel="stylesheet" href="../css/Practice Projects/student-record-system.css?v=2">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to lesson content</a>
@@ -72,7 +72,7 @@
         </div>
         <div class="sidebar-note">
           <strong>Instructor note</strong>
-          <p>This page is a lecture guide. The code blocks are examples for explanation and are not an attached Java application.</p>
+          <p>Use <strong>Run Example</strong> beneath each Java code block to display a simulated Swing GUI result in the browser. These previews demonstrate the expected interface behavior; the webpage does not compile Java code.</p>
         </div>
       </aside>
 
@@ -273,7 +273,7 @@
             <div class="step-grid">
               <div>
                 <p>Place a JTable inside a JScrollPane. The <code>DefaultTableModel</code> manages column headings and rows displayed by the table.</p>
-                <pre><code>DefaultTableModel model = new DefaultTableModel(
+                <pre class="runnable-code"><code>DefaultTableModel model = new DefaultTableModel(
     new Object[] {
         "Student ID", "Complete Name", "Program",
         "Year Level", "Email", "Contact Number"
@@ -282,6 +282,15 @@
 );
 
 tblStudents.setModel(model);</code></pre>
+                <div class="code-runner" data-demo="table-model">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview the JTable created by DefaultTableModel</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
               </div>
               <figure>
                 <img src="../img/student-record-system/step-05-table.svg" alt="JTable mockup showing student record columns and example rows">
@@ -295,10 +304,19 @@ tblStudents.setModel(model);</code></pre>
             <div class="step-grid">
               <div>
                 <p>Swing follows an <strong>event-driven</strong> model. The program waits for a user action. When a button is clicked, its event handler performs the related task.</p>
-                <pre><code>private void btnAddActionPerformed(
+                <pre class="runnable-code"><code>private void btnAddActionPerformed(
         java.awt.event.ActionEvent evt) {
     addStudentRecord();
 }</code></pre>
+                <div class="code-runner" data-demo="add-event">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview the Add button event and resulting interface</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
                 <p>The event method should call a clearly named helper method. This separates the interface event from the processing logic.</p>
               </div>
               <figure>
@@ -321,7 +339,7 @@ tblStudents.setModel(model);</code></pre>
 
           <div class="code-lesson">
             <div class="code-heading"><span>Create</span><h3>Add a valid row to the table</h3></div>
-            <pre><code>private void addStudentRecord() {
+            <pre class="runnable-code"><code>private void addStudentRecord() {
     if (!isFormValid()) {
         return;
     }
@@ -342,12 +360,21 @@ tblStudents.setModel(model);</code></pre>
     JOptionPane.showMessageDialog(this,
         "Student record added successfully.");
 }</code></pre>
+                <div class="code-runner" data-demo="create-record">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview a newly added student record</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
             <p class="explanation"><strong>Explanation:</strong> The method validates the form, obtains the current table model, creates one row from the form values, clears the fields, and reports success.</p>
           </div>
 
           <div class="code-lesson">
             <div class="code-heading"><span>Read</span><h3>Load a selected row into the form</h3></div>
-            <pre><code>private void tblStudentsMouseClicked(
+            <pre class="runnable-code"><code>private void tblStudentsMouseClicked(
         java.awt.event.MouseEvent evt) {
     int row = tblStudents.getSelectedRow();
 
@@ -362,12 +389,21 @@ tblStudents.setModel(model);</code></pre>
             tblStudents.getValueAt(row, 3).toString());
     }
 }</code></pre>
+                <div class="code-runner" data-demo="read-record">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview a selected row loaded into the form</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
             <p class="explanation"><strong>Explanation:</strong> The selected table row becomes the current record. Its values are copied into the fields so the user can inspect or revise them.</p>
           </div>
 
           <div class="code-lesson">
             <div class="code-heading"><span>Update</span><h3>Replace the selected row values</h3></div>
-            <pre><code>private void updateStudentRecord() {
+            <pre class="runnable-code"><code>private void updateStudentRecord() {
     int row = tblStudents.getSelectedRow();
 
     if (row == -1) {
@@ -383,12 +419,21 @@ tblStudents.setModel(model);</code></pre>
     model.setValueAt(cmbProgram.getSelectedItem(), row, 2);
     model.setValueAt(cmbYearLevel.getSelectedItem(), row, 3);
 }</code></pre>
+                <div class="code-runner" data-demo="update-record">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview the selected record after an update</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
             <p class="explanation"><strong>Explanation:</strong> Updating requires a selected row. Each form value is written to its corresponding column in that same row.</p>
           </div>
 
           <div class="code-lesson">
             <div class="code-heading"><span>Delete</span><h3>Confirm before removing a record</h3></div>
-            <pre><code>private void deleteStudentRecord() {
+            <pre class="runnable-code"><code>private void deleteStudentRecord() {
     int row = tblStudents.getSelectedRow();
 
     if (row == -1) {
@@ -409,6 +454,15 @@ tblStudents.setModel(model);</code></pre>
         clearForm();
     }
 }</code></pre>
+                <div class="code-runner" data-demo="delete-record">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview the confirmation dialog and delete action</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
             <p class="explanation"><strong>Explanation:</strong> A confirmation dialog helps prevent accidental data loss. The row is removed only when the user chooses Yes.</p>
           </div>
         </section>
@@ -425,7 +479,7 @@ tblStudents.setModel(model);</code></pre>
             <article><span>Uniqueness</span><h3>Duplicate ID check</h3><p>Each student ID should identify only one record.</p></article>
           </div>
 
-          <pre><code>private boolean isFormValid() {
+          <pre class="runnable-code"><code>private boolean isFormValid() {
     String id = txtStudentId.getText().trim();
     String name = txtCompleteName.getText().trim();
     String email = txtEmail.getText().trim();
@@ -443,6 +497,15 @@ tblStudents.setModel(model);</code></pre>
 
     return true;
 }</code></pre>
+                <div class="code-runner" data-demo="validate-form">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview a validation warning dialog</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
 
           <div class="callout callout-warning">
             <h3>Important distinction</h3>
@@ -456,7 +519,7 @@ tblStudents.setModel(model);</code></pre>
           <div class="two-column">
             <div>
               <h3>Clearing the form</h3>
-              <pre><code>private void clearForm() {
+              <pre class="runnable-code"><code>private void clearForm() {
     txtStudentId.setText("");
     txtCompleteName.setText("");
     txtEmail.setText("");
@@ -466,6 +529,15 @@ tblStudents.setModel(model);</code></pre>
     tblStudents.clearSelection();
     txtStudentId.requestFocus();
 }</code></pre>
+                <div class="code-runner" data-demo="clear-form">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview the form after all fields are cleared</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
             </div>
             <div>
               <h3>Usability checklist</h3>
@@ -483,7 +555,7 @@ tblStudents.setModel(model);</code></pre>
 
           <h3>Introducing search with a row filter</h3>
           <p>A <code>TableRowSorter</code> can filter the displayed rows while leaving the underlying model unchanged.</p>
-          <pre><code>private void searchRecords() {
+          <pre class="runnable-code"><code>private void searchRecords() {
     DefaultTableModel model =
         (DefaultTableModel) tblStudents.getModel();
     TableRowSorter&lt;DefaultTableModel&gt; sorter =
@@ -496,6 +568,15 @@ tblStudents.setModel(model);</code></pre>
         )
     );
 }</code></pre>
+                <div class="code-runner" data-demo="search-records">
+                  <div class="runner-toolbar">
+                    <button class="run-example-btn" type="button" aria-expanded="false">
+                      <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                    </button>
+                    <span class="runner-hint">Preview the JTable after applying a search filter</span>
+                  </div>
+                  <div class="gui-output" hidden aria-live="polite"></div>
+                </div>
           <p><code>Pattern.quote()</code> treats the search text as ordinary text instead of a regular-expression command. The class requires <code>import java.util.regex.Pattern;</code>.</p>
         </section>
 
@@ -622,5 +703,242 @@ tblStudents.setModel(model);</code></pre>
     </div>
     <a href="#main-content">Return to top ↑</a>
   </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const students = {
+        maria: ["2026-001", "Maria Santos", "BS Information Technology", "2nd Year", "maria.santos@example.com", "0917 123 4567"],
+        juan: ["2026-002", "Juan Dela Cruz", "BS Computer Science", "1st Year", "juan.delacruz@example.com", "0918 765 4321"],
+        ana: ["2026-003", "Ana Reyes", "BS Information Systems", "3rd Year", "ana.reyes@example.com", "0919 246 8101"]
+      };
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (char) {
+          return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"}[char];
+        });
+      }
+
+      function field(label, value, options) {
+        const opts = options || {};
+        const className = opts.focused ? " swing-field is-focused" : " swing-field";
+        return '<label class="' + className.trim() + '">' +
+          '<span>' + escapeHtml(label) + '</span>' +
+          '<div class="swing-input' + (opts.select ? ' select-look' : '') + '">' +
+          (value ? escapeHtml(value) : '<span class="input-placeholder">&nbsp;</span>') +
+          '</div></label>';
+      }
+
+      function table(rows, selectedIndex) {
+        const body = rows.length ? rows.map(function (row, index) {
+          const selected = index === selectedIndex ? ' class="is-selected"' : '';
+          return '<tr' + selected + '>' + row.map(function (cell) {
+            return '<td>' + escapeHtml(cell) + '</td>';
+          }).join('') + '</tr>';
+        }).join('') : '<tr><td class="empty-table" colspan="6">No student records yet.</td></tr>';
+
+        return '<div class="swing-table-scroll"><table class="swing-table">' +
+          '<thead><tr><th>Student ID</th><th>Complete Name</th><th>Program</th><th>Year Level</th><th>Email</th><th>Contact Number</th></tr></thead>' +
+          '<tbody>' + body + '</tbody></table></div>';
+      }
+
+      function actionButtons(active) {
+        const buttons = [
+          ["Add", "primary"],
+          ["Update", ""],
+          ["Clear", ""],
+          ["Delete", "danger"]
+        ];
+        return '<div class="swing-actions">' + buttons.map(function (item) {
+          const isActive = active === item[0].toLowerCase();
+          return '<button type="button" class="swing-btn ' + item[1] + (isActive ? ' is-active' : '') + '" tabindex="-1">' + item[0] + '</button>';
+        }).join('') + '</div>';
+      }
+
+      function dialog(type, title, message, actions) {
+        const icon = type === 'warning' ? '!' : type === 'question' ? '?' : '✓';
+        const actionHtml = (actions || [{label: 'OK', action: 'dismiss-dialog', primary: true}]).map(function (action) {
+          return '<button type="button" class="dialog-btn' + (action.primary ? ' primary' : '') + '" data-demo-action="' + action.action + '">' + escapeHtml(action.label) + '</button>';
+        }).join('');
+        return '<div class="swing-dialog-layer"><div class="swing-dialog ' + type + '" role="dialog" aria-label="' + escapeHtml(title) + '">' +
+          '<div class="dialog-content"><span class="dialog-icon" aria-hidden="true">' + icon + '</span><div><strong>' + escapeHtml(title) + '</strong><p>' + escapeHtml(message) + '</p></div></div>' +
+          '<div class="dialog-actions">' + actionHtml + '</div></div></div>';
+      }
+
+      function windowShell(options) {
+        const opts = options || {};
+        const rows = opts.rows || [];
+        const fields = opts.fields || {};
+        const status = opts.status || 'Ready';
+        return '<div class="gui-preview-card">' +
+          '<div class="preview-label"><span class="preview-dot"></span> Simulated Java Swing GUI output</div>' +
+          '<div class="swing-window">' +
+            '<div class="swing-titlebar"><span class="swing-app-icon">SR</span><strong>Student Record System</strong><span class="window-controls" aria-hidden="true">─ □ ×</span></div>' +
+            '<div class="swing-body">' +
+              '<div class="swing-form-grid">' +
+                field('Student ID', fields.id || '', {focused: opts.focus === 'id'}) +
+                field('Complete Name', fields.name || '') +
+                field('Program', fields.program || 'BS Information Technology', {select: true}) +
+                field('Year Level', fields.year || '1st Year', {select: true}) +
+                field('Email Address', fields.email || '') +
+                field('Contact Number', fields.contact || '') +
+              '</div>' +
+              actionButtons(opts.activeAction || '') +
+              '<div class="swing-search"><span>Search:</span><div class="swing-input search-input">' + escapeHtml(opts.search || '') + '</div>' +
+                (opts.matchCount !== undefined ? '<small>' + opts.matchCount + ' matching record' + (opts.matchCount === 1 ? '' : 's') + '</small>' : '') + '</div>' +
+              table(rows, opts.selectedIndex) +
+              '<div class="swing-status"><span>' + escapeHtml(status) + '</span><span>' + rows.length + ' record' + (rows.length === 1 ? '' : 's') + '</span></div>' +
+            '</div>' +
+            (opts.dialog || '') +
+          '</div>' +
+          '<p class="simulation-note">This is an offline browser simulation of the expected Swing result. It demonstrates the GUI behavior without compiling Java inside the webpage.</p>' +
+        '</div>';
+      }
+
+      function valuesFrom(row) {
+        return {id: row[0], name: row[1], program: row[2], year: row[3], email: row[4], contact: row[5]};
+      }
+
+      const demos = {
+        'table-model': function () {
+          return windowShell({
+            rows: [],
+            fields: {program: 'Select program', year: 'Select year level'},
+            status: 'JTable model configured with 6 columns'
+          });
+        },
+        'add-event': function () {
+          return windowShell({
+            fields: valuesFrom(students.maria),
+            rows: [students.maria],
+            activeAction: 'add',
+            status: 'btnAddActionPerformed → addStudentRecord()',
+            dialog: dialog('success', 'Message', 'Student record added successfully.')
+          });
+        },
+        'create-record': function () {
+          return windowShell({
+            rows: [students.maria, students.juan],
+            fields: {program: 'BS Information Technology', year: '1st Year'},
+            focus: 'id',
+            activeAction: 'add',
+            status: 'New row added; form cleared and focus returned to Student ID',
+            dialog: dialog('success', 'Message', 'Student record added successfully.')
+          });
+        },
+        'read-record': function () {
+          return windowShell({
+            fields: valuesFrom(students.juan),
+            rows: [students.maria, students.juan, students.ana],
+            selectedIndex: 1,
+            status: 'Selected row loaded into the input form'
+          });
+        },
+        'update-record': function () {
+          const updated = ["2026-001", "Maria S. Santos", "BS Information Technology", "3rd Year", "maria.santos@example.com", "0917 123 4567"];
+          return windowShell({
+            fields: valuesFrom(updated),
+            rows: [updated, students.juan],
+            selectedIndex: 0,
+            activeAction: 'update',
+            status: 'Selected row values updated successfully'
+          });
+        },
+        'delete-record': function () {
+          return windowShell({
+            fields: valuesFrom(students.juan),
+            rows: [students.maria, students.juan, students.ana],
+            selectedIndex: 1,
+            activeAction: 'delete',
+            status: 'Waiting for deletion confirmation',
+            dialog: dialog('question', 'Confirm deletion', 'Delete the selected student record?', [
+              {label: 'No', action: 'cancel-delete'},
+              {label: 'Yes', action: 'confirm-delete', primary: true}
+            ])
+          });
+        },
+        'validate-form': function () {
+          return windowShell({
+            fields: {id: '', name: '', program: 'BS Information Technology', year: '1st Year', email: 'student@email'},
+            rows: [students.maria],
+            focus: 'id',
+            status: 'Validation stopped the Add operation',
+            dialog: dialog('warning', 'Validation warning', 'Student ID and complete name are required.')
+          });
+        },
+        'clear-form': function () {
+          return windowShell({
+            fields: {id: '', name: '', program: 'Select program', year: 'Select year level', email: '', contact: ''},
+            rows: [students.maria, students.juan],
+            focus: 'id',
+            activeAction: 'clear',
+            status: 'Form cleared; table selection removed; Student ID has focus'
+          });
+        },
+        'search-records': function () {
+          return windowShell({
+            fields: {program: 'Select program', year: 'Select year level'},
+            rows: [students.maria],
+            search: 'maria',
+            matchCount: 1,
+            status: 'RowFilter applied: case-insensitive match for “maria”'
+          });
+        }
+      };
+
+      function bindPreviewActions(output, demoName) {
+        output.querySelectorAll('[data-demo-action="dismiss-dialog"]').forEach(function (button) {
+          button.addEventListener('click', function () {
+            const layer = button.closest('.swing-dialog-layer');
+            if (layer) layer.remove();
+          });
+        });
+
+        if (demoName === 'delete-record') {
+          const yes = output.querySelector('[data-demo-action="confirm-delete"]');
+          const no = output.querySelector('[data-demo-action="cancel-delete"]');
+
+          if (yes) {
+            yes.addEventListener('click', function () {
+              output.innerHTML = windowShell({
+                fields: {program: 'Select program', year: 'Select year level'},
+                rows: [students.maria, students.ana],
+                focus: 'id',
+                status: 'Record deleted; form cleared'
+              });
+            });
+          }
+
+          if (no) {
+            no.addEventListener('click', function () {
+              const layer = no.closest('.swing-dialog-layer');
+              if (layer) layer.remove();
+              const status = output.querySelector('.swing-status span:first-child');
+              if (status) status.textContent = 'Deletion cancelled; record kept';
+            });
+          }
+        }
+      }
+
+      document.querySelectorAll('.code-runner').forEach(function (runner) {
+        const button = runner.querySelector('.run-example-btn');
+        const output = runner.querySelector('.gui-output');
+        const demoName = runner.dataset.demo;
+
+        if (!button || !output || !demos[demoName]) return;
+
+        button.addEventListener('click', function () {
+          output.innerHTML = demos[demoName]();
+          output.hidden = false;
+          button.setAttribute('aria-expanded', 'true');
+          button.classList.add('has-run');
+          button.innerHTML = '<span class="run-icon" aria-hidden="true">↻</span> Run Again';
+          bindPreviewActions(output, demoName);
+        });
+      });
+    }());
+  </script>
+
 </body>
 </html>

@@ -1422,6 +1422,172 @@ kbd {
   padding: 18px;
 }
 
+
+/* =========================================================
+   INTERACTIVE JAVA EXAMPLE RUNNER
+   The lesson page previews expected Java/Swing output in-browser.
+   ========================================================= */
+
+.runner-notice {
+  margin: 1.2rem 0 1.5rem;
+  padding: 16px 18px;
+  border: 1px solid #b8d7f2;
+  border-left: 5px solid var(--blue-600);
+  border-radius: 12px;
+  color: #28435d;
+  background: #edf7ff;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.runner-notice strong {
+  color: var(--navy-900);
+}
+
+.code-heading {
+  flex-wrap: wrap;
+}
+
+.code-block pre,
+.code-card pre {
+  font-size: 0.88rem;
+  scrollbar-color: #607d98 #0b1724;
+  scrollbar-width: thin;
+}
+
+.code-card pre {
+  min-height: auto;
+}
+
+.example-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border-top: 1px solid #26394b;
+  background: #111f2e;
+}
+
+.run-example-button,
+.clear-output-button {
+  appearance: none;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.16s ease,
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.run-example-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 9px 15px;
+  color: #082742;
+  background: #ffc654;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+.run-example-button:hover,
+.run-example-button:focus-visible {
+  background: #ffd475;
+  transform: translateY(-1px);
+}
+
+.run-example-button:focus-visible,
+.clear-output-button:focus-visible {
+  outline: 3px solid #91c8ff;
+  outline-offset: 2px;
+}
+
+.run-example-button.has-run {
+  color: #073b28;
+  background: #9be3c4;
+}
+
+.example-hint {
+  color: #aebfd0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.example-output {
+  border-top: 1px solid #35536c;
+  background: #06121d;
+}
+
+.example-output[hidden] {
+  display: none;
+}
+
+.output-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  color: #dcecff;
+  background: #0d2235;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.output-heading > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: #49c98b;
+  box-shadow: 0 0 0 4px rgba(73, 201, 139, 0.14);
+}
+
+.clear-output-button {
+  padding: 6px 10px;
+  border: 1px solid #587590;
+  color: #eaf4ff;
+  background: transparent;
+  font-size: 0.72rem;
+}
+
+.clear-output-button:hover,
+.clear-output-button:focus-visible {
+  border-color: #88a9c5;
+  background: #193650;
+}
+
+.output-console {
+  max-height: 360px !important;
+  margin: 0 !important;
+  padding: 18px !important;
+  overflow: auto;
+  color: #c8f7d7 !important;
+  background: #06121d !important;
+  font-size: 0.84rem !important;
+  line-height: 1.65 !important;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 4;
+}
+
+/* Make two-column code examples align without forcing unnecessary blank space. */
+.two-column > .code-card {
+  align-self: stretch;
+}
+
 .before-after,
 .selection-visual,
 .search-visual {
@@ -2051,6 +2217,23 @@ kbd {
     min-height: auto;
   }
 
+  .example-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .run-example-button {
+    width: 100%;
+  }
+
+  .example-hint {
+    text-align: center;
+  }
+
+  .output-heading {
+    align-items: center;
+  }
+
   .final-challenge,
   .lesson-footer {
     align-items: flex-start;
@@ -2167,6 +2350,9 @@ kbd {
   .lesson-sidebar,
   .page-overlay,
   .copy-button,
+  .example-actions,
+  .example-output,
+  .runner-notice,
   .hero-actions,
   .lesson-footer {
     display: none !important;

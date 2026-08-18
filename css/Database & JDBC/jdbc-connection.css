@@ -1488,9 +1488,379 @@ tbody tr:last-child td {
   font-weight: 800;
 }
 
+
+/* =========================================================
+   Interactive Java example controls and GUI output preview
+   ========================================================= */
+.code-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.run-button,
+.output-ok-button,
+.java-output-close {
+  font: inherit;
+}
+
+.run-button {
+  min-height: 36px;
+  padding: 7px 13px;
+  color: #ffffff;
+  background: var(--teal-600);
+  border: 1px solid var(--teal-500);
+  border-radius: 7px;
+  font-size: 0.76rem;
+  font-weight: 850;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.run-button:hover {
+  background: #086762;
+  box-shadow: 0 7px 18px rgba(11, 122, 117, 0.26);
+  transform: translateY(-1px);
+}
+
+.run-button:active {
+  transform: translateY(0);
+}
+
+.comparison-run-button {
+  margin: 4px 0 14px;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.java-output-modal[hidden] {
+  display: none;
+}
+
+.java-output-modal {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.java-output-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 11, 20, 0.74);
+  backdrop-filter: blur(4px);
+}
+
+.java-output-window {
+  position: relative;
+  z-index: 1;
+  width: min(820px, 100%);
+  max-height: min(760px, calc(100vh - 48px));
+  overflow: hidden;
+  color: var(--ink);
+  background: #f7fafc;
+  border: 1px solid #b9c9d4;
+  border-radius: 18px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.36);
+}
+
+.java-output-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 17px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.java-output-title-group {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.java-output-title-group > div {
+  min-width: 0;
+}
+
+.java-output-title-group strong,
+.java-output-title-group small {
+  display: block;
+}
+
+.java-output-title-group strong {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.java-output-title-group small {
+  margin-top: 2px;
+  color: #b9cedd;
+  font-size: 0.72rem;
+}
+
+.java-output-app-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  color: var(--navy-950);
+  background: #e7bd5e;
+  border-radius: 9px;
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.java-output-close {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  padding: 0;
+  color: #e6f0f7;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9px;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.java-output-close:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.java-output-statusbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 18px;
+  color: #516476;
+  background: #e8eef2;
+  border-bottom: 1px solid #cfdae1;
+  font-size: 0.76rem;
+}
+
+.java-output-statusbar strong {
+  color: var(--navy-900);
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  background: #2c9f67;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(44, 159, 103, 0.12);
+}
+
+.java-output-content {
+  max-height: calc(100vh - 250px);
+  overflow: auto;
+  padding: 26px;
+}
+
+.output-loading {
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.output-spinner {
+  width: 38px;
+  height: 38px;
+  border: 4px solid #c9d8e2;
+  border-top-color: var(--teal-600);
+  border-radius: 50%;
+  animation: java-output-spin 0.75s linear infinite;
+}
+
+@keyframes java-output-spin {
+  to { transform: rotate(360deg); }
+}
+
+.output-summary {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 15px;
+  align-items: start;
+  padding: 19px;
+  border-radius: 12px;
+}
+
+.success-output-summary {
+  background: var(--green-100);
+  border: 1px solid #b9dfca;
+}
+
+.warning-output-summary {
+  background: var(--gold-100);
+  border: 1px solid #e7cf8f;
+}
+
+.output-summary-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: #ffffff;
+  background: var(--green-700);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.warning-output-summary .output-summary-icon {
+  color: var(--navy-900);
+  background: var(--gold-500);
+}
+
+.output-summary strong {
+  color: var(--navy-900);
+}
+
+.output-summary p {
+  margin: 4px 0 0;
+  color: #4b5e70;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.output-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.output-detail-grid > div {
+  min-width: 0;
+  padding: 13px 15px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.output-detail-grid span,
+.output-detail-grid strong {
+  display: block;
+}
+
+.output-detail-grid span {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.output-detail-grid strong {
+  margin-top: 3px;
+  overflow-wrap: anywhere;
+  color: var(--navy-900);
+  font-size: 0.9rem;
+}
+
+.gui-console {
+  overflow-x: auto;
+  margin: 16px 0 0;
+  padding: 18px;
+  color: #dbe8f2;
+  background: #071728;
+  border: 1px solid #233c51;
+  border-radius: 11px;
+  font: 0.84rem/1.7 "Cascadia Code", Consolas, monospace;
+  white-space: pre-wrap;
+}
+
+.gui-table-wrap {
+  overflow-x: auto;
+  margin-top: 16px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+}
+
+.gui-table {
+  min-width: 620px;
+  margin: 0;
+}
+
+.gui-table th,
+.gui-table td {
+  padding: 13px 14px;
+  font-size: 0.79rem;
+}
+
+.java-output-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 17px;
+  color: #617485;
+  background: #eef3f6;
+  border-top: 1px solid #d0dbe2;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.java-output-footer span {
+  max-width: 620px;
+}
+
+.output-ok-button {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 8px 16px;
+  color: #ffffff;
+  background: var(--navy-800);
+  border: 1px solid var(--navy-800);
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.output-ok-button:hover {
+  background: var(--teal-600);
+  border-color: var(--teal-600);
+}
+
 @media (max-width: 1120px) {
-  .main-navigation a:not(:first-child) {
-    display: none;
+  .header-inner {
+    gap: 18px;
+  }
+
+  .main-navigation {
+    max-width: 58%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .main-navigation a {
+    flex: 0 0 auto;
   }
 
   .hero {
@@ -1532,6 +1902,15 @@ tbody tr:last-child td {
   .header-inner {
     width: min(100% - 28px, var(--content-width));
     min-height: 72px;
+    flex-wrap: wrap;
+    padding: 10px 0;
+  }
+
+  .main-navigation {
+    width: 100%;
+    max-width: 100%;
+    padding-top: 7px;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
   }
 
   .brand-mark {
@@ -1638,6 +2017,24 @@ tbody tr:last-child td {
   .comparison-card pre {
     font-size: 0.8rem;
   }
+
+  .code-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .code-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .java-output-modal {
+    padding: 14px;
+  }
+
+  .java-output-content {
+    padding: 20px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -1720,7 +2117,13 @@ tbody tr:last-child td {
   }
 
   .code-toolbar {
-    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .code-actions,
+  .code-actions .run-button,
+  .code-actions .copy-button {
+    width: 100%;
   }
 
   .code-toolbar span {
@@ -1742,6 +2145,61 @@ tbody tr:last-child td {
 
   .lesson-summary {
     border-radius: 20px;
+  }
+
+  .java-output-modal {
+    padding: 8px;
+  }
+
+  .java-output-window {
+    max-height: calc(100vh - 16px);
+    border-radius: 13px;
+  }
+
+  .java-output-titlebar {
+    padding: 12px;
+  }
+
+  .java-output-title-group small {
+    display: none;
+  }
+
+  .java-output-statusbar {
+    padding: 9px 12px;
+  }
+
+  .java-output-statusbar > span:last-child {
+    display: none;
+  }
+
+  .java-output-content {
+    max-height: calc(100vh - 190px);
+    padding: 14px;
+  }
+
+  .output-summary {
+    grid-template-columns: 38px 1fr;
+    padding: 14px;
+  }
+
+  .output-summary-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .output-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .java-output-footer {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    padding: 11px 12px;
+  }
+
+  .output-ok-button {
+    width: 100%;
   }
 }
 
@@ -1769,6 +2227,8 @@ tbody tr:last-child td {
   .lesson-sidebar,
   .hero-actions,
   .copy-button,
+  .run-button,
+  .java-output-modal,
   .site-footer,
   .text-link {
     display: none !important;

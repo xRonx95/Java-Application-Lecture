@@ -192,6 +192,95 @@
       .lesson-section { break-inside: avoid; box-shadow: none; }
     }
   </style>
+<!-- RUN-EXAMPLE-STYLES -->
+
+  <style>
+    /* Interactive Run Example — self-contained so it also works when this HTML file is opened locally. */
+    .java-run-demo {
+      margin-top: 1.25rem;
+      overflow: hidden;
+      border: 1px solid #d8e1ee;
+      border-radius: 16px;
+      background: #0f172a;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, .12);
+    }
+    .java-run-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      color: #eef4ff;
+      background: #17233b;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .java-run-toolbar strong { font-size: .98rem; }
+    .java-run-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .java-run-button,
+    .java-clear-button {
+      min-height: 42px;
+      padding: 9px 15px;
+      border: 0;
+      border-radius: 9px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .java-run-button { color: #10213f; background: #f4c150; }
+    .java-run-button:hover { filter: brightness(1.04); }
+    .java-run-button:focus-visible,
+    .java-clear-button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
+    .java-clear-button { color: #e5edf9; background: #34445f; }
+    .java-run-code {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      color: #e8eef9;
+      background: #0f172a;
+      font: 15px/1.65 Consolas, "Courier New", monospace;
+      white-space: pre;
+    }
+    .java-run-result {
+      padding: 15px 18px 18px;
+      color: #dcfce7;
+      background: #07130e;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .java-run-result-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #86efac;
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .java-run-output {
+      min-height: 58px;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+      color: #d7ffe5;
+      background: transparent;
+      font: 15px/1.65 Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+    }
+    .java-run-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-left: 4px solid #3b82f6;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #24324a;
+    }
+    @media (max-width: 640px) {
+      .java-run-toolbar { align-items: stretch; }
+      .java-run-actions { width: 100%; }
+      .java-run-button, .java-clear-button { flex: 1 1 135px; }
+      .java-run-code, .java-run-output { font-size: 13px; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#lesson-content">Skip to lesson</a>
@@ -264,6 +353,7 @@
             <li><a href="#mistakes">Common Mistakes</a></li>
             <li><a href="#guided-project">Guided Project</a></li>
             <li><a href="#activity">Activities</a></li>
+            <li><a href="#run-example">Run Example</a></li>
             <li><a href="#assessment">Assessment</a></li>
             <li><a href="#glossary">Glossary</a></li>
           </ol>
@@ -431,7 +521,67 @@
 }</code></pre>
           </div>
           <div class="teacher-note"><strong>Explain it this way:</strong> The fields are locked. The methods are guarded doors. Each guard checks whether a request is allowed.</div>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Student Encapsulation Demo">
+            <div class="java-run-toolbar">
+              <strong>StudentDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-how-it-works', 'java-run-expected-how-it-works')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-how-it-works')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class StudentDemo {
+    static class Student {
+        private String name;
+        private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            if (name != null &amp;&amp; !name.isBlank()) {
+                this.name = name;
+            }
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            if (age &gt;= 5 &amp;&amp; age &lt;= 100) {
+                this.age = age;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student();
+        student.setName("Maria");
+        student.setAge(20);
+
+        System.out.println("Name: " + student.getName());
+        System.out.println("Age: " + student.getAge());
+
+        student.setAge(150);
+        System.out.println("After invalid age: " + student.getAge());
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-how-it-works" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-how-it-works" hidden>Name: Maria
+Age: 20
+After invalid age: 20</pre>
+            </div>
+          </div>
+</section>
 
         <section id="modifiers" class="lesson-section">
           <span class="section-number">04</span>
@@ -475,7 +625,43 @@
             </figure>
           </div>
           <p class="callout warning"><strong>Important:</strong> Making every field public breaks encapsulation because any code can assign an invalid value without permission.</p>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Access Modifier Demo">
+            <div class="java-run-toolbar">
+              <strong>AccessModifierDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-modifiers', 'java-run-expected-modifiers')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-modifiers')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class AccessModifierDemo {
+    static class Student {
+        private int score = 95;
+
+        public int getScore() {
+            return score;
+        }
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student();
+
+        // student.score = 100; // Not allowed because score is private.
+        System.out.println("Private score through getter: " + student.getScore());
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-modifiers" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-modifiers" hidden>Private score through getter: 95</pre>
+            </div>
+          </div>
+</section>
 
         <section id="getters-setters" class="lesson-section">
           <span class="section-number">05</span>
@@ -524,7 +710,52 @@
             <li><strong>Write-only:</strong> provide a method that accepts a value but does not reveal it, such as a password method.</li>
             <li><strong>Behavior-based:</strong> use meaningful actions such as <code>deposit()</code> and <code>withdraw()</code> instead of <code>setBalance()</code>.</li>
           </ul>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Getter and Setter Demo">
+            <div class="java-run-toolbar">
+              <strong>GetterSetterDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-getters-setters', 'java-run-expected-getters-setters')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-getters-setters')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class GetterSetterDemo {
+    static class Student {
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            if (name != null &amp;&amp; !name.isBlank()) {
+                this.name = name;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student();
+        student.setName("Maria");
+        System.out.println("Name: " + student.getName());
+
+        student.setName("Juan");
+        System.out.println("Updated name: " + student.getName());
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-getters-setters" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-getters-setters" hidden>Name: Maria
+Updated name: Juan</pre>
+            </div>
+          </div>
+</section>
 
         <section id="validation" class="lesson-section">
           <span class="section-number">06</span>
@@ -584,7 +815,70 @@
             </figure>
           </div>
           <p class="callout success"><strong>Why this is safer:</strong> Outside code can request a withdrawal, but only the <code>BankAccount</code> class decides whether the request is valid.</p>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Validation Demo">
+            <div class="java-run-toolbar">
+              <strong>ValidationDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-validation', 'java-run-expected-validation')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-validation')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class ValidationDemo {
+    static class BankAccount {
+        private double balance = 1000.00;
+
+        public double getBalance() {
+            return balance;
+        }
+
+        public void deposit(double amount) {
+            if (amount &lt;= 0) {
+                throw new IllegalArgumentException("Deposit must be greater than zero.");
+            }
+            balance += amount;
+        }
+
+        public boolean withdraw(double amount) {
+            if (amount &lt;= 0 || amount &gt; balance) {
+                return false;
+            }
+            balance -= amount;
+            return true;
+        }
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount();
+
+        account.deposit(500.00);
+        System.out.printf("After deposit: %.2f%n", account.getBalance());
+
+        System.out.println("Withdraw 200: " + account.withdraw(200.00));
+        System.out.printf("After withdrawal: %.2f%n", account.getBalance());
+
+        try {
+            account.deposit(0);
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Rejected: " + ex.getMessage());
+        }
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-validation" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-validation" hidden>After deposit: 1500.00
+Withdraw 200: true
+After withdrawal: 1300.00
+Rejected: Deposit must be greater than zero.</pre>
+            </div>
+          </div>
+</section>
 
         <section id="constructors" class="lesson-section">
           <span class="section-number">07</span>
@@ -621,7 +915,73 @@
             <label><input type="checkbox"> I can explain why validation should happen before field assignment.</label>
             <label><input type="checkbox"> I can identify which field is read-only in the example.</label>
           </div>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Constructor Validation Demo">
+            <div class="java-run-toolbar">
+              <strong>ConstructorDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-constructors', 'java-run-expected-constructors')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-constructors')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class ConstructorDemo {
+    static class Student {
+        private final String studentId;
+        private String name;
+        private int age;
+
+        Student(String studentId, String name, int age) {
+            if (studentId == null || studentId.isBlank()) {
+                throw new IllegalArgumentException("Student ID is required.");
+            }
+            this.studentId = studentId;
+            setName(name);
+            setAge(age);
+        }
+
+        void setName(String name) {
+            if (name == null || name.isBlank()) {
+                throw new IllegalArgumentException("Name is required.");
+            }
+            this.name = name;
+        }
+
+        void setAge(int age) {
+            if (age &lt; 5 || age &gt; 100) {
+                throw new IllegalArgumentException("Age must be from 5 to 100.");
+            }
+            this.age = age;
+        }
+
+        String getStudentId() { return studentId; }
+        String getName() { return name; }
+        int getAge() { return age; }
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student("2026-001", "Maria", 20);
+        System.out.println(student.getStudentId() + " - " + student.getName() + " - " + student.getAge());
+
+        try {
+            new Student("", "Juan", 19);
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Rejected: " + ex.getMessage());
+        }
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-constructors" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-constructors" hidden>2026-001 - Maria - 20
+Rejected: Student ID is required.</pre>
+            </div>
+          </div>
+</section>
 
         <section id="exceptions" class="lesson-section">
           <span class="section-number">08</span>
@@ -646,7 +1006,60 @@
             <h3>Which response would you choose?</h3>
             <p>A student tries to enroll in a class that is already full. Discuss whether the method should return <code>false</code>, throw an exception, or return a result object with the message “Class is full.”</p>
           </div>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Invalid Request Handling Demo">
+            <div class="java-run-toolbar">
+              <strong>ExceptionDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-exceptions', 'java-run-expected-exceptions')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-exceptions')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class ExceptionDemo {
+    static class BankAccount {
+        private double balance = 500.00;
+
+        public boolean withdraw(double amount) {
+            if (amount &lt;= 0 || amount &gt; balance) {
+                return false;
+            }
+            balance -= amount;
+            return true;
+        }
+
+        public void deposit(double amount) {
+            if (amount &lt;= 0) {
+                throw new IllegalArgumentException("Deposit must be positive.");
+            }
+            balance += amount;
+        }
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount();
+
+        System.out.println("Withdraw 900: " + account.withdraw(900));
+
+        try {
+            account.deposit(-50);
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Exception: " + ex.getMessage());
+        }
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-exceptions" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-exceptions" hidden>Withdraw 900: false
+Exception: Deposit must be positive.</pre>
+            </div>
+          </div>
+</section>
 
         <section id="immutability" class="lesson-section">
           <span class="section-number">09</span>
@@ -699,7 +1112,50 @@
               <figcaption>Picture 6: An immutable value is checked once, locked, and then exposed only for reading.</figcaption>
             </figure>
           </div>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Immutable Object Demo">
+            <div class="java-run-toolbar">
+              <strong>ImmutableDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-immutability', 'java-run-expected-immutability')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-immutability')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class ImmutableDemo {
+    static final class SchoolId {
+        private final String value;
+
+        SchoolId(String value) {
+            if (value == null || value.isBlank()) {
+                throw new IllegalArgumentException("ID is required.");
+            }
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
+
+    public static void main(String[] args) {
+        SchoolId id = new SchoolId("2026-001");
+        System.out.println("School ID: " + id.getValue());
+        System.out.println("No setter is available, so the value cannot be changed.");
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-immutability" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-immutability" hidden>School ID: 2026-001
+No setter is available, so the value cannot be changed.</pre>
+            </div>
+          </div>
+</section>
 
         <section id="collections" class="lesson-section">
           <span class="section-number">10</span>
@@ -745,7 +1201,61 @@
               <figcaption>Picture 7: The class keeps the original list and gives outside code a safe copy.</figcaption>
             </figure>
           </div>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Defensive Copy Demo">
+            <div class="java-run-toolbar">
+              <strong>DefensiveCopyDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-collections', 'java-run-expected-collections')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-collections')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>import java.util.ArrayList;
+import java.util.List;
+
+public class DefensiveCopyDemo {
+    static class Student {
+        private final List&lt;String&gt; subjects = new ArrayList&lt;&gt;();
+
+        Student() {
+            subjects.add("Math");
+            subjects.add("Java");
+        }
+
+        public List&lt;String&gt; getSubjects() {
+            return List.copyOf(subjects);
+        }
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student();
+        List&lt;String&gt; copy = student.getSubjects();
+
+        System.out.println("Subjects: " + copy);
+
+        try {
+            copy.add("English");
+        } catch (UnsupportedOperationException ex) {
+            System.out.println("Copy cannot be modified.");
+        }
+
+        System.out.println("Original remains: " + student.getSubjects());
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-collections" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-collections" hidden>Subjects: [Math, Java]
+Copy cannot be modified.
+Original remains: [Math, Java]</pre>
+            </div>
+          </div>
+</section>
 
         <section id="testing" class="lesson-section">
           <span class="section-number">11</span>
@@ -777,7 +1287,74 @@
             <label><input type="checkbox"> I can name one valid and one invalid test for a setter.</label>
             <label><input type="checkbox"> I understand why a failed request must not partly change the object.</label>
           </div>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Encapsulation Test Demo">
+            <div class="java-run-toolbar">
+              <strong>TestingDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-testing', 'java-run-expected-testing')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-testing')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class TestingDemo {
+    static class BankAccount {
+        private double balance;
+
+        BankAccount(double balance) {
+            this.balance = balance;
+        }
+
+        void deposit(double amount) {
+            if (amount &lt;= 0) {
+                throw new IllegalArgumentException("Invalid deposit.");
+            }
+            balance += amount;
+        }
+
+        boolean withdraw(double amount) {
+            if (amount &lt;= 0 || amount &gt; balance) {
+                return false;
+            }
+            balance -= amount;
+            return true;
+        }
+
+        double getBalance() {
+            return balance;
+        }
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount(1000);
+
+        account.deposit(500);
+        System.out.println("Valid deposit test: " + (account.getBalance() == 1500 ? "PASS" : "FAIL"));
+
+        boolean withdrawn = account.withdraw(2000);
+        System.out.println("Too-large withdrawal test: " + (!withdrawn &amp;&amp; account.getBalance() == 1500 ? "PASS" : "FAIL"));
+
+        try {
+            account.deposit(0);
+            System.out.println("Zero deposit test: FAIL");
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Zero deposit test: PASS");
+        }
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-testing" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-testing" hidden>Valid deposit test: PASS
+Too-large withdrawal test: PASS
+Zero deposit test: PASS</pre>
+            </div>
+          </div>
+</section>
 
         <section id="comparison" class="lesson-section">
           <span class="section-number">12</span>
@@ -848,7 +1425,53 @@ student.grade = -20;</code></pre>
 }</code></pre>
             </div>
           </div>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Safe Grade Demo">
+            <div class="java-run-toolbar">
+              <strong>SafeGradeDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-mistakes', 'java-run-expected-mistakes')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-mistakes')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class SafeGradeDemo {
+    static class Student {
+        private int grade;
+
+        public void setGrade(int grade) {
+            if (grade &gt;= 0 &amp;&amp; grade &lt;= 100) {
+                this.grade = grade;
+            }
+        }
+
+        public int getGrade() {
+            return grade;
+        }
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student();
+
+        student.setGrade(90);
+        System.out.println("Valid grade: " + student.getGrade());
+
+        student.setGrade(-20);
+        System.out.println("After invalid grade: " + student.getGrade());
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-mistakes" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-mistakes" hidden>Valid grade: 90
+After invalid grade: 90</pre>
+            </div>
+          </div>
+</section>
 
         <section id="guided-project" class="lesson-section">
           <span class="section-number">15</span>
@@ -955,7 +1578,76 @@ student.grade = -20;</code></pre>
 }</code></pre>
             </div>
           </details>
-        </section>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="LibraryBook Run Demo">
+            <div class="java-run-toolbar">
+              <strong>LibraryBookDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-guided-project', 'java-run-expected-guided-project')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-guided-project')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class LibraryBookDemo {
+    static class LibraryBook {
+        private final String title;
+        private String borrower;
+        private boolean available;
+
+        LibraryBook(String title) {
+            if (title == null || title.isBlank()) {
+                throw new IllegalArgumentException("Title is required.");
+            }
+            this.title = title;
+            this.available = true;
+        }
+
+        public boolean borrowBook(String studentName) {
+            if (!available || studentName == null || studentName.isBlank()) {
+                return false;
+            }
+            borrower = studentName;
+            available = false;
+            return true;
+        }
+
+        public void returnBook() {
+            borrower = null;
+            available = true;
+        }
+
+        public String getTitle() { return title; }
+        public String getBorrower() { return borrower; }
+        public boolean isAvailable() { return available; }
+    }
+
+    public static void main(String[] args) {
+        LibraryBook book = new LibraryBook("Java Fundamentals");
+
+        System.out.println("Available: " + book.isAvailable());
+        System.out.println("Maria borrows: " + book.borrowBook("Maria"));
+        System.out.println("Borrower: " + book.getBorrower());
+        System.out.println("Juan borrows: " + book.borrowBook("Juan"));
+
+        book.returnBook();
+        System.out.println("Available after return: " + book.isAvailable());
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-guided-project" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-guided-project" hidden>Available: true
+Maria borrows: true
+Borrower: Maria
+Juan borrows: false
+Available after return: true</pre>
+            </div>
+          </div>
+</section>
 
         <section id="activity" class="lesson-section">
           <span class="section-number">16</span>
@@ -1028,10 +1720,154 @@ student.grade = -20;</code></pre>
 }</code></pre>
             </div>
           </details>
+        
+          <div class="java-run-note">
+            <strong>Run Example:</strong> Click the button below to preview the result/output for this Java topic.
+          </div>
+          <div class="java-run-demo" aria-label="Product Activity Run Demo">
+            <div class="java-run-toolbar">
+              <strong>ProductDemo.java</strong>
+              <div class="java-run-actions">
+                <button class="java-run-button" type="button"
+                  onclick="runJavaExample(this, 'java-run-output-activity', 'java-run-expected-activity')">▶ Run Example</button>
+                <button class="java-clear-button" type="button"
+                  onclick="clearJavaExample('java-run-output-activity')">Clear Output</button>
+              </div>
+            </div>
+            <pre class="java-run-code"><code>public class ProductDemo {
+    static class Product {
+        private String name;
+        private double price;
+        private int stock;
+
+        Product(String name, double price, int stock) {
+            setName(name);
+            setPrice(price);
+            setStock(stock);
+        }
+
+        void setName(String name) {
+            if (name == null || name.isBlank()) {
+                throw new IllegalArgumentException("Name is required.");
+            }
+            this.name = name;
+        }
+
+        void setPrice(double price) {
+            if (price &lt; 0) {
+                throw new IllegalArgumentException("Invalid price.");
+            }
+            this.price = price;
+        }
+
+        void setStock(int stock) {
+            if (stock &lt; 0) {
+                throw new IllegalArgumentException("Invalid stock.");
+            }
+            this.stock = stock;
+        }
+
+        boolean sell(int quantity) {
+            if (quantity &lt;= 0 || quantity &gt; stock) {
+                return false;
+            }
+            stock -= quantity;
+            return true;
+        }
+
+        String getName() { return name; }
+        double getPrice() { return price; }
+        int getStock() { return stock; }
+    }
+
+    public static void main(String[] args) {
+        Product product = new Product("Keyboard", 850.00, 10);
+
+        System.out.println("Product: " + product.getName());
+        System.out.printf("Price: %.2f%n", product.getPrice());
+        System.out.println("Sell 3: " + product.sell(3));
+        System.out.println("Stock left: " + product.getStock());
+        System.out.println("Sell 20: " + product.sell(20));
+        System.out.println("Final stock: " + product.getStock());
+    }
+}</code></pre>
+            <div class="java-run-result">
+              <span class="java-run-result-label">Result / Output</span>
+              <pre class="java-run-output" id="java-run-output-activity" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+              <pre id="java-run-expected-activity" hidden>Product: Keyboard
+Price: 850.00
+Sell 3: true
+Stock left: 7
+Sell 20: false
+Final stock: 7</pre>
+            </div>
+          </div>
+</section>
+
+
+        <section id="run-example" class="lesson-section">
+          <span class="section-number">17</span>
+          <div class="section-heading">
+            <p class="section-kicker">Interactive Demonstration</p>
+            <h2>Run Example: Encapsulation</h2>
+          </div>
+          <p>This example keeps <code>balance</code> private and allows changes only through a validated public method.</p>
+      <p>Use this complete Java program to connect the lesson concept with the result that appears in the console.</p>
+                <div class="java-run-demo">
+                  <div class="java-run-toolbar">
+                    <strong>EncapsulationDemo.java</strong>
+                    <div class="java-run-actions">
+                      <button class="java-run-button" id="java-run-button" type="button" onclick="runLessonExample()">▶ Run Example</button>
+                      <button class="java-clear-button" type="button" onclick="clearLessonExample()">Clear Output</button>
+                    </div>
+                  </div>
+                  <pre class="java-run-code"><code>public class EncapsulationDemo {
+              static class BankAccount {
+                  private double balance;
+          
+                  BankAccount(double initialBalance) {
+                      if (initialBalance &lt; 0) {
+                          throw new IllegalArgumentException(&quot;Balance cannot be negative&quot;);
+                      }
+                      balance = initialBalance;
+                  }
+          
+                  public void deposit(double amount) {
+                      if (amount &gt; 0) {
+                          balance += amount;
+                          System.out.printf(&quot;Deposited: %.2f%n&quot;, amount);
+                      } else {
+                          System.out.println(&quot;Deposit rejected.&quot;);
+                      }
+                  }
+          
+                  public double getBalance() {
+                      return balance;
+                  }
+              }
+          
+              public static void main(String[] args) {
+                  BankAccount account = new BankAccount(1000.00);
+                  System.out.printf(&quot;Starting balance: %.2f%n&quot;, account.getBalance());
+                  account.deposit(500.00);
+                  account.deposit(-100.00);
+                  System.out.printf(&quot;Final balance: %.2f%n&quot;, account.getBalance());
+              }
+          }</code></pre>
+                  <div class="java-run-result">
+                    <span class="java-run-result-label">Result / Output</span>
+                    <pre class="java-run-output" id="java-run-output" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+                    <pre id="java-run-expected" hidden>Starting balance: 1000.00
+          Deposited: 500.00
+          Deposit rejected.
+          Final balance: 1500.00</pre>
+                  </div>
+                </div>
+                <p class="java-run-note"><strong>Teaching note:</strong> This button previews the expected console output inside the lesson page. The browser is not compiling Java; students can run the same source code in NetBeans or with the JDK for real execution.</p>
         </section>
 
         <section id="assessment" class="lesson-section assessment-section">
-          <span class="section-number">17</span>
+          <span class="section-number">18</span>
           <div class="section-heading">
             <p class="section-kicker">Assessment</p>
             <h2>Check your understanding</h2>
@@ -1062,7 +1898,7 @@ student.grade = -20;</code></pre>
         </section>
 
         <section id="teaching-guide" class="lesson-section teaching-guide">
-          <span class="section-number">18</span>
+          <span class="section-number">19</span>
           <div class="section-heading">
             <p class="section-kicker">For the Presenter</p>
             <h2>Short teaching guide</h2>
@@ -1083,7 +1919,7 @@ student.grade = -20;</code></pre>
         </section>
 
         <section id="glossary" class="lesson-section">
-          <span class="section-number">19</span>
+          <span class="section-number">20</span>
           <div class="section-heading">
             <p class="section-kicker">Review Words</p>
             <h2>Glossary and final checklist</h2>
@@ -1123,5 +1959,53 @@ student.grade = -20;</code></pre>
       <a href="#top">Back to top ↑</a>
     </div>
   </footer>
+<!-- RUN-EXAMPLE-SCRIPT -->
+
+  <script>
+    function runJavaExample(button, outputId, expectedId) {
+      const output = document.getElementById(outputId);
+      const expected = document.getElementById(expectedId);
+      if (!output || !expected || !button) return;
+
+      button.disabled = true;
+      const originalLabel = button.textContent;
+      button.textContent = 'Running…';
+      output.textContent = 'Compiling example…';
+
+      window.setTimeout(function () {
+        output.textContent = expected.textContent;
+        button.disabled = false;
+        button.textContent = originalLabel || '▶ Run Example';
+      }, 350);
+    }
+
+    function clearJavaExample(outputId) {
+      const output = document.getElementById(outputId);
+      if (output) {
+        output.textContent = 'Click “Run Example” to see the result / output.';
+      }
+    }
+
+    function runLessonExample() {
+      const output = document.getElementById('java-run-output');
+      const button = document.getElementById('java-run-button');
+      if (!output || !button) return;
+
+      button.disabled = true;
+      button.textContent = 'Running…';
+      output.textContent = 'Compiling example…';
+
+      window.setTimeout(function () {
+        output.textContent = document.getElementById('java-run-expected').textContent;
+        button.disabled = false;
+        button.textContent = '▶ Run Example';
+      }, 350);
+    }
+
+    function clearLessonExample() {
+      const output = document.getElementById('java-run-output');
+      if (output) output.textContent = 'Click “Run Example” to see the result / output.';
+    }
+  </script>
 </body>
 </html>

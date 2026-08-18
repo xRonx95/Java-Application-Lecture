@@ -181,3 +181,502 @@ pre code { padding: 0; color: inherit; background: none; font-size: inherit; }
 @media print {
   body { background: #fff; font-size: 12pt; }.module-header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }.lesson-nav, .mobile-contents, .table-of-contents, .module-footer { display: none; }.page-shell { max-width: none; padding: 0; display: block; }.lesson-section { margin: 0; padding: 24px 0; box-shadow: none; border: 0; border-bottom: 1px solid #aaa; break-inside: avoid; }.procedure-step { break-inside: avoid; }.lesson-section h2 { font-size: 25pt; }.module-header__inner { padding: 28px; }.module-heading h1 { font-size: 34pt; } pre { white-space: pre-wrap; }
 }
+
+/* =========================================================
+   Runnable Java examples
+   These controls simulate the expected Swing output locally.
+   ========================================================= */
+.run-example-bar {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  background: #f7fafc;
+  border: 1px solid var(--line);
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+}
+
+.step-copy pre + .run-example-bar {
+  margin-top: 0;
+}
+
+.run-example-bar--program {
+  margin-top: 0;
+  border-radius: 0 0 10px 10px;
+}
+
+.run-example-btn {
+  appearance: none;
+  min-height: 44px;
+  padding: 10px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #fff;
+  background: var(--success);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(39, 122, 84, .2);
+  font: 800 14px/1.2 inherit;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+
+.run-example-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 16px rgba(39, 122, 84, .25);
+  filter: brightness(.96);
+}
+
+.run-example-btn:active {
+  transform: translateY(0);
+}
+
+.run-example-btn:focus-visible,
+.java-window-simulator button:focus-visible,
+.java-window-simulator input:focus-visible,
+.java-window-simulator select:focus-visible,
+.dialog-ok:focus-visible {
+  outline: 3px solid rgba(211, 154, 44, .55);
+  outline-offset: 3px;
+}
+
+.run-example-btn.has-run {
+  background: #1f6847;
+}
+
+.run-example-btn--large {
+  min-height: 48px;
+  padding-inline: 22px;
+  font-size: 15px;
+}
+
+.run-example-note {
+  flex: 1 1 240px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.run-example-note code {
+  font-size: .9em;
+}
+
+.example-output {
+  margin-top: 14px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #bfcbd5;
+  border-radius: 11px;
+  box-shadow: 0 10px 25px rgba(20, 42, 67, .09);
+}
+
+.example-output[hidden] {
+  display: none !important;
+}
+
+.example-output.is-running {
+  animation: outputReveal .28s ease-out;
+}
+
+@keyframes outputReveal {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.output-header {
+  min-height: 44px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #fff;
+  background: var(--navy-900);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.output-status {
+  color: var(--gold-100);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.output-stage {
+  min-height: 190px;
+  padding: 28px;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)),
+    repeating-linear-gradient(45deg, #e9eef2 0 10px, #f3f6f8 10px 20px);
+}
+
+.simulated-dialog {
+  width: min(100%, 410px);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #acb8c3;
+  border-radius: 7px;
+  box-shadow: 0 18px 38px rgba(0,0,0,.2);
+}
+
+.simulated-dialog__title {
+  padding: 10px 13px;
+  color: #fff;
+  background: var(--navy-800);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.simulated-dialog__message {
+  min-height: 92px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.simulated-dialog__message p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dialog-check {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--success);
+  border-radius: 50%;
+  font-weight: 900;
+}
+
+.simulated-dialog__actions {
+  padding: 10px 14px;
+  display: flex;
+  justify-content: flex-end;
+  background: #f1f4f6;
+  border-top: 1px solid #d5dde4;
+}
+
+.dialog-ok {
+  min-width: 72px;
+  padding: 7px 16px;
+  color: #fff;
+  background: var(--navy-700);
+  border: 0;
+  border-radius: 5px;
+  font: 750 13px/1.2 inherit;
+  cursor: pointer;
+}
+
+.output-caption {
+  margin: 0;
+  padding: 14px 17px;
+  color: var(--muted);
+  background: #f8fafb;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.clear-demo-grid {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  background: #edf2f5;
+}
+
+.clear-arrow {
+  color: var(--gold-500);
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.mini-form-preview {
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #c5d0d9;
+  border-radius: 8px;
+}
+
+.preview-label {
+  color: var(--navy-800);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.mini-form-preview label {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.mini-form-preview input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 9px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #bac6d0;
+  border-radius: 5px;
+  font: 600 12px/1.3 inherit;
+}
+
+.mini-form-preview--cleared input {
+  background: #f7f9fa;
+}
+
+.example-output--application {
+  margin-top: 16px;
+}
+
+.java-window-simulator {
+  width: min(100% - 32px, 620px);
+  margin: 26px auto;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #9fadb9;
+  border-radius: 8px;
+  box-shadow: 0 18px 38px rgba(22, 46, 70, .18);
+}
+
+.java-window-titlebar {
+  min-height: 42px;
+  padding: 9px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #fff;
+  background: #31485d;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.java-window-controls {
+  white-space: nowrap;
+  letter-spacing: .18em;
+  opacity: .85;
+}
+
+.java-window-content {
+  padding: 28px;
+  background: #f3f3f3;
+}
+
+.sim-form-row {
+  margin-bottom: 14px;
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.sim-form-row label {
+  color: #2d3740;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sim-form-row input,
+.sim-form-row select {
+  width: 100%;
+  min-width: 0;
+  height: 38px;
+  padding: 7px 10px;
+  color: #202a33;
+  background: #fff;
+  border: 1px solid #9eabb7;
+  border-radius: 4px;
+  font: 500 13px/1.2 inherit;
+}
+
+.sim-form-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+}
+
+.sim-form-actions button {
+  min-width: 86px;
+  min-height: 36px;
+  padding: 7px 14px;
+  color: #263746;
+  background: #f8f8f8;
+  border: 1px solid #9ca8b3;
+  border-radius: 4px;
+  font: 750 13px/1.2 inherit;
+  cursor: pointer;
+}
+
+.sim-form-actions .sim-primary {
+  color: #fff;
+  background: var(--navy-700);
+  border-color: var(--navy-700);
+}
+
+.sim-message {
+  margin-top: 18px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 2px;
+  color: #41505f;
+  background: #fff;
+  border: 1px solid #cbd4dc;
+  border-left: 5px solid #8293a3;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.sim-message strong {
+  color: var(--navy-800);
+}
+
+.sim-message--success {
+  background: #eef8f2;
+  border-left-color: var(--success);
+}
+
+.sim-message--success strong {
+  color: var(--success);
+}
+
+.sim-message--warning {
+  background: #fff8e7;
+  border-left-color: var(--gold-500);
+}
+
+.sim-message--warning strong {
+  color: #7a5a14;
+}
+
+.sim-message--error {
+  background: #fff1f1;
+  border-left-color: var(--danger);
+}
+
+.sim-message--error strong {
+  color: var(--danger);
+}
+
+/* Code block and layout refinements */
+.lesson-content pre {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.step-copy pre {
+  border-radius: 9px 9px 0 0;
+}
+
+.large-code {
+  border-radius: 0;
+}
+
+.lesson-section,
+.procedure-step,
+.step-copy,
+.lesson-figure {
+  min-width: 0;
+}
+
+.lesson-section p,
+.lesson-section li,
+.lesson-section td,
+.lesson-section th {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 800px) {
+  .run-example-bar {
+    align-items: stretch;
+  }
+
+  .run-example-btn,
+  .run-example-btn--large {
+    width: 100%;
+  }
+
+  .run-example-note {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .clear-demo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .clear-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+
+  .java-window-content {
+    padding: 22px 18px;
+  }
+
+  .sim-form-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 520px) {
+  .output-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .output-stage,
+  .clear-demo-grid {
+    padding: 14px;
+  }
+
+  .java-window-simulator {
+    width: calc(100% - 18px);
+    margin-block: 14px;
+  }
+
+  .java-window-content {
+    padding: 18px 14px;
+  }
+
+  .sim-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .sim-form-actions button {
+    width: 100%;
+  }
+}
+
+@media print {
+  .run-example-bar,
+  .example-output {
+    display: none !important;
+  }
+}

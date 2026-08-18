@@ -12,7 +12,7 @@
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
   <!-- Separate stylesheet -->
-  <link rel="stylesheet" href="../css/Database & JDBC/jdbc-connection.css?v=1">
+  <link rel="stylesheet" href="../css/Database & JDBC/jdbc-connection.css?v=2">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to lesson content</a>
@@ -339,7 +339,7 @@ VALUES ('2026-001', 'Maria Santos', 'BS Information Technology');</code></pre>
               <h3>Create a Reusable Connection Class</h3>
               <p>Create <code>DatabaseConnection.java</code>. Replace the sample credentials with the account configured on your computer.</p>
               <div class="code-block">
-                <div class="code-toolbar"><span>Java · DatabaseConnection.java</span><button type="button" class="copy-button" data-copy-target="code-connection" aria-label="Copy connection class">Copy</button></div>
+                <div class="code-toolbar"><span>Java · DatabaseConnection.java</span><div class="code-actions"><button type="button" class="run-button" data-run-example="connection-class" aria-label="Preview the DatabaseConnection example output">▶ Run Example</button><button type="button" class="copy-button" data-copy-target="code-connection" aria-label="Copy connection class">Copy</button></div></div>
                 <pre><code id="code-connection">package database;
 
 import java.sql.Connection;
@@ -379,7 +379,7 @@ public final class DatabaseConnection {
               <h3>Test the Connection</h3>
               <p>Create a small test class. Try-with-resources closes the connection automatically after the test.</p>
               <div class="code-block">
-                <div class="code-toolbar"><span>Java · ConnectionTest.java</span><button type="button" class="copy-button" data-copy-target="code-test" aria-label="Copy connection test">Copy</button></div>
+                <div class="code-toolbar"><span>Java · ConnectionTest.java</span><div class="code-actions"><button type="button" class="run-button" data-run-example="connection-test" aria-label="Preview the connection test output">▶ Run Example</button><button type="button" class="copy-button" data-copy-target="code-test" aria-label="Copy connection test">Copy</button></div></div>
                 <pre><code id="code-test">package app;
 
 import database.DatabaseConnection;
@@ -417,7 +417,7 @@ public class ConnectionTest {
               <h3>Retrieve and Display Records</h3>
               <p>Use <code>PreparedStatement</code> even when a query initially has no parameters. This keeps the pattern consistent and makes later changes easier.</p>
               <div class="code-block">
-                <div class="code-toolbar"><span>Java · StudentRepository.java</span><button type="button" class="copy-button" data-copy-target="code-select" aria-label="Copy select example">Copy</button></div>
+                <div class="code-toolbar"><span>Java · StudentRepository.java</span><div class="code-actions"><button type="button" class="run-button" data-run-example="select-records" aria-label="Preview the SELECT example output">▶ Run Example</button><button type="button" class="copy-button" data-copy-target="code-select" aria-label="Copy select example">Copy</button></div></div>
                 <pre><code id="code-select">String sql = "SELECT id, student_number, full_name, program "
         + "FROM students ORDER BY full_name";
 
@@ -463,7 +463,7 @@ try (Connection connection = DatabaseConnection.getConnection();
 
           <h3 class="subtopic-title">Safe Insert Example</h3>
           <div class="code-block">
-            <div class="code-toolbar"><span>Java · parameterized INSERT</span><button type="button" class="copy-button" data-copy-target="code-insert" aria-label="Copy insert example">Copy</button></div>
+            <div class="code-toolbar"><span>Java · parameterized INSERT</span><div class="code-actions"><button type="button" class="run-button" data-run-example="insert-record" aria-label="Preview the INSERT example output">▶ Run Example</button><button type="button" class="copy-button" data-copy-target="code-insert" aria-label="Copy insert example">Copy</button></div></div>
             <pre><code id="code-insert">String sql = "INSERT INTO students "
         + "(student_number, full_name, program) VALUES (?, ?, ?)";
 
@@ -482,7 +482,8 @@ try (Connection connection = DatabaseConnection.getConnection();
           <h3 class="subtopic-title">Transaction Example</h3>
           <p>Use a transaction when two or more statements must be treated as one logical operation.</p>
           <div class="code-block compact">
-            <pre><code>connection.setAutoCommit(false);
+            <div class="code-toolbar"><span>Java · transaction control</span><div class="code-actions"><button type="button" class="run-button" data-run-example="transaction" aria-label="Preview the transaction example output">▶ Run Example</button></div></div>
+            <pre><code id="code-transaction">connection.setAutoCommit(false);
 try {
     // Execute related SQL statements here.
     connection.commit();
@@ -508,6 +509,7 @@ try {
             <article class="comparison-card unsafe">
               <p class="comparison-label">Avoid</p>
               <h3>SQL String Concatenation</h3>
+              <button type="button" class="run-button comparison-run-button" data-run-example="unsafe-query" aria-label="Preview why string concatenation is unsafe">▶ Run Example</button>
               <pre><code>String sql = "SELECT * FROM users "
     + "WHERE username='" + input + "'";</code></pre>
               <p>User input becomes part of the SQL command and may allow SQL injection.</p>
@@ -515,6 +517,7 @@ try {
             <article class="comparison-card safe">
               <p class="comparison-label">Use</p>
               <h3>PreparedStatement</h3>
+              <button type="button" class="run-button comparison-run-button" data-run-example="prepared-query" aria-label="Preview the prepared statement behavior">▶ Run Example</button>
               <pre><code>String sql = "SELECT * FROM users "
     + "WHERE username = ?";
 statement.setString(1, input);</code></pre>
@@ -715,6 +718,163 @@ statement.setString(1, input);</code></pre>
         }
       });
     });
+
+    const javaExamples = {
+      'connection-class': {
+        title: 'DatabaseConnection.java',
+        status: 'Utility class ready',
+        body: `
+          <div class="output-summary success-output-summary">
+            <span class="output-summary-icon" aria-hidden="true">✓</span>
+            <div><strong>Connection utility prepared</strong><p>The class can create a JDBC connection when Connector/J and MySQL are available.</p></div>
+          </div>
+          <div class="output-detail-grid">
+            <div><span>Host</span><strong>localhost:3306</strong></div>
+            <div><span>Database</span><strong>school_db</strong></div>
+            <div><span>User</span><strong>root</strong></div>
+            <div><span>Method</span><strong>getConnection()</strong></div>
+          </div>
+          <pre class="gui-console">DatabaseConnection has no main() method.\nExpected use: DatabaseConnection.getConnection()\nReturn type: java.sql.Connection</pre>`
+      },
+      'connection-test': {
+        title: 'ConnectionTest.java',
+        status: 'Process finished successfully',
+        body: `
+          <div class="output-summary success-output-summary">
+            <span class="output-summary-icon" aria-hidden="true">✓</span>
+            <div><strong>Database connection successful</strong><p>The example reaches the database and reads its catalog name.</p></div>
+          </div>
+          <pre class="gui-console">Connection successful.\nDatabase: school_db\n\nBUILD SUCCESSFUL</pre>`
+      },
+      'select-records': {
+        title: 'StudentRepository.java',
+        status: 'SELECT completed',
+        body: `
+          <div class="output-summary success-output-summary">
+            <span class="output-summary-icon" aria-hidden="true">✓</span>
+            <div><strong>Student records retrieved</strong><p>ResultSet values are displayed in the same order requested by the query.</p></div>
+          </div>
+          <div class="gui-table-wrap"><table class="gui-table"><thead><tr><th>ID</th><th>Student No.</th><th>Full Name</th><th>Program</th></tr></thead><tbody><tr><td>1</td><td>2026-001</td><td>Maria Santos</td><td>BS Information Technology</td></tr></tbody></table></div>
+          <pre class="gui-console">1 | 2026-001 | Maria Santos | BS Information Technology</pre>`
+      },
+      'insert-record': {
+        title: 'Parameterized INSERT',
+        status: 'INSERT completed',
+        body: `
+          <div class="output-summary success-output-summary">
+            <span class="output-summary-icon" aria-hidden="true">✓</span>
+            <div><strong>Record added</strong><p>The prepared statement binds all three student values before execution.</p></div>
+          </div>
+          <div class="output-detail-grid">
+            <div><span>Student No.</span><strong>2026-002</strong></div>
+            <div><span>Name</span><strong>Juan Dela Cruz</strong></div>
+            <div><span>Program</span><strong>BS Computer Science</strong></div>
+            <div><span>Affected Rows</span><strong>1</strong></div>
+          </div>
+          <pre class="gui-console">1 student record added.</pre>`
+      },
+      'transaction': {
+        title: 'JDBC Transaction',
+        status: 'Transaction committed',
+        body: `
+          <div class="output-summary success-output-summary">
+            <span class="output-summary-icon" aria-hidden="true">✓</span>
+            <div><strong>All related statements succeeded</strong><p>The transaction commits the changes and restores auto-commit afterward.</p></div>
+          </div>
+          <pre class="gui-console">Auto-commit: OFF\nExecuting related SQL statements...\nCommit successful.\nAuto-commit: ON</pre>`
+      },
+      'unsafe-query': {
+        title: 'SQL String Concatenation',
+        status: 'Security risk demonstrated',
+        body: `
+          <div class="output-summary warning-output-summary">
+            <span class="output-summary-icon" aria-hidden="true">!</span>
+            <div><strong>Unsafe SQL construction</strong><p>User input becomes part of the SQL syntax and can change the intended query.</p></div>
+          </div>
+          <pre class="gui-console">Input: student' OR '1'='1\n\nGenerated SQL:\nSELECT * FROM users WHERE username='student' OR '1'='1';\n\nWARNING: Do not build SQL with user-input concatenation.</pre>`
+      },
+      'prepared-query': {
+        title: 'PreparedStatement',
+        status: 'Parameter bound safely',
+        body: `
+          <div class="output-summary success-output-summary">
+            <span class="output-summary-icon" aria-hidden="true">✓</span>
+            <div><strong>Safe parameter binding</strong><p>The SQL structure stays fixed while the username is sent separately as data.</p></div>
+          </div>
+          <pre class="gui-console">SQL: SELECT * FROM users WHERE username = ?\nParameter 1: student\n\nStatus: Input treated as data, not SQL syntax.</pre>`
+      }
+    };
+
+    const outputModal = document.getElementById('javaOutputModal');
+    const outputTitle = document.getElementById('javaOutputTitle');
+    const outputStatus = document.getElementById('javaOutputStatus');
+    const outputContent = document.getElementById('javaOutputContent');
+    let lastRunButton = null;
+
+    function closeJavaOutput() {
+      if (!outputModal) return;
+      outputModal.hidden = true;
+      document.body.classList.remove('modal-open');
+      if (lastRunButton) lastRunButton.focus();
+    }
+
+    document.querySelectorAll('.run-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const example = javaExamples[button.dataset.runExample];
+        if (!example || !outputModal) return;
+
+        lastRunButton = button;
+        outputTitle.textContent = example.title;
+        outputStatus.textContent = 'Running example…';
+        outputContent.innerHTML = '<div class="output-loading"><span class="output-spinner" aria-hidden="true"></span><strong>Preparing expected result…</strong></div>';
+        outputModal.hidden = false;
+        document.body.classList.add('modal-open');
+        outputModal.querySelector('.java-output-close').focus();
+
+        window.setTimeout(() => {
+          outputStatus.textContent = example.status;
+          outputContent.innerHTML = example.body;
+        }, 320);
+      });
+    });
+
+    document.querySelectorAll('[data-close-output]').forEach((button) => {
+      button.addEventListener('click', closeJavaOutput);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && outputModal && !outputModal.hidden) {
+        closeJavaOutput();
+      }
+    });
   </script>
+
+  <!-- Offline-friendly Java example output viewer. It previews the expected result; it does not compile Java in the browser. -->
+  <div class="java-output-modal" id="javaOutputModal" hidden>
+    <div class="java-output-backdrop" data-close-output></div>
+    <section class="java-output-window" role="dialog" aria-modal="true" aria-labelledby="javaOutputTitle" aria-describedby="javaOutputDescription">
+      <header class="java-output-titlebar">
+        <div class="java-output-title-group">
+          <span class="java-output-app-icon" aria-hidden="true">J</span>
+          <div>
+            <strong id="javaOutputTitle">Java Example Output</strong>
+            <small id="javaOutputDescription">Expected classroom preview</small>
+          </div>
+        </div>
+        <button type="button" class="java-output-close" data-close-output aria-label="Close example output">×</button>
+      </header>
+      <div class="java-output-statusbar">
+        <span class="status-dot" aria-hidden="true"></span>
+        <strong id="javaOutputStatus">Ready</strong>
+        <span>Offline GUI simulation</span>
+      </div>
+      <div class="java-output-content" id="javaOutputContent" aria-live="polite"></div>
+      <footer class="java-output-footer">
+        <span>This browser preview demonstrates the expected Java/JDBC result. A real JDBC connection still requires Java, Connector/J, and MySQL.</span>
+        <button type="button" class="output-ok-button" data-close-output>Close</button>
+      </footer>
+    </section>
+  </div>
+
 </body>
 </html>

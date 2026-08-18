@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A classroom-ready Apache NetBeans overview lesson and learning module.">
   <title>Apache NetBeans Learning Module</title>
+  <!-- Browser tab logo -->
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="stylesheet" href="../css/Apache NetBeans/netbeans-overview.css">
 </head>
 <body>
@@ -19,6 +22,7 @@
       <a href="../index.html">Home</a>
       <a href="#overview">Overview</a>
       <a href="#topics">Topics</a>
+      <a href="#topic-1-run">Run Examples</a>
       <a href="#activity">Activity</a>
       <a href="#review">Review</a>
     </nav>
@@ -26,8 +30,12 @@
     <details class="mobile-nav">
       <summary aria-label="Open navigation">Menu</summary>
       <nav aria-label="Mobile navigation">
-        <a href="#overview">Overview</a><a href="#topics">Topics</a>
-        <a href="#activity">Activity</a><a href="#review">Review</a>
+        <a href="../index.html">Home</a>
+        <a href="#overview">Overview</a>
+        <a href="#topics">Topics</a>
+        <a href="#topic-1-run">Run Examples</a>
+        <a href="#activity">Activity</a>
+        <a href="#review">Review</a>
       </nav>
     </details>
   </header>
@@ -115,6 +123,31 @@
           <div class="comparison"><div><b>Basic text editor</b><ul><li>Mainly edits plain text</li><li>Tools are installed separately</li><li>Little awareness of project structure</li></ul></div><div><b>NetBeans IDE</b><ul><li>Understands project structure</li><li>Suggests and checks code</li><li>Builds, runs, and debugs in one place</li></ul></div></div>
         </div>
       </div>
+
+      <div class="run-example-section topic-run-example" id="topic-1-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 01</p>
+        <h3>Confirm that the IDE can run a Java program</h3>
+        <p>Use this first program to demonstrate the main purpose of an IDE: write the source code, run it, and immediately read the result in the Output window.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Java code</h4>
+            <pre class="run-example-code"><code>public class IDEIntroduction {
+    public static void main(String[] args) {
+        System.out.println("NetBeans IDE is ready!");
+        System.out.println("Write → Run → Check Output");
+    }
+}</code></pre>
+          </article>
+          <article class="run-example-card">
+            <h4>Expected Output</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+<span class="result">NetBeans IDE is ready!
+Write → Run → Check Output</span>
+BUILD SUCCESSFUL</div>
+            <p class="run-example-note">Teaching point: the source is written in the Editor and the printed result appears in the Output window.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section soft lesson" id="topic-2">
@@ -150,6 +183,34 @@
           </div>
           <figcaption id="workspace-caption"><b>1 Projects</b> organizes files • <b>2 Editor</b> is where code is written • <b>3 Navigator</b> lists members • <b>4 Output</b> shows results and errors</figcaption>
         </figure>
+      </div>
+
+      <div class="run-example-section topic-run-example" id="topic-2-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 02</p>
+        <h3>Use the Editor, Projects window, and Output window together</h3>
+        <p>Create a class named <strong>WorkspaceDemo</strong>. After running it, ask students to point to the source file in Projects, the code in the Editor, and the result in Output.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Java code</h4>
+            <pre class="run-example-code"><code>public class WorkspaceDemo {
+    public static void main(String[] args) {
+        String lesson = "NetBeans Workspace";
+        int windowsUsed = 3;
+
+        System.out.println("Lesson: " + lesson);
+        System.out.println("Main windows used: " + windowsUsed);
+    }
+}</code></pre>
+          </article>
+          <article class="run-example-card">
+            <h4>Expected Output</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+<span class="result">Lesson: NetBeans Workspace
+Main windows used: 3</span>
+BUILD SUCCESSFUL</div>
+            <p class="run-example-note">Students should see the class under Projects, edit it in the Source Editor, and read these two lines in Output.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -200,6 +261,31 @@
         </figure>
       </div>
       <aside class="callout visual-tip"><b>If your screen looks different</b><p>NetBeans versions may place buttons in slightly different positions. Follow the menu names and window titles shown in each picture.</p></aside>
+
+      <div class="run-example-section topic-run-example" id="topic-3-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 03</p>
+        <h3>Run the HelloNetBeans project</h3>
+        <p>This completes the workflow shown above: create the project, enter the code, save it, press <kbd>F6</kbd>, and compare the Output window with the expected result.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Java code</h4>
+            <pre class="run-example-code"><code>public class HelloNetBeans {
+    public static void main(String[] args) {
+        System.out.println("Hello, NetBeans!");
+        System.out.println("My first project is running.");
+    }
+}</code></pre>
+          </article>
+          <article class="run-example-card">
+            <h4>Expected Output</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+<span class="result">Hello, NetBeans!
+My first project is running.</span>
+BUILD SUCCESSFUL</div>
+            <div class="run-example-result"><strong>Success check:</strong> If both lines appear and the build is successful, the create → code → build → run workflow is working.</div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section dark lesson" id="topic-4">
@@ -213,6 +299,34 @@
         <article><small>05</small><h3>Code templates</h3><p>Abbreviations expand into frequently used code structures.</p></article>
         <article><small>06</small><h3>Formatting</h3><p>Alt + Shift + F applies consistent indentation and spacing.</p></article>
       </div>
+
+      <div class="run-example-section topic-run-example" id="topic-4-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 04</p>
+        <h3>Use smart coding tools, then verify that the program still works</h3>
+        <p>Type the method, try <kbd>Ctrl + Space</kbd> for completion, format with <kbd>Alt + Shift + F</kbd>, then run the class. Refactoring or formatting should improve the source without changing the result.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Java code</h4>
+            <pre class="run-example-code"><code>public class SmartCodingDemo {
+    public static int square(int number) {
+        return number * number;
+    }
+
+    public static void main(String[] args) {
+        int value = 6;
+        System.out.println("Square of " + value + " = " + square(value));
+    }
+}</code></pre>
+          </article>
+          <article class="run-example-card">
+            <h4>Expected Output</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+<span class="result">Square of 6 = 36</span>
+BUILD SUCCESSFUL</div>
+            <p class="run-example-note">Try renaming <code>value</code> with Refactor → Rename. Run again: the output should remain <strong>Square of 6 = 36</strong>.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section lesson" id="topic-5">
@@ -222,6 +336,37 @@
         <div>
           <ol class="debug-list"><li><span>1</span><div><b>Set a breakpoint</b><p>Click beside a line number. Execution pauses before that line runs.</p></div></li><li><span>2</span><div><b>Start Debug Project</b><p>Use Ctrl + F5 to run the project in debugging mode.</p></div></li><li><span>3</span><div><b>Inspect variables</b><p>Check current values and compare them with the values you expected.</p></div></li><li><span>4</span><div><b>Step through code</b><p>Use Step Over, Step Into, Step Out, and Continue to control execution.</p></div></li></ol>
           <aside class="callout warning"><b>Know the difference</b><p>A <strong>syntax error</strong> breaks language rules, a <strong>runtime error</strong> occurs during execution, and a <strong>logic error</strong> produces a wrong result even though the program runs.</p></aside>
+        </div>
+      </div>
+
+      <div class="run-example-section topic-run-example" id="topic-5-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 05</p>
+        <h3>Pause the program and inspect a variable</h3>
+        <p>Set a breakpoint on the line that calculates <code>total</code>, start Debug Project, and inspect <code>price</code>, <code>quantity</code>, and <code>total</code> as execution moves forward.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Java code</h4>
+            <pre class="run-example-code"><code>public class DebugDemo {
+    public static void main(String[] args) {
+        int price = 50;
+        int quantity = 3;
+        int total = price * quantity; // Set breakpoint here
+
+        System.out.println("Price: " + price);
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Total: " + total);
+    }
+}</code></pre>
+          </article>
+          <article class="run-example-card">
+            <h4>Expected Output</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+<span class="result">Price: 50
+Quantity: 3
+Total: 150</span>
+BUILD SUCCESSFUL</div>
+            <div class="run-example-result"><strong>Debugger check:</strong> before the print statements execute, the calculated value of <code>total</code> should become <code>150</code>.</div>
+          </article>
         </div>
       </div>
     </section>
@@ -237,6 +382,34 @@
         <article><span>✓</span><h3>Testing</h3><p>Create and run unit tests, then review pass and fail results.</p></article>
         <article><span>⚙</span><h3>Build tools</h3><p>Work with Ant, Maven, and Gradle projects in one interface.</p></article>
       </div>
+
+      <div class="run-example-section topic-run-example" id="topic-6-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 06</p>
+        <h3>Run a small reusable class that can later be tested or version-controlled</h3>
+        <p>This example is intentionally simple so it can be committed with Git, used in a Maven/Gradle project, or extended with unit tests.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Java code</h4>
+            <pre class="run-example-code"><code>public class CalculatorTool {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        int answer = add(2, 3);
+        System.out.println("2 + 3 = " + answer);
+    }
+}</code></pre>
+          </article>
+          <article class="run-example-card">
+            <h4>Expected Output</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+<span class="result">2 + 3 = 5</span>
+BUILD SUCCESSFUL</div>
+            <p class="run-example-note">Extension: create a unit test for <code>add(2, 3)</code> and verify that the expected value is <code>5</code>.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section lesson" id="topic-7">
@@ -248,6 +421,31 @@
         <figure><div class="setup-picture terminal-picture"><small>Terminal / Command Prompt</small><code>java --version</code><strong>openjdk 21...</strong></div><figcaption><span>3</span><div><b>Verify Java</b><p>Open a terminal, enter <strong>java --version</strong>, and confirm that a version number is displayed.</p></div></figcaption></figure>
       </div>
       <aside class="callout"><b>Before the class starts</b><p>Open NetBeans once and allow initial background downloads to finish. Create a small test project so installation problems are solved before the activity.</p></aside>
+
+      <div class="run-example-section topic-run-example" id="topic-7-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 07</p>
+        <h3>Verify that Java and NetBeans are configured correctly</h3>
+        <p>After installing the JDK and NetBeans, create this class and run it. A successful result confirms that NetBeans can compile and execute Java code.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Java code</h4>
+            <pre class="run-example-code"><code>public class SetupCheck {
+    public static void main(String[] args) {
+        System.out.println("JDK and NetBeans setup is working.");
+        System.out.println("Java version: " + System.getProperty("java.version"));
+    }
+}</code></pre>
+          </article>
+          <article class="run-example-card">
+            <h4>Example Output</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+<span class="result">JDK and NetBeans setup is working.
+Java version: 21.0.x</span>
+BUILD SUCCESSFUL</div>
+            <p class="run-example-note">The exact Java version depends on the JDK installed on the computer. The important result is that the program runs successfully.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section soft lesson" id="topic-8">
@@ -283,6 +481,31 @@ int grade = <em>88</em>;</code></pre><p>Choose a data type and a meaningful vari
     }
   }
 }</code></pre></div>
+
+      <div class="run-example-section topic-run-example" id="topic-8-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 08</p>
+        <h3>Enter a student name and grade, then read the decision</h3>
+        <p>Run the complete Grade Checker above. The program pauses for keyboard input and then selects the correct <code>if/else</code> branch.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Sample Run 1 — Passing grade</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+Student name: Ana
+Numeric grade: 88
+<span class="result">Ana — Passed</span>
+BUILD SUCCESSFUL</div>
+          </article>
+          <article class="run-example-card">
+            <h4>Sample Run 2 — Below passing grade</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+Student name: Leo
+Numeric grade: 74
+<span class="result">Leo — Needs Improvement</span>
+BUILD SUCCESSFUL</div>
+            <p class="run-example-note">Also test the boundary value <strong>75</strong>. It should display <strong>Passed</strong>.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section lesson" id="topic-9">
@@ -297,6 +520,37 @@ int grade = <em>88</em>;</code></pre><p>Choose a data type and a meaningful vari
         <h3>Test plan for the Grade Checker</h3>
         <table><thead><tr><th>Test</th><th>Input grade</th><th>Expected result</th><th>Why test it?</th></tr></thead><tbody><tr><td>Below boundary</td><td>74</td><td>Needs Improvement</td><td>Checks the false branch</td></tr><tr><td>Exact boundary</td><td>75</td><td>Passed</td><td>Checks the comparison operator</td></tr><tr><td>Typical pass</td><td>88</td><td>Passed</td><td>Checks an ordinary valid value</td></tr><tr><td>Highest grade</td><td>100</td><td>Passed</td><td>Checks the upper valid value</td></tr></tbody></table>
       </div>
+
+      <div class="run-example-section topic-run-example" id="topic-9-run">
+        <p class="run-example-kicker">▶ Run Example · Topic 09</p>
+        <h3>Run boundary tests after fixing the comparison</h3>
+        <p>The corrected condition uses <code>&gt;= 75</code>. Run several values so students can compare actual output with the test plan.</p>
+        <div class="run-example-grid">
+          <article class="run-example-card">
+            <h4>Java code</h4>
+            <pre class="run-example-code"><code>public class BoundaryTest {
+    public static void main(String[] args) {
+        int[] grades = {74, 75, 88, 100};
+
+        for (int grade : grades) {
+            String result = grade &gt;= 75 ? "Passed" : "Needs Improvement";
+            System.out.println(grade + " → " + result);
+        }
+    }
+}</code></pre>
+          </article>
+          <article class="run-example-card">
+            <h4>Expected Output</h4>
+            <div class="run-example-terminal"><span class="prompt">run:</span>
+<span class="result">74 → Needs Improvement
+75 → Passed
+88 → Passed
+100 → Passed</span>
+BUILD SUCCESSFUL</div>
+            <div class="run-example-result"><strong>Logic-error check:</strong> if <code>75</code> prints “Needs Improvement,” inspect the comparison operator and change <code>&gt;</code> to <code>&gt;=</code>.</div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section">
@@ -307,6 +561,45 @@ int grade = <em>88</em>;</code></pre><p>Choose a data type and a meaningful vari
     <section class="section soft">
       <div class="section-heading split"><div><p class="eyebrow">CHEAT SHEET</p><h2>Useful shortcuts</h2></div><p>Shortcuts speed up common actions and help learners stay focused on their code.</p></div>
       <div class="shortcuts"><div><kbd>Ctrl + Space</kbd><span>Show code suggestions</span></div><div><kbd>Alt + Shift + F</kbd><span>Format source code</span></div><div><kbd>Ctrl + R</kbd><span>Rename safely</span></div><div><kbd>Ctrl + F</kbd><span>Find in current file</span></div><div><kbd>Ctrl + Shift + F</kbd><span>Find in projects</span></div><div><kbd>F6</kbd><span>Run main project</span></div><div><kbd>Ctrl + F5</kbd><span>Debug main project</span></div><div><kbd>Ctrl + Shift + I</kbd><span>Fix imports</span></div></div>
+    </section>
+
+
+    <section class="section run-example-section" id="run-example">
+      <p class="run-example-kicker">▶ Run Example · See the Result</p>
+      <h2>Run a Java Grade Checker and read the Output window</h2>
+      <p>This combines the Java essentials in Topic 8 with the NetBeans run workflow. Students can type the program, press <kbd>F6</kbd>, enter values, and compare the Output panel with the examples below.</p>
+      <div class="run-example-grid">
+        <article class="run-example-card">
+          <h3>Java code</h3>
+          <pre class="run-example-code"><code>import java.util.Scanner;
+
+public class GradeChecker {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Student name: ");
+        String name = input.nextLine();
+        System.out.print("Numeric grade: ");
+        int grade = input.nextInt();
+
+        if (grade &gt;= 75) {
+            System.out.println(name + " — Passed");
+        } else {
+            System.out.println(name + " — Needs Improvement");
+        }
+    }
+}</code></pre>
+        </article>
+        <article class="run-example-card">
+          <h3>Expected Output window</h3>
+          <div class="run-example-terminal"><span class="prompt">run:</span>
+Student name: Ana
+Numeric grade: 88
+<span class="result">Ana — Passed</span>
+BUILD SUCCESSFUL</div>
+          <div class="run-example-result"><strong>Try another value:</strong><br><code>Student name: Leo</code><br><code>Numeric grade: 74</code><br>Result: <code>Leo — Needs Improvement</code></div>
+          <p class="run-example-note">The Editor contains the source code, <kbd>F6</kbd> runs the project, and the result appears in the Output window.</p>
+        </article>
+      </div>
     </section>
 
     <section class="section activity" id="activity">

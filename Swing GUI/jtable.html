@@ -11,7 +11,7 @@
   <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
-  <link rel="stylesheet" href="../css/Swing GUI/jtable.css?v=2">
+  <link rel="stylesheet" href="../css/Swing GUI/jtable.css?v=3">
   <script src="../js/jtable.js?v=2" defer></script>
 </head>
 <body id="top">
@@ -319,11 +319,28 @@
             <figcaption><strong>Picture 11 — Rename the table variable</strong><span>Open the Code tab in Properties and change the variable name to <code>tblStudents</code>.</span></figcaption>
           </figure>
         </div>
+        <div class="runner-notice" role="note">
+          <strong>About the Run Example buttons:</strong>
+          These buttons show a classroom-friendly simulation of the expected Java result directly in the browser. The HTML page does not compile Java; use Apache NetBeans/JDK to run the real Swing program.
+        </div>
         <div class="code-block">
           <div class="code-heading"><span>Obtain the model in Java code</span><button class="copy-button" type="button">Copy code</button></div>
           <pre><code>import javax.swing.table.DefaultTableModel;
 
 DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="table-model" aria-controls="output-table-model" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-table-model" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-table-model">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
         </div>
         <p>The cast tells Java that the table is using a <code>DefaultTableModel</code>, making methods such as <code>addRow()</code>, <code>removeRow()</code>, and <code>setValueAt()</code> available.</p>
       </section>
@@ -357,6 +374,19 @@ DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();</code></pr
     clearForm();
     JOptionPane.showMessageDialog(this, "Record added successfully.");
 }</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="add-record" aria-controls="output-add-record" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-add-record" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-add-record">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
         </div>
         <figure class="visual-card wide-visual">
           <div class="before-after" role="img" aria-label="Before and after illustration of adding a student row">
@@ -387,6 +417,19 @@ DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();</code></pr
     cmbCourse.setSelectedItem(model.getValueAt(modelRow, 2).toString());
     spnYear.setValue(model.getValueAt(modelRow, 3));
 }</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="select-record" aria-controls="output-select-record" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-select-record" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-select-record">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
         </div>
         <div class="two-column">
           <article class="code-card">
@@ -406,6 +449,19 @@ model.setValueAt(txtStudentId.getText().trim(), row, 0);
 model.setValueAt(txtName.getText().trim(), row, 1);
 model.setValueAt(cmbCourse.getSelectedItem(), row, 2);
 model.setValueAt(spnYear.getValue(), row, 3);</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="update-record" aria-controls="output-update-record" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-update-record" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-update-record">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
           </article>
           <article class="code-card">
             <h3>Delete the selected row</h3>
@@ -426,6 +482,19 @@ if (answer == JOptionPane.YES_OPTION) {
     ((DefaultTableModel) tblStudents.getModel())
         .removeRow(row);
 }</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="delete-record" aria-controls="output-delete-record" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-delete-record" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-delete-record">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
           </article>
         </div>
         <figure class="visual-card wide-visual">
@@ -452,6 +521,19 @@ if (answer == JOptionPane.YES_OPTION) {
 TableRowSorter&lt;DefaultTableModel&gt; sorter =
     new TableRowSorter&lt;&gt;(model);
 tblStudents.setRowSorter(sorter);</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="sort-records" aria-controls="output-sort-records" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-sort-records" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-sort-records">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
             </div>
           </div>
           <div>
@@ -468,6 +550,19 @@ if (text.isEmpty()) {
             Pattern.quote(text))
     );
 }</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="filter-records" aria-controls="output-filter-records" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-filter-records" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-filter-records">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
             </div>
           </div>
         </div>
@@ -506,6 +601,19 @@ if (text.isEmpty()) {
     }
     return false;
 }</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="duplicate-id" aria-controls="output-duplicate-id" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-duplicate-id" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-duplicate-id">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
         </div>
         <figure class="visual-card wide-visual">
           <div class="dialog-gallery" role="img" aria-label="Examples of warning confirmation and success dialogs">
@@ -781,6 +889,19 @@ public class StudentTableApp extends JFrame {
         );
     }
 }</code></pre>
+          <div class="example-actions">
+            <button class="run-example-button" type="button" data-example="complete-app" aria-controls="output-complete-app" aria-expanded="false">
+              <span aria-hidden="true">▶</span> Run Example
+            </button>
+            <span class="example-hint">View the expected result/output</span>
+          </div>
+          <div class="example-output" id="output-complete-app" hidden aria-live="polite">
+            <div class="output-heading">
+              <span><span class="status-dot" aria-hidden="true"></span> Example Output</span>
+              <button class="clear-output-button" type="button" data-output="output-complete-app">Clear</button>
+            </div>
+            <pre class="output-console"></pre>
+          </div>
         </div>
         <div class="important-box"><h3>Teaching note</h3><p>The complete example stores data only while the application is open. Persistent storage using a text file or database should be introduced as a separate lesson after students understand the JTable model.</p></div>
       </section>
@@ -900,5 +1021,56 @@ public class StudentTableApp extends JFrame {
       </footer>
     </main>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const exampleOutputs = {
+  "table-model": "RUN: Obtain the JTable model\n\nDefaultTableModel connected to tblStudents.\nColumns detected: ID | Name | Course | Year\nCurrent rows: 0\n\nRESULT: The model is ready for addRow(), removeRow(), and setValueAt().",
+  "add-record": "RUN: Add a student record\n\nInput:\nID: 1004\nName: Pat Lee\nCourse: BSIT\nYear: 1\n\nBefore: 3 rows\nAfter: 4 rows\n\nNEW ROW:\n1004 | Pat Lee | BSIT | 1\n\nDIALOG: Record added successfully.",
+  "select-record": "RUN: Select a JTable row\n\nVisible row selected: 1\nModel row after conversion: 1\n\nFORM VALUES LOADED:\nStudent ID: 1002\nComplete Name: Mika Reyes\nCourse: BSCS\nYear: 1\n\nRESULT: The selected record is ready to update or delete.",
+  "update-record": "RUN: Update the selected record\n\nBEFORE:\n1002 | Mika Reyes | BSCS | 1\n\nEdited values:\nName: Mika Reyes-Santos\nYear: 2\n\nAFTER:\n1002 | Mika Reyes-Santos | BSCS | 2\n\nRESULT: The selected model row was updated successfully.",
+  "delete-record": "RUN: Delete the selected record\n\nSelected:\n1002 | Mika Reyes | BSCS | 1\n\nConfirmation: YES\n\nRESULT:\nThe selected row was removed from DefaultTableModel.\nRemaining sample rows: 2",
+  "sort-records": "RUN: Enable JTable sorting\n\nTableRowSorter attached successfully.\n\nExample: click the Name column header\n\nSORTED VIEW:\n1001 | Alex Santos | BSIT | 2\n1003 | Jamie Cruz | BSIS | 3\n1002 | Mika Reyes | BSCS | 1\n\nRESULT: Only the visible order changes; the model data remains intact.",
+  "filter-records": "RUN: Filter JTable records\n\nSearch text: BSIT\n\nVISIBLE ROWS:\n1001 | Alex Santos | BSIT | 2\n1004 | Pat Lee | BSIT | 1\n\nRESULT: Non-matching rows are hidden by RowFilter.\nClear the search field to show all rows again.",
+  "duplicate-id": "RUN: Check duplicate Student ID\n\nEntered ID: 1001\nRows checked: 1001, 1002, 1003\n\nMATCH FOUND: 1001\n\nRETURN VALUE: true\nRESULT: The new record should be rejected because the ID already exists.",
+  "complete-app": "RUN: StudentTableApp.java\n\nLaunching Swing application...\nWindow title: Student Records Management\n\nINTERFACE READY:\n• Student ID field\n• Complete Name field\n• Course combo box\n• Year spinner\n• Add / Update / Delete / Clear buttons\n• Search field\n• JTable with sorting and filtering\n\nInitial table rows: 0\nStatus: GUI initialized successfully.\n\nNote: This browser lesson previews the expected result. The actual Swing window runs with a JDK/NetBeans environment."
+};
+
+      document.querySelectorAll(".run-example-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const key = button.dataset.example;
+          const output = document.getElementById(`output-${key}`);
+          if (!output) return;
+
+          const consoleArea = output.querySelector(".output-console");
+          consoleArea.textContent = exampleOutputs[key] || "No preview output is configured for this example.";
+          output.hidden = false;
+          button.setAttribute("aria-expanded", "true");
+          button.classList.add("has-run");
+          button.innerHTML = '<span aria-hidden="true">↻</span> Run Again';
+        });
+      });
+
+      document.querySelectorAll(".clear-output-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const output = document.getElementById(button.dataset.output);
+          if (!output) return;
+
+          output.hidden = true;
+          const consoleArea = output.querySelector(".output-console");
+          if (consoleArea) consoleArea.textContent = "";
+
+          const key = output.id.replace("output-", "");
+          const runButton = document.querySelector(`.run-example-button[data-example="${key}"]`);
+          if (runButton) {
+            runButton.setAttribute("aria-expanded", "false");
+            runButton.classList.remove("has-run");
+            runButton.innerHTML = '<span aria-hidden="true">▶</span> Run Example';
+            runButton.focus();
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

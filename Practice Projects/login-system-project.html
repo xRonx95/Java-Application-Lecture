@@ -11,7 +11,7 @@
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
   <!-- Separate stylesheet -->
-  <link rel="stylesheet" href="../css/Practice Projects/login-system-project.css?v=1">
+  <link rel="stylesheet" href="../css/Practice Projects/login-system-project.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to lesson content</a>
@@ -275,6 +275,9 @@
         <p class="section-kicker">Guided lesson</p>
         <h2 id="sequence-title">Step-by-step lecture sequence</h2>
         <p>Present each step in order. Ask students to predict the next component or behavior before revealing the explanation.</p>
+        <aside class="runner-notice" aria-label="Run example information">
+          <strong>Interactive lesson mode:</strong> Each step includes a <em>Run Example</em> button. Because a normal HTML page cannot compile Java Swing by itself, each button opens an offline GUI simulation of the expected JFrame result or behavior.
+        </aside>
       </div>
 
       <div class="lesson-stack">
@@ -313,6 +316,44 @@
               <figcaption>Figure 4. Low-fidelity wireframe used during planning.</figcaption>
             </figure>
           </div>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-1">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-1" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">Preview ready</span>
+              </div>
+              <div class="swing-preview" aria-label="Planned login interface preview">
+                <div class="swing-window swing-wireframe">
+                  <div class="swing-titlebar">
+                    <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <strong>Login Interface Plan</strong>
+                    <span class="titlebar-spacer" aria-hidden="true"></span>
+                  </div>
+                  <div class="swing-body">
+                    <div class="preview-heading">ACCOUNT LOGIN</div>
+                    <label class="swing-label">1. Username</label>
+                    <div class="mock-input">Username field</div>
+                    <label class="swing-label">2. Password</label>
+                    <div class="mock-input">Password field</div>
+                    <div class="swing-action-row">
+                      <span class="mock-check">□ 3. Show password</span>
+                      <button class="swing-button" type="button" disabled>4. SIGN IN</button>
+                    </div>
+                    <div class="swing-message neutral">5. Feedback / message area</div>
+                  </div>
+                </div>
+                <p class="gui-caption">Result: the required controls and their visual order are identified before coding begins.</p>
+              </div>
+            </div>
+          </div>
         </article>
 
         <article class="lesson-step">
@@ -332,6 +373,40 @@
               <h4>Explain it professionally</h4>
               <p><code>javax.swing</code> supplies interface components. <code>java.awt</code> supplies layouts, dimensions, colors, and fonts. <code>ActionEvent</code> represents a user action such as pressing a button.</p>
               <p class="small-note">For introductory lessons, wildcard imports reduce visual clutter. In production code, explicit imports can improve clarity.</p>
+            </div>
+          </div>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-2">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-2" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">Imports available</span>
+              </div>
+              <div class="swing-preview" aria-label="Imported Swing classes preview">
+                <div class="swing-window compact-window">
+                  <div class="swing-titlebar">
+                    <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <strong>Swing Components Available</strong>
+                    <span class="titlebar-spacer" aria-hidden="true"></span>
+                  </div>
+                  <div class="swing-body">
+                    <div class="preview-heading">IMPORT CHECK</div>
+                    <div class="component-chip-grid">
+                      <span>JFrame</span><span>JPanel</span><span>JLabel</span><span>JTextField</span>
+                      <span>JPasswordField</span><span>JCheckBox</span><span>JButton</span><span>ActionEvent</span>
+                    </div>
+                    <div class="swing-message success">Required Swing/AWT classes are ready to use.</div>
+                  </div>
+                </div>
+                <p class="gui-caption"><strong>Important:</strong> import statements alone do not open a window; this preview shows the GUI classes made available to the program.</p>
+              </div>
             </div>
           </div>
         </article>
@@ -355,6 +430,43 @@
             <p><strong><code>private</code></strong> protects the fields from unrelated classes.</p>
             <p><strong><code>final</code></strong> means the field reference will not be assigned to a different component.</p>
             <p><strong><code>extends JFrame</code></strong> makes the lesson class itself a window.</p>
+          </div>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-3">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-3" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">Fields created</span>
+              </div>
+              <div class="swing-preview" aria-label="Declared Swing fields preview">
+                <div class="swing-window">
+                  <div class="swing-titlebar">
+                    <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <strong>LoginSystemLesson</strong>
+                    <span class="titlebar-spacer" aria-hidden="true"></span>
+                  </div>
+                  <div class="swing-body">
+                    <div class="preview-heading">DECLARED COMPONENTS</div>
+                    <label class="swing-label"><code>usernameField</code> — JTextField</label>
+                    <input class="swing-input" type="text" placeholder="Username field" disabled>
+                    <label class="swing-label"><code>passwordField</code> — JPasswordField</label>
+                    <input class="swing-input" type="password" value="password" disabled>
+                    <div class="swing-action-row">
+                      <label class="swing-checkbox"><input type="checkbox" disabled> <code>showPasswordCheckBox</code></label>
+                    </div>
+                    <div class="swing-message neutral"><code>messageLabel</code> is ready for feedback.</div>
+                  </div>
+                </div>
+                <p class="gui-caption">Result: the class now owns reusable Swing component fields, although the final layout is not yet assembled.</p>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -381,6 +493,39 @@
             <div><code>setLocationRelativeTo(null)</code><span>Centers the window.</span></div>
             <div><code>setContentPane()</code><span>Installs the main interface panel.</span></div>
             <div><code>pack()</code><span>Sizes the window from preferred component sizes.</span></div>
+          </div>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-4">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-4" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">JFrame configured</span>
+              </div>
+              <div class="swing-preview" aria-label="Configured JFrame preview">
+                <div class="desktop-stage">
+                  <div class="swing-window configured-window">
+                    <div class="swing-titlebar">
+                      <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                      <strong>Account Login</strong>
+                      <span class="titlebar-spacer" aria-hidden="true"></span>
+                    </div>
+                    <div class="swing-body centered-placeholder">
+                      <div class="window-size-badge">Minimum size: 520 × 460</div>
+                      <strong>JFrame content area</strong>
+                      <span>Centered with <code>setLocationRelativeTo(null)</code></span>
+                    </div>
+                  </div>
+                </div>
+                <p class="gui-caption">Result: a titled, centered JFrame shell is configured and ready to receive the main panel.</p>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -424,6 +569,40 @@
               </div>
             </div>
           </div>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-5">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-5" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">Layout applied</span>
+              </div>
+              <div class="swing-preview" aria-label="Layout manager preview">
+                <div class="swing-window layout-demo-window">
+                  <div class="swing-titlebar">
+                    <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <strong>Account Login</strong>
+                    <span class="titlebar-spacer" aria-hidden="true"></span>
+                  </div>
+                  <div class="layout-demo">
+                    <div class="layout-region north"><strong>NORTH</strong><span>Title panel</span></div>
+                    <div class="layout-region center">
+                      <strong>CENTER — GridBagLayout</strong>
+                      <div class="mini-form-grid"><span>Username</span><i></i><span>Password</span><i></i></div>
+                    </div>
+                    <div class="layout-region south"><strong>SOUTH</strong><span>Actions + feedback</span></div>
+                  </div>
+                </div>
+                <p class="gui-caption">Result: components are aligned by layout managers and can resize without fixed pixel coordinates.</p>
+              </div>
+            </div>
+          </div>
         </article>
 
         <article class="lesson-step">
@@ -447,6 +626,38 @@
             <div>
               <h4>Instructor emphasis</h4>
               <p>Converting a password to String leaves an immutable value in memory until garbage collection. This sample is useful for explaining a comparison, but production authentication should avoid unnecessary password copies and should verify a secure hash.</p>
+            </div>
+          </div>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-6">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-6" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">Interactive password demo</span>
+              </div>
+              <div class="swing-preview" aria-label="JPasswordField behavior preview">
+                <div class="swing-window compact-window password-demo" data-password-demo>
+                  <div class="swing-titlebar">
+                    <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <strong>Password Field Demo</strong>
+                    <span class="titlebar-spacer" aria-hidden="true"></span>
+                  </div>
+                  <div class="swing-body">
+                    <label class="swing-label" for="password-demo-step-6">Password</label>
+                    <input class="swing-input demo-password" id="password-demo-step-6" type="password" value="LearnJava123" autocomplete="off">
+                    <label class="swing-checkbox"><input class="demo-show-password" type="checkbox"> Show password</label>
+                    <div class="swing-message neutral demo-password-message">Password is masked like a JPasswordField.</div>
+                  </div>
+                </div>
+                <p class="gui-caption">Try the checkbox. The browser simulation mirrors the visible/masked behavior discussed in the Swing lesson.</p>
+              </div>
             </div>
           </div>
         </article>
@@ -501,6 +712,40 @@ showPasswordCheckBox.addActionListener(event -> {
               <figcaption>Figure 6. Controls communicate with behavior through events.</figcaption>
             </figure>
           </div>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-7">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-7" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">Interactive event demo</span>
+              </div>
+              <div class="swing-preview" aria-label="ActionListener event preview">
+                <div class="swing-window compact-window event-demo" data-event-demo>
+                  <div class="swing-titlebar">
+                    <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <strong>ActionListener Demo</strong>
+                    <span class="titlebar-spacer" aria-hidden="true"></span>
+                  </div>
+                  <div class="swing-body">
+                    <label class="swing-label" for="event-password-step-7">Password</label>
+                    <input class="swing-input demo-password" id="event-password-step-7" type="password" value="JavaEvent" autocomplete="off">
+                    <label class="swing-checkbox"><input class="demo-show-password" type="checkbox"> Show password</label>
+                    <button class="swing-button demo-event-button" type="button">SIGN IN</button>
+                    <div class="swing-message neutral demo-event-message" role="status">Waiting for an ActionEvent.</div>
+                    <div class="event-pipeline" aria-label="Event pipeline"><span>Button click</span><b>→</b><span>ActionListener</span><b>→</b><span>Handler</span></div>
+                  </div>
+                </div>
+                <p class="gui-caption">Click <strong>SIGN IN</strong> to simulate the ActionListener receiving an event and calling the handler.</p>
+              </div>
+            </div>
+          </div>
         </article>
 
         <article class="lesson-step">
@@ -541,6 +786,45 @@ showPasswordCheckBox.addActionListener(event -> {
               <ul><li>Account lookup</li><li>Password-hash verification</li><li>Access decision</li></ul>
             </div>
           </div>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-8">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-8" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">Interactive login demo</span>
+              </div>
+              <div class="swing-preview" aria-label="Login validation and authentication preview">
+                <form class="swing-window login-demo" data-login-demo novalidate>
+                  <div class="swing-titlebar">
+                    <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <strong>Account Login</strong>
+                    <span class="titlebar-spacer" aria-hidden="true"></span>
+                  </div>
+                  <div class="swing-body">
+                    <div class="login-avatar" aria-hidden="true">👤</div>
+                    <label class="swing-label" for="demo-user-step-8">Username</label>
+                    <input class="swing-input demo-username" id="demo-user-step-8" type="text" placeholder="Enter username" autocomplete="off">
+                    <label class="swing-label" for="demo-pass-step-8">Password</label>
+                    <input class="swing-input demo-password" id="demo-pass-step-8" type="password" placeholder="Enter password" autocomplete="off">
+                    <div class="swing-action-row">
+                      <label class="swing-checkbox"><input class="demo-show-password" type="checkbox"> Show password</label>
+                      <button class="swing-button demo-login-button" type="submit">SIGN IN</button>
+                    </div>
+                    <div class="swing-message neutral demo-login-message" role="status" aria-live="polite">Enter the classroom credentials to test validation.</div>
+                    <div class="credential-hint"><strong>Demo account:</strong> student / LearnJava123</div>
+                  </div>
+                </form>
+                <p class="gui-caption">Empty fields show validation feedback; incorrect credentials show a neutral failure; the demo account shows success.</p>
+              </div>
+            </div>
+          </div>
         </article>
 
         <article class="lesson-step">
@@ -558,6 +842,46 @@ showPasswordCheckBox.addActionListener(event -> {
     });
 }</code></pre>
           <p class="lecture-summary"><strong>Key explanation:</strong> <code>invokeLater</code> schedules interface creation on Swing’s Event Dispatch Thread. Long-running database or network work should not run directly on this thread because it would freeze the interface.</p>
+        
+          <div class="run-example" data-runner>
+            <div class="run-example-toolbar">
+              <button class="run-example-button" type="button" aria-expanded="false" aria-controls="output-step-9">
+                <span class="run-example-icon" aria-hidden="true">▶</span>
+                <span class="run-example-label">Run Example</span>
+              </button>
+              <span class="run-example-hint">Offline browser simulation</span>
+            </div>
+            <div class="example-output" id="output-step-9" hidden>
+              <div class="output-header">
+                <strong>GUI Result / Output</strong>
+                <span class="output-status">Application launched</span>
+              </div>
+              <div class="swing-preview" aria-label="Final launched JFrame preview">
+                <div class="desktop-stage launched-stage">
+                  <form class="swing-window login-demo final-login-demo" data-login-demo novalidate>
+                    <div class="swing-titlebar">
+                      <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                      <strong>Account Login</strong>
+                      <span class="titlebar-spacer edt-badge">EDT</span>
+                    </div>
+                    <div class="swing-body">
+                      <div class="preview-heading">WELCOME</div>
+                      <label class="swing-label" for="demo-user-step-9">Username</label>
+                      <input class="swing-input demo-username" id="demo-user-step-9" type="text" placeholder="Enter username" autocomplete="off">
+                      <label class="swing-label" for="demo-pass-step-9">Password</label>
+                      <input class="swing-input demo-password" id="demo-pass-step-9" type="password" placeholder="Enter password" autocomplete="off">
+                      <div class="swing-action-row">
+                        <label class="swing-checkbox"><input class="demo-show-password" type="checkbox"> Show password</label>
+                        <button class="swing-button demo-login-button" type="submit">SIGN IN</button>
+                      </div>
+                      <div class="swing-message neutral demo-login-message" role="status" aria-live="polite">JFrame is visible and ready for user interaction.</div>
+                    </div>
+                  </form>
+                </div>
+                <p class="gui-caption"><code>SwingUtilities.invokeLater(...)</code> schedules creation on the Event Dispatch Thread, then <code>setVisible(true)</code> displays the JFrame.</p>
+              </div>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -716,5 +1040,98 @@ showPasswordCheckBox.addActionListener(event -> {
     </div>
     <a href="../index.html">Home</a>
   </footer>
+
+
+  <script>
+    (() => {
+      const setMessage = (element, text, state = 'neutral') => {
+        if (!element) return;
+        element.textContent = text;
+        element.classList.remove('neutral', 'success', 'error', 'warning');
+        element.classList.add(state);
+      };
+
+      document.querySelectorAll('[data-runner]').forEach((runner) => {
+        const button = runner.querySelector('.run-example-button');
+        const label = runner.querySelector('.run-example-label');
+        if (!button || !label) return;
+
+        const output = document.getElementById(button.getAttribute('aria-controls'));
+        if (!output) return;
+
+        button.addEventListener('click', () => {
+          const willOpen = output.hidden;
+          output.hidden = !willOpen;
+          button.setAttribute('aria-expanded', String(willOpen));
+          label.textContent = willOpen ? 'Hide GUI Output' : 'Run Example';
+
+          if (willOpen) {
+            output.classList.remove('is-running');
+            void output.offsetWidth;
+            output.classList.add('is-running');
+            const firstInteractive = output.querySelector('input:not([disabled]), button:not([disabled])');
+            if (firstInteractive) firstInteractive.focus({ preventScroll: true });
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-password-demo], [data-event-demo], [data-login-demo]').forEach((demo) => {
+        const password = demo.querySelector('.demo-password');
+        const showPassword = demo.querySelector('.demo-show-password');
+        if (!password || !showPassword) return;
+
+        showPassword.addEventListener('change', () => {
+          password.type = showPassword.checked ? 'text' : 'password';
+          const message = demo.querySelector('.demo-password-message');
+          if (message) {
+            setMessage(
+              message,
+              showPassword.checked ? 'Password characters are visible.' : 'Password is masked like a JPasswordField.',
+              showPassword.checked ? 'warning' : 'neutral'
+            );
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-event-demo]').forEach((demo) => {
+        const button = demo.querySelector('.demo-event-button');
+        const message = demo.querySelector('.demo-event-message');
+        if (!button || !message) return;
+
+        let eventCount = 0;
+        button.addEventListener('click', () => {
+          eventCount += 1;
+          setMessage(message, `ActionEvent received → handleLogin(event) called (${eventCount})`, 'success');
+          demo.classList.remove('event-fired');
+          void demo.offsetWidth;
+          demo.classList.add('event-fired');
+        });
+      });
+
+      document.querySelectorAll('[data-login-demo]').forEach((form) => {
+        const username = form.querySelector('.demo-username');
+        const password = form.querySelector('.demo-password');
+        const message = form.querySelector('.demo-login-message');
+        if (!username || !password || !message) return;
+
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const userValue = username.value.trim();
+          const passValue = password.value;
+
+          if (!userValue || !passValue) {
+            setMessage(message, 'Enter both username and password.', 'warning');
+            return;
+          }
+
+          if (userValue === 'student' && passValue === 'LearnJava123') {
+            setMessage(message, 'Login successful.', 'success');
+          } else {
+            setMessage(message, 'Invalid username or password.', 'error');
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

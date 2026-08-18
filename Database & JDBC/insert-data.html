@@ -11,7 +11,7 @@
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
   <!-- Separate page stylesheet -->
-  <link rel="stylesheet" href="../css/Database & JDBC/insert-data.css?v=2">
+  <link rel="stylesheet" href="../css/Database & JDBC/insert-data.css?v=3">
 </head>
 <body>
   <header class="module-header">
@@ -56,9 +56,20 @@
     </section>
 
     <section class="procedure" id="procedure">
-      <div class="section-title light"><p>Part II</p><h2>Step-by-step procedure</h2><span>Complete each checkpoint before moving to the next stage.</span></div>
+      <div class="section-title light"><p>Part II</p><h2>Step-by-step procedure</h2><span>Complete each checkpoint before moving to the next stage. Use each <strong>Run Example</strong> button to preview the expected output in a GUI-style panel.</span></div>
 
-      <article class="step"><div class="step-copy"><span class="number">Step 1</span><h3>Install and verify the tools</h3><ol><li>Install JDK 17 or later.</li><li>Install Apache Tomcat 10 or later.</li><li>Install and start MySQL Server.</li><li>Download MySQL Connector/J.</li><li>Add the driver JAR to <code>WEB-INF/lib</code>.</li></ol><aside><b>Checkpoint:</b> Java, Tomcat, and MySQL must all start without an error.</aside></div>
+      <article class="step"><div class="step-copy"><span class="number">Step 1</span><h3>Install and verify the tools</h3><ol><li>Install JDK 17 or later.</li><li>Install Apache Tomcat 10 or later.</li><li>Install and start MySQL Server.</li><li>Download MySQL Connector/J.</li><li>Add the driver JAR to <code>WEB-INF/lib</code>.</li></ol><aside><b>Checkpoint:</b> Java, Tomcat, and MySQL must all start without an error.</aside>
+<div class="run-example">
+  <button class="run-example-btn" type="button" data-demo="tools" aria-controls="output-tools" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button>
+  <p class="run-example-note">Browser simulation — checks the expected development tools.</p>
+  <div class="example-output" id="output-tools" hidden aria-live="polite">
+    <div class="output-title"><span>GUI Output</span><b>Environment Check</b></div>
+    <div class="status-grid">
+      <span>JDK 17+ <b>Ready</b></span><span>Tomcat 10+ <b>Running</b></span>
+      <span>MySQL 8+ <b>Online</b></span><span>Connector/J <b>Loaded</b></span>
+    </div>
+  </div>
+</div></div>
         <figure class="tools-picture"><div><span>JDK 17+</span><span>Tomcat 10+</span><span>MySQL 8+</span><span>Connector/J</span></div><ul><li>✓ Java detected</li><li>✓ Web server started</li><li>✓ Database online</li><li>✓ Driver available</li></ul><figcaption>Picture 3. Required development environment</figcaption></figure></article>
 
       <article class="step"><div class="step-copy"><span class="number">Step 2</span><h3>Create the database and table</h3><p>Run the following script in MySQL Workbench or phpMyAdmin.</p><pre><code>CREATE DATABASE school_db;
@@ -70,7 +81,22 @@ CREATE TABLE students (
   email VARCHAR(120) NOT NULL UNIQUE,
   course VARCHAR(80) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);</code></pre><aside><b>Checkpoint:</b> Run <code>DESCRIBE students;</code> and confirm five columns.</aside></div>
+);</code></pre><aside><b>Checkpoint:</b> Run <code>DESCRIBE students;</code> and confirm five columns.</aside>
+<div class="run-example">
+  <button class="run-example-btn" type="button" data-demo="schema" aria-controls="output-schema" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button>
+  <p class="run-example-note">Shows the expected result of creating and describing the table.</p>
+  <div class="example-output" id="output-schema" hidden aria-live="polite">
+    <div class="output-title"><span>SQL Output</span><b>students table created</b></div>
+    <div class="mini-table" role="table" aria-label="Students table structure">
+      <div class="mini-row mini-head" role="row"><span>Field</span><span>Type</span><span>Key</span></div>
+      <div class="mini-row" role="row"><span>student_id</span><span>INT</span><span>PRI</span></div>
+      <div class="mini-row" role="row"><span>full_name</span><span>VARCHAR(100)</span><span>—</span></div>
+      <div class="mini-row" role="row"><span>email</span><span>VARCHAR(120)</span><span>UNI</span></div>
+      <div class="mini-row" role="row"><span>course</span><span>VARCHAR(80)</span><span>—</span></div>
+      <div class="mini-row" role="row"><span>created_at</span><span>TIMESTAMP</span><span>—</span></div>
+    </div>
+  </div>
+</div></div>
         <figure class="schema-picture"><div class="cylinder">school_db</div><div class="schema"><b>students</b><p><span>🔑 student_id</span><em>INT</em></p><p><span>full_name</span><em>VARCHAR</em></p><p><span>email</span><em>VARCHAR</em></p><p><span>course</span><em>VARCHAR</em></p><p><span>created_at</span><em>TIMESTAMP</em></p></div><figcaption>Picture 4. Expected school_db schema</figcaption></figure></article>
 
       <article class="step"><div class="step-copy"><span class="number">Step 3</span><h3>Create insert-data.html</h3><p>The <code>name</code> attributes are important because the servlet uses the same names to read the submitted values.</p><pre><code>&lt;form action="insert-student" method="post"&gt;
@@ -87,7 +113,21 @@ CREATE TABLE students (
     &lt;option&gt;BS Computer Science&lt;/option&gt;
   &lt;/select&gt;
   &lt;button type="submit"&gt;Save student&lt;/button&gt;
-&lt;/form&gt;</code></pre></div>
+&lt;/form&gt;</code></pre>
+<div class="run-example">
+  <button class="run-example-btn" type="button" data-demo="form" aria-controls="output-form" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button>
+  <p class="run-example-note">Opens a working GUI preview of the form inside this lesson.</p>
+  <div class="example-output" id="output-form" hidden aria-live="polite">
+    <div class="output-title"><span>GUI Preview</span><b>Student Registration</b></div>
+    <form class="demo-student-form" id="demoStudentForm">
+      <label>Full name<input id="demoName" value="Ana Reyes" required></label>
+      <label>Email address<input id="demoEmail" type="email" value="ana@example.com" required></label>
+      <label>Course<select id="demoCourse" required><option>BS Information Technology</option><option>BS Computer Science</option></select></label>
+      <button type="submit">Save Student</button>
+      <p class="demo-message" id="demoFormMessage" aria-live="polite"></p>
+    </form>
+  </div>
+</div></div>
         <figure class="form-picture"><div class="browser-title">localhost:8080/student-app/insert-data.html</div><div class="mock-form"><h4>Student Registration</h4><label>Full name<input value="Ana Reyes" readonly></label><label>Email address<input value="ana@example.com" readonly></label><label>Course<select><option>BSIT</option></select></label><button type="button">Save student</button></div><figcaption>Picture 5. Expected form appearance</figcaption></figure></article>
 
       <article class="step"><div class="step-copy"><span class="number">Step 4</span><h3>Create the JDBC connection</h3><pre><code>public class DatabaseConnection {
@@ -99,7 +139,18 @@ CREATE TABLE students (
     return DriverManager.getConnection(
         URL, "app_user", "secure_password");
   }
-}</code></pre><aside class="warning"><b>Professional practice:</b> Store real credentials in environment variables or protected server configuration, not in public source files.</aside></div>
+}</code></pre><aside class="warning"><b>Professional practice:</b> Store real credentials in environment variables or protected server configuration, not in public source files.</aside>
+<div class="run-example">
+  <button class="run-example-btn" type="button" data-demo="connection" aria-controls="output-connection" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button>
+  <p class="run-example-note">Simulates the result of successfully opening the JDBC connection.</p>
+  <div class="example-output terminal-output" id="output-connection" hidden aria-live="polite">
+    <div class="output-title"><span>Java Output</span><b>DatabaseConnection</b></div>
+    <pre><code>Connecting to jdbc:mysql://localhost:3306/school_db ...
+Connection established successfully.
+Database: school_db
+Status: READY ✓</code></pre>
+  </div>
+</div></div>
         <figure class="project-picture"><div><b>student-app/</b><span>├── src/main/java/</span><span>│ &nbsp; ├── DatabaseConnection.java</span><span>│ &nbsp; └── InsertStudentServlet.java</span><span>└── src/main/webapp/</span><span>&nbsp;&nbsp;&nbsp; ├── insert-data.html</span><span>&nbsp;&nbsp;&nbsp; ├── css/insert-data.css</span><span>&nbsp;&nbsp;&nbsp; └── WEB-INF/lib/</span></div><figcaption>Picture 6. Recommended project structure</figcaption></figure></article>
 
       <article class="step"><div class="step-copy"><span class="number">Step 5</span><h3>Insert the data safely</h3><pre><code>String sql = "INSERT INTO students " +
@@ -111,11 +162,38 @@ try (Connection con = DatabaseConnection.getConnection();
   ps.setString(2, request.getParameter("email").trim());
   ps.setString(3, request.getParameter("course"));
   int rows = ps.executeUpdate();
-}</code></pre><aside class="warning"><b>Security rule:</b> Never concatenate form input into SQL. Use placeholders and validate every field on the server.</aside></div>
+}</code></pre><aside class="warning"><b>Security rule:</b> Never concatenate form input into SQL. Use placeholders and validate every field on the server.</aside>
+<div class="run-example">
+  <button class="run-example-btn" type="button" data-demo="insert" aria-controls="output-insert" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button>
+  <p class="run-example-note">Shows the bound values and the expected Java result from <code>executeUpdate()</code>.</p>
+  <div class="example-output" id="output-insert" hidden aria-live="polite">
+    <div class="output-title"><span>Java Output</span><b>PreparedStatement executed</b></div>
+    <div class="binding-demo">
+      <p><b>Parameter 1</b><span>Ana Reyes</span></p>
+      <p><b>Parameter 2</b><span>ana@example.com</span></p>
+      <p><b>Parameter 3</b><span>BS Information Technology</span></p>
+    </div>
+    <div class="success-banner">rows = 1 · Student record inserted successfully ✓</div>
+  </div>
+</div></div>
         <figure class="binding-picture"><code>VALUES ( ?, ?, ? )</code><p><b>1</b><span>Ana Reyes</span><em>String</em></p><p><b>2</b><span>ana@example.com</span><em>String</em></p><p><b>3</b><span>BSIT</span><em>String</em></p><strong>Prepared safely ✓</strong><figcaption>Picture 7. PreparedStatement parameter binding</figcaption></figure></article>
 
       <article class="step"><div class="step-copy"><span class="number">Step 6</span><h3>Run and verify</h3><ol><li>Start MySQL, then start Tomcat.</li><li>Open the form in the browser.</li><li>Enter a unique email and submit once.</li><li>Run the verification query below.</li></ol><pre><code>SELECT * FROM students
-ORDER BY student_id DESC;</code></pre><aside><b>Expected result:</b> The newest row contains the exact values submitted in the form.</aside></div>
+ORDER BY student_id DESC;</code></pre><aside><b>Expected result:</b> The newest row contains the exact values submitted in the form.</aside>
+<div class="run-example">
+  <button class="run-example-btn" type="button" data-demo="verify" aria-controls="output-verify" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button>
+  <p class="run-example-note">Displays the GUI-style result of the final verification query.</p>
+  <div class="example-output" id="output-verify" hidden aria-live="polite">
+    <div class="output-title"><span>Result Set</span><b>Latest student record</b></div>
+    <div class="student-result-card">
+      <span><small>ID</small><b>103</b></span>
+      <span><small>Full name</small><b>Ana Reyes</b></span>
+      <span><small>Email</small><b>ana@example.com</b></span>
+      <span><small>Course</small><b>BSIT</b></span>
+    </div>
+    <div class="success-banner">Query completed · 1 newest record displayed ✓</div>
+  </div>
+</div></div>
         <figure class="result-picture"><div><b>Before</b><strong>102</strong><small>records</small></div><i>+1</i><div><b>After</b><strong>103</strong><small>records</small></div><p><span>103</span><b>Ana Reyes</b><span>ana@example.com</span><em>BSIT</em></p><figcaption>Picture 8. Successful insert verification</figcaption></figure></article>
     </section>
 
@@ -128,5 +206,56 @@ ORDER BY student_id DESC;</code></pre><aside><b>Expected result:</b> The newest 
   </main>
 
   <footer><div><strong>Database &amp; JDBC</strong><p>Professional Lesson Module · Student Laboratory Guide</p></div><a href="#top">Back to top ↑</a></footer>
+
+  <script>
+    (() => {
+      const runButtons = document.querySelectorAll('.run-example-btn');
+
+      runButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const output = document.getElementById(button.getAttribute('aria-controls'));
+          const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+          button.setAttribute('aria-expanded', String(!isOpen));
+          output.hidden = isOpen;
+          button.classList.toggle('is-active', !isOpen);
+
+          const label = button.querySelector('.run-label');
+          if (label) label.textContent = isOpen ? 'Run Example' : 'Hide Output';
+
+          if (!isOpen) {
+            output.classList.remove('output-flash');
+            void output.offsetWidth;
+            output.classList.add('output-flash');
+          }
+        });
+
+        const originalText = button.textContent.trim();
+        button.innerHTML = '<span class="play-icon" aria-hidden="true">▶</span><span class="run-label">' + originalText.replace('▶', '').trim() + '</span>';
+      });
+
+      const demoForm = document.getElementById('demoStudentForm');
+      if (demoForm) {
+        demoForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+
+          const name = document.getElementById('demoName').value.trim();
+          const email = document.getElementById('demoEmail').value.trim();
+          const course = document.getElementById('demoCourse').value;
+          const message = document.getElementById('demoFormMessage');
+
+          if (!name || !email || !course) {
+            message.className = 'demo-message error';
+            message.textContent = 'Please complete all fields before saving.';
+            return;
+          }
+
+          message.className = 'demo-message success';
+          message.textContent = '✓ GUI simulation: ' + name + ' (' + email + ') was prepared for insertion into school_db.';
+        });
+      }
+    })();
+  </script>
+
 </body>
 </html>

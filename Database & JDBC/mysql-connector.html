@@ -10,8 +10,8 @@
   <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
-  <link rel="stylesheet" href="../css/Database & JDBC/mysql-connector.css?v=1">
-  <script src="../js/mysql-connector.js?v=1" defer></script>
+  <link rel="stylesheet" href="../css/Database%20%26%20JDBC/mysql-connector.css?v=3">
+  <script src="../js/mysql-connector1.js?v=3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to lesson content</a>
@@ -301,7 +301,13 @@ CREATE TABLE IF NOT EXISTS students (
           <div class="step-heading"><span class="step-number">6</span><div><p class="step-label">Reusable Configuration</p><h3>Create the Database Connection Class</h3></div></div>
           <p>Create <code>DatabaseConnection.java</code> inside the <code>school.database</code> package. Update the username and password to match the classroom server.</p>
           <div class="code-panel">
-            <div class="code-toolbar"><span>Java · DatabaseConnection.java</span><button class="copy-button" type="button" data-copy-target="connectionCode">Copy</button></div>
+            <div class="code-toolbar">
+              <span>Java · DatabaseConnection.java</span>
+              <div class="code-actions">
+                <button class="run-button" type="button" data-run-example="connection-config" aria-haspopup="dialog" aria-controls="example-modal" aria-expanded="false">▶ Run Example</button>
+                <button class="copy-button" type="button" data-copy-target="connectionCode">Copy</button>
+              </div>
+            </div>
             <pre class="code-block"><code id="connectionCode">package school.database;
 
 import java.sql.Connection;
@@ -338,7 +344,13 @@ public final class DatabaseConnection {
           <div class="step-heading"><span class="step-number">7</span><div><p class="step-label">Connection Test</p><h3>Open and Verify the Connection</h3></div></div>
           <p>Create <code>ConnectionTest.java</code> in the same package.</p>
           <div class="code-panel">
-            <div class="code-toolbar"><span>Java · ConnectionTest.java</span><button class="copy-button" type="button" data-copy-target="testCode">Copy</button></div>
+            <div class="code-toolbar">
+              <span>Java · ConnectionTest.java</span>
+              <div class="code-actions">
+                <button class="run-button" type="button" data-run-example="connection-test" aria-haspopup="dialog" aria-controls="example-modal" aria-expanded="false">▶ Run Example</button>
+                <button class="copy-button" type="button" data-copy-target="testCode">Copy</button>
+              </div>
+            </div>
             <pre class="code-block"><code id="testCode">package school.database;
 
 import java.sql.Connection;
@@ -396,8 +408,15 @@ public class ConnectionTest {
         <p class="section-kicker">Application Development</p>
         <h2>Execute SQL Safely with PreparedStatement</h2>
         <p>A successful connection is only the beginning. Applications should use parameterized statements when inserting, searching, updating, or deleting values supplied by a user.</p>
+        <div class="run-example-note"><strong>Interactive preview:</strong> Select <strong>Run Example</strong> on a Java code panel to see a GUI-style demonstration of the expected result. The browser preview demonstrates the lesson output; the actual Java/JDBC code still runs in Apache NetBeans with MySQL.</div>
         <div class="code-panel">
-          <div class="code-toolbar"><span>Java · safe insert</span><button class="copy-button" type="button" data-copy-target="insertCode">Copy</button></div>
+          <div class="code-toolbar">
+            <span>Java · PreparedStatement insert</span>
+            <div class="code-actions">
+              <button class="run-button" type="button" data-run-example="prepared-insert" aria-haspopup="dialog" aria-controls="example-modal" aria-expanded="false">▶ Run Example</button>
+              <button class="copy-button" type="button" data-copy-target="insertCode">Copy</button>
+            </div>
+          </div>
           <pre class="code-block"><code id="insertCode">String sql = "INSERT INTO students "
         + "(student_number, full_name, program) "
         + "VALUES (?, ?, ?)";
@@ -558,6 +577,26 @@ try (Connection connection = DatabaseConnection.open();
         <a class="next-lesson" href="jdbc-connection.html"><span>Next lesson</span><strong>JDBC Connection and CRUD</strong></a>
       </nav>
     </main>
+  </div>
+
+  <div class="example-modal" id="example-modal" hidden>
+    <div class="example-modal-backdrop" data-close-example></div>
+    <section class="example-dialog" role="dialog" aria-modal="true" aria-labelledby="example-dialog-title" aria-describedby="example-dialog-description" tabindex="-1">
+      <div class="example-dialog-titlebar">
+        <div class="example-dialog-brand" aria-hidden="true">J</div>
+        <div>
+          <p class="example-dialog-eyebrow">Java GUI Preview</p>
+          <h2 id="example-dialog-title">Run Example</h2>
+          <p class="sr-only" id="example-dialog-description">Interactive browser preview of the expected Java program output.</p>
+        </div>
+        <button class="example-close" type="button" data-close-example aria-label="Close run example">×</button>
+      </div>
+      <div class="example-dialog-body" id="example-dialog-body"></div>
+      <div class="example-dialog-footer">
+        <span>Educational browser simulation · no Java installation required for this preview</span>
+        <button class="example-done" type="button" data-close-example>Close</button>
+      </div>
+    </section>
   </div>
 
   <footer class="site-footer">

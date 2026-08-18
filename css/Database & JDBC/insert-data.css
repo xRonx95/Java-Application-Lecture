@@ -9,3 +9,106 @@
 @media(max-width:760px){body{font-size:17px}.module-header{position:static;align-items:flex-start;flex-direction:column;padding:14px 18px}.module-header nav{width:100%;overflow-x:auto;padding-top:7px;border-top:1px solid rgba(255,255,255,.16)}.module-header nav a{flex:0 0 auto;padding-left:8px;padding-right:8px;font-size:13px}.hero,.content,.procedure{padding-left:18px;padding-right:18px}.flow{display:grid;grid-template-columns:1fr}.flow i{transform:rotate(90deg);text-align:center}.cards,.activities{grid-template-columns:1fr}.table-picture{overflow-x:auto}.table-picture>div{min-width:680px}.step{padding:23px 18px}.tools-picture>div{grid-template-columns:1fr}.rubric>div{grid-template-columns:1fr}footer{align-items:flex-start;flex-direction:column}}
 @media(max-width:480px){body{font-size:16px}.brand small{font-size:10px}.hero h1{font-size:43px}.lead{font-size:18px}.meta{gap:12px}.result-picture>p{grid-template-columns:35px 1fr}.step pre{font-size:12px}.section-title>span{font-size:17px}}
 @media print{.module-header,footer{display:none}.hero,.procedure{color:#000;background:#fff}.hero{min-height:auto;padding:28px 0}.content,.procedure{padding:28px 0}.step{break-inside:avoid;border:1px solid #bbb}.section-title.light h2{color:#000}.section-title.light>span{color:#333}}
+
+/* =========================================================
+   Interactive Run Example GUI
+   ========================================================= */
+.step-copy{min-width:0}
+.step-copy code{overflow-wrap:anywhere}
+.step pre{width:100%;max-width:100%;white-space:pre;overscroll-behavior-inline:contain}
+
+.run-example{margin-top:22px;padding:18px;background:#f7fafc;border:1px solid var(--line);border-radius:10px}
+.run-example-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:11px 18px;color:#fff;background:var(--teal);border:2px solid var(--teal);border-radius:7px;font-size:15px;font-weight:900;line-height:1.2;cursor:pointer;box-shadow:0 7px 16px rgba(8,126,139,.18);transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.run-example-btn:hover{transform:translateY(-1px);background:#066d78;box-shadow:0 10px 22px rgba(8,126,139,.24)}
+.run-example-btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.run-example-btn.is-active{color:var(--navy);background:#fff;border-color:var(--teal);box-shadow:none}
+.play-icon{display:grid;width:24px;height:24px;place-items:center;color:var(--navy);background:var(--gold);border-radius:50%;font-size:10px}
+.run-example-note{margin:9px 0 0!important;color:var(--muted)!important;font-size:13px!important}
+.example-output{overflow:hidden;margin-top:16px;background:#fff;border:1px solid #b9cbd5;border-radius:9px;box-shadow:0 14px 32px rgba(16,42,67,.12)}
+.example-output[hidden]{display:none!important}
+.output-flash{animation:outputReveal .28s ease both}
+@keyframes outputReveal{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.output-flash{animation:none}.run-example-btn{transition:none}}
+
+.output-title{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 14px;color:#dfe9ef;background:#15283a;border-bottom:3px solid var(--gold);font-size:12px}
+.output-title span{font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.output-title b{color:#fff;font-size:13px;text-align:right}
+
+.status-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px}
+.status-grid span{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;color:#344c59;background:#f2f7f9;border:1px solid var(--line);border-radius:6px;font-size:13px;font-weight:800}
+.status-grid b{color:#167351}
+
+.mini-table{padding:12px 14px 16px}
+.mini-row{display:grid;grid-template-columns:1.2fr 1.2fr .55fr;border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-left:1px solid var(--line);font-size:12px}
+.mini-row:first-child{border-top:1px solid var(--line)}
+.mini-row span{padding:9px 10px;border-right:1px solid var(--line)}
+.mini-row span:last-child{border-right:0}
+.mini-head{color:#fff;background:var(--blue);font-weight:900}
+
+.demo-student-form{display:grid;gap:12px;padding:18px}
+.demo-student-form label{display:grid;gap:5px;color:#364f5d;font-size:12px;font-weight:900}
+.demo-student-form input,.demo-student-form select{width:100%;min-height:42px;padding:8px 10px;color:var(--ink);background:#fff;border:1px solid #aebfc9;border-radius:5px;font-size:14px}
+.demo-student-form input:focus,.demo-student-form select:focus{outline:3px solid rgba(8,126,139,.18);border-color:var(--teal)}
+.demo-student-form button{min-height:43px;padding:9px 14px;color:#fff;background:var(--blue);border:0;border-radius:5px;font-weight:900;cursor:pointer}
+.demo-student-form button:hover{background:var(--navy)}
+.demo-message{min-height:24px;margin:0!important;padding:9px 11px;border-radius:5px;font-size:12px!important;font-weight:800}
+.demo-message:empty{display:none}
+.demo-message.success{color:#15603f!important;background:#e4f5eb;border:1px solid #a5d4ba}
+.demo-message.error{color:#7a2d2d!important;background:#fff0f0;border:1px solid #e3b1b1}
+
+.terminal-output>pre{max-height:none;margin:0;padding:18px;color:#c9f4de;background:#0d1e2c;border:0;border-radius:0;font-size:12px;white-space:pre-wrap}
+.binding-demo{display:grid;gap:8px;padding:16px}
+.binding-demo p{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;margin:0!important;padding:10px 12px;color:#405966!important;background:#f5f8fa;border:1px solid var(--line);border-radius:6px;font-size:12px!important}
+.binding-demo b{color:var(--teal)}
+.binding-demo span{overflow-wrap:anywhere}
+.success-banner{margin:0 16px 16px;padding:11px 13px;color:#15603f;background:#e4f5eb;border:1px solid #a5d4ba;border-radius:6px;font-size:12px;font-weight:900}
+
+.student-result-card{display:grid;grid-template-columns:.55fr 1.1fr 1.6fr .8fr;padding:14px}
+.student-result-card>span{min-width:0;padding:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-left:1px solid var(--line)}
+.student-result-card>span:last-child{border-right:1px solid var(--line)}
+.student-result-card small,.student-result-card b{display:block}
+.student-result-card small{color:#70838f;font-size:10px;text-transform:uppercase}
+.student-result-card b{overflow-wrap:anywhere;color:var(--navy);font-size:12px}
+
+/* General layout/readability repairs */
+img,svg{max-width:100%}
+.step>*{min-width:0}
+.section-title strong{color:var(--gold)}
+.module-header nav{flex-wrap:wrap;justify-content:flex-end}
+.module-header nav a:focus-visible,footer a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.mock-form button{cursor:pointer}
+.table-picture,.schema,.form-picture,.project-picture,.binding-picture,.result-picture{max-width:100%}
+
+@media(max-width:760px){
+  .module-header{gap:10px}
+  .module-header nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;overflow:visible;padding-top:10px}
+  .module-header nav a{display:block;padding:9px 10px;background:rgba(255,255,255,.07);text-align:center}
+  .hero{padding-top:50px;padding-bottom:50px}
+  .hero h1{font-size:clamp(38px,11vw,54px)}
+  .step{gap:26px}
+  .status-grid{grid-template-columns:1fr}
+  .student-result-card{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .student-result-card>span:nth-child(2){border-right:1px solid var(--line)}
+  .student-result-card>span:nth-child(n+3){border-top:0}
+  .binding-demo p{grid-template-columns:1fr}
+  .run-example-btn{width:100%}
+  .output-title{align-items:flex-start;flex-direction:column;gap:3px}
+  .output-title b{text-align:left}
+}
+
+@media(max-width:480px){
+  .module-header nav{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:38px}
+  .step h3{font-size:30px}
+  .step pre{padding:15px;font-size:11px}
+  .mini-table{overflow-x:auto}
+  .mini-row{min-width:430px}
+  .student-result-card{grid-template-columns:1fr}
+  .student-result-card>span{border-right:1px solid var(--line);border-bottom:0}
+  .student-result-card>span:nth-child(n+3){border-top:1px solid var(--line)}
+  .student-result-card>span:last-child{border-bottom:1px solid var(--line)}
+}
+
+@media print{
+  .run-example{display:none}
+}

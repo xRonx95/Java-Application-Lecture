@@ -11,7 +11,7 @@
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
   <!-- Separate page stylesheet -->
-  <link rel="stylesheet" href="../css/Database & JDBC/display-data.css?v=2">
+  <link rel="stylesheet" href="../css/Database & JDBC/display-data.css?v=3">
   <script src="../js/display-data.js?v=2" defer></script>
 </head>
 <body>
@@ -141,7 +141,7 @@ ResultSet rs = stmt.executeQuery();</code></pre>
             <div class="step-title"><div><p class="step-label">Database preparation</p><h3>Create the database and table</h3></div><span class="time-chip">10 minutes</span></div>
             <p>Open MySQL Workbench or phpMyAdmin, create the <code>school_db</code> database, then create a <code>students</code> table. A primary key uniquely identifies every row.</p>
             <div class="split-layout">
-              <div class="code-card"><div class="code-head"><span>SQL · schema.sql</span><button class="copy-button" type="button">Copy code</button></div><pre><code>CREATE DATABASE school_db;
+              <div class="code-card"><div class="code-head"><span>SQL · schema.sql</span><div class="code-actions"><button class="copy-button" type="button">Copy code</button><button class="run-example-button" type="button" data-demo="schema"><span aria-hidden="true">▶</span> Run Example</button></div></div><pre><code>CREATE DATABASE school_db;
 USE school_db;
 
 CREATE TABLE students (
@@ -162,7 +162,7 @@ CREATE TABLE students (
           <div class="step-content">
             <div class="step-title"><div><p class="step-label">Sample records</p><h3>Insert and verify test data</h3></div><span class="time-chip">8 minutes</span></div>
             <p>Test data helps confirm that the connection and query work. Insert at least four rows, then retrieve them with a simple <code>SELECT</code> statement.</p>
-            <div class="code-card"><div class="code-head"><span>SQL · sample-data.sql</span><button class="copy-button" type="button">Copy code</button></div><pre><code>INSERT INTO students (student_no, full_name, course, year_level)
+            <div class="code-card"><div class="code-head"><span>SQL · sample-data.sql</span><div class="code-actions"><button class="copy-button" type="button">Copy code</button><button class="run-example-button" type="button" data-demo="sample-data"><span aria-hidden="true">▶</span> Run Example</button></div></div><pre><code>INSERT INTO students (student_no, full_name, course, year_level)
 VALUES
   ('2026-001', 'Ana Santos', 'BSIT', 2),
   ('2026-002', 'Marco Reyes', 'BSCS', 1),
@@ -182,7 +182,7 @@ SELECT * FROM students ORDER BY full_name ASC;</code></pre></div>
             <div class="split-layout folder-layout">
               <figure class="lesson-figure"><img src="../img/database/project-folders.svg" alt="Recommended Java web project folder structure" width="1000" height="570"><figcaption>Figure 2. Recommended separation of server-side and client-side files.</figcaption></figure>
               <div>
-                <div class="code-card compact"><div class="code-head"><span>XML · pom.xml</span><button class="copy-button" type="button">Copy code</button></div><pre><code>&lt;dependency&gt;
+                <div class="code-card compact"><div class="code-head"><span>XML · pom.xml</span><div class="code-actions"><button class="copy-button" type="button">Copy code</button><button class="run-example-button" type="button" data-demo="maven"><span aria-hidden="true">▶</span> Run Example</button></div></div><pre><code>&lt;dependency&gt;
   &lt;groupId&gt;com.mysql&lt;/groupId&gt;
   &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
   &lt;version&gt;26.7.0&lt;/version&gt;
@@ -198,7 +198,7 @@ SELECT * FROM students ORDER BY full_name ASC;</code></pre></div>
           <div class="step-content">
             <div class="step-title"><div><p class="step-label">Java connection</p><h3>Create <code>DBConnection.java</code></h3></div><span class="time-chip">15 minutes</span></div>
             <p>This utility class keeps connection details in one place. Change the username and password to match your local MySQL account.</p>
-            <div class="code-card"><div class="code-head"><span>Java · DBConnection.java</span><button class="copy-button" type="button">Copy code</button></div><pre><code>package com.school;
+            <div class="code-card"><div class="code-head"><span>Java · DBConnection.java</span><div class="code-actions"><button class="copy-button" type="button">Copy code</button><button class="run-example-button" type="button" data-demo="db-connection"><span aria-hidden="true">▶</span> Run Example</button></div></div><pre><code>package com.school;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -232,7 +232,7 @@ public final class DBConnection {
           <div class="step-content">
             <div class="step-title"><div><p class="step-label">Server-side retrieval</p><h3>Create <code>StudentServlet.java</code></h3></div><span class="time-chip">25 minutes</span></div>
             <p>The servlet executes the SQL query and returns student rows as JSON. The try-with-resources statement closes JDBC resources automatically, even when an error occurs.</p>
-            <div class="code-card"><div class="code-head"><span>Java · StudentServlet.java</span><button class="copy-button" type="button">Copy code</button></div><pre><code>package com.school;
+            <div class="code-card"><div class="code-head"><span>Java · StudentServlet.java</span><div class="code-actions"><button class="copy-button" type="button">Copy code</button><button class="run-example-button" type="button" data-demo="student-servlet"><span aria-hidden="true">▶</span> Run Example</button></div></div><pre><code>package com.school;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -301,7 +301,7 @@ public class StudentServlet extends HttpServlet {
           <div class="step-content">
             <div class="step-title"><div><p class="step-label">Browser presentation</p><h3>Create <code>display-data.html</code></h3></div><span class="time-chip">20 minutes</span></div>
             <p>The HTML page provides the semantic structure. CSS controls appearance, while JavaScript requests the records and creates a table row for each student.</p>
-            <div class="code-card"><div class="code-head"><span>HTML · display-data.html</span><button class="copy-button" type="button">Copy code</button></div><pre><code>&lt;!DOCTYPE html&gt;
+            <div class="code-card"><div class="code-head"><span>HTML · display-data.html</span><div class="code-actions"><button class="copy-button" type="button">Copy code</button><button class="run-example-button" type="button" data-demo="html-page"><span aria-hidden="true">▶</span> Run Example</button></div></div><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;meta charset="UTF-8"&gt;
@@ -342,7 +342,7 @@ public class StudentServlet extends HttpServlet {
   &lt;script src="../js/student-records.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div>
-            <div class="code-card"><div class="code-head"><span>JavaScript · student-records.js</span><button class="copy-button" type="button">Copy code</button></div><pre><code>const rows = document.getElementById("studentRows");
+            <div class="code-card"><div class="code-head"><span>JavaScript · student-records.js</span><div class="code-actions"><button class="copy-button" type="button">Copy code</button><button class="run-example-button" type="button" data-demo="javascript"><span aria-hidden="true">▶</span> Run Example</button></div></div><pre><code>const rows = document.getElementById("studentRows");
 const status = document.getElementById("status");
 
 fetch("../students")
@@ -447,5 +447,153 @@ fetch("../students")
   <footer>
     <div class="container footer-inner"><div><strong>Database &amp; JDBC</strong><p>Professional lesson module for classroom instruction.</p></div><div class="footer-links"><a href="#top">Back to top</a><a href="../index.html">Home</a></div></div>
   </footer>
+
+
+  <!-- Interactive lesson output simulator -->
+  <div class="example-modal" id="exampleModal" aria-hidden="true">
+    <div class="example-modal-backdrop" data-close-example></div>
+    <section class="example-dialog" role="dialog" aria-modal="true" aria-labelledby="exampleModalTitle">
+      <div class="example-dialog-head">
+        <div class="example-window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div>
+          <p class="example-dialog-kicker">Interactive lesson simulator</p>
+          <h2 id="exampleModalTitle">Example Output</h2>
+        </div>
+        <button class="example-close" type="button" data-close-example aria-label="Close example output">×</button>
+      </div>
+      <div class="example-notice">
+        <strong>GUI preview:</strong> This lesson runs as a browser simulation. Java/JDBC code still requires the JDK, MySQL, Connector/J, and Tomcat to execute for real.
+      </div>
+      <div class="example-screen" id="exampleScreen" aria-live="polite"></div>
+      <div class="example-dialog-foot">
+        <span id="exampleStatus">Ready</span>
+        <button class="example-done" type="button" data-close-example>Close Output</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (() => {
+      const modal = document.getElementById('exampleModal');
+      const screen = document.getElementById('exampleScreen');
+      const title = document.getElementById('exampleModalTitle');
+      const status = document.getElementById('exampleStatus');
+      let lastTrigger = null;
+
+      const students = [
+        ['2026-001', 'Ana Santos', 'BSIT', '2'],
+        ['2026-002', 'Marco Reyes', 'BSCS', '1'],
+        ['2026-003', 'Lea Cruz', 'BSIS', '3'],
+        ['2026-004', 'Paolo Lim', 'BSIT', '2']
+      ];
+
+      const studentRows = students.map(row =>
+        `<tr>${row.map(value => `<td>${value}</td>`).join('')}</tr>`
+      ).join('');
+
+      const recordsTable = `
+        <div class="sim-browser">
+          <div class="sim-browser-bar"><span class="sim-lock">●</span><span>localhost:8080/student-records/lesson/display-data.html</span></div>
+          <div class="sim-page">
+            <div class="sim-page-heading"><div><small>School Records</small><h3>Student Records</h3></div><span class="sim-badge">4 records loaded</span></div>
+            <div class="sim-table-wrap"><table class="sim-table"><thead><tr><th>Student No.</th><th>Full Name</th><th>Course</th><th>Year Level</th></tr></thead><tbody>${studentRows}</tbody></table></div>
+          </div>
+        </div>`;
+
+      const demos = {
+        'schema': {
+          title: 'Run Example · schema.sql',
+          status: 'Schema created successfully',
+          html: `
+            <div class="sim-app-window">
+              <div class="sim-app-toolbar"><b>MySQL · school_db</b><span class="sim-state success">Query completed</span></div>
+              <div class="sim-console"><span class="prompt">mysql&gt;</span> CREATE DATABASE school_db;<br><span class="ok">Query OK, 1 row affected</span><br><br><span class="prompt">mysql&gt;</span> DESCRIBE students;</div>
+              <div class="sim-table-wrap"><table class="sim-table"><thead><tr><th>Field</th><th>Type</th><th>Null</th><th>Key</th></tr></thead><tbody><tr><td>id</td><td>int</td><td>NO</td><td>PRI</td></tr><tr><td>student_no</td><td>varchar(20)</td><td>NO</td><td>UNI</td></tr><tr><td>full_name</td><td>varchar(100)</td><td>NO</td><td></td></tr><tr><td>course</td><td>varchar(50)</td><td>NO</td><td></td></tr><tr><td>year_level</td><td>tinyint</td><td>NO</td><td></td></tr></tbody></table></div>
+            </div>`
+        },
+        'sample-data': {
+          title: 'Run Example · sample-data.sql',
+          status: '4 rows returned',
+          html: `
+            <div class="sim-app-window">
+              <div class="sim-app-toolbar"><b>MySQL Result Grid</b><span class="sim-state success">4 rows</span></div>
+              <div class="sim-table-wrap"><table class="sim-table"><thead><tr><th>Student No.</th><th>Full Name</th><th>Course</th><th>Year Level</th></tr></thead><tbody>${studentRows}</tbody></table></div>
+              <div class="sim-console compact"><span class="ok">SELECT * FROM students ORDER BY full_name ASC;</span><br>4 row(s) returned.</div>
+            </div>`
+        },
+        'maven': {
+          title: 'Run Example · pom.xml',
+          status: 'Dependency resolved',
+          html: `
+            <div class="sim-app-window">
+              <div class="sim-app-toolbar"><b>Apache Maven</b><span class="sim-state success">BUILD SUCCESS</span></div>
+              <div class="sim-console large"><span class="muted-line">[INFO] Scanning for projects...</span><br>[INFO] Resolving com.mysql:mysql-connector-j...<br><span class="ok">[INFO] MySQL Connector/J dependency available</span><br><span class="ok">[INFO] BUILD SUCCESS</span><br><span class="muted-line">[INFO] Project is ready for JDBC compilation.</span></div>
+            </div>`
+        },
+        'db-connection': {
+          title: 'Run Example · DBConnection.java',
+          status: 'Connection simulation successful',
+          html: `
+            <div class="sim-app-window connection-demo">
+              <div class="sim-app-toolbar"><b>Java Database Connection</b><span class="sim-state success">Connected</span></div>
+              <div class="connection-card"><div class="connection-icon">✓</div><div><small>JDBC CONNECTION</small><h3>school_db is reachable</h3><p>The connection utility returns a MySQL connection using <code>jdbc:mysql://localhost:3306/school_db</code>.</p></div></div>
+              <dl class="sim-details"><div><dt>Host</dt><dd>localhost:3306</dd></div><div><dt>Database</dt><dd>school_db</dd></div><div><dt>User</dt><dd>root</dd></div><div><dt>Result</dt><dd class="success-text">Connection opened</dd></div></dl>
+            </div>`
+        },
+        'student-servlet': {
+          title: 'Run Example · StudentServlet.java',
+          status: 'HTTP 200 · 4 records',
+          html: `
+            <div class="sim-app-window">
+              <div class="sim-app-toolbar"><b>GET /students</b><span class="sim-state success">200 OK</span></div>
+              <div class="sim-json">[<br>&nbsp;&nbsp;{ "studentNo": "2026-001", "fullName": "Ana Santos", "course": "BSIT", "yearLevel": 2 },<br>&nbsp;&nbsp;{ "studentNo": "2026-002", "fullName": "Marco Reyes", "course": "BSCS", "yearLevel": 1 },<br>&nbsp;&nbsp;{ "studentNo": "2026-003", "fullName": "Lea Cruz", "course": "BSIS", "yearLevel": 3 },<br>&nbsp;&nbsp;{ "studentNo": "2026-004", "fullName": "Paolo Lim", "course": "BSIT", "yearLevel": 2 }<br>]</div>
+            </div>`
+        },
+        'html-page': {
+          title: 'Run Example · display-data.html',
+          status: 'Browser page rendered',
+          html: recordsTable
+        },
+        'javascript': {
+          title: 'Run Example · student-records.js',
+          status: '4 records loaded',
+          html: recordsTable
+        }
+      };
+
+      function openExample(button) {
+        const demo = demos[button.dataset.demo];
+        if (!demo) return;
+        lastTrigger = button;
+        title.textContent = demo.title;
+        status.textContent = demo.status;
+        screen.innerHTML = demo.html;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        modal.querySelector('.example-close').focus();
+      }
+
+      function closeExample() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        if (lastTrigger) lastTrigger.focus();
+      }
+
+      document.querySelectorAll('.run-example-button').forEach(button => {
+        button.addEventListener('click', () => openExample(button));
+      });
+
+      modal.querySelectorAll('[data-close-example]').forEach(control => {
+        control.addEventListener('click', closeExample);
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) closeExample();
+      });
+    })();
+  </script>
+
 </body>
 </html>

@@ -11,7 +11,7 @@
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
   <!-- Separate stylesheet -->
-  <link rel="stylesheet" href="../css/Swing GUI/labels-fields-buttons.css?v=3">
+  <link rel="stylesheet" href="../css/Swing GUI/labels-fields-buttons.css?v=4">
   <script src="../js/labels-fields-buttons.js?v=3" defer></script>
 </head>
 <body>
@@ -138,13 +138,75 @@
             <figcaption><strong>Picture 1.</strong> The three-component communication pattern in a data-entry form.</figcaption>
           </figure>
 
+          <div class="run-note" role="note">
+            <strong>Run Example:</strong>
+            These buttons show the expected Java Swing result directly in the lesson page.
+            The browser preview simulates the Swing interface; the actual Java program still runs through the JDK/Apache NetBeans.
+          </div>
+
           <div class="component-cards">
-            <article><div class="component-icon label-icon">Aa</div><p class="component-type">OUTPUT COMPONENT</p><h3>JLabel</h3><p>Displays instructions, captions, status text, or images. A label usually identifies a nearby field.</p><pre><code>JLabel lblName =
-    new JLabel("Full Name:");</code></pre></article>
-            <article><div class="component-icon field-icon"></div><p class="component-type">INPUT COMPONENT</p><h3>JTextField</h3><p>Accepts one line of editable text such as a name, email address, or student number.</p><pre><code>JTextField txtName =
-    new JTextField(20);</code></pre></article>
-            <article><div class="component-icon button-icon">Save</div><p class="component-type">ACTION COMPONENT</p><h3>JButton</h3><p>Represents a command. It fires an action event when the user clicks it or presses its keyboard shortcut.</p><pre><code>JButton btnSave =
-    new JButton("Save");</code></pre></article>
+            <article>
+              <div class="component-icon label-icon">Aa</div>
+              <p class="component-type">OUTPUT COMPONENT</p>
+              <h3>JLabel</h3>
+              <p>Displays instructions, captions, status text, or images. A label usually identifies a nearby field.</p>
+              <pre><code>JLabel lblName =
+    new JLabel("Full Name:");</code></pre>
+              <div class="example-actions">
+                <button class="run-example-button" type="button" data-run-example="labelOutput" aria-controls="labelOutput">▶ Run Example</button>
+              </div>
+              <div class="example-output" id="labelOutput" hidden aria-live="polite">
+                <div class="output-heading"><span>Expected Output</span><small>JLabel preview</small></div>
+                <div class="swing-mini-window">
+                  <div class="swing-titlebar">JLabel Example</div>
+                  <div class="swing-preview-body"><span class="sim-label">Full Name:</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article>
+              <div class="component-icon field-icon"></div>
+              <p class="component-type">INPUT COMPONENT</p>
+              <h3>JTextField</h3>
+              <p>Accepts one line of editable text such as a name, email address, or student number.</p>
+              <pre><code>JTextField txtName =
+    new JTextField(20);</code></pre>
+              <div class="example-actions">
+                <button class="run-example-button" type="button" data-run-example="textFieldOutput" aria-controls="textFieldOutput">▶ Run Example</button>
+              </div>
+              <div class="example-output" id="textFieldOutput" hidden aria-live="polite">
+                <div class="output-heading"><span>Expected Output</span><small>JTextField preview</small></div>
+                <div class="swing-mini-window">
+                  <div class="swing-titlebar">JTextField Example</div>
+                  <div class="swing-preview-body">
+                    <label class="sim-form-label" for="demoSingleField">Full Name</label>
+                    <input class="sim-text-field" id="demoSingleField" type="text" placeholder="Type a name here">
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article>
+              <div class="component-icon button-icon">Save</div>
+              <p class="component-type">ACTION COMPONENT</p>
+              <h3>JButton</h3>
+              <p>Represents a command. It fires an action event when the user clicks it or presses its keyboard shortcut.</p>
+              <pre><code>JButton btnSave =
+    new JButton("Save");</code></pre>
+              <div class="example-actions">
+                <button class="run-example-button" type="button" data-run-example="buttonOutput" aria-controls="buttonOutput">▶ Run Example</button>
+              </div>
+              <div class="example-output" id="buttonOutput" hidden aria-live="polite">
+                <div class="output-heading"><span>Expected Output</span><small>JButton preview</small></div>
+                <div class="swing-mini-window">
+                  <div class="swing-titlebar">JButton Example</div>
+                  <div class="swing-preview-body swing-button-preview">
+                    <button class="sim-swing-button" id="demoSwingSave" type="button">Save</button>
+                    <span class="sim-event-status" id="demoButtonStatus">Click the simulated Swing button.</span>
+                  </div>
+                </div>
+              </div>
+            </article>
           </div>
 
           <h3 class="subheading">Other useful field types</h3>
@@ -236,7 +298,19 @@ if (name.isEmpty()) {
 }
 
 JOptionPane.showMessageDialog(this,
-    "Student profile saved successfully.");</code></pre></div></div><figure class="step-picture"><div class="event-flow"><div><span>1</span><b>Click</b><small>Save Profile</small></div><i>→</i><div><span>2</span><b>Read</b><small>Field values</small></div><i>→</i><div><span>3</span><b>Validate</b><small>Required data</small></div><i>→</i><div><span>4</span><b>Respond</b><small>Show message</small></div></div><figcaption><strong>Picture 7.</strong> A button event reads, checks, and responds to input.</figcaption></figure></div>
+    "Student profile saved successfully.");</code></pre>
+                <div class="example-actions compact-actions">
+                  <button class="run-example-button" type="button" data-run-example="eventOutput" aria-controls="eventOutput">▶ Run Example</button>
+                </div>
+                <div class="example-output event-example-output" id="eventOutput" hidden aria-live="polite">
+                  <div class="output-heading"><span>Expected Output</span><small>empty-name validation</small></div>
+                  <div class="sim-dialog" role="img" aria-label="Simulated Java warning dialog">
+                    <div class="sim-dialog-title">Message</div>
+                    <div class="sim-dialog-content"><span class="sim-warning-icon">!</span><p>Please enter the student's full name.</p></div>
+                    <div class="sim-dialog-actions"><button type="button">OK</button></div>
+                  </div>
+                </div>
+              </div></div><figure class="step-picture"><div class="event-flow"><div><span>1</span><b>Click</b><small>Save Profile</small></div><i>→</i><div><span>2</span><b>Read</b><small>Field values</small></div><i>→</i><div><span>3</span><b>Validate</b><small>Required data</small></div><i>→</i><div><span>4</span><b>Respond</b><small>Show message</small></div></div><figcaption><strong>Picture 7.</strong> A button event reads, checks, and responds to input.</figcaption></figure></div>
           </article>
 
           <article class="step-card">
@@ -249,7 +323,13 @@ JOptionPane.showMessageDialog(this,
           <div class="section-heading"><span class="topic-number">06</span><div><p class="section-kicker">Code reference</p><h2>Complete Working Program</h2></div></div>
           <p>This example builds the same form with Java code. It uses meaningful variable names, <code>GridBagLayout</code>, keyboard mnemonics, validation, and separate methods for each action.</p>
           <div class="code-block">
-            <div class="code-toolbar"><span><b>StudentProfileForm.java</b><small>Complete example</small></span><button class="copy-button" type="button" data-copy="completeProgram">Copy code</button></div>
+            <div class="code-toolbar">
+              <span><b>StudentProfileForm.java</b><small>Complete example</small></span>
+              <div class="code-toolbar-actions">
+                <button class="copy-button" type="button" data-copy="completeProgram">Copy code</button>
+                <button class="run-example-button toolbar-run" type="button" data-run-example="completeProgramOutput" aria-controls="completeProgramOutput">▶ Run Example</button>
+              </div>
+            </div>
             <pre id="completeProgram"><code>import java.awt.*;
 import javax.swing.*;
 
@@ -362,6 +442,39 @@ public class StudentProfileForm extends JFrame {
     }
 }</code></pre>
           </div>
+
+          <div class="example-output complete-output" id="completeProgramOutput" hidden aria-live="polite">
+            <div class="output-heading">
+              <span>Expected Program Output</span>
+              <small>interactive Swing-style browser simulation</small>
+            </div>
+            <div class="swing-app-window">
+              <div class="swing-app-titlebar"><span>Student Profile</span><span class="window-controls">— □ ×</span></div>
+              <div class="swing-app-content">
+                <h3>Student Profile</h3>
+                <div class="swing-form-row">
+                  <label for="previewFullName">Full Name:</label>
+                  <input id="previewFullName" type="text" autocomplete="off" placeholder="e.g., Maria Santos">
+                </div>
+                <div class="swing-form-row">
+                  <label for="previewEmail">Email Address:</label>
+                  <input id="previewEmail" type="email" autocomplete="off" placeholder="e.g., maria@example.com">
+                </div>
+                <div class="swing-form-row">
+                  <label for="previewStudentNumber">Student Number:</label>
+                  <input id="previewStudentNumber" type="text" autocomplete="off" placeholder="e.g., 2026-00124">
+                </div>
+                <div class="swing-form-actions">
+                  <button type="button" class="sim-clear-button" id="previewClear">Clear</button>
+                  <button type="button" class="sim-save-button" id="previewSave">Save Profile</button>
+                </div>
+                <div class="program-status" id="previewStatus" role="status" aria-live="polite">
+                  Program is running. Enter sample data, then select <strong>Save Profile</strong>.
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="code-explanation">
             <article><span>01</span><h3>Create</h3><p>Construct labels, fields, and buttons with appropriate text and sizes.</p></article>
             <article><span>02</span><h3>Connect</h3><p><code>setLabelFor()</code> associates each label with its field for accessibility.</p></article>
@@ -452,5 +565,90 @@ public class StudentProfileForm extends JFrame {
   </main>
 
   <footer class="module-footer"><div><strong>Java Swing Learning Module</strong><span>Module 03 · Labels, Fields, and Buttons</span></div><a href="#top">Return to top ↑</a></footer>
+
+  <script>
+    (() => {
+      const runButtons = document.querySelectorAll('[data-run-example]');
+
+      function revealOutput(button) {
+        const output = document.getElementById(button.dataset.runExample);
+        if (!output) return;
+        output.hidden = false;
+        output.classList.remove('just-ran');
+        void output.offsetWidth;
+        output.classList.add('just-ran');
+        button.textContent = '↻ Run Again';
+
+        if (output.id === 'completeProgramOutput') {
+          const firstField = document.getElementById('previewFullName');
+          const status = document.getElementById('previewStatus');
+          if (status) {
+            status.className = 'program-status';
+            status.innerHTML = 'Program is running. Enter sample data, then select <strong>Save Profile</strong>.';
+          }
+          if (firstField) firstField.focus({ preventScroll: true });
+        }
+      }
+
+      runButtons.forEach((button) => {
+        button.addEventListener('click', () => revealOutput(button));
+      });
+
+      const demoSwingSave = document.getElementById('demoSwingSave');
+      const demoButtonStatus = document.getElementById('demoButtonStatus');
+      if (demoSwingSave && demoButtonStatus) {
+        demoSwingSave.addEventListener('click', () => {
+          demoButtonStatus.textContent = 'Action event fired: Save button selected.';
+          demoButtonStatus.classList.add('event-fired');
+        });
+      }
+
+      const fullName = document.getElementById('previewFullName');
+      const email = document.getElementById('previewEmail');
+      const studentNumber = document.getElementById('previewStudentNumber');
+      const save = document.getElementById('previewSave');
+      const clear = document.getElementById('previewClear');
+      const status = document.getElementById('previewStatus');
+
+      function setProgramStatus(message, type, field) {
+        if (!status) return;
+        status.textContent = message;
+        status.className = 'program-status ' + type;
+        if (field) field.focus();
+      }
+
+      if (save && clear && fullName && email && studentNumber && status) {
+        save.addEventListener('click', () => {
+          const nameValue = fullName.value.trim();
+          const emailValue = email.value.trim();
+          const studentValue = studentNumber.value.trim();
+          const emailPattern = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+          if (!nameValue) {
+            setProgramStatus("Warning: Please enter the student's full name.", 'is-warning', fullName);
+            return;
+          }
+          if (!emailValue || !emailPattern.test(emailValue)) {
+            setProgramStatus('Warning: Please enter a valid email address.', 'is-warning', email);
+            return;
+          }
+          if (!studentValue) {
+            setProgramStatus('Warning: Please enter the student number.', 'is-warning', studentNumber);
+            return;
+          }
+
+          setProgramStatus('Profile Saved: Student profile saved for ' + nameValue + '.', 'is-success');
+        });
+
+        clear.addEventListener('click', () => {
+          fullName.value = '';
+          email.value = '';
+          studentNumber.value = '';
+          setProgramStatus('Fields cleared. Full Name is ready for input.', 'is-neutral', fullName);
+        });
+      }
+    })();
+  </script>
+
 </body>
 </html>

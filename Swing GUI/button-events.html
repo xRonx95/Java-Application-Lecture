@@ -3,29 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A formal lesson and learning module about JavaScript button events.">
-  <title>JavaScript Button Events | Lesson and Module</title>
+  <meta name="description" content="Professional Java Swing lesson module about JButton events, ActionListener, event handling, and interactive output examples.">
+  <title>Java Swing Button Events | Lesson and Module</title>
 
   <!-- Browser tab logo -->
   <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
   <link rel="stylesheet" href="../css/Swing GUI/button-events.css">
-  <script src="../js/button-events.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to lesson content</a>
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="#top" aria-label="Button Events lesson home">
-        <span class="brand-mark" aria-hidden="true">JS</span>
-        <span><strong>Web Development Module</strong><small>Interactive JavaScript Lesson</small></span>
+      <a class="brand" href="#top" aria-label="Java Swing Button Events lesson home">
+        <span class="brand-mark" aria-hidden="true">J</span>
+        <span>
+          <strong>JavaLearn</strong>
+          <small>Java Swing GUI Lesson</small>
+        </span>
       </a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="lesson-nav"><span aria-hidden="true">☰</span> Lesson Menu</button>
+
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="lesson-nav">
+        <span aria-hidden="true">☰</span>
+        <span class="menu-text">Lesson Menu</span>
+      </button>
+
       <nav id="lesson-nav" class="lesson-nav" aria-label="Lesson navigation">
         <a href="../index.html">Home</a>
-        <a href="#overview">Overview</a><a href="#concepts">Concepts</a><a href="#demonstrations">Demonstrations</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a>
+        <a href="#overview">Overview</a>
+        <a href="#concepts">Concepts</a>
+        <a href="#examples">Run Examples</a>
+        <a href="#practice">Practice</a>
+        <a href="#assessment">Assessment</a>
       </nav>
     </div>
   </header>
@@ -33,144 +44,612 @@
   <main id="main-content">
     <section id="top" class="hero" aria-labelledby="lesson-title">
       <div class="hero-content">
-        <p class="eyebrow">Lesson 01 · JavaScript Fundamentals</p>
-        <h1 id="lesson-title">Understanding Button Events in JavaScript</h1>
-        <p class="hero-lead">Learn how a webpage detects a user action, runs JavaScript instructions, and displays a clear response. This module uses guided examples, live demonstrations, and short activities.</p>
-        <div class="hero-actions"><a class="primary-action" href="#overview">Begin the lesson</a><a class="secondary-action" href="#practice">Go to live practice</a></div>
+        <p class="eyebrow">Swing GUI · Button Events</p>
+        <h1 id="lesson-title">Handling Button Events in Java Swing</h1>
+        <p class="hero-lead">
+          Learn how a <code>JButton</code> responds to user actions through an
+          <code>ActionListener</code>. Each Java example below includes a
+          <strong>Run Example</strong> button so students can immediately see the expected result or console output.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-action" href="#overview">Begin Lesson</a>
+          <a class="secondary-action" href="#examples">Run Examples</a>
+        </div>
+
         <dl class="lesson-facts" aria-label="Lesson information">
-          <div><dt>Level</dt><dd>Beginner</dd></div><div><dt>Estimated time</dt><dd>45–60 minutes</dd></div><div><dt>Requirement</dt><dd>Basic HTML</dd></div>
+          <div><dt>Level</dt><dd>Beginner–Intermediate</dd></div>
+          <div><dt>Topic</dt><dd>Java Swing</dd></div>
+          <div><dt>Focus</dt><dd>JButton Events</dd></div>
         </dl>
       </div>
-      <div class="hero-visual"><img src="../img/click-event-flow.png" alt="A learner clicks a button, JavaScript receives the event, and the page displays a result."></div>
+
+      <div class="hero-visual" aria-label="Java Swing event flow illustration">
+        <div class="event-flow-card">
+          <div class="flow-step"><span>1</span><strong>User clicks JButton</strong></div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-step"><span>2</span><strong>ActionEvent is created</strong></div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-step"><span>3</span><strong>ActionListener runs</strong></div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-step success-step"><span>4</span><strong>GUI or output changes</strong></div>
+        </div>
+      </div>
     </section>
 
     <section id="overview" class="section section-light" aria-labelledby="overview-title">
-      <div class="section-heading"><p class="section-number">01 · Lesson Overview</p><h2 id="overview-title">What will you learn?</h2><p>By the end of the lesson, you should be able to explain button events, connect a button to JavaScript, use the event object, and build an accessible interaction.</p></div>
-      <div class="objective-grid">
-        <article class="objective-card"><span class="card-number">01</span><h3>Define an event</h3><p>Describe an event as an action or occurrence that the browser can detect.</p></article>
-        <article class="objective-card"><span class="card-number">02</span><h3>Attach a listener</h3><p>Use <code>addEventListener()</code> to connect a button to a function.</p></article>
-        <article class="objective-card"><span class="card-number">03</span><h3>Use event data</h3><p>Read useful information from the event object, such as the event type and target.</p></article>
-        <article class="objective-card"><span class="card-number">04</span><h3>Support all learners</h3><p>Create controls that work with a mouse, touch screen, and keyboard.</p></article>
+      <div class="section-heading">
+        <p class="section-number">01 · Lesson Overview</p>
+        <h2 id="overview-title">What will you learn?</h2>
+        <p>
+          By the end of this lesson, students should be able to create a Swing button,
+          register an event listener, respond to button clicks, update GUI components,
+          and use common event-handling patterns in Java.
+        </p>
       </div>
-      <aside class="prerequisite-box"><h3>Before you begin</h3><p>You should know the basic purpose of HTML elements, CSS selectors, and JavaScript variables. No advanced programming knowledge is required.</p></aside>
+
+      <div class="objective-grid">
+        <article class="objective-card">
+          <span class="card-number">01</span>
+          <h3>Create a JButton</h3>
+          <p>Instantiate a button and place it inside a Swing container.</p>
+        </article>
+        <article class="objective-card">
+          <span class="card-number">02</span>
+          <h3>Attach an ActionListener</h3>
+          <p>Connect a button click to Java instructions using an event listener.</p>
+        </article>
+        <article class="objective-card">
+          <span class="card-number">03</span>
+          <h3>Use ActionEvent</h3>
+          <p>Read event information such as the action command and event source.</p>
+        </article>
+        <article class="objective-card">
+          <span class="card-number">04</span>
+          <h3>Update the GUI</h3>
+          <p>Change labels, counters, dialogs, and component states after a click.</p>
+        </article>
+      </div>
+
+      <aside class="prerequisite-box">
+        <h3>Before you begin</h3>
+        <p>
+          Students should already understand Java classes, methods, variables, objects,
+          and the basic structure of a <code>JFrame</code> application.
+        </p>
+      </aside>
     </section>
 
     <section id="concepts" class="section section-tinted" aria-labelledby="concepts-title">
-      <div class="section-heading"><p class="section-number">02 · Core Concepts</p><h2 id="concepts-title">How a button event works</h2><p>A button event follows a simple sequence. The browser waits for an action, identifies the element, and calls the function assigned to that event.</p></div>
-      <div class="process-grid" aria-label="Three stages of a button event">
-        <article><div class="process-icon" aria-hidden="true">1</div><h3>User action</h3><p>The learner clicks, taps, presses Enter, or presses the Space bar.</p></article>
-        <article><div class="process-icon" aria-hidden="true">2</div><h3>Event listener</h3><p>JavaScript listens for the named event on the selected button.</p></article>
-        <article><div class="process-icon" aria-hidden="true">3</div><h3>Event handler</h3><p>The handler runs and changes text, color, data, or another part of the page.</p></article>
+      <div class="section-heading">
+        <p class="section-number">02 · Core Concepts</p>
+        <h2 id="concepts-title">How Java Swing handles a button click</h2>
+        <p>
+          Swing follows an event-driven programming model. The program waits for an action,
+          such as a click, then invokes the registered listener.
+        </p>
       </div>
-      <div class="definition-grid">
-        <article class="definition-card"><h3>Event target</h3><p>The HTML element that receives or starts the event. In this lesson, the target is usually a <code>&lt;button&gt;</code>.</p></article>
-        <article class="definition-card"><h3>Event listener</h3><p>A JavaScript instruction that waits for a specific event, such as <code>click</code>.</p></article>
-        <article class="definition-card"><h3>Event handler</h3><p>The function that runs after the event occurs. It contains the action the webpage must perform.</p></article>
-      </div>
-      <div class="method-comparison">
-        <div><p class="section-number">Recommended Method</p><h3>Keep HTML and JavaScript responsibilities separate</h3><p>Inline event attributes can work for very small examples, but <code>addEventListener()</code> is clearer, easier to maintain, and allows multiple handlers.</p></div>
-        <div class="comparison-code">
-          <div class="code-label">HTML</div><pre><code>&lt;button id="saveButton" type="button"&gt;
-  Save Record
-&lt;/button&gt;</code></pre>
-          <div class="code-label">JavaScript</div><pre><code>const saveButton = document.querySelector('#saveButton');
 
-saveButton.addEventListener('click', function () {
-  alert('Record saved successfully.');
-});</code></pre>
-        </div>
+      <div class="process-grid" aria-label="Button event process">
+        <article>
+          <div class="process-icon" aria-hidden="true">1</div>
+          <h3>User Action</h3>
+          <p>The user clicks a <code>JButton</code> using a mouse or activates it using the keyboard.</p>
+        </article>
+        <article>
+          <div class="process-icon" aria-hidden="true">2</div>
+          <h3>ActionEvent</h3>
+          <p>Swing creates an <code>ActionEvent</code> containing information about the action.</p>
+        </article>
+        <article>
+          <div class="process-icon" aria-hidden="true">3</div>
+          <h3>ActionListener</h3>
+          <p>The registered listener executes the code inside <code>actionPerformed()</code>.</p>
+        </article>
+      </div>
+
+      <div class="definition-grid">
+        <article class="definition-card">
+          <h3><code>JButton</code></h3>
+          <p>A Swing component that performs an action when the user activates it.</p>
+        </article>
+        <article class="definition-card">
+          <h3><code>ActionListener</code></h3>
+          <p>An interface used to receive action events from buttons and other components.</p>
+        </article>
+        <article class="definition-card">
+          <h3><code>ActionEvent</code></h3>
+          <p>An event object containing information about the action that occurred.</p>
+        </article>
+      </div>
+
+      <div class="callout info-callout">
+        <strong>Important classroom note:</strong>
+        <p>
+          A normal web browser cannot compile and execute desktop Java Swing code directly.
+          The Run Example buttons on this lesson page therefore demonstrate the
+          <em>expected result/output</em> of each Java example. Students can copy the Java code
+          into Apache NetBeans to run the actual Swing application.
+        </p>
       </div>
     </section>
 
-    <section id="demonstrations" class="section section-light" aria-labelledby="demonstrations-title">
-      <div class="section-heading"><p class="section-number">03 · Guided Demonstrations</p><h2 id="demonstrations-title">Follow each example step by step</h2><p>Read the steps, review the code, and then use the live button to observe the result.</p></div>
+    <section id="examples" class="section section-light" aria-labelledby="examples-title">
+      <div class="section-heading">
+        <p class="section-number">03 · Interactive Java Examples</p>
+        <h2 id="examples-title">Run each example and observe the result</h2>
+        <p>
+          Review the Java code first. Then press <strong>Run Example</strong> to display the expected program behavior.
+        </p>
+      </div>
+
       <article class="demo-card">
-        <div class="demo-lesson"><p class="demo-tag">Demonstration A</p><h3>Change a message after one click</h3>
+        <div class="demo-lesson">
+          <p class="demo-tag">Example 1</p>
+          <h3>Basic JButton with ActionListener</h3>
+          <p>This example prints a message when the button is clicked.</p>
           <ol class="steps-list">
-            <li><span>1</span><div><strong>Create the button.</strong><p>Give it a unique <code>id</code> so JavaScript can select it.</p></div></li>
-            <li><span>2</span><div><strong>Select the button.</strong><p>Use <code>document.querySelector()</code> with its ID selector.</p></div></li>
-            <li><span>3</span><div><strong>Listen for the click.</strong><p>Pass <code>'click'</code> and a handler function to <code>addEventListener()</code>.</p></div></li>
-            <li><span>4</span><div><strong>Update the page.</strong><p>Change the message by assigning a new value to <code>textContent</code>.</p></div></li>
+            <li><span>1</span><div><strong>Create the button.</strong><p>Use <code>new JButton("Click Me")</code>.</p></div></li>
+            <li><span>2</span><div><strong>Add the listener.</strong><p>Register an <code>ActionListener</code>.</p></div></li>
+            <li><span>3</span><div><strong>Handle the action.</strong><p>Place the response inside <code>actionPerformed()</code>.</p></div></li>
           </ol>
         </div>
-        <div class="demo-workspace"><div class="code-window"><div class="window-bar"><span></span><span></span><span></span><b>button-events.js</b></div><pre><code>const helloButton = document.querySelector('#helloButton');
-const helloMessage = document.querySelector('#helloMessage');
 
-helloButton.addEventListener('click', function () {
-  helloMessage.textContent = 'Excellent! The click event worked.';
-});</code></pre></div>
-          <div class="live-example"><p class="live-label">Live result</p><button id="helloButton" class="demo-button" type="button">Click to run the example</button><p id="helloMessage" class="result-message" aria-live="polite">The result will appear here.</p></div>
+        <div class="demo-workspace">
+          <div class="code-window">
+            <div class="window-bar"><span></span><span></span><span></span><b>ButtonExample.java</b></div>
+            <pre><code>JButton button = new JButton("Click Me");
+
+button.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Button clicked!");
+    }
+});</code></pre>
+          </div>
+          <div class="runner-panel">
+            <button class="run-example-button" type="button" data-run="basic">▶ Run Example</button>
+            <div class="output-console" id="output-basic" aria-live="polite">
+              <div class="output-title"><span>OUTPUT</span><button class="clear-output" type="button" data-clear="basic">Clear</button></div>
+              <pre class="output-text">Press “Run Example” to see the result.</pre>
+            </div>
+          </div>
         </div>
       </article>
+
       <article class="demo-card reverse">
-        <div class="demo-lesson"><p class="demo-tag">Demonstration B</p><h3>Count how many times a button is clicked</h3><p>A variable can remember a value between clicks. Each event increases the count by one.</p>
-          <ol class="steps-list"><li><span>1</span><div><strong>Set the starting value.</strong><p>Create <code>let count = 0</code>.</p></div></li><li><span>2</span><div><strong>Increase the value.</strong><p>Use <code>count += 1</code> inside the handler.</p></div></li><li><span>3</span><div><strong>Display the update.</strong><p>Use a template literal to show the latest count.</p></div></li></ol>
+        <div class="demo-lesson">
+          <p class="demo-tag">Example 2</p>
+          <h3>Change a JLabel after a click</h3>
+          <p>A button event can update another Swing component, such as a label.</p>
+          <ol class="steps-list">
+            <li><span>1</span><div><strong>Create a label.</strong><p>Give the label an initial message.</p></div></li>
+            <li><span>2</span><div><strong>Listen for the click.</strong><p>Use a lambda expression for concise event handling.</p></div></li>
+            <li><span>3</span><div><strong>Update the text.</strong><p>Call <code>label.setText()</code>.</p></div></li>
+          </ol>
         </div>
-        <div class="demo-workspace"><div class="code-window"><div class="window-bar"><span></span><span></span><span></span><b>counter example</b></div><pre><code>let count = 0;
 
-countButton.addEventListener('click', function () {
-  count += 1;
-  countOutput.textContent = `Total clicks: ${count}`;
-});</code></pre></div>
-          <div class="live-example"><p class="live-label">Live result</p><button id="countButton" class="demo-button" type="button">Add one click</button><p id="countOutput" class="counter-output" aria-live="polite">Total clicks: 0</p><button id="resetCount" class="text-button" type="button">Reset counter</button></div>
+        <div class="demo-workspace">
+          <div class="code-window">
+            <div class="window-bar"><span></span><span></span><span></span><b>LabelUpdate.java</b></div>
+            <pre><code>JLabel label = new JLabel("Waiting...");
+JButton button = new JButton("Update Label");
+
+button.addActionListener(e -&gt; {
+    label.setText("Button event completed!");
+});</code></pre>
+          </div>
+          <div class="runner-panel">
+            <button class="run-example-button" type="button" data-run="label">▶ Run Example</button>
+            <div class="output-console" id="output-label" aria-live="polite">
+              <div class="output-title"><span>GUI RESULT</span><button class="clear-output" type="button" data-clear="label">Clear</button></div>
+              <div class="swing-preview">
+                <span class="preview-label" id="preview-label">Waiting...</span>
+                <button type="button" tabindex="-1">Update Label</button>
+              </div>
+              <pre class="output-text">Press “Run Example” to simulate the JButton click.</pre>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="demo-card">
+        <div class="demo-lesson">
+          <p class="demo-tag">Example 3</p>
+          <h3>Count button clicks</h3>
+          <p>A variable can store state between events and update after each click.</p>
+          <ol class="steps-list">
+            <li><span>1</span><div><strong>Start the counter.</strong><p>Initialize <code>count</code> to zero.</p></div></li>
+            <li><span>2</span><div><strong>Increment it.</strong><p>Increase the value inside the listener.</p></div></li>
+            <li><span>3</span><div><strong>Display the value.</strong><p>Update a label with the new count.</p></div></li>
+          </ol>
+        </div>
+
+        <div class="demo-workspace">
+          <div class="code-window">
+            <div class="window-bar"><span></span><span></span><span></span><b>ClickCounter.java</b></div>
+            <pre><code>int[] count = {0};
+JLabel label = new JLabel("Clicks: 0");
+JButton button = new JButton("Add Click");
+
+button.addActionListener(e -&gt; {
+    count[0]++;
+    label.setText("Clicks: " + count[0]);
+});</code></pre>
+          </div>
+          <div class="runner-panel">
+            <button class="run-example-button" type="button" data-run="counter">▶ Run Example</button>
+            <button class="reset-example-button" type="button" data-reset="counter">Reset Counter</button>
+            <div class="output-console" id="output-counter" aria-live="polite">
+              <div class="output-title"><span>GUI RESULT</span><button class="clear-output" type="button" data-clear="counter">Clear</button></div>
+              <div class="swing-preview compact-preview"><span class="preview-label" id="preview-counter">Clicks: 0</span></div>
+              <pre class="output-text">Each run simulates one JButton click.</pre>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="demo-card reverse">
+        <div class="demo-lesson">
+          <p class="demo-tag">Example 4</p>
+          <h3>Read the ActionEvent command</h3>
+          <p>The event object can identify which action command was triggered.</p>
+          <ol class="steps-list">
+            <li><span>1</span><div><strong>Receive the event.</strong><p>The lambda parameter <code>e</code> represents the <code>ActionEvent</code>.</p></div></li>
+            <li><span>2</span><div><strong>Get the command.</strong><p>Use <code>e.getActionCommand()</code>.</p></div></li>
+            <li><span>3</span><div><strong>Use the value.</strong><p>Print or compare the command as needed.</p></div></li>
+          </ol>
+        </div>
+
+        <div class="demo-workspace">
+          <div class="code-window">
+            <div class="window-bar"><span></span><span></span><span></span><b>ActionCommand.java</b></div>
+            <pre><code>JButton saveButton = new JButton("Save");
+
+saveButton.addActionListener(e -&gt; {
+    String command = e.getActionCommand();
+    System.out.println("Action command: " + command);
+});</code></pre>
+          </div>
+          <div class="runner-panel">
+            <button class="run-example-button" type="button" data-run="command">▶ Run Example</button>
+            <div class="output-console" id="output-command" aria-live="polite">
+              <div class="output-title"><span>OUTPUT</span><button class="clear-output" type="button" data-clear="command">Clear</button></div>
+              <pre class="output-text">Press “Run Example” to see the action command.</pre>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="demo-card">
+        <div class="demo-lesson">
+          <p class="demo-tag">Example 5</p>
+          <h3>Display a JOptionPane message</h3>
+          <p>Button events commonly display confirmation, warning, or information dialogs.</p>
+          <ol class="steps-list">
+            <li><span>1</span><div><strong>Create the button.</strong><p>Use a clear action label such as <em>Save Record</em>.</p></div></li>
+            <li><span>2</span><div><strong>Register the event.</strong><p>Add an <code>ActionListener</code>.</p></div></li>
+            <li><span>3</span><div><strong>Show the dialog.</strong><p>Call <code>JOptionPane.showMessageDialog()</code>.</p></div></li>
+          </ol>
+        </div>
+
+        <div class="demo-workspace">
+          <div class="code-window">
+            <div class="window-bar"><span></span><span></span><span></span><b>DialogExample.java</b></div>
+            <pre><code>JButton saveButton = new JButton("Save Record");
+
+saveButton.addActionListener(e -&gt; {
+    JOptionPane.showMessageDialog(
+        null,
+        "Record saved successfully."
+    );
+});</code></pre>
+          </div>
+          <div class="runner-panel">
+            <button class="run-example-button" type="button" data-run="dialog">▶ Run Example</button>
+            <div class="output-console" id="output-dialog" aria-live="polite">
+              <div class="output-title"><span>GUI RESULT</span><button class="clear-output" type="button" data-clear="dialog">Clear</button></div>
+              <div class="dialog-preview" id="dialog-preview" hidden>
+                <strong>Message</strong>
+                <p>Record saved successfully.</p>
+                <span class="fake-ok">OK</span>
+              </div>
+              <pre class="output-text">Press “Run Example” to simulate the message dialog.</pre>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="demo-card reverse">
+        <div class="demo-lesson">
+          <p class="demo-tag">Example 6</p>
+          <h3>Disable a button after it is used</h3>
+          <p>A component can change its enabled state after an event.</p>
+          <ol class="steps-list">
+            <li><span>1</span><div><strong>Handle the click.</strong><p>Register the button listener.</p></div></li>
+            <li><span>2</span><div><strong>Disable the control.</strong><p>Call <code>button.setEnabled(false)</code>.</p></div></li>
+            <li><span>3</span><div><strong>Provide feedback.</strong><p>Tell the user why the button is no longer active.</p></div></li>
+          </ol>
+        </div>
+
+        <div class="demo-workspace">
+          <div class="code-window">
+            <div class="window-bar"><span></span><span></span><span></span><b>DisableButton.java</b></div>
+            <pre><code>JButton submitButton = new JButton("Submit");
+
+submitButton.addActionListener(e -&gt; {
+    submitButton.setEnabled(false);
+    System.out.println("Form submitted.");
+});</code></pre>
+          </div>
+          <div class="runner-panel">
+            <button class="run-example-button" type="button" data-run="disable">▶ Run Example</button>
+            <button class="reset-example-button" type="button" data-reset="disable">Reset Example</button>
+            <div class="output-console" id="output-disable" aria-live="polite">
+              <div class="output-title"><span>GUI + OUTPUT</span><button class="clear-output" type="button" data-clear="disable">Clear</button></div>
+              <div class="swing-preview compact-preview"><button id="preview-submit" type="button" tabindex="-1">Submit</button></div>
+              <pre class="output-text">Press “Run Example” to simulate submission.</pre>
+            </div>
+          </div>
         </div>
       </article>
     </section>
 
-    <section class="section section-dark" aria-labelledby="event-types-title">
-      <div class="section-heading light-heading"><p class="section-number">04 · Event Types</p><h2 id="event-types-title">More than a single click</h2><p>JavaScript can respond to several pointer actions. Select the event that best matches the intended interaction.</p></div>
-      <div class="event-showcase"><div class="event-image"><img src="../img/mouse-events.png" alt="Three browser buttons demonstrating a click, double-click, and pointer hover."></div>
-        <div class="event-table-wrap"><table><thead><tr><th>Event</th><th>When it occurs</th><th>Common use</th></tr></thead><tbody>
-          <tr><td><code>click</code></td><td>One activation</td><td>Submit, open, save, or select</td></tr><tr><td><code>dblclick</code></td><td>Two quick clicks</td><td>Special secondary action</td></tr><tr><td><code>pointerenter</code></td><td>Pointer enters an element</td><td>Preview or helper information</td></tr><tr><td><code>pointerleave</code></td><td>Pointer exits an element</td><td>Remove a preview</td></tr><tr><td><code>pointerdown</code></td><td>Pointer is pressed</td><td>Start a press or drag action</td></tr><tr><td><code>pointerup</code></td><td>Pointer is released</td><td>Complete a press or drag action</td></tr>
-        </tbody></table></div>
+    <section class="section section-dark" aria-labelledby="patterns-title">
+      <div class="section-heading light-heading">
+        <p class="section-number">04 · Common Event-Handling Styles</p>
+        <h2 id="patterns-title">Three ways to write a button listener</h2>
+        <p>These approaches are all valid. Choose the form that keeps the program readable and maintainable.</p>
       </div>
-      <div class="callout warning-callout"><strong>Important:</strong><p>Do not place an essential action only on hover or double-click. Touch-screen and keyboard users may not discover or activate it easily.</p></div>
-    </section>
 
-    <section class="section section-light" aria-labelledby="event-object-title">
-      <div class="section-heading"><p class="section-number">05 · The Event Object</p><h2 id="event-object-title">Use information supplied by the browser</h2><p>The handler can receive an event object. This object describes what happened and which element was involved.</p></div>
-      <div class="two-column">
-        <div class="code-window tall-code"><div class="window-bar"><span></span><span></span><span></span><b>event object example</b></div><pre><code>detailsButton.addEventListener('click', function (event) {
-  eventOutput.textContent =
-    `Event type: ${event.type}`;
-});</code></pre></div>
-        <div class="property-list"><article><code>event.type</code><p>The name of the event, such as <em>click</em>.</p></article><article><code>event.target</code><p>The deepest element that started the event.</p></article><article><code>event.currentTarget</code><p>The element whose listener is currently running.</p></article><article><code>event.preventDefault()</code><p>Stops the browser’s normal action when appropriate.</p></article></div>
-      </div>
-      <div class="live-example wide-live"><p class="live-label">Inspect a live event</p><button id="detailsButton" class="demo-button" type="button">Show event details</button><p id="eventOutput" class="result-message" aria-live="polite">Event information will appear here.</p></div>
-    </section>
-
-    <section class="section section-tinted" aria-labelledby="accessibility-title">
-      <div class="section-heading"><p class="section-number">06 · Accessibility and Good Practice</p><h2 id="accessibility-title">Make every button easy to use</h2><p>A professional button must work for learners using a mouse, touch screen, or keyboard and should always provide visible feedback.</p></div>
-      <div class="accessibility-layout"><img src="../img/keyboard-accessibility.png" alt="A keyboard user tabs to a button with a visible focus ring and activates it with Enter or Space.">
-        <div class="checklist-card"><h3>Professional checklist</h3><ul class="check-list"><li>Use a real <code>&lt;button&gt;</code> for button actions.</li><li>Include <code>type="button"</code> when the control should not submit a form.</li><li>Write a clear action label such as “Save record.”</li><li>Keep a strong visible keyboard focus indicator.</li><li>Show confirmation, progress, or error feedback.</li><li>Use <code>aria-live</code> for important dynamic messages.</li></ul></div>
+      <div class="event-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Style</th><th>Example</th><th>Best use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Anonymous class</td><td><code>new ActionListener() { ... }</code></td><td>Useful when teaching the full listener structure.</td></tr>
+            <tr><td>Lambda expression</td><td><code>e -&gt; { ... }</code></td><td>Concise and common for short actions.</td></tr>
+            <tr><td>Separate listener class</td><td><code>class SaveHandler implements ActionListener</code></td><td>Useful when event logic is large or reusable.</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <section id="practice" class="section section-light" aria-labelledby="practice-title">
-      <div class="section-heading"><p class="section-number">07 · Guided Practice</p><h2 id="practice-title">Try the interactions yourself</h2><p>Use the controls below and observe how each event changes the page.</p></div>
+    <section id="practice" class="section section-tinted" aria-labelledby="practice-title">
+      <div class="section-heading">
+        <p class="section-number">05 · Guided Practice</p>
+        <h2 id="practice-title">Apply the same event pattern</h2>
+        <p>Use the activities below as short exercises after demonstrating the examples.</p>
+      </div>
+
       <div class="practice-grid">
-        <article class="practice-card"><p class="practice-label">Practice 1</p><h3>Toggle a visual state</h3><p>Click the button to add or remove an active CSS class.</p><div id="togglePanel" class="state-panel">Current state: Inactive</div><button id="toggleButton" class="demo-button" type="button" aria-pressed="false">Activate panel</button></article>
-        <article class="practice-card"><p class="practice-label">Practice 2</p><h3>Observe pointer events</h3><p>Move the pointer into and out of the area. On touch devices, tap it.</p><button id="hoverButton" class="hover-zone" type="button">Move pointer here</button><p id="hoverOutput" class="small-result" aria-live="polite">Waiting for a pointer event.</p></article>
-        <article class="practice-card"><p class="practice-label">Practice 3</p><h3>Try a double-click</h3><p>Activate the button twice quickly to run the <code>dblclick</code> handler.</p><button id="doubleButton" class="demo-button" type="button">Double-click me</button><p id="doubleOutput" class="small-result" aria-live="polite">Waiting for two clicks.</p></article>
+        <article class="practice-card">
+          <p class="practice-label">Practice 1</p>
+          <h3>Change button text</h3>
+          <p>Write an event that changes <code>"Start"</code> to <code>"Running"</code>.</p>
+          <button class="practice-run" type="button" data-practice="text">▶ Show Expected Result</button>
+          <p class="practice-output" id="practice-text">Result will appear here.</p>
+        </article>
+
+        <article class="practice-card">
+          <p class="practice-label">Practice 2</p>
+          <h3>Clear a JTextField</h3>
+          <p>Write a button event that calls <code>textField.setText("")</code>.</p>
+          <button class="practice-run" type="button" data-practice="clear">▶ Show Expected Result</button>
+          <p class="practice-output" id="practice-clear">Result will appear here.</p>
+        </article>
+
+        <article class="practice-card">
+          <p class="practice-label">Practice 3</p>
+          <h3>Close a JFrame</h3>
+          <p>Write an Exit button that calls <code>frame.dispose()</code>.</p>
+          <button class="practice-run" type="button" data-practice="exit">▶ Show Expected Result</button>
+          <p class="practice-output" id="practice-exit">Result will appear here.</p>
+        </article>
       </div>
-      <article class="student-task"><div><p class="section-number">Independent Activity</p><h3>Build a “Change Theme” button</h3><p>Create a button that adds and removes a class on the page. Update the button’s <code>aria-pressed</code> value whenever the state changes.</p></div><ol><li>Create a button with an ID.</li><li>Select the button and the page container.</li><li>Add a <code>click</code> listener.</li><li>Use <code>classList.toggle()</code>.</li><li>Test with mouse, touch, Tab, Enter, and Space.</li></ol></article>
+
+      <article class="student-task">
+        <div>
+          <p class="section-number">Independent Activity</p>
+          <h3>Build a simple login-button event</h3>
+          <p>
+            Create a JFrame form containing username and password fields. When the Login button is clicked,
+            validate the input and display a message using <code>JOptionPane</code>.
+          </p>
+        </div>
+        <ol>
+          <li>Create the <code>JTextField</code>, <code>JPasswordField</code>, and <code>JButton</code>.</li>
+          <li>Add an <code>ActionListener</code> to the Login button.</li>
+          <li>Read the field values.</li>
+          <li>Use an <code>if</code> statement to validate the input.</li>
+          <li>Display success or error feedback.</li>
+        </ol>
+      </article>
     </section>
 
-    <section id="assessment" class="section section-tinted" aria-labelledby="assessment-title">
-      <div class="section-heading"><p class="section-number">08 · Knowledge Check</p><h2 id="assessment-title">Review your understanding</h2><p>Answer each question before opening the suggested response.</p></div>
+    <section id="assessment" class="section section-light" aria-labelledby="assessment-title">
+      <div class="section-heading">
+        <p class="section-number">06 · Knowledge Check</p>
+        <h2 id="assessment-title">Review your understanding</h2>
+        <p>Answer each question before opening the suggested response.</p>
+      </div>
+
       <div class="question-list">
-        <details><summary>1. What is a JavaScript event?</summary><p>An event is an action or occurrence that the browser detects, such as a click, key press, form submission, or pointer movement.</p></details>
-        <details><summary>2. What is the purpose of <code>addEventListener()</code>?</summary><p>It connects an event on a selected element to a function that should run when the event occurs.</p></details>
-        <details><summary>3. What is the difference between an event listener and an event handler?</summary><p>The listener waits for the event. The handler is the function that performs the response.</p></details>
-        <details><summary>4. What does <code>event.currentTarget</code> provide?</summary><p>It refers to the element whose event listener is currently executing.</p></details>
-        <details><summary>5. Why should an essential action use a real button?</summary><p>A native button provides keyboard support and proper meaning to assistive technologies without extra custom code.</p></details>
+        <details><summary>1. What is the purpose of an ActionListener?</summary><p>It receives action events and executes code when a component such as a JButton is activated.</p></details>
+        <details><summary>2. What method is required by ActionListener?</summary><p>The <code>actionPerformed(ActionEvent e)</code> method.</p></details>
+        <details><summary>3. What does e.getActionCommand() return?</summary><p>It returns the action command associated with the event, commonly the button text unless another command was assigned.</p></details>
+        <details><summary>4. Why are lambda expressions useful for button events?</summary><p>They provide a shorter syntax for functional interfaces such as <code>ActionListener</code>.</p></details>
+        <details><summary>5. Can a web browser directly execute a Swing JFrame?</summary><p>No. Swing is a desktop Java GUI toolkit. The examples on this lesson page simulate the expected result; the actual Java code should be run in Java or Apache NetBeans.</p></details>
       </div>
     </section>
 
-    <section class="section section-summary" aria-labelledby="summary-title"><div><p class="section-number">09 · Lesson Summary</p><h2 id="summary-title">From action to response</h2><p>A button event begins with a user action, passes through an event listener, and runs a handler. Use <code>addEventListener()</code>, provide visible feedback, and test every control with both pointer and keyboard input.</p></div><div class="summary-points"><span>Choose the correct event</span><span>Keep code responsibilities clear</span><span>Use the event object when needed</span><span>Design for accessibility</span></div></section>
+    <section class="section section-summary" aria-labelledby="summary-title">
+      <div>
+        <p class="section-number">07 · Lesson Summary</p>
+        <h2 id="summary-title">From JButton click to program response</h2>
+        <p>
+          A Swing button event begins when the user activates a <code>JButton</code>.
+          Swing generates an <code>ActionEvent</code>, and the registered
+          <code>ActionListener</code> performs the required action.
+        </p>
+      </div>
+      <div class="summary-points">
+        <span>Create the JButton</span>
+        <span>Register the listener</span>
+        <span>Handle the event</span>
+        <span>Update the GUI</span>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer"><p><strong>JavaScript Button Events</strong> · Lesson and Learning Module</p><p>Prepared for classroom instruction and independent practice.</p></footer>
-  <noscript><p class="noscript-message">JavaScript is disabled. You can read the lesson, but the live demonstrations require JavaScript.</p></noscript>
+  <footer class="site-footer">
+    <p><strong>Java Swing Button Events</strong> · Lesson and Learning Module</p>
+    <p>Prepared for classroom instruction and guided practice.</p>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const menuButton = document.querySelector('.menu-button');
+      const lessonNav = document.querySelector('#lesson-nav');
+
+      if (menuButton && lessonNav) {
+        menuButton.addEventListener('click', function () {
+          const isOpen = lessonNav.classList.toggle('is-open');
+          menuButton.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        lessonNav.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            lessonNav.classList.remove('is-open');
+            menuButton.setAttribute('aria-expanded', 'false');
+          });
+        });
+
+        document.addEventListener('click', function (event) {
+          if (!lessonNav.contains(event.target) && !menuButton.contains(event.target)) {
+            lessonNav.classList.remove('is-open');
+            menuButton.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      const initialMessages = {
+        basic: 'Press “Run Example” to see the result.',
+        label: 'Press “Run Example” to simulate the JButton click.',
+        counter: 'Each run simulates one JButton click.',
+        command: 'Press “Run Example” to see the action command.',
+        dialog: 'Press “Run Example” to simulate the message dialog.',
+        disable: 'Press “Run Example” to simulate submission.'
+      };
+
+      let counter = 0;
+
+      function getOutputText(id) {
+        const output = document.querySelector('#output-' + id);
+        return output ? output.querySelector('.output-text') : null;
+      }
+
+      function setOutput(id, message, success) {
+        const output = document.querySelector('#output-' + id);
+        const text = getOutputText(id);
+        if (!output || !text) return;
+
+        text.textContent = message;
+        output.classList.toggle('has-result', Boolean(success));
+      }
+
+      document.querySelectorAll('[data-run]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const example = button.dataset.run;
+
+          switch (example) {
+            case 'basic':
+              setOutput('basic', '> java ButtonExample\nButton clicked!\n\nProcess finished successfully.', true);
+              break;
+
+            case 'label':
+              document.querySelector('#preview-label').textContent = 'Button event completed!';
+              setOutput('label', 'JLabel text changed from “Waiting...” to “Button event completed!”.', true);
+              break;
+
+            case 'counter':
+              counter += 1;
+              document.querySelector('#preview-counter').textContent = 'Clicks: ' + counter;
+              setOutput('counter', 'ActionEvent received. Counter value is now ' + counter + '.', true);
+              break;
+
+            case 'command':
+              setOutput('command', '> java ActionCommand\nAction command: Save\n\nProcess finished successfully.', true);
+              break;
+
+            case 'dialog':
+              document.querySelector('#dialog-preview').hidden = false;
+              setOutput('dialog', 'JOptionPane displayed: “Record saved successfully.”', true);
+              break;
+
+            case 'disable':
+              const submit = document.querySelector('#preview-submit');
+              submit.disabled = true;
+              setOutput('disable', '> java DisableButton\nForm submitted.\n\nThe Submit JButton is now disabled.', true);
+              break;
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-clear]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const id = button.dataset.clear;
+          setOutput(id, initialMessages[id] || 'Output cleared.', false);
+
+          if (id === 'label') {
+            document.querySelector('#preview-label').textContent = 'Waiting...';
+          }
+          if (id === 'dialog') {
+            document.querySelector('#dialog-preview').hidden = true;
+          }
+          if (id === 'disable') {
+            document.querySelector('#preview-submit').disabled = false;
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-reset]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const id = button.dataset.reset;
+
+          if (id === 'counter') {
+            counter = 0;
+            document.querySelector('#preview-counter').textContent = 'Clicks: 0';
+            setOutput('counter', 'Counter reset to 0.', false);
+          }
+
+          if (id === 'disable') {
+            document.querySelector('#preview-submit').disabled = false;
+            setOutput('disable', 'Example reset. The Submit JButton is enabled again.', false);
+          }
+        });
+      });
+
+      const practiceResults = {
+        text: 'Expected GUI result: JButton text changes from “Start” to “Running”.',
+        clear: 'Expected GUI result: the JTextField becomes empty after the Clear button is clicked.',
+        exit: 'Expected GUI result: frame.dispose() closes the current JFrame window.'
+      };
+
+      document.querySelectorAll('[data-practice]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const id = button.dataset.practice;
+          const output = document.querySelector('#practice-' + id);
+          if (output) {
+            output.textContent = practiceResults[id];
+            output.classList.add('success-text');
+          }
+        });
+      });
+    }());
+  </script>
 </body>
 </html>

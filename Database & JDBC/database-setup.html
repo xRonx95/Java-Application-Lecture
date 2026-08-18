@@ -10,7 +10,7 @@
   <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
-  <link rel="stylesheet" href="../css/Database & JDBC/database-setup.css?v=2">
+  <link rel="stylesheet" href="../css/Database & JDBC/database-setup.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to lesson content</a>
@@ -180,6 +180,13 @@
         <p class="section-kicker">Guided Demonstration</p>
         <h2>Step-by-Step Database Setup</h2>
         <p class="section-introduction">Complete the following steps in order. After each major step, verify the expected result before moving forward.</p>
+        <div class="callout callout-information interactive-demo-note">
+          <div class="callout-icon" aria-hidden="true">▶</div>
+          <div>
+            <h3>Interactive Run Example</h3>
+            <p>Select <strong>Run Example</strong> beside a code sample to display its expected result in a GUI-style preview. These previews run entirely in the browser for teaching purposes; they do not execute PHP, MySQL, or modify a real database.</p>
+          </div>
+        </div>
 
         <article class="procedure-step" id="step-1">
           <div class="step-heading">
@@ -259,7 +266,15 @@
             <li>Enter the SQL statement below, then select <strong>Go</strong>.</li>
           </ol>
           <div class="code-panel">
-            <div class="code-toolbar"><span>SQL · Create table</span><button class="copy-button" type="button" data-copy-target="createTableCode">Copy</button></div>
+            <div class="code-toolbar">
+              <span>SQL · Create table</span>
+              <div class="code-toolbar-actions">
+                <button class="run-button" type="button" data-run-demo="create-table" aria-controls="output-create-table" aria-expanded="false">
+                  <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                </button>
+                <button class="copy-button" type="button" data-copy-target="createTableCode">Copy</button>
+              </div>
+            </div>
             <pre class="code-block"><code id="createTableCode">CREATE TABLE students (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     student_number VARCHAR(30) NOT NULL UNIQUE,
@@ -271,6 +286,7 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;</code></pre>
           </div>
+          <div class="example-output" id="output-create-table" data-example-output="create-table" hidden aria-live="polite"></div>
           <figure class="lesson-figure">
             <img src="../img/database-setup/06-run-sql.svg" alt="phpMyAdmin SQL tab illustration showing a CREATE TABLE statement and the Go button" width="960" height="540" loading="lazy">
             <figcaption><strong>Figure 6.</strong> The SQL tab allows a complete table definition to be created consistently.</figcaption>
@@ -301,7 +317,15 @@
           </div>
           <p>Add two sample records so the table can be tested.</p>
           <div class="code-panel">
-            <div class="code-toolbar"><span>SQL · Insert records</span><button class="copy-button" type="button" data-copy-target="insertCode">Copy</button></div>
+            <div class="code-toolbar">
+              <span>SQL · Insert records</span>
+              <div class="code-toolbar-actions">
+                <button class="run-button" type="button" data-run-demo="insert-records" aria-controls="output-insert-records" aria-expanded="false">
+                  <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                </button>
+                <button class="copy-button" type="button" data-copy-target="insertCode">Copy</button>
+              </div>
+            </div>
             <pre class="code-block"><code id="insertCode">INSERT INTO students
     (student_number, full_name, email, course, year_level)
 VALUES
@@ -310,6 +334,7 @@ VALUES
 
 SELECT * FROM students;</code></pre>
           </div>
+          <div class="example-output" id="output-insert-records" data-example-output="insert-records" hidden aria-live="polite"></div>
           <figure class="lesson-figure">
             <img src="../img/database-setup/07-browse-records.svg" alt="phpMyAdmin Browse tab illustration showing two student database records" width="960" height="540" loading="lazy">
             <figcaption><strong>Figure 7.</strong> Use the Browse tab or a <code>SELECT</code> statement to confirm that records were saved correctly.</figcaption>
@@ -327,7 +352,15 @@ SELECT * FROM students;</code></pre>
           </div>
           <p>Create <code>config/db.php</code> inside the project folder. Keeping the connection in one file prevents repeated configuration and simplifies maintenance.</p>
           <div class="code-panel">
-            <div class="code-toolbar"><span>PHP · config/db.php</span><button class="copy-button" type="button" data-copy-target="phpConnectionCode">Copy</button></div>
+            <div class="code-toolbar">
+              <span>PHP · config/db.php</span>
+              <div class="code-toolbar-actions">
+                <button class="run-button" type="button" data-run-demo="php-connection" aria-controls="output-php-connection" aria-expanded="false">
+                  <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                </button>
+                <button class="copy-button" type="button" data-copy-target="phpConnectionCode">Copy</button>
+              </div>
+            </div>
             <pre class="code-block"><code id="phpConnectionCode">&lt;?php
 declare(strict_types=1);
 
@@ -347,6 +380,7 @@ try {
     exit('Unable to connect to the database.');
 }</code></pre>
           </div>
+          <div class="example-output" id="output-php-connection" data-example-output="php-connection" hidden aria-live="polite"></div>
           <figure class="lesson-figure">
             <img src="../img/database-setup/08-db-config.svg" alt="Code editor illustration showing the config db.php database connection file" width="960" height="540" loading="lazy">
             <figcaption><strong>Figure 8.</strong> A reusable connection file centralizes the database host, name, user, password, and character set.</figcaption>
@@ -367,7 +401,15 @@ try {
           </div>
           <p>Create <code>test-connection.php</code> in the project root.</p>
           <div class="code-panel">
-            <div class="code-toolbar"><span>PHP · test-connection.php</span><button class="copy-button" type="button" data-copy-target="testConnectionCode">Copy</button></div>
+            <div class="code-toolbar">
+              <span>PHP · test-connection.php</span>
+              <div class="code-toolbar-actions">
+                <button class="run-button" type="button" data-run-demo="test-connection" aria-controls="output-test-connection" aria-expanded="false">
+                  <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                </button>
+                <button class="copy-button" type="button" data-copy-target="testConnectionCode">Copy</button>
+              </div>
+            </div>
             <pre class="code-block"><code id="testConnectionCode">&lt;?php
 require_once __DIR__ . '/config/db.php';
 
@@ -386,6 +428,7 @@ $row = $result-&gt;fetch_assoc();
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
           </div>
+          <div class="example-output" id="output-test-connection" data-example-output="test-connection" hidden aria-live="polite"></div>
           <p>Open <code>http://localhost/database_lesson/test-connection.php</code>. A success message and a record count of <strong>2</strong> should appear.</p>
           <figure class="lesson-figure">
             <img src="../img/database-setup/09-test-success.svg" alt="Browser illustration displaying a successful database connection and two student records" width="960" height="540" loading="lazy">
@@ -442,7 +485,15 @@ $row = $result-&gt;fetch_assoc();
 
         <h3>Prepared statement example</h3>
         <div class="code-panel">
-          <div class="code-toolbar"><span>PHP · Safe insert</span><button class="copy-button" type="button" data-copy-target="preparedCode">Copy</button></div>
+          <div class="code-toolbar">
+              <span>PHP · Safe insert</span>
+              <div class="code-toolbar-actions">
+                <button class="run-button" type="button" data-run-demo="prepared-insert" aria-controls="output-prepared-insert" aria-expanded="false">
+                  <span class="run-icon" aria-hidden="true">▶</span> Run Example
+                </button>
+                <button class="copy-button" type="button" data-copy-target="preparedCode">Copy</button>
+              </div>
+            </div>
           <pre class="code-block"><code id="preparedCode">$statement = $conn-&gt;prepare(
     'INSERT INTO students
      (student_number, full_name, email, course, year_level)
@@ -460,6 +511,7 @@ $statement-&gt;bind_param(
 
 $statement-&gt;execute();</code></pre>
         </div>
+          <div class="example-output" id="output-prepared-insert" data-example-output="prepared-insert" hidden aria-live="polite"></div>
       </section>
 
       <section class="content-section" id="troubleshooting">
@@ -593,5 +645,129 @@ $statement-&gt;execute();</code></pre>
 
   <div class="copy-notice" id="copyNotice" role="status" aria-live="polite">Code copied</div>
   <script src="../js/database-setup.js?v=2" defer></script>
+
+  <script>
+    (() => {
+      const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+      })[character]);
+
+      const studentRows = [
+        ['1', '2026-0001', 'Maria Santos', 'maria@example.edu', 'BSIT', '2'],
+        ['2', '2026-0002', 'Jose Reyes', 'jose@example.edu', 'BSCS', '1']
+      ];
+
+      const tableRows = studentRows.map((row) => `
+        <tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join('')}</tr>
+      `).join('');
+
+      const demos = {
+        'create-table': () => `
+          <div class="output-window">
+            <div class="output-window-bar">
+              <div><span class="status-dot status-success"></span><strong>phpMyAdmin · SQL Result</strong></div>
+              <span class="output-badge">Success</span>
+            </div>
+            <div class="output-window-body">
+              <div class="result-message result-success"><strong>Query executed successfully.</strong><span>Table <code>students</code> was created with 7 fields.</span></div>
+              <div class="schema-grid">
+                <span><strong>id</strong><small>INT · PRIMARY KEY</small></span>
+                <span><strong>student_number</strong><small>VARCHAR(30) · UNIQUE</small></span>
+                <span><strong>full_name</strong><small>VARCHAR(150)</small></span>
+                <span><strong>email</strong><small>VARCHAR(150) · UNIQUE</small></span>
+                <span><strong>course</strong><small>VARCHAR(100)</small></span>
+                <span><strong>year_level</strong><small>TINYINT</small></span>
+                <span><strong>created_at</strong><small>TIMESTAMP</small></span>
+              </div>
+            </div>
+          </div>`,
+        'insert-records': () => `
+          <div class="output-window">
+            <div class="output-window-bar">
+              <div><span class="status-dot status-success"></span><strong>phpMyAdmin · Browse</strong></div>
+              <span class="output-badge">2 rows</span>
+            </div>
+            <div class="output-window-body">
+              <div class="result-message result-success"><strong>Insert completed.</strong><span>2 records added. SELECT returned 2 rows.</span></div>
+              <div class="demo-table-wrap">
+                <table class="demo-result-table">
+                  <thead><tr><th>ID</th><th>Student No.</th><th>Full Name</th><th>Email</th><th>Course</th><th>Year</th></tr></thead>
+                  <tbody>${tableRows}</tbody>
+                </table>
+              </div>
+            </div>
+          </div>`,
+        'php-connection': () => `
+          <div class="output-window">
+            <div class="output-window-bar">
+              <div><span class="status-dot status-success"></span><strong>PHP · Database Connection</strong></div>
+              <span class="output-badge">Connected</span>
+            </div>
+            <div class="output-window-body">
+              <div class="connection-card">
+                <div class="connection-icon" aria-hidden="true">DB</div>
+                <div><strong>MySQL connection established</strong><span>Host: localhost</span><span>Database: database_lesson</span><span>Character set: utf8mb4</span></div>
+              </div>
+              <p class="output-note">Expected result: no error message is displayed when the connection succeeds.</p>
+            </div>
+          </div>`,
+        'test-connection': () => `
+          <div class="browser-preview">
+            <div class="browser-preview-bar">
+              <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+              <div class="browser-address">localhost/database_lesson/test-connection.php</div>
+            </div>
+            <div class="browser-preview-page">
+              <span class="preview-success-icon" aria-hidden="true">✓</span>
+              <p class="preview-kicker">DATABASE TEST</p>
+              <h3>Database connection successful</h3>
+              <p>Student records: <strong>2</strong></p>
+            </div>
+          </div>`,
+        'prepared-insert': () => `
+          <div class="output-window">
+            <div class="output-window-bar">
+              <div><span class="status-dot status-success"></span><strong>PHP · Prepared Statement</strong></div>
+              <span class="output-badge">Executed</span>
+            </div>
+            <div class="output-window-body">
+              <div class="result-message result-success"><strong>Prepared statement executed safely.</strong><span>Parameters were bound separately from the SQL instruction.</span></div>
+              <div class="security-result">
+                <span class="shield-icon" aria-hidden="true">✓</span>
+                <div><strong>1 row inserted</strong><p>The example demonstrates parameter binding that reduces SQL injection risk.</p></div>
+              </div>
+            </div>
+          </div>`
+      };
+
+      document.querySelectorAll('[data-run-demo]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const demoId = button.dataset.runDemo;
+          const output = document.querySelector(`[data-example-output="${demoId}"]`);
+          const render = demos[demoId];
+          if (!output || !render) return;
+
+          const isOpen = !output.hidden;
+          if (isOpen) {
+            output.hidden = true;
+            button.setAttribute('aria-expanded', 'false');
+            button.classList.remove('is-active');
+            button.innerHTML = '<span class="run-icon" aria-hidden="true">▶</span> Run Example';
+            return;
+          }
+
+          output.innerHTML = render();
+          output.hidden = false;
+          button.setAttribute('aria-expanded', 'true');
+          button.classList.add('is-active');
+          button.innerHTML = '<span class="run-icon" aria-hidden="true">■</span> Close Output';
+
+          if (window.matchMedia('(max-width: 640px)').matches) {
+            requestAnimationFrame(() => output.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

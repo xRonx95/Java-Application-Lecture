@@ -9,24 +9,6 @@
   <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
     <link rel="stylesheet" href="../css/Apache NetBeans/run-debug.css">
-    <style>
-        /* Extra visual lesson styles are included here so the new pictures work immediately. */
-        .lesson-figure{margin:24px 0;border:1px solid #c7dceb;border-radius:14px;overflow:hidden;background:#f8fcff;box-shadow:0 8px 22px rgba(16,42,67,.08)}
-        .lesson-figure svg{display:block;width:100%;height:auto;max-height:390px}
-        .lesson-figure figcaption{padding:11px 16px;background:#edf7ff;color:#486581;font-size:.92rem;border-top:1px solid #c7dceb}
-        .visual-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
-        .visual-steps article{position:relative;padding:16px 12px;text-align:center;border:1px solid #c7dceb;border-radius:12px;background:#f8fcff}
-        .visual-steps article:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:42%;z-index:2;color:#1261a0;font-weight:900;font-size:1.25rem}
-        .visual-steps b{display:grid;place-items:center;width:36px;height:36px;margin:0 auto 8px;border-radius:50%;background:#1261a0;color:#fff}
-        .practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0}
-        .practice-grid article{padding:17px;border:1px solid #d9e2ec;border-radius:12px;background:#fbfdff}
-        .practice-grid h3{margin-top:0}
-        .mini-task{margin:20px 0;padding:18px;border:2px dashed #8fc7e8;border-radius:12px;background:#f5fbff}
-        .mini-task h3{margin-top:0}
-        @media(max-width:800px){.visual-steps,.practice-grid{grid-template-columns:repeat(2,1fr)}}
-        @media(max-width:520px){.visual-steps,.practice-grid{grid-template-columns:1fr}.visual-steps article:not(:last-child)::after{content:"↓";right:auto;left:49%;top:auto;bottom:-20px}}
-        @media print{.lesson-figure{break-inside:avoid;box-shadow:none}}
-    </style>
 </head>
 <body>
     <header class="module-header">
@@ -76,6 +58,7 @@
                 <a class="topic-link" href="#input-validation" data-topic="12"><span>12</span> Input Validation</a>
                 <a class="topic-link" href="#loops-arrays" data-topic="13"><span>13</span> Loops and Arrays</a>
                 <a class="topic-link" href="#methods-stack" data-topic="14"><span>14</span> Methods and Stack</a>
+                <a class="topic-link" href="#run-examples"><span>★</span> Run Examples &amp; Output</a>
                 <a class="topic-link" href="#activity" data-topic="15"><span>15</span> Debugging Activity</a>
                 <a class="topic-link" href="#quiz" data-topic="16"><span>16</span> Knowledge Check</a>
             </nav>
@@ -131,6 +114,31 @@
                 </div>
 
                 <div class="teacher-tip"><strong>Explanation tip:</strong> Compare debugging to pausing a recorded game so you can study exactly what every player is doing.</div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-1" aria-controls="topic-output-1" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class RunVsDebugDemo {
+    public static void main(String[] args) {
+        int value = 5;
+        value *= 2;
+        System.out.println("Program finished. value = " + value);
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-1" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Program finished. value = 10</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="compile-run" data-section="2">
@@ -164,6 +172,29 @@
                     <pre><code>javac HelloWorld.java
 java HelloWorld</code></pre>
                 </div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-2" aria-controls="topic-output-2" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, debugger!");
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-2" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Hello, debugger!</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="debugging-process" data-section="3">
@@ -186,6 +217,35 @@ java HelloWorld</code></pre>
                     <article><span>06</span><h3>Verify</h3><p>Run normal, boundary, and invalid-input tests after the change.</p></article>
                 </div>
                 <div class="teacher-tip"><strong>Remember:</strong> Observe → Hypothesize → Test → Fix → Verify.</div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-3" aria-controls="topic-output-3" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class DebugProcessDemo {
+    public static void main(String[] args) {
+        int expected = 12;
+        int actual = 7 + 5;
+        System.out.println("Expected: " + expected);
+        System.out.println("Actual: " + actual);
+        System.out.println(actual == expected ? "Verification passed." : "Investigate again.");
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-3" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Expected: 12
+Actual: 12
+Verification passed.</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="breakpoints" data-section="4">
@@ -213,6 +273,37 @@ double average = (double) total / scores.length;</code></pre>
                     <article><h3>Good placement</h3><p>Choose a line near the first point where the program state becomes suspicious.</p></article>
                 </div>
                 <div class="warning-box"><strong>Important:</strong> A breakpoint does not fix or permanently stop a program. It temporarily freezes the current execution for inspection.</div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-4" aria-controls="topic-output-4" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class BreakpointDemo {
+    public static void main(String[] args) {
+        int[] scores = {80, 90, 100};
+        int total = 0;
+
+        for (int i = 0; i &lt; scores.length; i++) {
+            total += scores[i]; // Place a breakpoint here
+            System.out.println("i=" + i + ", total=" + total);
+        }
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-4" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>i=0, total=80
+i=1, total=170
+i=2, total=270</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="step-controls" data-section="5">
@@ -241,6 +332,38 @@ printReceipt(finalPrice);
 // Step Over to execute it as one line.
 // Step Out to finish it and return to the caller.</code></pre>
                 </div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-5" aria-controls="topic-output-5" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class StepControlsDemo {
+    static double calculateDiscount(double price) {
+        return price * 0.90;
+    }
+
+    static void printReceipt(double finalPrice) {
+        System.out.println("Final price: " + finalPrice);
+    }
+
+    public static void main(String[] args) {
+        double finalPrice = calculateDiscount(100.0);
+        printReceipt(finalPrice);
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-5" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Final price: 90.0</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="inspect-state" data-section="6">
@@ -260,6 +383,39 @@ printReceipt(finalPrice);
                     <article><span>E</span><div><h3>Evaluate Expression</h3><p>Tests an expression while the program is paused without adding it permanently to the code.</p></div></article>
                 </div>
                 <div class="teacher-tip"><strong>Ask three questions:</strong> What values do I have? How did execution get here? What line will execute next?</div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-6" aria-controls="topic-output-6" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class InspectStateDemo {
+    public static void main(String[] args) {
+        int i = 2;
+        int score = 79;
+        int total = 180;
+
+        System.out.println("i = " + i);
+        System.out.println("score = " + score);
+        System.out.println("total = " + total);
+        System.out.println("Watch total / 3.0 = " + (total / 3.0));
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-6" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>i = 2
+score = 79
+total = 180
+Watch total / 3.0 = 60.0</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="error-types" data-section="7">
@@ -285,6 +441,35 @@ printReceipt(finalPrice);
                         <p>The program finishes but produces an incorrect result.</p>
                         <pre><code>int area = length + width;</code></pre>
                     </article>
+                </div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-7" aria-controls="topic-output-7" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class ErrorTypesDemo {
+    public static void main(String[] args) {
+        int length = 6;
+        int width = 4;
+        int wrongArea = length + width; // Logic error
+
+        System.out.println("Wrong area: " + wrongArea);
+        System.out.println("Correct area: " + (length * width));
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-7" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Wrong area: 10
+Correct area: 24</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
                 </div>
             </section>
 
@@ -313,6 +498,32 @@ java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3
                     <li><strong>Caller:</strong> The failing method was called from line 7 of <code>main</code>.</li>
                 </ol>
                 <div class="warning-box"><strong>Remember:</strong> The listed line is where the failure appeared. The incorrect value may have been created earlier.</div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-8" aria-controls="topic-output-8" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class StackTraceDemo {
+    public static void main(String[] args) {
+        int[] values = {10, 20, 30};
+        System.out.println(values[3]);
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-8" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException
+Index 3 is outside an array of length 3.
+The exact line number may vary in your file.</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="troubleshooting" data-section="9">
@@ -328,6 +539,35 @@ java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3
                     <label><input type="checkbox"> Confirm operators and data types produce the intended result.</label>
                     <label><input type="checkbox"> Reduce the bug to a small, repeatable example.</label>
                     <label><input type="checkbox"> Test normal, boundary, and invalid inputs after the fix.</label>
+                </div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-9" aria-controls="topic-output-9" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class TroubleshootingDemo {
+    public static void main(String[] args) {
+        String className = "TroubleshootingDemo";
+        boolean saved = true;
+        boolean inputValid = true;
+
+        if (saved &amp;&amp; inputValid) {
+            System.out.println(className + ": basic checks passed.");
+        }
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-9" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>TroubleshootingDemo: basic checks passed.</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
                 </div>
             </section>
 
@@ -350,6 +590,31 @@ java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3
                 <div class="code-block"><div class="code-heading"><span>Installation check</span><button class="copy-code" type="button">Copy</button></div><pre><code>java -version
 javac -version</code></pre></div>
                 <div class="warning-box"><strong>If the command is not recognized:</strong> reinstall the JDK or correct the Java PATH setting, then close and reopen the terminal.</div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-10" aria-controls="topic-output-10" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class JavaSetupCheck {
+    public static void main(String[] args) {
+        System.out.println("Java runtime detected.");
+        System.out.println("Version: " + Runtime.version());
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-10" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Java runtime detected.
+Version: [your installed JDK version]</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="netbeans-project" data-section="11">
@@ -370,6 +635,30 @@ javac -version</code></pre></div>
                     <li><span>4</span><div><strong>Edit and run</strong><p>Open the generated <code>.java</code> file, enter the code, save, and press <b>F6</b>.</p></div></li>
                 </ol>
                 <div class="mini-task"><h3>Student practice</h3><p>Change the output to <code>Hello, my name is ______!</code>, run the project, and confirm the message in the Output panel.</p></div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-11" aria-controls="topic-output-11" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class HelloProject {
+    public static void main(String[] args) {
+        System.out.println("Hello from NetBeans!");
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-11" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Hello from NetBeans!
+BUILD SUCCESSFUL</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="input-validation" data-section="12">
@@ -396,6 +685,35 @@ if (input.hasNextInt()) {
     System.out.println("Please enter a whole number.");
 }</code></pre></div>
                 <div class="practice-grid"><article><h3>Normal input</h3><p>Test <code>18</code>. It should be accepted.</p></article><article><h3>Boundary input</h3><p>Test <code>0</code> and <code>120</code>.</p></article><article><h3>Invalid input</h3><p>Test <code>-1</code>, <code>121</code>, and <code>hello</code>.</p></article></div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-12" aria-controls="topic-output-12" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class SafeAgeDemo {
+    public static void main(String[] args) {
+        int age = 18;
+
+        if (age &gt;= 0 &amp;&amp; age &lt;= 120) {
+            System.out.println("Accepted: " + age);
+        } else {
+            System.out.println("Age must be from 0 to 120.");
+        }
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-12" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Accepted: 18</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="loops-arrays" data-section="13">
@@ -416,6 +734,38 @@ for (int i = 0; i &lt; grades.length; i++) {
 }</code></pre></div>
                 <ol class="process-list"><li><span>1</span><div><strong>Place a breakpoint inside the loop</strong><p>Pause before <code>total</code> changes.</p></div></li><li><span>2</span><div><strong>Watch the index</strong><p>Confirm that <code>i</code> changes from 0 to 1 to 2.</p></div></li><li><span>3</span><div><strong>Watch the total</strong><p>It should change from 0 to 88 to 180 to 259.</p></div></li><li><span>4</span><div><strong>Confirm the exit</strong><p>When <code>i</code> becomes 3, the condition is false and the loop stops safely.</p></div></li></ol>
                 <div class="warning-box"><strong>Common mistake:</strong> <code>i &lt;= grades.length</code> executes once too many and tries to read invalid index 3.</div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-13" aria-controls="topic-output-13" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class ArrayLoopDemo {
+    public static void main(String[] args) {
+        int[] grades = {88, 92, 79};
+        int total = 0;
+
+        for (int i = 0; i &lt; grades.length; i++) {
+            total += grades[i];
+        }
+
+        System.out.println("Total: " + total);
+        System.out.println("Average: " + (total / 3.0));
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-13" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Total: 259
+Average: 86.33333333333333</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-card" id="methods-stack" data-section="14">
@@ -437,6 +787,66 @@ public static void main(String[] args) {
     System.out.println(result);
 }</code></pre></div>
                 <div class="mini-task"><h3>Guided trace</h3><ol><li>Put a breakpoint on the line that calls <code>calculateAverage</code>.</li><li>Use Step Into and inspect <code>total</code> and <code>count</code>.</li><li>Step to the return statement and predict the result.</li><li>Use Step Out and confirm that <code>result</code> receives the returned value.</li></ol></div>
+            
+
+                <div class="topic-run-example" aria-label="Run example for this topic">
+                    <div class="topic-run-toolbar">
+                        <div>
+                            <span class="run-example-label">▶ Java Run Example</span>
+                            <h3>Run this example and view the output</h3>
+                        </div>
+                        <button class="run-example-button" type="button" data-run-target="topic-output-14" aria-controls="topic-output-14" aria-expanded="false">
+                            <span aria-hidden="true">▶</span> Run Example
+                        </button>
+                    </div>
+                    <pre class="topic-run-code"><code>public class MethodStackDemo {
+    static double calculateAverage(int total, int count) {
+        return (double) total / count;
+    }
+
+    public static void main(String[] args) {
+        double result = calculateAverage(259, 3);
+        System.out.println("Returned average: " + result);
+    }
+}</code></pre>
+                    <div class="topic-run-output" id="topic-output-14" hidden aria-live="polite">
+                        <div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div>
+                        <pre>Returned average: 86.33333333333333</pre>
+                        <p class="run-example-disclaimer">This page simulates the expected console result. Apache NetBeans or a Java JDK performs the actual Java execution.</p>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="lesson-card run-example-section" id="run-examples" data-section="run">
+                <div class="topic-number">Run Examples</div>
+                <p class="run-example-kicker">▶ Code → Run → Output</p>
+                <h2>Run the debugging examples and compare the results</h2>
+                <p>Run each example normally first, then repeat it in Debug mode when the lesson asks you to inspect values.</p>
+                <div class="run-example-mini-grid">
+                    <article class="run-example-mini"><h3>Compile and Run</h3><pre><code>public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, debugger!");
+  }
+}</code></pre><button class="mini-run-button" type="button" data-run-target="mini-output-1" aria-controls="mini-output-1" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button><div class="mini-output topic-run-output" id="mini-output-1" hidden><div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div><pre>Hello, debugger!</pre></div></article>
+                    <article class="run-example-mini"><h3>Breakpoint / Loop</h3><pre><code>int[] scores={80,90,100};
+int total=0;
+for(int s:scores) total+=s;
+System.out.println(total);</code></pre><button class="mini-run-button" type="button" data-run-target="mini-output-2" aria-controls="mini-output-2" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button><div class="mini-output topic-run-output" id="mini-output-2" hidden><div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div><pre>270</pre></div></article>
+                    <article class="run-example-mini"><h3>Input Validation</h3><pre><code>int age = 19;
+if(age &gt;= 0) System.out.println("Valid age: " + age);</code></pre><button class="mini-run-button" type="button" data-run-target="mini-output-3" aria-controls="mini-output-3" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button><div class="mini-output topic-run-output" id="mini-output-3" hidden><div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div><pre>Valid age: 19</pre></div></article>
+                    <article class="run-example-mini"><h3>Arrays</h3><pre><code>int[] grades={88,92,79};
+int total=0;
+for(int g:grades) total+=g;
+System.out.println("Average: " + total/3.0);</code></pre><button class="mini-run-button" type="button" data-run-target="mini-output-4" aria-controls="mini-output-4" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button><div class="mini-output topic-run-output" id="mini-output-4" hidden><div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div><pre>Average: 86.33333333333333</pre></div></article>
+                    <article class="run-example-mini"><h3>Methods / Call Stack</h3><pre><code>static double average(int t,int c){return (double)t/c;}
+System.out.println(average(259,3));</code></pre><button class="mini-run-button" type="button" data-run-target="mini-output-5" aria-controls="mini-output-5" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button><div class="mini-output topic-run-output" id="mini-output-5" hidden><div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div><pre>86.33333333333333</pre></div></article>
+                    <article class="run-example-mini"><h3>Exception</h3><pre><code>try { System.out.println(10/0); }
+catch(ArithmeticException e){
+  System.out.println("Error handled safely");
+}</code></pre><button class="mini-run-button" type="button" data-run-target="mini-output-6" aria-controls="mini-output-6" aria-expanded="false"><span aria-hidden="true">▶</span> Run Example</button><div class="mini-output topic-run-output" id="mini-output-6" hidden><div class="topic-output-heading"><span>Expected Output</span><span class="output-status">● Finished</span></div><pre>Error handled safely</pre></div></article>
+                </div>
+                <div class="run-example-result"><strong>NetBeans:</strong> press <kbd>F6</kbd> for a normal project run. For debugging, add a breakpoint, choose <b>Debug → Debug Project</b>, then use Step Over/Step Into while watching variable values.</div>
             </section>
 
             <section class="lesson-card activity-card" id="activity" data-section="15">
@@ -528,5 +938,32 @@ public static void main(String[] args) {
     </footer>
 
     <script src="../js/run-debug.js"></script>
+
+    <script>
+        (function () {
+            function runExample(button) {
+                const targetId = button.getAttribute('data-run-target');
+                const output = document.getElementById(targetId);
+                if (!output) return;
+
+                output.hidden = false;
+                output.classList.remove('is-running');
+                void output.offsetWidth;
+                output.classList.add('is-running');
+                button.setAttribute('aria-expanded', 'true');
+                button.classList.add('has-run');
+
+                const icon = button.querySelector('span');
+                if (icon) icon.textContent = '↻';
+                const textNode = Array.from(button.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                if (textNode) textNode.nodeValue = ' Run Again';
+            }
+
+            document.addEventListener('click', function (event) {
+                const button = event.target.closest('.run-example-button, .mini-run-button');
+                if (button) runExample(button);
+            });
+        }());
+    </script>
 </body>
 </html>

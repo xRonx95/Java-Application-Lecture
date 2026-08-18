@@ -147,6 +147,43 @@
         .glossary-grid dt { font-weight: 800; color: #6f1d2b; }
         .glossary-grid dd { margin: .3rem 0 0; }
 
+        .anatomy-run-panel,
+        .lesson-run-panel {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1.1rem 1.2rem;
+            border: 1px solid #d8e2ef;
+            border-radius: 14px;
+            background: #f7fbff;
+        }
+
+        .anatomy-run-panel p,
+        .lesson-run-panel p { margin: .35rem 0 0; }
+
+        .run-example-button {
+            flex: 0 0 auto;
+            border: 0;
+            border-radius: 10px;
+            padding: .85rem 1.15rem;
+            background: #0b5ed7;
+            color: #fff;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(11, 94, 215, .18);
+        }
+
+        .run-example-button:hover { filter: brightness(.95); }
+        .run-example-button:focus-visible { outline: 3px solid #8bbcff; outline-offset: 3px; }
+        .anatomy-output[hidden],
+        .lesson-output[hidden] { display: none; }
+
+        .lesson-run-code { margin-top: 1rem; }
+        .lesson-output { margin-top: 1rem; }
+
         @media (max-width: 850px) {
             .visual-roadmap,
             .topic-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -159,6 +196,9 @@
             .glossary-grid { grid-template-columns: 1fr; }
             .guided-step { grid-template-columns: 62px minmax(0, 1fr); padding: 1rem; }
             .step-picture { width: 62px; min-height: 62px; font-size: 1.7rem; border-radius: 14px; }
+            .anatomy-run-panel,
+        .lesson-run-panel { align-items: stretch; flex-direction: column; }
+            .run-example-button { width: 100%; }
         }
     </style>
 </head>
@@ -446,6 +486,48 @@
                         <div><strong>Constructor</strong><span>Sets up a new object.</span></div>
                         <div><strong>Methods</strong><span>Define what an object can do.</span></div>
                     </div>
+
+                    <div class="teacher-tip">
+                        <span class="tip-icon" aria-hidden="true">▶️</span>
+                        <div>
+                            <strong>Run the anatomy example</strong>
+                            <p>
+                                The class above defines the object, but Java needs a <code>main()</code> method
+                                to create a Student object and call <code>study()</code>. Use this short runner
+                                to see the expected console result.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="code-card compact-code">
+                        <div class="code-header">
+                            <span>Runner code to test Student</span>
+                            <span class="language-badge">JAVA</span>
+                        </div>
+                        <pre><code><span class="code-keyword">public static void</span> main(<span class="code-keyword">String</span>[] args) {
+    Student ana = <span class="code-keyword">new</span> Student(<span class="code-string">"Ana"</span>, <span class="code-number">19</span>);
+    ana.study();
+}</code></pre>
+                    </div>
+
+                    <div class="anatomy-run-panel">
+                        <div>
+                            <strong>Try the example</strong>
+                            <p>Click the button to display the output produced by <code>ana.study()</code>.</p>
+                        </div>
+                        <button type="button" class="run-example-button" id="run-anatomy-example" aria-expanded="false" data-output="anatomy-output">▶ Run Example</button>
+                    </div>
+
+                    <div class="output-box anatomy-output" id="anatomy-output" hidden aria-live="polite">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Ana is studying.</code>
+                    </div>
+
+                    <p class="student-action">
+                        <strong>Teaching point:</strong> <code>new Student("Ana", 19)</code> runs the constructor,
+                        stores <code>Ana</code> and <code>19</code> in the object's fields, and <code>ana.study()</code>
+                        prints the student's name followed by <code>is studying.</code>
+                    </p>
                 </section>
 
                 <section id="follow-along" class="lesson-section featured-section">
@@ -578,6 +660,28 @@ java Student</code></pre></div>
                         <div><span>3</span><strong>Assign</strong><code>ana = object reference</code></div>
                     </div>
 
+                    <div class="code-card compact-code lesson-run-code">
+                        <div class="code-header"><span>Run example: create two Student objects</span><span class="language-badge">JAVA</span></div>
+                        <pre><code>Student first = <span class="code-keyword">new</span> Student();
+Student second = <span class="code-keyword">new</span> Student(<span class="code-string">"Ana"</span>, <span class="code-number">19</span>);
+
+System.out.println(first.name + <span class="code-string">", "</span> + first.age);
+System.out.println(second.name + <span class="code-string">", "</span> + second.age);</code></pre>
+                    </div>
+
+                    <div class="lesson-run-panel">
+                        <div>
+                            <strong>Run the constructor example</strong>
+                            <p>Click the button to reveal the result produced by the default-style and parameterized constructors.</p>
+                        </div>
+                        <button type="button" class="run-example-button lesson-run-button" aria-expanded="false" data-output="constructors-output">▶ Run Example</button>
+                    </div>
+
+                    <div class="output-box lesson-output" id="constructors-output" hidden aria-live="polite">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Unknown, 0<br>Ana, 19</code>
+                    </div>
+
                     <div class="note-box">
                         <strong>Important:</strong> If you do not write any constructor, Java can provide
                         a no-argument default constructor. Once you write your own constructor, Java no
@@ -624,6 +728,19 @@ System.out.println(ana.name); <span class="code-comment">// Read a field</span>
 ana.age = <span class="code-number">20</span>;              <span class="code-comment">// Change a field</span>
 ana.study();                <span class="code-comment">// Call a method</span></code></pre>
                     </div>
+
+                    <div class="lesson-run-panel">
+                        <div>
+                            <strong>Run the fields and methods example</strong>
+                            <p>The field read prints the student's name. Changing <code>age</code> does not print anything by itself, then <code>study()</code> prints a message.</p>
+                        </div>
+                        <button type="button" class="run-example-button lesson-run-button" aria-expanded="false" data-output="members-output">▶ Run Example</button>
+                    </div>
+
+                    <div class="output-box lesson-output" id="members-output" hidden aria-live="polite">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Ana<br>Ana is studying.</code>
+                    </div>
                 </section>
 
                 <section id="this-keyword" class="lesson-section">
@@ -647,6 +764,28 @@ ana.study();                <span class="code-comment">// Call a method</span></
     <span class="code-keyword">this</span>.name = name; <span class="code-comment">// Correct</span>
 }</code></pre>
                         </div>
+                    </div>
+
+                    <div class="code-card compact-code lesson-run-code">
+                        <div class="code-header"><span>Run example: compare the two assignments</span><span class="language-badge">JAVA</span></div>
+                        <pre><code><span class="code-comment">// With name = name;</span>
+System.out.println(studentWithoutThis.name);
+
+<span class="code-comment">// With this.name = name;</span>
+System.out.println(studentWithThis.name);</code></pre>
+                    </div>
+
+                    <div class="lesson-run-panel">
+                        <div>
+                            <strong>Run the <code>this</code> keyword example</strong>
+                            <p>This comparison shows why <code>this.name = name</code> correctly stores the constructor parameter in the object's field.</p>
+                        </div>
+                        <button type="button" class="run-example-button lesson-run-button" aria-expanded="false" data-output="this-output">▶ Run Example</button>
+                    </div>
+
+                    <div class="output-box lesson-output" id="this-output" hidden aria-live="polite">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Without this: null<br>Using this: Ana</code>
                     </div>
 
                     <p class="plain-explanation">
@@ -697,6 +836,26 @@ ana.study();                <span class="code-comment">// Call a method</span></
     }
 }</code></pre>
                     </div>
+
+                    <div class="code-card compact-code lesson-run-code">
+                        <div class="code-header"><span>Run example: setter and getter</span><span class="language-badge">JAVA</span></div>
+                        <pre><code>Student ana = <span class="code-keyword">new</span> Student(<span class="code-string">"Ana"</span>, <span class="code-number">19</span>);
+ana.setAge(<span class="code-number">20</span>);
+System.out.println(<span class="code-string">"Age: "</span> + ana.getAge());</code></pre>
+                    </div>
+
+                    <div class="lesson-run-panel">
+                        <div>
+                            <strong>Run the encapsulation example</strong>
+                            <p>The setter validates and stores the new value, while the getter safely returns the private field.</p>
+                        </div>
+                        <button type="button" class="run-example-button lesson-run-button" aria-expanded="false" data-output="access-output">▶ Run Example</button>
+                    </div>
+
+                    <div class="output-box lesson-output" id="access-output" hidden aria-live="polite">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Age: 20</code>
+                    </div>
                 </section>
 
                 <section id="static-instance" class="lesson-section">
@@ -727,6 +886,28 @@ ana.study();                <span class="code-comment">// Call a method</span></
 
 System.out.println(Student.schoolName); <span class="code-comment">// Class access</span>
 System.out.println(ana.name);           <span class="code-comment">// Object access</span></code></pre>
+                    </div>
+
+                    <div class="code-card compact-code lesson-run-code">
+                        <div class="code-header"><span>Run example: class data and object data</span><span class="language-badge">JAVA</span></div>
+                        <pre><code>Student ana = <span class="code-keyword">new</span> Student();
+ana.name = <span class="code-string">"Ana"</span>;
+
+System.out.println(Student.schoolName);
+System.out.println(ana.name);</code></pre>
+                    </div>
+
+                    <div class="lesson-run-panel">
+                        <div>
+                            <strong>Run the static vs. instance example</strong>
+                            <p>The static value is accessed through the class name, while the instance value belongs to the <code>ana</code> object.</p>
+                        </div>
+                        <button type="button" class="run-example-button lesson-run-button" aria-expanded="false" data-output="static-output">▶ Run Example</button>
+                    </div>
+
+                    <div class="output-box lesson-output" id="static-output" hidden aria-live="polite">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Rizal College<br>Ana</code>
                     </div>
                 </section>
 
@@ -808,6 +989,28 @@ void study() {
 void study(int minutes) {
     System.out.println(name + " studies for " + minutes + " minutes.");
 }</code></pre>
+                    </div>
+
+                    <div class="code-card compact-code lesson-run-code">
+                        <div class="code-header"><span>Run example: overloaded constructor and method</span><span class="language-badge">JAVA</span></div>
+                        <pre><code>Student first = <span class="code-keyword">new</span> Student();
+Student ana = <span class="code-keyword">new</span> Student(<span class="code-string">"Ana"</span>, <span class="code-number">19</span>);
+
+first.study();
+ana.study(<span class="code-number">30</span>);</code></pre>
+                    </div>
+
+                    <div class="lesson-run-panel">
+                        <div>
+                            <strong>Run the overloading example</strong>
+                            <p>Java selects the constructor and <code>study()</code> method whose parameter list matches the arguments you provide.</p>
+                        </div>
+                        <button type="button" class="run-example-button lesson-run-button" aria-expanded="false" data-output="overloading-output">▶ Run Example</button>
+                    </div>
+
+                    <div class="output-box lesson-output" id="overloading-output" hidden aria-live="polite">
+                        <span>PROGRAM OUTPUT</span>
+                        <code>Unknown is studying.<br>Ana studies for 30 minutes.</code>
                     </div>
 
                     <div class="note-box">
@@ -940,7 +1143,15 @@ System.out.println(ana); <span class="code-comment">// Java calls ana.toString()
 }</code></pre>
                     </div>
 
-                    <div class="output-box">
+                    <div class="lesson-run-panel">
+                        <div>
+                            <strong>Run the complete BankAccount example</strong>
+                            <p>Click the button to reveal the console result after Ana deposits ₱250 and Ben withdraws ₱100.</p>
+                        </div>
+                        <button type="button" class="run-example-button lesson-run-button" aria-expanded="false" data-output="bank-output">▶ Run Example</button>
+                    </div>
+
+                    <div class="output-box lesson-output" id="bank-output" hidden aria-live="polite">
                         <span>PROGRAM OUTPUT</span>
                         <code>Ana: ₱1250.0<br>Ben: ₱400.0</code>
                     </div>
@@ -1169,5 +1380,19 @@ b.name = "Maria";</code></pre></div>
         </div>
         <p>Designed for classroom discussion, self-study, and review.</p>
     </footer>
+
+    <script>
+        document.querySelectorAll('.run-example-button[data-output]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const output = document.getElementById(this.dataset.output);
+                if (!output) return;
+
+                output.hidden = false;
+                output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                this.textContent = '✓ Example Run';
+                this.setAttribute('aria-expanded', 'true');
+            });
+        });
+    </script>
 </body>
 </html>

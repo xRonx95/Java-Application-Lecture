@@ -205,7 +205,37 @@
             .lesson-map, .anatomy-board { grid-template-columns: 1fr; }
             .wireframe { grid-template-columns: 90px 1fr; }
         }
-    </style>
+    
+/* ===== Run Example / Expected Output ===== */
+.run-example-section{margin:2rem 0;padding:1.5rem;border:2px solid #16a34a;border-radius:18px;background:linear-gradient(145deg,#f0fdf4,#ffffff);box-shadow:0 12px 30px rgba(22,163,74,.08)}
+.run-example-section>h2,.run-example-section>h3{margin-top:.35rem}
+.run-example-kicker{display:inline-flex;align-items:center;gap:.45rem;margin:0 0 .45rem;padding:.35rem .7rem;border-radius:999px;background:#166534;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.run-example-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);gap:1.1rem;align-items:stretch;margin-top:1rem}
+.run-example-card{padding:1rem 1.1rem;border:1px solid #bbf7d0;border-radius:14px;background:#fff;overflow:hidden}
+.run-example-card h3,.run-example-card h4{margin:.1rem 0 .75rem;color:#14532d}
+.run-example-steps{margin:.7rem 0 0;padding-left:1.25rem}
+.run-example-steps li{margin:.45rem 0;line-height:1.55}
+.run-example-code{margin:.65rem 0 0;padding:1rem;border-radius:12px;background:#0f172a;color:#e2e8f0;overflow:auto;font:500 .92rem/1.6 Consolas,"Courier New",monospace;white-space:pre}
+.run-example-terminal{margin:.65rem 0 0;padding:1rem;border-radius:12px;background:#111827;color:#d1fae5;overflow:auto;font:500 .92rem/1.65 Consolas,"Courier New",monospace;white-space:pre-wrap}
+.run-example-terminal .prompt{color:#86efac}.run-example-terminal .result{color:#bfdbfe}
+.run-example-result{margin-top:.8rem;padding:.85rem 1rem;border-left:5px solid #16a34a;border-radius:0 10px 10px 0;background:#ecfdf5;color:#14532d;line-height:1.6}
+.run-example-note{margin:.8rem 0 0;color:#475569;font-size:.94rem;line-height:1.6}
+.run-example-mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
+.run-example-mini{padding:1rem;border:1px solid #d1fae5;border-radius:14px;background:#fff}
+.run-example-mini h3{margin:.1rem 0 .45rem;color:#14532d;font-size:1.02rem}.run-example-mini p{margin:.35rem 0}.run-example-mini pre{margin:.55rem 0;padding:.75rem;border-radius:9px;background:#0f172a;color:#e5e7eb;overflow:auto;font:500 .82rem/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap}.run-example-mini .mini-output{padding:.65rem .75rem;border-radius:9px;background:#ecfdf5;color:#14532d;font:700 .86rem/1.5 Consolas,"Courier New",monospace;white-space:pre-wrap}
+
+.topic-run-example{margin-top:1.5rem;padding:1.15rem;border:1px solid #bbf7d0;border-radius:16px;background:linear-gradient(145deg,#f0fdf4,#ffffff);box-shadow:0 8px 22px rgba(22,163,74,.06)}
+.topic-run-example .run-example-kicker{margin-bottom:.65rem}
+.topic-run-example .run-example-mini-grid{margin-top:.35rem}
+.topic-run-example .run-example-mini{min-width:0}
+.topic-run-example .run-example-mini pre code{color:inherit}
+.topic-run-example .output-caption{margin:.15rem 0 .5rem;color:#166534;font-weight:800}
+.topic-run-example .visual-output{margin:.55rem 0 0;padding:.8rem;border:1px dashed #86efac;border-radius:10px;background:#f7fff9;color:#14532d;line-height:1.55}
+
+@media(max-width:800px){.run-example-grid,.run-example-mini-grid{grid-template-columns:1fr}.run-example-section{padding:1rem}.run-example-code,.run-example-terminal{font-size:.84rem}}
+@media print{.run-example-section,.run-example-card,.run-example-mini{break-inside:avoid;box-shadow:none}}
+
+</style>
     <script src="../js/lesson.js" defer></script>
 </head>
 <body>
@@ -251,6 +281,7 @@
                 <a href="#run-debug"><span>15</span> Run and debug</a>
                 <a href="#build"><span>16</span> Build a JAR</a>
                 <a href="#errors"><span>17</span> Common errors</a>
+                <a href="#run-example">Run example &amp; output</a>
                 <a href="#activities"><span>18</span> Activities</a>
                 <a href="#assessment"><span>19</span> Assessment</a>
             </nav>
@@ -310,6 +341,24 @@
                     <article class="info-card"><span class="card-icon">SW</span><h3>Java Swing</h3><p>A built-in Java toolkit containing JFrame, JButton, JLabel, JTextField, JPanel, and other GUI classes.</p></article>
                 </div>
                 <div class="callout"><strong>Recommended:</strong> Install a current Long-Term Support JDK and a compatible Apache NetBeans release. In NetBeans, check <b>Tools → Java Platforms</b> to confirm that the JDK is detected.</div>
+
+                <div class="topic-run-example" id="run-requirements">
+                    <p class="run-example-kicker">▶ Run Example · Check the Result</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Check that Java is installed</h3>
+                            <p>Open the NetBeans Terminal or Windows Command Prompt and run:</p>
+                            <pre><code>java -version
+javac -version</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected result</h3>
+                            <div class="mini-output">java version "..."
+javac ...</div>
+                            <p class="run-example-note">The exact version number depends on the JDK installed on the computer. If both commands return version information, Java and the compiler are available.</p>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="concepts">
@@ -322,6 +371,38 @@
                     <article><h3>Component</h3><p>A visual control such as a label, text field, button, combo box, or table.</p></article>
                     <article><h3>Container</h3><p>A component that holds other components. JFrame and JPanel are common containers.</p></article>
                     <article><h3>Event</h3><p>An action such as clicking a button, choosing an item, or typing in a field.</p></article>
+                </div>
+
+                <div class="topic-run-example" id="run-concepts">
+                    <p class="run-example-kicker">▶ Run Example · Classes and Objects</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Runnable Java example</h3>
+                            <pre><code>class Student {
+    String name;
+
+    Student(String name) {
+        this.name = name;
+    }
+
+    void introduce() {
+        System.out.println("Student: " + name);
+    }
+}
+
+public class ConceptDemo {
+    public static void main(String[] args) {
+        Student learner = new Student("Maria");
+        learner.introduce();
+    }
+}</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected Output window</h3>
+                            <div class="mini-output">Student: Maria</div>
+                            <p class="run-example-note"><code>Student</code> is the class, while <code>learner</code> is an object created from that class.</p>
+                        </article>
+                    </div>
                 </div>
             </section>
 
@@ -381,6 +462,25 @@
                     </figure>
                 </div>
                 <p class="visual-check"><b>Checkpoint:</b> Point to the Projects, Editor, Palette, and Output areas on your own screen before continuing.</p>
+
+                <div class="topic-run-example" id="run-visual-tour">
+                    <p class="run-example-kicker">▶ Run Example · Find the Output Window</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Type and run this line inside <code>main()</code></h3>
+                            <pre><code>System.out.println(
+    "NetBeans Output window is working."
+);</code></pre>
+                            <p class="run-example-note">Press <kbd>F6</kbd> to run the project.</p>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected NetBeans output</h3>
+                            <div class="mini-output">NetBeans Output window is working.
+BUILD SUCCESSFUL</div>
+                            <p class="run-example-note">Students should point to the Output panel where these messages appear.</p>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="create-project">
@@ -427,6 +527,30 @@
                     </figure>
                 </div>
                 <div class="teacher-note"><strong>Teacher prompt:</strong> Ask learners why project names should not contain confusing spaces or special symbols, and why package names normally use lowercase letters.</div>
+
+                <div class="topic-run-example" id="run-create-project">
+                    <p class="run-example-kicker">▶ Run Example · First Project Test</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>StudentRegistrationApp.java</h3>
+                            <pre><code>package studentapp;
+
+public class StudentRegistrationApp {
+    public static void main(String[] args) {
+        System.out.println(
+            "Student Registration project is running."
+        );
+    }
+}</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected Output window</h3>
+                            <div class="mini-output">Student Registration project is running.
+BUILD SUCCESSFUL</div>
+                            <p class="run-example-note">If this appears, the project, package, main class, compiler, and Run configuration are working.</p>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="project-structure">
@@ -449,6 +573,30 @@
                         <div class="definition"><h3>Source Packages</h3><p>Stores the Java source files that you write.</p></div>
                         <div class="definition"><h3>Libraries</h3><p>Lists the JDK and any external dependencies used by the project.</p></div>
                         <div class="definition"><h3>build and dist</h3><p>Generated after building. The <code>dist</code> folder normally contains the runnable JAR.</p></div>
+                    </div>
+                </div>
+
+                <div class="topic-run-example" id="run-project-structure">
+                    <p class="run-example-kicker">▶ Run Example · Confirm the Package</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Print the class package</h3>
+                            <pre><code>package studentapp;
+
+public class PackageCheck {
+    public static void main(String[] args) {
+        System.out.println(
+            "Package: " +
+            PackageCheck.class.getPackageName()
+        );
+    }
+}</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected output</h3>
+                            <div class="mini-output">Package: studentapp</div>
+                            <p class="run-example-note">The source file should appear under <b>Source Packages → studentapp</b> in the Projects pane.</p>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -500,6 +648,33 @@
                     </figure>
                 </div>
                 <div class="callout warning"><strong>Important:</strong> In GUI Builder projects, code inside the guarded <code>initComponents()</code> section is generated by NetBeans. Change the interface through Design view whenever possible.</div>
+
+                <div class="topic-run-example" id="run-create-jframe">
+                    <p class="run-example-kicker">▶ Run Example · Open a JFrame</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Minimal JFrame</h3>
+                            <pre><code>import javax.swing.JFrame;
+
+public class FirstFrame {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("My First JFrame");
+        frame.setSize(420, 220);
+        frame.setDefaultCloseOperation(
+            JFrame.EXIT_ON_CLOSE
+        );
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+}</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected result</h3>
+                            <div class="visual-output"><strong>A desktop window appears:</strong><br>Title: <b>My First JFrame</b><br>Approximate size: 420 × 220 pixels<br>The window can be moved, minimized, and closed.</div>
+                            <p class="run-example-note">For GUI lessons, the visible JFrame is the program output even when the Output window contains no printed text.</p>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="plan-interface">
@@ -528,6 +703,28 @@
                     <article><b>3</b><h3>Output</h3><p>Where will the result or message appear?</p></article>
                 </div>
                 <p class="visual-check"><b>Student task:</b> Sketch your own JFrame on paper and label at least five components before opening Design view.</p>
+
+                <div class="topic-run-example" id="run-plan-interface">
+                    <p class="run-example-kicker">▶ Run Example · Input → Process → Output</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Simple IPO demonstration</h3>
+                            <pre><code>public class IpoDemo {
+    public static void main(String[] args) {
+        String name = "Ana";          // Input
+        String message =              // Process
+            "Welcome, " + name + "!";
+        System.out.println(message);   // Output
+    }
+}</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected output</h3>
+                            <div class="mini-output">Welcome, Ana!</div>
+                            <p class="run-example-note">Use the same thinking when planning the JFrame: fields collect input, event code processes it, and a label, dialog, table, or text area shows output.</p>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="components">
@@ -551,6 +748,46 @@
                     </table>
                 </div>
                 <p class="tip"><strong>Naming tip:</strong> Replace names such as <code>jButton1</code> with meaningful names such as <code>saveButton</code>. This makes event code easier to explain and maintain.</p>
+
+                <div class="topic-run-example" id="run-components">
+                    <p class="run-example-kicker">▶ Run Example · Swing Components</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Create a label, field, and button</h3>
+                            <pre><code>import java.awt.FlowLayout;
+import javax.swing.*;
+
+public class ComponentDemo {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Components");
+        f.setLayout(new FlowLayout());
+
+        JTextField nameField = new JTextField(12);
+        JButton showButton = new JButton("Show");
+
+        f.add(new JLabel("Name:"));
+        f.add(nameField);
+        f.add(showButton);
+
+        showButton.addActionListener(e ->
+            JOptionPane.showMessageDialog(
+                f, "Hello, " + nameField.getText()
+            )
+        );
+
+        f.setSize(350, 140);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+    }
+}</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected result</h3>
+                            <div class="visual-output">The JFrame shows:<br><b>Name:</b> [ text field ] [ <b>Show</b> ]<br><br>Type <b>Maria</b> and click <b>Show</b>.<br>A dialog displays: <b>Hello, Maria</b></div>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="layouts">
@@ -563,6 +800,37 @@
                     <article><h3>GridLayout</h3><p>Creates equally sized cells in rows and columns. Good for keypads or simple dashboards.</p></article>
                     <article><h3>GridBagLayout</h3><p>Creates flexible rows and columns. Powerful for forms but requires more configuration.</p></article>
                     <article><h3>GroupLayout</h3><p>The default choice of the NetBeans GUI Builder. It aligns components visually in parallel and sequential groups.</p></article>
+                </div>
+
+                <div class="topic-run-example" id="run-layouts">
+                    <p class="run-example-kicker">▶ Run Example · FlowLayout</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Arrange three buttons automatically</h3>
+                            <pre><code>import java.awt.FlowLayout;
+import javax.swing.*;
+
+public class LayoutDemo {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("FlowLayout Demo");
+        f.setLayout(new FlowLayout());
+
+        f.add(new JButton("Add"));
+        f.add(new JButton("Edit"));
+        f.add(new JButton("Delete"));
+
+        f.setSize(360, 150);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+    }
+}</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected result</h3>
+                            <div class="visual-output">A JFrame opens with three buttons arranged in a row:<br><br>[ <b>Add</b> ] [ <b>Edit</b> ] [ <b>Delete</b> ]<br><br>Resize the window and observe how <code>FlowLayout</code> repositions the controls.</div>
+                        </article>
+                    </div>
                 </div>
             </section>
 
@@ -594,6 +862,39 @@
                 </div>
                 <div class="concept-flow">
                     <span>User clicks</span><b>→</b><span>Event occurs</span><b>→</b><span>Listener runs</span><b>→</b><span>Interface responds</span>
+                </div>
+
+                <div class="topic-run-example" id="run-events">
+                    <p class="run-example-kicker">▶ Run Example · Button Click Event</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Runnable event example</h3>
+                            <pre><code>import javax.swing.*;
+
+public class EventDemo {
+    public static void main(String[] args) {
+        JButton button = new JButton("Click Me");
+
+        button.addActionListener(event ->
+            JOptionPane.showMessageDialog(
+                null, "Button event executed!"
+            )
+        );
+
+        JFrame frame = new JFrame("Event Demo");
+        frame.add(button);
+        frame.setSize(300, 150);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+}</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected result</h3>
+                            <div class="visual-output">1. The <b>Event Demo</b> JFrame opens.<br>2. Click <b>Click Me</b>.<br>3. A message dialog appears:<br><br><b>Button event executed!</b></div>
+                        </article>
+                    </div>
                 </div>
             </section>
 
@@ -645,6 +946,36 @@ try {
 }</code></pre>
                 </div>
                 <div class="callout"><strong>Remember:</strong> Text fields always return text. Convert the value only after checking that it is present, and catch conversion errors instead of allowing the application to stop.</div>
+
+                <div class="topic-run-example" id="run-validation">
+                    <p class="run-example-kicker">▶ Run Example · Validation Result</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Validate text before continuing</h3>
+                            <pre><code>String name = nameField.getText().trim();
+
+if (name.isEmpty()) {
+    JOptionPane.showMessageDialog(
+        this,
+        "Please enter a name.",
+        "Validation Error",
+        JOptionPane.WARNING_MESSAGE
+    );
+    nameField.requestFocus();
+    return;
+}
+
+JOptionPane.showMessageDialog(
+    this, "Accepted: " + name
+);</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected result</h3>
+                            <div class="visual-output"><b>Test 1 — Empty field:</b><br>Dialog: <b>Please enter a name.</b><br><br><b>Test 2 — Type Maria:</b><br>Dialog: <b>Accepted: Maria</b></div>
+                            <p class="run-example-note">Students should test both an invalid case and a valid case.</p>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="complete-example">
@@ -746,6 +1077,27 @@ public class StudentRegistrationApp extends JFrame {
 }</code></pre>
                 </div>
                 <div class="callout"><strong>Why <code>SwingUtilities.invokeLater()</code>?</strong> Swing components should be created and updated on the Event Dispatch Thread. This keeps interface events safe and orderly.</div>
+
+                <div class="topic-run-example" id="run-complete-example">
+                    <p class="run-example-kicker">▶ Run Example · Complete JFrame Result</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Sample input</h3>
+                            <div class="mini-output">Complete name: Maria Santos
+Email address: maria.santos@example.com
+Course: BS Information Technology</div>
+                            <p class="run-example-note">Run <code>StudentRegistrationApp.java</code>, enter these values, then click <b>Save Student</b>.</p>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected result area</h3>
+                            <div class="mini-output">REGISTRATION SUMMARY
+
+Name: Maria Santos
+Email: maria.santos@example.com
+Course: BS Information Technology</div>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="jtable">
@@ -782,6 +1134,32 @@ model.addRow(new Object[]{
                     <article><b>2</b><h3>Table</h3><p>Displays the model in rows and columns.</p></article>
                     <article><b>3</b><h3>Scroll pane</h3><p>Lets students view more records than fit on screen.</p></article>
                 </div>
+
+                <div class="topic-run-example" id="run-jtable">
+                    <p class="run-example-kicker">▶ Run Example · JTable Output</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Add a sample row</h3>
+                            <pre><code>DefaultTableModel model =
+    new DefaultTableModel(
+        new String[]{"Name", "Email", "Course"}, 0
+    );
+
+model.addRow(new Object[]{
+    "Maria Santos",
+    "maria@example.com",
+    "BSIT"
+});
+
+JTable studentTable = new JTable(model);</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected table</h3>
+                            <div class="visual-output"><b>Name</b> | <b>Email</b> | <b>Course</b><br>Maria Santos | maria@example.com | BSIT</div>
+                            <p class="run-example-note">When this model is placed in a <code>JTable</code> inside a <code>JScrollPane</code>, the row appears under the three column headings.</p>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="run-debug">
@@ -807,6 +1185,34 @@ model.addRow(new Object[]{
                         </div>
                         <figcaption><strong>Picture 18 — Read the Output window</strong><span><code>BUILD SUCCESSFUL</code> means compilation finished. Red lines normally show where an error occurred.</span></figcaption>
                     </figure>
+                </div>
+
+                <div class="topic-run-example" id="run-run-debug">
+                    <p class="run-example-kicker">▶ Run Example · Debug and Observe</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Code for a breakpoint test</h3>
+                            <pre><code>public class DebugDemo {
+    public static void main(String[] args) {
+        int first = 10;
+        int second = 5;
+        int total = first + second; // Breakpoint here
+        System.out.println("Total = " + total);
+    }
+}</code></pre>
+                            <p class="run-example-note">Set a breakpoint on the line that calculates <code>total</code>, then choose <b>Debug Project</b>.</p>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected debug values and output</h3>
+                            <div class="mini-output">first = 10
+second = 5
+total = 15
+
+Total = 15
+BUILD SUCCESSFUL</div>
+                            <p class="run-example-note">Use Step Over to move from the calculation to the print statement.</p>
+                        </article>
+                    </div>
                 </div>
             </section>
 
@@ -835,6 +1241,24 @@ model.addRow(new Object[]{
                         <figcaption><strong>Picture 20 — Locate the JAR</strong><span>Open the <code>dist</code> folder after a successful build. This is the file you can test outside NetBeans.</span></figcaption>
                     </figure>
                 </div>
+
+                <div class="topic-run-example" id="run-build">
+                    <p class="run-example-kicker">▶ Run Example · Test the Built JAR</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Run outside NetBeans</h3>
+                            <pre><code>cd path\to\StudentRegistrationApp\dist
+java -jar StudentRegistrationApp.jar</code></pre>
+                            <p class="run-example-note">Replace the folder path with the actual project location on the computer.</p>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected result</h3>
+                            <div class="visual-output">The same <b>Student Registration App</b> JFrame should open even though NetBeans is not running.</div>
+                            <div class="mini-output">Clean and Build:
+BUILD SUCCESSFUL</div>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="lesson-section" id="errors">
@@ -848,6 +1272,65 @@ model.addRow(new Object[]{
                     <details><summary>GUI Builder code cannot be edited</summary><p>The gray guarded section is generated. Return to Design view and update components or properties there.</p></details>
                     <details><summary>The JAR will not open</summary><p>Check the configured main class and Java version. Run it from a terminal to see the detailed error message.</p></details>
                 </div>
+
+                <div class="topic-run-example" id="run-errors">
+                    <p class="run-example-kicker">▶ Run Example · Error then Fix</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Intentional compile error</h3>
+                            <pre><code>public class ErrorDemo {
+    public static void main(String[] args) {
+        System.out.println(message);
+    }
+}</code></pre>
+                            <div class="mini-output">Typical error:
+cannot find symbol
+symbol: variable message</div>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Corrected version</h3>
+                            <pre><code>public class ErrorDemo {
+    public static void main(String[] args) {
+        String message = "Program fixed!";
+        System.out.println(message);
+    }
+}</code></pre>
+                            <div class="mini-output">Program fixed!
+BUILD SUCCESSFUL</div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="lesson-section run-example-section" id="run-example">
+                <p class="run-example-kicker">▶ Run Example · See the Result</p>
+                <h2>Run the Student Registration JFrame</h2>
+                <p>Use the complete <code>StudentRegistrationApp.java</code> example from Topic 13. This run example shows exactly what students should enter and what the program should display.</p>
+                <div class="run-example-grid">
+                    <article class="run-example-card">
+                        <h3>1. Run in Apache NetBeans</h3>
+                        <ol class="run-example-steps">
+                            <li>Open <code>StudentRegistrationApp.java</code>.</li>
+                            <li>Save the file, then press <kbd>Shift</kbd> + <kbd>F6</kbd> to run the file, or press <kbd>F6</kbd> to run the project.</li>
+                            <li>Enter the sample values below and click <b>Save Student</b>.</li>
+                        </ol>
+                        <div class="run-example-terminal"><span class="result">Sample input</span>
+Complete name: Maria Santos
+Email address: maria.santos@example.com
+Course: BS Information Technology</div>
+                    </article>
+                    <article class="run-example-card">
+                        <h3>2. Expected JFrame output</h3>
+                        <div class="run-example-terminal"><span class="result">REGISTRATION SUMMARY</span>
+
+Name: Maria Santos
+Email: maria.santos@example.com
+Course: BS Information Technology</div>
+                        <div class="run-example-result"><strong>Also test validation:</strong> clear the Name or Email field and click <b>Save Student</b>. The program should show a warning dialog containing <code>Name and email are required.</code></div>
+                        <p class="run-example-note">The visible JFrame, result text area, and validation dialog are the output for this Swing lesson.</p>
+                    </article>
+                </div>
             </section>
 
             <section class="lesson-section" id="activities">
@@ -857,6 +1340,28 @@ model.addRow(new Object[]{
                     <article><span>Guided practice • 20 min</span><h3>Profile Card</h3><p>Create a JFrame that accepts a name, section, and favorite subject, then displays them in a text area.</p><ul><li>3 labels and input controls</li><li>Display and Clear buttons</li><li>Required-field validation</li></ul></article>
                     <article><span>Pair activity • 30 min</span><h3>Simple Calculator</h3><p>Create two number fields and buttons for addition, subtraction, multiplication, and division.</p><ul><li>Convert text to numbers</li><li>Handle invalid input</li><li>Prevent division by zero</li></ul></article>
                     <article><span>Performance task • 60 min</span><h3>Enrollment Form</h3><p>Build a clear student enrollment interface that summarizes the submitted information.</p><ul><li>At least 6 Swing controls</li><li>Logical layout managers</li><li>Save, Clear, and Exit events</li></ul></article>
+                </div>
+
+                <div class="topic-run-example" id="run-activities">
+                    <p class="run-example-kicker">▶ Run Example · Practice Targets</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Profile Card target output</h3>
+                            <div class="mini-output">STUDENT PROFILE
+Name: Maria Santos
+Section: BSIT-1A
+Favorite Subject: Programming</div>
+                            <p class="run-example-note">The output can appear in a <code>JTextArea</code> after the learner clicks <b>Display</b>.</p>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Simple Calculator target output</h3>
+                            <div class="mini-output">First number: 12
+Second number: 4
+Operation: Addition
+Result: 16</div>
+                            <p class="run-example-note">The learner should also demonstrate a friendly error for invalid numbers and division by zero.</p>
+                        </article>
+                    </div>
                 </div>
             </section>
 
@@ -879,6 +1384,29 @@ model.addRow(new Object[]{
                     <div><span>Interface layout and readability</span><b>25</b></div>
                     <div><span>Input validation and event handling</span><b>20</b></div>
                     <div><span>Code quality and naming</span><b>15</b></div>
+                </div>
+
+                <div class="topic-run-example" id="run-assessment">
+                    <p class="run-example-kicker">▶ Final Run Check · Demonstrate the Result</p>
+                    <div class="run-example-mini-grid">
+                        <article class="run-example-mini">
+                            <h3>Final demonstration</h3>
+                            <p>Before submitting, run the project and demonstrate all required behaviors:</p>
+                            <pre><code>1. JFrame opens
+2. Required fields validate
+3. Save/Display action works
+4. Clear action works
+5. JTable or result area updates
+6. Clean and Build succeeds</code></pre>
+                        </article>
+                        <article class="run-example-mini">
+                            <h3>Expected final status</h3>
+                            <div class="mini-output">Program runs without an unhandled error.
+Required GUI output is visible.
+BUILD SUCCESSFUL</div>
+                            <p class="run-example-note">This final check connects the assessment questions to an actual working Java program.</p>
+                        </article>
+                    </div>
                 </div>
             </section>
 

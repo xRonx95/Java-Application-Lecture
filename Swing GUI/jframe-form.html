@@ -171,6 +171,23 @@
         "Registration saved for " + name + " (" + grade + ").",
         "Success", JOptionPane.INFORMATION_MESSAGE);
 }</code></pre>
+            <div class="run-example-bar">
+              <button class="run-example-btn" type="button" data-run-example="submit" aria-controls="submit-example-output">
+                <span aria-hidden="true">▶</span> Run Example
+              </button>
+              <span class="run-example-note">Browser simulation of the Java <code>JOptionPane</code> result</span>
+            </div>
+            <div id="submit-example-output" class="example-output" data-example-output="submit" hidden aria-live="polite">
+              <div class="output-header"><span>Expected Result / Output</span><span class="output-status">Program running</span></div>
+              <div class="output-stage">
+                <div class="simulated-dialog" role="status">
+                  <div class="simulated-dialog__title">Success</div>
+                  <div class="simulated-dialog__message"><span class="dialog-check" aria-hidden="true">✓</span><p>Registration saved for <strong>Maria Santos</strong> (Grade 11).</p></div>
+                  <div class="simulated-dialog__actions"><button type="button" class="dialog-ok">OK</button></div>
+                </div>
+              </div>
+              <p class="output-caption"><strong>What happened:</strong> the example reads the field values, checks for blank input, then displays a success message.</p>
+            </div>
           </div>
           <figure class="lesson-figure mini-figure"><div class="code-visual"><div class="code-tabs"><span>StudentForm.java</span><b>Source</b></div><div class="code-lines"><i></i><i></i><i class="short"></i><i></i><i class="medium"></i><i class="short"></i></div><div class="method-tag">btnSubmitActionPerformed()</div></div><figcaption><strong>Figure 5.</strong> The button event contains the form logic.</figcaption></figure>
         </article>
@@ -184,6 +201,31 @@
     cmbGrade.setSelectedIndex(0);
     txtName.requestFocus();
 }</code></pre>
+            <div class="run-example-bar">
+              <button class="run-example-btn" type="button" data-run-example="clear" aria-controls="clear-example-output">
+                <span aria-hidden="true">▶</span> Run Example
+              </button>
+              <span class="run-example-note">Shows the form state after the Clear button event</span>
+            </div>
+            <div id="clear-example-output" class="example-output" data-example-output="clear" hidden aria-live="polite">
+              <div class="output-header"><span>Expected Result / Output</span><span class="output-status">Clear event completed</span></div>
+              <div class="clear-demo-grid">
+                <div class="mini-form-preview">
+                  <span class="preview-label">Before Clear</span>
+                  <label>Full Name<input type="text" value="Maria Santos" readonly></label>
+                  <label>Email<input type="text" value="maria@example.com" readonly></label>
+                  <label>Grade Level<input type="text" value="Grade 11" readonly></label>
+                </div>
+                <div class="clear-arrow" aria-hidden="true">→</div>
+                <div class="mini-form-preview mini-form-preview--cleared">
+                  <span class="preview-label">After Clear</span>
+                  <label>Full Name<input type="text" value="" placeholder="Empty" readonly></label>
+                  <label>Email<input type="text" value="" placeholder="Empty" readonly></label>
+                  <label>Grade Level<input type="text" value="Select grade" readonly></label>
+                </div>
+              </div>
+              <p class="output-caption"><strong>What happened:</strong> both text fields were emptied, the combo box returned to index 0, and focus returned to the name field.</p>
+            </div>
             <ol><li>Save the file using <kbd>Ctrl</kbd> + <kbd>S</kbd>.</li><li>Run the project using <kbd>F6</kbd>.</li><li>Test blank fields, valid information, Submit, and Clear.</li></ol>
           </div>
           <figure class="lesson-figure mini-figure"><div class="result-visual"><div class="result-form"><b>Student Registration</b><span>Maria Santos</span><span>maria@example.com</span><span>Grade 11</span><strong>Submit</strong></div><div class="dialog-visual"><b>✓ Registration saved</b><span>Registration saved for Maria Santos (Grade 11).</span><em>OK</em></div></div><figcaption><strong>Figure 6.</strong> Run the program and verify the confirmation dialog.</figcaption></figure>
@@ -275,6 +317,47 @@ public class StudentForm extends JFrame {
         SwingUtilities.invokeLater(() -&gt; new StudentForm().setVisible(true));
     }
 }</code></pre>
+        <div class="run-example-bar run-example-bar--program">
+          <button class="run-example-btn run-example-btn--large" type="button" data-run-example="full" aria-controls="full-example-output">
+            <span aria-hidden="true">▶</span> Run Complete Example
+          </button>
+          <span class="run-example-note">Interactive browser preview of the JFrame behavior</span>
+        </div>
+        <div id="full-example-output" class="example-output example-output--application" data-example-output="full" hidden aria-live="polite">
+          <div class="output-header"><span>Expected JFrame Result</span><span class="output-status">StudentForm.java</span></div>
+          <div class="java-window-simulator">
+            <div class="java-window-titlebar">
+              <span>Student Registration Form</span>
+              <span class="java-window-controls" aria-hidden="true">— □ ×</span>
+            </div>
+            <div class="java-window-content">
+              <div class="sim-form-row">
+                <label for="sim-name">Full Name:</label>
+                <input id="sim-name" type="text" value="Maria Santos" autocomplete="off">
+              </div>
+              <div class="sim-form-row">
+                <label for="sim-email">Email:</label>
+                <input id="sim-email" type="email" value="maria@example.com" autocomplete="off">
+              </div>
+              <div class="sim-form-row">
+                <label for="sim-grade">Grade Level:</label>
+                <select id="sim-grade">
+                  <option>Select grade</option>
+                  <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+                  <option>Grade 10</option><option selected>Grade 11</option><option>Grade 12</option>
+                </select>
+              </div>
+              <div class="sim-form-actions">
+                <button type="button" id="sim-clear">Clear</button>
+                <button type="button" id="sim-submit" class="sim-primary">Submit</button>
+              </div>
+              <div id="sim-message" class="sim-message" role="status" aria-live="polite">
+                Enter or change the sample values, then click Submit or Clear.
+              </div>
+            </div>
+          </div>
+          <p class="output-caption"><strong>Teaching note:</strong> this preview reproduces the expected Swing behavior in the browser. The browser is not compiling Java; students still run the real Java program in NetBeans with <kbd>F6</kbd>.</p>
+        </div>
         <div class="explanation-grid"><article><span>01</span><h3>Declare</h3><p>The text fields and combo box are class fields so other methods can access them.</p></article><article><span>02</span><h3>Construct</h3><p>The constructor configures the window and places all components.</p></article><article><span>03</span><h3>Listen</h3><p>Action listeners connect button clicks to methods.</p></article><article><span>04</span><h3>Launch</h3><p><code>SwingUtilities.invokeLater</code> safely opens the interface.</p></article></div>
       </section>
 
@@ -312,5 +395,90 @@ public class StudentForm extends JFrame {
   </div>
 
   <footer class="module-footer"><div><strong>Java Swing Learning Module</strong><span>JFrame Form Design and Event Handling</span></div><a href="#main-content">Return to top ↑</a></footer>
+
+  <script>
+    (function () {
+      const runButtons = document.querySelectorAll("[data-run-example]");
+
+      function showOutput(name) {
+        const output = document.querySelector('[data-example-output="' + name + '"]');
+        if (!output) return;
+        output.hidden = false;
+        output.classList.remove("is-running");
+        void output.offsetWidth;
+        output.classList.add("is-running");
+        output.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      runButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          showOutput(button.dataset.runExample);
+          button.classList.add("has-run");
+          const original = button.innerHTML;
+          button.innerHTML = '<span aria-hidden="true">✓</span> Example Ran';
+          window.setTimeout(function () {
+            button.innerHTML = original;
+            button.classList.remove("has-run");
+          }, 1400);
+        });
+      });
+
+      document.querySelectorAll(".dialog-ok").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const output = button.closest(".example-output");
+          if (output) output.hidden = true;
+        });
+      });
+
+      const nameField = document.getElementById("sim-name");
+      const emailField = document.getElementById("sim-email");
+      const gradeField = document.getElementById("sim-grade");
+      const submitButton = document.getElementById("sim-submit");
+      const clearButton = document.getElementById("sim-clear");
+      const messageBox = document.getElementById("sim-message");
+
+      function setMessage(type, title, message) {
+        if (!messageBox) return;
+        messageBox.className = "sim-message sim-message--" + type;
+        messageBox.innerHTML = "<strong>" + title + "</strong><span>" + message + "</span>";
+      }
+
+      if (submitButton) {
+        submitButton.addEventListener("click", function () {
+          const name = nameField.value.trim();
+          const email = emailField.value.trim();
+          const gradeIndex = gradeField.selectedIndex;
+
+          if (!name || !email || gradeIndex === 0) {
+            setMessage("warning", "Incomplete Form", "Please complete all required fields.");
+            if (!name) nameField.focus();
+            else if (!email) emailField.focus();
+            else gradeField.focus();
+            return;
+          }
+
+          const emailPattern = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/;
+          if (!emailPattern.test(email)) {
+            setMessage("error", "Invalid Email", "Please enter a valid email address.");
+            emailField.focus();
+            return;
+          }
+
+          setMessage("success", "Success", "Registration saved for " + name + ".");
+        });
+      }
+
+      if (clearButton) {
+        clearButton.addEventListener("click", function () {
+          nameField.value = "";
+          emailField.value = "";
+          gradeField.selectedIndex = 0;
+          setMessage("neutral", "Form Cleared", "All fields were reset. Focus returned to Full Name.");
+          nameField.focus();
+        });
+      }
+    })();
+  </script>
+
 </body>
 </html>

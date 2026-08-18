@@ -185,3 +185,400 @@ footer p, footer a { font-size: 15px; }
   .outcomes h2, .lesson-section h2 { font-size: 32px; }
   .code-block pre { padding: 19px; font-size: 13px; }
 }
+/* =========================================================
+   Runnable lesson examples + CSS corrections
+   ========================================================= */
+
+/* Preserve readable text on dark surfaces. */
+.project-brief h3,
+.project-brief li,
+.recap h2,
+.recap span,
+.recap span b,
+footer .brand b {
+  color: #fff;
+}
+
+.project-brief li {
+  color: #e5edf3;
+}
+
+.recap small,
+footer p,
+footer a {
+  color: #b5c4cf;
+}
+
+/* Keep toolbar controls aligned even on narrower screens. */
+.code-toolbar {
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.code-toolbar > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #dbe8ee;
+  font-weight: 700;
+}
+
+.toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.code-toolbar .code-action {
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid #597186;
+  border-radius: 6px;
+  background: transparent;
+  color: #eaf3f7;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.code-toolbar .code-action:hover {
+  border-color: #87a3b8;
+  background: rgba(255,255,255,.08);
+}
+
+.code-toolbar .run-code {
+  border-color: #79cfc2;
+  background: #dff3ee;
+  color: #0b4d49;
+}
+
+.code-toolbar .run-code:hover {
+  border-color: #9ce4da;
+  background: #edf9f6;
+  transform: translateY(-1px);
+}
+
+/* Browser-based preview of the expected Java Swing result. */
+.run-example[hidden] {
+  display: none !important;
+}
+
+.run-example {
+  margin: -12px 0 32px;
+  overflow: hidden;
+  border: 1px solid #c8d7de;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(18,50,75,.08);
+}
+
+.run-example-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #d8e2e7;
+  background: #f6f9fa;
+}
+
+.run-example-head > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.run-example-head strong {
+  color: var(--navy);
+  font-size: 15px;
+}
+
+.run-example-head small {
+  color: #647786;
+  font-size: 13px;
+  text-align: right;
+}
+
+.run-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: #dff3ee;
+  color: #0b625d;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.desktop-stage {
+  display: grid;
+  min-height: 310px;
+  place-items: center;
+  padding: 36px;
+  background:
+    linear-gradient(rgba(18,50,75,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,50,75,.05) 1px, transparent 1px),
+    #eaf0f3;
+  background-size: 28px 28px;
+}
+
+.simulated-window {
+  width: min(100%, 560px);
+  overflow: hidden;
+  border: 1px solid #97a9b6;
+  border-radius: 9px;
+  background: #f7f7f7;
+  box-shadow: 0 22px 45px rgba(15,38,57,.2);
+}
+
+.first-app-demo {
+  max-width: 420px;
+}
+
+.simulated-titlebar {
+  position: relative;
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 90px 7px 72px;
+  border-bottom: 1px solid #a9b6bf;
+  background: linear-gradient(#eef2f4, #dce3e7);
+  color: #243b4b;
+  font-size: 13px;
+  user-select: none;
+}
+
+.simulated-titlebar b {
+  overflow: hidden;
+  color: #243b4b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-dots {
+  position: absolute;
+  left: 13px;
+  display: inline-flex;
+  gap: 6px;
+}
+
+.window-dots i {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d86a5e;
+}
+
+.window-dots i:nth-child(2) {
+  background: #d8a84b;
+}
+
+.window-dots i:nth-child(3) {
+  background: #5cad7b;
+}
+
+.simulated-content {
+  min-height: 190px;
+  padding: 26px;
+  background: #fbfbfb;
+}
+
+.centered-content {
+  display: grid;
+  place-items: center;
+}
+
+.centered-content strong {
+  color: #1e2f3a;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+.demo-form {
+  display: grid;
+  grid-template-columns: minmax(120px, .8fr) minmax(180px, 1.2fr);
+  gap: 12px 14px;
+  align-items: center;
+}
+
+.demo-form label {
+  color: #273c4b;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.demo-form input {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 11px;
+  border: 1px solid #9eacb5;
+  border-radius: 4px;
+  background: #fff;
+  color: #172b3a;
+  font-size: 15px;
+}
+
+.demo-form input:focus {
+  border-color: var(--teal);
+  outline: 3px solid rgba(31,82,118,.13);
+}
+
+.demo-form button {
+  min-height: 42px;
+  padding: 8px 14px;
+  border: 1px solid #164766;
+  border-radius: 4px;
+  background: var(--teal);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.demo-form button:hover {
+  background: var(--teal-dark);
+}
+
+.demo-result {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #c6d1d7;
+  border-radius: 4px;
+  background: #eef3f5;
+  color: #2b4050;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.demo-result.is-success {
+  border-color: #8bbda0;
+  background: #e8f5ed;
+  color: #245d3a;
+}
+
+.demo-result.is-warning {
+  border-color: #d1b06e;
+  background: #fff5da;
+  color: #76561e;
+}
+
+.run-caption {
+  margin: 0;
+  padding: 15px 20px 18px;
+  border-top: 1px solid #dce5e9;
+  color: #546876;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.run-caption b {
+  color: #243a49;
+}
+
+.run-note {
+  margin-top: 0;
+  border-color: #1f5276;
+  background: #edf4f8;
+}
+
+.run-note .note-icon {
+  background: #1f5276;
+}
+
+@keyframes runExampleFlash {
+  from { box-shadow: 0 0 0 4px rgba(31,82,118,.18), 0 12px 28px rgba(18,50,75,.08); }
+  to { box-shadow: 0 12px 28px rgba(18,50,75,.08); }
+}
+
+.run-example.run-flash {
+  animation: runExampleFlash .6s ease-out;
+}
+
+/* Mobile corrections for code controls and simulated windows. */
+@media (max-width: 760px) {
+  .code-toolbar {
+    align-items: flex-start;
+  }
+
+  .code-toolbar > span {
+    width: 100%;
+  }
+
+  .toolbar-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .code-toolbar .code-action {
+    flex: 1 1 140px;
+    min-height: 42px;
+  }
+
+  .run-example {
+    margin-top: -8px;
+  }
+
+  .run-example-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .run-example-head > div {
+    flex-wrap: wrap;
+  }
+
+  .run-example-head small {
+    text-align: left;
+  }
+
+  .desktop-stage {
+    min-height: 260px;
+    padding: 22px 14px;
+  }
+
+  .demo-form {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-spacer {
+    display: none;
+  }
+
+  .simulated-titlebar {
+    padding-right: 55px;
+    padding-left: 65px;
+  }
+}
+
+@media (max-width: 430px) {
+  .run-example-head,
+  .run-caption {
+    padding-inline: 14px;
+  }
+
+  .desktop-stage {
+    padding: 16px 10px;
+  }
+
+  .simulated-content {
+    min-height: 175px;
+    padding: 18px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .run-example.run-flash {
+    animation: none;
+  }
+}

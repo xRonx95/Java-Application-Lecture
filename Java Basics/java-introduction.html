@@ -11,6 +11,95 @@
     <!-- This page is inside the "Java Basics" folder, so ../ goes back to the project root. -->
     <link rel="stylesheet" href="../css/Java Basics/java-introduction.css">
     <link rel="icon" href="../img/favicon.jpg" type="image/jpeg">
+<!-- RUN-EXAMPLE-STYLES -->
+
+  <style>
+    /* Interactive Run Example — self-contained so it also works when this HTML file is opened locally. */
+    .java-run-demo {
+      margin-top: 1.25rem;
+      overflow: hidden;
+      border: 1px solid #d8e1ee;
+      border-radius: 16px;
+      background: #0f172a;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, .12);
+    }
+    .java-run-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      color: #eef4ff;
+      background: #17233b;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .java-run-toolbar strong { font-size: .98rem; }
+    .java-run-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .java-run-button,
+    .java-clear-button {
+      min-height: 42px;
+      padding: 9px 15px;
+      border: 0;
+      border-radius: 9px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .java-run-button { color: #10213f; background: #f4c150; }
+    .java-run-button:hover { filter: brightness(1.04); }
+    .java-run-button:focus-visible,
+    .java-clear-button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
+    .java-clear-button { color: #e5edf9; background: #34445f; }
+    .java-run-code {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      color: #e8eef9;
+      background: #0f172a;
+      font: 15px/1.65 Consolas, "Courier New", monospace;
+      white-space: pre;
+    }
+    .java-run-result {
+      padding: 15px 18px 18px;
+      color: #dcfce7;
+      background: #07130e;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .java-run-result-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #86efac;
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .java-run-output {
+      min-height: 58px;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+      color: #d7ffe5;
+      background: transparent;
+      font: 15px/1.65 Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+    }
+    .java-run-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-left: 4px solid #3b82f6;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #24324a;
+    }
+    @media (max-width: 640px) {
+      .java-run-toolbar { align-items: stretch; }
+      .java-run-actions { width: 100%; }
+      .java-run-button, .java-clear-button { flex: 1 1 135px; }
+      .java-run-code, .java-run-output { font-size: 13px; }
+    }
+  </style>
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -94,6 +183,7 @@
                     <a href="#features">Features</a>
                     <a href="#platform">JDK, JRE &amp; JVM</a>
                     <a href="#first-program">First Program</a>
+                    <a href="#run-example">Run Example</a>
                     <a href="#uses">Uses</a>
                 </div>
             </div>
@@ -296,6 +386,40 @@
             </div>
         </section>
 
+
+        <section class="section section-soft" id="run-example">
+            <div class="container">
+                <div class="section-heading centered">
+                    <p class="section-label">Interactive Demonstration</p>
+                    <h2>Run Example and View the Output</h2>
+                    <p>Click the Run Example button to reveal the console result students should expect.</p>
+                </div>
+      <p>Use this complete Java program to connect the lesson concept with the result that appears in the console.</p>
+              <div class="java-run-demo">
+                <div class="java-run-toolbar">
+                  <strong>HelloWorld.java</strong>
+                  <div class="java-run-actions">
+                    <button class="java-run-button" id="java-run-button" type="button" onclick="runLessonExample()">▶ Run Example</button>
+                    <button class="java-clear-button" type="button" onclick="clearLessonExample()">Clear Output</button>
+                  </div>
+                </div>
+                <pre class="java-run-code"><code>public class HelloWorld {
+            public static void main(String[] args) {
+                System.out.println(&quot;Hello, World!&quot;);
+                System.out.println(&quot;Java is running successfully.&quot;);
+            }
+        }</code></pre>
+                <div class="java-run-result">
+                  <span class="java-run-result-label">Result / Output</span>
+                  <pre class="java-run-output" id="java-run-output" aria-live="polite">Click “Run Example” to see the result / output.</pre>
+                  <pre id="java-run-expected" hidden>Hello, World!
+        Java is running successfully.</pre>
+                </div>
+              </div>
+              <p class="java-run-note"><strong>Teaching note:</strong> This button previews the expected console output inside the lesson page. The browser is not compiling Java; students can run the same source code in NetBeans or with the JDK for real execution.</p>
+            </div>
+        </section>
+
         <section class="section" id="uses">
             <div class="container">
                 <div class="section-heading centered">
@@ -360,5 +484,29 @@
             <p>&copy; 2026 Java Application. Educational use.</p>
         </div>
     </footer>
+<!-- RUN-EXAMPLE-SCRIPT -->
+
+  <script>
+    function runLessonExample() {
+      const output = document.getElementById('java-run-output');
+      const button = document.getElementById('java-run-button');
+      if (!output || !button) return;
+
+      button.disabled = true;
+      button.textContent = 'Running…';
+      output.textContent = 'Compiling example…';
+
+      window.setTimeout(function () {
+        output.textContent = document.getElementById('java-run-expected').textContent;
+        button.disabled = false;
+        button.textContent = '▶ Run Example';
+      }, 350);
+    }
+
+    function clearLessonExample() {
+      const output = document.getElementById('java-run-output');
+      if (output) output.textContent = 'Click “Run Example” to see the result / output.';
+    }
+  </script>
 </body>
 </html>

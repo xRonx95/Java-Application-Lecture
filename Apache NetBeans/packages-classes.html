@@ -1,189 +1,166 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A complete Java learning path from Beginner to Pro, with 26 lessons, illustrated step-by-step labs, practical projects, code examples, quizzes, and Apache NetBeans activities.">
-    <title>Java Beginner to Pro | Complete Learning Path</title>
-      <!-- Browser tab logo -->
-  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
-  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
-    <link rel="stylesheet" href="../css/Apache NetBeans/packages-classes.css">
-    <style>
-        /* Self-contained styles for the new illustrated lesson content. */
-        .visual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem;margin:1.5rem 0}
-        .lesson-visual{margin:0;border:1px solid #d8dee9;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(15,23,42,.08)}
-        .lesson-visual svg{display:block;width:100%;height:auto;background:#f8fafc}
-        .lesson-visual figcaption{padding:.9rem 1rem;color:#475569;font-size:.92rem;line-height:1.55;border-top:1px solid #e2e8f0}
-        .lesson-visual figcaption strong{display:block;color:#7f1d1d;margin-bottom:.2rem}
-        .visual-wide{grid-column:1/-1}
-        .guided-lab{margin:1.5rem 0 2rem;padding:1.25rem;border:1px solid #e2e8f0;border-radius:18px;background:linear-gradient(145deg,#fff,#fff7ed)}
-        .guided-lab h3{margin-top:0}
-        .step-detail{display:grid;grid-template-columns:52px 1fr;gap:.8rem;margin:.8rem 0;padding:.9rem;border-radius:12px;background:#fff;border-left:4px solid #991b1b}
-        .step-detail>span{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#991b1b;color:#fff;font-weight:800}
-        .step-detail p{margin:0;line-height:1.65}
-        .step-detail strong{display:block;color:#7f1d1d;margin-bottom:.2rem}
-        .topic-chips{display:flex;flex-wrap:wrap;gap:.55rem;margin:1rem 0}
-        .topic-chips span{padding:.45rem .75rem;border:1px solid #fecaca;border-radius:999px;background:#fff1f2;color:#7f1d1d;font-weight:700;font-size:.86rem}
-        .practice-box{margin:1rem 0;padding:1rem 1.1rem;border-radius:14px;background:#f0fdf4;border:1px solid #bbf7d0}
-        .practice-box strong{color:#166534}
-        .image-note{font-size:.9rem;color:#64748b}
-        @media(max-width:760px){.visual-grid{grid-template-columns:1fr}.visual-wide{grid-column:auto}.guided-lab{padding:1rem}.step-detail{grid-template-columns:44px 1fr}.lesson-visual figcaption{font-size:.88rem}}
-    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A complete Java learning path from Beginner to Pro, with 26 lessons, illustrated step-by-step labs, practical projects, code examples, quizzes, and Apache NetBeans activities." name="description"/>
+<title>Java Beginner to Pro | Complete Learning Path</title>
+<!-- Browser tab logo -->
+<link href="../img/favicon.jpg?v=2" rel="icon" type="image/jpeg"/>
+<link href="../img/favicon.jpg?v=2" rel="shortcut icon" type="image/jpeg"/>
+<link href="../css/Apache NetBeans/packages-classes.css" rel="stylesheet"/>
+
 </head>
 <body>
-    <header class="site-header">
-        <a class="brand" href="#top" aria-label="Java Learning Hub home">
-            <span class="brand-mark">J</span>
-            <span><strong>Java Learning Hub</strong><small>Beginner to Pro Program</small></span>
-        </a>
-        <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="main-navigation" aria-expanded="false">☰</button>
-        <nav id="main-navigation" class="main-navigation" aria-label="Lesson navigation">
-            <a href="../index.html">Home</a>
-            <a href="#roadmap">Roadmap</a>
-            <a href="#beginner">Beginner</a>
-            <a href="#intermediate">Intermediate</a>
-            <a href="#advanced">Advanced</a>
-            <a href="#pro">Pro</a>
-            <a href="#extra-topics">New Topics</a>
-            <a href="#activity">Projects</a>
-            <a href="#quiz">Quiz</a>
-        </nav>
-    </header>
-
-    <div class="reading-progress" aria-hidden="true"><span id="progressBar"></span></div>
-
-    <main id="top">
-        <section class="hero">
-            <div class="hero-content">
-                <span class="eyebrow">Complete Java Program • 26 Guided Lessons</span>
-                <h1>Learn Java from Beginner to Pro</h1>
-                <p>Start with syntax and problem-solving, progress through object-oriented programming and databases, then master architecture, testing, security, performance, and deployment.</p>
-                <div class="hero-actions">
-                    <a class="button primary" href="#roadmap">Start Learning</a>
-                    <a class="button secondary" href="#activity">View Projects</a>
-                </div>
-                <ul class="lesson-meta" aria-label="Lesson information">
-                    <li><strong>Level</strong><span>Beginner → Pro</span></li>
-                    <li><strong>Duration</strong><span>45–55 hours</span></li>
-                    <li><strong>Output</strong><span>6 Projects + Capstone</span></li>
-                </ul>
-            </div>
-        </section>
-
-        <div class="lesson-layout">
-            <aside class="lesson-sidebar" aria-label="Table of contents">
-                <p class="sidebar-title">In this module</p>
-                <a href="#roadmap">1. Course roadmap</a>
-                <a href="#overview">2. Learning objectives</a>
-                <a href="#beginner">3. Beginner lessons</a>
-                <a href="#packages">4. Packages and classes</a>
-                <a href="#jframe">5. JFrame application</a>
-                <a href="#visual-labs">6. Illustrated labs</a>
-                <a href="#intermediate">7. Intermediate lessons</a>
-                <a href="#advanced">8. Advanced lessons</a>
-                <a href="#pro">9. Pro lessons</a>
-                <a href="#extra-topics">10. New topic lessons</a>
-                <a href="#activity">11. Projects and capstone</a>
-                <a href="#quiz">12. Knowledge check</a>
-            </aside>
-
-            <article class="lesson-content">
-                <section id="roadmap" class="lesson-section">
-                    <span class="section-number">01</span>
-                    <h2>Your Beginner-to-Pro roadmap</h2>
-                    <p>Complete the stages in order. Each stage introduces new ideas, includes deliberate practice, and ends with a portfolio-ready milestone project.</p>
-                    <div class="objective-grid">
-                        <div class="info-card"><span>🌱</span><h3>Beginner • Lessons 1–8</h3><p>Setup, syntax, input, decisions, loops, methods, OOP, arrays, strings, enums, and date-time.</p></div>
-                        <div class="info-card"><span>🚀</span><h3>Intermediate • Lessons 9–16</h3><p>Inheritance, interfaces, exceptions, collections, files, Swing, debugging, and Git.</p></div>
-                        <div class="info-card"><span>⚙️</span><h3>Advanced • Lessons 17–22</h3><p>Streams, concurrency, JDBC, MVC/DAO, tests, logging, JSON, HTTP, and REST APIs.</p></div>
-                        <div class="info-card"><span>🏆</span><h3>Pro • Lessons 23–26</h3><p>SOLID design, patterns, performance, security, builds, documentation, and deployment.</p></div>
-                    </div>
-                    <div class="callout important"><strong>Recommended pace:</strong> Study 3–5 lessons each week. Type every example yourself, complete each checkpoint, and keep finished projects in a portfolio repository.</div>
-                </section>
-
-                <section id="overview" class="lesson-section">
-                    <span class="section-number">02</span>
-                    <h2>Learning objectives</h2>
-                    <p>At the end of the lesson, learners should be able to:</p>
-                    <div class="objective-grid">
-                        <div class="info-card"><span>🧠</span><h3>Solve problems</h3><p>Translate requirements into algorithms, readable Java code, and reusable methods.</p></div>
-                        <div class="info-card"><span>🧱</span><h3>Design software</h3><p>Apply OOP, SOLID principles, interfaces, patterns, and layered architecture.</p></div>
-                        <div class="info-card"><span>🗄️</span><h3>Work with data</h3><p>Use collections, files, SQL databases, JDBC, validation, and exception handling.</p></div>
-                        <div class="info-card"><span>🚢</span><h3>Ship quality apps</h3><p>Test, debug, secure, optimize, version, build, document, and deploy applications.</p></div>
-                    </div>
-                </section>
-
-                <section id="beginner" class="lesson-section">
-                    <span class="section-number">03</span>
-                    <h2>Beginner stage • Build strong foundations</h2>
-                    <p>These first eight lessons teach the language fundamentals you need before working with larger applications.</p>
-                    <div class="term-table-wrapper">
-                        <table>
-                            <thead><tr><th>Lesson</th><th>Topics</th><th>Practice output</th></tr></thead>
-                            <tbody>
-                                <tr><td>1. Setup and first program</td><td>JDK, NetBeans, projects, <code>main()</code>, output, comments</td><td>Hello Java profile card</td></tr>
-                                <tr><td>2. Variables and operators</td><td>Primitive types, <code>String</code>, casting, constants, arithmetic</td><td>Grade and bill calculator</td></tr>
-                                <tr><td>3. Keyboard input and validation</td><td><code>Scanner</code>, parsing, formatted output, validation loops</td><td>Student registration form</td></tr>
-                                <tr><td>4. Decisions and loops</td><td><code>if</code>, <code>switch</code>, <code>for</code>, <code>while</code>, nested logic</td><td>Menu-driven number game</td></tr>
-                                <tr><td>5. Methods</td><td>Parameters, return values, scope, overloading, decomposition</td><td>Reusable calculator methods</td></tr>
-                                <tr><td>6. Packages and OOP</td><td>Packages, classes, objects, constructors, encapsulation</td><td>Student model</td></tr>
-                                <tr><td>7. Arrays and strings</td><td>Arrays, 2D arrays, traversal, common <code>String</code> methods</td><td>Student grade analyzer</td></tr>
-                                <tr><td>8. Enums and date-time</td><td><code>enum</code>, <code>LocalDate</code>, formatting, date calculations</td><td>Enrollment schedule checker</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="visual-grid">
-                        <figure class="lesson-visual">
-                            <svg viewBox="0 0 640 360" role="img" aria-labelledby="flowTitle flowDesc">
-                                <title id="flowTitle">Program flow from input to output</title>
-                                <desc id="flowDesc">A four-step diagram showing input, validation, processing, and output.</desc>
-                                <rect width="640" height="360" fill="#fff7ed"/>
-                                <text x="32" y="48" font-size="24" font-weight="700" fill="#7f1d1d">How a beginner Java program works</text>
-                                <g font-family="Arial, sans-serif" text-anchor="middle">
-                                    <rect x="28" y="105" width="128" height="112" rx="18" fill="#fee2e2" stroke="#991b1b" stroke-width="3"/>
-                                    <text x="92" y="145" font-size="30">⌨</text><text x="92" y="180" font-size="18" font-weight="700" fill="#450a0a">1. INPUT</text><text x="92" y="203" font-size="13" fill="#7f1d1d">Scanner</text>
-                                    <path d="M161 161h34" stroke="#991b1b" stroke-width="4"/><path d="m195 161-12-8v16z" fill="#991b1b"/>
-                                    <rect x="200" y="105" width="128" height="112" rx="18" fill="#fef3c7" stroke="#b45309" stroke-width="3"/>
-                                    <text x="264" y="145" font-size="30">✓</text><text x="264" y="180" font-size="17" font-weight="700" fill="#78350f">2. VALIDATE</text><text x="264" y="203" font-size="13" fill="#92400e">if / while</text>
-                                    <path d="M333 161h34" stroke="#991b1b" stroke-width="4"/><path d="m367 161-12-8v16z" fill="#991b1b"/>
-                                    <rect x="372" y="105" width="128" height="112" rx="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="3"/>
-                                    <text x="436" y="145" font-size="30">⚙</text><text x="436" y="180" font-size="17" font-weight="700" fill="#1e3a8a">3. PROCESS</text><text x="436" y="203" font-size="13" fill="#1d4ed8">methods</text>
-                                    <path d="M505 161h34" stroke="#991b1b" stroke-width="4"/><path d="m539 161-12-8v16z" fill="#991b1b"/>
-                                    <rect x="544" y="105" width="70" height="112" rx="18" fill="#dcfce7" stroke="#15803d" stroke-width="3"/>
-                                    <text x="579" y="145" font-size="28">▣</text><text x="579" y="180" font-size="14" font-weight="700" fill="#14532d">OUTPUT</text>
-                                </g>
-                                <text x="320" y="282" text-anchor="middle" font-size="17" fill="#475569">Read data → check it → calculate → show a result</text>
-                                <text x="320" y="315" text-anchor="middle" font-size="14" fill="#64748b">Trace this path whenever you are unsure what your code should do next.</text>
-                            </svg>
-                            <figcaption><strong>Picture 1 — Program flow</strong>Use this four-part pattern when planning calculators, forms, menus, and record systems.</figcaption>
-                        </figure>
-                        <figure class="lesson-visual">
-                            <svg viewBox="0 0 640 360" role="img" aria-labelledby="loopTitle loopDesc">
-                                <title id="loopTitle">Decision and loop visual</title>
-                                <desc id="loopDesc">A flowchart showing a grade being checked, rejected if invalid, and processed if valid.</desc>
-                                <rect width="640" height="360" fill="#f8fafc"/>
-                                <text x="32" y="48" font-size="24" font-weight="700" fill="#7f1d1d">Validation loop</text>
-                                <g font-family="Arial, sans-serif" text-anchor="middle">
-                                    <rect x="42" y="130" width="140" height="64" rx="32" fill="#fee2e2" stroke="#991b1b" stroke-width="3"/><text x="112" y="168" font-size="17" font-weight="700">Enter grade</text>
-                                    <path d="M186 162h62" stroke="#64748b" stroke-width="4"/><path d="m248 162-12-8v16z" fill="#64748b"/>
-                                    <path d="M326 105 408 162 326 219 244 162z" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><text x="326" y="157" font-size="16" font-weight="700">0 to 100?</text>
-                                    <text x="326" y="180" font-size="13">valid range</text>
-                                    <path d="M412 162h64" stroke="#15803d" stroke-width="4"/><path d="m476 162-12-8v16z" fill="#15803d"/><text x="444" y="148" font-size="13" fill="#166534">YES</text>
-                                    <rect x="480" y="130" width="120" height="64" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="3"/><text x="540" y="168" font-size="16" font-weight="700">Calculate</text>
-                                    <path d="M326 222v69H112v-92" fill="none" stroke="#b91c1c" stroke-width="4"/><path d="m112 199-8 12h16z" fill="#b91c1c"/><text x="238" y="280" font-size="13" fill="#991b1b">NO: show error and ask again</text>
-                                </g>
-                            </svg>
-                            <figcaption><strong>Picture 2 — Validation loop</strong>The program repeats until the user enters a grade from 0 to 100.</figcaption>
-                        </figure>
-                    </div>
-                    <h3>Beginner example: decisions, loops, and methods</h3>
-                    <div class="code-block">
-                        <div class="code-header"><span>GradeAnalyzer.java</span><button class="copy-button" type="button">Copy</button></div>
-                        <pre><code>public class GradeAnalyzer {
+<header class="site-header">
+<a aria-label="Java Learning Hub home" class="brand" href="#top">
+<span class="brand-mark">J</span>
+<span><strong>Java Learning Hub</strong><small>Beginner to Pro Program</small></span>
+</a>
+<button aria-controls="main-navigation" aria-expanded="false" aria-label="Open navigation" class="menu-button" type="button">☰</button>
+<nav aria-label="Lesson navigation" class="main-navigation" id="main-navigation">
+<a href="../index.html">Home</a>
+<a href="#roadmap">Roadmap</a>
+<a href="#beginner">Beginner</a>
+<a href="#intermediate">Intermediate</a>
+<a href="#advanced">Advanced</a>
+<a href="#pro">Pro</a>
+<a href="#extra-topics">New Topics</a>
+<a href="#run-examples">Run Examples</a>
+<a href="#activity">Projects</a>
+<a href="#quiz">Quiz</a>
+</nav>
+</header>
+<div aria-hidden="true" class="reading-progress"><span id="progressBar"></span></div>
+<main id="top">
+<section class="hero">
+<div class="hero-content">
+<span class="eyebrow">Complete Java Program • 26 Guided Lessons</span>
+<h1>Learn Java from Beginner to Pro</h1>
+<p>Start with syntax and problem-solving, progress through object-oriented programming and databases, then master architecture, testing, security, performance, and deployment.</p>
+<div class="hero-actions">
+<a class="button primary" href="#roadmap">Start Learning</a>
+<a class="button secondary" href="#activity">View Projects</a>
+</div>
+<ul aria-label="Lesson information" class="lesson-meta">
+<li><strong>Level</strong><span>Beginner → Pro</span></li>
+<li><strong>Duration</strong><span>45–55 hours</span></li>
+<li><strong>Output</strong><span>6 Projects + Capstone</span></li>
+</ul>
+</div>
+</section>
+<div class="lesson-layout">
+<aside aria-label="Table of contents" class="lesson-sidebar">
+<p class="sidebar-title">In this module</p>
+<a href="#roadmap">1. Course roadmap</a>
+<a href="#overview">2. Learning objectives</a>
+<a href="#beginner">3. Beginner lessons</a>
+<a href="#packages">4. Packages and classes</a>
+<a href="#jframe">5. JFrame application</a>
+<a href="#visual-labs">6. Illustrated labs</a>
+<a href="#intermediate">7. Intermediate lessons</a>
+<a href="#advanced">8. Advanced lessons</a>
+<a href="#pro">9. Pro lessons</a>
+<a href="#extra-topics">10. New topic lessons</a>
+<a href="#run-examples">11. Run examples &amp; outputs</a>
+<a href="#activity">12. Projects and capstone</a>
+<a href="#quiz">13. Knowledge check</a>
+</aside>
+<article class="lesson-content">
+<section class="lesson-section" id="roadmap">
+<span class="section-number">01</span>
+<h2>Your Beginner-to-Pro roadmap</h2>
+<p>Complete the stages in order. Each stage introduces new ideas, includes deliberate practice, and ends with a portfolio-ready milestone project.</p>
+<div class="objective-grid">
+<div class="info-card"><span>🌱</span><h3>Beginner • Lessons 1–8</h3><p>Setup, syntax, input, decisions, loops, methods, OOP, arrays, strings, enums, and date-time.</p></div>
+<div class="info-card"><span>🚀</span><h3>Intermediate • Lessons 9–16</h3><p>Inheritance, interfaces, exceptions, collections, files, Swing, debugging, and Git.</p></div>
+<div class="info-card"><span>⚙️</span><h3>Advanced • Lessons 17–22</h3><p>Streams, concurrency, JDBC, MVC/DAO, tests, logging, JSON, HTTP, and REST APIs.</p></div>
+<div class="info-card"><span>🏆</span><h3>Pro • Lessons 23–26</h3><p>SOLID design, patterns, performance, security, builds, documentation, and deployment.</p></div>
+</div>
+<div class="callout important"><strong>Recommended pace:</strong> Study 3–5 lessons each week. Type every example yourself, complete each checkpoint, and keep finished projects in a portfolio repository.</div>
+</section>
+<section class="lesson-section" id="overview">
+<span class="section-number">02</span>
+<h2>Learning objectives</h2>
+<p>At the end of the lesson, learners should be able to:</p>
+<div class="objective-grid">
+<div class="info-card"><span>🧠</span><h3>Solve problems</h3><p>Translate requirements into algorithms, readable Java code, and reusable methods.</p></div>
+<div class="info-card"><span>🧱</span><h3>Design software</h3><p>Apply OOP, SOLID principles, interfaces, patterns, and layered architecture.</p></div>
+<div class="info-card"><span>🗄️</span><h3>Work with data</h3><p>Use collections, files, SQL databases, JDBC, validation, and exception handling.</p></div>
+<div class="info-card"><span>🚢</span><h3>Ship quality apps</h3><p>Test, debug, secure, optimize, version, build, document, and deploy applications.</p></div>
+</div>
+</section>
+<section class="lesson-section" id="beginner">
+<span class="section-number">03</span>
+<h2>Beginner stage • Build strong foundations</h2>
+<p>These first eight lessons teach the language fundamentals you need before working with larger applications.</p>
+<div class="term-table-wrapper">
+<table>
+<thead><tr><th>Lesson</th><th>Topics</th><th>Practice output</th></tr></thead>
+<tbody>
+<tr><td>1. Setup and first program</td><td>JDK, NetBeans, projects, <code>main()</code>, output, comments</td><td>Hello Java profile card</td></tr>
+<tr><td>2. Variables and operators</td><td>Primitive types, <code>String</code>, casting, constants, arithmetic</td><td>Grade and bill calculator</td></tr>
+<tr><td>3. Keyboard input and validation</td><td><code>Scanner</code>, parsing, formatted output, validation loops</td><td>Student registration form</td></tr>
+<tr><td>4. Decisions and loops</td><td><code>if</code>, <code>switch</code>, <code>for</code>, <code>while</code>, nested logic</td><td>Menu-driven number game</td></tr>
+<tr><td>5. Methods</td><td>Parameters, return values, scope, overloading, decomposition</td><td>Reusable calculator methods</td></tr>
+<tr><td>6. Packages and OOP</td><td>Packages, classes, objects, constructors, encapsulation</td><td>Student model</td></tr>
+<tr><td>7. Arrays and strings</td><td>Arrays, 2D arrays, traversal, common <code>String</code> methods</td><td>Student grade analyzer</td></tr>
+<tr><td>8. Enums and date-time</td><td><code>enum</code>, <code>LocalDate</code>, formatting, date calculations</td><td>Enrollment schedule checker</td></tr>
+</tbody>
+</table>
+</div>
+<div class="visual-grid">
+<figure class="lesson-visual">
+<svg aria-labelledby="flowTitle flowDesc" role="img" viewbox="0 0 640 360">
+<title id="flowTitle">Program flow from input to output</title>
+<desc id="flowDesc">A four-step diagram showing input, validation, processing, and output.</desc>
+<rect fill="#fff7ed" height="360" width="640"></rect>
+<text fill="#7f1d1d" font-size="24" font-weight="700" x="32" y="48">How a beginner Java program works</text>
+<g font-family="Arial, sans-serif" text-anchor="middle">
+<rect fill="#fee2e2" height="112" rx="18" stroke="#991b1b" stroke-width="3" width="128" x="28" y="105"></rect>
+<text font-size="30" x="92" y="145">⌨</text><text fill="#450a0a" font-size="18" font-weight="700" x="92" y="180">1. INPUT</text><text fill="#7f1d1d" font-size="13" x="92" y="203">Scanner</text>
+<path d="M161 161h34" stroke="#991b1b" stroke-width="4"></path><path d="m195 161-12-8v16z" fill="#991b1b"></path>
+<rect fill="#fef3c7" height="112" rx="18" stroke="#b45309" stroke-width="3" width="128" x="200" y="105"></rect>
+<text font-size="30" x="264" y="145">✓</text><text fill="#78350f" font-size="17" font-weight="700" x="264" y="180">2. VALIDATE</text><text fill="#92400e" font-size="13" x="264" y="203">if / while</text>
+<path d="M333 161h34" stroke="#991b1b" stroke-width="4"></path><path d="m367 161-12-8v16z" fill="#991b1b"></path>
+<rect fill="#dbeafe" height="112" rx="18" stroke="#1d4ed8" stroke-width="3" width="128" x="372" y="105"></rect>
+<text font-size="30" x="436" y="145">⚙</text><text fill="#1e3a8a" font-size="17" font-weight="700" x="436" y="180">3. PROCESS</text><text fill="#1d4ed8" font-size="13" x="436" y="203">methods</text>
+<path d="M505 161h34" stroke="#991b1b" stroke-width="4"></path><path d="m539 161-12-8v16z" fill="#991b1b"></path>
+<rect fill="#dcfce7" height="112" rx="18" stroke="#15803d" stroke-width="3" width="70" x="544" y="105"></rect>
+<text font-size="28" x="579" y="145">▣</text><text fill="#14532d" font-size="14" font-weight="700" x="579" y="180">OUTPUT</text>
+</g>
+<text fill="#475569" font-size="17" text-anchor="middle" x="320" y="282">Read data → check it → calculate → show a result</text>
+<text fill="#64748b" font-size="14" text-anchor="middle" x="320" y="315">Trace this path whenever you are unsure what your code should do next.</text>
+</svg>
+<figcaption><strong>Picture 1 — Program flow</strong>Use this four-part pattern when planning calculators, forms, menus, and record systems.</figcaption>
+</figure>
+<figure class="lesson-visual">
+<svg aria-labelledby="loopTitle loopDesc" role="img" viewbox="0 0 640 360">
+<title id="loopTitle">Decision and loop visual</title>
+<desc id="loopDesc">A flowchart showing a grade being checked, rejected if invalid, and processed if valid.</desc>
+<rect fill="#f8fafc" height="360" width="640"></rect>
+<text fill="#7f1d1d" font-size="24" font-weight="700" x="32" y="48">Validation loop</text>
+<g font-family="Arial, sans-serif" text-anchor="middle">
+<rect fill="#fee2e2" height="64" rx="32" stroke="#991b1b" stroke-width="3" width="140" x="42" y="130"></rect><text font-size="17" font-weight="700" x="112" y="168">Enter grade</text>
+<path d="M186 162h62" stroke="#64748b" stroke-width="4"></path><path d="m248 162-12-8v16z" fill="#64748b"></path>
+<path d="M326 105 408 162 326 219 244 162z" fill="#fef3c7" stroke="#b45309" stroke-width="3"></path><text font-size="16" font-weight="700" x="326" y="157">0 to 100?</text>
+<text font-size="13" x="326" y="180">valid range</text>
+<path d="M412 162h64" stroke="#15803d" stroke-width="4"></path><path d="m476 162-12-8v16z" fill="#15803d"></path><text fill="#166534" font-size="13" x="444" y="148">YES</text>
+<rect fill="#dcfce7" height="64" rx="12" stroke="#15803d" stroke-width="3" width="120" x="480" y="130"></rect><text font-size="16" font-weight="700" x="540" y="168">Calculate</text>
+<path d="M326 222v69H112v-92" fill="none" stroke="#b91c1c" stroke-width="4"></path><path d="m112 199-8 12h16z" fill="#b91c1c"></path><text fill="#991b1b" font-size="13" x="238" y="280">NO: show error and ask again</text>
+</g>
+</svg>
+<figcaption><strong>Picture 2 — Validation loop</strong>The program repeats until the user enters a grade from 0 to 100.</figcaption>
+</figure>
+</div>
+<h3>Beginner example: decisions, loops, and methods</h3>
+<div class="code-block">
+<div class="code-header"><span>GradeAnalyzer.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>public class GradeAnalyzer {
     static String getRemark(double grade) {
-        if (grade >= 90) return "Outstanding";
-        if (grade >= 75) return "Passed";
+        if (grade &gt;= 90) return "Outstanding";
+        if (grade &gt;= 75) return "Passed";
         return "Needs improvement";
     }
 
@@ -200,59 +177,51 @@
         System.out.println("Remark: " + getRemark(average));
     }
 }</code></pre>
-                    </div>
-                    <div class="callout analogy"><strong>Beginner checkpoint:</strong> Explain every line of the example, change the grades, add highest/lowest calculations, and reject values below 0 or above 100.</div>
-                </section>
-
-                <section id="packages" class="lesson-section">
-                    <span class="section-number">04</span>
-                    <h2>Lesson 6 deep dive: Java packages</h2>
-                    <p>A <strong>package</strong> is a named group of related classes, interfaces, and subpackages. Think of it as a labeled folder that keeps a project clean and prevents two classes with the same name from colliding.</p>
-
-                    <div class="callout analogy"><strong>Simple analogy:</strong> A school is the project, departments are packages, teachers are classes, and individual teachers are objects.</div>
-
-                    <h3>Package declaration and import</h3>
-                    <div class="code-block">
-                        <div class="code-header"><span>Student.java</span><button class="copy-button" type="button">Copy</button></div>
-                        <pre><code>package lessonmodule.models;
+</div>
+<div class="callout analogy"><strong>Beginner checkpoint:</strong> Explain every line of the example, change the grades, add highest/lowest calculations, and reject values below 0 or above 100.</div>
+</section>
+<section class="lesson-section" id="packages">
+<span class="section-number">04</span>
+<h2>Lesson 6 deep dive: Java packages</h2>
+<p>A <strong>package</strong> is a named group of related classes, interfaces, and subpackages. Think of it as a labeled folder that keeps a project clean and prevents two classes with the same name from colliding.</p>
+<div class="callout analogy"><strong>Simple analogy:</strong> A school is the project, departments are packages, teachers are classes, and individual teachers are objects.</div>
+<h3>Package declaration and import</h3>
+<div class="code-block">
+<div class="code-header"><span>Student.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>package lessonmodule.models;
 
 import javax.swing.JOptionPane;
 
 public class Student {
     // Class members go here
 }</code></pre>
-                    </div>
-
-                    <div class="two-column">
-                        <div><h3>Why packages matter</h3><ul class="check-list"><li>Keep source files organized</li><li>Prevent class-name conflicts</li><li>Control class accessibility</li><li>Make code easier to reuse</li></ul></div>
-                        <div><h3>Naming convention</h3><p>Package names normally use lowercase letters. In larger projects, a reversed domain name is often used.</p><div class="mini-code">com.school.lessonmodule</div></div>
-                    </div>
-
-                    <h3>Suggested project structure</h3>
-                    <div class="file-tree" aria-label="Project file structure">
-                        <span>📁 PackagesClassesLesson</span>
-                        <span class="indent">📁 Source Packages</span>
-                        <span class="indent-two">📦 lessonmodule</span>
-                        <span class="indent-three">☕ PackagesClassesFrame.java</span>
-                        <span class="indent-two">📦 lessonmodule.models</span>
-                        <span class="indent-three">☕ Student.java</span>
-                    </div>
-                </section>
-
-                <section id="classes" class="lesson-section">
-                    <span class="section-number">05</span>
-                    <h2>Classes and objects</h2>
-                    <p>A <strong>class</strong> is a blueprint that defines data and behavior. An <strong>object</strong> is a real instance created from that blueprint.</p>
-
-                    <div class="concept-map">
-                        <div><span>Blueprint</span><strong>Student class</strong><small>Defines name and course</small></div>
-                        <span class="concept-arrow">→</span>
-                        <div><span>Instance</span><strong>studentOne object</strong><small>Contains actual values</small></div>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header"><span>Student.java</span><button class="copy-button" type="button">Copy</button></div>
-                        <pre><code>package lessonmodule.models;
+</div>
+<div class="two-column">
+<div><h3>Why packages matter</h3><ul class="check-list"><li>Keep source files organized</li><li>Prevent class-name conflicts</li><li>Control class accessibility</li><li>Make code easier to reuse</li></ul></div>
+<div><h3>Naming convention</h3><p>Package names normally use lowercase letters. In larger projects, a reversed domain name is often used.</p><div class="mini-code">com.school.lessonmodule</div></div>
+</div>
+<h3>Suggested project structure</h3>
+<div aria-label="Project file structure" class="file-tree">
+<span>📁 PackagesClassesLesson</span>
+<span class="indent">📁 Source Packages</span>
+<span class="indent-two">📦 lessonmodule</span>
+<span class="indent-three">☕ PackagesClassesFrame.java</span>
+<span class="indent-two">📦 lessonmodule.models</span>
+<span class="indent-three">☕ Student.java</span>
+</div>
+</section>
+<section class="lesson-section" id="classes">
+<span class="section-number">05</span>
+<h2>Classes and objects</h2>
+<p>A <strong>class</strong> is a blueprint that defines data and behavior. An <strong>object</strong> is a real instance created from that blueprint.</p>
+<div class="concept-map">
+<div><span>Blueprint</span><strong>Student class</strong><small>Defines name and course</small></div>
+<span class="concept-arrow">→</span>
+<div><span>Instance</span><strong>studentOne object</strong><small>Contains actual values</small></div>
+</div>
+<div class="code-block">
+<div class="code-header"><span>Student.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>package lessonmodule.models;
 
 public class Student {
     private String name;       // Field
@@ -267,251 +236,236 @@ public class Student {
         return "I am " + name + " from " + course + ".";
     }
 }</code></pre>
-                    </div>
-
-                    <div class="term-table-wrapper">
-                        <table>
-                            <thead><tr><th>Part</th><th>Meaning</th><th>Example</th></tr></thead>
-                            <tbody>
-                                <tr><td>Field</td><td>Stores an object's data</td><td><code>private String name;</code></td></tr>
-                                <tr><td>Constructor</td><td>Initializes a new object</td><td><code>new Student(...)</code></td></tr>
-                                <tr><td>Method</td><td>Defines an object's behavior</td><td><code>introduce()</code></td></tr>
-                                <tr><td>Object</td><td>An instance of a class</td><td><code>Student studentOne</code></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section id="access" class="lesson-section">
-                    <span class="section-number">06</span>
-                    <h2>Access modifiers</h2>
-                    <p>Access modifiers determine where a class or member can be used. Keeping fields <code>private</code> and exposing them through methods is called <strong>encapsulation</strong>.</p>
-                    <div class="term-table-wrapper">
-                        <table>
-                            <thead><tr><th>Modifier</th><th>Same class</th><th>Same package</th><th>Subclass</th><th>Everywhere</th></tr></thead>
-                            <tbody>
-                                <tr><td><code>private</code></td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
-                                <tr><td>default</td><td>Yes</td><td>Yes</td><td>No*</td><td>No</td></tr>
-                                <tr><td><code>protected</code></td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-                                <tr><td><code>public</code></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="table-note">*A subclass in another package can access an inherited protected member, but default access remains package-only.</p>
-                </section>
-
-                <section id="jframe" class="lesson-section">
-                    <span class="section-number">07</span>
-                    <h2>Lesson 14 preview: Building a JFrame application</h2>
-                    <p><code>JFrame</code> is Swing's main top-level window. The sample below creates a small student introduction application and demonstrates packages, objects, events, and GUI components.</p>
-
-                    <div class="steps">
-                        <div><span>1</span><p><strong>Create a project</strong>In NetBeans, select File → New Project → Java Application.</p></div>
-                        <div><span>2</span><p><strong>Create a package</strong>Right-click Source Packages → New → Java Package. Name it <code>lessonmodule</code>.</p></div>
-                        <div><span>3</span><p><strong>Add the class</strong>Create <code>PackagesClassesFrame.java</code>, then paste the supplied Java code.</p></div>
-                        <div><span>4</span><p><strong>Run the program</strong>Right-click the file and choose Run File, or press Shift + F6.</p></div>
-                    </div>
-
-                    <div class="callout important"><strong>Important:</strong> The package name must match the package folder, and the public class name must match the Java filename exactly.</div>
-
-                    <h3>How the application works</h3>
-                    <ol class="explanation-list">
-                        <li>The class extends <code>JFrame</code>, so it becomes a window.</li>
-                        <li>The constructor sets the title, size, close behavior, and layout.</li>
-                        <li>Swing components such as <code>JTextField</code>, <code>JButton</code>, and <code>JLabel</code> are added to panels.</li>
-                        <li>An action listener runs when the user clicks the button.</li>
-                        <li><code>SwingUtilities.invokeLater</code> starts the interface safely on Swing's event thread.</li>
-                    </ol>
-                </section>
-
-                <section id="visual-labs" class="lesson-section">
-                    <span class="section-number">08</span>
-                    <h2>Illustrated step-by-step labs</h2>
-                    <p>Follow each picture from left to right, then complete the numbered action below it. NetBeans wording can vary slightly by version, but the project, package, class, Run, and Output areas remain the same.</p>
-
-                    <div class="guided-lab">
-                        <h3>Lab A — Create and run your first NetBeans project</h3>
-                        <div class="topic-chips"><span>JDK setup</span><span>Java Application</span><span>Main class</span><span>Run Project</span></div>
-                        <figure class="lesson-visual visual-wide">
-                            <svg viewBox="0 0 920 480" role="img" aria-labelledby="netbeansTitle netbeansDesc">
-                                <title id="netbeansTitle">Illustrated NetBeans new-project wizard</title>
-                                <desc id="netbeansDesc">A three-panel mockup showing File New Project, choosing Java Application, and naming the project.</desc>
-                                <rect width="920" height="480" fill="#eef2ff"/>
-                                <text x="36" y="46" font-size="25" font-weight="700" fill="#7f1d1d">Create a Java Application</text>
-                                <g font-family="Arial, sans-serif">
-                                    <rect x="34" y="76" width="260" height="338" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
-                                    <rect x="34" y="76" width="260" height="42" rx="14" fill="#7f1d1d"/><rect x="34" y="103" width="260" height="15" fill="#7f1d1d"/>
-                                    <text x="52" y="103" font-size="16" font-weight="700" fill="#fff">STEP 1 • Open the wizard</text>
-                                    <text x="55" y="150" font-size="15" font-weight="700" fill="#334155">File</text><text x="85" y="150" font-size="14" fill="#64748b">menu</text>
-                                    <rect x="52" y="166" width="220" height="42" rx="7" fill="#fee2e2" stroke="#991b1b"/><text x="68" y="192" font-size="15" font-weight="700" fill="#7f1d1d">New Project…</text>
-                                    <text x="52" y="242" font-size="14" fill="#475569">Shortcut:</text><rect x="122" y="221" width="116" height="30" rx="6" fill="#f1f5f9"/><text x="180" y="242" text-anchor="middle" font-size="14" fill="#0f172a">Ctrl + Shift + N</text>
-                                    <circle cx="164" cy="326" r="54" fill="#fff7ed" stroke="#fb923c" stroke-width="3"/><text x="164" y="338" text-anchor="middle" font-size="44">📁</text>
-
-                                    <path d="M303 245h34" stroke="#991b1b" stroke-width="5"/><path d="m337 245-14-9v18z" fill="#991b1b"/>
-                                    <rect x="345" y="76" width="250" height="338" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
-                                    <rect x="345" y="76" width="250" height="42" rx="14" fill="#7f1d1d"/><rect x="345" y="103" width="250" height="15" fill="#7f1d1d"/>
-                                    <text x="363" y="103" font-size="16" font-weight="700" fill="#fff">STEP 2 • Select project</text>
-                                    <text x="365" y="150" font-size="14" font-weight="700" fill="#334155">Categories</text><rect x="365" y="165" width="94" height="36" rx="6" fill="#fef3c7"/><text x="412" y="188" text-anchor="middle" font-size="14">Java</text>
-                                    <text x="365" y="232" font-size="14" font-weight="700" fill="#334155">Projects</text><rect x="365" y="248" width="210" height="44" rx="6" fill="#fee2e2" stroke="#991b1b"/><text x="470" y="275" text-anchor="middle" font-size="15" font-weight="700" fill="#7f1d1d">Java Application</text>
-                                    <rect x="487" y="344" width="88" height="34" rx="7" fill="#991b1b"/><text x="531" y="366" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Next ›</text>
-
-                                    <path d="M603 245h34" stroke="#991b1b" stroke-width="5"/><path d="m637 245-14-9v18z" fill="#991b1b"/>
-                                    <rect x="645" y="76" width="242" height="338" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
-                                    <rect x="645" y="76" width="242" height="42" rx="14" fill="#7f1d1d"/><rect x="645" y="103" width="242" height="15" fill="#7f1d1d"/>
-                                    <text x="663" y="103" font-size="16" font-weight="700" fill="#fff">STEP 3 • Name it</text>
-                                    <text x="666" y="157" font-size="14" font-weight="700" fill="#334155">Project Name</text><rect x="666" y="169" width="198" height="39" rx="6" fill="#fff" stroke="#94a3b8"/><text x="677" y="194" font-size="14" fill="#0f172a">JavaLearningHub</text>
-                                    <rect x="666" y="231" width="17" height="17" rx="3" fill="#991b1b"/><path d="m670 239 5 5 10-12" fill="none" stroke="#fff" stroke-width="3"/><text x="692" y="245" font-size="13" fill="#334155">Create Main Class</text>
-                                    <rect x="776" y="344" width="88" height="34" rx="7" fill="#15803d"/><text x="820" y="366" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Finish</text>
-                                </g>
-                            </svg>
-                            <figcaption><strong>Picture 3 — New Project wizard</strong>Choose Java Application, enter <code>JavaLearningHub</code>, keep “Create Main Class” checked, and select Finish.</figcaption>
-                        </figure>
-                        <div class="step-detail"><span>1</span><p><strong>Confirm Java is ready.</strong>Open a terminal and run <code>java -version</code>. If a version appears, the JDK is available.</p></div>
-                        <div class="step-detail"><span>2</span><p><strong>Create the project.</strong>Use File → New Project → Java Application, then enter the project name shown in the picture.</p></div>
-                        <div class="step-detail"><span>3</span><p><strong>Write a test message.</strong>Inside <code>main()</code>, type <code>System.out.println("Hello, Java!");</code>.</p></div>
-                        <div class="step-detail"><span>4</span><p><strong>Run and verify.</strong>Press F6. The Output window should display <code>Hello, Java!</code> followed by <code>BUILD SUCCESSFUL</code>.</p></div>
-                        <div class="practice-box"><strong>Try it:</strong> Print your name, section, and one goal on separate lines. Change one line, run again, and observe how the output changes.</div>
-                    </div>
-
-                    <div class="guided-lab">
-                        <h3>Lab B — Create packages, classes, and objects</h3>
-                        <div class="visual-grid">
-                            <figure class="lesson-visual">
-                                <svg viewBox="0 0 640 420" role="img" aria-labelledby="treeTitle treeDesc">
-                                    <title id="treeTitle">NetBeans project explorer structure</title>
-                                    <desc id="treeDesc">A project tree with app and models packages and two Java classes.</desc>
-                                    <rect width="640" height="420" fill="#f8fafc"/>
-                                    <rect x="30" y="28" width="580" height="362" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
-                                    <rect x="30" y="28" width="580" height="44" rx="14" fill="#334155"/><rect x="30" y="58" width="580" height="14" fill="#334155"/>
-                                    <text x="52" y="57" font-size="17" font-family="Arial" font-weight="700" fill="#fff">Projects</text>
-                                    <g font-family="Arial, sans-serif" font-size="17" fill="#1e293b">
-                                        <text x="56" y="108">▾ ☕ JavaLearningHub</text>
-                                        <text x="83" y="146">▾ 📁 Source Packages</text>
-                                        <rect x="104" y="160" width="466" height="38" rx="7" fill="#fff1f2"/>
-                                        <text x="112" y="186">▾ 📦 school.app</text>
-                                        <text x="145" y="222">☕ Main.java</text>
-                                        <rect x="104" y="239" width="466" height="38" rx="7" fill="#eff6ff"/>
-                                        <text x="112" y="265">▾ 📦 school.models</text>
-                                        <text x="145" y="303">☕ Student.java</text>
-                                        <text x="83" y="344">▸ 📁 Test Packages</text>
-                                    </g>
-                                    <path d="M479 180h82" stroke="#991b1b" stroke-width="3"/><text x="477" y="173" text-anchor="end" font-family="Arial" font-size="13" fill="#991b1b">program entry</text>
-                                    <path d="M479 258h82" stroke="#1d4ed8" stroke-width="3"/><text x="477" y="251" text-anchor="end" font-family="Arial" font-size="13" fill="#1d4ed8">data model</text>
-                                </svg>
-                                <figcaption><strong>Picture 4 — Correct project structure</strong>Keep the program entry point in <code>school.app</code> and reusable data classes in <code>school.models</code>.</figcaption>
-                            </figure>
-                            <figure class="lesson-visual">
-                                <svg viewBox="0 0 640 420" role="img" aria-labelledby="objectTitle objectDesc">
-                                    <title id="objectTitle">Class blueprint creating two student objects</title>
-                                    <desc id="objectDesc">A Student class blueprint points to Ana and Ben student objects with individual values.</desc>
-                                    <rect width="640" height="420" fill="#fff7ed"/>
-                                    <text x="320" y="45" text-anchor="middle" font-family="Arial" font-size="23" font-weight="700" fill="#7f1d1d">One class can create many objects</text>
-                                    <g font-family="Arial, sans-serif">
-                                        <rect x="54" y="96" width="218" height="235" rx="18" fill="#fff" stroke="#991b1b" stroke-width="3"/>
-                                        <rect x="54" y="96" width="218" height="55" rx="18" fill="#991b1b"/><rect x="54" y="130" width="218" height="21" fill="#991b1b"/>
-                                        <text x="163" y="131" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">Student class</text>
-                                        <text x="76" y="188" font-size="15" fill="#334155">- name: String</text><text x="76" y="222" font-size="15" fill="#334155">- course: String</text><text x="76" y="271" font-size="15" fill="#334155">+ introduce()</text><text x="76" y="302" font-size="15" fill="#334155">+ getName()</text>
-                                        <path d="M278 174h82" stroke="#64748b" stroke-width="4"/><path d="m360 174-13-8v16z" fill="#64748b"/>
-                                        <path d="M278 270h82" stroke="#64748b" stroke-width="4"/><path d="m360 270-13-8v16z" fill="#64748b"/>
-                                        <rect x="366" y="112" width="220" height="114" rx="16" fill="#dcfce7" stroke="#15803d" stroke-width="3"/>
-                                        <text x="476" y="143" text-anchor="middle" font-size="18" font-weight="700" fill="#14532d">studentOne</text><text x="389" y="176" font-size="15">name = “Ana”</text><text x="389" y="203" font-size="15">course = “BSIT”</text>
-                                        <rect x="366" y="246" width="220" height="114" rx="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="3"/>
-                                        <text x="476" y="277" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">studentTwo</text><text x="389" y="310" font-size="15">name = “Ben”</text><text x="389" y="337" font-size="15">course = “BSCS”</text>
-                                    </g>
-                                </svg>
-                                <figcaption><strong>Picture 5 — Blueprint and instances</strong>The class defines the fields and methods; each object stores its own actual values.</figcaption>
-                            </figure>
-                        </div>
-                        <div class="step-detail"><span>1</span><p><strong>Create two packages.</strong>Right-click Source Packages → New → Java Package. Add <code>school.app</code> and <code>school.models</code>.</p></div>
-                        <div class="step-detail"><span>2</span><p><strong>Create the model.</strong>Inside <code>school.models</code>, add <code>Student.java</code> with private fields, a constructor, getters, and <code>introduce()</code>.</p></div>
-                        <div class="step-detail"><span>3</span><p><strong>Create objects.</strong>In <code>Main.java</code>, import <code>school.models.Student</code>, create two students, and print both introductions.</p></div>
-                        <div class="step-detail"><span>4</span><p><strong>Check encapsulation.</strong>Try accessing <code>studentOne.name</code>. Notice the error, then use <code>getName()</code> instead.</p></div>
-                    </div>
-
-                    <div class="guided-lab">
-                        <h3>Lab C — Read errors and debug one line at a time</h3>
-                        <figure class="lesson-visual visual-wide">
-                            <svg viewBox="0 0 920 470" role="img" aria-labelledby="debugTitle debugDesc">
-                                <title id="debugTitle">NetBeans debugging workspace</title>
-                                <desc id="debugDesc">A mock editor shows a breakpoint, variable values, call stack, and output window.</desc>
-                                <rect width="920" height="470" fill="#0f172a"/>
-                                <rect x="20" y="20" width="880" height="42" rx="7" fill="#334155"/>
-                                <circle cx="44" cy="41" r="7" fill="#ef4444"/><circle cx="67" cy="41" r="7" fill="#f59e0b"/><circle cx="90" cy="41" r="7" fill="#22c55e"/>
-                                <text x="124" y="47" font-family="Arial" font-size="16" font-weight="700" fill="#fff">GradeAnalyzer.java — Debugging</text>
-                                <rect x="20" y="72" width="582" height="270" fill="#111827" stroke="#475569"/>
-                                <rect x="20" y="184" width="582" height="34" fill="#422006"/>
-                                <circle cx="42" cy="201" r="8" fill="#ef4444"/><text x="62" y="206" font-family="monospace" font-size="16" fill="#94a3b8">12</text><text x="100" y="206" font-family="monospace" font-size="16" fill="#f8fafc">double average = total / grades.length;</text>
-                                <text x="62" y="112" font-family="monospace" font-size="16" fill="#94a3b8">9</text><text x="100" y="112" font-family="monospace" font-size="16" fill="#f8fafc">for (double grade : grades) {</text>
-                                <text x="62" y="150" font-family="monospace" font-size="16" fill="#94a3b8">10</text><text x="120" y="150" font-family="monospace" font-size="16" fill="#86efac">total += grade;</text>
-                                <text x="62" y="250" font-family="monospace" font-size="16" fill="#94a3b8">13</text><text x="100" y="250" font-family="monospace" font-size="16" fill="#f8fafc">System.out.println(average);</text>
-                                <rect x="612" y="72" width="288" height="270" fill="#f8fafc" stroke="#475569"/>
-                                <rect x="612" y="72" width="288" height="36" fill="#e2e8f0"/><text x="630" y="96" font-family="Arial" font-size="15" font-weight="700" fill="#1e293b">Variables</text>
-                                <text x="632" y="140" font-family="monospace" font-size="15" fill="#334155">grades = [88,93,79,91]</text><text x="632" y="174" font-family="monospace" font-size="15" fill="#334155">total = 351.0</text><text x="632" y="208" font-family="monospace" font-size="15" fill="#991b1b">average = not assigned</text>
-                                <rect x="20" y="352" width="880" height="98" fill="#fff"/><rect x="20" y="352" width="880" height="30" fill="#e2e8f0"/><text x="38" y="374" font-family="Arial" font-size="14" font-weight="700" fill="#1e293b">Output</text><text x="40" y="414" font-family="monospace" font-size="15" fill="#334155">Debugger paused at GradeAnalyzer.java:12</text><text x="40" y="438" font-family="monospace" font-size="14" fill="#64748b">Use Step Over (F8) to execute the highlighted line.</text>
-                            </svg>
-                            <figcaption><strong>Picture 6 — Debugger view</strong>The red dot is a breakpoint. When execution pauses, inspect variables before pressing F8 to run the next line.</figcaption>
-                        </figure>
-                        <div class="step-detail"><span>1</span><p><strong>Reproduce the problem.</strong>Run the program again and read the first meaningful error line, including the filename and line number.</p></div>
-                        <div class="step-detail"><span>2</span><p><strong>Add a breakpoint.</strong>Click the left margin beside the line you want to inspect. A red marker should appear.</p></div>
-                        <div class="step-detail"><span>3</span><p><strong>Start debugging.</strong>Choose Debug → Debug Project. When the program pauses, inspect the Variables panel.</p></div>
-                        <div class="step-detail"><span>4</span><p><strong>Move slowly.</strong>Press F8 for Step Over and watch values change. Fix one cause, run again, and record what solved it.</p></div>
-                        <div class="practice-box"><strong>Debug challenge:</strong> Change <code>grades.length</code> to <code>0</code>, predict the result, then use the debugger to confirm your prediction.</div>
-                    </div>
-
-                    <div class="guided-lab">
-                        <h3>Lab D — Understand a complete database application</h3>
-                        <figure class="lesson-visual visual-wide">
-                            <svg viewBox="0 0 920 400" role="img" aria-labelledby="mvcTitle mvcDesc">
-                                <title id="mvcTitle">MVC and DAO request flow</title>
-                                <desc id="mvcDesc">A flow from student interface to controller, service, DAO, MySQL database, and back.</desc>
-                                <rect width="920" height="400" fill="#f8fafc"/>
-                                <text x="460" y="48" text-anchor="middle" font-family="Arial" font-size="24" font-weight="700" fill="#7f1d1d">Save a student: one request through the layers</text>
-                                <g font-family="Arial, sans-serif" text-anchor="middle">
-                                    <rect x="28" y="120" width="145" height="112" rx="18" fill="#fee2e2" stroke="#991b1b" stroke-width="3"/><text x="100" y="158" font-size="30">🖥</text><text x="100" y="191" font-size="17" font-weight="700">VIEW</text><text x="100" y="215" font-size="13">Swing form</text>
-                                    <path d="M178 176h40" stroke="#64748b" stroke-width="4"/><path d="m218 176-12-8v16z" fill="#64748b"/>
-                                    <rect x="223" y="120" width="145" height="112" rx="18" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><text x="295" y="158" font-size="30">🎛</text><text x="295" y="191" font-size="17" font-weight="700">CONTROLLER</text><text x="295" y="215" font-size="13">handles event</text>
-                                    <path d="M373 176h40" stroke="#64748b" stroke-width="4"/><path d="m413 176-12-8v16z" fill="#64748b"/>
-                                    <rect x="418" y="120" width="145" height="112" rx="18" fill="#ede9fe" stroke="#7c3aed" stroke-width="3"/><text x="490" y="158" font-size="30">✓</text><text x="490" y="191" font-size="17" font-weight="700">SERVICE</text><text x="490" y="215" font-size="13">validates rules</text>
-                                    <path d="M568 176h40" stroke="#64748b" stroke-width="4"/><path d="m608 176-12-8v16z" fill="#64748b"/>
-                                    <rect x="613" y="120" width="120" height="112" rx="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="3"/><text x="673" y="158" font-size="30">↔</text><text x="673" y="191" font-size="17" font-weight="700">DAO</text><text x="673" y="215" font-size="13">prepared SQL</text>
-                                    <path d="M738 176h40" stroke="#64748b" stroke-width="4"/><path d="m778 176-12-8v16z" fill="#64748b"/>
-                                    <ellipse cx="844" cy="136" rx="55" ry="20" fill="#dcfce7" stroke="#15803d" stroke-width="3"/><path d="M789 136v74c0 11 25 20 55 20s55-9 55-20v-74" fill="#dcfce7" stroke="#15803d" stroke-width="3"/><ellipse cx="844" cy="210" rx="55" ry="20" fill="#bbf7d0" stroke="#15803d" stroke-width="3"/><text x="844" y="181" font-size="16" font-weight="700">MySQL</text>
-                                    <path d="M844 254v54H100v-54" fill="none" stroke="#15803d" stroke-width="4" stroke-dasharray="8 6"/><path d="m100 254-8 13h16z" fill="#15803d"/><text x="470" y="337" font-size="15" fill="#166534">Success or safe error returns to the interface</text>
-                                </g>
-                            </svg>
-                            <figcaption><strong>Picture 7 — MVC/Service/DAO flow</strong>Each layer has one clear job. This makes the application easier to test, repair, and extend.</figcaption>
-                        </figure>
-                        <div class="step-detail"><span>1</span><p><strong>View gathers input.</strong>The Swing form reads name, course, and date but does not contain SQL.</p></div>
-                        <div class="step-detail"><span>2</span><p><strong>Controller handles the event.</strong>It receives the button click and sends the values to the service.</p></div>
-                        <div class="step-detail"><span>3</span><p><strong>Service checks rules.</strong>It rejects blank names, invalid dates, or duplicate student numbers.</p></div>
-                        <div class="step-detail"><span>4</span><p><strong>DAO saves safely.</strong>It uses a prepared statement inside try-with-resources, then returns success or a safe error.</p></div>
-                    </div>
-                </section>
-
-                <section id="intermediate" class="lesson-section">
-                    <span class="section-number">09</span>
-                    <h2>Intermediate stage • Create maintainable applications</h2>
-                    <p>At this stage, you move from small exercises to multi-class programs that handle errors, collections, files, and user interaction.</p>
-                    <div class="term-table-wrapper">
-                        <table>
-                            <thead><tr><th>Lesson</th><th>Core skills</th><th>Practice output</th></tr></thead>
-                            <tbody>
-                                <tr><td>9. Inheritance and polymorphism</td><td><code>extends</code>, overriding, <code>super</code>, runtime polymorphism</td><td>Employee payroll hierarchy</td></tr>
-                                <tr><td>10. Abstraction and interfaces</td><td>Abstract classes, interfaces, contracts, composition</td><td>Multiple payment methods</td></tr>
-                                <tr><td>11. Exceptions</td><td><code>try</code>/<code>catch</code>, custom exceptions, stack traces, recovery</td><td>Safe registration form</td></tr>
-                                <tr><td>12. Collections and generics</td><td><code>List</code>, <code>Set</code>, <code>Map</code>, iterators, type parameters</td><td>Searchable student directory</td></tr>
-                                <tr><td>13. Files and persistence</td><td>Paths, buffered I/O, CSV, serialization basics, try-with-resources</td><td>File-based record manager</td></tr>
-                                <tr><td>14. Swing GUI development</td><td>Layouts, components, events, validation, dialogs, tables</td><td>Desktop enrollment form</td></tr>
-                                <tr><td>15. Debugging and code quality</td><td>Breakpoints, watches, call stack, refactoring, naming, documentation</td><td>Diagnosed and refactored app</td></tr>
-                                <tr><td>16. Git foundations</td><td>Repository, commit, branch, merge, ignore files, change history</td><td>Version-controlled project</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h3>Intermediate example: interfaces and polymorphism</h3>
-                    <div class="code-block">
-                        <div class="code-header"><span>PaymentDemo.java</span><button class="copy-button" type="button">Copy</button></div>
-                        <pre><code>interface PaymentMethod {
+</div>
+<div class="term-table-wrapper">
+<table>
+<thead><tr><th>Part</th><th>Meaning</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>Field</td><td>Stores an object's data</td><td><code>private String name;</code></td></tr>
+<tr><td>Constructor</td><td>Initializes a new object</td><td><code>new Student(...)</code></td></tr>
+<tr><td>Method</td><td>Defines an object's behavior</td><td><code>introduce()</code></td></tr>
+<tr><td>Object</td><td>An instance of a class</td><td><code>Student studentOne</code></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="lesson-section" id="access">
+<span class="section-number">06</span>
+<h2>Access modifiers</h2>
+<p>Access modifiers determine where a class or member can be used. Keeping fields <code>private</code> and exposing them through methods is called <strong>encapsulation</strong>.</p>
+<div class="term-table-wrapper">
+<table>
+<thead><tr><th>Modifier</th><th>Same class</th><th>Same package</th><th>Subclass</th><th>Everywhere</th></tr></thead>
+<tbody>
+<tr><td><code>private</code></td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td>default</td><td>Yes</td><td>Yes</td><td>No*</td><td>No</td></tr>
+<tr><td><code>protected</code></td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+<tr><td><code>public</code></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+</tbody>
+</table>
+</div>
+<p class="table-note">*A subclass in another package can access an inherited protected member, but default access remains package-only.</p>
+</section>
+<section class="lesson-section" id="jframe">
+<span class="section-number">07</span>
+<h2>Lesson 14 preview: Building a JFrame application</h2>
+<p><code>JFrame</code> is Swing's main top-level window. The sample below creates a small student introduction application and demonstrates packages, objects, events, and GUI components.</p>
+<div class="steps">
+<div><span>1</span><p><strong>Create a project</strong>In NetBeans, select File → New Project → Java Application.</p></div>
+<div><span>2</span><p><strong>Create a package</strong>Right-click Source Packages → New → Java Package. Name it <code>lessonmodule</code>.</p></div>
+<div><span>3</span><p><strong>Add the class</strong>Create <code>PackagesClassesFrame.java</code>, then paste the supplied Java code.</p></div>
+<div><span>4</span><p><strong>Run the program</strong>Right-click the file and choose Run File, or press Shift + F6.</p></div>
+</div>
+<div class="callout important"><strong>Important:</strong> The package name must match the package folder, and the public class name must match the Java filename exactly.</div>
+<h3>How the application works</h3>
+<ol class="explanation-list">
+<li>The class extends <code>JFrame</code>, so it becomes a window.</li>
+<li>The constructor sets the title, size, close behavior, and layout.</li>
+<li>Swing components such as <code>JTextField</code>, <code>JButton</code>, and <code>JLabel</code> are added to panels.</li>
+<li>An action listener runs when the user clicks the button.</li>
+<li><code>SwingUtilities.invokeLater</code> starts the interface safely on Swing's event thread.</li>
+</ol>
+</section>
+<section class="lesson-section" id="visual-labs">
+<span class="section-number">08</span>
+<h2>Illustrated step-by-step labs</h2>
+<p>Follow each picture from left to right, then complete the numbered action below it. NetBeans wording can vary slightly by version, but the project, package, class, Run, and Output areas remain the same.</p>
+<div class="guided-lab">
+<h3>Lab A — Create and run your first NetBeans project</h3>
+<div class="topic-chips"><span>JDK setup</span><span>Java Application</span><span>Main class</span><span>Run Project</span></div>
+<figure class="lesson-visual visual-wide">
+<svg aria-labelledby="netbeansTitle netbeansDesc" role="img" viewbox="0 0 920 480">
+<title id="netbeansTitle">Illustrated NetBeans new-project wizard</title>
+<desc id="netbeansDesc">A three-panel mockup showing File New Project, choosing Java Application, and naming the project.</desc>
+<rect fill="#eef2ff" height="480" width="920"></rect>
+<text fill="#7f1d1d" font-size="25" font-weight="700" x="36" y="46">Create a Java Application</text>
+<g font-family="Arial, sans-serif">
+<rect fill="#fff" height="338" rx="14" stroke="#cbd5e1" stroke-width="2" width="260" x="34" y="76"></rect>
+<rect fill="#7f1d1d" height="42" rx="14" width="260" x="34" y="76"></rect><rect fill="#7f1d1d" height="15" width="260" x="34" y="103"></rect>
+<text fill="#fff" font-size="16" font-weight="700" x="52" y="103">STEP 1 • Open the wizard</text>
+<text fill="#334155" font-size="15" font-weight="700" x="55" y="150">File</text><text fill="#64748b" font-size="14" x="85" y="150">menu</text>
+<rect fill="#fee2e2" height="42" rx="7" stroke="#991b1b" width="220" x="52" y="166"></rect><text fill="#7f1d1d" font-size="15" font-weight="700" x="68" y="192">New Project…</text>
+<text fill="#475569" font-size="14" x="52" y="242">Shortcut:</text><rect fill="#f1f5f9" height="30" rx="6" width="116" x="122" y="221"></rect><text fill="#0f172a" font-size="14" text-anchor="middle" x="180" y="242">Ctrl + Shift + N</text>
+<circle cx="164" cy="326" fill="#fff7ed" r="54" stroke="#fb923c" stroke-width="3"></circle><text font-size="44" text-anchor="middle" x="164" y="338">📁</text>
+<path d="M303 245h34" stroke="#991b1b" stroke-width="5"></path><path d="m337 245-14-9v18z" fill="#991b1b"></path>
+<rect fill="#fff" height="338" rx="14" stroke="#cbd5e1" stroke-width="2" width="250" x="345" y="76"></rect>
+<rect fill="#7f1d1d" height="42" rx="14" width="250" x="345" y="76"></rect><rect fill="#7f1d1d" height="15" width="250" x="345" y="103"></rect>
+<text fill="#fff" font-size="16" font-weight="700" x="363" y="103">STEP 2 • Select project</text>
+<text fill="#334155" font-size="14" font-weight="700" x="365" y="150">Categories</text><rect fill="#fef3c7" height="36" rx="6" width="94" x="365" y="165"></rect><text font-size="14" text-anchor="middle" x="412" y="188">Java</text>
+<text fill="#334155" font-size="14" font-weight="700" x="365" y="232">Projects</text><rect fill="#fee2e2" height="44" rx="6" stroke="#991b1b" width="210" x="365" y="248"></rect><text fill="#7f1d1d" font-size="15" font-weight="700" text-anchor="middle" x="470" y="275">Java Application</text>
+<rect fill="#991b1b" height="34" rx="7" width="88" x="487" y="344"></rect><text fill="#fff" font-size="14" font-weight="700" text-anchor="middle" x="531" y="366">Next ›</text>
+<path d="M603 245h34" stroke="#991b1b" stroke-width="5"></path><path d="m637 245-14-9v18z" fill="#991b1b"></path>
+<rect fill="#fff" height="338" rx="14" stroke="#cbd5e1" stroke-width="2" width="242" x="645" y="76"></rect>
+<rect fill="#7f1d1d" height="42" rx="14" width="242" x="645" y="76"></rect><rect fill="#7f1d1d" height="15" width="242" x="645" y="103"></rect>
+<text fill="#fff" font-size="16" font-weight="700" x="663" y="103">STEP 3 • Name it</text>
+<text fill="#334155" font-size="14" font-weight="700" x="666" y="157">Project Name</text><rect fill="#fff" height="39" rx="6" stroke="#94a3b8" width="198" x="666" y="169"></rect><text fill="#0f172a" font-size="14" x="677" y="194">JavaLearningHub</text>
+<rect fill="#991b1b" height="17" rx="3" width="17" x="666" y="231"></rect><path d="m670 239 5 5 10-12" fill="none" stroke="#fff" stroke-width="3"></path><text fill="#334155" font-size="13" x="692" y="245">Create Main Class</text>
+<rect fill="#15803d" height="34" rx="7" width="88" x="776" y="344"></rect><text fill="#fff" font-size="14" font-weight="700" text-anchor="middle" x="820" y="366">Finish</text>
+</g>
+</svg>
+<figcaption><strong>Picture 3 — New Project wizard</strong>Choose Java Application, enter <code>JavaLearningHub</code>, keep “Create Main Class” checked, and select Finish.</figcaption>
+</figure>
+<div class="step-detail"><span>1</span><p><strong>Confirm Java is ready.</strong>Open a terminal and run <code>java -version</code>. If a version appears, the JDK is available.</p></div>
+<div class="step-detail"><span>2</span><p><strong>Create the project.</strong>Use File → New Project → Java Application, then enter the project name shown in the picture.</p></div>
+<div class="step-detail"><span>3</span><p><strong>Write a test message.</strong>Inside <code>main()</code>, type <code>System.out.println("Hello, Java!");</code>.</p></div>
+<div class="step-detail"><span>4</span><p><strong>Run and verify.</strong>Press F6. The Output window should display <code>Hello, Java!</code> followed by <code>BUILD SUCCESSFUL</code>.</p></div>
+<div class="practice-box"><strong>Try it:</strong> Print your name, section, and one goal on separate lines. Change one line, run again, and observe how the output changes.</div>
+</div>
+<div class="guided-lab">
+<h3>Lab B — Create packages, classes, and objects</h3>
+<div class="visual-grid">
+<figure class="lesson-visual">
+<svg aria-labelledby="treeTitle treeDesc" role="img" viewbox="0 0 640 420">
+<title id="treeTitle">NetBeans project explorer structure</title>
+<desc id="treeDesc">A project tree with app and models packages and two Java classes.</desc>
+<rect fill="#f8fafc" height="420" width="640"></rect>
+<rect fill="#fff" height="362" rx="14" stroke="#cbd5e1" stroke-width="2" width="580" x="30" y="28"></rect>
+<rect fill="#334155" height="44" rx="14" width="580" x="30" y="28"></rect><rect fill="#334155" height="14" width="580" x="30" y="58"></rect>
+<text fill="#fff" font-family="Arial" font-size="17" font-weight="700" x="52" y="57">Projects</text>
+<g fill="#1e293b" font-family="Arial, sans-serif" font-size="17">
+<text x="56" y="108">▾ ☕ JavaLearningHub</text>
+<text x="83" y="146">▾ 📁 Source Packages</text>
+<rect fill="#fff1f2" height="38" rx="7" width="466" x="104" y="160"></rect>
+<text x="112" y="186">▾ 📦 school.app</text>
+<text x="145" y="222">☕ Main.java</text>
+<rect fill="#eff6ff" height="38" rx="7" width="466" x="104" y="239"></rect>
+<text x="112" y="265">▾ 📦 school.models</text>
+<text x="145" y="303">☕ Student.java</text>
+<text x="83" y="344">▸ 📁 Test Packages</text>
+</g>
+<path d="M479 180h82" stroke="#991b1b" stroke-width="3"></path><text fill="#991b1b" font-family="Arial" font-size="13" text-anchor="end" x="477" y="173">program entry</text>
+<path d="M479 258h82" stroke="#1d4ed8" stroke-width="3"></path><text fill="#1d4ed8" font-family="Arial" font-size="13" text-anchor="end" x="477" y="251">data model</text>
+</svg>
+<figcaption><strong>Picture 4 — Correct project structure</strong>Keep the program entry point in <code>school.app</code> and reusable data classes in <code>school.models</code>.</figcaption>
+</figure>
+<figure class="lesson-visual">
+<svg aria-labelledby="objectTitle objectDesc" role="img" viewbox="0 0 640 420">
+<title id="objectTitle">Class blueprint creating two student objects</title>
+<desc id="objectDesc">A Student class blueprint points to Ana and Ben student objects with individual values.</desc>
+<rect fill="#fff7ed" height="420" width="640"></rect>
+<text fill="#7f1d1d" font-family="Arial" font-size="23" font-weight="700" text-anchor="middle" x="320" y="45">One class can create many objects</text>
+<g font-family="Arial, sans-serif">
+<rect fill="#fff" height="235" rx="18" stroke="#991b1b" stroke-width="3" width="218" x="54" y="96"></rect>
+<rect fill="#991b1b" height="55" rx="18" width="218" x="54" y="96"></rect><rect fill="#991b1b" height="21" width="218" x="54" y="130"></rect>
+<text fill="#fff" font-size="19" font-weight="700" text-anchor="middle" x="163" y="131">Student class</text>
+<text fill="#334155" font-size="15" x="76" y="188">- name: String</text><text fill="#334155" font-size="15" x="76" y="222">- course: String</text><text fill="#334155" font-size="15" x="76" y="271">+ introduce()</text><text fill="#334155" font-size="15" x="76" y="302">+ getName()</text>
+<path d="M278 174h82" stroke="#64748b" stroke-width="4"></path><path d="m360 174-13-8v16z" fill="#64748b"></path>
+<path d="M278 270h82" stroke="#64748b" stroke-width="4"></path><path d="m360 270-13-8v16z" fill="#64748b"></path>
+<rect fill="#dcfce7" height="114" rx="16" stroke="#15803d" stroke-width="3" width="220" x="366" y="112"></rect>
+<text fill="#14532d" font-size="18" font-weight="700" text-anchor="middle" x="476" y="143">studentOne</text><text font-size="15" x="389" y="176">name = “Ana”</text><text font-size="15" x="389" y="203">course = “BSIT”</text>
+<rect fill="#dbeafe" height="114" rx="16" stroke="#1d4ed8" stroke-width="3" width="220" x="366" y="246"></rect>
+<text fill="#1e3a8a" font-size="18" font-weight="700" text-anchor="middle" x="476" y="277">studentTwo</text><text font-size="15" x="389" y="310">name = “Ben”</text><text font-size="15" x="389" y="337">course = “BSCS”</text>
+</g>
+</svg>
+<figcaption><strong>Picture 5 — Blueprint and instances</strong>The class defines the fields and methods; each object stores its own actual values.</figcaption>
+</figure>
+</div>
+<div class="step-detail"><span>1</span><p><strong>Create two packages.</strong>Right-click Source Packages → New → Java Package. Add <code>school.app</code> and <code>school.models</code>.</p></div>
+<div class="step-detail"><span>2</span><p><strong>Create the model.</strong>Inside <code>school.models</code>, add <code>Student.java</code> with private fields, a constructor, getters, and <code>introduce()</code>.</p></div>
+<div class="step-detail"><span>3</span><p><strong>Create objects.</strong>In <code>Main.java</code>, import <code>school.models.Student</code>, create two students, and print both introductions.</p></div>
+<div class="step-detail"><span>4</span><p><strong>Check encapsulation.</strong>Try accessing <code>studentOne.name</code>. Notice the error, then use <code>getName()</code> instead.</p></div>
+</div>
+<div class="guided-lab">
+<h3>Lab C — Read errors and debug one line at a time</h3>
+<figure class="lesson-visual visual-wide">
+<svg aria-labelledby="debugTitle debugDesc" role="img" viewbox="0 0 920 470">
+<title id="debugTitle">NetBeans debugging workspace</title>
+<desc id="debugDesc">A mock editor shows a breakpoint, variable values, call stack, and output window.</desc>
+<rect fill="#0f172a" height="470" width="920"></rect>
+<rect fill="#334155" height="42" rx="7" width="880" x="20" y="20"></rect>
+<circle cx="44" cy="41" fill="#ef4444" r="7"></circle><circle cx="67" cy="41" fill="#f59e0b" r="7"></circle><circle cx="90" cy="41" fill="#22c55e" r="7"></circle>
+<text fill="#fff" font-family="Arial" font-size="16" font-weight="700" x="124" y="47">GradeAnalyzer.java — Debugging</text>
+<rect fill="#111827" height="270" stroke="#475569" width="582" x="20" y="72"></rect>
+<rect fill="#422006" height="34" width="582" x="20" y="184"></rect>
+<circle cx="42" cy="201" fill="#ef4444" r="8"></circle><text fill="#94a3b8" font-family="monospace" font-size="16" x="62" y="206">12</text><text fill="#f8fafc" font-family="monospace" font-size="16" x="100" y="206">double average = total / grades.length;</text>
+<text fill="#94a3b8" font-family="monospace" font-size="16" x="62" y="112">9</text><text fill="#f8fafc" font-family="monospace" font-size="16" x="100" y="112">for (double grade : grades) {</text>
+<text fill="#94a3b8" font-family="monospace" font-size="16" x="62" y="150">10</text><text fill="#86efac" font-family="monospace" font-size="16" x="120" y="150">total += grade;</text>
+<text fill="#94a3b8" font-family="monospace" font-size="16" x="62" y="250">13</text><text fill="#f8fafc" font-family="monospace" font-size="16" x="100" y="250">System.out.println(average);</text>
+<rect fill="#f8fafc" height="270" stroke="#475569" width="288" x="612" y="72"></rect>
+<rect fill="#e2e8f0" height="36" width="288" x="612" y="72"></rect><text fill="#1e293b" font-family="Arial" font-size="15" font-weight="700" x="630" y="96">Variables</text>
+<text fill="#334155" font-family="monospace" font-size="15" x="632" y="140">grades = [88,93,79,91]</text><text fill="#334155" font-family="monospace" font-size="15" x="632" y="174">total = 351.0</text><text fill="#991b1b" font-family="monospace" font-size="15" x="632" y="208">average = not assigned</text>
+<rect fill="#fff" height="98" width="880" x="20" y="352"></rect><rect fill="#e2e8f0" height="30" width="880" x="20" y="352"></rect><text fill="#1e293b" font-family="Arial" font-size="14" font-weight="700" x="38" y="374">Output</text><text fill="#334155" font-family="monospace" font-size="15" x="40" y="414">Debugger paused at GradeAnalyzer.java:12</text><text fill="#64748b" font-family="monospace" font-size="14" x="40" y="438">Use Step Over (F8) to execute the highlighted line.</text>
+</svg>
+<figcaption><strong>Picture 6 — Debugger view</strong>The red dot is a breakpoint. When execution pauses, inspect variables before pressing F8 to run the next line.</figcaption>
+</figure>
+<div class="step-detail"><span>1</span><p><strong>Reproduce the problem.</strong>Run the program again and read the first meaningful error line, including the filename and line number.</p></div>
+<div class="step-detail"><span>2</span><p><strong>Add a breakpoint.</strong>Click the left margin beside the line you want to inspect. A red marker should appear.</p></div>
+<div class="step-detail"><span>3</span><p><strong>Start debugging.</strong>Choose Debug → Debug Project. When the program pauses, inspect the Variables panel.</p></div>
+<div class="step-detail"><span>4</span><p><strong>Move slowly.</strong>Press F8 for Step Over and watch values change. Fix one cause, run again, and record what solved it.</p></div>
+<div class="practice-box"><strong>Debug challenge:</strong> Change <code>grades.length</code> to <code>0</code>, predict the result, then use the debugger to confirm your prediction.</div>
+</div>
+<div class="guided-lab">
+<h3>Lab D — Understand a complete database application</h3>
+<figure class="lesson-visual visual-wide">
+<svg aria-labelledby="mvcTitle mvcDesc" role="img" viewbox="0 0 920 400">
+<title id="mvcTitle">MVC and DAO request flow</title>
+<desc id="mvcDesc">A flow from student interface to controller, service, DAO, MySQL database, and back.</desc>
+<rect fill="#f8fafc" height="400" width="920"></rect>
+<text fill="#7f1d1d" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle" x="460" y="48">Save a student: one request through the layers</text>
+<g font-family="Arial, sans-serif" text-anchor="middle">
+<rect fill="#fee2e2" height="112" rx="18" stroke="#991b1b" stroke-width="3" width="145" x="28" y="120"></rect><text font-size="30" x="100" y="158">🖥</text><text font-size="17" font-weight="700" x="100" y="191">VIEW</text><text font-size="13" x="100" y="215">Swing form</text>
+<path d="M178 176h40" stroke="#64748b" stroke-width="4"></path><path d="m218 176-12-8v16z" fill="#64748b"></path>
+<rect fill="#fef3c7" height="112" rx="18" stroke="#b45309" stroke-width="3" width="145" x="223" y="120"></rect><text font-size="30" x="295" y="158">🎛</text><text font-size="17" font-weight="700" x="295" y="191">CONTROLLER</text><text font-size="13" x="295" y="215">handles event</text>
+<path d="M373 176h40" stroke="#64748b" stroke-width="4"></path><path d="m413 176-12-8v16z" fill="#64748b"></path>
+<rect fill="#ede9fe" height="112" rx="18" stroke="#7c3aed" stroke-width="3" width="145" x="418" y="120"></rect><text font-size="30" x="490" y="158">✓</text><text font-size="17" font-weight="700" x="490" y="191">SERVICE</text><text font-size="13" x="490" y="215">validates rules</text>
+<path d="M568 176h40" stroke="#64748b" stroke-width="4"></path><path d="m608 176-12-8v16z" fill="#64748b"></path>
+<rect fill="#dbeafe" height="112" rx="18" stroke="#1d4ed8" stroke-width="3" width="120" x="613" y="120"></rect><text font-size="30" x="673" y="158">↔</text><text font-size="17" font-weight="700" x="673" y="191">DAO</text><text font-size="13" x="673" y="215">prepared SQL</text>
+<path d="M738 176h40" stroke="#64748b" stroke-width="4"></path><path d="m778 176-12-8v16z" fill="#64748b"></path>
+<ellipse cx="844" cy="136" fill="#dcfce7" rx="55" ry="20" stroke="#15803d" stroke-width="3"></ellipse><path d="M789 136v74c0 11 25 20 55 20s55-9 55-20v-74" fill="#dcfce7" stroke="#15803d" stroke-width="3"></path><ellipse cx="844" cy="210" fill="#bbf7d0" rx="55" ry="20" stroke="#15803d" stroke-width="3"></ellipse><text font-size="16" font-weight="700" x="844" y="181">MySQL</text>
+<path d="M844 254v54H100v-54" fill="none" stroke="#15803d" stroke-dasharray="8 6" stroke-width="4"></path><path d="m100 254-8 13h16z" fill="#15803d"></path><text fill="#166534" font-size="15" x="470" y="337">Success or safe error returns to the interface</text>
+</g>
+</svg>
+<figcaption><strong>Picture 7 — MVC/Service/DAO flow</strong>Each layer has one clear job. This makes the application easier to test, repair, and extend.</figcaption>
+</figure>
+<div class="step-detail"><span>1</span><p><strong>View gathers input.</strong>The Swing form reads name, course, and date but does not contain SQL.</p></div>
+<div class="step-detail"><span>2</span><p><strong>Controller handles the event.</strong>It receives the button click and sends the values to the service.</p></div>
+<div class="step-detail"><span>3</span><p><strong>Service checks rules.</strong>It rejects blank names, invalid dates, or duplicate student numbers.</p></div>
+<div class="step-detail"><span>4</span><p><strong>DAO saves safely.</strong>It uses a prepared statement inside try-with-resources, then returns success or a safe error.</p></div>
+</div>
+</section>
+<section class="lesson-section" id="intermediate">
+<span class="section-number">09</span>
+<h2>Intermediate stage • Create maintainable applications</h2>
+<p>At this stage, you move from small exercises to multi-class programs that handle errors, collections, files, and user interaction.</p>
+<div class="term-table-wrapper">
+<table>
+<thead><tr><th>Lesson</th><th>Core skills</th><th>Practice output</th></tr></thead>
+<tbody>
+<tr><td>9. Inheritance and polymorphism</td><td><code>extends</code>, overriding, <code>super</code>, runtime polymorphism</td><td>Employee payroll hierarchy</td></tr>
+<tr><td>10. Abstraction and interfaces</td><td>Abstract classes, interfaces, contracts, composition</td><td>Multiple payment methods</td></tr>
+<tr><td>11. Exceptions</td><td><code>try</code>/<code>catch</code>, custom exceptions, stack traces, recovery</td><td>Safe registration form</td></tr>
+<tr><td>12. Collections and generics</td><td><code>List</code>, <code>Set</code>, <code>Map</code>, iterators, type parameters</td><td>Searchable student directory</td></tr>
+<tr><td>13. Files and persistence</td><td>Paths, buffered I/O, CSV, serialization basics, try-with-resources</td><td>File-based record manager</td></tr>
+<tr><td>14. Swing GUI development</td><td>Layouts, components, events, validation, dialogs, tables</td><td>Desktop enrollment form</td></tr>
+<tr><td>15. Debugging and code quality</td><td>Breakpoints, watches, call stack, refactoring, naming, documentation</td><td>Diagnosed and refactored app</td></tr>
+<tr><td>16. Git foundations</td><td>Repository, commit, branch, merge, ignore files, change history</td><td>Version-controlled project</td></tr>
+</tbody>
+</table>
+</div>
+<h3>Intermediate example: interfaces and polymorphism</h3>
+<div class="code-block">
+<div class="code-header"><span>PaymentDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>interface PaymentMethod {
     void pay(double amount);
 }
 
@@ -535,32 +489,30 @@ public class PaymentDemo {
         payment.pay(500.00);
     }
 }</code></pre>
-                    </div>
-                    <div class="callout analogy"><strong>Intermediate checkpoint:</strong> Add a card payment class, reject non-positive amounts with a custom exception, and store transaction records in an <code>ArrayList</code>.</div>
-                </section>
-
-                <section id="advanced" class="lesson-section">
-                    <span class="section-number">10</span>
-                    <h2>Advanced stage • Work with production-style systems</h2>
-                    <p>Advanced lessons focus on processing data efficiently, communicating with databases, separating responsibilities, and verifying behavior automatically.</p>
-                    <div class="term-table-wrapper">
-                        <table>
-                            <thead><tr><th>Lesson</th><th>Core skills</th><th>Practice output</th></tr></thead>
-                            <tbody>
-                                <tr><td>17. Lambdas and Streams</td><td>Functional interfaces, filtering, mapping, reducing, collectors</td><td>Enrollment analytics</td></tr>
-                                <tr><td>18. Concurrency</td><td>Threads, executors, futures, synchronization, race conditions</td><td>Background report generator</td></tr>
-                                <tr><td>19. JDBC and SQL</td><td>Connections, prepared statements, CRUD, transactions, result sets</td><td>MySQL student records</td></tr>
-                                <tr><td>20. MVC and DAO</td><td>Models, views, controllers, services, repositories/DAOs, dependency flow</td><td>Layered desktop application</td></tr>
-                                <tr><td>21. Testing and logging</td><td>JUnit, assertions, test cases, mocks overview, structured logs</td><td>Tested service layer</td></tr>
-                                <tr><td>22. JSON, HTTP, and REST APIs</td><td>JSON mapping, HTTP methods, status codes, Java <code>HttpClient</code>, API errors</td><td>Weather or school-data client</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h3>Advanced example: Stream pipeline</h3>
-                    <div class="code-block">
-                        <div class="code-header"><span>StudentAnalytics.java</span><button class="copy-button" type="button">Copy</button></div>
-                        <pre><code>List&lt;Student&gt; honorStudents = students.stream()
+</div>
+<div class="callout analogy"><strong>Intermediate checkpoint:</strong> Add a card payment class, reject non-positive amounts with a custom exception, and store transaction records in an <code>ArrayList</code>.</div>
+</section>
+<section class="lesson-section" id="advanced">
+<span class="section-number">10</span>
+<h2>Advanced stage • Work with production-style systems</h2>
+<p>Advanced lessons focus on processing data efficiently, communicating with databases, separating responsibilities, and verifying behavior automatically.</p>
+<div class="term-table-wrapper">
+<table>
+<thead><tr><th>Lesson</th><th>Core skills</th><th>Practice output</th></tr></thead>
+<tbody>
+<tr><td>17. Lambdas and Streams</td><td>Functional interfaces, filtering, mapping, reducing, collectors</td><td>Enrollment analytics</td></tr>
+<tr><td>18. Concurrency</td><td>Threads, executors, futures, synchronization, race conditions</td><td>Background report generator</td></tr>
+<tr><td>19. JDBC and SQL</td><td>Connections, prepared statements, CRUD, transactions, result sets</td><td>MySQL student records</td></tr>
+<tr><td>20. MVC and DAO</td><td>Models, views, controllers, services, repositories/DAOs, dependency flow</td><td>Layered desktop application</td></tr>
+<tr><td>21. Testing and logging</td><td>JUnit, assertions, test cases, mocks overview, structured logs</td><td>Tested service layer</td></tr>
+<tr><td>22. JSON, HTTP, and REST APIs</td><td>JSON mapping, HTTP methods, status codes, Java <code>HttpClient</code>, API errors</td><td>Weather or school-data client</td></tr>
+</tbody>
+</table>
+</div>
+<h3>Advanced example: Stream pipeline</h3>
+<div class="code-block">
+<div class="code-header"><span>StudentAnalytics.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>List&lt;Student&gt; honorStudents = students.stream()
         .filter(student -&gt; student.getAverage() &gt;= 90)
         .sorted(Comparator.comparing(Student::getAverage).reversed())
         .toList();
@@ -569,12 +521,11 @@ double classAverage = students.stream()
         .mapToDouble(Student::getAverage)
         .average()
         .orElse(0.0);</code></pre>
-                    </div>
-
-                    <h3>Advanced example: safe JDBC query</h3>
-                    <div class="code-block">
-                        <div class="code-header"><span>StudentDao.java</span><button class="copy-button" type="button">Copy</button></div>
-                        <pre><code>String sql = "SELECT id, name, course FROM students WHERE course = ?";
+</div>
+<h3>Advanced example: safe JDBC query</h3>
+<div class="code-block">
+<div class="code-header"><span>StudentDao.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>String sql = "SELECT id, name, course FROM students WHERE course = ?";
 
 try (Connection connection = dataSource.getConnection();
      PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -586,35 +537,32 @@ try (Connection connection = dataSource.getConnection();
         }
     }
 }</code></pre>
-                    </div>
-                    <div class="callout important"><strong>Advanced checkpoint:</strong> Never join raw user input into SQL. Use prepared statements, validate inputs, handle errors without exposing database details, and test the service layer separately from the interface.</div>
-                </section>
-
-                <section id="pro" class="lesson-section">
-                    <span class="section-number">11</span>
-                    <h2>Pro stage • Design, secure, and ship software</h2>
-                    <p>The Pro stage brings together software design, operational quality, and delivery. The goal is not just code that works—it is software another developer can understand, test, operate, and extend.</p>
-                    <div class="term-table-wrapper">
-                        <table>
-                            <thead><tr><th>Lesson</th><th>Core skills</th><th>Professional evidence</th></tr></thead>
-                            <tbody>
-                                <tr><td>23. SOLID and design patterns</td><td>Single responsibility, dependency inversion, Factory, Strategy, Observer</td><td>Refactored modular design</td></tr>
-                                <tr><td>24. Performance and security</td><td>Profiling, complexity, memory, input validation, hashing, least privilege</td><td>Security and performance review</td></tr>
-                                <tr><td>25. Build engineering</td><td>Maven/Gradle, dependency scopes, configuration, executable JAR packaging</td><td>Repeatable automated build</td></tr>
-                                <tr><td>26. Documentation and deployment</td><td>Javadoc, README, release notes, environment setup, deployment checklist</td><td>Versioned release others can install</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="two-column">
-                        <div><h3>Professional code checklist</h3><ul class="check-list"><li>Small classes with clear responsibilities</li><li>Interfaces at changeable boundaries</li><li>Tests for important business rules</li><li>Meaningful logs without sensitive data</li><li>Configuration kept outside source code</li><li>Useful README and setup instructions</li></ul></div>
-                        <div><h3>Security checklist</h3><ul class="check-list"><li>Validate on every trust boundary</li><li>Use prepared SQL statements</li><li>Hash passwords with a proven library</li><li>Never commit secrets or credentials</li><li>Show safe errors to users</li><li>Keep dependencies updated</li></ul></div>
-                    </div>
-
-                    <h3>Pro example: Strategy pattern with dependency injection</h3>
-                    <div class="code-block">
-                        <div class="code-header"><span>EnrollmentService.java</span><button class="copy-button" type="button">Copy</button></div>
-                        <pre><code>interface FeePolicy {
+</div>
+<div class="callout important"><strong>Advanced checkpoint:</strong> Never join raw user input into SQL. Use prepared statements, validate inputs, handle errors without exposing database details, and test the service layer separately from the interface.</div>
+</section>
+<section class="lesson-section" id="pro">
+<span class="section-number">11</span>
+<h2>Pro stage • Design, secure, and ship software</h2>
+<p>The Pro stage brings together software design, operational quality, and delivery. The goal is not just code that works—it is software another developer can understand, test, operate, and extend.</p>
+<div class="term-table-wrapper">
+<table>
+<thead><tr><th>Lesson</th><th>Core skills</th><th>Professional evidence</th></tr></thead>
+<tbody>
+<tr><td>23. SOLID and design patterns</td><td>Single responsibility, dependency inversion, Factory, Strategy, Observer</td><td>Refactored modular design</td></tr>
+<tr><td>24. Performance and security</td><td>Profiling, complexity, memory, input validation, hashing, least privilege</td><td>Security and performance review</td></tr>
+<tr><td>25. Build engineering</td><td>Maven/Gradle, dependency scopes, configuration, executable JAR packaging</td><td>Repeatable automated build</td></tr>
+<tr><td>26. Documentation and deployment</td><td>Javadoc, README, release notes, environment setup, deployment checklist</td><td>Versioned release others can install</td></tr>
+</tbody>
+</table>
+</div>
+<div class="two-column">
+<div><h3>Professional code checklist</h3><ul class="check-list"><li>Small classes with clear responsibilities</li><li>Interfaces at changeable boundaries</li><li>Tests for important business rules</li><li>Meaningful logs without sensitive data</li><li>Configuration kept outside source code</li><li>Useful README and setup instructions</li></ul></div>
+<div><h3>Security checklist</h3><ul class="check-list"><li>Validate on every trust boundary</li><li>Use prepared SQL statements</li><li>Hash passwords with a proven library</li><li>Never commit secrets or credentials</li><li>Show safe errors to users</li><li>Keep dependencies updated</li></ul></div>
+</div>
+<h3>Pro example: Strategy pattern with dependency injection</h3>
+<div class="code-block">
+<div class="code-header"><span>EnrollmentService.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>interface FeePolicy {
     double calculate(Student student);
 }
 
@@ -630,21 +578,19 @@ final class EnrollmentService {
         return feePolicy.calculate(student);
     }
 }</code></pre>
-                    </div>
-                    <div class="callout analogy"><strong>Pro checkpoint:</strong> Supply two different fee policies, test each one, package the program with Maven or Gradle, and write setup instructions that a classmate can follow without your help.</div>
-                </section>
-
-                <section id="extra-topics" class="lesson-section">
-                    <span class="section-number">12</span>
-                    <h2>New topic mini-lessons</h2>
-                    <p>Use these focused lessons after the related stage. Each one adds a practical skill that students commonly need in real projects.</p>
-
-                    <div class="guided-lab">
-                        <h3>Mini-lesson 1 — Safe keyboard input with Scanner</h3>
-                        <p>Never assume the user will type the correct data. Check the input before converting or using it.</p>
-                        <div class="code-block">
-                            <div class="code-header"><span>SafeInput.java</span><button class="copy-button" type="button">Copy</button></div>
-                            <pre><code>import java.util.Scanner;
+</div>
+<div class="callout analogy"><strong>Pro checkpoint:</strong> Supply two different fee policies, test each one, package the program with Maven or Gradle, and write setup instructions that a classmate can follow without your help.</div>
+</section>
+<section class="lesson-section" id="extra-topics">
+<span class="section-number">12</span>
+<h2>New topic mini-lessons</h2>
+<p>Use these focused lessons after the related stage. Each one adds a practical skill that students commonly need in real projects.</p>
+<div class="guided-lab">
+<h3>Mini-lesson 1 — Safe keyboard input with Scanner</h3>
+<p>Never assume the user will type the correct data. Check the input before converting or using it.</p>
+<div class="code-block">
+<div class="code-header"><span>SafeInput.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>import java.util.Scanner;
 
 public class SafeInput {
     public static void main(String[] args) {
@@ -665,16 +611,15 @@ public class SafeInput {
         System.out.println("Accepted age: " + age);
     }
 }</code></pre>
-                        </div>
-                        <div class="practice-box"><strong>Practice:</strong> Add validated inputs for a grade from 0–100 and a non-empty student name.</div>
-                    </div>
-
-                    <div class="guided-lab">
-                        <h3>Mini-lesson 2 — Enums and the Java date-time API</h3>
-                        <p>Use an <code>enum</code> when a value must come from a small fixed list. Use <code>LocalDate</code> for a date without a time zone.</p>
-                        <div class="code-block">
-                            <div class="code-header"><span>EnrollmentSchedule.java</span><button class="copy-button" type="button">Copy</button></div>
-                            <pre><code>import java.time.LocalDate;
+</div>
+<div class="practice-box"><strong>Practice:</strong> Add validated inputs for a grade from 0–100 and a non-empty student name.</div>
+</div>
+<div class="guided-lab">
+<h3>Mini-lesson 2 — Enums and the Java date-time API</h3>
+<p>Use an <code>enum</code> when a value must come from a small fixed list. Use <code>LocalDate</code> for a date without a time zone.</p>
+<div class="code-block">
+<div class="code-header"><span>EnrollmentSchedule.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 enum EnrollmentStatus { OPEN, CLOSED, WAITLIST }
@@ -692,47 +637,45 @@ public class EnrollmentSchedule {
         System.out.println("Status: " + status);
     }
 }</code></pre>
-                        </div>
-                        <div class="practice-box"><strong>Practice:</strong> Add a WAITLIST state and use <code>ChronoUnit.DAYS.between()</code> to show the number of days remaining.</div>
-                    </div>
-
-                    <div class="guided-lab">
-                        <h3>Mini-lesson 3 — Git workflow for student projects</h3>
-                        <figure class="lesson-visual visual-wide">
-                            <svg viewBox="0 0 920 330" role="img" aria-labelledby="gitTitle gitDesc">
-                                <title id="gitTitle">Basic Git learning workflow</title>
-                                <desc id="gitDesc">A circular workflow showing edit, test, stage, commit, and push.</desc>
-                                <rect width="920" height="330" fill="#fff7ed"/>
-                                <text x="460" y="46" text-anchor="middle" font-family="Arial" font-size="24" font-weight="700" fill="#7f1d1d">Save progress in small, meaningful versions</text>
-                                <g font-family="Arial, sans-serif" text-anchor="middle">
-                                    <rect x="35" y="118" width="140" height="78" rx="18" fill="#fee2e2" stroke="#991b1b" stroke-width="3"/><text x="105" y="150" font-size="26">✎</text><text x="105" y="180" font-size="16" font-weight="700">1. EDIT</text>
-                                    <path d="M180 157h48" stroke="#64748b" stroke-width="4"/><path d="m228 157-12-8v16z" fill="#64748b"/>
-                                    <rect x="233" y="118" width="140" height="78" rx="18" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><text x="303" y="150" font-size="26">✓</text><text x="303" y="180" font-size="16" font-weight="700">2. TEST</text>
-                                    <path d="M378 157h48" stroke="#64748b" stroke-width="4"/><path d="m426 157-12-8v16z" fill="#64748b"/>
-                                    <rect x="431" y="118" width="140" height="78" rx="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="3"/><text x="501" y="150" font-size="25">＋</text><text x="501" y="180" font-size="16" font-weight="700">3. STAGE</text>
-                                    <path d="M576 157h48" stroke="#64748b" stroke-width="4"/><path d="m624 157-12-8v16z" fill="#64748b"/>
-                                    <rect x="629" y="118" width="140" height="78" rx="18" fill="#ede9fe" stroke="#7c3aed" stroke-width="3"/><text x="699" y="150" font-size="25">●</text><text x="699" y="180" font-size="16" font-weight="700">4. COMMIT</text>
-                                    <path d="M774 157h36" stroke="#64748b" stroke-width="4"/><path d="m810 157-12-8v16z" fill="#64748b"/>
-                                    <rect x="815" y="118" width="76" height="78" rx="18" fill="#dcfce7" stroke="#15803d" stroke-width="3"/><text x="853" y="150" font-size="24">↑</text><text x="853" y="180" font-size="14" font-weight="700">PUSH</text>
-                                </g>
-                                <text x="460" y="259" text-anchor="middle" font-family="monospace" font-size="16" fill="#334155">git add .  →  git commit -m "Add grade validation"  →  git push</text>
-                            </svg>
-                            <figcaption><strong>Picture 8 — Simple Git cycle</strong>Test before every commit and write a message that explains the completed change.</figcaption>
-                        </figure>
-                        <div class="steps">
-                            <div><span>1</span><p><strong>Initialize</strong><code>git init</code> starts version history in the project folder.</p></div>
-                            <div><span>2</span><p><strong>Ignore generated files</strong>Add <code>build/</code>, <code>target/</code>, and private configuration to <code>.gitignore</code>.</p></div>
-                            <div><span>3</span><p><strong>Commit a working change</strong>Use <code>git add .</code> and <code>git commit -m "Add student model"</code>.</p></div>
-                            <div><span>4</span><p><strong>Use a branch</strong>Create a feature branch before a large experiment, then merge it after testing.</p></div>
-                        </div>
-                    </div>
-
-                    <div class="guided-lab">
-                        <h3>Mini-lesson 4 — Call a REST API with Java HttpClient</h3>
-                        <p>An API request can fail because of connectivity, permission, invalid JSON, or a server problem. Always check the HTTP status code before using the response body.</p>
-                        <div class="code-block">
-                            <div class="code-header"><span>ApiClient.java</span><button class="copy-button" type="button">Copy</button></div>
-                            <pre><code>import java.net.URI;
+</div>
+<div class="practice-box"><strong>Practice:</strong> Add a WAITLIST state and use <code>ChronoUnit.DAYS.between()</code> to show the number of days remaining.</div>
+</div>
+<div class="guided-lab">
+<h3>Mini-lesson 3 — Git workflow for student projects</h3>
+<figure class="lesson-visual visual-wide">
+<svg aria-labelledby="gitTitle gitDesc" role="img" viewbox="0 0 920 330">
+<title id="gitTitle">Basic Git learning workflow</title>
+<desc id="gitDesc">A circular workflow showing edit, test, stage, commit, and push.</desc>
+<rect fill="#fff7ed" height="330" width="920"></rect>
+<text fill="#7f1d1d" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle" x="460" y="46">Save progress in small, meaningful versions</text>
+<g font-family="Arial, sans-serif" text-anchor="middle">
+<rect fill="#fee2e2" height="78" rx="18" stroke="#991b1b" stroke-width="3" width="140" x="35" y="118"></rect><text font-size="26" x="105" y="150">✎</text><text font-size="16" font-weight="700" x="105" y="180">1. EDIT</text>
+<path d="M180 157h48" stroke="#64748b" stroke-width="4"></path><path d="m228 157-12-8v16z" fill="#64748b"></path>
+<rect fill="#fef3c7" height="78" rx="18" stroke="#b45309" stroke-width="3" width="140" x="233" y="118"></rect><text font-size="26" x="303" y="150">✓</text><text font-size="16" font-weight="700" x="303" y="180">2. TEST</text>
+<path d="M378 157h48" stroke="#64748b" stroke-width="4"></path><path d="m426 157-12-8v16z" fill="#64748b"></path>
+<rect fill="#dbeafe" height="78" rx="18" stroke="#1d4ed8" stroke-width="3" width="140" x="431" y="118"></rect><text font-size="25" x="501" y="150">＋</text><text font-size="16" font-weight="700" x="501" y="180">3. STAGE</text>
+<path d="M576 157h48" stroke="#64748b" stroke-width="4"></path><path d="m624 157-12-8v16z" fill="#64748b"></path>
+<rect fill="#ede9fe" height="78" rx="18" stroke="#7c3aed" stroke-width="3" width="140" x="629" y="118"></rect><text font-size="25" x="699" y="150">●</text><text font-size="16" font-weight="700" x="699" y="180">4. COMMIT</text>
+<path d="M774 157h36" stroke="#64748b" stroke-width="4"></path><path d="m810 157-12-8v16z" fill="#64748b"></path>
+<rect fill="#dcfce7" height="78" rx="18" stroke="#15803d" stroke-width="3" width="76" x="815" y="118"></rect><text font-size="24" x="853" y="150">↑</text><text font-size="14" font-weight="700" x="853" y="180">PUSH</text>
+</g>
+<text fill="#334155" font-family="monospace" font-size="16" text-anchor="middle" x="460" y="259">git add .  →  git commit -m "Add grade validation"  →  git push</text>
+</svg>
+<figcaption><strong>Picture 8 — Simple Git cycle</strong>Test before every commit and write a message that explains the completed change.</figcaption>
+</figure>
+<div class="steps">
+<div><span>1</span><p><strong>Initialize</strong><code>git init</code> starts version history in the project folder.</p></div>
+<div><span>2</span><p><strong>Ignore generated files</strong>Add <code>build/</code>, <code>target/</code>, and private configuration to <code>.gitignore</code>.</p></div>
+<div><span>3</span><p><strong>Commit a working change</strong>Use <code>git add .</code> and <code>git commit -m "Add student model"</code>.</p></div>
+<div><span>4</span><p><strong>Use a branch</strong>Create a feature branch before a large experiment, then merge it after testing.</p></div>
+</div>
+</div>
+<div class="guided-lab">
+<h3>Mini-lesson 4 — Call a REST API with Java HttpClient</h3>
+<p>An API request can fail because of connectivity, permission, invalid JSON, or a server problem. Always check the HTTP status code before using the response body.</p>
+<div class="code-block">
+<div class="code-header"><span>ApiClient.java</span><button class="copy-button" type="button">Copy</button></div>
+<pre><code>import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -756,75 +699,160 @@ public class ApiClient {
         }
     }
 }</code></pre>
-                        </div>
-                        <div class="callout important"><strong>Important:</strong> The example URL is a placeholder. Replace it with an API your teacher approves. Never place a secret API key directly in source code.</div>
-                        <div class="practice-box"><strong>Practice:</strong> Explain what GET, POST, PUT, and DELETE usually do, then handle status codes 200, 404, and 500 with different user-friendly messages.</div>
-                    </div>
+</div>
+<div class="callout important"><strong>Important:</strong> The example URL is a placeholder. Replace it with an API your teacher approves. Never place a secret API key directly in source code.</div>
+<div class="practice-box"><strong>Practice:</strong> Explain what GET, POST, PUT, and DELETE usually do, then handle status codes 200, 404, and 500 with different user-friendly messages.</div>
+</div>
+<div class="guided-lab">
+<h3>Mini-lesson 5 — Build, document, and release</h3>
+<div class="two-column">
+<div><h3>Minimum README</h3><ul class="check-list"><li>Project purpose and screenshots</li><li>Required JDK and database version</li><li>Installation and setup steps</li><li>How to run tests and the application</li><li>Configuration variables</li><li>Known limitations</li></ul></div>
+<div><h3>Release checklist</h3><ul class="check-list"><li>Run all automated tests</li><li>Remove passwords and sample secrets</li><li>Create the JAR with Maven or Gradle</li><li>Test the JAR on another computer</li><li>Tag the release version</li><li>Publish release notes</li></ul></div>
+</div>
+<div class="practice-box"><strong>Portfolio output:</strong> Ask a classmate to follow only your README. If they cannot run the project without help, improve the instructions and test again.</div>
+</div>
+</section>
+<section class="lesson-section run-example-section" id="run-examples">
+<p class="run-example-kicker">▶ Run Examples · Lessons 1–26</p>
+<h2>See the result/output for every Java lesson</h2>
+<p>Choose Run Example under any lesson to reveal the expected result/output. The button demonstrates the result in this lesson page; execute the Java code itself in Apache NetBeans to verify the same output.</p>
+<div class="run-example-mini-grid">
+<article class="run-example-mini"><h3>Lesson 1 · Setup and first program</h3><pre><code>public class Lesson01 {
+  public static void main(String[] args) {
+    System.out.println("Hello, Java!");
+  }
+}</code></pre><div class="run-example-actions"><button aria-controls="run-output-01" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-01"><div class="output-title">OUTPUT</div><div class="mini-output">Hello, Java!</div></div></article>
+<article class="run-example-mini"><h3>Lesson 2 · Variables and operators</h3><pre><code>int units = 3;
+double price = 125.50;
+System.out.println("Total: ₱" + (units * price));</code></pre><div class="run-example-actions"><button aria-controls="run-output-02" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-02"><div class="output-title">OUTPUT</div><div class="mini-output">Total: ₱376.5</div></div></article>
+<article class="run-example-mini"><h3>Lesson 3 · Keyboard input and validation</h3><pre><code>String name = "Ana";
+int age = 19;
+System.out.println(name + " | Age: " + age);</code></pre><div class="run-example-actions"><button aria-controls="run-output-03" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-03"><div class="output-title">OUTPUT</div><div class="mini-output">Ana | Age: 19</div></div></article>
+<article class="run-example-mini"><h3>Lesson 4 · Decisions and loops</h3><pre><code>for (int n = 1; n &lt;= 3; n++) {
+  System.out.println("Round " + n);
+}</code></pre><div class="run-example-actions"><button aria-controls="run-output-04" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-04"><div class="output-title">OUTPUT</div><div class="mini-output">Round 1
+Round 2
+Round 3</div></div></article>
+<article class="run-example-mini"><h3>Lesson 5 · Methods</h3><pre><code>static int add(int a,int b){ return a+b; }
+System.out.println(add(8, 7));</code></pre><div class="run-example-actions"><button aria-controls="run-output-05" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-05"><div class="output-title">OUTPUT</div><div class="mini-output">15</div></div></article>
+<article class="run-example-mini"><h3>Lesson 6 · Packages and OOP</h3><pre><code>Student s = new Student("Mia");
+System.out.println(s.getName());</code></pre><div class="run-example-actions"><button aria-controls="run-output-06" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-06"><div class="output-title">OUTPUT</div><div class="mini-output">Mia</div></div></article>
+<article class="run-example-mini"><h3>Lesson 7 · Arrays and strings</h3><pre><code>int[] g = {88,93,79};
+System.out.println("First: " + g[0]);</code></pre><div class="run-example-actions"><button aria-controls="run-output-07" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-07"><div class="output-title">OUTPUT</div><div class="mini-output">First: 88</div></div></article>
+<article class="run-example-mini"><h3>Lesson 8 · Enums and date-time</h3><pre><code>System.out.println(java.time.LocalDate.of(2026,8,18));</code></pre><div class="run-example-actions"><button aria-controls="run-output-08" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-08"><div class="output-title">OUTPUT</div><div class="mini-output">2026-08-18</div></div></article>
+<article class="run-example-mini"><h3>Lesson 9 · Inheritance and polymorphism</h3><pre><code>Employee e = new Teacher();
+e.work();</code></pre><div class="run-example-actions"><button aria-controls="run-output-09" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-09"><div class="output-title">OUTPUT</div><div class="mini-output">Teacher is teaching.</div></div></article>
+<article class="run-example-mini"><h3>Lesson 10 · Abstraction and interfaces</h3><pre><code>PaymentMethod p = new CashPayment();
+p.pay(500);</code></pre><div class="run-example-actions"><button aria-controls="run-output-10" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-10"><div class="output-title">OUTPUT</div><div class="mini-output">Cash received: ₱500.00</div></div></article>
+<article class="run-example-mini"><h3>Lesson 11 · Exceptions</h3><pre><code>try { int x=10/0; }
+catch(ArithmeticException e){ System.out.println("Cannot divide by zero"); }</code></pre><div class="run-example-actions"><button aria-controls="run-output-11" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-11"><div class="output-title">OUTPUT</div><div class="mini-output">Cannot divide by zero</div></div></article>
+<article class="run-example-mini"><h3>Lesson 12 · Collections and generics</h3><pre><code>java.util.List&lt;String&gt; names = java.util.List.of("Ana","Ben");
+System.out.println(names);</code></pre><div class="run-example-actions"><button aria-controls="run-output-12" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-12"><div class="output-title">OUTPUT</div><div class="mini-output">[Ana, Ben]</div></div></article>
+<article class="run-example-mini"><h3>Lesson 13 · Files and persistence</h3><pre><code>java.nio.file.Files.writeString(java.nio.file.Path.of("student.txt"), "Ana");
+System.out.println("Saved student.txt");</code></pre><div class="run-example-actions"><button aria-controls="run-output-13" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-13"><div class="output-title">OUTPUT</div><div class="mini-output">Saved student.txt</div></div></article>
+<article class="run-example-mini"><h3>Lesson 14 · Swing GUI development</h3><pre><code>javax.swing.JOptionPane.showMessageDialog(null, "Welcome, student!");</code></pre><div class="run-example-actions"><button aria-controls="run-output-14" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-14"><div class="output-title">OUTPUT</div><div class="mini-output">Dialog appears: Welcome, student!</div></div></article>
+<article class="run-example-mini"><h3>Lesson 15 · Debugging and code quality</h3><pre><code>int total = 88 + 92 + 79;
+System.out.println("Total = " + total);</code></pre><div class="run-example-actions"><button aria-controls="run-output-15" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-15"><div class="output-title">OUTPUT</div><div class="mini-output">Total = 259</div></div></article>
+<article class="run-example-mini"><h3>Lesson 16 · Git foundations</h3><pre><code>git init
+git add .
+git commit -m "First Java lesson"</code></pre><div class="run-example-actions"><button aria-controls="run-output-16" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-16"><div class="output-title">OUTPUT</div><div class="mini-output">Repository initialized; first commit created.</div></div></article>
+<article class="run-example-mini"><h3>Lesson 17 · Streams and lambdas</h3><pre><code>java.util.List.of(70,90,95).stream()
+ .filter(g -&gt; g &gt;= 90)
+ .forEach(System.out::println);</code></pre><div class="run-example-actions"><button aria-controls="run-output-17" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-17"><div class="output-title">OUTPUT</div><div class="mini-output">90
+95</div></div></article>
+<article class="run-example-mini"><h3>Lesson 18 · Concurrency</h3><pre><code>Thread t = new Thread(() -&gt; System.out.println("Task running"));
+t.start();</code></pre><div class="run-example-actions"><button aria-controls="run-output-18" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-18"><div class="output-title">OUTPUT</div><div class="mini-output">Task running</div></div></article>
+<article class="run-example-mini"><h3>Lesson 19 · JDBC and SQL</h3><pre><code>System.out.println("Connected to database");
+System.out.println("Rows returned: 3");</code></pre><div class="run-example-actions"><button aria-controls="run-output-19" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-19"><div class="output-title">OUTPUT</div><div class="mini-output">Connected to database
+Rows returned: 3</div></div></article>
+<article class="run-example-mini"><h3>Lesson 20 · MVC and DAO</h3><pre><code>System.out.println("View → Controller → Service → DAO");</code></pre><div class="run-example-actions"><button aria-controls="run-output-20" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-20"><div class="output-title">OUTPUT</div><div class="mini-output">View → Controller → Service → DAO</div></div></article>
+<article class="run-example-mini"><h3>Lesson 21 · Testing and logging</h3><pre><code>int expected=4, actual=2+2;
+System.out.println(expected==actual ? "TEST PASSED" : "TEST FAILED");</code></pre><div class="run-example-actions"><button aria-controls="run-output-21" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-21"><div class="output-title">OUTPUT</div><div class="mini-output">TEST PASSED</div></div></article>
+<article class="run-example-mini"><h3>Lesson 22 · JSON, HTTP, and REST APIs</h3><pre><code>String json = "{\"status\":\"ok\"}";
+System.out.println(json);</code></pre><div class="run-example-actions"><button aria-controls="run-output-22" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-22"><div class="output-title">OUTPUT</div><div class="mini-output">{"status":"ok"}</div></div></article>
+<article class="run-example-mini"><h3>Lesson 23 · SOLID and design patterns</h3><pre><code>FeePolicy policy = s -&gt; 1500.0;
+System.out.println("Fee: ₱" + policy.calculate(null));</code></pre><div class="run-example-actions"><button aria-controls="run-output-23" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-23"><div class="output-title">OUTPUT</div><div class="mini-output">Fee: ₱1500.0</div></div></article>
+<article class="run-example-mini"><h3>Lesson 24 · Performance and security</h3><pre><code>String input = "  admin  ";
+System.out.println(input.trim());</code></pre><div class="run-example-actions"><button aria-controls="run-output-24" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-24"><div class="output-title">OUTPUT</div><div class="mini-output">admin</div></div></article>
+<article class="run-example-mini"><h3>Lesson 25 · Build engineering</h3><pre><code>mvn clean package
+java -jar target/student-app.jar</code></pre><div class="run-example-actions"><button aria-controls="run-output-25" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-25"><div class="output-title">OUTPUT</div><div class="mini-output">BUILD SUCCESS
+Application started.</div></div></article>
+<article class="run-example-mini"><h3>Lesson 26 · Documentation and deployment</h3><pre><code>System.out.println("Student App v1.0 ready for deployment");</code></pre><div class="run-example-actions"><button aria-controls="run-output-26" aria-expanded="false" class="run-button" data-run-example="" type="button">▶ Run Example</button><span class="run-shortcut-hint">Show expected output</span></div><div class="run-example-output" hidden="" id="run-output-26"><div class="output-title">OUTPUT</div><div class="mini-output">Student App v1.0 ready for deployment</div></div></article>
+</div>
+<div class="run-example-result"><strong>Teaching routine:</strong> explain the concept → type the example → run with <kbd>Shift</kbd> + <kbd>F6</kbd> or <kbd>F6</kbd> → compare the actual result with the expected output → change one value and run again.</div>
+</section>
+<section class="lesson-section activity-section" id="activity">
+<span class="section-number">13</span>
+<h2>Stage projects and final capstone</h2>
+<p>Build one project at the end of every stage. Improve the same project as your skills grow, or create separate portfolio projects.</p>
+<div class="task-grid">
+<div><h3>Foundation project</h3><ul class="check-list"><li>Validated student profile form</li><li>Variables, input, decisions, and loops</li><li>Clear prompts and formatted output</li><li>Three invalid-input test cases</li><li>Short reflection on errors fixed</li></ul></div>
+<div><h3>Beginner project</h3><ul class="check-list"><li>Console-based grade manager</li><li>Methods for add, search, update, and delete</li><li>Arrays or an <code>ArrayList</code></li><li>Input validation</li><li>Readable menu and output</li></ul></div>
+<div><h3>Intermediate project</h3><ul class="check-list"><li>Swing student records interface</li><li>Multiple model classes</li><li>Collections and file saving</li><li>Exception handling</li><li>Search, sorting, and validation</li></ul></div>
+<div><h3>Advanced project</h3><ul class="check-list"><li>MySQL database through JDBC</li><li>MVC and DAO layers</li><li>Prepared statements and transactions</li><li>JUnit tests for business rules</li><li>Logs for important events</li></ul></div>
+<div><h3>API integration project</h3><ul class="check-list"><li>Approved public REST API</li><li>Java <code>HttpClient</code> request</li><li>JSON response mapping</li><li>Loading and error states</li><li>No secrets stored in source code</li></ul></div>
+<div><h3>Quality project</h3><ul class="check-list"><li>Refactor one earlier application</li><li>Add unit tests for important rules</li><li>Profile one slow operation</li><li>Review validation and error messages</li><li>Document before-and-after improvements</li></ul></div>
+<div><h3>Pro capstone</h3><ul class="plus-list"><li>Role-based school or parish system</li><li>Secure authentication design</li><li>Reports and data export</li><li>Maven/Gradle build and version control</li><li>README, screenshots, tests, and release</li></ul></div>
+</div>
+<h3>Capstone assessment rubric</h3>
+<div class="term-table-wrapper">
+<table>
+<thead><tr><th>Criterion</th><th>Points</th></tr></thead>
+<tbody><tr><td>Correctness and complete requirements</td><td>25</td></tr><tr><td>Architecture, OOP, and code quality</td><td>25</td></tr><tr><td>Database, validation, security, and error handling</td><td>20</td></tr><tr><td>Testing, logging, and reliability</td><td>15</td></tr><tr><td>User experience, documentation, and presentation</td><td>15</td></tr></tbody>
+<tfoot><tr><th>Total</th><th>100</th></tr></tfoot>
+</table>
+</div>
+</section>
+<section class="lesson-section" id="quiz">
+<span class="section-number">14</span>
+<h2>Beginner-to-Pro knowledge check</h2>
+<form class="quiz-form" id="quizForm">
+<fieldset data-answer="b"><legend>1. What is the main purpose of a Java package?</legend><label><input name="q1" type="radio" value="a"/> To change the program color</label><label><input name="q1" type="radio" value="b"/> To organize related types and prevent naming conflicts</label><label><input name="q1" type="radio" value="c"/> To create a database</label></fieldset>
+<fieldset data-answer="c"><legend>2. What is an object?</legend><label><input name="q2" type="radio" value="a"/> A Java folder</label><label><input name="q2" type="radio" value="b"/> A code comment</label><label><input name="q2" type="radio" value="c"/> An instance of a class</label></fieldset>
+<fieldset data-answer="a"><legend>3. Which modifier restricts a field to its own class?</legend><label><input name="q3" type="radio" value="a"/> private</label><label><input name="q3" type="radio" value="b"/> public</label><label><input name="q3" type="radio" value="c"/> protected</label></fieldset>
+<fieldset data-answer="b"><legend>4. Which Swing class creates a top-level window?</legend><label><input name="q4" type="radio" value="a"/> JLabel</label><label><input name="q4" type="radio" value="b"/> JFrame</label><label><input name="q4" type="radio" value="c"/> JButton</label></fieldset>
+<fieldset data-answer="c"><legend>5. Which collection stores unique values?</legend><label><input name="q5" type="radio" value="a"/> List</label><label><input name="q5" type="radio" value="b"/> Map</label><label><input name="q5" type="radio" value="c"/> Set</label></fieldset>
+<fieldset data-answer="a"><legend>6. Why should JDBC queries use prepared statements?</legend><label><input name="q6" type="radio" value="a"/> They safely bind values and help prevent SQL injection</label><label><input name="q6" type="radio" value="b"/> They automatically design the GUI</label><label><input name="q6" type="radio" value="c"/> They remove the need for a database</label></fieldset>
+<fieldset data-answer="b"><legend>7. What is the main purpose of MVC?</legend><label><input name="q7" type="radio" value="a"/> To make every class public</label><label><input name="q7" type="radio" value="b"/> To separate data, presentation, and application control</label><label><input name="q7" type="radio" value="c"/> To replace Java with SQL</label></fieldset>
+<fieldset data-answer="c"><legend>8. Which practice best supports a professional release?</legend><label><input name="q8" type="radio" value="a"/> Hard-code passwords in the source</label><label><input name="q8" type="radio" value="b"/> Skip tests when the program runs once</label><label><input name="q8" type="radio" value="c"/> Package, version, test, and document the application</label></fieldset>
+<fieldset data-answer="b"><legend>9. What should a program do before converting uncertain keyboard input?</legend><label><input name="q9" type="radio" value="a"/> Close immediately</label><label><input name="q9" type="radio" value="b"/> Validate that the input has the expected type and range</label><label><input name="q9" type="radio" value="c"/> Save it directly to the database</label></fieldset>
+<fieldset data-answer="a"><legend>10. Which Java type is best for a date without a time zone?</legend><label><input name="q10" type="radio" value="a"/> LocalDate</label><label><input name="q10" type="radio" value="b"/> JFrame</label><label><input name="q10" type="radio" value="c"/> ArrayList</label></fieldset>
+<fieldset data-answer="c"><legend>11. Which Git message is the most useful?</legend><label><input name="q11" type="radio" value="a"/> update</label><label><input name="q11" type="radio" value="b"/> stuff</label><label><input name="q11" type="radio" value="c"/> Add grade input validation</label></fieldset>
+<fieldset data-answer="b"><legend>12. What should an API client check before processing the response body?</legend><label><input name="q12" type="radio" value="a"/> The monitor brightness</label><label><input name="q12" type="radio" value="b"/> The HTTP status code</label><label><input name="q12" type="radio" value="c"/> The Java filename only</label></fieldset>
+<button class="button primary" type="submit">Check Answers</button>
+<p aria-live="polite" class="quiz-result" id="quizResult" role="status"></p>
+</form>
+</section>
+<section class="lesson-section summary-section">
+<h2>Course summary</h2>
+<p>You now have a 26-lesson route from Java syntax to object-oriented design, desktop interfaces, Git, databases, REST APIs, architecture, testing, security, performance, documentation, and deployment. Follow the illustrated labs, finish each stage project, review mistakes, and make every new version more maintainable than the last.</p>
+<a class="button primary" href="#top">Review from the top</a>
+</section>
+</article>
+</div>
+</main>
+<footer><p>Java Learning Hub • 26-Lesson Illustrated Beginner-to-Pro Learning Path</p></footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-run-example]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var outputId = button.getAttribute('aria-controls');
+            var output = document.getElementById(outputId);
+            if (!output) return;
 
-                    <div class="guided-lab">
-                        <h3>Mini-lesson 5 — Build, document, and release</h3>
-                        <div class="two-column">
-                            <div><h3>Minimum README</h3><ul class="check-list"><li>Project purpose and screenshots</li><li>Required JDK and database version</li><li>Installation and setup steps</li><li>How to run tests and the application</li><li>Configuration variables</li><li>Known limitations</li></ul></div>
-                            <div><h3>Release checklist</h3><ul class="check-list"><li>Run all automated tests</li><li>Remove passwords and sample secrets</li><li>Create the JAR with Maven or Gradle</li><li>Test the JAR on another computer</li><li>Tag the release version</li><li>Publish release notes</li></ul></div>
-                        </div>
-                        <div class="practice-box"><strong>Portfolio output:</strong> Ask a classmate to follow only your README. If they cannot run the project without help, improve the instructions and test again.</div>
-                    </div>
-                </section>
+            var willShow = output.hidden;
+            output.hidden = !willShow;
+            button.setAttribute('aria-expanded', String(willShow));
+            button.textContent = willShow ? '■ Hide Output' : '▶ Run Example';
 
-                <section id="activity" class="lesson-section activity-section">
-                    <span class="section-number">13</span>
-                    <h2>Stage projects and final capstone</h2>
-                    <p>Build one project at the end of every stage. Improve the same project as your skills grow, or create separate portfolio projects.</p>
-                    <div class="task-grid">
-                        <div><h3>Foundation project</h3><ul class="check-list"><li>Validated student profile form</li><li>Variables, input, decisions, and loops</li><li>Clear prompts and formatted output</li><li>Three invalid-input test cases</li><li>Short reflection on errors fixed</li></ul></div>
-                        <div><h3>Beginner project</h3><ul class="check-list"><li>Console-based grade manager</li><li>Methods for add, search, update, and delete</li><li>Arrays or an <code>ArrayList</code></li><li>Input validation</li><li>Readable menu and output</li></ul></div>
-                        <div><h3>Intermediate project</h3><ul class="check-list"><li>Swing student records interface</li><li>Multiple model classes</li><li>Collections and file saving</li><li>Exception handling</li><li>Search, sorting, and validation</li></ul></div>
-                        <div><h3>Advanced project</h3><ul class="check-list"><li>MySQL database through JDBC</li><li>MVC and DAO layers</li><li>Prepared statements and transactions</li><li>JUnit tests for business rules</li><li>Logs for important events</li></ul></div>
-                        <div><h3>API integration project</h3><ul class="check-list"><li>Approved public REST API</li><li>Java <code>HttpClient</code> request</li><li>JSON response mapping</li><li>Loading and error states</li><li>No secrets stored in source code</li></ul></div>
-                        <div><h3>Quality project</h3><ul class="check-list"><li>Refactor one earlier application</li><li>Add unit tests for important rules</li><li>Profile one slow operation</li><li>Review validation and error messages</li><li>Document before-and-after improvements</li></ul></div>
-                        <div><h3>Pro capstone</h3><ul class="plus-list"><li>Role-based school or parish system</li><li>Secure authentication design</li><li>Reports and data export</li><li>Maven/Gradle build and version control</li><li>README, screenshots, tests, and release</li></ul></div>
-                    </div>
-                    <h3>Capstone assessment rubric</h3>
-                    <div class="term-table-wrapper">
-                        <table>
-                            <thead><tr><th>Criterion</th><th>Points</th></tr></thead>
-                            <tbody><tr><td>Correctness and complete requirements</td><td>25</td></tr><tr><td>Architecture, OOP, and code quality</td><td>25</td></tr><tr><td>Database, validation, security, and error handling</td><td>20</td></tr><tr><td>Testing, logging, and reliability</td><td>15</td></tr><tr><td>User experience, documentation, and presentation</td><td>15</td></tr></tbody>
-                            <tfoot><tr><th>Total</th><th>100</th></tr></tfoot>
-                        </table>
-                    </div>
-                </section>
-
-                <section id="quiz" class="lesson-section">
-                    <span class="section-number">14</span>
-                    <h2>Beginner-to-Pro knowledge check</h2>
-                    <form id="quizForm" class="quiz-form">
-                        <fieldset data-answer="b"><legend>1. What is the main purpose of a Java package?</legend><label><input type="radio" name="q1" value="a"> To change the program color</label><label><input type="radio" name="q1" value="b"> To organize related types and prevent naming conflicts</label><label><input type="radio" name="q1" value="c"> To create a database</label></fieldset>
-                        <fieldset data-answer="c"><legend>2. What is an object?</legend><label><input type="radio" name="q2" value="a"> A Java folder</label><label><input type="radio" name="q2" value="b"> A code comment</label><label><input type="radio" name="q2" value="c"> An instance of a class</label></fieldset>
-                        <fieldset data-answer="a"><legend>3. Which modifier restricts a field to its own class?</legend><label><input type="radio" name="q3" value="a"> private</label><label><input type="radio" name="q3" value="b"> public</label><label><input type="radio" name="q3" value="c"> protected</label></fieldset>
-                        <fieldset data-answer="b"><legend>4. Which Swing class creates a top-level window?</legend><label><input type="radio" name="q4" value="a"> JLabel</label><label><input type="radio" name="q4" value="b"> JFrame</label><label><input type="radio" name="q4" value="c"> JButton</label></fieldset>
-                        <fieldset data-answer="c"><legend>5. Which collection stores unique values?</legend><label><input type="radio" name="q5" value="a"> List</label><label><input type="radio" name="q5" value="b"> Map</label><label><input type="radio" name="q5" value="c"> Set</label></fieldset>
-                        <fieldset data-answer="a"><legend>6. Why should JDBC queries use prepared statements?</legend><label><input type="radio" name="q6" value="a"> They safely bind values and help prevent SQL injection</label><label><input type="radio" name="q6" value="b"> They automatically design the GUI</label><label><input type="radio" name="q6" value="c"> They remove the need for a database</label></fieldset>
-                        <fieldset data-answer="b"><legend>7. What is the main purpose of MVC?</legend><label><input type="radio" name="q7" value="a"> To make every class public</label><label><input type="radio" name="q7" value="b"> To separate data, presentation, and application control</label><label><input type="radio" name="q7" value="c"> To replace Java with SQL</label></fieldset>
-                        <fieldset data-answer="c"><legend>8. Which practice best supports a professional release?</legend><label><input type="radio" name="q8" value="a"> Hard-code passwords in the source</label><label><input type="radio" name="q8" value="b"> Skip tests when the program runs once</label><label><input type="radio" name="q8" value="c"> Package, version, test, and document the application</label></fieldset>
-                        <fieldset data-answer="b"><legend>9. What should a program do before converting uncertain keyboard input?</legend><label><input type="radio" name="q9" value="a"> Close immediately</label><label><input type="radio" name="q9" value="b"> Validate that the input has the expected type and range</label><label><input type="radio" name="q9" value="c"> Save it directly to the database</label></fieldset>
-                        <fieldset data-answer="a"><legend>10. Which Java type is best for a date without a time zone?</legend><label><input type="radio" name="q10" value="a"> LocalDate</label><label><input type="radio" name="q10" value="b"> JFrame</label><label><input type="radio" name="q10" value="c"> ArrayList</label></fieldset>
-                        <fieldset data-answer="c"><legend>11. Which Git message is the most useful?</legend><label><input type="radio" name="q11" value="a"> update</label><label><input type="radio" name="q11" value="b"> stuff</label><label><input type="radio" name="q11" value="c"> Add grade input validation</label></fieldset>
-                        <fieldset data-answer="b"><legend>12. What should an API client check before processing the response body?</legend><label><input type="radio" name="q12" value="a"> The monitor brightness</label><label><input type="radio" name="q12" value="b"> The HTTP status code</label><label><input type="radio" name="q12" value="c"> The Java filename only</label></fieldset>
-                        <button class="button primary" type="submit">Check Answers</button>
-                        <p id="quizResult" class="quiz-result" role="status" aria-live="polite"></p>
-                    </form>
-                </section>
-
-                <section class="lesson-section summary-section">
-                    <h2>Course summary</h2>
-                    <p>You now have a 26-lesson route from Java syntax to object-oriented design, desktop interfaces, Git, databases, REST APIs, architecture, testing, security, performance, documentation, and deployment. Follow the illustrated labs, finish each stage project, review mistakes, and make every new version more maintainable than the last.</p>
-                    <a class="button primary" href="#top">Review from the top</a>
-                </section>
-            </article>
-        </div>
-    </main>
-
-    <footer><p>Java Learning Hub • 26-Lesson Illustrated Beginner-to-Pro Learning Path</p></footer>
-    <script src="../js/packages-classes.js"></script>
+            if (willShow) {
+                output.classList.remove('just-ran');
+                void output.offsetWidth;
+                output.classList.add('just-ran');
+            }
+        });
+    });
+});
+</script><script src="../js/packages-classes.js"></script>
 </body>
 </html>

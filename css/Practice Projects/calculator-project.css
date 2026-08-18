@@ -368,6 +368,180 @@ tbody tr:hover { background: #f6f9fd; }
   .context-menu { left: 33%; }
 }
 
+
+
+/* Interactive Java example runner --------------------------------------- */
+.lesson-main { min-width: 0; overflow-x: clip; }
+.lesson-section { width: 100%; }
+.run-preview-note {
+  margin: 24px 0 0;
+  padding: 17px 20px;
+  color: #274760;
+  background: #edf7ff;
+  border: 1px solid #c9e4f8;
+  border-left: 5px solid var(--blue-700);
+  border-radius: 0 12px 12px 0;
+  font-size: .93rem;
+}
+.code-block { border: 1px solid #203853; }
+.code-title { flex-wrap: wrap; }
+.code-title-copy { min-width: 0; display: grid; gap: 3px; }
+.code-title-copy > span { color: #f4f8fc; font-weight: 800; }
+.code-title-copy small { display: block; }
+.run-example-button {
+  flex: 0 0 auto;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 15px;
+  color: #071426;
+  background: #f1c45f;
+  border: 1px solid #f1c45f;
+  border-radius: 9px;
+  font: 800 .8rem/1.2 "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, .16);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+}
+.run-example-button:hover { transform: translateY(-1px); background: #ffd777; box-shadow: 0 9px 22px rgba(0, 0, 0, .22); }
+.run-example-button:focus-visible { outline: 3px solid #82d4ff; outline-offset: 3px; }
+.run-example-button[aria-expanded="true"] { color: #eaf4ff; background: #145fc5; border-color: #2f7ddd; }
+.run-output { padding: 0; background: #0a1726; border-top: 1px solid #29425d; }
+.run-output[hidden] { display: none !important; }
+.run-output-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 18px; color: #d9e9f8; background: #0d2035; border-bottom: 1px solid #233b55; }
+.run-output-heading span { font-size: .8rem; font-weight: 850; letter-spacing: .025em; }
+.run-output-heading small { color: #8fc9a8; font: 700 .7rem/1.3 "Segoe UI", Arial, sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+
+.gui-preview {
+  padding: clamp(20px, 4vw, 38px);
+  background:
+    radial-gradient(circle at 12% 15%, rgba(34,117,219,.17), transparent 25%),
+    linear-gradient(145deg, #071321, #102942);
+}
+.gui-window {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  overflow: hidden;
+  color: #26364a;
+  background: #edf2f7;
+  border: 1px solid #58718b;
+  border-radius: 13px;
+  box-shadow: 0 22px 55px rgba(0,0,0,.32);
+}
+.compact-gui-window { max-width: 560px; }
+.calculator-gui-window { max-width: 430px; }
+.gui-titlebar {
+  min-height: 42px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  color: #eef5fc;
+  background: #172a40;
+  border-bottom: 1px solid #344b65;
+  font-size: .76rem;
+}
+.gui-titlebar strong { grid-column: 2; text-align: center; font-weight: 750; }
+.gui-titlebar::after { content: ""; width: 48px; }
+.gui-window-controls { display: flex; gap: 6px; }
+.gui-window-controls i { width: 10px; height: 10px; background: #ef6b70; border-radius: 50%; }
+.gui-window-controls i:nth-child(2) { background: #edb94f; }
+.gui-window-controls i:nth-child(3) { background: #54c982; }
+.gui-state-panel { display: grid; gap: 10px; padding: 24px; background: #f6f9fc; }
+.gui-state-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 13px 15px;
+  background: #fff;
+  border: 1px solid #d4dee8;
+  border-radius: 9px;
+  box-shadow: 0 4px 12px rgba(27,52,79,.05);
+}
+.gui-state-row span { color: #52657a; font: 700 .78rem/1.3 "Cascadia Code", Consolas, monospace; }
+.gui-state-row b { color: #12345a; font: 800 .86rem/1.3 "Cascadia Code", Consolas, monospace; }
+.gui-state-row .state-true { color: var(--green-700); }
+.gui-calculator { padding: 16px; background: #1a2a3b; }
+.gui-calculator-display {
+  min-height: 96px;
+  display: grid;
+  align-content: center;
+  justify-items: end;
+  padding: 14px 17px;
+  color: #fff;
+  background: #06101c;
+  border: 1px solid #344b62;
+  border-radius: 10px;
+}
+.gui-calculator-display small { color: #91a4ba; font-size: .72rem; }
+.gui-calculator-display strong { font-size: 2.3rem; line-height: 1.15; }
+.gui-calculator-display.single-value { min-height: 112px; }
+.gui-calculator-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 10px; }
+.gui-key { min-height: 43px; display: grid; place-items: center; color: #eef5fc; background: #2d4055; border: 1px solid #40566d; border-radius: 7px; font-weight: 800; }
+.gui-key.utility { background: #46586c; }
+.gui-key.operator { color: #14233a; background: #efb849; border-color: #efb849; }
+.gui-key.equals { color: #fff; background: var(--blue-600); border-color: var(--blue-600); }
+.gui-key.zero { grid-column: span 2; }
+.gui-demo-body { display: grid; gap: 14px; padding: 22px; background: #e8edf3; }
+.gui-action-trace { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+.gui-action-trace span, .gui-action-trace b { padding: 10px 12px; text-align: center; border-radius: 8px; }
+.gui-action-trace span { color: #506175; background: #fff; border: 1px solid #cad5df; font-size: .78rem; }
+.gui-action-trace b { color: #fff; background: var(--blue-700); font-size: .8rem; }
+.operator-selection { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px 14px; color: #536578; background: #fff; border: 1px solid #cad5df; border-radius: 9px; font-size: .8rem; }
+.operator-selection b { width: 43px; height: 43px; display: grid; place-items: center; color: var(--navy-950); background: var(--gold-500); border-radius: 9px; font-size: 1.25rem; }
+.decimal-demo { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; padding: 13px 14px; color: #536578; background: #fff; border: 1px solid #cad5df; border-radius: 9px; font-size: .78rem; }
+.decimal-demo b { color: var(--navy-900); font: 800 .9rem "Cascadia Code", Consolas, monospace; }
+.gui-reset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.gui-reset-grid span { display: grid; gap: 3px; padding: 10px; color: #5c6d80; background: #fff; border: 1px solid #cad5df; border-radius: 8px; text-align: center; font-size: .7rem; }
+.gui-reset-grid b { color: var(--navy-900); font: 800 .75rem "Cascadia Code", Consolas, monospace; }
+.gui-status { display: flex; align-items: center; gap: 9px; min-height: 45px; padding: 10px 14px; border-top: 1px solid #cbd6e1; font-size: .76rem; font-weight: 700; }
+.gui-status.success { color: #17614f; background: #eaf8f3; }
+.gui-status.info { color: #1d5794; background: #eaf3ff; }
+.gui-status.warning { color: #745412; background: #fff5dc; }
+.status-dot { width: 9px; height: 9px; flex: 0 0 9px; background: currentColor; border-radius: 50%; box-shadow: 0 0 0 4px rgba(255,255,255,.55); }
+.output-flash { animation: outputReveal .32s ease-out; }
+@keyframes outputReveal {
+  from { opacity: .25; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Readability and overflow fixes ---------------------------------------- */
+img, svg { max-width: 100%; }
+pre { max-width: 100%; }
+.table-wrap { -webkit-overflow-scrolling: touch; }
+.code-block pre { scrollbar-width: thin; scrollbar-color: #526c87 #081424; }
+.code-block pre::-webkit-scrollbar { height: 10px; }
+.code-block pre::-webkit-scrollbar-track { background: #081424; }
+.code-block pre::-webkit-scrollbar-thumb { background: #526c87; border: 2px solid #081424; border-radius: 999px; }
+.button:focus-visible, .home-link:focus-visible, .lesson-sidebar a:focus-visible, .mobile-toc a:focus-visible { outline: 3px solid #82d4ff; outline-offset: 3px; }
+
+@media (max-width: 620px) {
+  .code-title { align-items: stretch; }
+  .code-title-copy { width: 100%; }
+  .run-example-button { width: 100%; margin-top: 7px; }
+  .run-output-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .code-block pre { font-size: .95em; }
+  .gui-preview { padding: 16px 12px; }
+  .gui-titlebar { grid-template-columns: auto 1fr; }
+  .gui-titlebar strong { grid-column: 2; text-align: left; }
+  .gui-titlebar::after { display: none; }
+  .gui-state-panel, .gui-demo-body { padding: 14px; }
+  .gui-action-trace { grid-template-columns: 1fr; }
+  .gui-reset-grid { grid-template-columns: 1fr; }
+  .gui-calculator-display { min-height: 82px; }
+  .gui-calculator-display strong { font-size: 1.9rem; }
+  .gui-key { min-height: 39px; }
+}
+
+@media (max-width: 390px) {
+  .code-block { margin-inline: 0; }
+  .code-block pre, .code-block .run-output pre { padding-inline: 15px; }
+  .run-output-heading { padding-inline: 15px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
@@ -376,7 +550,7 @@ tbody tr:hover { background: #f6f9fd; }
 @media print {
   @page { margin: 16mm; }
   body { color: #111; background: #fff; font-size: 11pt; }
-  .site-header, .lesson-sidebar, .mobile-toc, .hero-actions, .lesson-footer { display: none !important; }
+  .site-header, .lesson-sidebar, .mobile-toc, .hero-actions, .lesson-footer, .run-example-button, .run-output { display: none !important; }
   .page-layout { padding: 0; }
   .lesson-main { margin: 0; }
   .hero { min-height: auto; padding: 28px; background: var(--navy-900) !important; print-color-adjust: exact; }

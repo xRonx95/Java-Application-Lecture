@@ -259,6 +259,125 @@
       font-weight: 700;
     }
 
+
+    /* Interactive Java run-example cards */
+    .run-example {
+      margin-top: 1.75rem;
+      padding: clamp(1rem, 2vw, 1.35rem);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: 1rem;
+      background: #f8fafc;
+      color: #0f172a;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    .run-example-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .run-example-header h3 {
+      margin: 0.2rem 0 0;
+      color: #0f172a;
+    }
+
+    .run-label {
+      display: inline-block;
+      color: #1d4ed8;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+    }
+
+    .run-example-note {
+      margin: 0 0 1rem;
+      color: #475569;
+      line-height: 1.65;
+    }
+
+    .run-example-button {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 0.7rem 1rem;
+      border: 0;
+      border-radius: 0.7rem;
+      background: #166534;
+      color: #ffffff;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(22, 101, 52, 0.18);
+    }
+
+    .run-example-button:hover {
+      filter: brightness(1.07);
+    }
+
+    .run-example-button:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    .run-example .code-window {
+      margin-top: 0;
+    }
+
+    .run-output {
+      margin-top: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 0.85rem;
+      background: #020617;
+      color: #e2e8f0;
+    }
+
+    .run-output[hidden] {
+      display: none;
+    }
+
+    .run-output-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.7rem 0.9rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .run-output-head small {
+      color: #86efac;
+      font-weight: 800;
+    }
+
+    .run-output pre {
+      margin: 0;
+      padding: 1rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      color: #e2e8f0;
+      font-family: "IBM Plex Mono", Consolas, "Courier New", monospace;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .run-example-header {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .run-example-button {
+        width: 100%;
+      }
+    }
+
     @media (max-width: 980px) {
       .visual-gallery,
       .picture-steps,
@@ -501,6 +620,41 @@
 myCar.color = <span class="str">"Blue"</span>;
 myCar.drive();</code></pre></div>
         </div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-class-object" aria-controls="run-output-class-object" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>ClassObjectDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>ClassObjectDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Car {
+    String color;
+
+    void drive() {
+        System.out.println(color + &quot; car is moving!&quot;);
+    }
+}
+
+public class ClassObjectDemo {
+    public static void main(String[] args) {
+        Car myCar = new Car();
+        myCar.color = &quot;Blue&quot;;
+
+        System.out.println(&quot;Color: &quot; + myCar.color);
+        myCar.drive();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-class-object" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Color: Blue
+Blue car is moving!</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section tinted" id="class-anatomy">
@@ -525,6 +679,50 @@ myCar.drive();</code></pre></div>
           </div>
         </div>
         <div class="concept-strip"><div><strong><code>this</code></strong><span>the current object</span></div><div><strong><code>new</code></strong><span>creates an object</span></div><div><strong>constructor</strong><span>same name as the class</span></div></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-class-anatomy" aria-controls="run-output-class-anatomy" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>StudentAnatomyDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>StudentAnatomyDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Student {
+    private String name;
+    private int score;
+
+    Student(String name) {
+        this.name = name;
+    }
+
+    void study() {
+        score++;
+    }
+
+    void displayInfo() {
+        System.out.println(&quot;Student: &quot; + name);
+        System.out.println(&quot;Score: &quot; + score);
+    }
+}
+
+public class StudentAnatomyDemo {
+    public static void main(String[] args) {
+        Student student = new Student(&quot;Ana&quot;);
+        student.study();
+        student.study();
+        student.displayInfo();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-class-anatomy" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Student: Ana
+Score: 2</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section" id="constructors">
@@ -558,6 +756,45 @@ Book novel = <span class="kw">new</span> Book(<span class="str">"Noli Me Tangere
           <article class="mini-lesson-card"><small>CONSTRUCTOR CHAINING</small><h3>Reuse setup with <code>this(...)</code></h3><p>One constructor can call another constructor in the same class as its first statement.</p></article>
         </div>
         <div class="checkpoint"><strong>Quick check</strong>Why does <code>this.title = title;</code> use <code>this</code>? The left side is the object’s field; the right side is the constructor parameter.</div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-constructors" aria-controls="run-output-constructors" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>ConstructorDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>ConstructorDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Book {
+    private String title;
+    private int pages;
+
+    Book(String title, int pages) {
+        this.title = title;
+        this.pages = pages;
+    }
+
+    void displayInfo() {
+        System.out.println(&quot;Title: &quot; + title);
+        System.out.println(&quot;Pages: &quot; + pages);
+    }
+}
+
+public class ConstructorDemo {
+    public static void main(String[] args) {
+        Book novel = new Book(&quot;Noli Me Tangere&quot;, 480);
+        novel.displayInfo();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-constructors" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Title: Noli Me Tangere
+Pages: 480</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section" id="encapsulation">
@@ -582,6 +819,50 @@ Book novel = <span class="kw">new</span> Book(<span class="str">"Noli Me Tangere
   }
 }</code></pre></div>
           <div><h3>Why not make every field public?</h3><p>If <code>balance</code> were public, any code could set an invalid value. A controlled method can check rules first.</p><div class="warning-box"><strong>Key idea</strong><p>Encapsulation is not simply “using getters and setters.” It means protecting valid object state.</p></div></div>
+        </div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-encapsulation" aria-controls="run-output-encapsulation" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>EncapsulationDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>EncapsulationDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class BankAccount {
+    private double balance;
+
+    public void deposit(double amount) {
+        if (amount &gt; 0) {
+            balance += amount;
+        } else {
+            System.out.println(&quot;Invalid deposit ignored.&quot;);
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+public class EncapsulationDemo {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount();
+
+        account.deposit(1000);
+        account.deposit(-50);
+
+        System.out.printf(&quot;Balance: %.2f%n&quot;, account.getBalance());
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-encapsulation" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Invalid deposit ignored.
+Balance: 1000.00</pre>
+          </div>
         </div>
       </section>
 
@@ -631,6 +912,45 @@ Book novel = <span class="kw">new</span> Book(<span class="str">"Noli Me Tangere
 Student a = <span class="kw">new</span> Student(<span class="str">"Ana"</span>);
 Student b = <span class="kw">new</span> Student(<span class="str">"Ben"</span>);
 System.out.println(Student.studentCount); <span class="comment">// 2</span></code></pre></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-static-members" aria-controls="run-output-static-members" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>StudentCounterDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>StudentCounterDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Student {
+    static int studentCount = 0;
+    String name;
+
+    Student(String name) {
+        this.name = name;
+        studentCount++;
+    }
+}
+
+public class StudentCounterDemo {
+    public static void main(String[] args) {
+        Student a = new Student(&quot;Ana&quot;);
+        Student b = new Student(&quot;Ben&quot;);
+
+        System.out.println(&quot;Student A: &quot; + a.name);
+        System.out.println(&quot;Student B: &quot; + b.name);
+        System.out.println(&quot;Total students: &quot; + Student.studentCount);
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-static-members" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Student A: Ana
+Student B: Ben
+Total students: 2</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section dark" id="inheritance">
@@ -655,6 +975,47 @@ pet.eat();  <span class="comment">// inherited</span>
 pet.bark(); <span class="comment">// own method</span></code></pre></div>
         </div>
         <div class="explain-box light"><strong>Explain it this way</strong><p>“A Dog can use Dog features and accessible Animal features. The child gains members, but the parent does not gain the child’s special members.”</p></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-inheritance" aria-controls="run-output-inheritance" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>InheritanceDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>InheritanceDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Animal {
+    String name;
+
+    void eat() {
+        System.out.println(name + &quot; eats.&quot;);
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println(&quot;Woof!&quot;);
+    }
+}
+
+public class InheritanceDemo {
+    public static void main(String[] args) {
+        Dog pet = new Dog();
+        pet.name = &quot;Milo&quot;;
+
+        pet.eat();
+        pet.bark();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-inheritance" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Milo eats.
+Woof!</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section" id="inheritance-types">
@@ -667,6 +1028,63 @@ pet.bark(); <span class="comment">// own method</span></code></pre></div>
           <article><div class="mini-tree multiple"><div><span>A</span><span>B</span></div><i></i><span>C</span></div><div><small>INTERFACES ONLY</small><h3>Multiple</h3><p>A class cannot extend two classes, but it can implement interfaces.</p><code>C implements A, B</code></div></article>
         </div>
         <div class="note-box"><strong>Why can’t class C extend both A and B?</strong><p>If A and B contain the same method, Java would not know which implementation to inherit. This is called the diamond problem.</p></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-inheritance-types" aria-controls="run-output-inheritance-types" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>InheritanceTypesDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>InheritanceTypesDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Animal {
+    void eat() {
+        System.out.println(&quot;Animal eats.&quot;);
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println(&quot;Dog barks.&quot;);
+    }
+}
+
+class Puppy extends Dog {
+    void play() {
+        System.out.println(&quot;Puppy plays.&quot;);
+    }
+}
+
+class Cat extends Animal {
+    void meow() {
+        System.out.println(&quot;Cat meows.&quot;);
+    }
+}
+
+public class InheritanceTypesDemo {
+    public static void main(String[] args) {
+        Puppy puppy = new Puppy();
+        puppy.eat();
+        puppy.bark();
+        puppy.play();
+
+        Cat cat = new Cat();
+        cat.eat();
+        cat.meow();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-inheritance-types" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Animal eats.
+Dog barks.
+Puppy plays.
+Animal eats.
+Cat meows.</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section dark" id="interfaces">
@@ -713,6 +1131,57 @@ pet.bark(); <span class="comment">// own method</span></code></pre></div>
   <span class="kw">public void</span> fly()  { System.out.println(<span class="str">"Flap"</span>); }
 }</code></pre></div>
         <div class="try-box"><strong>Try it</strong>Create a <code>Robot</code> class that implements <code>Swimmable</code>. Its method can print <code>"Water mode activated"</code>.</div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-interfaces" aria-controls="run-output-interfaces" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>InterfaceDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>InterfaceDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>interface Swimmable {
+    void swim();
+}
+
+interface Flyable {
+    void fly();
+}
+
+class Animal {
+    void eat() {
+        System.out.println(&quot;Duck eats.&quot;);
+    }
+}
+
+class Duck extends Animal implements Swimmable, Flyable {
+    public void swim() {
+        System.out.println(&quot;Paddle&quot;);
+    }
+
+    public void fly() {
+        System.out.println(&quot;Flap&quot;);
+    }
+}
+
+public class InterfaceDemo {
+    public static void main(String[] args) {
+        Duck duck = new Duck();
+        duck.eat();
+        duck.swim();
+        duck.fly();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-interfaces" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Duck eats.
+Paddle
+Flap</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section tinted" id="super-keyword">
@@ -740,6 +1209,57 @@ pet.bark(); <span class="comment">// own method</span></code></pre></div>
     System.out.println(<span class="str">"My role is "</span> + role);
   }
 }</code></pre></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-super-keyword" aria-controls="run-output-super-keyword" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>SuperDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>SuperDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Person {
+    String name;
+
+    Person(String name) {
+        this.name = name;
+    }
+
+    void introduce() {
+        System.out.println(&quot;I am &quot; + name);
+    }
+}
+
+class Employee extends Person {
+    String role;
+
+    Employee(String name, String role) {
+        super(name);
+        this.role = role;
+    }
+
+    @Override
+    void introduce() {
+        super.introduce();
+        System.out.println(&quot;My role is &quot; + role);
+    }
+}
+
+public class SuperDemo {
+    public static void main(String[] args) {
+        Employee employee = new Employee(&quot;Ana Cruz&quot;, &quot;Developer&quot;);
+        employee.introduce();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-super-keyword" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>I am Ana Cruz
+My role is Developer</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section" id="overriding">
@@ -759,6 +1279,53 @@ pet.bark(); <span class="comment">// own method</span></code></pre></div>
 Animal pet = <span class="kw">new</span> Dog();
 pet.sound(); <span class="comment">// Woof — actual object decides</span></code></pre></div>
         <div class="teacher-script"><span>ASK THE CLASS</span><p>“The variable type is <code>Animal</code>, so why does Java run the <code>Dog</code> method?”</p><small>Dynamic method dispatch chooses the method using the actual object at runtime.</small></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-overriding" aria-controls="run-output-overriding" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>PolymorphismDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>PolymorphismDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Animal {
+    void sound() {
+        System.out.println(&quot;Animal sound&quot;);
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println(&quot;Woof&quot;);
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println(&quot;Meow&quot;);
+    }
+}
+
+public class PolymorphismDemo {
+    public static void main(String[] args) {
+        Animal[] pets = { new Dog(), new Cat() };
+
+        for (Animal pet : pets) {
+            pet.sound();
+        }
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-overriding" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Woof
+Meow</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section tinted" id="casting">
@@ -794,6 +1361,51 @@ pet.sound(); <span class="comment">// allowed; prints Woof</span>
           <article><small>DOWNCASTING</small><h3><code>Dog dog = (Dog) pet;</code></h3><p>Explicit and potentially unsafe. Check the actual type with <code>instanceof</code> first.</p></article>
         </div>
         <div class="warning-box"><strong>Avoid <code>ClassCastException</code></strong><p>Never cast just because the compiler allows the syntax. Confirm the object really has that child type.</p></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-casting" aria-controls="run-output-casting" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>CastingDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>CastingDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Animal {
+    void sound() {
+        System.out.println(&quot;Animal sound&quot;);
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println(&quot;Woof&quot;);
+    }
+
+    void bark() {
+        System.out.println(&quot;Dog is barking.&quot;);
+    }
+}
+
+public class CastingDemo {
+    public static void main(String[] args) {
+        Animal pet = new Dog();
+        pet.sound();
+
+        if (pet instanceof Dog dog) {
+            dog.bark();
+        }
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-casting" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Woof
+Dog is barking.</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section tinted" id="relationships">
@@ -804,6 +1416,63 @@ pet.sound(); <span class="comment">// allowed; prints Woof</span>
           <article class="has-a"><div class="relationship-title"><span>HAS-A</span><small>Composition</small></div><h3>A Car <em>has an</em> Engine.</h3><p>One object contains or uses another object.</p><code>class Car { Engine engine; }</code><ul><li>Use for parts and capabilities</li><li>Usually more flexible</li></ul></article>
         </div>
         <div class="decision-rule"><strong>Design rule</strong><p>Prefer composition when the relationship is “has-a,” when behavior may change independently, or when the inheritance sentence sounds unnatural.</p></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-relationships" aria-controls="run-output-relationships" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>RelationshipDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>RelationshipDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Animal {
+    void breathe() {
+        System.out.println(&quot;Animal breathes.&quot;);
+    }
+}
+
+class Dog extends Animal {
+    void identify() {
+        System.out.println(&quot;Dog IS-A Animal.&quot;);
+    }
+}
+
+class Engine {
+    void start() {
+        System.out.println(&quot;Engine started.&quot;);
+    }
+}
+
+class Car {
+    private final Engine engine = new Engine();
+
+    void drive() {
+        engine.start();
+        System.out.println(&quot;Car HAS-A Engine.&quot;);
+    }
+}
+
+public class RelationshipDemo {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.breathe();
+        dog.identify();
+
+        Car car = new Car();
+        car.drive();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-relationships" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Animal breathes.
+Dog IS-A Animal.
+Engine started.
+Car HAS-A Engine.</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section" id="advanced">
@@ -823,6 +1492,59 @@ pet.sound(); <span class="comment">// allowed; prints Woof</span>
   <span class="annotation">@Override</span>
   <span class="kw">double</span> area() { <span class="kw">return</span> Math.PI * radius * radius; }
 }</code></pre></div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-advanced" aria-controls="run-output-advanced" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>AdvancedDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>AdvancedDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>abstract class Shape {
+    abstract double area();
+
+    void describe() {
+        System.out.println(&quot;I am a shape.&quot;);
+    }
+}
+
+class Circle extends Shape {
+    private final double radius;
+
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+final class AppVersion {
+    static final String VERSION = &quot;1.0&quot;;
+}
+
+public class AdvancedDemo {
+    public static void main(String[] args) {
+        Circle circle = new Circle(5);
+
+        circle.describe();
+        System.out.printf(&quot;Circle area: %.2f%n&quot;, circle.area());
+        System.out.println(&quot;Version: &quot; + AppVersion.VERSION);
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-advanced" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>I am a shape.
+Circle area: 78.54
+Version: 1.0</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section dark compact" id="common-mistakes">
@@ -834,6 +1556,59 @@ pet.sound(); <span class="comment">// allowed; prints Woof</span>
           <article><span>04</span><div><h3>Forcing inheritance</h3><p>Confirm a true IS-A relationship first.</p></div></article>
           <article><span>05</span><div><h3>Wrong filename</h3><p>A public <code>Student</code> class must be saved as <code>Student.java</code>.</p></div></article>
           <article><span>06</span><div><h3>Unsafe downcasting</h3><p>Use <code>instanceof</code> before treating a parent reference as a child.</p></div></article>
+        </div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-common-mistakes" aria-controls="run-output-common-mistakes" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>DebuggingDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>DebuggingDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class Person {
+    private String name;
+
+    Person(String name) {
+        this.name = name;
+    }
+
+    String getName() {
+        return name;
+    }
+}
+
+class Student extends Person {
+    private String course;
+
+    Student(String name, String course) {
+        super(name);
+        this.course = course;
+    }
+
+    void display() {
+        System.out.println(&quot;Student: &quot; + getName());
+        System.out.println(&quot;Course: &quot; + course);
+    }
+}
+
+public class DebuggingDemo {
+    public static void main(String[] args) {
+        Person person = new Student(&quot;Ana&quot;, &quot;BSIT&quot;);
+
+        if (person instanceof Student student) {
+            student.display();
+        }
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-common-mistakes" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Student: Ana
+Course: BSIT</pre>
+          </div>
         </div>
       </section>
 
@@ -887,6 +1662,64 @@ pet.sound(); <span class="comment">// allowed; prints Woof</span>
           </figure>
         </div>
         <div class="checkpoint"><strong>If the terminal says “javac is not recognized”</strong>Install a JDK, reopen the terminal, then check with <code>java -version</code> and <code>javac -version</code>.</div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-build-run" aria-controls="run-output-build-run" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>Main.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>Main.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class SchoolMember {
+    private String name;
+    private int id;
+
+    SchoolMember(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    int getId() {
+        return id;
+    }
+}
+
+class Student extends SchoolMember {
+    private String course;
+
+    Student(String name, int id, String course) {
+        super(name, id);
+        this.course = course;
+    }
+
+    void displayInfo() {
+        System.out.println(&quot;Name: &quot; + getName());
+        System.out.println(&quot;ID: &quot; + getId());
+        System.out.println(&quot;Course: &quot; + course);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student(&quot;Ana Cruz&quot;, 2026, &quot;BSIT&quot;);
+        student.displayInfo();
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-build-run" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Name: Ana Cruz
+ID: 2026
+Course: BSIT</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section" id="activity">
@@ -915,6 +1748,97 @@ pet.sound(); <span class="comment">// allowed; prints Woof</span>
 Name: Mr. Reyes | ID: 104 | Subject: Programming
 Total school members: 2</pre></div>
         <div class="try-box"><strong>Reflection</strong>Write two sentences: Which code was reused from the parent? Which behavior was specialized by each child?</div>
+        <div class="run-example" aria-label="Runnable Java example">
+          <div class="run-example-header">
+            <div>
+              <span class="run-label">RUN EXAMPLE</span>
+              <h3>Complete runnable program</h3>
+            </div>
+            <button class="run-example-button" type="button" data-output-target="run-output-activity" aria-controls="run-output-activity" aria-expanded="false">▶ Run Example</button>
+          </div>
+          <p class="run-example-note">Save this code as <strong>SchoolHierarchyDemo.java</strong>. In NetBeans, run the file/project. On this lesson page, the button previews the expected console result so students can compare their output.</p>
+          <div class="code-window wide-code">
+            <div class="code-head"><span>SchoolHierarchyDemo.java</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code>class SchoolMember {
+    private String name;
+    private int id;
+    private static int totalMembers = 0;
+
+    SchoolMember(String name, int id) {
+        this.name = name;
+        this.id = id;
+        totalMembers++;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    int getId() {
+        return id;
+    }
+
+    static int getTotalMembers() {
+        return totalMembers;
+    }
+
+    void displayInfo() {
+        System.out.print(&quot;Name: &quot; + name + &quot; | ID: &quot; + id);
+    }
+}
+
+class Student extends SchoolMember {
+    private String course;
+
+    Student(String name, int id, String course) {
+        super(name, id);
+        this.course = course;
+    }
+
+    @Override
+    void displayInfo() {
+        super.displayInfo();
+        System.out.println(&quot; | Course: &quot; + course);
+    }
+}
+
+class Teacher extends SchoolMember {
+    private String subject;
+
+    Teacher(String name, int id, String subject) {
+        super(name, id);
+        this.subject = subject;
+    }
+
+    @Override
+    void displayInfo() {
+        super.displayInfo();
+        System.out.println(&quot; | Subject: &quot; + subject);
+    }
+}
+
+public class SchoolHierarchyDemo {
+    public static void main(String[] args) {
+        SchoolMember[] members = {
+            new Student(&quot;Ana Cruz&quot;, 2026, &quot;BSIT&quot;),
+            new Teacher(&quot;Mr. Reyes&quot;, 104, &quot;Programming&quot;)
+        };
+
+        for (SchoolMember member : members) {
+            member.displayInfo();
+        }
+
+        System.out.println(&quot;Total school members: &quot; + SchoolMember.getTotalMembers());
+    }
+}</code></pre>
+          </div>
+          <div class="run-output" id="run-output-activity" hidden>
+            <div class="run-output-head"><span>Console Output</span><small>✓ Expected result</small></div>
+            <pre>Name: Ana Cruz | ID: 2026 | Course: BSIT
+Name: Mr. Reyes | ID: 104 | Subject: Programming
+Total school members: 2</pre>
+          </div>
+        </div>
       </section>
 
       <section class="content-section tinted" id="assessment">
@@ -1001,6 +1925,37 @@ Total school members: 2</pre></div>
             setTimeout(() => { button.textContent = previousLabel; }, 1500);
           } catch {
             button.textContent = 'Select & copy';
+          }
+        });
+      });
+
+
+      document.querySelectorAll('.run-example-button').forEach((button) => {
+        button.addEventListener('click', () => {
+          const targetId = button.getAttribute('data-output-target');
+          const output = document.getElementById(targetId);
+          if (!output) return;
+
+          const willShow = output.hasAttribute('hidden');
+          document.querySelectorAll('.run-output').forEach((panel) => {
+            if (panel !== output) panel.setAttribute('hidden', '');
+          });
+          document.querySelectorAll('.run-example-button').forEach((otherButton) => {
+            if (otherButton !== button) {
+              otherButton.setAttribute('aria-expanded', 'false');
+              otherButton.textContent = '▶ Run Example';
+            }
+          });
+
+          if (willShow) {
+            output.removeAttribute('hidden');
+            button.setAttribute('aria-expanded', 'true');
+            button.textContent = '■ Hide Output';
+            output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } else {
+            output.setAttribute('hidden', '');
+            button.setAttribute('aria-expanded', 'false');
+            button.textContent = '▶ Run Example';
           }
         });
       });

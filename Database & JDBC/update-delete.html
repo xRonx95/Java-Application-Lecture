@@ -9,7 +9,7 @@
   <!-- Browser tab logo -->
   <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
-  <link rel="stylesheet" href="../css/Database & JDBC/update-delete.css">
+  <link rel="stylesheet" href="../css/Database%20%26%20JDBC/update-delete.css">
   <script src="../js/databaselesson.js" defer></script>
 </head>
 <body>
@@ -49,6 +49,7 @@
         <p class="hero-lead">A structured, step-by-step module for building safe <code>UPDATE</code> and <code>DELETE</code> features in a Java desktop application.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#overview">Begin the lesson</a>
+          <button class="button button-demo" type="button" data-run-example="full">Run Full GUI Demo</button>
           <a class="button button-secondary" href="../java/StudentManagementFrame.java" download>Download Java example</a>
         </div>
         <dl class="lesson-meta" aria-label="Lesson information">
@@ -172,7 +173,13 @@
           </div>
 
           <div class="code-panel">
-            <div class="code-toolbar"><span>Recommended Maven dependency</span><button type="button" data-copy-target="maven-code">Copy</button></div>
+            <div class="code-toolbar">
+              <span>Recommended Maven dependency</span>
+              <div class="code-toolbar-actions">
+                <button type="button" data-copy-target="maven-code">Copy</button>
+                <button class="run-example-button" type="button" data-run-example="maven">Run Example</button>
+              </div>
+            </div>
             <pre id="maven-code"><code>&lt;dependency&gt;
     &lt;groupId&gt;com.mysql&lt;/groupId&gt;
     &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
@@ -194,7 +201,13 @@
           <p>The <code>student_id</code> column is the primary key. It uniquely identifies each record and is therefore the safest value to use in the <code>WHERE</code> clause.</p>
 
           <div class="code-panel">
-            <div class="code-toolbar"><span>school_db.sql</span><button type="button" data-copy-target="schema-code">Copy</button></div>
+            <div class="code-toolbar">
+              <span>school_db.sql</span>
+              <div class="code-toolbar-actions">
+                <button type="button" data-copy-target="schema-code">Copy</button>
+                <button class="run-example-button" type="button" data-run-example="schema">Run Example</button>
+              </div>
+            </div>
             <pre id="schema-code"><code>CREATE DATABASE IF NOT EXISTS school_db;
 USE school_db;
 
@@ -224,7 +237,13 @@ INSERT INTO students (full_name, course, year_level, email) VALUES
 
           <h3 class="subheading">Create the reusable connection class</h3>
           <div class="code-panel">
-            <div class="code-toolbar"><span>DatabaseConnection.java</span><button type="button" data-copy-target="connection-code">Copy</button></div>
+            <div class="code-toolbar">
+              <span>DatabaseConnection.java</span>
+              <div class="code-toolbar-actions">
+                <button type="button" data-copy-target="connection-code">Copy</button>
+                <button class="run-example-button" type="button" data-run-example="connection">Run Example</button>
+              </div>
+            </div>
             <pre id="connection-code"><code>import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -244,6 +263,9 @@ public final class DatabaseConnection {
 }</code></pre>
           </div>
           <p class="code-explanation"><strong>Explain the code:</strong> The URL identifies the server and database. <code>DriverManager</code> selects the matching JDBC driver. The method returns an open connection or throws <code>SQLException</code> if the connection fails. The <code>useSSL=false</code> setting is suitable only for a local classroom server; configure TLS correctly for deployed systems.</p>
+          <div class="simulation-note" role="note">
+            <strong>Run Example:</strong> The browser cannot execute Java Swing or connect directly to your local MySQL server. The Run button therefore shows an interactive simulation of the expected JFrame/JDBC result for classroom demonstration.
+          </div>
         </section>
 
         <section id="update" class="content-section feature-section update-section">
@@ -272,7 +294,13 @@ WHERE student_id=?</code></pre><p>Separates the SQL instruction from the supplie
           </figure>
 
           <div class="code-panel">
-            <div class="code-toolbar"><span>Update method</span><button type="button" data-copy-target="update-code">Copy</button></div>
+            <div class="code-toolbar">
+              <span>Update method</span>
+              <div class="code-toolbar-actions">
+                <button type="button" data-copy-target="update-code">Copy</button>
+                <button class="run-example-button" type="button" data-run-example="update">Run Example</button>
+              </div>
+            </div>
             <pre id="update-code"><code>private void updateStudent() {
     Integer studentId = getSelectedStudentId();
     if (studentId == null || !validateForm()) {
@@ -332,7 +360,13 @@ WHERE student_id=?</code></pre><p>Separates the SQL instruction from the supplie
           </div>
 
           <div class="code-panel">
-            <div class="code-toolbar"><span>Delete method</span><button type="button" data-copy-target="delete-code">Copy</button></div>
+            <div class="code-toolbar">
+              <span>Delete method</span>
+              <div class="code-toolbar-actions">
+                <button type="button" data-copy-target="delete-code">Copy</button>
+                <button class="run-example-button" type="button" data-run-example="delete">Run Example</button>
+              </div>
+            </div>
             <pre id="delete-code"><code>private void deleteStudent() {
     Integer studentId = getSelectedStudentId();
     if (studentId == null) {
@@ -392,7 +426,13 @@ WHERE student_id=?</code></pre><p>Separates the SQL instruction from the supplie
 
           <h3 class="subheading">Connect button events</h3>
           <div class="code-panel">
-            <div class="code-toolbar"><span>Action listeners</span><button type="button" data-copy-target="listener-code">Copy</button></div>
+            <div class="code-toolbar">
+              <span>Action listeners</span>
+              <div class="code-toolbar-actions">
+                <button type="button" data-copy-target="listener-code">Copy</button>
+                <button class="run-example-button" type="button" data-run-example="listeners">Run Example</button>
+              </div>
+            </div>
             <pre id="listener-code"><code>btnUpdate.addActionListener(event -&gt; updateStudent());
 btnDelete.addActionListener(event -&gt; deleteStudent());
 btnClear.addActionListener(event -&gt; clearForm());
@@ -406,7 +446,13 @@ studentTable.getSelectionModel().addListSelectionListener(event -&gt; {
 
           <h3 class="subheading">Load records into the JTable</h3>
           <div class="code-panel">
-            <div class="code-toolbar"><span>Table refresh method</span><button type="button" data-copy-target="load-code">Copy</button></div>
+            <div class="code-toolbar">
+              <span>Table refresh method</span>
+              <div class="code-toolbar-actions">
+                <button type="button" data-copy-target="load-code">Copy</button>
+                <button class="run-example-button" type="button" data-run-example="load">Run Example</button>
+              </div>
+            </div>
             <pre id="load-code"><code>private void loadStudents() {
     tableModel.setRowCount(0);
     String sql = "SELECT student_id, full_name, course, year_level, email "
@@ -541,6 +587,24 @@ studentTable.getSelectionModel().addListSelectionListener(event -&gt; {
       </article>
     </div>
   </main>
+
+
+  <div class="java-demo-modal" id="javaDemoModal" hidden aria-hidden="true">
+    <div class="java-demo-backdrop" data-demo-close></div>
+
+    <section class="java-demo-dialog" role="dialog" aria-modal="true" aria-labelledby="javaDemoTitle">
+      <header class="java-demo-titlebar">
+        <div>
+          <span class="java-demo-badge">JAVA / SWING</span>
+          <h2 id="javaDemoTitle">Run Example</h2>
+          <p id="javaDemoSubtitle">Expected browser simulation</p>
+        </div>
+        <button class="java-demo-close" type="button" data-demo-close aria-label="Close Run Example">&times;</button>
+      </header>
+
+      <div class="java-demo-content" id="javaDemoBody"></div>
+    </section>
+  </div>
 
   <footer class="site-footer">
     <div><strong>Database &amp; JDBC Learning Module</strong><p>UPDATE and DELETE Using Java Swing JFrame</p></div>

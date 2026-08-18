@@ -9,11 +9,6 @@
   <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
   <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
 
-  <!-- Typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
   <!-- Separated stylesheet -->
   <link rel="stylesheet" href="../css/Practice Projects/inventory-system.css">
 </head>
@@ -95,6 +90,12 @@
         </ul>
       </section>
 
+      <div class="runner-notice" role="note">
+        <strong>About the Run Example buttons:</strong> These classroom buttons demonstrate the
+        <em>expected GUI result</em> of each Java/Swing lesson directly in the browser. These previews are
+        fully offline and use HTML/CSS/JavaScript to imitate the Swing result; students should still run the actual Java source in NetBeans for the real program.
+      </div>
+
       <!-- ============================================================
            LESSON 1
            ============================================================ -->
@@ -150,6 +151,40 @@
           Ask the class: why is a graphical interface generally more user-friendly for an inventory
           clerk than a console-based (text-only) program? Use this to transition into system planning.
         </div>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Create a JFrame window</h3>
+              <p>See what happens when a basic Swing JFrame is created and displayed.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-1" aria-controls="lesson-output-1" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-1" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 1">
+              <div class="swing-window compact-window">
+                <div class="swing-titlebar"><span>Inventory Management System</span><span class="window-controls"><i></i><i></i><i></i></span></div>
+                <div class="swing-content gui-center">
+                  <div class="welcome-panel">
+                    <div class="app-icon">IMS</div>
+                    <strong>Inventory Management System</strong>
+                    <span>JFrame window created successfully.</span>
+                    <button type="button" class="swing-button primary">Open Inventory Form</button>
+                  </div>
+                </div>
+                <div class="swing-status">Ready &middot; JFrame visible &middot; 760 &times; 420</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -190,6 +225,44 @@
           <span class="callout-title">Teaching Tip</span>
           Have students sketch the form layout on paper first, labeling every field and button, before
           they touch the GUI builder. This reinforces planning as a separate step from implementation.
+        </div>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Preview the planned inventory workflow</h3>
+              <p>Display the data fields and CRUD operations planned before coding.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-2" aria-controls="lesson-output-2" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-2" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 2">
+              <div class="swing-window">
+                <div class="swing-titlebar"><span>Inventory System Planner</span><span class="window-controls"><i></i><i></i><i></i></span></div>
+                <div class="swing-content">
+                  <div class="planner-grid">
+                    <section class="gui-card">
+                      <h4>Required Data Fields</h4>
+                      <div class="field-chip-list"><span>Product ID</span><span>Product Name</span><span>Category</span><span>Quantity</span><span>Unit Price</span></div>
+                    </section>
+                    <section class="gui-card">
+                      <h4>CRUD Operations</h4>
+                      <div class="crud-grid"><button type="button">Create</button><button type="button">Read</button><button type="button">Update</button><button type="button" class="danger-soft">Delete</button></div>
+                    </section>
+                  </div>
+                  <div class="gui-message success-message"><strong>Planning complete.</strong> Requirements are ready for GUI design.</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -262,6 +335,42 @@
           </svg>
           <figcaption><b>Figure 2.</b> The GUI Builder layout: components are dragged from the <b>Palette</b> onto the <b>Design Canvas</b>, and each component's settings appear in the <b>Properties</b> panel.</figcaption>
         </figure>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Check the project setup</h3>
+              <p>Show the expected project state after creating the Java application and JFrame Form.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-3" aria-controls="lesson-output-3" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-3" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 3">
+              <div class="ide-window">
+                <div class="ide-toolbar"><span class="ide-brand">Apache NetBeans IDE</span><span class="ide-run">&#9654; Run Project</span></div>
+                <div class="ide-layout">
+                  <aside class="project-tree">
+                    <strong>Projects</strong>
+                    <ul><li>&#9662; InventorySystem<ul><li>&#9662; Source Packages<ul><li>inventory</li><li class="selected-file">InventoryForm.java</li><li>DBConnection.java</li></ul></li><li>Libraries</li></ul></li></ul>
+                  </aside>
+                  <div class="ide-editor">
+                    <div class="editor-tab">InventoryForm.java &nbsp; <b>Design</b></div>
+                    <div class="design-canvas"><div class="mini-form"><strong>Inventory Management System</strong><span>JFrame Form ready for components</span></div></div>
+                  </div>
+                </div>
+                <div class="ide-output">BUILD SUCCESSFUL &mdash; InventorySystem is ready for Swing GUI design.</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -360,6 +469,42 @@
           </svg>
           <figcaption><b>Figure 3.</b> The completed <code>InventoryForm</code> layout showing labeled input fields, action buttons, and a <code>JTable</code> populated with sample inventory records.</figcaption>
         </figure>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Render the JFrame form design</h3>
+              <p>Preview the visible controls that students should have after completing the GUI layout.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-4" aria-controls="lesson-output-4" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-4" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 4">
+              <div class="swing-window inventory-demo">
+                <div class="swing-titlebar"><span>Inventory Management System</span><span class="window-controls"><i></i><i></i><i></i></span></div>
+                <div class="swing-content">
+                  <div class="inventory-form-grid">
+                    <label>Product ID<input value="1004" readonly></label>
+                    <label>Product Name<input value="Mechanical Keyboard" readonly></label>
+                    <label>Category<select disabled><option>Electronics</option></select></label>
+                    <label>Quantity<input value="18" readonly></label>
+                    <label>Unit Price<input value="1899.00" readonly></label>
+                  </div>
+                  <div class="gui-actions"><button type="button" class="swing-button primary">Add</button><button type="button" class="swing-button">Update</button><button type="button" class="swing-button danger">Delete</button><button type="button" class="swing-button">Clear</button><button type="button" class="swing-button accent">Search</button></div>
+                  <div class="gui-table-wrap"><table class="gui-table"><thead><tr><th>ID</th><th>Product Name</th><th>Category</th><th>Qty</th><th>Price</th></tr></thead><tbody><tr><td>1001</td><td>Wireless Mouse</td><td>Electronics</td><td>35</td><td>450.00</td></tr><tr><td>1002</td><td>Bond Paper (A4)</td><td>Office Supplies</td><td>120</td><td>185.00</td></tr><tr><td>1003</td><td>USB Flash Drive 32GB</td><td>Electronics</td><td>60</td><td>299.00</td></tr></tbody></table></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -397,6 +542,36 @@
           <code>jButton1</code>) are difficult to read once the project grows. Renaming components
           now prevents confusion later when writing event-handling code.
         </div>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Verify component names</h3>
+              <p>Check the descriptive variable names that will be used by the event-handling code.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-5" aria-controls="lesson-output-5" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-5" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 5">
+              <div class="properties-demo">
+                <div class="properties-preview"><div class="fake-label">Product Name</div><div class="fake-input">Wireless Mouse</div><button type="button" class="swing-button primary">Add</button></div>
+                <div class="properties-panel">
+                  <div class="properties-title">Properties &mdash; JButton</div>
+                  <dl><dt>Variable Name</dt><dd>btnAdd</dd><dt>text</dt><dd>Add</dd><dt>enabled</dt><dd>true</dd><dt>component</dt><dd>JButton</dd></dl>
+                  <div class="naming-ok">&#10003; Descriptive component naming applied</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -427,6 +602,36 @@ model.addRow(new Object[] {
           <span class="callout-title">Teaching Tip</span>
           Demonstrate this in class by running the program and adding two or three sample rows live,
           so students can see the connection between the code and what appears on the table.
+        </div>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Add a sample JTable record</h3>
+              <p>Demonstrate how DefaultTableModel adds one row to the inventory table.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-6" aria-controls="lesson-output-6" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-6" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 6">
+              <div class="swing-window">
+                <div class="swing-titlebar"><span>tblInventory &mdash; JTable Preview</span><span class="window-controls"><i></i><i></i><i></i></span></div>
+                <div class="swing-content">
+                  <div class="model-badge">DefaultTableModel &middot; 1 row</div>
+                  <div class="gui-table-wrap"><table class="gui-table selected-table"><thead><tr><th>Product ID</th><th>Product Name</th><th>Category</th><th>Quantity</th><th>Price</th></tr></thead><tbody><tr class="selected-row"><td>1001</td><td>Wireless Mouse</td><td>Electronics</td><td>35</td><td>450.00</td></tr></tbody></table></div>
+                  <div class="gui-message success-message">&#10003; <code>model.addRow(...)</code> added the record to the visible JTable.</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -489,6 +694,40 @@ private void clearFields() {
           Walk through the flow of control: a user click &rarr; triggers the ActionEvent &rarr; calls
           the listener method &rarr; updates the table model &rarr; the JTable repaints automatically.
         </div>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Run the button event flow</h3>
+              <p>Simulate the Add, Delete, and Clear button behavior described in this lesson.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-7" aria-controls="lesson-output-7" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-7" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 7">
+              <div class="swing-window inventory-demo">
+                <div class="swing-titlebar"><span>Button Event Demonstration</span><span class="window-controls"><i></i><i></i><i></i></span></div>
+                <div class="swing-content">
+                  <div class="event-demo-grid">
+                    <label>Product ID<input value="1004" readonly></label><label>Product Name<input value="Mechanical Keyboard" readonly></label><label>Quantity<input value="18" readonly></label>
+                  </div>
+                  <div class="gui-actions"><button type="button" class="swing-button primary">Add</button><button type="button" class="swing-button danger">Delete</button><button type="button" class="swing-button">Clear</button></div>
+                  <div class="event-flow"><span>User click</span><b>&rarr;</b><span>ActionEvent</span><b>&rarr;</b><span>Listener method</span><b>&rarr;</b><span>Table model updates</span></div>
+                  <div class="gui-table-wrap"><table class="gui-table"><thead><tr><th>ID</th><th>Product</th><th>Qty</th><th>Status</th></tr></thead><tbody><tr><td>1004</td><td>Mechanical Keyboard</td><td>18</td><td><span class="status-pill">Added</span></td></tr></tbody></table></div>
+                  <div class="gui-message success-message">Event handler completed and the JTable repainted automatically.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -547,6 +786,34 @@ while (rs.next()) {
           <code>ResultSet</code> objects (or use try-with-resources) to avoid leaving database
           connections open.
         </div>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Simulate the JDBC database workflow</h3>
+              <p>Show the expected connection, insert, and select sequence for the MySQL example.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-8" aria-controls="lesson-output-8" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-8" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 8">
+              <div class="db-demo">
+                <div class="db-connection-card"><div class="db-icon">DB</div><div><strong>MySQL Connection</strong><span>jdbc:mysql://localhost:3306/inventory_db</span></div><span class="connection-pill">Connected</span></div>
+                <div class="db-steps"><div><b>1</b><span>Connection opened</span><em>&#10003;</em></div><div><b>2</b><span>PreparedStatement executed</span><em>&#10003;</em></div><div><b>3</b><span>1 row inserted</span><em>&#10003;</em></div><div><b>4</b><span>SELECT records loaded</span><em>&#10003;</em></div></div>
+                <div class="gui-table-wrap"><table class="gui-table"><thead><tr><th>ID</th><th>Name</th><th>Category</th><th>Qty</th><th>Price</th></tr></thead><tbody><tr><td>1001</td><td>Wireless Mouse</td><td>Electronics</td><td>35</td><td>450.00</td></tr></tbody></table></div>
+                <div class="gui-message info-message">Browser demo only: the actual Java program still requires MySQL and a JDBC driver.</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -583,6 +850,38 @@ while (rs.next()) {
           <li>Use <code>System.out.println()</code> statements to trace values before an operation runs.</li>
           <li>Wrap database calls in <code>try&ndash;catch</code> blocks and read the exception message carefully.</li>
         </ul>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Test input validation</h3>
+              <p>Compare valid and invalid input so students can see the validation result.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-9" aria-controls="lesson-output-9" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-9" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 9">
+              <div class="validation-demo">
+                <div class="validation-form">
+                  <label>Product Name<input value="" placeholder="Required field" readonly class="invalid-input"></label>
+                  <label>Quantity<input value="thirty-five" readonly class="invalid-input"></label>
+                  <label>Unit Price<input value="450.00" readonly></label>
+                  <button type="button" class="swing-button primary">Save Product</button>
+                </div>
+                <div class="dialog-box" role="alert"><div class="dialog-icon">!</div><div><strong>Input Validation</strong><p>Product name cannot be empty.<br>Quantity and price must be numeric.</p></div><button type="button" class="dialog-ok">OK</button></div>
+                <div class="validation-summary"><span class="fail-dot"></span> Invalid data blocked before saving.</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -601,6 +900,40 @@ while (rs.next()) {
           <li>JDBC allows the form to store and retrieve data permanently from a database.</li>
           <li>Input validation protects the system from blank or invalid data before it is saved.</li>
         </ul>
+
+        <div class="run-example">
+          <div class="run-example__header">
+            <div class="run-example__copy">
+              <span class="run-kicker">Interactive Lesson Demo</span>
+              <h3>Run the complete lesson workflow</h3>
+              <p>Review the end-to-end sequence from planning through database storage and validation.</p>
+            </div>
+            <button class="run-btn" type="button" data-target="lesson-output-10" aria-controls="lesson-output-10" aria-expanded="false">
+              <span class="run-btn__icon" aria-hidden="true">&#9654;</span>
+              <span class="run-btn__text">Run Example</span>
+            </button>
+          </div>
+          <div class="run-output" id="lesson-output-10" hidden>
+            <div class="run-output__bar">
+              <span class="run-output__status" aria-hidden="true"></span>
+              <span>GUI Output / Result</span>
+            </div>
+            <div class="gui-stage" aria-label="GUI result for lesson 10">
+              <div class="swing-window inventory-demo final-demo">
+                <div class="swing-titlebar"><span>Inventory Management System &mdash; Complete Workflow</span><span class="window-controls"><i></i><i></i><i></i></span></div>
+                <div class="swing-content">
+                  <div class="summary-toolbar"><div><strong>Inventory Dashboard</strong><span>GUI + Events + JTable + JDBC + Validation</span></div><span class="system-ready">System Ready</span></div>
+                  <div class="inventory-form-grid">
+                    <label>Product ID<input value="1005" readonly></label><label>Product Name<input value="Laptop Stand" readonly></label><label>Category<select disabled><option>Office Supplies</option></select></label><label>Quantity<input value="12" readonly></label><label>Unit Price<input value="799.00" readonly></label>
+                  </div>
+                  <div class="gui-actions"><button type="button" class="swing-button primary">Add</button><button type="button" class="swing-button">Update</button><button type="button" class="swing-button danger">Delete</button><button type="button" class="swing-button">Clear</button><button type="button" class="swing-button accent">Search</button></div>
+                  <div class="gui-table-wrap"><table class="gui-table"><thead><tr><th>ID</th><th>Product Name</th><th>Category</th><th>Qty</th><th>Price</th></tr></thead><tbody><tr><td>1001</td><td>Wireless Mouse</td><td>Electronics</td><td>35</td><td>450.00</td></tr><tr><td>1002</td><td>Bond Paper (A4)</td><td>Office Supplies</td><td>120</td><td>185.00</td></tr><tr><td>1005</td><td>Laptop Stand</td><td>Office Supplies</td><td>12</td><td>799.00</td></tr></tbody></table></div>
+                  <div class="final-status-row"><span>&#10003; Validation passed</span><span>&#10003; Event handled</span><span>&#10003; Database synchronized</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -640,5 +973,38 @@ while (rs.next()) {
 
     </main>
   </div>
+
+  <script>
+    (function () {
+      const navToggle = document.getElementById('nav-toggle');
+
+      document.querySelectorAll('.run-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const output = document.getElementById(button.dataset.target);
+          if (!output) return;
+
+          const willOpen = output.hasAttribute('hidden');
+          if (willOpen) {
+            output.removeAttribute('hidden');
+            button.setAttribute('aria-expanded', 'true');
+            button.classList.add('is-running');
+            button.querySelector('.run-btn__text').textContent = 'Hide GUI';
+            output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } else {
+            output.setAttribute('hidden', '');
+            button.setAttribute('aria-expanded', 'false');
+            button.classList.remove('is-running');
+            button.querySelector('.run-btn__text').textContent = 'Run Example';
+          }
+        });
+      });
+
+      document.querySelectorAll('.toc-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+          if (navToggle) navToggle.checked = false;
+        });
+      });
+    }());
+  </script>
 </body>
 </html>

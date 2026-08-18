@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NetBeans-style Java JFrame practice IDE for building multi-form Swing mini systems.">
+  <title>Java JFrame Practice IDE</title>
+
+  <link rel="icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="shortcut icon" type="image/jpeg" href="../img/favicon.jpg?v=2">
+  <link rel="stylesheet" href="css/ide.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">J</div>
+      <div>
+        <h1>Java JFrame Practice IDE</h1>
+        <p>NetBeans-style learning environment for multi-form JFrame + JDBC projects</p>
+      </div>
+    </div>
+
+    <div class="top-actions" aria-label="IDE actions">
+      <a class="btn ghost" href="../index.html">Home</a>
+      <button class="btn" id="newProjectBtn" type="button">New Project</button>
+      <button class="btn" id="openProjectBtn" type="button">Open Project</button>
+      <button class="btn success" id="saveBtn" type="button">Save</button>
+      <button class="btn primary" id="compileBtn" type="button">Compile</button>
+      <button class="btn run" id="runBtn" type="button">▶ Run Java</button>
+    </div>
+  </header>
+
+  <nav class="menubar" aria-label="IDE menu">
+    <button type="button" data-menu="file">File</button>
+    <button type="button" data-menu="edit">Edit</button>
+    <button type="button" data-menu="view">View</button>
+    <button type="button" data-menu="source">Source</button>
+    <button type="button" data-menu="run">Run</button>
+    <button type="button" data-menu="database">Database</button>
+    <button type="button" data-menu="tools">Tools</button>
+    <button type="button" data-menu="help">Help</button>
+  </nav>
+
+  <div class="toolbar">
+    <span class="project-label">Project:</span>
+    <strong id="activeProjectLabel">No project</strong>
+    <span class="separator" aria-hidden="true"></span>
+
+    <button id="newFileBtn" class="toolbar-emphasis" type="button">+ New File / JFrame</button>
+    <button id="deleteFileBtn" class="toolbar-danger" type="button">🗑 Delete Selected File</button>
+    <button id="setMainBtn" type="button">Set as Main</button>
+    <button id="previewBtn" type="button">Preview Form</button>
+    <button id="addDbBtn" type="button">+ DBConnection.java</button>
+    <button id="addAuthBtn" type="button">+ Auth DB Files</button>
+    <button id="refreshFilesBtn" type="button">Refresh Files</button>
+
+    <span class="spacer"></span>
+
+    <label for="mainClassInput">
+      Main class
+      <input id="mainClassInput" value="MainForm" autocomplete="off">
+    </label>
+  </div>
+
+  <main class="layout">
+    <aside class="left-pane">
+      <section class="panel project-panel">
+        <div class="panel-title">
+          <span>Projects / Files</span>
+          <button class="mini-add" id="treeNewFileBtn" type="button" title="Create a new JFrame or Java class">＋</button>
+        </div>
+        <div id="projectTree" class="tree">
+          <div class="empty">Create or open a project.</div>
+        </div>
+      </section>
+
+      <section class="panel palette-panel">
+        <div class="panel-title">Palette - Swing Controls</div>
+        <p class="panel-help">Click a control or drag it onto the currently selected JFrame canvas. Double-click a JButton in Design to open its ActionPerformed code.</p>
+        <div class="palette">
+          <button type="button" draggable="true" data-type="JLabel">A <span>JLabel</span></button>
+          <button type="button" draggable="true" data-type="JTextField">▭ <span>JTextField</span></button>
+          <button type="button" draggable="true" data-type="JPasswordField">••• <span>JPasswordField</span></button>
+          <button type="button" draggable="true" data-type="JButton">B <span>JButton</span></button>
+          <button type="button" draggable="true" data-type="JCheckBox">☑ <span>JCheckBox</span></button>
+          <button type="button" draggable="true" data-type="JRadioButton">◉ <span>JRadioButton</span></button>
+          <button type="button" draggable="true" data-type="JTextArea">≡ <span>JTextArea</span></button>
+          <button type="button" draggable="true" data-type="JComboBox">▼ <span>JComboBox</span></button>
+          <button type="button" draggable="true" data-type="JTable">▦ <span>JTable</span></button>
+        </div>
+      </section>
+    </aside>
+
+    <section class="center-pane">
+      <div class="tabs" role="tablist" aria-label="Editor views">
+        <button class="tab active" data-view="design" type="button" role="tab" aria-selected="true">Design</button>
+        <button class="tab" data-view="source" type="button" role="tab" aria-selected="false">Source</button>
+        <span id="activeFileBadge" class="active-file-badge">MainForm.java</span>
+      </div>
+
+      <section id="designView" class="view active">
+        <div id="nonFormNotice" class="non-form-notice hidden">
+          <strong>This file is a Java source class, not a JFrame Form.</strong>
+          <span>Open the Source tab, or create a new JFrame Form using “+ New File / JFrame”.</span>
+        </div>
+
+        <div class="designer-wrap" id="designerWrap">
+          <div class="fake-window" id="fakeWindow">
+            <div class="fake-title">
+              <span id="frameTitleDisplay">Main Form</span>
+              <span aria-hidden="true">— □ ×</span>
+            </div>
+            <div id="canvas" class="canvas">
+              <div id="emptyCanvas" class="empty-canvas">Drag Swing controls here</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sourceView" class="view">
+        <div class="editor-head">
+          <span id="currentFileLabel">MainForm.java</span>
+          <div class="editor-actions">
+            <button id="foldModeBtn" type="button" title="Show or hide the NetBeans-style folded code view">▾ Code Folding</button>
+            <button id="collapseGeneratedBtn" type="button" title="Collapse imports, fields, constructor/init code, and main method">− Minimize Generated</button>
+            <button id="expandAllCodeBtn" type="button" title="Expand every folded code section">+ Maximize All</button>
+            <button id="generateBtn" type="button">Generate Current Form</button>
+            <button id="copyBtn" type="button">Copy</button>
+          </div>
+        </div>
+        <div id="foldedCodeView" class="folded-code-view hidden" aria-label="Folded Java source view"></div>
+        <textarea id="codeEditor" spellcheck="false" aria-label="Java source editor"></textarea>
+      </section>
+    </section>
+
+    <aside class="right-pane">
+      <section class="panel" id="framePropertiesPanel">
+        <div class="panel-title">JFrame Properties</div>
+        <div class="form-grid">
+          <label>Class Name<input id="className" value="MainForm" autocomplete="off"></label>
+          <label>Title<input id="frameTitle" value="Main Form" autocomplete="off"></label>
+          <label>Width<input id="frameWidth" type="number" value="760" min="400" max="1200"></label>
+          <label>Height<input id="frameHeight" type="number" value="500" min="300" max="800"></label>
+        </div>
+      </section>
+
+      <section class="panel grow" id="componentPanel">
+        <div class="panel-title">Component Properties</div>
+        <div id="noSelection" class="empty">Select a component.</div>
+        <div id="componentProps" class="form-grid hidden">
+          <label>Type<input id="propType" readonly></label>
+          <label>Variable<input id="propName" autocomplete="off"></label>
+          <label class="full">Text / Items<input id="propText" autocomplete="off"></label>
+          <label>X<input id="propX" type="number"></label>
+          <label>Y<input id="propY" type="number"></label>
+          <label>Width<input id="propW" type="number" min="20"></label>
+          <label>Height<input id="propH" type="number" min="18"></label>
+          <label id="actionTargetLabel" class="full hidden">
+            Open JFrame on Button Click
+            <select id="propActionTarget">
+              <option value="">No form action</option>
+            </select>
+          </label>
+          <div id="buttonEventsBlock" class="events-block full hidden">
+            <div class="events-title">⚡ Events</div>
+            <label>
+              ActionPerformed Handler
+              <input id="propActionHandler" readonly>
+            </label>
+            <button id="openEventHandlerBtn" class="event-handler-btn" type="button">Open / Create Action Handler</button>
+            <p class="event-help">Tip: double-click this JButton on the Design canvas to jump directly to its event code.</p>
+          </div>
+          <button class="danger" id="deleteComponentBtn" type="button">Delete Component</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">Database Helper</div>
+        <div class="form-grid">
+          <label>Host<input id="dbHost" value="localhost" autocomplete="off"></label>
+          <label>Port<input id="dbPort" value="3306" inputmode="numeric" autocomplete="off"></label>
+          <label>Database<input id="dbName" value="student_system" autocomplete="off"></label>
+          <label>User<input id="dbUser" value="root" autocomplete="username"></label>
+          <label class="full">Password<input id="dbPass" type="password" autocomplete="current-password"></label>
+          <label class="full">Users Table<input id="dbUsersTable" value="users" autocomplete="off"></label>
+          <button id="generateAuthBtn" type="button">Generate Login/Register DB Files</button>
+          <button id="testDbBtn" type="button">Test XAMPP Database</button>
+          <p class="db-note">Authentication templates use JDBC, PreparedStatement, and PBKDF2 password hashing.</p>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <section class="output-panel">
+    <div class="panel-title">
+      <span>Output</span>
+      <button id="clearOutputBtn" type="button">Clear</button>
+    </div>
+    <pre id="output" aria-live="polite">IDE ready. Create a project to begin.</pre>
+  </section>
+</div>
+
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-head">
+      <strong id="modalTitle">Dialog</strong>
+      <button id="modalClose" type="button" aria-label="Close dialog">×</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="js/ide.js"></script>
+</body>
+</html>

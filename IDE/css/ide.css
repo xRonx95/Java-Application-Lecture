@@ -67,3 +67,98 @@
   .fold-edit-btn{min-width:54px;min-height:30px}
   .fold-code{padding:10px;font-size:11px}
 }
+
+/* ===== Enhanced NetBeans-style designer controls ===== */
+.form-grid input[type="color"]{height:34px;padding:3px;cursor:pointer;background:#fff}
+.check-field{display:flex!important;flex-direction:column;justify-content:flex-end}
+.check-field input[type="checkbox"]{width:18px!important;height:18px;margin:8px 0 3px}
+.design-section{margin-top:4px;padding:6px 7px;border-top:1px solid #c2ccd4;border-bottom:1px solid #d4dde4;background:#e9f1f7;color:#294b64;font-size:11px;font-weight:800;letter-spacing:.02em}
+.icon-editor{padding:0 0 3px}
+.icon-editor>label{margin-top:7px}
+.icon-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+.icon-actions button{padding:7px;border:1px solid #8d9aa4;border-radius:4px;background:#f7f7f7}
+.icon-actions button:hover{background:#e7f2fb}
+.component-icon{display:inline-block;max-width:42%;max-height:82%;object-fit:contain;vertical-align:middle;margin-right:6px;pointer-events:none}
+.component>button,.component>label,.component>input,.component>textarea,.component>select{overflow:hidden}
+.component>button,.component>label{white-space:nowrap;text-overflow:ellipsis}
+
+/* Direct event-edit guidance */
+.event-edit-notice{display:grid;grid-template-columns:auto minmax(0,1fr) 28px;gap:9px;align-items:center;padding:8px 10px;border-bottom:1px solid #d2b765;background:#fff7cf;color:#4f451e;font:12px/1.4 "Segoe UI",Arial,sans-serif}
+.event-edit-notice strong{color:#674e00}
+.event-edit-notice button{width:28px;height:26px;padding:0;border:1px solid #cbbd7b;border-radius:4px;background:#fffdf1;color:#5c532c;font-size:18px;line-height:1}
+.event-edit-notice button:hover{background:#fff2b0}
+
+/* Output panel hide / maximize */
+.output-panel{transition:min-height .18s ease,height .18s ease}
+.output-panel .output-actions{display:flex;align-items:center;gap:5px}
+.output-panel.collapsed{min-height:0!important}
+.output-panel.collapsed pre{display:none}
+.output-panel.maximized{position:fixed;left:0;right:0;bottom:0;z-index:9000;height:min(62vh,620px);min-height:300px;border:2px solid #555;box-shadow:0 -10px 28px rgba(0,0,0,.28)}
+.output-panel.maximized pre{height:calc(100% - 35px);max-height:none;min-height:0}
+.output-panel.maximized.collapsed{height:auto;min-height:0}
+
+/* Save-state cue */
+.autosave-badge{font-size:10px;font-weight:600;color:#507080}
+
+@media(max-width:600px){
+  .event-edit-notice{grid-template-columns:1fr 32px}
+  .event-edit-notice strong{grid-column:1/-1}
+  .event-edit-notice span{grid-column:1}
+  .event-edit-notice button{grid-column:2;grid-row:2}
+  .icon-actions{grid-template-columns:1fr}
+  .output-panel .output-actions{flex-wrap:wrap;justify-content:flex-end}
+  .output-panel.maximized{height:70vh}
+}
+
+/* ===== Inline editing inside Code Folding View ===== */
+.fold-inline-editor{border-top:1px solid #b8c7d2;background:#f8fbfd;padding:10px}
+.fold-inline-help{margin-bottom:8px;padding:7px 9px;border:1px solid #9fc2db;border-radius:4px;background:#eaf5fd;color:#244e69;font:11px/1.45 "Segoe UI",Arial,sans-serif}
+.fold-inline-help.generated-warning{border-color:#d6bd72;background:#fff7da;color:#655319}
+.fold-inline-textarea{display:block;width:100%;min-height:190px;max-height:520px;resize:vertical;border:1px solid #6f9fbe;border-radius:4px;outline:0;padding:12px 14px;background:#fff;color:#17232c;font:12px/1.55 Consolas,"Courier New",monospace;tab-size:4;white-space:pre;overflow:auto}
+.fold-inline-textarea:focus{border-color:#2478b6;box-shadow:0 0 0 3px rgba(36,120,182,.14)}
+.fold-inline-actions{display:flex;justify-content:flex-end;gap:7px;flex-wrap:wrap;margin-top:8px}
+.fold-inline-actions button{min-height:32px;padding:6px 11px;border:1px solid #8296a5;border-radius:4px;background:#f5f5f5;color:#263844;font-size:11px;font-weight:700}
+.fold-inline-actions button:hover{background:#e7f1f8}
+.fold-inline-actions .fold-save-btn{border-color:#4e8f5a;background:#e9f6eb;color:#23592d}
+.fold-inline-actions .fold-save-btn:hover{background:#d8eedc}
+.fold-inline-actions .fold-cancel-btn{border-color:#a6a6a6;background:#f7f7f7;color:#555}
+.fold-inline-actions .fold-full-source-btn{border-color:#6b97b6;background:#e9f3fa;color:#224f6d}
+.code-fold-section[data-editing="true"]{box-shadow:0 0 0 2px rgba(34,113,168,.18)}
+.code-fold-section[data-editing="true"]>summary{background:#dceefa}
+.code-fold-section[data-editing="true"] .fold-edit-btn{opacity:.55;pointer-events:none}
+
+@media(max-width:600px){
+  .fold-inline-editor{padding:7px}
+  .fold-inline-textarea{min-height:230px;font-size:11px;padding:10px}
+  .fold-inline-actions{display:grid;grid-template-columns:1fr 1fr}
+  .fold-inline-actions button{width:100%;min-height:40px}
+  .fold-inline-actions .fold-full-source-btn{grid-column:1/-1}
+}
+
+
+/* NetBeans-style Navigator / component z-order */
+.navigator-panel{min-height:215px}
+.navigator-front-hint{font-size:10px;font-weight:700;color:#557084}
+.navigator-help{padding-bottom:4px}
+.component-navigator{max-height:260px;overflow:auto;padding:4px 5px 6px;background:#fbfbfb;border-top:1px solid #d1d1d1;border-bottom:1px solid #c7c7c7}
+.navigator-root{display:flex;align-items:center;gap:5px;min-height:28px;padding:4px 5px;color:#253743;font-size:11px}
+.navigator-disclosure{width:14px;text-align:center;color:#566a78}.navigator-root-type{margin-left:auto;color:#7a858c;font-size:9px;font-weight:400}
+.navigator-children{padding-left:13px;border-left:1px dotted #aaa;margin-left:9px}
+.navigator-item{width:100%;display:grid;grid-template-columns:22px minmax(72px,1fr) minmax(0,.9fr) 42px;align-items:center;gap:5px;min-height:34px;padding:4px 5px;border:1px solid transparent;border-radius:2px;background:transparent;color:#222;text-align:left}
+.navigator-item:hover{background:#e8f2fb;border-color:#b5d0e5}.navigator-item.selected{background:#cfe8fb;border-color:#75acd2;box-shadow:inset 3px 0 0 #1976bd}
+.navigator-type-icon{display:grid;place-items:center;width:20px;height:20px;border:1px solid #b6bec4;border-radius:2px;background:#fff;color:#1f4058;font-size:10px;font-weight:800;overflow:hidden}
+.navigator-item-main{min-width:0;display:flex;flex-direction:column;line-height:1.15}.navigator-item-main strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}.navigator-item-main small{color:#77828a;font-size:9px}
+.navigator-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#5c666d;font-size:9px}.navigator-text.empty-text{font-style:italic;color:#969da2}
+.navigator-layer{justify-self:end;min-width:34px;padding:2px 3px;border:1px solid #bec7ce;border-radius:8px;background:#f4f6f7;color:#596b77;text-align:center;font-size:8px;font-weight:800}
+.navigator-item:first-child .navigator-layer{border-color:#7aa57f;background:#edf8ee;color:#32623a}
+.navigator-empty{padding:9px 4px;text-align:left}
+.layer-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:6px;background:#eee}
+.layer-actions button{min-height:30px;padding:5px 4px;border:1px solid #9da7ae;border-radius:3px;background:linear-gradient(#fff,#e3e6e8);color:#263944;font-size:10px;font-weight:700}
+.layer-actions button:hover:not(:disabled){background:#dceefd;border-color:#6e9fc3}.layer-actions button:disabled{opacity:.42;cursor:not-allowed}
+.navigator-shortcuts{margin:0;padding:0 7px 7px;background:#eee;color:#717b82;font-size:9px;line-height:1.35}
+
+/* An empty text property must really render as empty. The component box stays selectable in Design. */
+.component>label:empty,.preview-component>label:empty{min-width:1px;min-height:1px}
+
+@media(max-width:900px){.navigator-panel{min-height:190px}.component-navigator{max-height:210px}}
+@media(max-width:600px){.navigator-item{grid-template-columns:22px minmax(70px,1fr) 38px}.navigator-text{display:none}.layer-actions button{min-height:38px;font-size:11px}.navigator-shortcuts{display:none}}

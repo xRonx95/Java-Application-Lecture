@@ -5,7 +5,7 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
   const els = {
-    newProjectBtn: $("#newProjectBtn"), openProjectBtn: $("#openProjectBtn"), saveBtn: $("#saveBtn"),
+    newProjectBtn: $("#newProjectBtn"), openProjectBtn: $("#openProjectBtn"), saveBtn: $("#saveBtn"), saveAsBtn: $("#saveAsBtn"),
     compileBtn: $("#compileBtn"), runBtn: $("#runBtn"), newFileBtn: $("#newFileBtn"),
     treeNewFileBtn: $("#treeNewFileBtn"), deleteFileBtn: $("#deleteFileBtn"), setMainBtn: $("#setMainBtn"),
     previewBtn: $("#previewBtn"), addDbBtn: $("#addDbBtn"), addAuthBtn: $("#addAuthBtn"), refreshFilesBtn: $("#refreshFilesBtn"),
@@ -16,14 +16,20 @@
     foldedCodeView: $("#foldedCodeView"), foldModeBtn: $("#foldModeBtn"), collapseGeneratedBtn: $("#collapseGeneratedBtn"), expandAllCodeBtn: $("#expandAllCodeBtn"),
     generateBtn: $("#generateBtn"), copyBtn: $("#copyBtn"), framePropertiesPanel: $("#framePropertiesPanel"),
     componentPanel: $("#componentPanel"), className: $("#className"), frameTitle: $("#frameTitle"),
-    frameWidth: $("#frameWidth"), frameHeight: $("#frameHeight"), frameTitleDisplay: $("#frameTitleDisplay"),
+    frameWidth: $("#frameWidth"), frameHeight: $("#frameHeight"), frameBackground: $("#frameBackground"), frameResizable: $("#frameResizable"), frameTitleDisplay: $("#frameTitleDisplay"),
     noSelection: $("#noSelection"), componentProps: $("#componentProps"), propType: $("#propType"),
     propName: $("#propName"), propText: $("#propText"), propX: $("#propX"), propY: $("#propY"),
-    propW: $("#propW"), propH: $("#propH"), actionTargetLabel: $("#actionTargetLabel"),
-    propActionTarget: $("#propActionTarget"), buttonEventsBlock: $("#buttonEventsBlock"),
+    propW: $("#propW"), propH: $("#propH"), propFontFamily: $("#propFontFamily"), propFontStyle: $("#propFontStyle"),
+    propFontSize: $("#propFontSize"), propForeground: $("#propForeground"), propBackground: $("#propBackground"), propOpaque: $("#propOpaque"),
+    iconEditorBlock: $("#iconEditorBlock"), propIconPath: $("#propIconPath"), chooseIconBtn: $("#chooseIconBtn"), clearIconBtn: $("#clearIconBtn"),
+    actionTargetLabel: $("#actionTargetLabel"), propActionTarget: $("#propActionTarget"), buttonEventsBlock: $("#buttonEventsBlock"),
     propActionHandler: $("#propActionHandler"), openEventHandlerBtn: $("#openEventHandlerBtn"), deleteComponentBtn: $("#deleteComponentBtn"),
+    componentNavigator: $("#componentNavigator"), bringToFrontBtn: $("#bringToFrontBtn"), moveForwardBtn: $("#moveForwardBtn"),
+    moveBackwardBtn: $("#moveBackwardBtn"), sendToBackBtn: $("#sendToBackBtn"),
     dbHost: $("#dbHost"), dbPort: $("#dbPort"), dbName: $("#dbName"), dbUser: $("#dbUser"), dbPass: $("#dbPass"), dbUsersTable: $("#dbUsersTable"),
-    generateAuthBtn: $("#generateAuthBtn"), testDbBtn: $("#testDbBtn"), clearOutputBtn: $("#clearOutputBtn"), output: $("#output"),
+    generateAuthBtn: $("#generateAuthBtn"), testDbBtn: $("#testDbBtn"), outputPanel: $("#outputPanel"), toggleOutputBtn: $("#toggleOutputBtn"),
+    maximizeOutputBtn: $("#maximizeOutputBtn"), clearOutputBtn: $("#clearOutputBtn"), output: $("#output"),
+    eventEditNotice: $("#eventEditNotice"), eventEditTitle: $("#eventEditTitle"), eventEditText: $("#eventEditText"), closeEventNoticeBtn: $("#closeEventNoticeBtn"),
     modal: $("#modal"), modalTitle: $("#modalTitle"), modalBody: $("#modalBody"), modalClose: $("#modalClose")
   };
 
@@ -38,8 +44,13 @@
     forms: {},
     selectedId: null,
     dirty: false,
-    foldView: false
+    foldView: false,
+    activeView: "design",
+    uiState: {},
+    saveFileHandle: null
   };
+
+  let autoSaveTimer = null;
 
   const componentDefaults = {
     JLabel:{prefix:"jLabel",text:"Label",w:100,h:28}, JTextField:{prefix:"jTextField",text:"",w:170,h:30},
@@ -56,7 +67,11 @@
     els.output.scrollTop = els.output.scrollHeight;
   }
   function replaceOutput(message){ els.output.textContent = message; }
-  function setDirty(v=true){ state.dirty=v; document.title=`${v?"* ":""}Java JFrame Practice IDE`; }
+  function setDirty(v=true){
+    state.dirty=v;
+    document.title=`${v?"* ":""}Java JFrame Practice IDE`;
+    if(v) scheduleAutoSave();
+  }
   function safeClassName(v){ let s=String(v||"MainForm").replace(/[^A-Za-z0-9_$]/g,"").replace(/^[^A-Za-z_$]+/,""); return s||"MainForm"; }
   function safeVariableName(v,f="component1"){ let s=String(v||"").trim().replace(/[^A-Za-z0-9_$]/g,"").replace(/^[^A-Za-z_$]+/,""); return s||f; }
   function escapeJava(v){ return String(v??"").replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\r?\n/g,"\\n"); }
@@ -72,6 +87,56 @@
 
   function getProjects(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");}catch{return{};} }
   function putProjects(v){ localStorage.setItem(STORAGE_KEY,JSON.stringify(v)); }
+
+  function currentViewName(){ return els.sourceView?.classList.contains("active") ? "source" : "design"; }
+  function captureCurrentFileUI(){
+    if(!state.projectName || !state.currentFile) return;
+    state.uiState[state.currentFile]={
+      view: currentViewName(),
+      selectionStart: Number(els.codeEditor?.selectionStart)||0,
+      selectionEnd: Number(els.codeEditor?.selectionEnd)||0,
+      codeScrollTop: Number(els.codeEditor?.scrollTop)||0,
+      designerScrollTop: Number(els.designerWrap?.scrollTop)||0,
+      designerScrollLeft: Number(els.designerWrap?.scrollLeft)||0
+    };
+  }
+  function restoreCurrentFileUI(preferDesign=false){
+    const ui=state.uiState[state.currentFile]||{};
+    let view=ui.view;
+    if(!isFormFile()) view="source";
+    else if(!view) view=preferDesign?"design":"design";
+    switchView(view||"design",false);
+    requestAnimationFrame(()=>{
+      if(els.codeEditor){
+        const max=els.codeEditor.value.length;
+        const a=Math.max(0,Math.min(max,Number(ui.selectionStart)||0));
+        const b=Math.max(a,Math.min(max,Number(ui.selectionEnd)||a));
+        els.codeEditor.setSelectionRange(a,b);
+        els.codeEditor.scrollTop=Number(ui.codeScrollTop)||0;
+      }
+      if(els.designerWrap){
+        els.designerWrap.scrollTop=Number(ui.designerScrollTop)||0;
+        els.designerWrap.scrollLeft=Number(ui.designerScrollLeft)||0;
+      }
+    });
+  }
+  function projectSnapshot(){
+    captureCurrentFileUI();
+    return {
+      format:"JavaJFramePracticeIDE", version:4, name:state.projectName, currentFile:state.currentFile, mainClass:state.mainClass,
+      files:state.files, forms:state.forms, uiState:state.uiState, activeView:currentViewName(), savedAt:new Date().toISOString()
+    };
+  }
+  function persistProjectQuietly(){
+    if(!state.projectName) return;
+    try{
+      const projects=getProjects(); projects[state.projectName]=projectSnapshot(); putProjects(projects);
+    }catch(e){ console.warn("Autosave failed",e); }
+  }
+  function scheduleAutoSave(){
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer=setTimeout(()=>{ persistProjectQuietly(); },700);
+  }
 
   function migrateOldProjects(){
     if(localStorage.getItem(STORAGE_KEY)) return;
@@ -181,7 +246,86 @@
     });
   }
 
-  function renderFoldedCode({focusHandler=''}={}){
+  function saveInlineFoldSection(section,newText,index){
+    const source=els.codeEditor.value||'';
+    const start=Math.max(0,Math.min(source.length,Number(section.start)||0));
+    const end=Math.max(start,Math.min(source.length,Number(section.end)||start));
+    const updated=source.slice(0,start)+newText+source.slice(end);
+
+    els.codeEditor.value=updated;
+    if(state.projectName&&state.currentFile)state.files[state.currentFile]=updated;
+
+    const form=currentForm();
+    if(form){
+      captureEditedEventBodies(form,updated);
+      captureEditedHelperMethod(form,updated);
+    }
+
+    captureCurrentFileUI();
+    setDirty(true);
+    scheduleAutoSave();
+    renderFoldedCode({focusHandler:section.name||'',focusIndex:index});
+    log(`Saved changes to ${section.label}.`,'success');
+  }
+
+  function openInlineFoldEditor(details,section,index){
+    if(details.dataset.editing==='true')return;
+    details.dataset.editing='true';
+    details.open=true;
+
+    const pre=details.querySelector('.fold-code');
+    if(!pre)return;
+    pre.classList.add('hidden');
+
+    const editorWrap=document.createElement('div');
+    editorWrap.className='fold-inline-editor';
+
+    const help=document.createElement('div');
+    help.className=`fold-inline-help ${section.generated?'generated-warning':''}`;
+    help.textContent=section.generated
+      ? 'You are editing generated code directly. Design changes may regenerate this section later.'
+      : 'Edit only this section here. Save Section updates the full Java file without leaving Code Folding View.';
+
+    const textarea=document.createElement('textarea');
+    textarea.className='fold-inline-textarea';
+    textarea.spellcheck=false;
+    textarea.value=section.text||'';
+    textarea.setAttribute('aria-label',`Edit ${section.label}`);
+
+    const actions=document.createElement('div');
+    actions.className='fold-inline-actions';
+    const save=document.createElement('button');
+    save.type='button'; save.className='fold-save-btn'; save.textContent='Save Section';
+    const cancel=document.createElement('button');
+    cancel.type='button'; cancel.className='fold-cancel-btn'; cancel.textContent='Cancel';
+    const full=document.createElement('button');
+    full.type='button'; full.className='fold-full-source-btn'; full.textContent='Open Full Source';
+    actions.append(save,cancel,full);
+    editorWrap.append(help,textarea,actions);
+    details.appendChild(editorWrap);
+
+    const closeEditor=()=>{
+      details.dataset.editing='false';
+      editorWrap.remove();
+      pre.classList.remove('hidden');
+    };
+    save.onclick=()=>saveInlineFoldSection(section,textarea.value,index);
+    cancel.onclick=closeEditor;
+    full.onclick=()=>focusFullSource(section.start,section.end);
+    textarea.addEventListener('keydown',e=>{
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveInlineFoldSection(section,textarea.value,index);}
+      else if(e.key==='Escape'){e.preventDefault();closeEditor();}
+    });
+
+    requestAnimationFrame(()=>{
+      textarea.focus();
+      const firstEditable=Math.min(textarea.value.length,Math.max(0,textarea.value.indexOf('{')+1));
+      textarea.setSelectionRange(firstEditable,firstEditable);
+      details.scrollIntoView({block:'nearest',behavior:'smooth'});
+    });
+  }
+
+  function renderFoldedCode({focusHandler='',focusIndex=-1}={}){
     if(!els.foldedCodeView) return;
     const source=els.codeEditor.value||'';
     const sections=parseJavaFoldSections(source);
@@ -189,7 +333,7 @@
 
     const intro=document.createElement('div');
     intro.className='folded-code-note';
-    intro.innerHTML='<strong>Code Folding View</strong><span>Collapse generated sections and keep event/database code visible. Click Edit on any section to return to the full editable source.</span>';
+    intro.innerHTML='<strong>Code Folding View</strong><span>Edit an event, database/helper method, imports, or generated section directly on this page. Click <b>Edit Here</b>, change only that section, then click <b>Save Section</b>.</span>';
     els.foldedCodeView.appendChild(intro);
 
     if(!sections.length){
@@ -201,15 +345,16 @@
       details.className=`code-fold-section fold-${section.kind}`;
       details.dataset.generated=section.generated?'true':'false';
       details.dataset.name=section.name||'';
+      details.dataset.index=String(index);
       details.dataset.start=String(section.start);
       details.dataset.end=String(section.end);
-      details.open=focusHandler ? section.name===focusHandler : section.open;
+      details.open=focusHandler ? section.name===focusHandler : (focusIndex===index ? true : section.open);
 
       const summary=document.createElement('summary');
       const title=document.createElement('span'); title.className='fold-summary-title'; title.textContent=section.label;
       const meta=document.createElement('span'); meta.className='fold-summary-meta'; meta.textContent=`${String(section.text||'').split('\n').length} lines`;
-      const edit=document.createElement('button'); edit.type='button'; edit.className='fold-edit-btn'; edit.textContent='Edit'; edit.title='Open this section in the full source editor';
-      edit.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();focusFullSource(section.start,section.end);});
+      const edit=document.createElement('button'); edit.type='button'; edit.className='fold-edit-btn'; edit.textContent='Edit Here'; edit.title='Edit only this section without leaving Code Folding View';
+      edit.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openInlineFoldEditor(details,section,index);});
       summary.append(title,meta,edit);
 
       const pre=document.createElement('pre'); pre.className='fold-code'; pre.textContent=section.text||'';
@@ -217,9 +362,11 @@
       els.foldedCodeView.appendChild(details);
     });
 
-    if(focusHandler){
+    if(focusHandler||focusIndex>=0){
       requestAnimationFrame(()=>{
-        const target=[...els.foldedCodeView.querySelectorAll('.code-fold-section')].find(d=>d.dataset.name===focusHandler);
+        let target=null;
+        if(focusHandler)target=[...els.foldedCodeView.querySelectorAll('.code-fold-section')].find(d=>d.dataset.name===focusHandler);
+        if(!target&&focusIndex>=0)target=els.foldedCodeView.querySelector(`.code-fold-section[data-index="${focusIndex}"]`);
         if(target){ target.open=true; target.scrollIntoView({block:'center',behavior:'smooth'}); }
       });
     }
@@ -257,23 +404,56 @@
     log('All code sections expanded.','success');
   }
   function serializeProject(){
-    syncEditor();
-    if(isFormFile()) syncFormFromInputs();
-    return {name:state.projectName,currentFile:state.currentFile,mainClass:state.mainClass,files:state.files,forms:state.forms,savedAt:new Date().toISOString()};
+    if(isFormFile()) {
+      syncFormFromInputs();
+      syncGeneratedSourceFromDesign();
+    } else syncEditor();
+    return projectSnapshot();
+  }
+  function unwrapProjectData(data){
+    if(data && data.project && typeof data.project==="object") return data.project;
+    return data||{};
+  }
+  function defaultAppearance(type){
+    const backgrounds={JLabel:"#f3f3f3",JTextField:"#ffffff",JPasswordField:"#ffffff",JButton:"#f0f0f0",JCheckBox:"#f3f3f3",JRadioButton:"#f3f3f3",JTextArea:"#ffffff",JComboBox:"#ffffff",JTable:"#ffffff"};
+    return {fontFamily:"Arial",fontStyle:"plain",fontSize:14,foreground:"#000000",background:backgrounds[type]||"#f0f0f0",opaque:type!=="JLabel",iconPath:"",iconData:""};
+  }
+  function normalizeComponentDesign(item){
+    if(!item || typeof item!=="object") return item;
+    const d=defaultAppearance(item.type);
+    item.fontFamily=String(item.fontFamily||d.fontFamily);
+    item.fontStyle=["plain","bold","italic","bolditalic"].includes(item.fontStyle)?item.fontStyle:d.fontStyle;
+    item.fontSize=Math.max(8,Math.min(72,Number(item.fontSize)||d.fontSize));
+    item.foreground=/^#[0-9a-f]{6}$/i.test(item.foreground||"")?item.foreground:d.foreground;
+    item.background=/^#[0-9a-f]{6}$/i.test(item.background||"")?item.background:d.background;
+    item.opaque=item.opaque===undefined?d.opaque:!!item.opaque;
+    item.iconPath=String(item.iconPath||"");
+    item.iconData=String(item.iconData||"");
+    return item;
+  }
+  function normalizeProjectDesignData(){
+    Object.values(state.forms||{}).forEach(f=>{
+      f.backgroundColor=/^#[0-9a-f]{6}$/i.test(f.backgroundColor||"")?f.backgroundColor:"#f3f3f3";
+      f.resizable=f.resizable===undefined?true:!!f.resizable;
+      f.components=Array.isArray(f.components)?f.components:[];
+      f.components.forEach(normalizeComponentDesign);
+    });
   }
   function applyProject(data){
+    data=unwrapProjectData(data);
     state.projectName=data.name||"JavaProject"; state.files=data.files||{}; state.forms=data.forms||{};
+    state.uiState=data.uiState||{}; state.activeView=data.activeView||"design"; state.saveFileHandle=null;
     state.mainClass=safeClassName(data.mainClass||"MainForm");
     state.currentFile=data.currentFile && state.files[data.currentFile]!==undefined ? data.currentFile : Object.keys(state.files)[0]||"MainForm.java";
-    state.selectedId=null; els.mainClassInput.value=state.mainClass;
-    upgradeAuthMetadata(); autoLinkAuthForms(); updateActiveProjectLabel(); renderProjectTree(); loadCurrentFile({preferDesign:true}); setDirty(false);
+    state.selectedId=null; els.mainClassInput.value=state.mainClass; normalizeProjectDesignData();
+    upgradeAuthMetadata(); autoLinkAuthForms(); updateActiveProjectLabel(); renderProjectTree(); loadCurrentFile({preferDesign:false,restoreView:true}); setDirty(false);
   }
 
   function blankForm(className="MainForm",title="Main Form"){
-    return {className:safeClassName(className),title:title||className,width:760,height:500,components:[],counter:0};
+    return {className:safeClassName(className),title:title||className,width:760,height:500,backgroundColor:"#f3f3f3",resizable:true,components:[],counter:0};
   }
   function component(type,name,text,x,y,w,h,actionTarget="",role=""){
-    return {id:`component-${Date.now()}-${Math.random().toString(16).slice(2)}`,type,name,text,x,y,w,h,actionTarget,role,eventCode:null,lastGeneratedEventCode:null};
+    return Object.assign({id:`component-${Date.now()}-${Math.random().toString(16).slice(2)}`,type,name,text,x,y,w,h,actionTarget,role,eventCode:null,lastGeneratedEventCode:null},defaultAppearance(type));
   }
 
   function loginTemplate(className,title){
@@ -374,6 +554,214 @@
     ]; return f;
   }
 
+
+
+  function inventoryRecordTemplate(className="InventoryForm",title="Inventory Management"){
+    const f=blankForm(className,title||"Inventory Management");
+    f.width=980; f.height=650; f.counter=18; f.templateType="inventory-record";
+    f.components=[
+      component("JLabel","lblInventoryTitle","INVENTORY MANAGEMENT",30,20,360,40,"","inventoryTitle"),
+      component("JLabel","lblProductId","Product ID",35,85,105,28),
+      component("JTextField","txtProductId","",150,83,210,32),
+      component("JLabel","lblProductName","Product Name",390,85,110,28),
+      component("JTextField","txtProductName","",510,83,300,32),
+      component("JLabel","lblCategory","Category",35,135,105,28),
+      component("JComboBox","cmbCategory","General, Electronics, Office Supplies, School Supplies, Other",150,133,210,32),
+      component("JLabel","lblQuantity","Quantity",390,135,110,28),
+      component("JTextField","txtQuantity","0",510,133,130,32),
+      component("JLabel","lblUnitPrice","Unit Price",665,135,100,28),
+      component("JTextField","txtUnitPrice","0.00",765,133,150,32),
+      component("JLabel","lblReorderLevel","Reorder Level",35,185,105,28),
+      component("JTextField","txtReorderLevel","5",150,183,120,32),
+      component("JButton","btnSaveProduct","Save",315,183,100,36),
+      component("JButton","btnUpdateProduct","Update",425,183,100,36),
+      component("JButton","btnDeleteProduct","Delete",535,183,100,36),
+      component("JButton","btnClearProduct","Clear",645,183,100,36),
+      component("JTable","tblInventory","Product ID, Product Name, Category, Quantity, Unit Price, Reorder Level",35,255,880,285),
+      component("JLabel","lblInventoryHint","Select a row to edit, then use Update or Delete.",35,555,420,28)
+    ];
+    const titleItem=f.components[0]; titleItem.fontSize=22; titleItem.fontStyle="bold"; titleItem.foreground="#174a72"; titleItem.opaque=false;
+    ["btnSaveProduct","btnUpdateProduct","btnDeleteProduct","btnClearProduct"].forEach(n=>{const b=f.components.find(i=>i.name===n);if(b){b.fontStyle="bold";}});
+    return f;
+  }
+
+  function supplierRecordTemplate(className="SupplierForm",title="Supplier Management"){
+    const f=blankForm(className,title||"Supplier Management");
+    f.width=860; f.height=570; f.counter=14; f.templateType="supplier-record";
+    f.components=[
+      component("JLabel","lblSupplierTitle","SUPPLIER MANAGEMENT",30,20,340,40),
+      component("JLabel","lblSupplierId","Supplier ID",35,85,105,28),
+      component("JTextField","txtSupplierId","",150,83,210,32),
+      component("JLabel","lblSupplierName","Supplier Name",390,85,110,28),
+      component("JTextField","txtSupplierName","",510,83,280,32),
+      component("JLabel","lblContact","Contact No.",35,135,105,28),
+      component("JTextField","txtContact","",150,133,210,32),
+      component("JLabel","lblAddress","Address",390,135,110,28),
+      component("JTextField","txtAddress","",510,133,280,32),
+      component("JButton","btnSaveSupplier","Save",150,190,100,36),
+      component("JButton","btnUpdateSupplier","Update",260,190,100,36),
+      component("JButton","btnDeleteSupplier","Delete",370,190,100,36),
+      component("JButton","btnClearSupplier","Clear",480,190,100,36),
+      component("JTable","tblSuppliers","Supplier ID, Supplier Name, Contact No., Address",35,255,755,220)
+    ];
+    const titleItem=f.components[0]; titleItem.fontSize=22; titleItem.fontStyle="bold"; titleItem.foreground="#174a72"; titleItem.opaque=false;
+    return f;
+  }
+
+  function studentRecordTemplate(className="StudentRecordForm",title="Student Record Management"){
+    const f=blankForm(className,title||"Student Record Management");
+    f.width=1000; f.height=690; f.counter=20; f.templateType="student-record";
+    f.components=[
+      component("JLabel","lblStudentTitle","STUDENT RECORD MANAGEMENT",30,20,420,40,"","studentTitle"),
+      component("JLabel","lblStudentId","Student ID",35,85,105,28),
+      component("JTextField","txtStudentId","",150,83,210,32),
+      component("JLabel","lblFullName","Full Name",390,85,110,28),
+      component("JTextField","txtFullName","",510,83,410,32),
+      component("JLabel","lblCourse","Course",35,135,105,28),
+      component("JComboBox","cmbCourse","BSIT, BSCS, ACT, BSEMC, Other",150,133,210,32),
+      component("JLabel","lblYearLevel","Year Level",390,135,110,28),
+      component("JComboBox","cmbYearLevel","1st Year, 2nd Year, 3rd Year, 4th Year",510,133,180,32),
+      component("JLabel","lblContact","Contact No.",35,185,105,28),
+      component("JTextField","txtContact","",150,183,210,32),
+      component("JLabel","lblEmail","Email",390,185,110,28),
+      component("JTextField","txtEmail","",510,183,300,32),
+      component("JButton","btnSaveStudent","Save",150,240,100,36),
+      component("JButton","btnUpdateStudent","Update",260,240,100,36),
+      component("JButton","btnDeleteStudent","Delete",370,240,100,36),
+      component("JButton","btnClearStudent","Clear",480,240,100,36),
+      component("JTable","tblStudents","Student ID, Full Name, Course, Year Level, Contact No., Email",35,315,885,275),
+      component("JLabel","lblStudentHint","Use this starter form to practice CRUD operations with JDBC and MySQL.",35,605,520,28)
+    ];
+    const titleItem=f.components[0]; titleItem.fontSize=22; titleItem.fontStyle="bold"; titleItem.foreground="#174a72"; titleItem.opaque=false;
+    return f;
+  }
+
+  function courseRecordTemplate(className="CourseForm",title="Course Management"){
+    const f=blankForm(className,title||"Course Management");
+    f.width=780; f.height=520; f.counter=11; f.templateType="course-record";
+    f.components=[
+      component("JLabel","lblCourseTitle","COURSE MANAGEMENT",30,20,330,40),
+      component("JLabel","lblCourseCode","Course Code",35,90,110,28),
+      component("JTextField","txtCourseCode","",155,88,200,32),
+      component("JLabel","lblCourseName","Course Name",385,90,110,28),
+      component("JTextField","txtCourseName","",505,88,220,32),
+      component("JButton","btnSaveCourse","Save",155,145,100,36),
+      component("JButton","btnUpdateCourse","Update",265,145,100,36),
+      component("JButton","btnDeleteCourse","Delete",375,145,100,36),
+      component("JButton","btnClearCourse","Clear",485,145,100,36),
+      component("JTable","tblCourses","Course Code, Course Name",35,220,690,205),
+      component("JLabel","lblCourseHint","Maintain course choices used by the Student Record form.",35,440,470,28)
+    ];
+    const titleItem=f.components[0]; titleItem.fontSize=22; titleItem.fontStyle="bold"; titleItem.foreground="#174a72"; titleItem.opaque=false;
+    return f;
+  }
+
+  function inventoryDashboardTemplate(className="InventoryDashboardForm",title="Inventory Dashboard"){
+    const f=blankForm(className,title||"Inventory Dashboard");
+    f.width=900; f.height=580; f.counter=15; f.templateType="inventory-dashboard";
+    f.components=[
+      component("JLabel","lblTitle","INVENTORY MANAGEMENT SYSTEM",35,25,430,42),
+      component("JLabel","lblWelcome","Choose a module to continue.",35,70,300,28),
+      component("JLabel","lblProductsCard","Products",35,125,160,28),
+      component("JLabel","lblProductsValue","0",35,155,160,38),
+      component("JLabel","lblLowStockCard","Low Stock",220,125,160,28),
+      component("JLabel","lblLowStockValue","0",220,155,160,38),
+      component("JLabel","lblSuppliersCard","Suppliers",405,125,160,28),
+      component("JLabel","lblSuppliersValue","0",405,155,160,38),
+      component("JLabel","lblValueCard","Inventory Value",590,125,190,28),
+      component("JLabel","lblValueAmount","0.00",590,155,190,38),
+      component("JButton","btnInventory","Manage Inventory",35,245,200,48,"InventoryForm","inventoryOpen"),
+      component("JButton","btnSuppliers","Manage Suppliers",255,245,200,48,"SupplierForm","supplierOpen"),
+      component("JButton","btnReports","Inventory Reports",475,245,200,48,"","inventoryReports"),
+      component("JButton","btnLogout","Logout",715,450,140,40,"LoginForm","dashboardLogout"),
+      component("JLabel","lblFooter","Java JFrame Inventory Mini System",35,460,360,28)
+    ];
+    const titleItem=f.components[0]; titleItem.fontSize=23; titleItem.fontStyle="bold"; titleItem.foreground="#174a72"; titleItem.opaque=false;
+    return f;
+  }
+
+  function studentDashboardTemplate(className="StudentDashboardForm",title="Student Record Dashboard"){
+    const f=blankForm(className,title||"Student Record Dashboard");
+    f.width=900; f.height=580; f.counter=15; f.templateType="student-dashboard";
+    f.components=[
+      component("JLabel","lblTitle","STUDENT RECORD SYSTEM",35,25,390,42),
+      component("JLabel","lblWelcome","Choose a module to continue.",35,70,300,28),
+      component("JLabel","lblStudentsCard","Students",35,125,160,28),
+      component("JLabel","lblStudentsValue","0",35,155,160,38),
+      component("JLabel","lblCoursesCard","Courses",220,125,160,28),
+      component("JLabel","lblCoursesValue","0",220,155,160,38),
+      component("JLabel","lblYearCard","Year Levels",405,125,160,28),
+      component("JLabel","lblYearValue","4",405,155,160,38),
+      component("JLabel","lblRecordsCard","Records",590,125,160,28),
+      component("JLabel","lblRecordsValue","0",590,155,160,38),
+      component("JButton","btnStudents","Student Records",35,245,200,48,"StudentRecordForm","studentOpen"),
+      component("JButton","btnCourses","Manage Courses",255,245,200,48,"CourseForm","courseOpen"),
+      component("JButton","btnReports","Student Reports",475,245,200,48,"","studentReports"),
+      component("JButton","btnLogout","Logout",715,450,140,40,"LoginForm","dashboardLogout"),
+      component("JLabel","lblFooter","Java JFrame Student Record Mini System",35,460,390,28)
+    ];
+    const titleItem=f.components[0]; titleItem.fontSize=23; titleItem.fontStyle="bold"; titleItem.foreground="#174a72"; titleItem.opaque=false;
+    return f;
+  }
+
+  function buildInventoryMiniSystemSql(){
+    return `${buildAuthSql()}\n\n-- Inventory Management Mini System\nCREATE TABLE IF NOT EXISTS products (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    product_code VARCHAR(50) NOT NULL UNIQUE,\n    product_name VARCHAR(150) NOT NULL,\n    category VARCHAR(100),\n    quantity INT NOT NULL DEFAULT 0,\n    unit_price DECIMAL(10,2) NOT NULL DEFAULT 0.00,\n    reorder_level INT NOT NULL DEFAULT 5,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE TABLE IF NOT EXISTS suppliers (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    supplier_code VARCHAR(50) NOT NULL UNIQUE,\n    supplier_name VARCHAR(150) NOT NULL,\n    contact_no VARCHAR(50),\n    address VARCHAR(255),\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n`;
+  }
+
+  function buildStudentMiniSystemSql(){
+    return `${buildAuthSql()}\n\n-- Student Record Mini System\nCREATE TABLE IF NOT EXISTS courses (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    course_code VARCHAR(30) NOT NULL UNIQUE,\n    course_name VARCHAR(150) NOT NULL\n);\n\nCREATE TABLE IF NOT EXISTS students (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    student_no VARCHAR(50) NOT NULL UNIQUE,\n    full_name VARCHAR(150) NOT NULL,\n    course VARCHAR(100),\n    year_level VARCHAR(30),\n    contact_no VARCHAR(50),\n    email VARCHAR(150),\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n`;
+  }
+
+  function createMiniSystemProject(name,template="blank"){
+    const projectName=String(name||"").trim()||(
+      template==="inventory"?"InventoryManagementSystem":template==="student-record"?"StudentRecordSystem":"JavaJFrameProject"
+    );
+    state.projectName=projectName; state.files={}; state.forms={}; state.uiState={}; state.activeView="design"; state.saveFileHandle=null; state.selectedId=null;
+
+    if(template==="inventory"){
+      const login=loginTemplate("LoginForm","Inventory Login");
+      const loginBtn=login.components.find(i=>i.role==="loginSubmit"); if(loginBtn)loginBtn.actionTarget="InventoryDashboardForm";
+      const registerBtn=login.components.find(i=>i.role==="loginRegisterLink"); if(registerBtn){registerBtn.text=""; registerBtn.w=1; registerBtn.h=1; registerBtn.x=0; registerBtn.y=0;}
+      state.forms={
+        "LoginForm.java":login,
+        "InventoryDashboardForm.java":inventoryDashboardTemplate(),
+        "InventoryForm.java":inventoryRecordTemplate(),
+        "SupplierForm.java":supplierRecordTemplate()
+      };
+      state.mainClass="LoginForm"; state.currentFile="LoginForm.java";
+      state.files["DBConnection.java"]=buildDbConnectionCode();
+      state.files["PasswordUtil.java"]=buildPasswordUtilCode();
+      state.files["database_setup.sql"]=buildInventoryMiniSystemSql();
+      if(els.dbName)els.dbName.value="inventory_system";
+    }else if(template==="student-record"){
+      const login=loginTemplate("LoginForm","Student Record Login");
+      const loginBtn=login.components.find(i=>i.role==="loginSubmit"); if(loginBtn)loginBtn.actionTarget="StudentDashboardForm";
+      const registerBtn=login.components.find(i=>i.role==="loginRegisterLink"); if(registerBtn){registerBtn.text=""; registerBtn.w=1; registerBtn.h=1; registerBtn.x=0; registerBtn.y=0;}
+      state.forms={
+        "LoginForm.java":login,
+        "StudentDashboardForm.java":studentDashboardTemplate(),
+        "StudentRecordForm.java":studentRecordTemplate(),
+        "CourseForm.java":courseRecordTemplate()
+      };
+      state.mainClass="LoginForm"; state.currentFile="LoginForm.java";
+      state.files["DBConnection.java"]=buildDbConnectionCode();
+      state.files["PasswordUtil.java"]=buildPasswordUtilCode();
+      state.files["database_setup.sql"]=buildStudentMiniSystemSql();
+      if(els.dbName)els.dbName.value="student_record_system";
+    }else{
+      state.mainClass="MainForm"; state.currentFile="MainForm.java";
+      state.forms={"MainForm.java":blankForm("MainForm","Main Form")};
+    }
+
+    Object.keys(state.forms).forEach(file=>{state.files[file]=generateJavaCode(state.forms[file]);});
+    autoLinkAuthForms();
+    // Regenerate once after linking so navigation ActionPerformed code matches the final targets.
+    Object.keys(state.forms).forEach(file=>{state.files[file]=generateJavaCode(state.forms[file]);});
+    els.mainClassInput.value=state.mainClass; updateActiveProjectLabel(); renderProjectTree(); loadCurrentFile({preferDesign:true,restoreView:false}); setDirty(true);
+    const label=template==="inventory"?"Inventory Management Mini System":template==="student-record"?"Student Record Mini System":"Blank Java JFrame Project";
+    replaceOutput(`Project "${state.projectName}" created from ${label}.\nYour work is auto-saved in this browser. Use Save As File to create a project file you can reopen later.`);
+  }
+
   function autoLinkAuthForms(){
     const loginFile=formFiles().find(n=>/login/i.test(classFromFile(n)));
     const registerFile=formFiles().find(n=>/register|signup/i.test(classFromFile(n)));
@@ -454,18 +842,39 @@
   }
 
 
-  function newProject(name="JavaJFrameProject"){
-    state.projectName=String(name||"").trim()||"JavaJFrameProject"; state.mainClass="MainForm"; state.currentFile="MainForm.java";
-    state.forms={"MainForm.java":blankForm("MainForm","Main Form")}; state.files={};
-    state.files["MainForm.java"]=generateJavaCode(state.forms["MainForm.java"]); state.selectedId=null;
-    els.mainClassInput.value=state.mainClass; updateActiveProjectLabel(); renderProjectTree(); loadCurrentFile({preferDesign:true}); setDirty(true);
-    replaceOutput(`Project "${state.projectName}" created.\nUse + New File / JFrame to add LoginForm, DashboardForm, StudentForm, and other windows.`);
+  function newProject(name="JavaJFrameProject",template="blank"){
+    createMiniSystemProject(name,template);
   }
   function saveProject(){
     if(!state.projectName){showNewProjectDialog();return;}
-    if(isFormFile()) generateCurrentForm(false); else syncEditor();
-    const projects=getProjects(); projects[state.projectName]=serializeProject(); putProjects(projects); setDirty(false); renderProjectTree();
-    log(`Project "${state.projectName}" saved with ${javaFiles().length} Java file(s).`,"success");
+    const data=serializeProject();
+    try{
+      const projects=getProjects(); projects[state.projectName]=data; putProjects(projects); setDirty(false); renderProjectTree();
+      log(`Project "${state.projectName}" saved with ${javaFiles().length} Java file(s). Editor position was saved too.`,"success");
+    }catch(e){
+      log(`Browser save failed: ${e.message||e}. Use Save As File so your project is not lost.`,"error");
+    }
+  }
+  async function saveProjectAsFile(){
+    if(!state.projectName){showNewProjectDialog();return;}
+    const data=serializeProject();
+    const payload=JSON.stringify({format:"JavaJFramePracticeIDE",version:4,project:data},null,2);
+    const suggested=`${String(state.projectName||"JavaProject").replace(/[^A-Za-z0-9._-]+/g,"_")}.jframeide.json`;
+    try{
+      if("showSaveFilePicker" in window){
+        const handle=await window.showSaveFilePicker({suggestedName:suggested,types:[{description:"Java JFrame Practice IDE Project",accept:{"application/json":[".json"]}}]});
+        const writable=await handle.createWritable(); await writable.write(payload); await writable.close(); state.saveFileHandle=handle;
+        const projects=getProjects();projects[state.projectName]=data;putProjects(projects);setDirty(false);
+        log(`Project file saved as ${handle.name||suggested}.`,"success");
+        return;
+      }
+      const blob=new Blob([payload],{type:"application/json"});
+      const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download=suggested; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+      const projects=getProjects();projects[state.projectName]=data;putProjects(projects);setDirty(false);
+      log(`Project file downloaded as ${suggested}. Use Open Project to reopen it later.`,"success");
+    }catch(e){
+      if(e?.name!=="AbortError") log(`Save As failed: ${e.message||e}`,"error");
+    }
   }
   function updateActiveProjectLabel(){ els.activeProjectLabel.textContent=state.projectName||"No project"; }
 
@@ -484,24 +893,26 @@
     $$("[data-delete-file]",els.projectTree).forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();confirmDeleteFile(b.dataset.deleteFile);}));
   }
 
-  function loadCurrentFile({preferDesign=false}={}){
+  function loadCurrentFile({preferDesign=false,restoreView=true}={}){
     state.selectedId=null; els.currentFileLabel.textContent=state.currentFile; els.activeFileBadge.textContent=state.currentFile;
     els.codeEditor.value=state.files[state.currentFile]??"";
     if(state.foldView) renderFoldedCode();
     if(isFormFile()){
-      const f=currentForm(); els.className.value=f.className; els.frameTitle.value=f.title; els.frameWidth.value=f.width; els.frameHeight.value=f.height;
+      const f=currentForm(); normalizeProjectDesignData();
+      els.className.value=f.className; els.frameTitle.value=f.title; els.frameWidth.value=f.width; els.frameHeight.value=f.height;
+      if(els.frameBackground)els.frameBackground.value=f.backgroundColor||"#f3f3f3"; if(els.frameResizable)els.frameResizable.checked=f.resizable!==false;
       updateFrameVisual(); renderComponents(); setFormPanelsEnabled(true); els.nonFormNotice.classList.add("hidden"); els.designerWrap.classList.remove("hidden");
-      if(preferDesign) switchView("design");
     } else {
       renderComponents(); setFormPanelsEnabled(false); els.nonFormNotice.classList.remove("hidden"); els.designerWrap.classList.add("hidden");
-      if(preferDesign) switchView("source");
     }
     populateActionTargets(); renderProjectTree();
+    if(restoreView) restoreCurrentFileUI(preferDesign); else switchView(isFormFile()&&preferDesign?"design":"source",false);
   }
   function openVirtualFile(fileName){
     if(!fileName || state.files[fileName]===undefined)return;
-    if(isFormFile()) generateCurrentForm(false); else syncEditor();
-    state.currentFile=fileName; loadCurrentFile({preferDesign:isFormFile(fileName)}); log(`Opened ${fileName}.`);
+    captureCurrentFileUI();
+    if(isFormFile()) syncGeneratedSourceFromDesign(); else syncEditor();
+    state.currentFile=fileName; loadCurrentFile({preferDesign:isFormFile(fileName),restoreView:true}); log(`Opened ${fileName}.`);
   }
   function setFormPanelsEnabled(enabled){
     els.framePropertiesPanel.classList.toggle("disabled-panel",!enabled); els.componentPanel.classList.toggle("disabled-panel",!enabled);
@@ -511,10 +922,30 @@
   function showModal(title,html){els.modalTitle.textContent=title;els.modalBody.innerHTML=html;els.modal.classList.remove("hidden");}
   function closeModal(){els.modal.classList.add("hidden");els.modalBody.innerHTML="";}
   function showNewProjectDialog(){
-    showModal("Create Java Project",`<div class="content"><label>Project Name<input id="newProjectName" value="JavaJFrameProject" autocomplete="off"></label><div class="actions"><button id="cancelNewProject" type="button">Cancel</button><button id="createProjectConfirm" type="button">Create Project</button></div></div>`);
-    const input=$("#newProjectName",els.modalBody); input.focus(); input.select();
-    $("#cancelNewProject",els.modalBody).onclick=closeModal; $("#createProjectConfirm",els.modalBody).onclick=()=>{newProject(input.value);closeModal();};
-    input.onkeydown=e=>{if(e.key==="Enter"){newProject(input.value);closeModal();}};
+    showModal("Create Java Project",`<div class="content">
+      <p class="notice"><strong>Mini System Templates:</strong> start blank, or generate a ready-to-practice Inventory or Student Record project with Login, Dashboard, CRUD forms, JDBC helper files, and MySQL tables.</p>
+      <label>Project Name<input id="newProjectName" value="JavaJFrameProject" autocomplete="off"></label>
+      <label>Mini System Template
+        <select id="newProjectTemplate">
+          <option value="blank">Blank Java JFrame Project</option>
+          <option value="inventory">Inventory Management Mini System</option>
+          <option value="student-record">Student Record Mini System</option>
+        </select>
+      </label>
+      <div class="template-grid" id="miniTemplatePreview">
+        <div class="template-card"><strong>Blank Project</strong><span>Start with one empty MainForm and build everything yourself.</span></div>
+        <div class="template-card"><strong>Inventory System</strong><span>Login, dashboard, product inventory, suppliers, JDBC helpers, and MySQL tables.</span></div>
+        <div class="template-card"><strong>Student Record</strong><span>Login, dashboard, student records, courses, JDBC helpers, and MySQL tables.</span></div>
+      </div>
+      <div class="actions"><button id="cancelNewProject" type="button">Cancel</button><button id="createProjectConfirm" type="button">Create Project</button></div>
+    </div>`);
+    const input=$("#newProjectName",els.modalBody), template=$("#newProjectTemplate",els.modalBody);
+    const defaults={blank:"JavaJFrameProject",inventory:"InventoryManagementSystem","student-record":"StudentRecordSystem"};
+    template.onchange=()=>{const previous=Object.values(defaults).includes(input.value.trim());if(previous||!input.value.trim())input.value=defaults[template.value];};
+    const create=()=>{newProject(input.value,template.value);closeModal();};
+    input.focus(); input.select();
+    $("#cancelNewProject",els.modalBody).onclick=closeModal; $("#createProjectConfirm",els.modalBody).onclick=create;
+    input.onkeydown=e=>{if(e.key==="Enter")create();};
   }
   function showNewFileDialog(){
     if(!state.projectName){showNewProjectDialog();return;}
@@ -526,7 +957,7 @@
       </div>
       <label>Class Name<input id="newFileClass" value="LoginForm" autocomplete="off"></label>
       <label id="newWindowTitleLabel">Window Title<input id="newWindowTitle" value="Login" autocomplete="off"></label>
-      <label id="templateLabel">JFrame Template<select id="newFormTemplate"><option value="blank">Blank JFrame</option><option value="login-db">Login Form - MySQL Database</option><option value="register-db">Register / Signup - MySQL Database</option><option value="dashboard">Dashboard - Professional JFrame</option><option value="data">Data Entry / CRUD Form</option></select></label>
+      <label id="templateLabel">JFrame Template<select id="newFormTemplate"><option value="blank">Blank JFrame</option><option value="login-db">Login Form - MySQL Database</option><option value="register-db">Register / Signup - MySQL Database</option><option value="dashboard">Dashboard - Professional JFrame</option><option value="inventory">Inventory Management / CRUD Form</option><option value="student-record">Student Record / CRUD Form</option><option value="data">Generic Data Entry / CRUD Form</option></select></label>
       <div class="actions"><button id="cancelNewFile" type="button">Cancel</button><button id="createNewFile" type="button">Create File</button></div>
     </div>`);
     const classInput=$("#newFileClass",els.modalBody), titleInput=$("#newWindowTitle",els.modalBody), titleLabel=$("#newWindowTitleLabel",els.modalBody), templateLabel=$("#templateLabel",els.modalBody), templateSelect=$("#newFormTemplate",els.modalBody);
@@ -536,7 +967,9 @@
         "login-db":["LoginForm","Login"],
         "register-db":["RegisterForm","Create Account"],
         "dashboard":["DashboardForm","System Dashboard"],
-        "data":["StudentForm","Student Management"]
+        "inventory":["InventoryForm","Inventory Management"],
+        "student-record":["StudentRecordForm","Student Record Management"],
+        "data":["DataEntryForm","Data Entry Form"]
       };
       const preset=presets[templateSelect.value];
       if(preset){classInput.value=preset[0];titleInput.value=preset[1];}
@@ -551,7 +984,7 @@
         state.files[fileName]=`public class ${className} {\n\n    public ${className}() {\n    }\n}\n`; state.currentFile=fileName; state.selectedId=null; closeModal(); loadCurrentFile({preferDesign:false}); switchView("source"); setDirty(true); log(`${fileName} Java class created.`,"success"); return;
       }
       const title=titleInput.value.trim()||className; const template=$("#newFormTemplate",els.modalBody).value;
-      let f=template==="login-db"?loginTemplate(className,title):template==="register-db"?registerTemplate(className,title):template==="dashboard"?dashboardTemplate(className,title):template==="data"?dataEntryTemplate(className,title):blankForm(className,title);
+      let f=template==="login-db"?loginTemplate(className,title):template==="register-db"?registerTemplate(className,title):template==="dashboard"?dashboardTemplate(className,title):template==="inventory"?inventoryRecordTemplate(className,title):template==="student-record"?studentRecordTemplate(className,title):template==="data"?dataEntryTemplate(className,title):blankForm(className,title);
       if(template==="login-db" || template==="register-db") ensureAuthSupportFiles(false);
       state.forms[fileName]=f; upgradeAuthMetadata(); autoLinkAuthForms(); state.files[fileName]=generateJavaCode(f); state.currentFile=fileName; state.selectedId=null; closeModal(); loadCurrentFile({preferDesign:true}); setDirty(true); log(`${fileName} JFrame Form created.`,"success");
     };
@@ -561,32 +994,48 @@
   function showOpenProjectDialog(){
     const projects=getProjects(),names=Object.keys(projects).sort();
     const list=names.length?`<div class="project-list">${names.map(n=>`<button type="button" data-project="${escapeHtml(n)}"><strong>${escapeHtml(n)}</strong><br><small>${Object.keys(projects[n].files||{}).length} Java file(s) • Saved ${new Date(projects[n].savedAt||Date.now()).toLocaleString()}</small></button>`).join("")}</div>`:'<p class="notice">No projects are saved in this browser yet.</p>';
-    showModal("Open Project",`<div class="content">${list}<hr><p class="notice">You can also import a project JSON file or a single .java source file.</p><input id="projectFilePicker" type="file" accept=".json,.java,application/json,text/x-java-source"></div>`);
-    $$('[data-project]',els.modalBody).forEach(b=>b.onclick=()=>{applyProject(projects[b.dataset.project]);closeModal();log(`Project "${b.dataset.project}" opened.`,"success");});
+    showModal("Open Project",`<div class="content">${list}<hr><p class="notice"><strong>Open a saved project file:</strong> choose the .jframeide.json file created by Save As File. Your last file, Source/Design tab, cursor and scroll position are restored.</p><input id="projectFilePicker" type="file" accept=".json,.jframeide,.java,application/json,text/x-java-source"></div>`);
+    $$('[data-project]',els.modalBody).forEach(b=>b.onclick=()=>{captureCurrentFileUI();applyProject(projects[b.dataset.project]);closeModal();log(`Project "${b.dataset.project}" opened at its saved editing position.`,"success");});
     $("#projectFilePicker",els.modalBody).onchange=async e=>{const file=e.target.files?.[0];if(!file)return;const text=await file.text();
-      if(file.name.toLowerCase().endsWith(".json")){try{applyProject(JSON.parse(text));closeModal();log(`Imported project "${state.projectName}".`,"success");}catch{log("Invalid project JSON file.","error");}return;}
-      state.projectName=file.name.replace(/\.java$/i,"")||"ImportedJavaProject";state.currentFile=file.name;state.mainClass=classFromFile(file.name);state.files={[file.name]:text};state.forms={};state.selectedId=null;els.mainClassInput.value=state.mainClass;updateActiveProjectLabel();renderProjectTree();loadCurrentFile({preferDesign:false});switchView("source");setDirty(true);closeModal();log(`Opened ${file.name}.`);
+      if(/\.(json|jframeide)$/i.test(file.name)){try{applyProject(JSON.parse(text));closeModal();const projectsNow=getProjects();projectsNow[state.projectName]=projectSnapshot();putProjects(projectsNow);log(`Imported project "${state.projectName}" and restored its editing position.`,"success");}catch(err){log(`Invalid project file: ${err.message||"JSON could not be read."}`,"error");}return;}
+      state.projectName=file.name.replace(/\.java$/i,"")||"ImportedJavaProject";state.currentFile=file.name;state.mainClass=classFromFile(file.name);state.files={[file.name]:text};state.forms={};state.uiState={[file.name]:{view:"source",selectionStart:0,selectionEnd:0,codeScrollTop:0}};state.selectedId=null;state.saveFileHandle=null;els.mainClassInput.value=state.mainClass;updateActiveProjectLabel();renderProjectTree();loadCurrentFile({preferDesign:false,restoreView:true});setDirty(true);closeModal();log(`Opened ${file.name}.`);
     };
   }
 
-  function switchView(view){const design=view==="design";els.designView.classList.toggle("active",design);els.sourceView.classList.toggle("active",!design);$$(".tab").forEach(t=>{const a=t.dataset.view===view;t.classList.toggle("active",a);t.setAttribute("aria-selected",String(a));});}
+  function switchView(view,capture=true){
+    if(capture) captureCurrentFileUI();
+    const design=view==="design"; state.activeView=view;
+    els.designView.classList.toggle("active",design);els.sourceView.classList.toggle("active",!design);
+    $$(".tab").forEach(t=>{const a=t.dataset.view===view;t.classList.toggle("active",a);t.setAttribute("aria-selected",String(a));});
+    if(state.projectName && state.currentFile){
+      state.uiState[state.currentFile]=Object.assign({},state.uiState[state.currentFile]||{},{view});
+    }
+  }
   function syncFormFromInputs(){
     const f=currentForm(); if(!f)return;
     const oldClass=f.className; f.className=safeClassName(els.className.value); f.title=els.frameTitle.value||f.className; f.width=Math.max(400,Math.min(1200,Number(els.frameWidth.value)||760)); f.height=Math.max(300,Math.min(800,Number(els.frameHeight.value)||500));
+    f.backgroundColor=els.frameBackground?.value||f.backgroundColor||"#f3f3f3"; f.resizable=els.frameResizable?!!els.frameResizable.checked:true;
     els.className.value=f.className; els.frameWidth.value=f.width; els.frameHeight.value=f.height;
     if(f.className!==oldClass){ renameCurrentFormFile(f.className); }
   }
   function renameCurrentFormFile(newClass){
     const oldFile=state.currentFile,newFile=`${safeClassName(newClass)}.java`; if(oldFile===newFile)return;
     if(state.files[newFile]!==undefined){const f=currentForm();f.className=classFromFile(oldFile);els.className.value=f.className;log(`${newFile} already exists. Class name was not changed.`,"error");return;}
-    const wasMain=classFromFile(oldFile)===state.mainClass; state.forms[newFile]=state.forms[oldFile];delete state.forms[oldFile];state.files[newFile]=state.files[oldFile]||"";delete state.files[oldFile];state.currentFile=newFile;if(wasMain){state.mainClass=safeClassName(newClass);els.mainClassInput.value=state.mainClass;}renderProjectTree();
+    const wasMain=classFromFile(oldFile)===state.mainClass; state.forms[newFile]=state.forms[oldFile];delete state.forms[oldFile];state.files[newFile]=state.files[oldFile]||"";delete state.files[oldFile];
+    if(state.uiState[oldFile]){state.uiState[newFile]=state.uiState[oldFile];delete state.uiState[oldFile];}
+    state.currentFile=newFile;if(wasMain){state.mainClass=safeClassName(newClass);els.mainClassInput.value=state.mainClass;}renderProjectTree();
   }
-  function updateFrameVisual(){const f=currentForm();if(!f)return;els.frameTitleDisplay.textContent=f.title||f.className;els.fakeWindow.style.width=`${f.width}px`;els.canvas.style.width=`${f.width}px`;els.canvas.style.height=`${f.height}px`;}
-  function updateFrame(){if(!isFormFile())return;syncFormFromInputs();updateFrameVisual();renderProjectTree();setDirty(true);}
+  function updateFrameVisual(){
+    const f=currentForm();if(!f)return;
+    els.frameTitleDisplay.textContent=f.title||f.className;els.fakeWindow.style.width=`${f.width}px`;els.canvas.style.width=`${f.width}px`;els.canvas.style.height=`${f.height}px`;
+    els.canvas.style.backgroundColor=f.backgroundColor||"#f3f3f3";
+  }
+  function updateFrame(){if(!isFormFile())return;syncFormFromInputs();updateFrameVisual();renderProjectTree();syncGeneratedSourceFromDesign();setDirty(true);}
 
   function createComponent(type,x=30,y=30){
     const f=currentForm();if(!f){log("Open a JFrame Form before adding Swing controls.","error");return;}const d=componentDefaults[type];if(!d)return;const n=++f.counter;
-    const item={id:`component-${Date.now()}-${n}`,type,name:`${d.prefix}${n}`,text:d.text,x:Math.max(0,Math.round(x)),y:Math.max(0,Math.round(y)),w:d.w,h:d.h,actionTarget:"",eventCode:null,lastGeneratedEventCode:null};f.components.push(item);state.selectedId=item.id;renderComponents();selectComponent(item.id);setDirty(true);
+    const item=Object.assign({id:`component-${Date.now()}-${n}`,type,name:`${d.prefix}${n}`,text:d.text,x:Math.max(0,Math.round(x)),y:Math.max(0,Math.round(y)),w:d.w,h:d.h,actionTarget:"",eventCode:null,lastGeneratedEventCode:null},defaultAppearance(type));
+    f.components.push(item);state.selectedId=item.id;renderComponents();selectComponent(item.id);syncGeneratedSourceFromDesign();setDirty(true);
   }
   function getSelected(){const f=currentForm();return f?.components.find(i=>i.id===state.selectedId)||null;}
 
@@ -601,7 +1050,7 @@
       const target=safeClassName(item.actionTarget);
       return `new ${target}().setVisible(true);\ndispose();`;
     }
-    return '// TODO add your handling code here:';
+    return '// START EDITING HERE: add your button code.';
   }
   function normalizeEventCode(value){
     return String(value??'').replace(/\r/g,'').split('\n').map(line=>line.trim()).filter(Boolean).join('\n');
@@ -646,6 +1095,28 @@
       }
     });
   }
+  function extractMethodSource(source,methodName){
+    if(!source||!methodName)return null;
+    const escaped=methodName.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    const re=new RegExp(`^[ \t]*(?:private|protected|public)\\s+[^\n{;]*?\\b${escaped}\\s*\\([^)]*\\)\\s*\\{`,'m');
+    const match=re.exec(source);if(!match)return null;
+    const open=source.indexOf('{',match.index);const close=findMatchingBrace(source,open);if(open<0||close<0)return null;
+    return source.slice(match.index,close+1);
+  }
+  function helperMethodName(form){return form?.templateType==='login-db'?'authenticateUser':form?.templateType==='register-db'?'registerUser':'';}
+  function captureEditedHelperMethod(form,source){
+    const name=helperMethodName(form);if(!name||!source)return;
+    const actual=extractMethodSource(source,name);if(!actual)return;
+    form.customHelperMethods=form.customHelperMethods||{};form.lastGeneratedHelperMethods=form.lastGeneratedHelperMethods||{};
+    const last=form.lastGeneratedHelperMethods[name];
+    let baseline='';
+    if(!last){
+      const generated=form.templateType==='login-db'?loginMethods(form):registerMethods(form);
+      baseline=extractMethodSource(generated,name)||generated;
+    }
+    const reference=last||baseline;
+    if(reference && normalizeEventCode(actual)!==normalizeEventCode(reference))form.customHelperMethods[name]=actual;
+  }
   function eventBodyFor(item){
     return item?.eventCode!=null ? String(item.eventCode) : defaultEventBody(item);
   }
@@ -660,8 +1131,22 @@
   }
   function selectComponent(id){
     state.selectedId=id;const selected=getSelected();$$('.component',els.canvas).forEach(n=>n.classList.toggle('selected',n.dataset.id===id));
-    if(!selected){els.noSelection.classList.remove('hidden');els.componentProps.classList.add('hidden');els.buttonEventsBlock?.classList.add('hidden');return;}
+    if(els.componentNavigator){$$('.navigator-item',els.componentNavigator).forEach(n=>n.classList.toggle('selected',n.dataset.componentId===id));}
+    updateLayerButtons();
+    if(!selected){
+      els.noSelection.classList.remove('hidden');els.componentProps.classList.add('hidden');els.buttonEventsBlock?.classList.add('hidden');els.iconEditorBlock?.classList.add('hidden');return;
+    }
+    normalizeComponentDesign(selected);
     els.noSelection.classList.add('hidden');els.componentProps.classList.remove('hidden');els.propType.value=selected.type;els.propName.value=selected.name;els.propText.value=selected.text;els.propX.value=selected.x;els.propY.value=selected.y;els.propW.value=selected.w;els.propH.value=selected.h;
+    if(els.propFontFamily)els.propFontFamily.value=selected.fontFamily||'Arial';
+    if(els.propFontStyle)els.propFontStyle.value=selected.fontStyle||'plain';
+    if(els.propFontSize)els.propFontSize.value=selected.fontSize||14;
+    if(els.propForeground)els.propForeground.value=selected.foreground||'#000000';
+    if(els.propBackground)els.propBackground.value=selected.background||'#f0f0f0';
+    if(els.propOpaque)els.propOpaque.checked=selected.opaque!==false;
+    const supportsIcon=selected.type==='JLabel'||selected.type==='JButton';
+    els.iconEditorBlock?.classList.toggle('hidden',!supportsIcon);
+    if(els.propIconPath)els.propIconPath.value=selected.iconPath||'';
     const isButton=selected.type==='JButton';
     els.actionTargetLabel.classList.toggle('hidden',!isButton);
     els.buttonEventsBlock?.classList.toggle('hidden',!isButton);
@@ -670,31 +1155,157 @@
       if(els.propActionHandler)els.propActionHandler.value=actionHandlerName(selected);
     }
   }
+  function componentCss(item){
+    normalizeComponentDesign(item);
+    const weight=item.fontStyle==='bold'||item.fontStyle==='bolditalic'?'700':'400';
+    const style=item.fontStyle==='italic'||item.fontStyle==='bolditalic'?'italic':'normal';
+    const bg=item.opaque?(item.background||'#f0f0f0'):'transparent';
+    return `font-family:${String(item.fontFamily||'Arial').replace(/[;{}]/g,'')};font-size:${Math.max(8,Number(item.fontSize)||14)}px;font-weight:${weight};font-style:${style};color:${item.foreground||'#000000'};background-color:${bg};`;
+  }
+  function componentIconMarkup(item){
+    if(item.type!=='JLabel'&&item.type!=='JButton')return '';
+    const src=item.iconData||item.iconPath||'';
+    return src?`<img class="component-icon" src="${escapeHtml(src)}" alt="">`:'';
+  }
   function componentInnerHtml(item,preview=false){
-    const text=escapeHtml(item.text);
+    const text=escapeHtml(item.text),style=componentCss(item),icon=componentIconMarkup(item);
     const isAuthButton=item.role==='loginSubmit'||item.role==='registerSubmit';
     const actionAttr=preview&&item.type==='JButton'&&isAuthButton?` data-auth-action="${item.role==='loginSubmit'?'login':'register'}"`:preview&&item.type==='JButton'&&item.actionTarget?` data-open-form="${escapeHtml(item.actionTarget)}"`:'';
-    switch(item.type){case'JLabel':return`<label>${text||'Label'}</label>`;case'JTextField':return`<input type="text" value="${text}">`;case'JPasswordField':return`<input type="password" value="${text}">`;case'JButton':return`<button type="button"${actionAttr}>${text||'Button'}</button>`;case'JCheckBox':return`<label><input type="checkbox"> ${text||'Check Box'}</label>`;case'JRadioButton':return`<label><input type="radio"> ${text||'Radio Button'}</label>`;case'JTextArea':return`<textarea>${text}</textarea>`;case'JComboBox':{const o=String(item.text||'Item 1, Item 2').split(',').map(v=>v.trim()).filter(Boolean);return`<select>${o.map(v=>`<option>${escapeHtml(v)}</option>`).join('')}</select>`;}case'JTable':{const c=String(item.text||'Column 1, Column 2').split(',').map(v=>v.trim()).filter(Boolean);return`<table><thead><tr>${c.map(v=>`<th>${escapeHtml(v)}</th>`).join('')}</tr></thead><tbody><tr>${c.map(()=>'<td></td>').join('')}</tr><tr>${c.map(()=>'<td></td>').join('')}</tr></tbody></table>`;}default:return`<div>${text}</div>`;}
+    switch(item.type){
+      // The Palette supplies default text only when a component is first created.
+      // After that, an intentionally empty Text / Items property must stay empty.
+      case'JLabel':return`<label style="${style}">${icon}${text}</label>`;
+      case'JTextField':return`<input style="${style}" type="text" value="${text}">`;
+      case'JPasswordField':return`<input style="${style}" type="password" value="${text}">`;
+      case'JButton':return`<button style="${style}" type="button"${actionAttr}>${icon}${text}</button>`;
+      case'JCheckBox':return`<label style="${style}"><input type="checkbox">${text?` ${text}`:''}</label>`;
+      case'JRadioButton':return`<label style="${style}"><input type="radio">${text?` ${text}`:''}</label>`;
+      case'JTextArea':return`<textarea style="${style}">${text}</textarea>`;
+      case'JComboBox':{const o=String(item.text??'').split(',').map(v=>v.trim()).filter(Boolean);return`<select style="${style}">${o.map(v=>`<option>${escapeHtml(v)}</option>`).join('')}</select>`;}
+      case'JTable':{const c=String(item.text??'').split(',').map(v=>v.trim()).filter(Boolean);return`<table style="${style}"><thead><tr>${c.map(v=>`<th>${escapeHtml(v)}</th>`).join('')}</tr></thead><tbody>${c.length?`<tr>${c.map(()=>'<td></td>').join('')}</tr><tr>${c.map(()=>'<td></td>').join('')}</tr>`:''}</tbody></table>`;}
+      default:return`<div style="${style}">${text}</div>`;
+    }
   }
+  function layerIcon(type){
+    return ({JLabel:'A',JTextField:'▭',JPasswordField:'•••',JButton:'B',JCheckBox:'☑',JRadioButton:'◉',JTextArea:'≡',JComboBox:'▼',JTable:'▦'})[type]||'◆';
+  }
+  function renderNavigator(){
+    if(!els.componentNavigator)return;
+    const f=currentForm();
+    if(!f){
+      els.componentNavigator.innerHTML='<div class="empty">Open a JFrame Form to view its components.</div>';
+      [els.bringToFrontBtn,els.moveForwardBtn,els.moveBackwardBtn,els.sendToBackBtn].filter(Boolean).forEach(b=>b.disabled=true);
+      return;
+    }
+    const components=Array.isArray(f.components)?f.components:[];
+    const root=`<div class="navigator-root"><span class="navigator-disclosure">▾</span><strong>${escapeHtml(f.className||'JFrame')}</strong><span class="navigator-root-type">JFrame</span></div>`;
+    if(!components.length){
+      els.componentNavigator.innerHTML=root+'<div class="empty navigator-empty">No components on this form.</div>';
+    }else{
+      // f.components is stored back -> front. Reverse it so the Navigator matches NetBeans-like visual stacking: front at the top.
+      const rows=[...components].reverse().map((item,frontIndex)=>{
+        const selected=item.id===state.selectedId?' selected':'';
+        const preview=String(item.text??'').trim();
+        const textPreview=preview?`<span class="navigator-text">${escapeHtml(preview.length>24?preview.slice(0,24)+'…':preview)}</span>`:'<span class="navigator-text empty-text">(no text)</span>';
+        return `<button class="navigator-item${selected}" type="button" data-component-id="${escapeHtml(item.id)}" title="Select ${escapeHtml(item.name)}. Layer ${frontIndex+1} from front."><span class="navigator-type-icon">${layerIcon(item.type)}</span><span class="navigator-item-main"><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.type)}</small></span>${textPreview}<span class="navigator-layer">${frontIndex===0?'FRONT':frontIndex+1}</span></button>`;
+      }).join('');
+      els.componentNavigator.innerHTML=root+`<div class="navigator-children">${rows}</div>`;
+      $$('.navigator-item',els.componentNavigator).forEach(row=>row.addEventListener('click',()=>{
+        const id=row.dataset.componentId;
+        if(!id)return;
+        if(currentViewName()!=='design')switchView('design',false);
+        selectComponent(id);
+      }));
+    }
+    updateLayerButtons();
+  }
+  function updateLayerButtons(){
+    const f=currentForm(),s=getSelected();
+    const count=f?.components?.length||0;
+    const index=s?f.components.findIndex(i=>i.id===s.id):-1;
+    if(els.bringToFrontBtn)els.bringToFrontBtn.disabled=index<0||index===count-1;
+    if(els.moveForwardBtn)els.moveForwardBtn.disabled=index<0||index===count-1;
+    if(els.moveBackwardBtn)els.moveBackwardBtn.disabled=index<=0;
+    if(els.sendToBackBtn)els.sendToBackBtn.disabled=index<=0;
+  }
+  function moveSelectedLayer(direction){
+    const f=currentForm(),s=getSelected();
+    if(!f||!s)return;
+    const list=f.components;
+    const index=list.findIndex(i=>i.id===s.id);
+    if(index<0)return;
+    let target=index;
+    if(direction==='front')target=list.length-1;
+    else if(direction==='forward')target=Math.min(list.length-1,index+1);
+    else if(direction==='backward')target=Math.max(0,index-1);
+    else if(direction==='back')target=0;
+    if(target===index){updateLayerButtons();return;}
+    const [item]=list.splice(index,1);
+    list.splice(target,0,item);
+    state.selectedId=item.id;
+    renderComponents();
+    syncGeneratedSourceFromDesign();
+    setDirty(true);
+    const label=direction==='front'?'brought to front':direction==='forward'?'moved one layer forward':direction==='backward'?'moved one layer backward':'sent to back';
+    log(`${item.name} ${label}.`,'success');
+  }
+
   function renderComponents(){
-    $$('.component',els.canvas).forEach(n=>n.remove());const f=currentForm();if(!f){els.emptyCanvas.classList.remove('hidden');selectComponent(null);return;}
-    f.components.forEach(item=>{const node=document.createElement('div');node.className='component';node.dataset.id=item.id;if(item.type==='JButton')node.dataset.buttonEvent='true';Object.assign(node.style,{left:`${item.x}px`,top:`${item.y}px`,width:`${item.w}px`,height:`${item.h}px`});node.innerHTML=`${componentInnerHtml(item)}<span class="resize" title="Resize"></span>`;
+    $$('.component',els.canvas).forEach(n=>n.remove());const f=currentForm();if(!f){els.emptyCanvas.classList.remove('hidden');selectComponent(null);renderNavigator();return;}
+    f.components.forEach((item,layerIndex)=>{normalizeComponentDesign(item);const node=document.createElement('div');node.className='component';node.dataset.id=item.id;if(item.type==='JButton')node.dataset.buttonEvent='true';Object.assign(node.style,{left:`${item.x}px`,top:`${item.y}px`,width:`${item.w}px`,height:`${item.h}px`,zIndex:String(layerIndex+1)});node.innerHTML=`${componentInnerHtml(item)}<span class="resize" title="Resize"></span>`;
       node.addEventListener('dblclick',e=>{
         if(item.type!=='JButton')return;
         e.preventDefault();e.stopPropagation();selectComponent(item.id);openActionHandler(item);
       });
       node.addEventListener('pointerdown',e=>{if(e.button!==0)return;const resize=e.target.classList.contains('resize');selectComponent(item.id);const sx=e.clientX,sy=e.clientY,start={x:item.x,y:item.y,w:item.w,h:item.h};node.setPointerCapture(e.pointerId);
         const move=m=>{const dx=m.clientX-sx,dy=m.clientY-sy;if(resize){item.w=Math.max(20,Math.round(start.w+dx));item.h=Math.max(18,Math.round(start.h+dy));}else{const maxX=Math.max(0,els.canvas.clientWidth-item.w),maxY=Math.max(0,els.canvas.clientHeight-item.h);item.x=Math.max(0,Math.min(maxX,Math.round(start.x+dx)));item.y=Math.max(0,Math.min(maxY,Math.round(start.y+dy)));}Object.assign(node.style,{left:`${item.x}px`,top:`${item.y}px`,width:`${item.w}px`,height:`${item.h}px`});selectComponent(item.id);setDirty(true);};
-        const up=u=>{try{node.releasePointerCapture(u.pointerId);}catch{}node.removeEventListener('pointermove',move);node.removeEventListener('pointerup',up);};node.addEventListener('pointermove',move);node.addEventListener('pointerup',up);});els.canvas.appendChild(node);});
-    els.emptyCanvas.classList.toggle('hidden',f.components.length>0);selectComponent(state.selectedId);
+        const up=u=>{try{node.releasePointerCapture(u.pointerId);}catch{}node.removeEventListener('pointermove',move);node.removeEventListener('pointerup',up);syncGeneratedSourceFromDesign();};node.addEventListener('pointermove',move);node.addEventListener('pointerup',up);});els.canvas.appendChild(node);});
+    els.emptyCanvas.classList.toggle('hidden',f.components.length>0);selectComponent(state.selectedId);renderNavigator();
   }
-  function updateSelectedFromProperties(){const s=getSelected();if(!s)return;s.name=safeVariableName(els.propName.value,s.name);s.text=els.propText.value;s.x=Math.max(0,Number(els.propX.value)||0);s.y=Math.max(0,Number(els.propY.value)||0);s.w=Math.max(20,Number(els.propW.value)||20);s.h=Math.max(18,Number(els.propH.value)||18);if(s.type==='JButton')s.actionTarget=els.propActionTarget.value||'';renderComponents();setDirty(true);}
-  function deleteSelected(){const f=currentForm(),s=getSelected();if(!f||!s)return;f.components=f.components.filter(i=>i.id!==s.id);state.selectedId=null;renderComponents();setDirty(true);log(`${s.type} "${s.name}" deleted.`);}
+  function updateSelectedFromProperties(){
+    const s=getSelected();if(!s)return;
+    const form=currentForm();const existing=els.codeEditor.value||state.files[state.currentFile]||'';captureEditedEventBodies(form,existing);captureEditedHelperMethod(form,existing);
+    s.name=safeVariableName(els.propName.value,s.name);s.text=els.propText.value;s.x=Math.max(0,Number(els.propX.value)||0);s.y=Math.max(0,Number(els.propY.value)||0);s.w=Math.max(20,Number(els.propW.value)||20);s.h=Math.max(18,Number(els.propH.value)||18);
+    s.fontFamily=els.propFontFamily?.value||s.fontFamily||'Arial';s.fontStyle=els.propFontStyle?.value||'plain';s.fontSize=Math.max(8,Math.min(72,Number(els.propFontSize?.value)||14));s.foreground=els.propForeground?.value||'#000000';s.background=els.propBackground?.value||'#f0f0f0';s.opaque=els.propOpaque?!!els.propOpaque.checked:true;
+    if((s.type==='JLabel'||s.type==='JButton')&&els.propIconPath){const nextIconPath=els.propIconPath.value.trim();if(nextIconPath!==s.iconPath)s.iconData='';s.iconPath=nextIconPath;}
+    if(s.type==='JButton')s.actionTarget=els.propActionTarget.value||'';
+    renderComponents();syncGeneratedSourceFromDesign();setDirty(true);
+  }
+  function chooseComponentImage(){
+    const s=getSelected();if(!s || (s.type!=='JLabel'&&s.type!=='JButton')){log('Select a JLabel or JButton before choosing an image/icon.','error');return;}
+    const picker=document.createElement('input');picker.type='file';picker.accept='image/*';
+    picker.onchange=()=>{const file=picker.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{s.iconData=String(reader.result||'');s.iconPath=file.name;els.propIconPath.value=s.iconPath;renderComponents();syncGeneratedSourceFromDesign();setDirty(true);log(`Image/icon ${file.name} added to ${s.name}.`,'success');};reader.readAsDataURL(file);};
+    picker.click();
+  }
+  function clearComponentImage(){
+    const s=getSelected();if(!s)return;s.iconPath='';s.iconData='';if(els.propIconPath)els.propIconPath.value='';renderComponents();syncGeneratedSourceFromDesign();setDirty(true);
+  }
+  function deleteSelected(){const f=currentForm(),s=getSelected();if(!f||!s)return;f.components=f.components.filter(i=>i.id!==s.id);state.selectedId=null;renderComponents();syncGeneratedSourceFromDesign();setDirty(true);log(`${s.type} "${s.name}" deleted.`);}
 
   function javaDeclaration(i){return`    private ${i.type} ${safeVariableName(i.name)};`;}
-  function javaInitialization(i){const n=safeVariableName(i.name),t=escapeJava(i.text);switch(i.type){case'JLabel':return`        ${n} = new JLabel("${t}");`;case'JTextField':return`        ${n} = new JTextField("${t}");`;case'JPasswordField':return`        ${n} = new JPasswordField("${t}");`;case'JButton':return`        ${n} = new JButton("${t}");`;case'JCheckBox':return`        ${n} = new JCheckBox("${t}");`;case'JRadioButton':return`        ${n} = new JRadioButton("${t}");`;case'JTextArea':return`        ${n} = new JTextArea("${t}");`;case'JComboBox':{const v=String(i.text||'').split(',').map(x=>`"${escapeJava(x.trim())}"`).filter(x=>x!=='""').join(', ');return`        ${n} = new JComboBox<>(new String[]{${v}});`;}case'JTable':{const v=String(i.text||'Column 1, Column 2').split(',').map(x=>`"${escapeJava(x.trim())}"`).filter(x=>x!=='""').join(', ');return`        ${n} = new JTable(new Object[][]{}, new String[]{${v}});`;}default:return`        ${n} = new ${i.type}();`;}}
+  function javaInitialization(i){const n=safeVariableName(i.name),t=escapeJava(i.text);switch(i.type){case'JLabel':return`        ${n} = new JLabel("${t}");`;case'JTextField':return`        ${n} = new JTextField("${t}");`;case'JPasswordField':return`        ${n} = new JPasswordField("${t}");`;case'JButton':return`        ${n} = new JButton("${t}");`;case'JCheckBox':return`        ${n} = new JCheckBox("${t}");`;case'JRadioButton':return`        ${n} = new JRadioButton("${t}");`;case'JTextArea':return`        ${n} = new JTextArea("${t}");`;case'JComboBox':{const v=String(i.text||'').split(',').map(x=>`"${escapeJava(x.trim())}"`).filter(x=>x!=='""').join(', ');return`        ${n} = new JComboBox<>(new String[]{${v}});`;}case'JTable':{const v=String(i.text??'').split(',').map(x=>`"${escapeJava(x.trim())}"`).filter(x=>x!=='""').join(', ');return`        ${n} = new JTable(new Object[][]{}, new String[]{${v}});`;}default:return`        ${n} = new ${i.type}();`;}}
+  function hexToRgb(hex){
+    const m=/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(String(hex||''));
+    return m?[parseInt(m[1],16),parseInt(m[2],16),parseInt(m[3],16)]:[0,0,0];
+  }
+  function javaAppearanceStatements(i){
+    normalizeComponentDesign(i);
+    const n=safeVariableName(i.name), lines=[];
+    const style=i.fontStyle==='bold'?'Font.BOLD':i.fontStyle==='italic'?'Font.ITALIC':i.fontStyle==='bolditalic'?'Font.BOLD | Font.ITALIC':'Font.PLAIN';
+    const [fr,fg,fb]=hexToRgb(i.foreground),[br,bg,bb]=hexToRgb(i.background);
+    lines.push(`        ${n}.setFont(new Font("${escapeJava(i.fontFamily||'Arial')}", ${style}, ${Math.max(8,Number(i.fontSize)||14)}));`);
+    lines.push(`        ${n}.setForeground(new Color(${fr}, ${fg}, ${fb}));`);
+    if(i.opaque){
+      lines.push(`        ${n}.setBackground(new Color(${br}, ${bg}, ${bb}));`);
+      if(i.type==='JLabel') lines.push(`        ${n}.setOpaque(true);`);
+    }else if(i.type==='JLabel') lines.push(`        ${n}.setOpaque(false);`);
+    if((i.type==='JLabel'||i.type==='JButton')&&i.iconPath){
+      lines.push(`        ${n}.setIcon(new ImageIcon("${escapeJava(i.iconPath)}"));`);
+    }
+    return lines;
+  }
   function javaAddStatement(i){
-    const n=safeVariableName(i.name);const lines=[];
+    const n=safeVariableName(i.name);const lines=[...javaAppearanceStatements(i)];
     if(i.type==='JTable'||i.type==='JTextArea'){
       lines.push(`        JScrollPane ${n}ScrollPane = new JScrollPane(${n});`,`        ${n}ScrollPane.setBounds(${i.x}, ${i.y}, ${i.w}, ${i.h});`,`        add(${n}ScrollPane);`);
     }else{
@@ -704,6 +1315,16 @@
       lines.push('',`        ${n}.addActionListener(this::${actionHandlerName(i)});`);
     }
     return lines.join('\n');
+  }
+
+  function javaLayerStatements(components){
+    const list=Array.isArray(components)?components:[];
+    if(list.length<2)return '';
+    return [...list].reverse().map((i,frontIndex)=>{
+      const n=safeVariableName(i.name);
+      const target=(i.type==='JTable'||i.type==='JTextArea')?`${n}ScrollPane`:n;
+      return `        getContentPane().setComponentZOrder(${target}, ${frontIndex});`;
+    }).join('\n');
   }
 
   function javaEventHandlers(form){
@@ -884,50 +1505,83 @@ ${target?`                    new ${target}().setVisible(true);
   }
 
   function generateJavaCode(form){
-    const f=form||currentForm()||blankForm();const c=safeClassName(f.className),title=escapeJava(f.title||c),w=Math.max(400,Number(f.width)||760),h=Math.max(300,Number(f.height)||500),components=Array.isArray(f.components)?f.components:[];
-    const dec=components.map(javaDeclaration).join('\n'),init=components.map(javaInitialization).join('\n'),adds=components.map(javaAddStatement).join('\n\n');
+    const f=form||currentForm()||blankForm();normalizeProjectDesignData();
+    const c=safeClassName(f.className),title=escapeJava(f.title||c),w=Math.max(400,Number(f.width)||760),h=Math.max(300,Number(f.height)||500),components=Array.isArray(f.components)?f.components:[];
+    const dec=components.map(javaDeclaration).join('\n'),init=components.map(javaInitialization).join('\n'),adds=components.map(javaAddStatement).join('\n\n'),layers=javaLayerStatements(components);
     const handlers=javaEventHandlers(f);
     const authType=f.templateType==='login-db'||f.templateType==='register-db';
-    const extraMethods=f.templateType==='login-db'?loginMethods(f):f.templateType==='register-db'?registerMethods(f):'';
-    const imports=authType?'import javax.swing.*;\nimport java.sql.*;':'import javax.swing.*;';
+    const baselineExtraMethods=f.templateType==='login-db'?loginMethods(f):f.templateType==='register-db'?registerMethods(f):'';
+    const helperName=helperMethodName(f);
+    const extraMethods=helperName&&f.customHelperMethods?.[helperName]?f.customHelperMethods[helperName]:baselineExtraMethods;
+    if(helperName){f.lastGeneratedHelperMethods=f.lastGeneratedHelperMethods||{};f.lastGeneratedHelperMethods[helperName]=extraMethods;}
+    const imports=authType?'import javax.swing.*;\nimport java.sql.*;\nimport java.awt.*;':'import javax.swing.*;\nimport java.awt.*;';
+    const [rr,rg,rb]=hexToRgb(f.backgroundColor||'#f3f3f3');
 
-    return`${imports}\n\npublic class ${c} extends JFrame {\n${dec?'\n'+dec+'\n':''}\n    public ${c}() {\n        setTitle("${title}");\n        setSize(${w}, ${h});\n        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);\n        setLocationRelativeTo(null);\n        setLayout(null);\n\n${init||'        // Add Swing components from the Design tab.'}${adds?'\n\n'+adds:''}\n    }\n\n${handlers}${handlers?'\n':''}${extraMethods}\n    public static void main(String[] args) {\n        SwingUtilities.invokeLater(() -> new ${c}().setVisible(true));\n    }\n}\n`;
+    return`${imports}\n\npublic class ${c} extends JFrame {\n${dec?'\n'+dec+'\n':''}\n    public ${c}() {\n        setTitle("${title}");\n        setSize(${w}, ${h});\n        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);\n        setResizable(${f.resizable!==false?'true':'false'});\n        setLocationRelativeTo(null);\n        setLayout(null);\n        getContentPane().setBackground(new Color(${rr}, ${rg}, ${rb}));\n\n${init||'        // Add Swing components from the Design tab.'}${adds?'\n\n'+adds:''}${layers?'\n\n        // Component layer order: z-order 0 is the front-most Swing component.\n'+layers:''}\n    }\n\n${handlers}${handlers?'\n':''}${extraMethods}\n    public static void main(String[] args) {\n        SwingUtilities.invokeLater(() -> new ${c}().setVisible(true));\n    }\n}\n`;
+  }
+
+  function syncGeneratedSourceFromDesign(){
+    if(!isFormFile())return;
+    const f=currentForm();if(!f)return;
+    const existing=els.codeEditor.value||state.files[state.currentFile]||'';
+    captureEditedEventBodies(f,existing);
+    captureEditedHelperMethod(f,existing);
+    state.files[state.currentFile]=generateJavaCode(f);
+    els.codeEditor.value=state.files[state.currentFile];
+    els.currentFileLabel.textContent=state.currentFile;
+    if(state.foldView)renderFoldedCode();
   }
 
   function generateCurrentForm(switchToSource=true){
     if(!isFormFile()){log('The current file is not a JFrame Form.','error');return;}
     syncFormFromInputs();upgradeAuthMetadata();autoLinkAuthForms();const f=currentForm();
-    const existingSource=els.codeEditor.value||state.files[state.currentFile]||'';
-    captureEditedEventBodies(f,existingSource);
     if(f.templateType==='login-db'||f.templateType==='register-db')ensureAuthSupportFiles(false);
-    state.files[state.currentFile]=generateJavaCode(f);els.codeEditor.value=state.files[state.currentFile];els.currentFileLabel.textContent=state.currentFile;
-    if(state.foldView) renderFoldedCode();
+    syncGeneratedSourceFromDesign();
     if(switchToSource)switchView('source');setDirty(true);log(`Generated ${state.currentFile} from its Design canvas.`,"success");
   }
+
+  function showEventEditNotice(item,handler){
+    if(!els.eventEditNotice)return;
+    els.eventEditTitle.textContent=`Editing ${handler}(...)`;
+    const auth=item?.role==='loginSubmit'?' Keep authenticateUser() for the database login; add extra code before or after that call.':item?.role==='registerSubmit'?' Keep registerUser() for database registration; add extra code before or after that call.':'';
+    els.eventEditText.textContent=`The Source editor is positioned directly inside this ActionPerformed method. This is where you edit the button behavior.${auth}`;
+    els.eventEditNotice.classList.remove('hidden');
+  }
+  function hideEventEditNotice(){els.eventEditNotice?.classList.add('hidden');}
 
   function openActionHandler(item=getSelected()){
     if(!item || item.type!=='JButton'){log('Select a JButton to open its ActionPerformed event.','error');return;}
     if(!isFormFile()){log('Open a JFrame Form first.','error');return;}
     state.selectedId=item.id;
-    generateCurrentForm(false);
+    syncFormFromInputs();
+    syncGeneratedSourceFromDesign();
     const handler=actionHandlerName(item);
     const source=els.codeEditor.value;
-    const idx=source.indexOf(`void ${handler}(`);
+    const methodIdx=source.indexOf(`void ${handler}(`);
     setFoldView(false);
     switchView('source');
-    if(idx>=0){
-      const nameStart=source.indexOf(handler,idx);
-      const nameEnd=nameStart+handler.length;
+    if(methodIdx>=0){
+      const brace=source.indexOf('{',methodIdx),close=findMatchingBrace(source,brace);
+      let a=brace+1,b=close;
+      if(brace>=0&&close>brace){
+        const inner=source.slice(brace+1,close);
+        const lead=(inner.match(/^\s*/)||[''])[0].length;
+        const trail=(inner.match(/\s*$/)||[''])[0].length;
+        a=brace+1+lead;b=Math.max(a,close-trail);
+      }
       els.codeEditor.focus();
-      els.codeEditor.setSelectionRange(nameStart,nameEnd);
-      const line=source.slice(0,nameStart).split('\n').length-1;
+      const selectEnd=(item.role==='loginSubmit'||item.role==='registerSubmit'||item.actionTarget)?a:b;
+      els.codeEditor.setSelectionRange(a,selectEnd);
+      const line=source.slice(0,a).split('\n').length-1;
       const style=getComputedStyle(els.codeEditor);
       const lineHeight=parseFloat(style.lineHeight)||21.7;
       els.codeEditor.scrollTop=Math.max(0,line*lineHeight-120);
       els.codeEditor.classList.remove('source-jump-flash');
       void els.codeEditor.offsetWidth;
       els.codeEditor.classList.add('source-jump-flash');
-      log(`Opened event handler ${handler}(...).`,'success');
+      state.uiState[state.currentFile]=Object.assign({},state.uiState[state.currentFile]||{},{view:'source',selectionStart:a,selectionEnd:selectEnd,codeScrollTop:els.codeEditor.scrollTop});
+      showEventEditNotice(item,handler);
+      log(`Opened ${handler}(...). The cursor is now inside the exact button event code.`,'success');
     }else{
       log(`Could not locate ${handler} in the generated source.`,'error');
     }
@@ -1089,6 +1743,7 @@ CREATE TABLE IF NOT EXISTS \`${table}\` (
       const doomedClass=classFromFile(doomed);
       delete state.files[doomed];
       delete state.forms[doomed];
+      delete state.uiState[doomed];
 
       Object.values(state.forms).forEach(f=>{
         (f.components||[]).forEach(i=>{
@@ -1105,7 +1760,8 @@ CREATE TABLE IF NOT EXISTS \`${table}\` (
 
       els.mainClassInput.value=state.mainClass;
       closeModal();
-      loadCurrentFile({preferDesign:isFormFile()});
+      loadCurrentFile({preferDesign:isFormFile(),restoreView:true});
+      Object.keys(state.forms).forEach(name=>{state.files[name]=generateJavaCode(state.forms[name]);});
       renderProjectTree();
       setDirty(true);
       log(`${doomed} deleted from the project.`,"success");
@@ -1130,7 +1786,7 @@ CREATE TABLE IF NOT EXISTS \`${table}\` (
   function previewFormByClass(className){const file=`${safeClassName(className)}.java`;if(!state.forms[file]){log(`Preview target ${className} was not found.`,`error`);return;}showPreview(file);}
   function showPreview(fileName=state.currentFile){
     const f=state.forms[fileName];if(!f){log('Open a JFrame Form before previewing.','error');return;}
-    showModal(`JFrame Preview - ${f.className}`,`<div class="preview-box"><div style="width:${f.width}px;max-width:none;margin:auto"><div class="fake-title"><span>${escapeHtml(f.title)}</span><span>— □ ×</span></div><div class="preview-frame" style="width:${f.width}px;height:${f.height}px">${f.components.map(i=>`<div class="preview-component" style="left:${i.x}px;top:${i.y}px;width:${i.w}px;height:${i.h}px">${componentInnerHtml(i,true)}</div>`).join('')}</div></div></div>`);
+    showModal(`JFrame Preview - ${f.className}`,`<div class="preview-box"><div style="width:${f.width}px;max-width:none;margin:auto"><div class="fake-title"><span>${escapeHtml(f.title)}</span><span>— □ ×</span></div><div class="preview-frame" style="width:${f.width}px;height:${f.height}px;background:${escapeHtml(f.backgroundColor||'#f3f3f3')}">${f.components.map((i,layerIndex)=>`<div class="preview-component" style="left:${i.x}px;top:${i.y}px;width:${i.w}px;height:${i.h}px;z-index:${layerIndex+1}">${componentInnerHtml(i,true)}</div>`).join('')}</div></div></div>`);
     $$('[data-open-form]',els.modalBody).forEach(b=>b.addEventListener('click',()=>{const target=b.dataset.openForm;closeModal();previewFormByClass(target);}));
     $$('[data-auth-action]',els.modalBody).forEach(b=>b.addEventListener('click',()=>{log(`Preview only: ${b.dataset.authAction} uses JDBC in the generated Java application. Open the Source tab to see the database code.`,"info");}));
   }
@@ -1139,19 +1795,72 @@ CREATE TABLE IF NOT EXISTS \`${table}\` (
   async function copySource(){try{await navigator.clipboard.writeText(els.codeEditor.value);log('Source code copied.',"success");}catch{els.codeEditor.focus();els.codeEditor.select();document.execCommand('copy');log('Source code copied.',"success");}}
   async function testDatabase(){const payload={host:els.dbHost.value.trim()||'localhost',port:els.dbPort.value.trim()||'3306',database:els.dbName.value.trim(),user:els.dbUser.value,password:els.dbPass.value,usersTable:usersTable()};if(!payload.database){log('Enter a database name first.','error');return;}log(`Testing MySQL connection to ${payload.host}:${payload.port}/${payload.database}...`);try{const response=await fetch('api/test-db.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const raw=await response.text();let data;try{data=JSON.parse(raw);}catch{throw new Error('The PHP endpoint did not return JSON.');}if(!response.ok||!data.ok)throw new Error(data.message||'Database connection failed.');log(data.message||'Database connection successful.',"success");}catch(e){log(`Database test failed: ${e.message}\nIf you are using Live Server on port 5500, PHP will NOT execute. Open this project through XAMPP Apache (for example http://localhost/your-folder/IDE/) to use test-db.php.`,"error");}}
   function refreshFiles(){if(isFormFile())generateCurrentForm(false);else syncEditor();renderProjectTree();populateActionTargets();log('Project file list refreshed.');}
-  function showHelp(){showModal('IDE Help',`<div class="content"><p><strong>Multi-form project:</strong> use <em>+ New File / JFrame</em> to create LoginForm, RegisterForm, the Professional Dashboard JFrame template, StudentForm, and other windows.</p><p><strong>Each JFrame Form</strong> has a separate Design canvas and separate generated Java source.</p><p><strong>Button navigation:</strong> select a JButton and use <em>Open JFrame on Button Click</em> to connect one form to another.</p><p><strong>Main form:</strong> select a file and click <em>Set as Main</em>.</p><p><strong>Database:</strong> choose the Login or Register MySQL template. The IDE generates DBConnection.java, PasswordUtil.java, and database_setup.sql. Import MySQL Connector/J into the real NetBeans project.</p><p><strong>Delete files:</strong> click the × beside any file in the project tree or select a file and use Delete Selected File.</p><p><strong>Code folding:</strong> use <em>Minimize Generated</em> to collapse imports, fields, constructor/init code, and main. Use <em>Maximize All</em> to expand every section. Click <em>Edit</em> on a folded section to jump back to the full editable source.</p><p class="notice">Real Swing execution still requires Java/JDK. The browser Run button provides an interactive form preview, including navigation between designed JFrame forms.</p></div>`);}
+  function showHelp(){showModal('IDE Help',`<div class="content"><p><strong>Button event editing:</strong> double-click any JButton in Design. The IDE opens Source, highlights the exact ActionPerformed body, and shows where you should start typing.</p><p><strong>Live Design → Source:</strong> moving/resizing controls or changing text, font, colors, image/icon, form size, background, or button navigation immediately regenerates the Swing source while preserving edited button event bodies.</p><p><strong>Save / Continue later:</strong> projects auto-save in the browser. Save stores the project locally, while <em>Save As File</em> creates a .jframeide.json project file. Open Project restores the last file, tab, cursor and source scroll position.</p><p><strong>Mini System Templates:</strong> New Project can generate a complete Inventory Management or Student Record starter system with Login, Dashboard, CRUD forms, JDBC support files, and MySQL setup SQL.</p><p><strong>Multi-form project:</strong> use <em>+ New File / JFrame</em> to add Login, Register, Dashboard, Inventory, Student Record, generic CRUD, and other JFrame forms.</p><p><strong>Database:</strong> choose the Login or Register MySQL template. The IDE generates DBConnection.java, PasswordUtil.java, and database_setup.sql. Import MySQL Connector/J into the real NetBeans project.</p><p><strong>Code folding:</strong> use <em>Minimize Generated</em> to collapse imports, fields, constructor/init code, and main. Use <em>Maximize All</em> to expand every section.</p><p><strong>Navigator / Layers:</strong> the Navigator lists front-most components at the top. Select a component and use Front, Forward, Backward, or Back to control overlap. The generated Swing source preserves the same z-order.</p><p><strong>Output:</strong> use Hide/Show or Maximize/Restore in the Output title bar.</p><p class="notice">Real Swing execution still requires Java/JDK. The browser Run button provides an interactive form preview, including navigation between designed JFrame forms.</p></div>`);}
+
+  function toggleOutputPanel(){
+    if(!els.outputPanel)return;
+    const collapsed=els.outputPanel.classList.toggle('collapsed');
+    if(collapsed)els.outputPanel.classList.remove('maximized');
+    if(els.toggleOutputBtn)els.toggleOutputBtn.textContent=collapsed?'+ Show':'− Hide';
+    if(els.maximizeOutputBtn)els.maximizeOutputBtn.textContent='□ Maximize';
+  }
+  function toggleOutputMaximize(){
+    if(!els.outputPanel)return;
+    els.outputPanel.classList.remove('collapsed');
+    if(els.toggleOutputBtn)els.toggleOutputBtn.textContent='− Hide';
+    const max=els.outputPanel.classList.toggle('maximized');
+    if(els.maximizeOutputBtn)els.maximizeOutputBtn.textContent=max?'↙ Restore':'□ Maximize';
+  }
 
   $$('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
   $$('.palette button').forEach(b=>{b.addEventListener('click',()=>{const f=currentForm();const i=f?.components.length||0;createComponent(b.dataset.type,30+(i%6)*18,30+(i%6)*18);});b.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',b.dataset.type);e.dataTransfer.effectAllowed='copy';});});
   els.canvas.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='copy';});
   els.canvas.addEventListener('drop',e=>{e.preventDefault();const type=e.dataTransfer.getData('text/plain');if(!componentDefaults[type])return;const r=els.canvas.getBoundingClientRect();createComponent(type,e.clientX-r.left,e.clientY-r.top);});
   els.canvas.addEventListener('pointerdown',e=>{if(e.target===els.canvas){state.selectedId=null;selectComponent(null);}});
-  [els.className,els.frameTitle,els.frameWidth,els.frameHeight].forEach(i=>{i.addEventListener('change',updateFrame);i.addEventListener('input',()=>{if(i===els.frameTitle&&currentForm()){currentForm().title=i.value||currentForm().className;els.frameTitleDisplay.textContent=currentForm().title;}setDirty(true);});});
-  [els.propName,els.propText,els.propX,els.propY,els.propW,els.propH,els.propActionTarget].forEach(i=>{i.addEventListener('change',updateSelectedFromProperties);if(i===els.propText)i.addEventListener('input',()=>{const s=getSelected();if(s){s.text=i.value;renderComponents();setDirty(true);}});});
-  els.newProjectBtn.onclick=showNewProjectDialog;els.openProjectBtn.onclick=showOpenProjectDialog;els.saveBtn.onclick=saveProject;els.newFileBtn.onclick=showNewFileDialog;els.treeNewFileBtn.onclick=showNewFileDialog;els.deleteFileBtn.onclick=deleteCurrentFile;els.setMainBtn.onclick=setCurrentAsMain;els.compileBtn.onclick=compileCheck;els.runBtn.onclick=runProject;els.previewBtn.onclick=()=>showPreview();els.addDbBtn.onclick=addDbConnectionFile;els.addAuthBtn.onclick=()=>ensureAuthSupportFiles(true);els.refreshFilesBtn.onclick=refreshFiles;els.foldModeBtn.onclick=toggleFoldView;els.collapseGeneratedBtn.onclick=collapseGeneratedCode;els.expandAllCodeBtn.onclick=expandAllCode;els.generateBtn.onclick=()=>generateCurrentForm(true);els.copyBtn.onclick=copySource;els.openEventHandlerBtn.onclick=()=>openActionHandler();els.deleteComponentBtn.onclick=deleteSelected;els.generateAuthBtn.onclick=()=>ensureAuthSupportFiles(true);els.testDbBtn.onclick=testDatabase;els.clearOutputBtn.onclick=()=>replaceOutput('Output cleared.');
-  els.codeEditor.addEventListener('input',()=>{if(state.projectName&&state.currentFile){state.files[state.currentFile]=els.codeEditor.value;setDirty(true);}});
+
+  [els.className,els.frameTitle,els.frameWidth,els.frameHeight,els.frameBackground,els.frameResizable].filter(Boolean).forEach(i=>{
+    i.addEventListener('change',updateFrame);
+  });
+  els.frameTitle?.addEventListener('input',()=>{const f=currentForm();if(!f)return;f.title=els.frameTitle.value||f.className;els.frameTitleDisplay.textContent=f.title;syncGeneratedSourceFromDesign();setDirty(true);});
+  els.frameBackground?.addEventListener('input',()=>{const f=currentForm();if(!f)return;f.backgroundColor=els.frameBackground.value;updateFrameVisual();syncGeneratedSourceFromDesign();setDirty(true);});
+
+  [els.propName,els.propText,els.propX,els.propY,els.propW,els.propH,els.propFontFamily,els.propFontStyle,els.propFontSize,els.propForeground,els.propBackground,els.propOpaque,els.propIconPath,els.propActionTarget].filter(Boolean).forEach(i=>i.addEventListener('change',updateSelectedFromProperties));
+  [els.propText,els.propFontSize,els.propForeground,els.propBackground].filter(Boolean).forEach(i=>i.addEventListener('input',()=>{const s=getSelected();if(!s)return;if(i===els.propText)s.text=i.value;else if(i===els.propFontSize)s.fontSize=Math.max(8,Math.min(72,Number(i.value)||14));else if(i===els.propForeground)s.foreground=i.value;else if(i===els.propBackground)s.background=i.value;renderComponents();syncGeneratedSourceFromDesign();setDirty(true);}));
+
+  els.newProjectBtn.onclick=showNewProjectDialog;
+  els.openProjectBtn.onclick=showOpenProjectDialog;
+  els.saveBtn.onclick=saveProject;
+  if(els.saveAsBtn)els.saveAsBtn.onclick=saveProjectAsFile;
+  els.newFileBtn.onclick=showNewFileDialog;els.treeNewFileBtn.onclick=showNewFileDialog;els.deleteFileBtn.onclick=deleteCurrentFile;els.setMainBtn.onclick=setCurrentAsMain;els.compileBtn.onclick=compileCheck;els.runBtn.onclick=runProject;els.previewBtn.onclick=()=>showPreview();els.addDbBtn.onclick=addDbConnectionFile;els.addAuthBtn.onclick=()=>ensureAuthSupportFiles(true);els.refreshFilesBtn.onclick=refreshFiles;els.foldModeBtn.onclick=toggleFoldView;els.collapseGeneratedBtn.onclick=collapseGeneratedCode;els.expandAllCodeBtn.onclick=expandAllCode;els.generateBtn.onclick=()=>generateCurrentForm(true);els.copyBtn.onclick=copySource;els.openEventHandlerBtn.onclick=()=>openActionHandler();els.deleteComponentBtn.onclick=deleteSelected;els.generateAuthBtn.onclick=()=>ensureAuthSupportFiles(true);els.testDbBtn.onclick=testDatabase;els.clearOutputBtn.onclick=()=>replaceOutput('Output cleared.');
+  if(els.chooseIconBtn)els.chooseIconBtn.onclick=chooseComponentImage;
+  if(els.clearIconBtn)els.clearIconBtn.onclick=clearComponentImage;
+  if(els.toggleOutputBtn)els.toggleOutputBtn.onclick=toggleOutputPanel;
+  if(els.maximizeOutputBtn)els.maximizeOutputBtn.onclick=toggleOutputMaximize;
+  if(els.closeEventNoticeBtn)els.closeEventNoticeBtn.onclick=hideEventEditNotice;
+  if(els.bringToFrontBtn)els.bringToFrontBtn.onclick=()=>moveSelectedLayer('front');
+  if(els.moveForwardBtn)els.moveForwardBtn.onclick=()=>moveSelectedLayer('forward');
+  if(els.moveBackwardBtn)els.moveBackwardBtn.onclick=()=>moveSelectedLayer('backward');
+  if(els.sendToBackBtn)els.sendToBackBtn.onclick=()=>moveSelectedLayer('back');
+
+  els.codeEditor.addEventListener('input',()=>{if(state.projectName&&state.currentFile){state.files[state.currentFile]=els.codeEditor.value;captureCurrentFileUI();setDirty(true);}});
+  ['scroll','click','keyup','select'].forEach(type=>els.codeEditor.addEventListener(type,()=>captureCurrentFileUI(),{passive:type==='scroll'}));
+  els.designerWrap?.addEventListener('scroll',()=>captureCurrentFileUI(),{passive:true});
   els.mainClassInput.addEventListener('change',()=>{state.mainClass=safeClassName(els.mainClassInput.value);els.mainClassInput.value=state.mainClass;renderProjectTree();setDirty(true);});
-  els.modalClose.onclick=closeModal;els.modal.addEventListener('click',e=>{if(e.target===els.modal)closeModal();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!els.modal.classList.contains('hidden'))closeModal();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveProject();}});
+  els.modalClose.onclick=closeModal;els.modal.addEventListener('click',e=>{if(e.target===els.modal)closeModal();});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&!els.modal.classList.contains('hidden'))closeModal();
+    if((e.ctrlKey||e.metaKey)&&(e.key===']'||e.key==='[')&&isFormFile()&&getSelected()){
+      e.preventDefault();
+      if(e.key===']')moveSelectedLayer(e.shiftKey?'front':'forward');
+      else moveSelectedLayer(e.shiftKey?'back':'backward');
+      return;
+    }
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){
+      e.preventDefault();
+      if(e.shiftKey)saveProjectAsFile();else saveProject();
+    }
+  });
+  window.addEventListener('beforeunload',()=>{captureCurrentFileUI();persistProjectQuietly();});
   $$('.menubar button').forEach(b=>b.addEventListener('click',()=>{const m=b.dataset.menu;if(m==='file')showNewFileDialog();else if(m==='source')isFormFile()?generateCurrentForm(true):switchView('source');else if(m==='run')runProject();else if(m==='database')addDbConnectionFile();else if(m==='help')showHelp();else if(m==='view')switchView('design');else log(`${b.textContent} menu selected.`);}));
 
   migrateOldProjects(); const saved=getProjects(),names=Object.keys(saved); if(names.length){const newest=names.sort((a,b)=>new Date(saved[b].savedAt||0)-new Date(saved[a].savedAt||0))[0];applyProject(saved[newest]);replaceOutput(`Restored saved project "${newest}".\nYou can now add more JFrame forms with + New File / JFrame.`);}else{newProject('JavaJFrameProject');setDirty(false);}

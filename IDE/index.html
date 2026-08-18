@@ -26,6 +26,7 @@
       <button class="btn" id="newProjectBtn" type="button">New Project</button>
       <button class="btn" id="openProjectBtn" type="button">Open Project</button>
       <button class="btn success" id="saveBtn" type="button">Save</button>
+      <button class="btn" id="saveAsBtn" type="button" title="Save this entire IDE project as a file you can reopen later">Save As File</button>
       <button class="btn primary" id="compileBtn" type="button">Compile</button>
       <button class="btn run" id="runBtn" type="button">▶ Run Java</button>
     </div>
@@ -90,6 +91,24 @@
           <button type="button" draggable="true" data-type="JTable">▦ <span>JTable</span></button>
         </div>
       </section>
+
+      <section class="panel navigator-panel">
+        <div class="panel-title">
+          <span>Navigator - Component Layers</span>
+          <span class="navigator-front-hint" title="The first component in the list is drawn in front">Front ↑</span>
+        </div>
+        <p class="panel-help navigator-help">NetBeans-style component navigator. Select a component, then move it in front of or behind overlapping controls.</p>
+        <div id="componentNavigator" class="component-navigator" aria-label="JFrame component navigator">
+          <div class="empty">Open a JFrame Form to view its components.</div>
+        </div>
+        <div class="layer-actions" aria-label="Layer order actions">
+          <button id="bringToFrontBtn" type="button" title="Move the selected component above every other component">⇧ Front</button>
+          <button id="moveForwardBtn" type="button" title="Move the selected component one layer forward">↑ Forward</button>
+          <button id="moveBackwardBtn" type="button" title="Move the selected component one layer backward">↓ Backward</button>
+          <button id="sendToBackBtn" type="button" title="Move the selected component behind every other component">⇩ Back</button>
+        </div>
+        <p class="navigator-shortcuts">Shortcuts: Ctrl+] forward · Ctrl+[ backward · Ctrl+Shift+] front · Ctrl+Shift+[ back</p>
+      </section>
     </aside>
 
     <section class="center-pane">
@@ -129,6 +148,11 @@
             <button id="copyBtn" type="button">Copy</button>
           </div>
         </div>
+        <div id="eventEditNotice" class="event-edit-notice hidden" role="status">
+          <strong id="eventEditTitle">Button event opened</strong>
+          <span id="eventEditText">The editable event code is selected below. Start typing to replace the highlighted code.</span>
+          <button id="closeEventNoticeBtn" type="button" aria-label="Hide event editing help">×</button>
+        </div>
         <div id="foldedCodeView" class="folded-code-view hidden" aria-label="Folded Java source view"></div>
         <textarea id="codeEditor" spellcheck="false" aria-label="Java source editor"></textarea>
       </section>
@@ -142,6 +166,8 @@
           <label>Title<input id="frameTitle" value="Main Form" autocomplete="off"></label>
           <label>Width<input id="frameWidth" type="number" value="760" min="400" max="1200"></label>
           <label>Height<input id="frameHeight" type="number" value="500" min="300" max="800"></label>
+          <label>Form Background<input id="frameBackground" type="color" value="#f3f3f3"></label>
+          <label class="check-field">Resizable<input id="frameResizable" type="checkbox" checked></label>
         </div>
       </section>
 
@@ -156,6 +182,42 @@
           <label>Y<input id="propY" type="number"></label>
           <label>Width<input id="propW" type="number" min="20"></label>
           <label>Height<input id="propH" type="number" min="18"></label>
+
+          <div class="design-section full">Text &amp; Appearance</div>
+          <label>Font Family
+            <select id="propFontFamily">
+              <option>Arial</option>
+              <option>Segoe UI</option>
+              <option>Tahoma</option>
+              <option>Verdana</option>
+              <option>Times New Roman</option>
+              <option>Courier New</option>
+              <option>Georgia</option>
+            </select>
+          </label>
+          <label>Font Style
+            <select id="propFontStyle">
+              <option value="plain">Plain</option>
+              <option value="bold">Bold</option>
+              <option value="italic">Italic</option>
+              <option value="bolditalic">Bold Italic</option>
+            </select>
+          </label>
+          <label>Font Size<input id="propFontSize" type="number" min="8" max="72" value="14"></label>
+          <label>Font Color<input id="propForeground" type="color" value="#000000"></label>
+          <label>Background<input id="propBackground" type="color" value="#f0f0f0"></label>
+          <label class="check-field">Opaque Background<input id="propOpaque" type="checkbox" checked></label>
+
+          <div id="iconEditorBlock" class="icon-editor full hidden">
+            <div class="design-section">Image / Icon</div>
+            <label class="full">Image / Icon Path<input id="propIconPath" placeholder="images/logo.png or choose a picture"></label>
+            <div class="icon-actions">
+              <button id="chooseIconBtn" type="button">Choose Image</button>
+              <button id="clearIconBtn" type="button">Clear Image</button>
+            </div>
+            <p class="event-help">For Java output, the image path is generated into <code>new ImageIcon(...)</code>. Choosing an image also stores a preview copy inside the saved IDE project.</p>
+          </div>
+
           <label id="actionTargetLabel" class="full hidden">
             Open JFrame on Button Click
             <select id="propActionTarget">
@@ -192,10 +254,14 @@
     </aside>
   </main>
 
-  <section class="output-panel">
+  <section class="output-panel" id="outputPanel">
     <div class="panel-title">
       <span>Output</span>
-      <button id="clearOutputBtn" type="button">Clear</button>
+      <div class="output-actions">
+        <button id="toggleOutputBtn" type="button" title="Hide or show the Output window">− Hide</button>
+        <button id="maximizeOutputBtn" type="button" title="Maximize or restore the Output window">□ Maximize</button>
+        <button id="clearOutputBtn" type="button">Clear</button>
+      </div>
     </div>
     <pre id="output" aria-live="polite">IDE ready. Create a project to begin.</pre>
   </section>
